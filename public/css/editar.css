@@ -1,0 +1,91 @@
+/* ===== CONTENEDOR ===== */
+.form-card {
+    background: #ffffff;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    margin: 50px auto;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+}
+
+.form-card:hover {
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== TITULO ===== */
+.form-card h1 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #0b2f33; /* Text */
+}
+
+/* ===== INPUT ===== */
+.form-card input {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 14px;
+    border: 1px solid #dcdcdc;
+    font-size: 15px;
+    margin-bottom: 18px;
+    transition: 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-card input:focus {
+    border-color: #6bb7c7; /* Primary */
+    box-shadow: 0 0 0 3px rgba(107, 183, 199, 0.2);
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* ===== BOTON PRINCIPAL ===== */
+.form-card button {
+    width: 100%;
+    padding: 13px;
+    border-radius: 14px;
+    border: none;
+    background-color: #e8338a; /* Primary */
+    color: #0b2f33; /* Text */
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.form-card button:hover {
+    background-color: #6bb7c7; /* Accent */
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ===== BOTON VOLVER ===== */
+.volver-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    color: #e8338a; /* Primary */
+    transition: 0.2s ease;
+}
+
+.volver-link:hover {
+    color: #6bb7c7; /* Accent */
+}
+
+/* ===== MENSAJES ===== */
+.error-message {
+    color: #e8338a; /* Accent */
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.success-message {
+    color: #0b2f33; /* Text */
+    font-size: 14px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,152 @@
+/* consultas.css */
+
+:root {
+  --text: #1e293b;
+  --bg: #f4f8fb;
+  --white: #ffffff;
+  --primary: #60cdf6;
+  --secondary: #9adcd4;
+  --accent: #ff5e94;
+  --radius: 12px;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: url('/img/fondo-consultas.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  color: var(--text);
+}
+
+header {
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+
+main {
+  padding: 2rem;
+}
+
+.contenedor-consultas {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px var(--shadow);
+  max-width: 1000px;
+  margin: auto;
+}
+
+.barra-superior {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.busqueda {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+}
+
+.filtro {
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.lista-citas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cita {
+  background: var(--secondary);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.cita:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+.cita strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  color: #0f172a;
+}
+
+.cita span {
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: bold;
+  color: #475569;
+}
+
+.cita p {
+  margin-top: 0.5rem;
+  color: #334155;
+}
+
+footer {
+  background: var(--white);
+  margin-top: 3rem;
+  padding: 2rem;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links strong {
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+footer p {
+  text-align: center;
+  color: #64748b;
+}

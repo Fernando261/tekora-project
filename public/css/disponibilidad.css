@@ -1,0 +1,123 @@
+.mb-alert{
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  font-weight: 800;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(109,184,201,.20);
+  box-shadow: 0 14px 24px -18px rgba(0,0,0,.18);
+}
+.mb-success{ border-color: rgba(193,242,233,.75); }
+.mb-error{ border-color: rgba(232,49,138,.35); }
+
+.mb-top{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 12px;
+}
+
+.mb-add{
+  border:none;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  cursor:pointer;
+  color: white;
+  background: linear-gradient(45deg, #6db8c9, #4fd1c5);
+  transition: .18s ease;
+}
+.mb-add:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -16px rgba(79,209,197,.55);
+}
+
+.mb-ranges{
+  margin-top: 14px;
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+
+.mb-range{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap:wrap;
+
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(109,184,201,.18);
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.mb-select{
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(109,184,201,.22);
+  background: rgba(255,255,255,.9);
+  font-weight: 850;
+  outline: none;
+}
+
+.mb-time{
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(109,184,201,.22);
+  background: rgba(255,255,255,.9);
+  font-weight: 850;
+  outline:none;
+  min-width: 130px;
+}
+
+.mb-sep{
+  font-weight: 950;
+  opacity:.7;
+}
+
+.mb-del{
+  margin-left:auto;
+  border: 1px solid rgba(232,49,138,.20);
+  background: rgba(232,49,138,.10);
+  color: #9a1354;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-weight: 900;
+  cursor:pointer;
+  transition:.18s;
+}
+.mb-del:hover{
+  transform: translateY(-1px);
+  background: rgba(232,49,138,.14);
+}
+
+.mb-actions{
+  margin-top: 14px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.mb-save{
+  border:none;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-weight: 950;
+  cursor:pointer;
+  color: white;
+  background: linear-gradient(45deg, #e8318a, #ff6b9d);
+  transition: .18s ease;
+}
+.mb-save:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px -16px rgba(232,49,138,.55);
+}
+
+.mb-error-list{
+  margin: 10px 0 0 18px;
+  padding: 0;
+  font-weight: 700;
+  opacity: .9;
+}
+.mb-error-list li{
+  margin: 6px 0;
+}

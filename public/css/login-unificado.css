@@ -1,0 +1,442 @@
+:root{
+  --bg1:#eaf6f9;
+  --bg2:#c6ebf5;
+  --bg3:#f5d1dc;
+  --bg4:#c1f2e9;
+
+  --text:#062f33;
+  --white:#ffffff;
+
+  --primary:#6db8c9;
+  --secondary:#9cc7d4;
+  --accent:#e8318a;
+
+  --shadow: rgba(0,0,0,.12);
+  --shadow2: rgba(0,0,0,.18);
+  --radius: 22px;
+  --border: rgba(109,184,201,.25);
+}
+
+*{ box-sizing:border-box; font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+body{
+  margin:0;
+  min-height:100vh;
+  color: var(--text);
+  background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
+  background-size: 400% 400%;
+  animation: bg 14s ease infinite;
+}
+@keyframes bg{
+  0% { background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+
+.mb-auth-wrap{
+  min-height: 100vh;
+  display:grid;
+  place-items:center;
+  padding: 26px 16px;
+}
+
+.mb-auth-card{
+  background: rgba(255,255,255,.70);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  box-shadow: 0 24px 60px -34px var(--shadow2);
+  position: relative;
+  overflow: hidden;
+  width: 940px;
+  max-width: 100%;
+  min-height: 700px;
+  backdrop-filter: blur(12px);
+}
+
+/* ===== ESTRUCTURA TIPO VIDEO ===== */
+.mb-form-container{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all .65s ease-in-out;
+}
+
+.mb-sign-in-container{
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.mb-sign-up-container{
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.mb-auth-card.right-panel-active .mb-sign-in-container{
+  transform: translateX(100%);
+}
+
+.mb-auth-card.right-panel-active .mb-sign-up-container{
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show .65s;
+}
+
+@keyframes show{
+  0%, 49.99% { opacity: 0; z-index: 1; }
+  50%, 100%  { opacity: 1; z-index: 5; }
+}
+
+/* ===== OVERLAY ===== */
+.mb-overlay-container{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:50%;
+  height:100%;
+  overflow:hidden;
+  transition: transform .65s ease-in-out;
+  z-index: 100;
+}
+
+.mb-auth-card.right-panel-active .mb-overlay-container{
+  transform: translateX(-100%);
+}
+
+.mb-overlay{
+  background: linear-gradient(135deg, rgba(109,184,201,.95), rgba(232,49,138,.75));
+  background-size: 160% 160%;
+  animation: glow 6s ease infinite;
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform .65s ease-in-out;
+}
+
+@keyframes glow{
+  0%{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+
+.mb-auth-card.right-panel-active .mb-overlay{
+  transform: translateX(50%);
+}
+
+.mb-overlay-panel{
+  position:absolute;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  top:0;
+  height:100%;
+  width:50%;
+  padding: 0 46px;
+  transform: translateX(0);
+  transition: transform .65s ease-in-out;
+}
+
+.mb-overlay-left{
+  transform: translateX(-20%);
+}
+.mb-auth-card.right-panel-active .mb-overlay-left{
+  transform: translateX(0);
+}
+
+.mb-overlay-right{
+  right:0;
+  transform: translateX(0);
+}
+.mb-auth-card.right-panel-active .mb-overlay-right{
+  transform: translateX(20%);
+}
+
+.mb-oh1{
+  margin:0 0 10px 0;
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+.mb-op{
+  margin: 0 0 16px 0;
+  opacity: .95;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* ===== FORM ===== */
+.mb-form{
+  background: transparent;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  justify-content:center;
+  padding: 0 56px;
+}
+
+.mb-brand{
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  margin-bottom: 12px;
+}
+
+.mb-logo{
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  color:#fff;
+  font-weight: 900;
+  box-shadow: 0 16px 26px -18px rgba(232,49,138,.55);
+}
+
+.mb-title{ font-weight: 900; }
+.mb-sub{ font-size: 12px; opacity:.75; margin-top:2px; }
+
+.mb-h1{
+  margin: 4px 0 6px 0;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+}
+.mb-p{
+  margin: 0 0 16px 0;
+  opacity: .78;
+  font-weight: 700;
+}
+
+.mb-label{
+  font-weight: 900;
+  font-size: 13px;
+  margin: 10px 0 6px;
+  opacity: .9;
+}
+
+.mb-input{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(6,47,51,.10);
+  outline: none;
+  background: rgba(255,255,255,.85);
+  transition: .18s ease;
+  font-weight: 700;
+}
+
+.mb-input:focus{
+  border-color: rgba(109,184,201,.45);
+  box-shadow: 0 0 0 4px rgba(109,184,201,.16);
+}
+
+.mb-row{
+  display:flex;
+  justify-content:flex-end;
+  margin: 10px 0 14px;
+}
+
+.mb-link{
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 900;
+}
+.mb-link:hover{ text-decoration: underline; }
+
+.mb-btn{
+  border: none;
+  cursor: pointer;
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-weight: 900;
+  transition: .18s ease;
+}
+
+.mb-btn-primary{
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  color: #fff;
+  box-shadow: 0 18px 32px -22px rgba(232,49,138,.65);
+}
+.mb-btn-primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 24px 44px -28px rgba(232,49,138,.7);
+}
+
+.mb-btn-ghost{
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.35);
+}
+.mb-btn-ghost:hover{ transform: translateY(-1px); }
+
+.mb-bottom{
+  margin-top: 14px;
+  display:flex;
+  gap: 10px;
+  justify-content:center;
+  font-weight: 800;
+  opacity: .9;
+}
+
+/* alerts */
+.mb-alert{
+  margin: 10px 0 6px 0;
+  padding: 12px 14px;
+  border-radius: 18px;
+  font-weight: 900;
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(109,184,201,.25);
+  box-shadow: 0 14px 24px -18px rgba(0,0,0,.18);
+}
+.mb-error{ border-color: rgba(232,49,138,.38); }
+
+/* footer mini */
+.mb-mini-footer{
+  margin-top: 14px;
+  opacity: .75;
+  font-weight: 800;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .mb-auth-card{
+    width: 94vw;
+    min-height: 640px;
+  }
+
+  .mb-sign-in-container,
+  .mb-sign-up-container{
+    width: 100%;
+  }
+
+  .mb-overlay-container{
+    display:none; /* en móvil, simplifica */
+  }
+
+  .mb-auth-card.right-panel-active .mb-sign-in-container{
+    transform: translateX(0);
+    display:none;
+  }
+
+  .mb-auth-card.right-panel-active .mb-sign-up-container{
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .mb-form{ padding: 30px 18px; }
+}
+
+/* =========================
+   FIX: ALERT GLOBAL (no debe romper el layout)
+========================= */
+.mb-global-alert{
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(820px, calc(100% - 28px));
+  z-index: 999;
+  margin: 0;
+}
+
+/* Un poquito más “MindBloom” */
+.mb-global-alert.mb-error{
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(232,49,138,.35);
+  box-shadow: 0 18px 40px -26px rgba(232,49,138,.35);
+}
+
+/* Para que el alert no tape el logo/h1 */
+.mb-form{
+  padding-top: 72px; /* deja espacio arriba cuando hay alert */
+}
+
+/* Si NO hay alert, no necesitamos tanto espacio */
+.mb-auth-card:not(:has(.mb-global-alert)) .mb-form{
+  padding-top: 0;
+}
+
+/* =========================
+   FIX: TEXTO SUPERPUESTO (títulos grandes)
+   Evita que el h1 se “coma” el logo o se encime con fuentes
+========================= */
+.mb-h1{
+  line-height: 1.05;
+}
+
+.mb-brand{
+  position: relative;
+  z-index: 2;
+}
+
+.mb-form{
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   FIX: OVERLAY PANEL (suaviza y mejora transición)
+========================= */
+.mb-form-container,
+.mb-overlay-container,
+.mb-overlay,
+.mb-overlay-panel{
+  will-change: transform, opacity;
+}
+
+/* =========================
+   RESPONSIVE: alert en móvil (como no hay overlay)
+========================= */
+@media (max-width: 980px){
+  .mb-global-alert{
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin: 0 0 12px 0;
+  }
+
+  .mb-form{
+    padding-top: 30px; /* tu valor actual */
+  }
+
+  .mb-auth-card:not(:has(.mb-global-alert)) .mb-form{
+    padding-top: 30px;
+  }
+}
+
+/* =========================
+   FIX DEFINITIVO: NO SUPERPONER FORMULARIOS
+   Apaga el panel inactivo (opacity + pointer-events)
+========================= */
+
+/* Estado normal: usuario visible, profesionista apagado */
+.mb-sign-in-container{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mb-sign-up-container{
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cuando está activo el panel profesionista */
+.mb-auth-card.right-panel-active .mb-sign-in-container{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mb-auth-card.right-panel-active .mb-sign-up-container{
+  opacity: 1;
+  pointer-events: auto;
+}

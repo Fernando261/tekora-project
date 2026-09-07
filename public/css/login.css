@@ -1,0 +1,171 @@
+/* login.css */
+
+:root {
+  --bg: #eaf6f9;
+  --white: #ffffff;
+  --primary: #60cdf6;
+  --secondary: #9adcd4;
+  --accent: #ff5e94;
+  --text: #1e293b;
+  --radius: 14px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(-45deg, #eaf6f9, #c6ebf5, #f5d1dc, #c1f2e9);
+  background-size: 400% 400%;
+  animation: backgroundAnimation 15s ease infinite;
+  color: var(--text);
+}
+
+@keyframes backgroundAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header {
+  background: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+header h2 {
+  color: var(--primary);
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+header nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--text);
+  transition: color 0.3s;
+}
+
+header nav a:hover {
+  color: var(--accent);
+}
+
+
+@keyframes backgroundAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== CONTENEDOR ESTILO MODERNO ===== */
+.container {
+  max-width: 360px;
+  margin: 6rem auto;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+  border-radius: 40px;
+  padding: 35px;
+  border: 6px solid white;
+  box-shadow: 0px 30px 30px -20px rgba(96, 205, 246, 0.5);
+}
+
+.heading {
+  text-align: center;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--primary);
+}
+
+/* ===== FORM ===== */
+.form {
+  margin-top: 25px;
+}
+
+.form .input {
+  width: 100%;
+  background: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  margin-top: 15px;
+  box-shadow: 0px 10px 10px -5px rgba(96, 205, 246, 0.4);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.form .input::placeholder {
+  color: #aaa;
+}
+
+.form .input:focus {
+  outline: none;
+  box-shadow: 0px 10px 15px -5px rgba(255, 94, 148, 0.5);
+  transform: scale(1.02);
+}
+
+/* ===== BOTÓN ===== */
+.form .login-button {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary) 0%, var(--accent) 100%);
+  color: white;
+  padding: 15px;
+  margin: 25px auto 10px auto;
+  border-radius: 25px;
+  border: none;
+  box-shadow: 0px 20px 15px -10px rgba(96, 205, 246, 0.6);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.form .login-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0px 25px 18px -12px rgba(255, 94, 148, 0.6);
+}
+
+.form .login-button:active {
+  transform: scale(0.95);
+}
+
+/* ===== LINK ===== */
+.agreement {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.agreement a {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.agreement a:hover {
+  color: var(--accent);
+}
+
+footer.footer-links {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  background-color: var(--white);
+  border-top: 1px solid #ccc;
+  margin-top: 3rem;
+}
+
+.footer-links div {
+  text-align: left;
+}
+
+.footer-links strong {
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
