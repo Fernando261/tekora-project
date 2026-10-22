@@ -9,7 +9,8 @@ class EmotionSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('emotions')->insert([
+        // El slug es único; conservar el contenido existente al repetir el seed.
+        DB::table('emotions')->insertOrIgnore([
             [
                 'name' => 'Calma',
                 'slug' => 'calma',

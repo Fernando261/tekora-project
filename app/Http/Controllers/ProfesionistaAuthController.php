@@ -9,14 +9,14 @@ class ProfesionistaAuthController extends Controller
 {
     public function showLogin()
     {
-        return view('login-profesionista');
+        return redirect()->route('login', ['role' => 'prof']);
     }
 
     public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required', 'string'],
         ]);
 
         if (Auth::guard('profesionista')->attempt($credentials)) {

@@ -18,7 +18,6 @@
       <li><a href="/comunidad">Comunidad</a></li>
       <li><a href="/conferencias">Conferencias</a></li>
       <li><a href="/citas">Citas</a></li>
-      <li><a href="/reuniones">Reuniones</a></li>
       <li><a href="/perfil"><span title="Perfil">👤</span></a></li>
       <li>
         <form action="{{ route('logout') }}" method="POST" style="display: inline;">

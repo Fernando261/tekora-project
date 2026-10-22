@@ -33,7 +33,7 @@ class AuthController extends Controller
         'password' => Hash::make($request->password),
     ]);
 
-    return redirect('/')->with('success', 'Registro exitoso.');
+    return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
 }
 
 public function showLogin()
@@ -45,10 +45,10 @@ public function login(Request $request)
 {
     $credentials = $request->validate([
         'email' => ['required', 'email'],
-        'password' => ['required'],
+        'password' => ['required', 'string'],
     ]);
 
-    if (Auth::attempt($credentials)) {
+    if (Auth::guard('web')->attempt($credentials)) {
         $request->session()->regenerate();
         return redirect()->intended('/');
     }
@@ -60,7 +60,7 @@ public function login(Request $request)
 
 public function logout(Request $request)
 {
-    Auth::logout();
+    Auth::guard('web')->logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 

@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,7 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->redirectGuestsTo(function (Request $request) {
+            $professionalRoute = in_array('auth:profesionista', $request->route()->gatherMiddleware(), true);
+
+            return route('login', $professionalRoute ? ['role' => 'prof'] : []);
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -20,6 +20,10 @@
 
     <div class="mb-auth-card {{ $isProf ? 'right-panel-active' : '' }}" id="authCard">
 
+      @if(session('success'))
+        <div class="mb-alert mb-success mb-global-alert">{{ session('success') }}</div>
+      @endif
+
       <!-- ====== REGISTRO USUARIO ====== -->
       <div class="mb-form-container mb-sign-in-container">
         <form class="mb-form" method="POST" action="{{ route('registro.store') }}">

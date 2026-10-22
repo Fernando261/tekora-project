@@ -25,10 +25,10 @@ use Illuminate\Support\Facades\Http;
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
+            'nombre' => 'required|string|max:255',
             'email' => 'required|email|unique:profesionistas,email',
-            'password' => 'required|min:6|confirmed',
-            'cedula' => 'required'
+            'password' => 'required|string|min:6|confirmed',
+            'cedula' => 'required|string|max:255|unique:profesionistas,cedula'
         ]);
 
 
@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Http;
             'cedula' => $request->cedula,
         ]);
 
-        return redirect()->route('profesionista.create')->with('success', 'Registro exitoso');
+        return redirect()->route('registro.create', ['role' => 'prof'])->with('success', 'Registro exitoso');
     }
 
 
