@@ -1,6 +1,6 @@
 # MindBloom — base de Tekora
 
-Aplicación Laravel 12 con Blade, CSS y JavaScript. La etapa 1 estabiliza la base existente; no introduce módulos ni identidad visual de Tekora. Se conservan las identidades `users`/`web` y `profesionistas`/`profesionista`.
+Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la base existente; la Etapa 2A añade roles múltiples y perfiles centrales. Se conservan las pantallas MindBloom y las identidades `users`/`web` y `profesionistas`/`profesionista`, sin fusionar cuentas.
 
 ## Requisitos
 
@@ -14,8 +14,8 @@ Aplicación Laravel 12 con Blade, CSS y JavaScript. La etapa 1 estabiliza la bas
 Es preferible usar una carpeta nueva para no mezclar cambios locales. Desde su carpeta de proyectos:
 
 ```powershell
-git clone --branch codex/etapa-1-estabilizacion --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa1
-Set-Location .\tekora-etapa1
+git clone --branch codex/etapa-2a-identidades-roles --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa2a
+Set-Location .\tekora-etapa2a
 php --version
 php --ini
 php -m
@@ -73,3 +73,7 @@ npm run build
 ```
 
 Para bases existentes, respaldos, revisión de cambios locales, estrategia de migraciones y limitaciones, consultar [la guía de estabilización](docs/estabilizacion-etapa-1.md). **No aplicar los pasos de instalación nueva sobre una base existente ni regenerar su `APP_KEY`.**
+
+## Etapa 2A: identidades y roles
+
+La identidad central incorpora varios roles por cuenta y un perfil profesional separado. Los accesos antiguos siguen funcionando; no se fusionan cuentas por email ni se crean administradores automáticamente. Consultar [arquitectura, migraciones, permisos y prueba con Laragon/PowerShell](docs/identidades-roles-etapa-2a.md).
