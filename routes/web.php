@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Emotion;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComunidadController;
@@ -25,16 +26,16 @@ use App\Http\Controllers\CommentLikeController;
 | PÚBLICAS (UNIFICADAS)
 |--------------------------------------------------------------------------
 | Solo 1 login y 1 registro (usuario/profesionista en la misma vista).
-| Usas ?type=profesionista para abrir la versión profesionista.
+| Usas ?role=prof para abrir la versión profesionista.
 */
 
 // ✅ LOGIN unificado (aquí vive la vista con switch Usuario/Profesionista)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.post');
 
 // ✅ GET login profesionista -> redirige al login unificado (modo profesionista)
 Route::get('/login-profesionista', [ProfesionistaAuthController::class, 'showLogin'])->name('profesionista.login');
-Route::post('/login-profesionista', [ProfesionistaAuthController::class, 'login'])->name('profesionista.login.post');
+Route::post('/login-profesionista', [ProfesionistaAuthController::class, 'login'])->middleware('throttle:login')->name('profesionista.login.post');
 
 
 // ✅ REGISTRO unificado (aquí vive la vista con switch Usuario/Profesionista)
@@ -45,7 +46,7 @@ Route::post('/registro', [AuthController::class, 'store'])->name('registro.store
 
 // ✅ GET registro profesionista -> redirige al registro unificado (modo profesionista)
 Route::get('/registro-profesionista', function () {
-    return redirect()->route('registro.create', ['type' => 'profesionista']);
+    return redirect()->route('registro.create', ['role' => 'prof']);
 })->name('profesionista.create');
 
 // ✅ POST registro profesionista (se mantiene para que el form profesionista postee aquí)
@@ -127,7 +128,7 @@ Route::middleware(['auth:profesionista'])->group(function () {
 | USUARIO (PROTEGIDAS)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:web'])->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     
@@ -138,13 +139,8 @@ Route::middleware(['auth'])->group(function () {
         return view('conferencias');
     });
 
-    Route::get('/consultas', function () {
-        return view('consultas');
-    });
-
-    Route::get('/reuniones', function () {
-        return view('reuniones');
-    });
+    // Compatibilidad con enlaces antiguos: el listado real está en /citas.
+    Route::get('/consultas', fn () => redirect()->route('user.citas'));
 
     // Comunidad
     Route::get('/comunidad', [ComunidadController::class, 'index'])->name('comunidad');

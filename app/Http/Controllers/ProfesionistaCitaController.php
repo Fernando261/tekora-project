@@ -166,7 +166,8 @@ class ProfesionistaCitaController extends Controller
                 'cita_id' => $cita->id,
                 'profesionista_id' => $prof->id,
                 'calendar_id' => $calendarId,
-                'error' => $msg,
+                'exception' => $e::class,
+                'code' => (int) $e->getCode(),
             ]);
 
             return back()->with('error', 'Ocurrió un error al aceptar y agendar. Intenta de nuevo.');

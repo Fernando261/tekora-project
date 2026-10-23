@@ -44,9 +44,7 @@
       </button>
 
       <div class="submenu" id="accountSub">
-        <a href="/perfil" class="submenu-item">Perfil</a>
         <a href="{{ route('google.connect') }}" class="submenu-item">Google Calendar</a>
-        <a href="#" class="submenu-item">Preferencias</a>
       </div>
 
       <a class="menu-item" href="/solicitudes-citas">
@@ -54,17 +52,7 @@
         <span>Notificaciones</span>
       </a>
 
-      <a class="menu-item" href="#">
-        <span class="icon">❤</span>
-        <span>Favoritos</span>
-      </a>
-
-      <a class="menu-item" href="#">
-        <span class="icon">⚙</span>
-        <span>Configuración</span>
-      </a>
-
-      <form method="POST" action="{{ route('logout') }}" class="logout-form">
+      <form method="POST" action="{{ route('profesionista.logout') }}" class="logout-form">
           @csrf
           <button type="submit" class="menu-item logout-btn" style="width:100%;">
             <span class="icon">⎋</span>

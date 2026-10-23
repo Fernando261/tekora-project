@@ -60,7 +60,6 @@
         <div class="submenu" id="createSub">
           <a href="/comunidad" class="submenu-item">Comunidad</a>
           <a href="/conferencias" class="submenu-item">Conferencias</a>
-          <a href="/reuniones" class="submenu-item">Reuniones</a>
         </div>
 
         <button class="menu-item has-sub" type="button" data-sub="accountSub">
@@ -72,7 +71,6 @@
         <div class="submenu" id="accountSub">
           <a href="/perfil" class="submenu-item">Perfil</a>
           <a href="/citas" class="submenu-item">Mis citas</a>
-          <a href="/notificaciones" class="submenu-item">Notificaciones</a>
         </div>
 
         <a class="menu-item" href="/profesionistas">

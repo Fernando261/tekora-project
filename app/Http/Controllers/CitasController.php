@@ -127,7 +127,8 @@ class CitasController extends Controller
                 \Log::warning('FreeBusy fallo (se ignora)', [
                     'profesionista_id' => $profesionista->id,
                     'calendar_id' => $profesionista->google_calendar_id ?? 'primary',
-                    'error' => $e->getMessage(),
+                    'exception' => $e::class,
+                    'code' => (int) $e->getCode(),
                 ]);
 
                 $busyRanges = collect();
@@ -223,7 +224,8 @@ class CitasController extends Controller
             \Log::error('Error creando solicitud de cita', [
                 'profesionista_id' => $profesionista->id,
                 'user_id'          => auth()->id(),
-                'error'            => $e->getMessage(),
+                'exception'        => $e::class,
+                'code'             => (int) $e->getCode(),
             ]);
 
             return back()

@@ -40,6 +40,12 @@
         </div>
       @endif
 
+      @if(session('status') || session('success'))
+        <div class="mb-alert mb-success mb-global-alert">
+          {{ session('status') ?: session('success') }}
+        </div>
+      @endif
+
       @if($hasErrors && $firstError)
         <div class="mb-alert mb-error mb-global-alert">
           {{ $firstError }}
