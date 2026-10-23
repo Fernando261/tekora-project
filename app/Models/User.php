@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\Permission;
+use App\Enums\RoleName;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,6 +50,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    public function providerProfile(): HasOne
+    {
+        return $this->hasOne(ProviderProfile::class);
+    }
+
+    public function hasRole(RoleName $role): bool
+    {
+        return $this->roles()->where('slug', $role->value)->exists();
+    }
+
+    public function hasPermission(Permission $permission): bool
+    {
+        // Consultar la asignación actual, sin confiar en relaciones cacheadas.
+        $roles = array_map(fn (RoleName $role) => $role->value, $permission->roles());
+
+        return $this->roles()->whereIn('slug', $roles)->exists();
     }
 
     public function posts()
