@@ -6,6 +6,7 @@
   <title>Perfil - MindBloom</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/perfil.css">
+  <link rel="stylesheet" href="{{ asset('css/account.css') }}">
 </head>
 
 <body>
@@ -19,52 +20,7 @@
         </div>
       </div>
 
-      <nav class="menu">
-        <a class="menu-item" href="/">
-          <span class="icon">▦</span>
-          <span>Inicio</span>
-        </a>
-
-        <button class="menu-item has-sub" type="button" data-sub="createSub">
-          <span class="icon">✎</span>
-          <span>Explorar</span>
-          <span class="chev">▾</span>
-        </button>
-
-        <div class="submenu" id="createSub">
-          <a href="/comunidad" class="submenu-item">Comunidad</a>
-          <a href="/conferencias" class="submenu-item">Conferencias</a>
-        </div>
-
-        <button class="menu-item has-sub open" type="button" data-sub="accountSub">
-          <span class="icon">👤</span>
-          <span>Cuenta</span>
-          <span class="chev">▾</span>
-        </button>
-
-        <div class="submenu open" id="accountSub">
-          <a href="/perfil" class="submenu-item active">Perfil</a>
-          <a href="/citas" class="submenu-item">Mis citas</a>
-        </div>
-
-        <a class="menu-item" href="/profesionistas">
-          <span class="icon">🩺</span>
-          <span>Profesionistas</span>
-        </a>
-
-        <a class="menu-item" href="/citas">
-          <span class="icon">🗓</span>
-          <span>Agendar cita</span>
-        </a>
-
-        <form method="POST" action="{{ route('logout') }}" class="logout-form">
-          @csrf
-          <button type="submit" class="menu-item logout-btn" style="width:100%;">
-            <span class="icon">⎋</span>
-            <span>Cerrar sesión</span>
-          </button>
-        </form>
-      </nav>
+      <x-account-navigation />
 
       <div class="sidebar-footer">
         <div class="hint">

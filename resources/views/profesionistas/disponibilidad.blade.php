@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/dashboard-profesionista.css">
   <link rel="stylesheet" href="/css/disponibilidad.css">
+  <link rel="stylesheet" href="{{ asset('css/account.css') }}">
 </head>
 <body>
 
@@ -77,6 +78,7 @@
 
   <!-- CONTENT -->
   <main class="content">
+<x-legacy-account-notice />
     <div class="content-head">
       <button class="toggle" id="toggleSidebar" type="button" title="Menú">☰</button>
       <div>

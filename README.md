@@ -1,6 +1,6 @@
 # MindBloom — base de Tekora
 
-Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la base existente; la Etapa 2A añade roles múltiples y perfiles centrales. Se conservan las pantallas MindBloom y las identidades `users`/`web` y `profesionistas`/`profesionista`, sin fusionar cuentas.
+Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la base existente; la Etapa 2A añade roles múltiples y perfiles centrales; la Etapa 2B habilita su registro, activación y gestión desde la web. Se conservan las pantallas MindBloom y las identidades `users`/`web` y `profesionistas`/`profesionista`, sin fusionar cuentas.
 
 ## Requisitos
 
@@ -14,8 +14,8 @@ Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la bas
 Es preferible usar una carpeta nueva para no mezclar cambios locales. Desde su carpeta de proyectos:
 
 ```powershell
-git clone --branch codex/etapa-2a-identidades-roles --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa2a
-Set-Location .\tekora-etapa2a
+git clone --branch codex/etapa-2b-registro-perfiles --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa2b
+Set-Location .\tekora-etapa2b
 php --version
 php --ini
 php -m
@@ -29,7 +29,7 @@ if (-not (Test-Path .\.env)) {
 }
 ```
 
-Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa1/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
+Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa2b/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
 
 **El siguiente bloque es solo para una instalación nueva, sin datos. Si la base ya existe, seguir el procedimiento de actualización de la guía, sin borrar el archivo.**
 
@@ -77,3 +77,11 @@ Para bases existentes, respaldos, revisión de cambios locales, estrategia de mi
 ## Etapa 2A: identidades y roles
 
 La identidad central incorpora varios roles por cuenta y un perfil profesional separado. Los accesos antiguos siguen funcionando; no se fusionan cuentas por email ni se crean administradores automáticamente. Consultar [arquitectura, migraciones, permisos y prueba con Laragon/PowerShell](docs/identidades-roles-etapa-2a.md).
+
+## Etapa 2B: registro y perfiles desde la web
+
+El registro crea una sola cuenta `User` para contratar, ofrecer servicios o ambas opciones. Desde `/cuenta` se activa Prestador, se conserva Cliente y se gestiona el nombre público, titular profesional y biografía. La navegación utiliza los permisos existentes y permite cambiar de experiencia sin cerrar sesión.
+
+El registro de nuevas cuentas `Profesionista` queda retirado; su acceso anterior, citas y disponibilidad se conservan. Los perfiles centrales todavía no aparecen en el directorio anterior ni reciben sus citas. Esta etapa no agrega migraciones ni concede privilegios administrativos.
+
+Consultar [pantallas, rutas, archivos, pruebas y guía de Laragon/PowerShell](docs/registro-perfiles-etapa-2b.md). La suite completa contiene **78 pruebas y 732 aserciones**, con SQLite en memoria.

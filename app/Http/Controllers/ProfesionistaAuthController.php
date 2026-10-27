@@ -26,7 +26,7 @@ class ProfesionistaAuthController extends Controller
 
         return back()->withErrors([
             'email' => 'Las credenciales proporcionadas no son válidas.',
-        ]);
+        ])->withInput($request->only('email'))->with('legacy_login', true);
     }
 
     public function logout(Request $request)

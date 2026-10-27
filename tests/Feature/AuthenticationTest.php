@@ -36,21 +36,20 @@ class AuthenticationTest extends TestCase
         $this->assertDatabaseCount('profesionistas', 0);
     }
 
-    public function test_a_professional_can_register_with_the_correct_panel_and_password_hash(): void
+    public function test_retired_professional_registration_redirects_without_creating_an_identity(): void
     {
         $this->post('/registro-profesionista', [
             'nombre' => 'Profesional de prueba', 'email' => 'professional@example.test',
             'password' => 'test-password', 'password_confirmation' => 'test-password',
             'cedula' => 'TEST-001',
-        ])->assertRedirect('/registro?role=prof')->assertSessionHas('success');
+        ])->assertRedirect('/registro?intent=provider')->assertSessionHas('info');
 
-        $professional = Profesionista::firstOrFail();
-        $this->assertTrue(Hash::check('test-password', $professional->password));
+        $this->assertDatabaseCount('profesionistas', 0);
         $this->assertDatabaseCount('users', 0);
         $this->assertGuest('profesionista');
     }
 
-    public function test_duplicate_professional_credentials_are_validation_errors_without_changing_the_account(): void
+    public function test_retired_registration_does_not_change_an_existing_professional_account(): void
     {
         $professional = $this->professional()->fresh();
 
@@ -58,7 +57,7 @@ class AuthenticationTest extends TestCase
             'nombre' => 'Otro nombre', 'email' => $professional->email,
             'password' => 'another-password', 'password_confirmation' => 'another-password',
             'cedula' => $professional->cedula,
-        ])->assertSessionHasErrors(['email', 'cedula']);
+        ])->assertRedirect('/registro?intent=provider')->assertSessionHas('info');
 
         $this->assertSame($professional->getAttributes(), $professional->fresh()->getAttributes());
         $this->assertDatabaseCount('profesionistas', 1);

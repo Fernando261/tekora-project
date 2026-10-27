@@ -1,0 +1,1 @@
+<aside class="legacy-account-notice" role="note"><strong>Acceso heredado de MindBloom.</strong> Esta cuenta conserva tus citas y disponibilidad anteriores. No está vinculada a un perfil de la cuenta única. <a href="{{ route('login') }}">Acceso a cuenta única</a></aside>

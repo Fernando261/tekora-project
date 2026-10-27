@@ -9,6 +9,7 @@
 
   {{-- ✅ opcional: estilos específicos de slots/agenda --}}
   <link rel="stylesheet" href="{{ asset('css/citas2.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/account.css') }}">
 </head>
 
 <body>
@@ -27,53 +28,7 @@
         </div>
       </div>
 
-      <nav class="menu">
-        <a class="menu-item" href="/">
-          <span class="icon">▦</span>
-          <span>Inicio</span>
-        </a>
-
-        <button class="menu-item has-sub" type="button" data-sub="createSub">
-          <span class="icon">✎</span>
-          <span>Explorar</span>
-          <span class="chev">▾</span>
-        </button>
-
-        <div class="submenu" id="createSub">
-          <a href="/comunidad" class="submenu-item">Comunidad</a>
-          <a href="/conferencias" class="submenu-item">Conferencias</a>
-        </div>
-
-        <button class="menu-item has-sub" type="button" data-sub="accountSub">
-          <span class="icon">👤</span>
-          <span>Cuenta</span>
-          <span class="chev">▾</span>
-        </button>
-
-        <div class="submenu" id="accountSub">
-          <a href="/perfil" class="submenu-item">Perfil</a>
-          <a href="/citas" class="submenu-item">Mis citas</a>
-        </div>
-
-        <a class="menu-item" href="/profesionistas">
-          <span class="icon">🩺</span>
-          <span>Profesionistas</span>
-        </a>
-
-        <!-- ✅ Activo aquí -->
-        <a class="menu-item active" href="{{ route('citas.create', $profesionista->id) }}">
-          <span class="icon">🗓</span>
-          <span>Agendar cita</span>
-        </a>
-
-        <form method="POST" action="{{ route('logout') }}" class="logout-form">
-          @csrf
-          <button type="submit" class="menu-item logout-btn" style="width:100%;">
-            <span class="icon">⎋</span>
-            <span>Cerrar sesión</span>
-          </button>
-        </form>
-      </nav>
+      <x-account-navigation />
 
       <div class="sidebar-footer">
         <div class="hint">

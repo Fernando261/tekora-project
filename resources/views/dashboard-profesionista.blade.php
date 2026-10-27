@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Profesionista - MindBloom</title>
   <link rel="stylesheet" href="/css/dashboard-profesionista.css">
+  <link rel="stylesheet" href="{{ asset('css/account.css') }}">
 </head>
 <body>
 
@@ -76,6 +77,7 @@
 
   <!-- MAIN CONTENT -->
   <main class="content">
+<x-legacy-account-notice />
     <div class="content-head">
       <button class="toggle" id="toggleSidebar" type="button" title="Menú">☰</button>
       <div>
