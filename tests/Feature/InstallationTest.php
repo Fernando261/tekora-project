@@ -23,10 +23,11 @@ class InstallationTest extends TestCase
         DB::setDefaultConnection('migration_probe');
     }
 
-    public function test_all_24_migrations_run_on_an_empty_memory_database_and_can_be_checked_again(): void
+    public function test_all_migrations_run_on_an_empty_memory_database_and_can_be_checked_again(): void
     {
         $this->assertSame(':memory:', DB::connection()->getDatabaseName());
-        $this->assertDatabaseCount('migrations', 24);
+        $migrationCount = count(glob(database_path('migrations/*.php')));
+        $this->assertDatabaseCount('migrations', $migrationCount);
         $this->assertTrue(Schema::hasColumns('profesionistas', [
             'google_access_token', 'google_refresh_token', 'google_calendar_id', 'google_token_expires_at',
         ]));
@@ -36,7 +37,7 @@ class InstallationTest extends TestCase
         $this->assertDatabaseCount('citas', 0);
 
         $this->artisan('migrate', ['--force' => true])->assertExitCode(0);
-        $this->assertDatabaseCount('migrations', 24);
+        $this->assertDatabaseCount('migrations', $migrationCount);
     }
 
     public function test_google_migration_preserves_existing_credentials_in_both_directions(): void

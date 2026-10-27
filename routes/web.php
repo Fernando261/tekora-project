@@ -21,6 +21,8 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentLikeController;
 
+require __DIR__.'/identities.php';
+
 /*
 |--------------------------------------------------------------------------
 | PÚBLICAS (UNIFICADAS)

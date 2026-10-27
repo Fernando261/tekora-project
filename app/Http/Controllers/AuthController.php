@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Enums\RoleName;
+use App\Services\RoleMemberships;
 
 
 class AuthController extends Controller
@@ -25,13 +28,16 @@ class AuthController extends Controller
         'password' => 'required|string|min:6',
     ]);
 
-    User::create([
-        'name' => $request->name,
-        'age' => $request->age,
-        'gender' => $request->gender,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
+    DB::transaction(function () use ($request) {
+        $user = User::create([
+            'name' => $request->name,
+            'age' => $request->age,
+            'gender' => $request->gender,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        app(RoleMemberships::class)->enroll($user, RoleName::Client);
+    });
 
     return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
 }
