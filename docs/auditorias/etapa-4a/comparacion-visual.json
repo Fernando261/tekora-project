@@ -1,0 +1,155 @@
+{
+  "render_checks": 56,
+  "before_after_comparisons": 28,
+  "javascript_errors": 0,
+  "ajax_cookie_csrf_checked": true,
+  "cross_origin_token_not_sent": true,
+  "bootstrap_controls_checked": true,
+  "legacy_fetch_checked": true,
+  "pixel_tolerance": {
+    "max_changed_pixels": 100,
+    "max_channel_delta": 1
+  },
+  "comparisons": [
+    {
+      "image": "bootstrap-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "bootstrap-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "catalogo-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "catalogo-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "cita-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "cita-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "cliente-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "cliente-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "crear-servicio-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "crear-servicio-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "detalle-servicio-desktop.png",
+      "changed_pixels": 14,
+      "max_channel_delta": 1
+    },
+    {
+      "image": "detalle-servicio-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "login-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "login-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "nueva-solicitud-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "nueva-solicitud-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "perfil-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "perfil-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "prestador-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "prestador-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "recibidas-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "recibidas-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "registro-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "registro-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "servicios-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "servicios-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "solicitud-desktop.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    },
+    {
+      "image": "solicitud-mobile.png",
+      "changed_pixels": 0,
+      "max_channel_delta": 0
+    }
+  ]
+}
