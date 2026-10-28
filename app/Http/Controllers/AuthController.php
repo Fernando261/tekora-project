@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Enums\RoleName;
 use App\Services\RoleMemberships;
+use App\Enums\Permission;
+use App\Http\Requests\RegisterUserRequest;
 
 
 class AuthController extends Controller
@@ -18,16 +20,8 @@ class AuthController extends Controller
         return view('auth.registro');
     }
 
-    public function store(Request $request)
+    public function store(RegisterUserRequest $request)
 {
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'age' => 'required|integer|min:1',
-        'gender' => 'required|string',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|string|min:6',
-    ]);
-
     DB::transaction(function () use ($request) {
         $user = User::create([
             'name' => $request->name,
@@ -37,6 +31,9 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         app(RoleMemberships::class)->enroll($user, RoleName::Client);
+        if (in_array($request->validated('intent'), ['provider', 'both'], true)) {
+            app(RoleMemberships::class)->enroll($user, RoleName::Provider);
+        }
     });
 
     return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
@@ -56,12 +53,16 @@ public function login(Request $request)
 
     if (Auth::guard('web')->attempt($credentials)) {
         $request->session()->regenerate();
-        return redirect()->intended('/');
+        $user = Auth::guard('web')->user();
+        $destination = $user->hasPermission(Permission::ManageProviderProfile) ? route('account.provider')
+            : ($user->hasRole(RoleName::Client) ? route('account.index') : '/');
+
+        return redirect()->intended($destination);
     }
 
     return back()->withErrors([
         'email' => 'Las credenciales proporcionadas no coinciden.',
-    ]);
+    ])->withInput($request->only('email'));
 }
 
 public function logout(Request $request)

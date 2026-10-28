@@ -47,8 +47,8 @@ class RoutesAndGoogleSafetyTest extends TestCase
     public function test_professional_entry_points_select_the_existing_professional_panel(): void
     {
         $this->get('/login-profesionista')->assertRedirect('/login?role=prof');
-        $this->get('/registro-profesionista')->assertRedirect('/registro?role=prof');
-        $this->get('/registro?role=prof')->assertOk()->assertSee('mb-auth-card right-panel-active', false);
+        $this->get('/registro-profesionista')->assertRedirect('/registro?intent=provider');
+        $this->get('/registro?role=prof')->assertOk()->assertSee('Crear mi cuenta única')->assertDontSee('action="'.route('profesionista.store').'"', false);
     }
 
     public function test_existing_user_pages_render_without_links_to_unimplemented_modules(): void

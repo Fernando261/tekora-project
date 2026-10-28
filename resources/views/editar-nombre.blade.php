@@ -7,27 +7,15 @@
   <link rel="stylesheet" href="/css/perfil.css">
   <link rel="stylesheet" href="/css/editar.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/account.css') }}">
 </head>
 <body>
 
 <header>
   <h2>MindBloom</h2>
-  <nav>
-    <ul>
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/comunidad">Comunidad</a></li>
-      <li><a href="/conferencias">Conferencias</a></li>
-      <li><a href="/citas">Citas</a></li>
-      <li><a href="/perfil"><span title="Perfil">👤</span></a></li>
-      <li>
-        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-          @csrf
-          <button type="submit" style="background:none;border:none;cursor:pointer;">🚪</button>
-        </form>
-      </li>
-    </ul>
-  </nav>
+
 </header>
+<x-account-navigation horizontal />
 
 <main>
   <section class="perfil-container">
@@ -42,7 +30,7 @@
             @csrf
             @method('PUT')
 
-            <input type="text" 
+            <input type="text"
                    name="name"
                    value="{{ Auth::user()->name }}"
                    placeholder="Nuevo nombre"

@@ -6,20 +6,14 @@
   <title>Conferencias - MindBloom</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/conferencias.css">
+  <link rel="stylesheet" href="{{ asset('css/account.css') }}">
 </head>
 <body>
   <header>
     <h2>MindBloom</h2>
-    <nav>
-        <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/comunidad">Comunidad</a></li>
-            <li><a href="/conferencias">Conferencias</a></li>
-            <li><a href="/citas">Citas</a></li>
-            <li><a href="/perfil"><span title="Perfil">👤</span></a></li>
-        </ul>
-    </nav>
+
   </header>
+<x-account-navigation horizontal />
 
   <div class="sidebar">
     <img src="/img/sidebar-banner.png" alt="Imagen lateral" style="width: 100%; border-radius: 8px;">

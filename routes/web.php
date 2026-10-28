@@ -27,11 +27,11 @@ require __DIR__.'/identities.php';
 |--------------------------------------------------------------------------
 | PÚBLICAS (UNIFICADAS)
 |--------------------------------------------------------------------------
-| Solo 1 login y 1 registro (usuario/profesionista en la misma vista).
-| Usas ?role=prof para abrir la versión profesionista.
+| Registro central en User y acceso anterior de Profesionista separado.
+| ?role=prof abre únicamente el acceso para cuentas profesionales existentes.
 */
 
-// ✅ LOGIN unificado (aquí vive la vista con switch Usuario/Profesionista)
+// Login central, con una sección explícita para el acceso heredado.
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.post');
 
@@ -40,18 +40,18 @@ Route::get('/login-profesionista', [ProfesionistaAuthController::class, 'showLog
 Route::post('/login-profesionista', [ProfesionistaAuthController::class, 'login'])->middleware('throttle:login')->name('profesionista.login.post');
 
 
-// ✅ REGISTRO unificado (aquí vive la vista con switch Usuario/Profesionista)
+// Registro único de User con intención de cliente, prestador o ambas.
 Route::get('/registro', [AuthController::class, 'create'])->name('registro.create');
 
 // ✅ POST registro usuario
 Route::post('/registro', [AuthController::class, 'store'])->name('registro.store');
 
-// ✅ GET registro profesionista -> redirige al registro unificado (modo profesionista)
+// Enlaces antiguos de registro llevan al registro central de prestador.
 Route::get('/registro-profesionista', function () {
-    return redirect()->route('registro.create', ['role' => 'prof']);
+    return redirect()->route('registro.create', ['intent' => 'provider']);
 })->name('profesionista.create');
 
-// ✅ POST registro profesionista (se mantiene para que el form profesionista postee aquí)
+// Registro heredado retirado: no crea cuentas y orienta al registro central.
 Route::post('/registro-profesionista', [ProfesionistaController::class, 'store'])->name('profesionista.store');
 
 

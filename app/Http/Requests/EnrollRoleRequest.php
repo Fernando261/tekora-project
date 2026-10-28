@@ -22,4 +22,13 @@ class EnrollRoleRequest extends FormRequest
             'is_admin' => ['prohibited'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'role.required' => 'Elige la experiencia que quieres activar.',
+            'role.in' => 'Solo puedes activar las experiencias de cliente o prestador.',
+            'prohibited' => 'No puedes cambiar la identidad ni privilegios desde este formulario.',
+        ];
+    }
 }
