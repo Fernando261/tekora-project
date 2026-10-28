@@ -7,6 +7,7 @@
   <title>{{ $title }} - MindBloom</title>
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
   <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+  @stack('styles')
   <script src="{{ asset('js/account.js') }}" defer></script>
 </head>
 <body>

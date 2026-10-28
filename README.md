@@ -14,8 +14,8 @@ Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la bas
 Es preferible usar una carpeta nueva para no mezclar cambios locales. Desde su carpeta de proyectos:
 
 ```powershell
-git clone --branch codex/etapa-2b-registro-perfiles --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa2b
-Set-Location .\tekora-etapa2b
+git clone --branch codex/etapa-3a-catalogo-servicios --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa3a
+Set-Location .\tekora-etapa3a
 php --version
 php --ini
 php -m
@@ -29,7 +29,7 @@ if (-not (Test-Path .\.env)) {
 }
 ```
 
-Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa2b/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
+Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa3a/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
 
 **El siguiente bloque es solo para una instalación nueva, sin datos. Si la base ya existe, seguir el procedimiento de actualización de la guía, sin borrar el archivo.**
 
@@ -39,6 +39,7 @@ if (Test-Path .\database\database.sqlite) {
 }
 New-Item -ItemType File -Path .\database\database.sqlite | Out-Null
 php artisan migrate
+php artisan db:seed --class=ServiceCategorySeeder
 php artisan storage:link
 npm run build
 php .\vendor\bin\phpunit --do-not-cache-result
@@ -84,4 +85,12 @@ El registro crea una sola cuenta `User` para contratar, ofrecer servicios o amba
 
 El registro de nuevas cuentas `Profesionista` queda retirado; su acceso anterior, citas y disponibilidad se conservan. Los perfiles centrales todavía no aparecen en el directorio anterior ni reciben sus citas. Esta etapa no agrega migraciones ni concede privilegios administrativos.
 
-Consultar [pantallas, rutas, archivos, pruebas y guía de Laragon/PowerShell](docs/registro-perfiles-etapa-2b.md). La suite completa contiene **78 pruebas y 732 aserciones**, con SQLite en memoria.
+Consultar [pantallas, rutas, archivos, pruebas y guía de Laragon/PowerShell](docs/registro-perfiles-etapa-2b.md). La entrega 2B se validó con **78 pruebas y 732 aserciones**, con SQLite en memoria.
+
+## Etapa 3A: catálogo de servicios y prestadores
+
+Los prestadores centrales gestionan borradores y publicaciones en `/cuenta/servicios`. Visitantes y clientes exploran `/servicios` con búsqueda, filtros y paginación, y `/prestadores` muestra fichas públicas solo cuando tienen servicios visibles. Las rutas privadas del perfil conservan su protección.
+
+Esta entrega agrega **dos migraciones** sobre las 26 anteriores y un seeder idempotente de categorías, sin vincular identidades antiguas ni conectar las citas. La suite completa contiene **110 pruebas y 1132 aserciones** en memoria. Se conservan alertas npm existentes, sin actualizaciones automáticas.
+
+Consultar [esquema, rutas, permisos, archivos, validación, auditoría npm y procedimiento seguro de actualización en Laragon/PowerShell](docs/catalogo-servicios-etapa-3a.md).

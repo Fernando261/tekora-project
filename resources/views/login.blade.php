@@ -13,6 +13,7 @@
       <button class="account-button" type="submit">Entrar a mi cuenta</button>
     </form>
     <p class="access-footer">¿No tienes cuenta? <a href="{{ route('registro.create') }}">Crear una cuenta única</a></p>
+    <p class="access-footer"><a href="{{ route('catalog.index') }}">Explorar servicios sin iniciar sesión</a></p>
   </section>
   <details class="account-card legacy-access" id="legacy-access" {{ request('role') === 'prof' || session('legacy_login') ? 'open' : '' }}>
     <summary>Ya tenía una cuenta de profesionista en MindBloom</summary>

@@ -22,6 +22,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentLikeController;
 
 require __DIR__.'/identities.php';
+require __DIR__.'/catalog.php';
 
 /*
 |--------------------------------------------------------------------------
