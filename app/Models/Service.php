@@ -8,6 +8,7 @@ use App\Enums\ServiceStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
@@ -26,6 +27,11 @@ class Service extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(ServiceCategory::class, 'service_category_id');
+    }
+
+    public function inquiries(): HasMany
+    {
+        return $this->hasMany(ServiceInquiry::class);
     }
 
     // Una sola regla para catálogo, detalle y fichas públicas. No carga datos de User.

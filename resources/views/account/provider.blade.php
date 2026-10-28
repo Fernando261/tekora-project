@@ -1,6 +1,7 @@
 <x-account-layout title="Mi perfil profesional">
   <header class="account-heading"><span class="account-eyebrow">Experiencia de prestador</span><h1>Mi perfil profesional</h1><p>Presenta tu experiencia como técnico o freelancer usando tu misma cuenta.</p></header>
   <p class="account-alert">Activación sin verificación profesional. Este perfil no aparece todavía en el directorio de MindBloom ni recibe sus citas.</p>
+  <section class="account-card"><h2>Solicitudes de tus servicios</h2><p>Revisa las necesidades de tus clientes y consulta su seguimiento.</p><a class="account-button" href="{{ route('inquiries.received') }}">Solicitudes recibidas</a></section>
   <section class="account-card"><h2>Los servicios que ofreces</h2><p>Al publicar un servicio en el catálogo Tekora, tu nombre público, titular y biografía aparecen en tu ficha pública de prestador.</p><a class="account-button secondary" href="{{ route('provider-services.index') }}">Mis servicios</a> @can('create', \App\Models\Service::class)<a class="account-button" href="{{ route('provider-services.create') }}">Crear servicio</a>@endcan</section>
   <div class="account-grid profile-grid">
     <section class="account-card">

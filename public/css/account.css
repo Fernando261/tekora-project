@@ -88,6 +88,11 @@
   min-width:0
 }
 
+.sidebar .menu {
+  max-height:calc(100vh - 240px);
+  overflow-y:auto
+}
+
 .account-heading {
   display:block;
   padding:0;

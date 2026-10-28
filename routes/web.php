@@ -23,6 +23,7 @@ use App\Http\Controllers\CommentLikeController;
 
 require __DIR__.'/identities.php';
 require __DIR__.'/catalog.php';
+require __DIR__.'/inquiries.php';
 
 /*
 |--------------------------------------------------------------------------

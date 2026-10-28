@@ -115,7 +115,9 @@ class CatalogMigrationTest extends TestCase
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($table) => $table !== 'migrations'));
         $before = $this->snapshot($tables);
 
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'catalog_upgrade', '--force' => true]));
+        $catalogFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_10_28_000002'));
+        $catalogOptions = ['--database' => 'catalog_upgrade', '--path' => $catalogFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $catalogOptions));
         $this->assertDatabaseCount('migrations', 28);
         $this->assertSame($before, $this->snapshot($tables));
         $this->assertDatabaseCount('service_categories', 0);
@@ -134,7 +136,7 @@ class CatalogMigrationTest extends TestCase
         $this->assertFalse(Schema::hasTable('service_categories'));
         $this->assertDatabaseCount('migrations', 26);
         $this->assertSame($before, $this->snapshot($tables));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'catalog_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $catalogOptions));
         $this->assertDatabaseCount('migrations', 28);
         $this->assertSame($before, $this->snapshot($tables));
     }

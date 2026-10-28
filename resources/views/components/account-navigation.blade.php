@@ -6,6 +6,9 @@
   @can(\App\Enums\Permission::ViewClientAppointments->value)
     <a class="menu-item {{ request()->routeIs('account.client', 'identity.citas') ? 'active' : '' }}" href="{{ route('account.client') }}">Cliente</a>
   @endcan
+  @can(\App\Enums\Permission::ManageOwnInquiries->value)
+    <a class="menu-item {{ request()->routeIs('inquiries.index') ? 'active' : '' }}" href="{{ route('inquiries.index') }}">Mis solicitudes</a>
+  @endcan
   @can(\App\Enums\Permission::ManageProviderProfile->value)
     <a class="menu-item {{ request()->routeIs('account.provider', 'provider-profiles.*') ? 'active' : '' }}" href="{{ route('account.provider') }}">Prestador · Mi perfil</a>
   @else
@@ -13,6 +16,9 @@
   @endcan
   @can('viewAny', \App\Models\Service::class)
     <a class="menu-item {{ request()->routeIs('provider-services.*') ? 'active' : '' }}" href="{{ route('provider-services.index') }}">Mis servicios</a>
+  @endcan
+  @can(\App\Enums\Permission::ManageReceivedInquiries->value)
+    <a class="menu-item {{ request()->routeIs('inquiries.received') ? 'active' : '' }}" href="{{ route('inquiries.received') }}">Solicitudes recibidas</a>
   @endcan
   @can(\App\Enums\Permission::ManageAccountRoles->value)
     <a class="menu-item" href="{{ route('identity.roles.index') }}">Administración · Roles</a>
