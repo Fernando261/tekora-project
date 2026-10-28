@@ -14,13 +14,13 @@ Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la bas
 Es preferible usar una carpeta nueva para no mezclar cambios locales. Desde su carpeta de proyectos:
 
 ```powershell
-git clone --branch codex/etapa-3a-catalogo-servicios --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa3a
-Set-Location .\tekora-etapa3a
+git clone --branch codex/etapa-3b-solicitudes-servicios --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa3b
+Set-Location .\tekora-etapa3b
 php --version
 php --ini
 php -m
 composer install
-npm ci
+npm.cmd ci
 
 # Crear entorno y clave solo cuando todavía no existe .env.
 if (-not (Test-Path .\.env)) {
@@ -29,7 +29,7 @@ if (-not (Test-Path .\.env)) {
 }
 ```
 
-Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa3a/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
+Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa3b/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
 
 **El siguiente bloque es solo para una instalación nueva, sin datos. Si la base ya existe, seguir el procedimiento de actualización de la guía, sin borrar el archivo.**
 
@@ -41,7 +41,7 @@ New-Item -ItemType File -Path .\database\database.sqlite | Out-Null
 php artisan migrate
 php artisan db:seed --class=ServiceCategorySeeder
 php artisan storage:link
-npm run build
+npm.cmd run build
 php .\vendor\bin\phpunit --do-not-cache-result
 php artisan route:list --except-vendor
 php artisan serve
@@ -66,11 +66,11 @@ Los valores privados se configuran localmente y no se agregan al repositorio. No
 
 ## Verificación y actualización segura
 
-La suite fuerza SQLite `:memory:`, correo/caché/sesión en memoria y un contexto de pruebas separado. No requiere Google ni SMTP. No usa `migrate:fresh`, `db:wipe`, `migrate:reset` o rollback.
+La suite fuerza SQLite `:memory:`, correo/caché/sesión en memoria y un contexto de pruebas separado. No requiere Google ni SMTP. No usa reseteos ni rollback sobre bases persistentes. La reversibilidad de migraciones se comprueba exclusivamente en memoria.
 
 ```powershell
 php .\vendor\bin\phpunit --do-not-cache-result
-npm run build
+npm.cmd run build
 ```
 
 Para bases existentes, respaldos, revisión de cambios locales, estrategia de migraciones y limitaciones, consultar [la guía de estabilización](docs/estabilizacion-etapa-1.md). **No aplicar los pasos de instalación nueva sobre una base existente ni regenerar su `APP_KEY`.**
@@ -91,6 +91,14 @@ Consultar [pantallas, rutas, archivos, pruebas y guía de Laragon/PowerShell](do
 
 Los prestadores centrales gestionan borradores y publicaciones en `/cuenta/servicios`. Visitantes y clientes exploran `/servicios` con búsqueda, filtros y paginación, y `/prestadores` muestra fichas públicas solo cuando tienen servicios visibles. Las rutas privadas del perfil conservan su protección.
 
-Esta entrega agrega **dos migraciones** sobre las 26 anteriores y un seeder idempotente de categorías, sin vincular identidades antiguas ni conectar las citas. La suite completa contiene **110 pruebas y 1132 aserciones** en memoria. Se conservan alertas npm existentes, sin actualizaciones automáticas.
+Esta entrega agrega **dos migraciones** sobre las 26 anteriores y un seeder idempotente de categorías, sin vincular identidades antiguas ni conectar las citas. La entrega 3A se validó con **110 pruebas y 1132 aserciones** en memoria. Se conservan alertas npm existentes, sin actualizaciones automáticas.
 
 Consultar [esquema, rutas, permisos, archivos, validación, auditoría npm y procedimiento seguro de actualización en Laragon/PowerShell](docs/catalogo-servicios-etapa-3a.md).
+
+## Etapa 3B: solicitudes y seguimiento
+
+Cliente puede solicitar un servicio público y consultar `/cuenta/solicitudes`; Prestador revisa `/cuenta/solicitudes/recibidas`. Las decisiones autorizadas permiten aceptar, rechazar, cancelar mientras esté pendiente y finalizar después de aceptar. El título guardado y las fechas mantienen el historial aunque cambie la publicación.
+
+Esta etapa agrega una migración sobre las 28 anteriores y una restricción SQLite contra solicitudes activas duplicadas. No crea citas, reservas, pagos ni contratos automáticos. La suite completa pasa con **143 pruebas y 1573 aserciones**, usando solo SQLite en memoria.
+
+Consultar [estados, permisos, concurrencia, rutas, pruebas, auditoría npm y actualización segura en Laragon/PowerShell](docs/solicitudes-servicios-etapa-3b.md).

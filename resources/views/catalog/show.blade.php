@@ -7,5 +7,17 @@
     @if($service->providerProfile->headline)<p>{{ $service->providerProfile->headline }}</p>@endif
     <p>Publicación sin verificación profesional.</p>
     <a class="account-button secondary" href="{{ route('public-providers.show', $service->providerProfile) }}">Conocer al prestador y sus servicios</a>
+    <div class="catalog-actions">
+      @guest('web')
+        <a class="account-button" href="{{ route('inquiries.create', $service) }}">Solicitar servicio</a><p>Inicia sesión o crea tu cuenta para enviar una solicitud.</p>
+      @else
+        @can('create', [\App\Models\ServiceInquiry::class, $service])
+          <a class="account-button" href="{{ route('inquiries.create', $service) }}">Solicitar servicio</a>
+        @else
+          @can(\App\Enums\Permission::ManageOwnInquiries->value)<p>Este es un servicio propio. No puedes solicitarlo desde tu cuenta.</p>@else<p>Activa Cliente desde <a href="{{ route('account.index') }}">Mi cuenta</a> para solicitar servicios.</p>@endcan
+        @endcan
+      @endguest
+    </div>
+    <p class="account-help">Enviar una solicitud no crea reservas, pagos ni contratos automáticos.</p>
   </article>
 </x-catalog-layout>

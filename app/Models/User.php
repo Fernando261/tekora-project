@@ -6,6 +6,7 @@ use App\Enums\Permission;
 use App\Enums\RoleName;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,6 +61,11 @@ class User extends Authenticatable
     public function providerProfile(): HasOne
     {
         return $this->hasOne(ProviderProfile::class);
+    }
+
+    public function serviceInquiries(): HasMany
+    {
+        return $this->hasMany(ServiceInquiry::class, 'client_user_id');
     }
 
     public function hasRole(RoleName $role): bool
