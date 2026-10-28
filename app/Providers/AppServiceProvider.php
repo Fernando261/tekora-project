@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use App\Enums\Permission;
 use App\Models\ProviderProfile;
+use App\Models\Service;
 use App\Models\User;
 use App\Policies\ProviderProfilePolicy;
+use App\Policies\ServicePolicy;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Gate;
 
@@ -35,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Gate::policy(ProviderProfile::class, ProviderProfilePolicy::class);
+        Gate::policy(Service::class, ServicePolicy::class);
 
         RateLimiter::for('login', function (Request $request) {
             $email = $request->input('email');

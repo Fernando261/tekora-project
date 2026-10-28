@@ -1,5 +1,7 @@
 @props(['horizontal' => false])
 <nav class="{{ $horizontal ? 'account-navigation' : 'menu' }}" aria-label="Experiencias de la cuenta">
+  <a class="menu-item" href="{{ route('catalog.index') }}">Explorar servicios</a>
+  <a class="menu-item" href="{{ route('public-providers.index') }}">Explorar prestadores</a>
   <a class="menu-item {{ request()->routeIs('account.index') ? 'active' : '' }}" href="{{ route('account.index') }}">Mi cuenta</a>
   @can(\App\Enums\Permission::ViewClientAppointments->value)
     <a class="menu-item {{ request()->routeIs('account.client', 'identity.citas') ? 'active' : '' }}" href="{{ route('account.client') }}">Cliente</a>
@@ -8,6 +10,9 @@
     <a class="menu-item {{ request()->routeIs('account.provider', 'provider-profiles.*') ? 'active' : '' }}" href="{{ route('account.provider') }}">Prestador · Mi perfil</a>
   @else
     <a class="menu-item" href="{{ route('account.activate-provider') }}">Activar prestador</a>
+  @endcan
+  @can('viewAny', \App\Models\Service::class)
+    <a class="menu-item {{ request()->routeIs('provider-services.*') ? 'active' : '' }}" href="{{ route('provider-services.index') }}">Mis servicios</a>
   @endcan
   @can(\App\Enums\Permission::ManageAccountRoles->value)
     <a class="menu-item" href="{{ route('identity.roles.index') }}">Administración · Roles</a>

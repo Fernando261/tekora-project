@@ -37,7 +37,7 @@ class IdentityMigrationTest extends TestCase
         ]]);
         DB::setDefaultConnection('legacy_upgrade');
         $files = array_filter(glob(database_path('migrations/*.php')), fn ($file) =>
-            ! in_array(basename($file), self::NEW_MIGRATIONS, true));
+            basename($file) < self::NEW_MIGRATIONS[0]);
         $this->assertCount(24, $files);
         foreach ($files as $file) {
             (require $file)->up();
