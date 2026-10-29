@@ -14,8 +14,8 @@ Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la bas
 Es preferible usar una carpeta nueva para no mezclar cambios locales. Desde su carpeta de proyectos:
 
 ```powershell
-git clone --branch codex/etapa-3b-solicitudes-servicios --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa3b
-Set-Location .\tekora-etapa3b
+git clone --branch codex/etapa-4a-seguridad-dependencias --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa4a
+Set-Location .\tekora-etapa4a
 php --version
 php --ini
 php -m
@@ -29,7 +29,7 @@ if (-not (Test-Path .\.env)) {
 }
 ```
 
-Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa3b/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
+Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa4a/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
 
 **El siguiente bloque es solo para una instalación nueva, sin datos. Si la base ya existe, seguir el procedimiento de actualización de la guía, sin borrar el archivo.**
 
@@ -91,7 +91,7 @@ Consultar [pantallas, rutas, archivos, pruebas y guía de Laragon/PowerShell](do
 
 Los prestadores centrales gestionan borradores y publicaciones en `/cuenta/servicios`. Visitantes y clientes exploran `/servicios` con búsqueda, filtros y paginación, y `/prestadores` muestra fichas públicas solo cuando tienen servicios visibles. Las rutas privadas del perfil conservan su protección.
 
-Esta entrega agrega **dos migraciones** sobre las 26 anteriores y un seeder idempotente de categorías, sin vincular identidades antiguas ni conectar las citas. La entrega 3A se validó con **110 pruebas y 1132 aserciones** en memoria. Se conservan alertas npm existentes, sin actualizaciones automáticas.
+Esta entrega agrega **dos migraciones** sobre las 26 anteriores y un seeder idempotente de categorías, sin vincular identidades antiguas ni conectar las citas. La entrega 3A se validó con **110 pruebas y 1132 aserciones** en memoria. En esa etapa quedaron alertas npm pendientes; la corrección se documenta en 4A.
 
 Consultar [esquema, rutas, permisos, archivos, validación, auditoría npm y procedimiento seguro de actualización en Laragon/PowerShell](docs/catalogo-servicios-etapa-3a.md).
 
@@ -99,6 +99,14 @@ Consultar [esquema, rutas, permisos, archivos, validación, auditoría npm y pro
 
 Cliente puede solicitar un servicio público y consultar `/cuenta/solicitudes`; Prestador revisa `/cuenta/solicitudes/recibidas`. Las decisiones autorizadas permiten aceptar, rechazar, cancelar mientras esté pendiente y finalizar después de aceptar. El título guardado y las fechas mantienen el historial aunque cambie la publicación.
 
-Esta etapa agrega una migración sobre las 28 anteriores y una restricción SQLite contra solicitudes activas duplicadas. No crea citas, reservas, pagos ni contratos automáticos. La suite completa pasa con **143 pruebas y 1573 aserciones**, usando solo SQLite en memoria.
+Esta etapa agrega una migración sobre las 28 anteriores y una restricción SQLite contra solicitudes activas duplicadas. No crea citas, reservas, pagos ni contratos automáticos. La entrega 3B se validó con **143 pruebas y 1573 aserciones**, usando solo SQLite en memoria.
 
 Consultar [estados, permisos, concurrencia, rutas, pruebas, auditoría npm y actualización segura en Laragon/PowerShell](docs/solicitudes-servicios-etapa-3b.md).
+
+## Etapa 4A: seguridad de dependencias
+
+La auditoría npm completa pasa de 13 paquetes afectados a **cero**. Se actualizan Axios/Vite y transitivas compatibles, y se retiran Tailwind y su hoja de scaffolding sin uso. Bootstrap, Sass, Laravel 12 y los flujos existentes se conservan; no hay nuevas migraciones ni seeds para actualizar desde 3B.
+
+La instalación limpia y la compilación pasan, al igual que **145 pruebas y 1591 aserciones** (las 143 anteriores más dos regresiones de cabeceras CSRF). Se verifican Node 22/24 y la comparación visual antes/después. Persisten deprecaciones Sass/Bootstrap, diferenciadas de los avisos de seguridad.
+
+Consultar [versiones, avisos GHSA, evidencia antes/después, alcance del bundle e instrucciones Laragon/PowerShell](docs/seguridad-dependencias-etapa-4a.md).
