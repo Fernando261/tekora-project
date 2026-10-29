@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-28",
+  "timezone": "America/Mexico_City",
+  "base_main": "da1c65718c10b9cb055b1c0fa8bdb93e03cbdaff",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "v12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; dos PDO sobre URI mode=memory&cache=shared para concurrencia",
+  "commands": [
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Metadatos Composer aislados y paquetes bloqueados existentes montados de solo lectura, sin red. Nothing to install, update or remove. Generación de autoload y package:discover correctos. Avisos previos de clases ambiguas Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Deprecaciones Sass/Bootstrap existentes; assets app-DbaZCfaT.css y app-rIANMhMB.js iguales a 4A."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 169,
+      "assertions": 1867
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result --filter /^(?!.*InquiryNotification)/",
+      "exit_code": 0,
+      "tests": 145,
+      "assertions": 1591
+    }
+  ],
+  "added_tests": 24,
+  "added_assertions": 276,
+  "migration_count": 30,
+  "historical_migrations_unchanged": 29,
+  "protected_files_unchanged": true,
+  "visual_checks": 18,
+  "windows_laragon_executed": false
+}

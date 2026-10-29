@@ -1,0 +1,9 @@
+.notification-card { overflow-wrap:anywhere; border-left:4px solid #bbccd2; }
+.notification-card.is-unread { border-left-color:#367c8d; }
+.notification-meta { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; color:var(--account-muted); font-size:.88rem; }
+.notification-state { background:#edf4f6; border-radius:20px; padding:6px 12px; font-weight:750; }
+.is-unread .notification-state { background:#deeff3; color:#164b58; }
+.notification-actions { display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:22px; }
+.notification-actions form, .notification-actions p { margin:0; }
+.notification-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+@media(max-width:560px) { .notification-actions form, .notification-actions .account-button { width:100%; } }

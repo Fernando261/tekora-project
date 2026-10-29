@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Enums\InquiryAction;
 use App\Enums\InquiryStatus;
+use App\Enums\InquiryNotificationEvent;
 use App\Exceptions\InquiryConflict;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
+use App\Models\InquiryNotification;
 use App\Models\User;
 use Illuminate\Database\DetectsConcurrencyErrors;
 use Illuminate\Database\QueryException;
@@ -34,6 +36,7 @@ class InquiryWorkflow
                 $inquiry->service_title = $service->title;
                 $inquiry->status = InquiryStatus::Pending;
                 $inquiry->save();
+                $this->notify($inquiry, InquiryNotificationEvent::Created, $client);
 
                 return ['inquiry' => $inquiry, 'created' => true];
             }, 3);
@@ -61,11 +64,28 @@ class InquiryWorkflow
                 ]);
                 if ($changed !== 1) throw new InquiryConflict($inquiryId);
 
-                return $inquiry->fresh();
+                $updated = $inquiry->fresh();
+                $this->notify($updated, InquiryNotificationEvent::from($action->target()->value), $actor);
+
+                return $updated;
             }, 3);
         } catch (QueryException $exception) {
             if (! $this->causedByConcurrencyError($exception)) throw $exception;
             throw new InquiryConflict($inquiryId, 'Hay otra decisión en curso. Consulta el estado actual e inténtalo de nuevo.');
         }
+    }
+
+    private function notify(ServiceInquiry $inquiry, InquiryNotificationEvent $event, User $actor): void
+    {
+        $recipientId = $event->forProvider() ? $inquiry->service->providerProfile->user_id : $inquiry->client_user_id;
+        if ($recipientId === $actor->id) return;
+
+        // Misma conexión y transacción que la operación. Si falla el aviso, también se revierte la solicitud.
+        $notification = new InquiryNotification;
+        $notification->setConnection($inquiry->getConnectionName());
+        $notification->user_id = $recipientId;
+        $notification->service_inquiry_id = $inquiry->id;
+        $notification->event = $event;
+        $notification->save();
     }
 }

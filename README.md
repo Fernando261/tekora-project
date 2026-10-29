@@ -110,3 +110,11 @@ La auditoría npm completa pasa de 13 paquetes afectados a **cero**. Se actualiz
 La instalación limpia y la compilación pasan, al igual que **145 pruebas y 1591 aserciones** (las 143 anteriores más dos regresiones de cabeceras CSRF). Se verifican Node 22/24 y la comparación visual antes/después. Persisten deprecaciones Sass/Bootstrap, diferenciadas de los avisos de seguridad.
 
 Consultar [versiones, avisos GHSA, evidencia antes/después, alcance del bundle e instrucciones Laragon/PowerShell](docs/seguridad-dependencias-etapa-4a.md).
+
+## Etapa 4B: notificaciones internas
+
+`/cuenta/notificaciones` reúne los avisos de solicitudes enviadas y recibidas en la identidad central. La navegación muestra las no leídas; cada aviso propio puede marcarse como leído sin cambiar su primera fecha de lectura. Los enlaces privados dependen de los roles y permisos actuales.
+
+Se agrega una migración aditiva sobre las 29 existentes. Solicitud y aviso se guardan en la misma transacción, con unicidad en SQLite. No se generan avisos retroactivos ni se conectan las citas o cuentas profesionales anteriores. No hay cambios de dependencias.
+
+La entrega se valida con **169 pruebas y 1867 aserciones**; las 145 anteriores conservan sus 1591 aserciones. Consultar [modelo, consistencia, rutas, resultados y prueba segura en Laragon/PowerShell](docs/notificaciones-internas-etapa-4b.md) antes de aplicar la migración en una copia aislada.

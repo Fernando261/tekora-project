@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-28",
+  "timezone": "America/Mexico_City",
+  "render_source": "Laravel HTTP kernel; fixtures SQLite :memory:; sin .env ni base persistente",
+  "viewports": {
+    "desktop": "1440x1000",
+    "mobile": "390x844"
+  },
+  "render_checks": 18,
+  "javascript_errors": [],
+  "external_requests_aborted": 0,
+  "checks": [
+    "empty",
+    "unread",
+    "read",
+    "mixed",
+    "both roles",
+    "current policy denies links",
+    "403 page",
+    "pagination",
+    "CSRF forms",
+    "mobile menu and Escape",
+    "no private messages",
+    "no horizontal overflow"
+  ],
+  "results": [
+    {
+      "view": "vacio",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "no-leidas",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "mixtas",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "navegacion",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "leidas",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "sin-permisos",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "denegado",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-1",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-2",
+      "viewport": "desktop",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "vacio",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "no-leidas",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "mixtas",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "navegacion",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "leidas",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "sin-permisos",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "denegado",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-1",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-2",
+      "viewport": "mobile",
+      "horizontal_overflow": false
+    }
+  ]
+}
