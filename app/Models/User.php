@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $this->hasMany(ServiceInquiry::class, 'client_user_id');
     }
 
+    public function inquiryNotifications(): HasMany
+    {
+        return $this->hasMany(InquiryNotification::class);
+    }
+
     public function hasRole(RoleName $role): bool
     {
         return $this->roles()->where('slug', $role->value)->exists();

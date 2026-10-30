@@ -34,7 +34,7 @@ class InquiryMigrationTest extends TestCase
         return $snapshot;
     }
 
-    public function test_upgrade_from_28_applied_migrations_preserves_all_previous_data_and_only_reverses_the_new_table(): void
+    public function test_upgrade_from_28_applied_migrations_preserves_all_previous_data_and_only_reverses_the_new_tables(): void
     {
         config(['database.connections.inquiry_upgrade' => ['driver' => 'sqlite', 'database' => ':memory:',
             'prefix' => '', 'foreign_key_constraints' => true]]);
@@ -64,7 +64,7 @@ class InquiryMigrationTest extends TestCase
         $before = $this->snapshot($tables);
 
         $this->assertSame(0, Artisan::call('migrate', ['--database' => 'inquiry_upgrade', '--force' => true]));
-        $this->assertDatabaseCount('migrations', 29);
+        $this->assertDatabaseCount('migrations', 30);
         $this->assertDatabaseCount('service_inquiries', 0);
         $this->assertSame($before, $this->snapshot($tables));
         $workflow = app(InquiryWorkflow::class);
@@ -77,13 +77,13 @@ class InquiryMigrationTest extends TestCase
         $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
         $this->assertDatabaseCount('citas', 1);
 
-        // Solo SQLite en memoria: la reversión elimina exclusivamente los datos nuevos de solicitudes.
-        $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'inquiry_upgrade', '--step' => 1, '--force' => true]));
+        // Solo SQLite en memoria: revertir avisos y solicitudes, conservando las 28 migraciones previas.
+        $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'inquiry_upgrade', '--step' => 2, '--force' => true]));
         $this->assertFalse(Schema::hasTable('service_inquiries'));
         $this->assertDatabaseCount('migrations', 28);
         $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame(0, Artisan::call('migrate', ['--database' => 'inquiry_upgrade', '--force' => true]));
-        $this->assertDatabaseCount('migrations', 29);
+        $this->assertDatabaseCount('migrations', 30);
         $this->assertDatabaseCount('service_inquiries', 0);
         $this->assertSame($before, $this->snapshot($tables));
     }

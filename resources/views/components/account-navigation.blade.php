@@ -3,6 +3,10 @@
   <a class="menu-item" href="{{ route('catalog.index') }}">Explorar servicios</a>
   <a class="menu-item" href="{{ route('public-providers.index') }}">Explorar prestadores</a>
   <a class="menu-item {{ request()->routeIs('account.index') ? 'active' : '' }}" href="{{ route('account.index') }}">Mi cuenta</a>
+  @auth('web')
+    @php($unreadNotifications = auth('web')->user()->inquiryNotifications()->unread()->count())
+    <a class="menu-item {{ request()->routeIs('notifications.*') ? 'active' : '' }}" href="{{ route('notifications.index') }}">Notificaciones @if($unreadNotifications > 0)<span aria-label="{{ $unreadNotifications }} sin leer">({{ $unreadNotifications }})</span>@endif</a>
+  @endauth
   @can(\App\Enums\Permission::ViewClientAppointments->value)
     <a class="menu-item {{ request()->routeIs('account.client', 'identity.citas') ? 'active' : '' }}" href="{{ route('account.client') }}">Cliente</a>
   @endcan
