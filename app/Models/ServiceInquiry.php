@@ -33,6 +33,11 @@ class ServiceInquiry extends Model
         return $this->hasMany(ServiceInquiryMessage::class);
     }
 
+    public function readProgress(): HasMany
+    {
+        return $this->hasMany(InquiryReadProgress::class);
+    }
+
     public function scopeActive(Builder $query): void
     {
         $query->whereIn('status', [InquiryStatus::Pending->value, InquiryStatus::Accepted->value]);

@@ -21,7 +21,8 @@ class InquiryMessagesPaginationTest extends TestCase
         $foreign = $this->inquiry();
         $this->message($foreign->client, $foreign, 'PRIVATE-FOREIGN-CONVERSATION');
         $queries = [];
-        DB::listen(function ($event) use (&$queries) { if (str_contains($event->sql, 'service_inquiry_messages')) $queries[] = $event->sql; });
+        // Medir la carga del historial; los contadores de 5B consultan metadatos, sin seleccionar cuerpos.
+        DB::listen(function ($event) use (&$queries) { if (str_contains($event->sql, 'service_inquiry_messages') && str_contains($event->sql, '"body"')) $queries[] = $event->sql; });
         $response = $this->actingAs($client, 'web')->get(route('inquiries.show', $inquiry))->assertOk()->assertSeeInOrder(['TEXTO_026_FIN', 'TEXTO_045_FIN'])
             ->assertDontSee('TEXTO_025_FIN')->assertDontSee('PRIVATE-FOREIGN-CONVERSATION');
         $first = $response->viewData('messages');

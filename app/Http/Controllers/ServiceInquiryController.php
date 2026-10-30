@@ -11,6 +11,7 @@ use App\Http\Requests\StoreInquiryRequest;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
 use App\Services\InquiryWorkflow;
+use App\Services\InquiryReadTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -71,8 +72,12 @@ class ServiceInquiryController extends Controller
         $publicService = Service::publiclyVisible()->whereKey($inquiry->service_id)->exists();
         $messages = $inquiry->messages()->with('author:id,name')->orderByDesc('created_at')->orderByDesc('id')
             ->cursorPaginate(20, ['id', 'service_inquiry_id', 'author_user_id', 'body', 'created_at'], 'messages_cursor')->fragment('conversacion');
+        $tracking = app(InquiryReadTracking::class);
+        $readMarker = $tracking->markerFor($request->user('web'), $inquiry);
+        $unreadMessagesCount = $tracking->unreadFor($request->user('web'), $inquiry);
+        $messageReadToken = $tracking->tokenFor($request->user('web'), $inquiry, $messages->getCollection());
 
-        return view('inquiries.show', compact('inquiry', 'publicService', 'messages'));
+        return view('inquiries.show', compact('inquiry', 'publicService', 'messages', 'readMarker', 'unreadMessagesCount', 'messageReadToken'));
     }
 
     public function decide(DecideInquiryRequest $request, ServiceInquiry $inquiry, InquiryWorkflow $workflow)

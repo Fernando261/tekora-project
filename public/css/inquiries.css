@@ -37,6 +37,9 @@
 .conversation-empty { padding:18px; border:1px dashed #b8d4dc; border-radius:12px; }
 .conversation-empty p { margin-bottom:0; }
 .conversation-pagination { display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; margin:20px 0; line-height:1.6; }
+.conversation-unread { display:inline-block; margin-top:12px; border-radius:20px; padding:4px 10px; font-size:.82rem; font-weight:750; background:#d9edf2; color:#164b58; }
+.conversation-read-form { margin:18px 0 24px; padding:16px; border:1px solid #bdd5dd; border-radius:12px; background:#f3f9fb; }
+.conversation-read-form p { margin-bottom:0; }
 @media(max-width:560px) { .conversation-message { max-width:100%; width:100%; } }
 @media(max-width:1100px) { .inquiry-detail-grid { grid-template-columns:1fr; } }
 @media(max-width:560px) {

@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(InquiryNotification::class);
     }
 
+    public function inquiryReadProgress(): HasMany
+    {
+        return $this->hasMany(InquiryReadProgress::class);
+    }
+
     public function hasRole(RoleName $role): bool
     {
         return $this->roles()->where('slug', $role->value)->exists();

@@ -27,6 +27,12 @@ class ServiceInquiryPolicy
         return $this->view($actor, $inquiry);
     }
 
+    public function conversations(Authenticatable $actor): bool
+    {
+        return $actor instanceof User && ($actor->hasPermission(Permission::ManageOwnInquiries)
+            || $actor->hasPermission(Permission::ManageReceivedInquiries));
+    }
+
     // La policy comprueba identidad/rol/propiedad; el workflow comprueba atómicamente el estado vigente.
     public function cancel(Authenticatable $actor, ServiceInquiry $inquiry): bool
     {

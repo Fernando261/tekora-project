@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Mexico_City",
+  "base_main": "e5f60de174842c2a4c1d2afddf3ad8e79e32ffc7",
+  "branch": "codex/etapa-5b-mensajes-no-leidos",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "v12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; concurrencia con dos PDO y URI mode=memory&cache=shared",
+  "commands": [
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Paquetes existentes del lock montados de solo lectura; metadatos y wrappers independientes, sin red ni .env. Autoload y package discovery correctos; avisos previos de clases ambiguas Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Mismos assets Vite que 5A; CSS específico en public/css/inquiries.css. Deprecaciones Sass/Bootstrap existentes."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 219,
+      "assertions": 2599
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result --filter /^(?!.*Conversation)/",
+      "exit_code": 0,
+      "tests": 196,
+      "assertions": 2279
+    }
+  ],
+  "added_tests": 23,
+  "added_assertions": 320,
+  "migration_count": 32,
+  "historical_migrations_unchanged": 31,
+  "protected_files_unchanged": true,
+  "inquiry_workflow_and_messaging_unchanged": true,
+  "notification_models_events_and_schema_unchanged": true,
+  "visual_checks": 28,
+  "windows_laragon_executed": false,
+  "windows_review_directory": "C:\\laragon\\www\\tekora-etapa5b",
+  "windows_review_port": 8007
+}
