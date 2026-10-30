@@ -6,6 +6,7 @@ use App\Enums\InquiryStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ServiceInquiry extends Model
 {
@@ -25,6 +26,11 @@ class ServiceInquiry extends Model
     public function client(): BelongsTo
     {
         return $this->belongsTo(User::class, 'client_user_id');
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(ServiceInquiryMessage::class);
     }
 
     public function scopeActive(Builder $query): void

@@ -118,3 +118,11 @@ Consultar [versiones, avisos GHSA, evidencia antes/después, alcance del bundle 
 Se agrega una migración aditiva sobre las 29 existentes. Solicitud y aviso se guardan en la misma transacción, con unicidad en SQLite. No se generan avisos retroactivos ni se conectan las citas o cuentas profesionales anteriores. No hay cambios de dependencias.
 
 La entrega se valida con **169 pruebas y 1867 aserciones**; las 145 anteriores conservan sus 1591 aserciones. Consultar [modelo, consistencia, rutas, resultados y prueba segura en Laragon/PowerShell](docs/notificaciones-internas-etapa-4b.md) antes de aplicar la migración en una copia aislada.
+
+## Etapa 5A: conversación privada por solicitud
+
+El detalle de cada solicitud incorpora una conversación de texto entre sus participantes centrales, separada de la necesidad inicial. Solo admite mensajes en `pending` y `accepted`; los estados terminales conservan el historial en modo de lectura. Se aplican las políticas vigentes, CSRF, límites de frecuencia, paginación por cursor e idempotencia por envío, sin avisos automáticos por mensaje.
+
+Se agrega una migración sobre las 30 anteriores, sin modificar las notificaciones ni conectar el sistema heredado. Validación: **196 pruebas y 2279 aserciones**, incluidas las 169 anteriores con sus 1867 aserciones, y auditoría npm completa sin vulnerabilidades reportadas.
+
+Consultar [arquitectura, concurrencia, rutas, resultados y validación aislada en Laragon/PowerShell](docs/mensajeria-solicitudes-etapa-5a.md). La revisión manual se prepara en `C:\laragon\www\tekora-etapa5a`, puerto **8006**; no aplicar cambios sobre la instalación original.

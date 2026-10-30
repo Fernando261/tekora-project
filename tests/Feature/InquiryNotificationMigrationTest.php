@@ -58,7 +58,10 @@ class InquiryNotificationMigrationTest extends TestCase
         DB::table('sessions')->insert(['id' => 'notice-old-session', 'user_id' => $client->id, 'payload' => 'opaque-fixture', 'last_activity' => 1]);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($table) => $table !== 'migrations'));
         $before = $this->snapshot($tables);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'notice_upgrade', '--force' => true]));
+        // Conservar el escenario 29→30 y sus aserciones; 5A se verifica por separado.
+        $noticeFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_10_30_000000'));
+        $noticeOptions = ['--database' => 'notice_upgrade', '--path' => $noticeFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $noticeOptions));
         $this->assertDatabaseCount('migrations', 30);
         $this->assertDatabaseCount('inquiry_notifications', 0);
         $this->assertSame($before, $this->snapshot($tables));
@@ -75,7 +78,7 @@ class InquiryNotificationMigrationTest extends TestCase
         $this->assertFalse(Schema::hasTable('inquiry_notifications'));
         $this->assertDatabaseCount('migrations', 29);
         $this->assertSame($afterAction, $this->snapshot($tables));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'notice_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $noticeOptions));
         $this->assertDatabaseCount('migrations', 30);
         $this->assertDatabaseCount('inquiry_notifications', 0);
         $this->assertSame($afterAction, $this->snapshot($tables));

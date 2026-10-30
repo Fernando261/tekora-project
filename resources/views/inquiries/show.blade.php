@@ -16,5 +16,6 @@
     </section>
     <section class="account-card inquiry-timeline"><h2>Historial de decisiones</h2><p class="account-help">Horario de Ciudad de México.</p><ol>@foreach($inquiry->timeline() as $event)<li><strong>{{ $event['label'] }}</strong><x-inquiry-time :at="$event['at']" /></li>@endforeach</ol></section>
   </div>
+  <x-inquiry-conversation :inquiry="$inquiry" :messages="$messages" />
   <nav class="inquiry-actions" aria-label="Volver a mis paneles">@can(\App\Enums\Permission::ManageOwnInquiries->value)<a href="{{ route('inquiries.index') }}">Mis solicitudes</a>@endcan @can(\App\Enums\Permission::ManageReceivedInquiries->value)<a href="{{ route('inquiries.received') }}">Solicitudes recibidas</a>@endcan</nav>
 </x-account-layout>
