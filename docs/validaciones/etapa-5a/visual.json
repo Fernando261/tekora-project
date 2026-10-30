@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Mexico_City",
+  "render_source": "HTTP kernel y vistas Blade con fixtures SQLite :memory:, sin .env ni base persistente; errores 409/429 desde su vista Blade",
+  "viewports": {
+    "desktop": "1440x1000",
+    "mobile": "390x844"
+  },
+  "render_checks": 28,
+  "javascript_errors": [],
+  "external_requests_aborted": 0,
+  "checks": [
+    "empty",
+    "both participants",
+    "pending",
+    "accepted",
+    "paused service",
+    "all terminal read-only states",
+    "cursor pagination recent/older",
+    "escaped malicious HTML",
+    "form CSRF and UUID",
+    "mobile menu and Escape",
+    "403/422/409/429 states",
+    "no horizontal overflow"
+  ],
+  "results": [
+    {
+      "view": "vacia",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pendiente-cliente",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pendiente-prestador",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-pausado",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "aceptada",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "larga-reciente",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "larga-anterior",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "finalizada",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "rechazada",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "cancelada",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "denegada",
+      "viewport": "desktop",
+      "status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "cursor-invalido",
+      "viewport": "desktop",
+      "status": 422,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "conflicto",
+      "viewport": "desktop",
+      "status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "limite",
+      "viewport": "desktop",
+      "status": 429,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "vacia",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pendiente-cliente",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pendiente-prestador",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-pausado",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "aceptada",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "larga-reciente",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "larga-anterior",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "finalizada",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "rechazada",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "cancelada",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "denegada",
+      "viewport": "mobile",
+      "status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "cursor-invalido",
+      "viewport": "mobile",
+      "status": 422,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "conflicto",
+      "viewport": "mobile",
+      "status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "limite",
+      "viewport": "mobile",
+      "status": 429,
+      "horizontal_overflow": false
+    }
+  ]
+}

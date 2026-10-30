@@ -6,6 +6,7 @@ use App\Enums\InquiryAction;
 use App\Exceptions\InquiryConflict;
 use App\Http\Requests\DecideInquiryRequest;
 use App\Http\Requests\InquiryIndexRequest;
+use App\Http\Requests\InquiryConversationRequest;
 use App\Http\Requests\StoreInquiryRequest;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
@@ -63,13 +64,15 @@ class ServiceInquiryController extends Controller
         }
     }
 
-    public function show(Request $request, ServiceInquiry $inquiry)
+    public function show(InquiryConversationRequest $request, ServiceInquiry $inquiry)
     {
         Gate::forUser($request->user('web'))->authorize('view', $inquiry);
         $inquiry->load(['client:id,name', 'service:id,provider_profile_id', 'service.providerProfile:id,display_name']);
         $publicService = Service::publiclyVisible()->whereKey($inquiry->service_id)->exists();
+        $messages = $inquiry->messages()->with('author:id,name')->orderByDesc('created_at')->orderByDesc('id')
+            ->cursorPaginate(20, ['id', 'service_inquiry_id', 'author_user_id', 'body', 'created_at'], 'messages_cursor')->fragment('conversacion');
 
-        return view('inquiries.show', compact('inquiry', 'publicService'));
+        return view('inquiries.show', compact('inquiry', 'publicService', 'messages'));
     }
 
     public function decide(DecideInquiryRequest $request, ServiceInquiry $inquiry, InquiryWorkflow $workflow)

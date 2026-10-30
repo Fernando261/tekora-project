@@ -21,6 +21,12 @@ class ServiceInquiryPolicy
         return $this->cancel($actor, $inquiry) || $this->accept($actor, $inquiry);
     }
 
+    public function sendMessage(Authenticatable $actor, ServiceInquiry $inquiry): bool
+    {
+        // Propiedad y roles vigentes; InquiryMessaging comprueba el estado bajo bloqueo de escritura.
+        return $this->view($actor, $inquiry);
+    }
+
     // La policy comprueba identidad/rol/propiedad; el workflow comprueba atómicamente el estado vigente.
     public function cancel(Authenticatable $actor, ServiceInquiry $inquiry): bool
     {

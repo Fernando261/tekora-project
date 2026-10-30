@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Mexico_City",
+  "base_main": "48cd269ec81c477a5fd68c6300d5af14fb65923f",
+  "branch": "codex/etapa-5a-mensajeria-solicitudes",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "v12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; concurrencia con dos PDO distintos y URI mode=memory&cache=shared",
+  "commands": [
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Sin red; metadatos y wrappers Composer independientes, paquetes existentes del lock montados solo para lectura. Nothing to install, update or remove; autoload y package:discover correctos. Avisos previos de clases ambiguas Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Deprecaciones Sass/Bootstrap previas. Mismos assets Vite que 4B; el CSS específico de la conversación se sirve desde public/css/inquiries.css."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 196,
+      "assertions": 2279
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result --filter /^(?!.*InquiryMessages)/",
+      "exit_code": 0,
+      "tests": 169,
+      "assertions": 1867
+    }
+  ],
+  "added_tests": 27,
+  "added_assertions": 412,
+  "migration_count": 31,
+  "historical_migrations_unchanged": 30,
+  "inquiry_workflow_and_notification_models_schema_events_unchanged": true,
+  "protected_files_unchanged": true,
+  "visual_checks": 28,
+  "windows_laragon_executed": false,
+  "windows_review_directory": "C:\\laragon\\www\\tekora-etapa5a",
+  "windows_review_port": 8006
+}

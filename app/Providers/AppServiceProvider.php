@@ -63,5 +63,24 @@ class AppServiceProvider extends ServiceProvider
                 Limit::perMinute(20)->by('login-ip:'.$request->ip()),
             ];
         });
+
+        RateLimiter::for('inquiry-messages', function (Request $request) {
+            $id = $request->user('web')->getAuthIdentifier();
+            $inquiry = $request->route('inquiry');
+            $inquiryId = $inquiry instanceof ServiceInquiry ? $inquiry->id : $inquiry;
+            $response = function (Request $request, array $headers) {
+                $message = 'Has enviado varios mensajes. Espera antes de volver a intentarlo.';
+                if ($request->expectsJson()) return response()->json(['message' => $message], 429, $headers);
+
+                return response()->view('inquiries.message-error', ['message' => $message,
+                    'detailUrl' => route('inquiries.show', $request->route('inquiry')).'#conversacion'], 429, $headers);
+            };
+
+            return [
+                Limit::perMinute(10)->by('messages:inquiry:'.$id.':'.$inquiryId)->response($response),
+                Limit::perHour(60)->by('messages:account:'.$id)->response($response),
+                Limit::perMinute(30)->by('messages:ip:'.hash('sha256', $request->ip()))->response($response),
+            ];
+        });
     }
 }

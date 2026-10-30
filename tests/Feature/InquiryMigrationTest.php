@@ -63,7 +63,10 @@ class InquiryMigrationTest extends TestCase
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($table) => $table !== 'migrations'));
         $before = $this->snapshot($tables);
 
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'inquiry_upgrade', '--force' => true]));
+        // Este escenario histórico termina en 4B; la actualización a 5A tiene su propia prueba.
+        $inquiryFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_10_30_000000'));
+        $inquiryOptions = ['--database' => 'inquiry_upgrade', '--path' => $inquiryFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $inquiryOptions));
         $this->assertDatabaseCount('migrations', 30);
         $this->assertDatabaseCount('service_inquiries', 0);
         $this->assertSame($before, $this->snapshot($tables));
@@ -82,7 +85,7 @@ class InquiryMigrationTest extends TestCase
         $this->assertFalse(Schema::hasTable('service_inquiries'));
         $this->assertDatabaseCount('migrations', 28);
         $this->assertSame($before, $this->snapshot($tables));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'inquiry_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $inquiryOptions));
         $this->assertDatabaseCount('migrations', 30);
         $this->assertDatabaseCount('service_inquiries', 0);
         $this->assertSame($before, $this->snapshot($tables));
