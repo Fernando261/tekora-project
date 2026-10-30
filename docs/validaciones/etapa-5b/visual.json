@@ -1,0 +1,197 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Mexico_City",
+  "render_source": "HTTP kernel con fixtures SQLite :memory: y HTML estático; escrituras de progreso por el servicio sobre tokens extraídos de sus formularios",
+  "viewports": {
+    "desktop": "1440x1000",
+    "mobile": "390x844"
+  },
+  "render_checks": 28,
+  "javascript_errors": [],
+  "external_requests_aborted": 0,
+  "checks": [
+    "empty inbox",
+    "dual account inbox",
+    "individual unread counts",
+    "own messages excluded",
+    "explicit CSRF/token forms",
+    "read and unread labels",
+    "new arrival after read",
+    "terminal read action without send form",
+    "older incoming outside outgoing-only page",
+    "inbox pagination",
+    "mobile menu and Escape",
+    "403 and privacy",
+    "no horizontal overflow"
+  ],
+  "results": [
+    {
+      "view": "vacia",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "bandeja-sin-leer",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "detalle-cliente",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "detalle-prestador",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "bandeja-mixta",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "detalle-leido",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "llegada-nueva",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "terminal-sin-leer",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "terminal-leida",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "bandeja-leida",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "solo-enviados",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-1",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-2",
+      "viewport": "desktop",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "denegada",
+      "viewport": "desktop",
+      "status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "vacia",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "bandeja-sin-leer",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "detalle-cliente",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "detalle-prestador",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "bandeja-mixta",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "detalle-leido",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "llegada-nueva",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "terminal-sin-leer",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "terminal-leida",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "bandeja-leida",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "solo-enviados",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-1",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "pagina-2",
+      "viewport": "mobile",
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "denegada",
+      "viewport": "mobile",
+      "status": 403,
+      "horizontal_overflow": false
+    }
+  ]
+}

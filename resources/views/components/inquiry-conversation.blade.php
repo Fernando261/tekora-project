@@ -1,7 +1,18 @@
-@props(['inquiry', 'messages'])
+@props(['inquiry', 'messages', 'readMarker' => 0, 'unreadMessagesCount' => 0, 'messageReadToken' => null])
 <section class="account-card inquiry-conversation" id="conversacion" aria-labelledby="conversation-title">
   <h2 id="conversation-title">Conversación privada</h2>
   <p class="account-help">Mensajes posteriores a la necesidad inicial. Solo participan el cliente y el prestador de esta solicitud. Fechas en horario de Ciudad de México.</p>
+  <p class="account-help">{{ $unreadMessagesCount }} {{ $unreadMessagesCount === 1 ? 'mensaje recibido sin leer' : 'mensajes recibidos sin leer' }} en esta solicitud. Consultarla no cambia tu lectura.</p>
+  @if($messageReadToken)
+    <form method="POST" action="{{ route('conversations.read', $inquiry) }}" class="conversation-read-form">
+      @csrf
+      <input type="hidden" name="read_token" value="{{ $messageReadToken }}">
+      <button class="account-button secondary" type="submit">Marcar mensajes como leídos</button>
+      <p class="account-help">Marca los recibidos hasta el último incluido en esta página. Los posteriores siguen sin leer.</p>
+    </form>
+  @elseif($unreadMessagesCount > 0)
+    <p class="account-note">No hay recibidos nuevos para marcar en esta página. Revisa las otras páginas de la conversación.</p>
+  @endif
   @if($messages->hasPages())
     <nav class="conversation-pagination" aria-label="Páginas de la conversación">
       @if($messages->hasMorePages())<a href="{{ $messages->nextPageUrl() }}">Mensajes anteriores</a>@else<span>Inicio de la conversación</span>@endif
@@ -12,6 +23,7 @@
     @forelse($messages->getCollection()->reverse() as $message)
       <li class="conversation-message {{ $message->author_user_id === auth('web')->id() ? 'is-own' : '' }}">
         <div class="conversation-meta"><strong>{{ $message->author_user_id === $inquiry->client_user_id ? 'Cliente' : 'Prestador' }} · {{ $message->author->name }}{{ $message->author_user_id === auth('web')->id() ? ' (tú)' : '' }}</strong><x-inquiry-time :at="$message->created_at" /></div>
+        @if($message->author_user_id !== auth('web')->id() && $message->id > $readMarker)<span class="conversation-unread">Sin leer</span>@endif
         <p class="inquiry-message">{{ $message->body }}</p>
       </li>
     @empty

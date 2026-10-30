@@ -126,3 +126,11 @@ El detalle de cada solicitud incorpora una conversación de texto entre sus part
 Se agrega una migración sobre las 30 anteriores, sin modificar las notificaciones ni conectar el sistema heredado. Validación: **196 pruebas y 2279 aserciones**, incluidas las 169 anteriores con sus 1867 aserciones, y auditoría npm completa sin vulnerabilidades reportadas.
 
 Consultar [arquitectura, concurrencia, rutas, resultados y validación aislada en Laragon/PowerShell](docs/mensajeria-solicitudes-etapa-5a.md). La revisión manual se prepara en `C:\laragon\www\tekora-etapa5a`, puerto **8006**; no aplicar cambios sobre la instalación original.
+
+## Etapa 5B: mensajes no leídos y bandeja
+
+`/cuenta/mensajes` reúne las solicitudes autorizadas y prioriza las que tienen recibidos sin leer. La navegación muestra un contador individual, sin incluir mensajes propios. La conversación permite marcar explícitamente los recibidos hasta el límite de la página mostrada; abrirla no cambia el progreso y un formulario antiguo no marca llegadas posteriores.
+
+La migración aditiva **31→32** incorpora progreso por cuenta/solicitud e índices, sin modificar los mensajes, `InquiryWorkflow`, `InquiryMessaging` o las notificaciones 4B. La entrega pasa **219 pruebas y 2599 aserciones**, incluidas las 196 anteriores con sus 2279 aserciones.
+
+Consultar [persistencia, seguridad, concurrencia, evidencias y validación Laragon/PowerShell](docs/mensajes-no-leidos-etapa-5b.md). Copia de revisión: `C:\laragon\www\tekora-etapa5b`, puerto **8007**.

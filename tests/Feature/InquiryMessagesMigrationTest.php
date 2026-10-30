@@ -49,7 +49,10 @@ class InquiryMessagesMigrationTest extends TestCase
         DB::table('sessions')->insert(['id' => 'message-existing-session', 'user_id' => $client->id, 'payload' => 'opaque-fixture', 'last_activity' => 1]);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($table) => $table !== 'migrations'));
         $before = $this->snapshot($tables);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'message_upgrade', '--force' => true]));
+        // Este escenario comprueba 30→31; el progreso de lectura se prueba por separado.
+        $messageFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_10_30_000001'));
+        $messageOptions = ['--database' => 'message_upgrade', '--path' => $messageFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $messageOptions));
         $this->assertDatabaseCount('migrations', 31);
         $this->assertDatabaseCount('service_inquiry_messages', 0);
         $this->assertSame($before, $this->snapshot($tables));
@@ -64,7 +67,7 @@ class InquiryMessagesMigrationTest extends TestCase
         $this->assertFalse(Schema::hasTable('service_inquiry_messages'));
         $this->assertDatabaseCount('migrations', 30);
         $this->assertSame($before, $this->snapshot($tables));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'message_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $messageOptions));
         $this->assertDatabaseCount('migrations', 31);
         $this->assertDatabaseCount('service_inquiry_messages', 0);
         $this->assertSame($before, $this->snapshot($tables));

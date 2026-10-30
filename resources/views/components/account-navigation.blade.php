@@ -7,6 +7,10 @@
     @php($unreadNotifications = auth('web')->user()->inquiryNotifications()->unread()->count())
     <a class="menu-item {{ request()->routeIs('notifications.*') ? 'active' : '' }}" href="{{ route('notifications.index') }}">Notificaciones @if($unreadNotifications > 0)<span aria-label="{{ $unreadNotifications }} sin leer">({{ $unreadNotifications }})</span>@endif</a>
   @endauth
+  @can('conversations', \App\Models\ServiceInquiry::class)
+    @php($unreadMessages = app(\App\Services\InquiryReadTracking::class)->totalUnread(auth('web')->user()))
+    <a class="menu-item {{ request()->routeIs('conversations.*') ? 'active' : '' }}" href="{{ route('conversations.index') }}">Mensajes @if($unreadMessages > 0)<span aria-label="{{ $unreadMessages }} {{ $unreadMessages === 1 ? 'mensaje sin leer' : 'mensajes sin leer' }}">({{ $unreadMessages }})</span>@endif</a>
+  @endcan
   @can(\App\Enums\Permission::ViewClientAppointments->value)
     <a class="menu-item {{ request()->routeIs('account.client', 'identity.citas') ? 'active' : '' }}" href="{{ route('account.client') }}">Cliente</a>
   @endcan
