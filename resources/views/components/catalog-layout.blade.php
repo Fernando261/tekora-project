@@ -7,6 +7,7 @@
   <title>{{ $title }} - MindBloom</title>
   <link rel="stylesheet" href="{{ asset('css/account.css') }}">
   <link rel="stylesheet" href="{{ asset('css/catalog.css') }}">
+  @stack('styles')
 </head>
 <body class="account-access catalog-page">
   <a class="catalog-skip" href="#catalog-content">Ir al contenido</a>

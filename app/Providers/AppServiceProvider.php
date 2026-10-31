@@ -33,6 +33,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        RateLimiter::for('provider-availability', function (Request $request) {
+            $response = function (Request $request, array $headers) {
+                $message = 'Has realizado varias ediciones. Espera antes de guardar de nuevo.';
+                if ($request->expectsJson()) return response()->json(['message' => $message], 429, $headers);
+
+                return response()->view('availability.error', compact('message'), 429, $headers);
+            };
+
+            return [Limit::perMinute(10)->by('availability:'.$request->user('web')->id)->response($response)];
+        });
+
         foreach (Permission::cases() as $permission) {
             Gate::define($permission->value, fn (Authenticatable $actor) =>
                 $actor instanceof User && $actor->hasPermission($permission));
