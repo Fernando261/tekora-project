@@ -134,3 +134,11 @@ Consultar [arquitectura, concurrencia, rutas, resultados y validación aislada e
 La migración aditiva **31→32** incorpora progreso por cuenta/solicitud e índices, sin modificar los mensajes, `InquiryWorkflow`, `InquiryMessaging` o las notificaciones 4B. La entrega pasa **219 pruebas y 2599 aserciones**, incluidas las 196 anteriores con sus 2279 aserciones.
 
 Consultar [persistencia, seguridad, concurrencia, evidencias y validación Laragon/PowerShell](docs/mensajes-no-leidos-etapa-5b.md). Copia de revisión: `C:\laragon\www\tekora-etapa5b`, puerto **8007**.
+
+## Etapa 6A: disponibilidad informativa
+
+Cada prestador central gestiona `/cuenta/disponibilidad`: turnos semanales, días sin atención, fechas bloqueadas y zona IANA. Las fichas públicas muestran los horarios orientativos únicamente con la visibilidad actual del catálogo. Sin configuración aparece «Horario no publicado»; no se crean citas o reservas.
+
+La migración aditiva **32→33** crea tres tablas independientes del sistema heredado. Las horas son civiles de la zona elegida, inicialmente `America/Mexico_City`. Se usan revisiones, transacciones y restricciones SQLite contra superposiciones. Validación: **247 pruebas y 2960 aserciones**, con las 219 anteriores y sus 2599 aserciones conservadas.
+
+Consultar [arquitectura, fechas/zonas, seguridad, evidencias y guía de Laragon/PowerShell](docs/disponibilidad-prestadores-etapa-6a.md). Crear una copia nueva en `C:\laragon\www\tekora-etapa6a`, puerto **8008**, sin tocar clones anteriores.

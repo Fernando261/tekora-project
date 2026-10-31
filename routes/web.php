@@ -25,6 +25,7 @@ require __DIR__.'/identities.php';
 require __DIR__.'/catalog.php';
 require __DIR__.'/inquiries.php';
 require __DIR__.'/conversations.php';
+require __DIR__.'/availability.php';
 require __DIR__.'/notifications.php';
 
 /*

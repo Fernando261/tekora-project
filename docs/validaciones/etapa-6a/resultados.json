@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Mexico_City",
+  "base_main": "43a64e13e52debdf127311ec2be2af96cb1658a5",
+  "branch": "codex/etapa-6a-disponibilidad-prestadores",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "v12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; dos PDO sobre URI mode=memory&cache=shared para concurrencia",
+  "commands": [
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Copia 6A nueva, sin red ni .env; paquetes del lock montados de solo lectura, metadatos y wrappers independientes. Autoload y package discovery correctos. Avisos previos Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Mismos assets Vite que 5B; CSS/JS de disponibilidad servidos desde public. Deprecaciones Sass/Bootstrap existentes."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 247,
+      "assertions": 2960
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result --filter /^(?!.*Availability)/",
+      "exit_code": 0,
+      "tests": 219,
+      "assertions": 2599
+    }
+  ],
+  "added_tests": 28,
+  "added_assertions": 361,
+  "migration_count": 33,
+  "new_tables": [
+    "provider_availability_settings",
+    "provider_weekly_intervals",
+    "provider_blocked_dates"
+  ],
+  "historical_migrations_unchanged": 32,
+  "protected_files_unchanged": true,
+  "catalog_visibility_controllers_and_inquiry_workflows_unchanged": true,
+  "default_timezone": "America/Mexico_City",
+  "weekly_time_storage": "minutos civiles 0..1439, ISO lunes=1 a domingo=7; no instantes UTC",
+  "blocked_date_range": "2000-01-01 a 2100-12-31, fechas civiles",
+  "visual_checks": 32,
+  "windows_laragon_executed": false,
+  "windows_review_directory": "C:\\laragon\\www\\tekora-etapa6a",
+  "windows_review_port": 8008,
+  "previous_review_clones_modified": false
+}
