@@ -33,6 +33,11 @@ class ServiceInquiry extends Model
         return $this->hasMany(ServiceInquiryMessage::class);
     }
 
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(ServiceReservation::class);
+    }
+
     public function readProgress(): HasMany
     {
         return $this->hasMany(InquiryReadProgress::class);

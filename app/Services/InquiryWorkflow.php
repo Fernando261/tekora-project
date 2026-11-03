@@ -57,6 +57,13 @@ class InquiryWorkflow
             return DB::transaction(function () use ($actor, $inquiryId, $action) {
                 $inquiry = ServiceInquiry::findOrFail($inquiryId);
                 Gate::forUser($actor)->authorize($action->value, $inquiry);
+                if ($action === InquiryAction::Complete && $inquiry->status === InquiryStatus::Accepted) {
+                    try {
+                        app(ReservationWorkflow::class)->closeForInquiry($inquiry, $actor);
+                    } catch (\App\Exceptions\ReservationFailure $exception) {
+                        throw new InquiryConflict($inquiryId, $exception->getMessage());
+                    }
+                }
                 $now = now();
                 // Compare-and-swap: una sola decisión puede consumir el estado de origen.
                 $changed = ServiceInquiry::whereKey($inquiryId)->where('status', $action->source()->value)->update([

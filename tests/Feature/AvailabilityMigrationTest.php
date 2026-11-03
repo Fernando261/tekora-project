@@ -50,7 +50,10 @@ class AvailabilityMigrationTest extends TestCase
         DB::table('sessions')->insert(['id' => 'availability-old-session', 'user_id' => $client->id, 'payload' => 'opaque-fixture', 'last_activity' => 1]);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($table) => $table !== 'migrations'));
         $before = $this->snapshot($tables);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'availability_upgrade', '--force' => true]));
+        // Mantener el escenario histórico 32→33; 6B tiene su propia prueba de actualización.
+        $availabilityFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_11_03_000000'));
+        $availabilityOptions = ['--database' => 'availability_upgrade', '--path' => $availabilityFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $availabilityOptions));
         $this->assertDatabaseCount('migrations', 33); $this->assertDatabaseCount('provider_availability_settings', 0);
         $this->assertSame($before, $this->snapshot($tables));
         $setting = app(ProviderAvailability::class)->save($provider, $this->availabilityData());
@@ -64,7 +67,7 @@ class AvailabilityMigrationTest extends TestCase
         foreach (['provider_availability_settings', 'provider_weekly_intervals', 'provider_blocked_dates'] as $table) $this->assertFalse(Schema::hasTable($table));
         $this->assertDatabaseCount('migrations', 32); $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame([], DB::select("SELECT name FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'provider_weekly_%'"));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'availability_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $availabilityOptions));
         $this->assertDatabaseCount('migrations', 33); $this->assertDatabaseCount('provider_availability_settings', 0);
         $this->assertSame($before, $this->snapshot($tables));
     }

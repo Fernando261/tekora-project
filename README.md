@@ -142,3 +142,9 @@ Cada prestador central gestiona `/cuenta/disponibilidad`: turnos semanales, día
 La migración aditiva **32→33** crea tres tablas independientes del sistema heredado. Las horas son civiles de la zona elegida, inicialmente `America/Mexico_City`. Se usan revisiones, transacciones y restricciones SQLite contra superposiciones. Validación: **247 pruebas y 2960 aserciones**, con las 219 anteriores y sus 2599 aserciones conservadas.
 
 Consultar [arquitectura, fechas/zonas, seguridad, evidencias y guía de Laragon/PowerShell](docs/disponibilidad-prestadores-etapa-6a.md). Crear una copia nueva en `C:\laragon\www\tekora-etapa6a`, puerto **8008**, sin tocar clones anteriores.
+
+### Etapa 6B: reservas de servicios
+
+Propuestas de 60 minutos desde solicitudes aceptadas, confirmación del prestador, historial privado y protección SQLite contra dobles reservas. La zona y el horario originales se conservan; no se implementan pagos ni sincronización con citas antiguas.
+
+Arquitectura, migración aditiva **33 → 34**, pruebas y guía aislada de Laragon/PowerShell (clon `tekora-etapa6b`, puerto **8009**): [reservas de servicios — Etapa 6B](docs/reservas-servicios-etapa-6b.md).
