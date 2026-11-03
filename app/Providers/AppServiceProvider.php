@@ -33,6 +33,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(\App\Models\ServiceReservation::class, \App\Policies\ServiceReservationPolicy::class);
+        foreach (['reservation-proposals' => 5, 'reservation-decisions' => 15] as $limiter => $attempts) {
+            RateLimiter::for($limiter, function (Request $request) use ($limiter, $attempts) {
+                return Limit::perMinute($attempts)->by($limiter.':'.$request->user('web')->id)->response(function (Request $request, array $headers) {
+                    $message = 'Has realizado varias operaciones de reserva. Espera antes de volver a intentarlo.';
+                    if ($request->expectsJson()) return response()->json(['message' => $message], 429, $headers);
+
+                    return response()->view('reservations.error', compact('message'), 429, $headers);
+                });
+            });
+        }
+
         RateLimiter::for('provider-availability', function (Request $request) {
             $response = function (Request $request, array $headers) {
                 $message = 'Has realizado varias ediciones. Espera antes de guardar de nuevo.';

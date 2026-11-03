@@ -1,0 +1,308 @@
+{
+  "checks": [
+    {
+      "page": "bandeja-vacia",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "solicitud-aceptada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario-invalido",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "propuesta-cliente",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "propuesta-prestador",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-propuestas",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "confirmada-prestador",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "confirmada-cliente",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "conflicto",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "cancelada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "rechazada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "realizada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "expirada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "acceso-denegado",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "sin-horarios",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "error-temporal",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "expected_application_status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-vacia",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "solicitud-aceptada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario-invalido",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "propuesta-cliente",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "propuesta-prestador",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-propuestas",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "confirmada-prestador",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "confirmada-cliente",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "conflicto",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "cancelada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "rechazada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "realizada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "expirada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "acceso-denegado",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "sin-horarios",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "error-temporal",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "expected_application_status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "sin-js",
+      "width": 1440,
+      "height": 1000,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "propuesta-prestador",
+      "viewport": "sin-js",
+      "width": 1440,
+      "height": 1000,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "sin-js",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "propuesta-prestador",
+      "viewport": "sin-js",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false
+    }
+  ],
+  "count": 38,
+  "javascript_errors": [],
+  "external_requests": [],
+  "method": "HTML producido por peticiones Laravel sobre SQLite en memoria; revisión Chromium de artefactos estáticos, sin escrituras de navegador."
+}

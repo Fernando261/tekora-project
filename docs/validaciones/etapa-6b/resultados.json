@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-03",
+  "timezone": "America/Mexico_City",
+  "base_main": "b5080391cb9e5273915169106aaaedeb2c0e1399",
+  "branch": "codex/etapa-6b-reservas-servicios",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; concurrencia con dos PDO distintos sobre URI mode=memory&cache=shared, sin archivo físico",
+  "commands": [
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Copia 6B nueva, sin .env ni red; paquetes del lock montados de solo lectura; metadatos propios. Autoload y package discovery correctos. Avisos previos Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Mismos assets Vite anteriores; CSS propio en public/css/reservations.css. Deprecaciones Sass/Bootstrap previas."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 288,
+      "assertions": 3447
+    },
+    {
+      "command": "Suite del commit de origen en copia nueva aislada",
+      "exit_code": 0,
+      "tests": 247,
+      "assertions": 2960
+    }
+  ],
+  "previous_tests_preserved": 247,
+  "previous_assertions_current_branch": 2961,
+  "previous_assertion_difference": "ConversationInboxTest valida cada consulta SQL; la policy del enlace Mis reservas agrega una comprobación dinámica. Todas las aserciones originales se conservan.",
+  "new_tests": 41,
+  "new_assertions": 486,
+  "migration_count": 34,
+  "historical_migrations_unchanged": 33,
+  "new_tables": [
+    "service_reservations",
+    "reservation_events"
+  ],
+  "protected_files_unchanged": true,
+  "duration_minutes": 60,
+  "horizon_days": 90,
+  "interval_semantics": "[inicio, fin)",
+  "visual_checks": 38,
+  "windows_laragon_executed": false,
+  "windows_review_directory": "C:\\laragon\\www\\tekora-etapa6b",
+  "windows_review_port": 8009,
+  "previous_review_clones_modified": false,
+  "real_databases_modified": false,
+  "env_and_credentials_modified": false
+}

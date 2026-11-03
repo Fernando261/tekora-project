@@ -1,0 +1,18 @@
+.reservation-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:20px}
+.reservation-card{margin:0;overflow-wrap:anywhere}
+.reservation-card h2{margin-top:20px}
+.reservation-status{display:inline-block;padding:7px 13px;margin-bottom:20px;border:1px solid #d3b76c;border-radius:20px;background:#fff8e3;color:#694f15;font-size:.86rem;font-weight:750}
+.reservation-confirmed{background:#e4f5eb;border-color:#9acbb0;color:#205b3e}
+.reservation-rejected{background:#fff0f3;border-color:#e7b9c2;color:#802d42}
+.reservation-cancelled{background:#f1f1f4;border-color:#cdced6;color:#4d4d60}
+.reservation-completed{background:#edeaf9;border-color:#cac1e4;color:#514072}
+.reservation-schedule{display:grid;gap:16px;line-height:1.5;margin:8px 0 24px}
+.reservation-schedule dt{font-size:.86rem;color:var(--account-muted)}
+.reservation-schedule dd{margin:3px 0 0;font-weight:750;overflow-wrap:anywhere}
+.reservation-actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
+.reservation-actions form{margin:0}
+.reservation-history{list-style:none;padding:0;line-height:1.6}
+.reservation-history li{border-left:3px solid #a9cfd9;padding:0 0 24px 16px}
+.reservation-history span{display:block;margin-top:6px;font-size:.88rem;color:var(--account-muted);overflow-wrap:anywhere}
+.reservation-form input[type=date],.reservation-form input[type=time]{min-width:0;max-width:100%}
+@media(max-width:560px){.reservation-actions form,.reservation-actions button{width:100%}}

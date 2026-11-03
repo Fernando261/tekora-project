@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__.'/reservations.php';
+
 use Illuminate\Support\Facades\Route;
 use App\Models\Emotion;
 

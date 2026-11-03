@@ -40,4 +40,9 @@ class ProviderProfile extends Model
     {
         return $this->hasMany(ProviderBlockedDate::class);
     }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(ServiceReservation::class);
+    }
 }
