@@ -48,7 +48,10 @@ class ConversationMigrationTest extends TestCase
         DB::table('sessions')->insert(['id' => 'read-existing-session', 'user_id' => $client->id, 'payload' => 'opaque-fixture', 'last_activity' => 1]);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($table) => $table !== 'migrations'));
         $before = $this->snapshot($tables);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'read_upgrade', '--force' => true]));
+        // Mantener el escenario histórico 31→32; 6A se verifica por separado.
+        $readFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_10_30_000002'));
+        $readOptions = ['--database' => 'read_upgrade', '--path' => $readFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $readOptions));
         $this->assertDatabaseCount('migrations', 32); $this->assertDatabaseCount('service_inquiry_reads', 0);
         $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame(1, app(InquiryReadTracking::class)->unreadFor($client, $inquiry));
@@ -63,7 +66,7 @@ class ConversationMigrationTest extends TestCase
         $indexes = array_column(DB::select('PRAGMA index_list(service_inquiry_messages)'), 'name');
         $this->assertContains('inquiry_messages_one_submission', $indexes); $this->assertContains('inquiry_messages_conversation_order', $indexes);
         $this->assertNotContains('inquiry_messages_identity', $indexes); $this->assertNotContains('inquiry_messages_received_order', $indexes);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'read_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $readOptions));
         $this->assertDatabaseCount('migrations', 32); $this->assertDatabaseCount('service_inquiry_reads', 0);
         $this->assertSame($before, $this->snapshot($tables));
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ProviderProfile extends Model
 {
@@ -23,5 +24,20 @@ class ProviderProfile extends Model
     public function services(): HasMany
     {
         return $this->hasMany(Service::class);
+    }
+
+    public function availabilitySetting(): HasOne
+    {
+        return $this->hasOne(ProviderAvailabilitySetting::class);
+    }
+
+    public function weeklyIntervals(): HasMany
+    {
+        return $this->hasMany(ProviderWeeklyInterval::class);
+    }
+
+    public function blockedDates(): HasMany
+    {
+        return $this->hasMany(ProviderBlockedDate::class);
     }
 }

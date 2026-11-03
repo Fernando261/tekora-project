@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-30",
+  "timezone": "America/Mexico_City",
+  "render_source": "Laravel HTTP kernel con fixtures nuevos y SQLite :memory:; HTML estático; conflicto desde vista Blade",
+  "viewports": {
+    "desktop": "1440x1000",
+    "mobile": "390x844"
+  },
+  "render_checks": 32,
+  "javascript_errors": [],
+  "external_requests_aborted": 0,
+  "checks": [
+    "empty configuration",
+    "configured civil weekly intervals",
+    "multiple intervals and blank days",
+    "future blocked dates only in public",
+    "published service and provider",
+    "all days without attention",
+    "paused service 404",
+    "owner editor while paused",
+    "third party 403",
+    "conflict",
+    "JS add/remove with unique names",
+    "CSRF/PATCH fields",
+    "mobile menu and Escape",
+    "basic no-JS editing",
+    "no horizontal overflow"
+  ],
+  "results": [
+    {
+      "view": "editor-vacio",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-no-publicado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "perfil-no-publicado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-configurado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-configurado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "perfil-configurado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-sin-atencion",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-sin-atencion",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-pausado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 404,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-pausado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-denegado",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "conflicto",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "lectura-publica-temporal",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "lectura-privada-temporal",
+      "viewport": "desktop",
+      "javascript": true,
+      "status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-vacio",
+      "viewport": "desktop",
+      "javascript": false,
+      "status": 200
+    },
+    {
+      "view": "editor-configurado",
+      "viewport": "desktop",
+      "javascript": false,
+      "status": 200
+    },
+    {
+      "view": "editor-vacio",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-no-publicado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "perfil-no-publicado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-configurado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-configurado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "perfil-configurado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-sin-atencion",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-sin-atencion",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "servicio-pausado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 404,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-pausado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-denegado",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "conflicto",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "lectura-publica-temporal",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "lectura-privada-temporal",
+      "viewport": "mobile",
+      "javascript": true,
+      "status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "view": "editor-vacio",
+      "viewport": "mobile",
+      "javascript": false,
+      "status": 200
+    },
+    {
+      "view": "editor-configurado",
+      "viewport": "mobile",
+      "javascript": false,
+      "status": 200
+    }
+  ]
+}
