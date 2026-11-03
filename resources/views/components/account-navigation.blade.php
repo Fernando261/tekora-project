@@ -11,6 +11,9 @@
     @php($unreadMessages = app(\App\Services\InquiryReadTracking::class)->totalUnread(auth('web')->user()))
     <a class="menu-item {{ request()->routeIs('conversations.*') ? 'active' : '' }}" href="{{ route('conversations.index') }}">Mensajes @if($unreadMessages > 0)<span aria-label="{{ $unreadMessages }} {{ $unreadMessages === 1 ? 'mensaje sin leer' : 'mensajes sin leer' }}">({{ $unreadMessages }})</span>@endif</a>
   @endcan
+  @can('viewAny', \App\Models\ServiceReview::class)
+    <a class="menu-item {{ request()->routeIs('reviews.*') ? 'active' : '' }}" href="{{ route('reviews.index') }}">Mis reseñas</a>
+  @endcan
   @can('viewAny', \App\Models\ServiceReservation::class)
     <a class="menu-item {{ request()->routeIs('reservations.*') ? 'active' : '' }}" href="{{ route('reservations.index') }}">Mis reservas</a>
   @endcan

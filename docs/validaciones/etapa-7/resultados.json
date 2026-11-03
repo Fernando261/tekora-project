@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-03",
+  "timezone": "America/Mexico_City",
+  "base_main": "fe46c9ff9974e00cbc2a89bdef53572e292094a9",
+  "branch": "codex/etapa-7-resenas-verificadas",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; concurrencia con dos PDO independientes sobre URI mode=memory&cache=shared y sin archivo físico",
+  "commands": [
+    {
+      "command": "Suite del commit de origen antes de implementar",
+      "exit_code": 0,
+      "tests": 288,
+      "assertions": 3447
+    },
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Copia nueva Etapa 7, sin .env ni red; paquetes del lock de solo lectura y metadatos propios. Autoload/package discovery correctos. Avisos previos Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Assets Vite anteriores conservados; CSS nuevo en public/css/reviews.css. Deprecaciones previas Sass/Bootstrap."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 319,
+      "assertions": 3903
+    }
+  ],
+  "previous_tests_preserved": 288,
+  "previous_assertions_current_branch": 3448,
+  "dynamic_assertion_difference": "ConversationInboxTest comprueba cada consulta SQL; el enlace Mis reseñas añade una consulta de permisos, 45→46 en ese caso. No se retiraron aserciones anteriores.",
+  "new_tests": 31,
+  "new_assertions": 455,
+  "migration_count": 35,
+  "historical_migrations_unchanged": 34,
+  "new_tables": [
+    "service_reviews"
+  ],
+  "migration_validation": "Upgrade 34→35, reversión exclusiva y reaplicación solo en memoria; todos los registros y columnas anteriores preservados.",
+  "foreign_key_check": "sin infracciones",
+  "integrity_check": "ok",
+  "protected_files_unchanged": true,
+  "public_queries_with_data": 4,
+  "public_page_size": 5,
+  "private_page_size": 12,
+  "write_limit_per_minute_per_account": 10,
+  "visual_checks": 38,
+  "windows_laragon_executed": false,
+  "windows_review_directory": "C:\\laragon\\www\\tekora-etapa7",
+  "windows_review_port": 8010,
+  "persistent_migration_applied": false,
+  "persistent_migration_requires_independent_approval": true,
+  "previous_review_clones_modified": false,
+  "real_databases_modified": false,
+  "env_or_credentials_modified": false
+}

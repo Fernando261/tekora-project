@@ -33,11 +33,14 @@ class ServiceCatalogController extends Controller
             'categories' => ServiceCategory::active()->ordered()->get(['name', 'slug']), 'filters' => $filters]);
     }
 
-    public function show(int $service)
+    public function show(\Illuminate\Http\Request $request, int $service)
     {
         $service = Service::publiclyVisible()->with(['category:id,name', 'providerProfile:id,display_name,headline,bio'])
             ->findOrFail($service);
 
-        return view('catalog.show', compact('service'));
+        $reviewPage = \App\Support\ReviewInput::page($request, 'reviews_page');
+        $reviews = app(\App\Services\PublicReviews::class)->forService($service->id, $reviewPage);
+
+        return view('catalog.show', compact('service', 'reviews'));
     }
 }

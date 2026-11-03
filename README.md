@@ -148,3 +148,9 @@ Consultar [arquitectura, fechas/zonas, seguridad, evidencias y guía de Laragon/
 Propuestas de 60 minutos desde solicitudes aceptadas, confirmación del prestador, historial privado y protección SQLite contra dobles reservas. La zona y el horario originales se conservan; no se implementan pagos ni sincronización con citas antiguas.
 
 Arquitectura, migración aditiva **33 → 34**, pruebas y guía aislada de Laragon/PowerShell (clon `tekora-etapa6b`, puerto **8009**): [reservas de servicios — Etapa 6B](docs/reservas-servicios-etapa-6b.md).
+
+### Etapa 7: reseñas verificadas
+
+Reseñas inmutables de reservas centrales completadas, con 1–5 estrellas, comentario opcional y retiro público irreversible. Promedios por servicio/prestador basados en reseñas visibles y servicios autorizados, con identificación pública anónima y sin afirmar pagos.
+
+Arquitectura, migración aditiva **34 → 35**, pruebas y preparación de Laragon/PowerShell (clon `tekora-etapa7`, puerto **8010**, aplicación de migración pendiente de aprobación independiente): [reseñas verificadas — Etapa 7](docs/resenas-verificadas-etapa-7.md).

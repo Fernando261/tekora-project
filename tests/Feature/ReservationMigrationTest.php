@@ -45,7 +45,10 @@ class ReservationMigrationTest extends TestCase
         DB::table('profesionista_bloqueos')->insert(['profesionista_id' => $legacy->id, 'start_datetime' => '2030-01-08 10:00:00', 'end_datetime' => '2030-01-08 11:00:00']);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($t) => $t !== 'migrations'));
         $before = $this->snapshot($tables);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'reservation_upgrade', '--force' => true]));
+        // Conservar el escenario histórico 33→34; las reseñas se prueban por separado.
+        $reservationFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_11_03_000001'));
+        $reservationOptions = ['--database' => 'reservation_upgrade', '--path' => $reservationFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $reservationOptions));
         $this->assertDatabaseCount('migrations', 34); $this->assertDatabaseCount('service_reservations', 0); $this->assertDatabaseCount('reservation_events', 0);
         $this->assertSame($before, $this->snapshot($tables));
         $reservation = $this->proposeReservation($inquiry);
@@ -59,7 +62,7 @@ class ReservationMigrationTest extends TestCase
         $this->assertDatabaseCount('migrations', 33); $this->assertFalse(Schema::hasTable('service_reservations')); $this->assertFalse(Schema::hasTable('reservation_events'));
         $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame([], DB::select("SELECT name FROM sqlite_master WHERE type='trigger' AND (name LIKE 'reservation_%' OR name LIKE 'reservations_%')"));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'reservation_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $reservationOptions));
         $this->assertDatabaseCount('migrations', 34); $this->assertDatabaseCount('service_reservations', 0);
         $this->assertSame($before, $this->snapshot($tables));
     }

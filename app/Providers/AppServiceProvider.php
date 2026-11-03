@@ -33,6 +33,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(\App\Models\ServiceReview::class, \App\Policies\ServiceReviewPolicy::class);
+        RateLimiter::for('service-reviews', function (Request $request) {
+            return Limit::perMinute(10)->by('reviews:'.$request->user('web')->id)->response(function (Request $request, array $headers) {
+                $response = (new \App\Exceptions\ReviewFailure('Has realizado varias operaciones de reseñas. Espera antes de intentarlo de nuevo.', 429))->render($request);
+                $response->headers->add($headers);
+
+                return $response;
+            });
+        });
+
         Gate::policy(\App\Models\ServiceReservation::class, \App\Policies\ServiceReservationPolicy::class);
         foreach (['reservation-proposals' => 5, 'reservation-decisions' => 15] as $limiter => $attempts) {
             RateLimiter::for($limiter, function (Request $request) use ($limiter, $attempts) {
