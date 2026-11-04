@@ -16,6 +16,7 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/cuenta/activar-prestador', [AccountController::class, 'activate'])->name('account.activate-provider');
     Route::get('/cuenta/prestador', [AccountController::class, 'provider'])
         ->middleware('can:'.Permission::ManageProviderProfile->value)->name('account.provider');
+    Route::get('/cuenta/prestador/dashboard', \App\Http\Controllers\ProviderDashboardController::class)->name('provider.dashboard');
     Route::get('/cuenta/identidad', [IdentityController::class, 'show'])->name('identity.show');
     Route::post('/cuenta/roles', [RoleMembershipController::class, 'store'])->name('identity.roles.store');
 
