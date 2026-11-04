@@ -160,3 +160,9 @@ Arquitectura, migración aditiva **34 → 35**, pruebas y preparación de Larago
 Una bandeja y un contador para solicitudes, reservas y reseñas. Los avisos nuevos se generan de forma transaccional en SQLite; los anteriores conservan su tabla y ruta de lectura. Los textos son genéricos y los enlaces respetan permisos actuales.
 
 Arquitectura, migración aditiva **35 → 36**, resultados y preparación de Laragon/PowerShell (clon `tekora-etapa8`, puerto **8011**, migración persistente pendiente de aprobación independiente): [notificaciones de actividad — Etapa 8](docs/notificaciones-actividad-etapa-8.md).
+
+### Etapa 9A: dashboard web del prestador
+
+Panel central con diez KPI, periodos de 7/30/90 días naturales en Ciudad de México, gráfica de completadas, agenda y solicitudes pendientes. Las métricas se restringen al prestador autenticado y reutilizan las reglas existentes; consultar el panel no cambia datos de negocio ni marcadores.
+
+Arquitectura, definiciones, resultados, capturas y validación independiente de Laragon/PowerShell (clon `tekora-etapa9a`, puerto **8012**, sin migraciones nuevas): [dashboard del prestador — Etapa 9A](docs/dashboard-prestador-etapa-9a.md).

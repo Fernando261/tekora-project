@@ -1,0 +1,1 @@
+<x-access-layout title="Panel del prestador"><section class="account-card"><h1>No se pudo mostrar el panel</h1><p role="alert">{{ $message }}</p><a class="account-button" href="{{ route('provider.dashboard') }}">Volver al panel</a></section></x-access-layout>

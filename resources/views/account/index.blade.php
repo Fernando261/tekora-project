@@ -11,6 +11,7 @@
     <section class="account-card"><h2>Quiero ofrecer servicios</h2><p>Crea tu presentación como técnico o freelancer. Tu acceso de cliente se conserva.</p>
       @can(\App\Enums\Permission::ManageProviderProfile->value)
         <a class="account-button" href="{{ route('account.provider') }}">Ir a Prestador</a>
+        <p><a href="{{ route('provider.dashboard') }}">Abrir panel del prestador →</a></p>
       @else
         <a class="account-button" href="{{ route('account.activate-provider') }}">Convertirme en prestador</a>
       @endcan

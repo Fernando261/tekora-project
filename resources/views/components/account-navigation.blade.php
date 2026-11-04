@@ -24,6 +24,7 @@
     <a class="menu-item {{ request()->routeIs('inquiries.index') ? 'active' : '' }}" href="{{ route('inquiries.index') }}">Mis solicitudes</a>
   @endcan
   @can(\App\Enums\Permission::ManageProviderProfile->value)
+    <a class="menu-item {{ request()->routeIs('provider.dashboard') ? 'active' : '' }}" href="{{ route('provider.dashboard') }}">Panel del prestador</a>
     <a class="menu-item {{ request()->routeIs('availability.*') ? 'active' : '' }}" href="{{ route('availability.edit') }}">Disponibilidad</a>
     <a class="menu-item {{ request()->routeIs('account.provider', 'provider-profiles.*') ? 'active' : '' }}" href="{{ route('account.provider') }}">Prestador · Mi perfil</a>
   @else

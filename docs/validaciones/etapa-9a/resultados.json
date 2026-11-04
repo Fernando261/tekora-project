@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-04",
+  "timezone": "America/Mexico_City",
+  "base_main": "7523cfd9a938b85958df26bf4de0543badc9467e",
+  "branch": "codex/etapa-9a-dashboard-prestador",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; sin .env ni SQLite persistente en la copia de validación",
+  "commands": [
+    {
+      "command": "Suite del commit de origen antes de implementar",
+      "exit_code": 0,
+      "tests": 350,
+      "assertions": 4337
+    },
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Copia nueva Etapa 9A sin .env ni red, paquetes del lock montados de solo lectura y metadatos propios; avisos previos Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Mismos assets Vite; deprecaciones previas Sass/Bootstrap."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 375,
+      "assertions": 4633
+    },
+    {
+      "command": "php artisan route:list --except-vendor",
+      "exit_code": 0,
+      "routes": 99,
+      "notes": "Sin .env ni SQLite persistente."
+    }
+  ],
+  "previous_tests_preserved": 350,
+  "previous_assertions_current_branch": 4337,
+  "previous_assertion_differences": [],
+  "new_tests": 25,
+  "new_assertions": 296,
+  "migration_count": 36,
+  "new_migrations": 0,
+  "historical_migrations_unchanged": 36,
+  "foreign_key_check": "sin infracciones",
+  "integrity_check": "ok",
+  "protected_files_unchanged": true,
+  "protected_files_checked": 76,
+  "business_workflows_unchanged": true,
+  "read_markers_unchanged_on_dashboard_get": true,
+  "business_writes_on_dashboard_get": 0,
+  "metrics_service_queries": 11,
+  "query_count_independent_of_row_count": true,
+  "agenda_limit": 5,
+  "pending_inquiries_limit": 5,
+  "periods_allowed": [
+    7,
+    30,
+    90
+  ],
+  "default_period": 30,
+  "period_timezone": "America/Mexico_City",
+  "graph_daily_buckets_maximum": 90,
+  "visual_checks": 32,
+  "visual_states": 12,
+  "visual_viewports": [
+    "1440x1000",
+    "390x844"
+  ],
+  "javascript_disabled_checks": 7,
+  "visual_javascript_errors": 0,
+  "visual_external_requests": 0,
+  "visual_horizontal_overflow": false,
+  "visual_method": "Respuestas Laravel con fixtures sintéticos nuevos en SQLite en memoria, servidas como HTML estático local. Chromium comprueba escritorio/móvil, datos, menú y formularios GET sin JavaScript. PHPUnit verifica autorización, agregaciones y ausencia de escrituras.",
+  "screenshots": [
+    "dashboard-escritorio.jpg",
+    "dashboard-movil.jpg"
+  ],
+  "windows_laragon_executed": false,
+  "windows_review_directory": "C:\\laragon\\www\\tekora-etapa9a",
+  "windows_review_port": 8012,
+  "windows_temp_copy_requires_independent_review": true,
+  "persistent_migration_applied": false,
+  "previous_review_clones_modified": false,
+  "real_databases_modified": false,
+  "env_or_credentials_modified": false
+}

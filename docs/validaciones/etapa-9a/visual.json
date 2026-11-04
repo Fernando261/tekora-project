@@ -1,0 +1,198 @@
+{
+  "date": "2026-11-04",
+  "timezone": "America/Mexico_City",
+  "checks": [
+    {
+      "state": "sin-perfil",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "sin-actividad",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "actividad-7",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "actividad-30",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "actividad-90",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "resena-retirada",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "servicios-no-publicos",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "texto-largo-escapado",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "periodo-invalido",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "cliente-sin-acceso",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "admin-sin-acceso",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "error-temporal",
+      "viewport": "escritorio",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "sin-perfil",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "sin-actividad",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "actividad-7",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "actividad-30",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "actividad-90",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "resena-retirada",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "servicios-no-publicos",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "texto-largo-escapado",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "periodo-invalido",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "cliente-sin-acceso",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "admin-sin-acceso",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "error-temporal",
+      "viewport": "movil",
+      "javascript": true,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "menu-movil-teclado",
+      "viewport": "movil",
+      "javascript": true
+    },
+    {
+      "state": "actividad-7",
+      "viewport": "movil",
+      "javascript": false,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "actividad-90",
+      "viewport": "movil",
+      "javascript": false,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "sin-actividad",
+      "viewport": "movil",
+      "javascript": false,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "sin-perfil",
+      "viewport": "movil",
+      "javascript": false,
+      "horizontal_overflow": false
+    },
+    {
+      "state": "filtro-nativo-7",
+      "viewport": "movil",
+      "javascript": false
+    },
+    {
+      "state": "filtro-nativo-90",
+      "viewport": "movil",
+      "javascript": false
+    },
+    {
+      "state": "filtro-nativo-30",
+      "viewport": "movil",
+      "javascript": false
+    }
+  ],
+  "javascript_errors": [],
+  "external_requests": [],
+  "method": "Respuestas Laravel con fixtures sintéticos nuevos en SQLite en memoria, servidas como HTML estático local. Chromium comprueba escritorio/móvil, datos, menú y formularios GET sin JavaScript. PHPUnit verifica autorización, agregaciones y ausencia de escrituras.",
+  "count": 32
+}
