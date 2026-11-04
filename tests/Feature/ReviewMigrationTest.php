@@ -47,7 +47,10 @@ class ReviewMigrationTest extends TestCase
         DB::table('profesionista_bloqueos')->insert(['profesionista_id' => $legacy->id, 'start_datetime' => '2030-01-08 10:00:00', 'end_datetime' => '2030-01-08 11:00:00']);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($t) => $t !== 'migrations'));
         $before = $this->snapshot($tables);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'review_upgrade', '--force' => true]));
+        // Mantener el escenario histórico 34→35; la actividad se prueba por separado.
+        $reviewFiles = array_values(array_filter(glob(database_path('migrations/*.php')), fn ($file) => basename($file) < '2026_11_03_000002'));
+        $reviewOptions = ['--database' => 'review_upgrade', '--path' => $reviewFiles, '--realpath' => true, '--force' => true];
+        $this->assertSame(0, Artisan::call('migrate', $reviewOptions));
         $this->assertDatabaseCount('migrations', 35); $this->assertDatabaseCount('service_reviews', 0); $this->assertSame($before, $this->snapshot($tables));
         $review = $this->publishReview($reservation);
         $this->assertSame($reservation->id, $review->reservation->id); $this->assertSame($reservation->id, $reservation->review->service_reservation_id);
@@ -61,7 +64,7 @@ class ReviewMigrationTest extends TestCase
         $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'review_upgrade', '--step' => 1, '--force' => true]));
         $this->assertDatabaseCount('migrations', 34); $this->assertFalse(Schema::hasTable('service_reviews')); $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame([], DB::select("SELECT name FROM sqlite_master WHERE type='trigger' AND name LIKE 'reviews_%'"));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'review_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', $reviewOptions));
         $this->assertDatabaseCount('migrations', 35); $this->assertDatabaseCount('service_reviews', 0); $this->assertSame($before, $this->snapshot($tables));
     }
 

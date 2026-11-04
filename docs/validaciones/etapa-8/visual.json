@@ -1,0 +1,276 @@
+{
+  "checks": [
+    {
+      "page": "bandeja-vacia",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-combinada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "contador-panel",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "actividad-leida",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "solicitud-leida",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "resena-retirada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "publicacion-leida-tras-retiro",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "permisos-revocados",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "paginacion-primera",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "paginacion-segunda",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-no-publico",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "aviso-ajeno",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 404,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "pagina-invalida",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 422,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "error-temporal",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "contador-temporal",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-vacia",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-combinada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "contador-panel",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "actividad-leida",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "solicitud-leida",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "resena-retirada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "publicacion-leida-tras-retiro",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "permisos-revocados",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "paginacion-primera",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "paginacion-segunda",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-no-publico",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "aviso-ajeno",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 404,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "pagina-invalida",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 422,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "error-temporal",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "contador-temporal",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-combinada",
+      "viewport": "sin-js",
+      "width": 1440,
+      "height": 1000,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "actividad-leida",
+      "viewport": "sin-js",
+      "width": 1440,
+      "height": 1000,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-combinada",
+      "viewport": "sin-js",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "actividad-leida",
+      "viewport": "sin-js",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false
+    }
+  ],
+  "count": 34,
+  "javascript_errors": [],
+  "external_requests": [],
+  "method": "Peticiones Laravel con fixtures sintéticos nuevos en SQLite en memoria; Chromium revisa HTML estático, categorías, contador, privacidad, menú móvil y formularios nativos sin JavaScript."
+}

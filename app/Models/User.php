@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(InquiryNotification::class);
     }
 
+    public function activityNotifications(): HasMany
+    {
+        return $this->hasMany(ActivityNotification::class);
+    }
+
     public function inquiryReadProgress(): HasMany
     {
         return $this->hasMany(InquiryReadProgress::class);

@@ -33,6 +33,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(\App\Models\ActivityNotification::class, \App\Policies\ActivityNotificationPolicy::class);
+        RateLimiter::for('activity-notification-reads', function (Request $request) {
+            return Limit::perMinute(30)->by('activity-read:'.$request->user('web')->id)->response(function (Request $request, array $headers) {
+                $response = (new \App\Exceptions\NotificationFailure('Has marcado varios avisos. Espera antes de volver a intentarlo.', 429))->render($request);
+                $response->headers->add($headers);
+
+                return $response;
+            });
+        });
+
         Gate::policy(\App\Models\ServiceReview::class, \App\Policies\ServiceReviewPolicy::class);
         RateLimiter::for('service-reviews', function (Request $request) {
             return Limit::perMinute(10)->by('reviews:'.$request->user('web')->id)->response(function (Request $request, array $headers) {
