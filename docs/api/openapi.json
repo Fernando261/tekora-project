@@ -1,0 +1,1188 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Tekora API móvil",
+    "version": "1.0.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 409 se reserva para futuros workflows de escritura de 9C; 9B no añade esas operaciones.",
+    "license": {
+      "name": "MIT",
+      "identifier": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8013/api/v1",
+      "description": "Clon local aislado; en servidores reales usar HTTPS"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "operationId": "login",
+        "summary": "Emitir token móvil de solicitante",
+        "security": [],
+        "responses": {
+          "201": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Login"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "token_type": "Bearer",
+                    "access_token": "<token devuelto una sola vez>",
+                    "expires_at": "2030-02-01T18:00:00.000000Z",
+                    "user": {
+                      "id": 4,
+                      "name": "Solicitante de prueba",
+                      "email": "cliente@example.test",
+                      "experience": "client",
+                      "permissions": [
+                        "client.appointments.view",
+                        "client.inquiries.manage"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Mismo error para cuenta inexistente, contraseña incorrecta y rol/permisos insuficientes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": {
+                    "code": "invalid_credentials",
+                    "message": "No se pudo iniciar sesión con los datos proporcionados.",
+                    "fields": {}
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginInput"
+              },
+              "example": {
+                "email": "cliente@example.test",
+                "password": "<contraseña existente>",
+                "device_name": "Expo Android de prueba"
+              }
+            }
+          }
+        },
+        "description": "5 intentos/minuto por correo normalizado e IP; 20/minuto por IP. Token de 30 días, ability client:read. Reemplaza el token del mismo device_name. Máximo 5 tokens móviles por usuario; elimina primero el más antiguo. No inicia sesión web. No hay refresh token."
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "logout",
+        "summary": "Revocar únicamente el token actual",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Logout"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "revoked": true
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "operationId": "me",
+        "summary": "Consultar identidad propia en experiencia solicitante",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Client"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 4,
+                    "name": "Solicitante de prueba",
+                    "email": "cliente@example.test",
+                    "experience": "client",
+                    "permissions": [
+                      "client.appointments.view",
+                      "client.inquiries.manage"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "operationId": "services",
+        "summary": "Listar servicios públicos",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Service"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 21,
+                      "title": "Soporte de computadoras",
+                      "description": "Diagnóstico remoto.",
+                      "modality": "remote",
+                      "category": {
+                        "id": 1,
+                        "name": "Soporte técnico",
+                        "slug": "soporte-tecnico"
+                      },
+                      "provider": {
+                        "id": 7,
+                        "display_name": "Soporte local",
+                        "headline": "Especialista en equipos",
+                        "bio": "Diagnóstico y mantenimiento."
+                      }
+                    }
+                  ],
+                  "meta": {
+                    "current_page": 1,
+                    "per_page": 12,
+                    "last_page": 1,
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Slug de categoría activa."
+            }
+          },
+          {
+            "name": "modality",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "remote",
+                "onsite",
+                "both"
+              ],
+              "description": "remote/onsite también incluyen servicios both."
+            }
+          }
+        ]
+      }
+    },
+    "/services/{service}": {
+      "get": {
+        "operationId": "service",
+        "summary": "Consultar servicio público",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Service"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 21,
+                    "title": "Soporte de computadoras",
+                    "description": "Diagnóstico remoto.",
+                    "modality": "remote",
+                    "category": {
+                      "id": 1,
+                      "name": "Soporte técnico",
+                      "slug": "soporte-tecnico"
+                    },
+                    "provider": {
+                      "id": 7,
+                      "display_name": "Soporte local",
+                      "headline": "Especialista en equipos",
+                      "bio": "Diagnóstico y mantenimiento."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "parameters": [
+          {
+            "name": "service",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/providers": {
+      "get": {
+        "operationId": "providers",
+        "summary": "Listar perfiles con servicios públicos",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Provider"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 7,
+                      "display_name": "Soporte local",
+                      "headline": "Especialista en equipos",
+                      "bio": "Diagnóstico y mantenimiento."
+                    }
+                  ],
+                  "meta": {
+                    "current_page": 1,
+                    "per_page": 12,
+                    "last_page": 1,
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Búsqueda literal en display_name y headline."
+            }
+          }
+        ]
+      }
+    },
+    "/providers/{provider}": {
+      "get": {
+        "operationId": "provider",
+        "summary": "Consultar perfil público",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Provider"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 7,
+                    "display_name": "Soporte local",
+                    "headline": "Especialista en equipos",
+                    "bio": "Diagnóstico y mantenimiento."
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ]
+      }
+    },
+    "/services/{service}/availability": {
+      "get": {
+        "operationId": "serviceAvailability",
+        "summary": "Consultar horario público informativo",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Availability"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "service_id": 21,
+                    "configured": true,
+                    "timezone": "America/Mexico_City",
+                    "kind": "informational_weekly_schedule",
+                    "intervals": [
+                      {
+                        "weekday": 1,
+                        "start_local": "09:00",
+                        "end_local": "12:00"
+                      }
+                    ],
+                    "blocked_dates": [
+                      "2030-01-01"
+                    ],
+                    "queried_at": "2029-12-01T18:00:00.000000Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "parameters": [
+          {
+            "name": "service",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "description": "Reutiliza ProviderAvailability::publicFor. No representa slots reservables ni revela reservas, motivos de bloqueo, revisiones o identidades. Fechas civiles y horas locales se interpretan con la zona IANA. No convertir una recurrencia semanal con un offset UTC fijo. Sin configuración: timezone=null e intervalos/fechas vacíos."
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Token opaco de Sanctum; guardar en almacenamiento seguro del dispositivo. Nunca en URL o logs."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "message",
+              "fields"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Client": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "email",
+          "experience",
+          "permissions"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "experience": {
+            "type": "string",
+            "enum": [
+              "client"
+            ]
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "client.appointments.view",
+                "client.inquiries.manage"
+              ]
+            }
+          }
+        }
+      },
+      "Provider": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "display_name",
+          "headline",
+          "bio"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "headline": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "bio": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "slug"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "description",
+          "modality",
+          "category",
+          "provider"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "modality": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "onsite",
+              "both"
+            ]
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          }
+        }
+      },
+      "Page": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "current_page",
+          "per_page",
+          "last_page",
+          "total"
+        ],
+        "properties": {
+          "current_page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "per_page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50
+          },
+          "last_page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "Availability": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "service_id",
+          "configured",
+          "timezone",
+          "kind",
+          "intervals",
+          "blocked_dates",
+          "queried_at"
+        ],
+        "properties": {
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "configured": {
+            "type": "boolean"
+          },
+          "timezone": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Zona IANA del prestador. Null si no hay configuración."
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "informational_weekly_schedule"
+            ]
+          },
+          "intervals": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "weekday",
+                "start_local",
+                "end_local"
+              ],
+              "properties": {
+                "weekday": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 7,
+                  "description": "ISO: lunes=1, domingo=7"
+                },
+                "start_local": {
+                  "type": "string",
+                  "pattern": "^[0-2][0-9]:[0-5][0-9]$"
+                },
+                "end_local": {
+                  "type": "string",
+                  "pattern": "^[0-2][0-9]:[0-5][0-9]$",
+                  "description": "Puede ser 24:00: medianoche al final del día."
+                }
+              }
+            }
+          },
+          "blocked_dates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "queried_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "LoginInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "password",
+          "device_name"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255
+          },
+          "password": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "writeOnly": true
+          },
+          "device_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "Identificador descriptivo estable por dispositivo. Sin controles ni < >."
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "token_type",
+          "access_token",
+          "expires_at",
+          "user"
+        ],
+        "properties": {
+          "token_type": {
+            "type": "string",
+            "enum": [
+              "Bearer"
+            ]
+          },
+          "access_token": {
+            "type": "string"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/Client"
+          }
+        }
+      },
+      "Logout": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "revoked"
+        ],
+        "properties": {
+          "revoked": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      }
+    },
+    "responses": {
+      "Error400": {
+        "description": "La petición no es válida.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "bad_request",
+                "message": "La petición no es válida.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error401": {
+        "description": "Token ausente, revocado o caducado. En login, cuenta inexistente, contraseña incorrecta o sin permisos devuelve invalid_credentials con el mismo mensaje genérico.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "unauthenticated",
+                "message": "Se requiere un token válido.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error403": {
+        "description": "No tienes permiso para esta operación.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "forbidden",
+                "message": "No tienes permiso para esta operación.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error404": {
+        "description": "El recurso no está disponible.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "not_found",
+                "message": "El recurso no está disponible.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error405": {
+        "description": "El método no está permitido.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "method_not_allowed",
+                "message": "El método no está permitido.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error409": {
+        "description": "La operación entra en conflicto con el estado actual.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "conflict",
+                "message": "La operación entra en conflicto con el estado actual.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error422": {
+        "description": "Los datos enviados no son válidos.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "validation_failed",
+                "message": "Los datos enviados no son válidos.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error429": {
+        "description": "Demasiados intentos. Inténtalo más tarde.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "rate_limited",
+                "message": "Demasiados intentos. Inténtalo más tarde.",
+                "fields": {}
+              }
+            }
+          }
+        },
+        "headers": {
+          "Retry-After": {
+            "description": "Segundos hasta el siguiente intento.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "Error500": {
+        "description": "No se pudo completar la petición.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "server_error",
+                "message": "No se pudo completar la petición.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      },
+      "Error503": {
+        "description": "El servicio no está disponible temporalmente.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "error": {
+                "code": "temporarily_unavailable",
+                "message": "El servicio no está disponible temporalmente.",
+                "fields": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

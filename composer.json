@@ -11,6 +11,7 @@
         "doctrine/dbal": "^4.4",
         "google/apiclient": "2.15",
         "laravel/framework": "^12.0",
+        "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1",
         "laravel/ui": "^4.6",

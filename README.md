@@ -166,3 +166,7 @@ Arquitectura, migración aditiva **35 → 36**, resultados y preparación de Lar
 Panel central con diez KPI, periodos de 7/30/90 días naturales en Ciudad de México, gráfica de completadas, agenda y solicitudes pendientes. Las métricas se restringen al prestador autenticado y reutilizan las reglas existentes; consultar el panel no cambia datos de negocio ni marcadores.
 
 Arquitectura, definiciones, resultados, capturas y validación independiente de Laragon/PowerShell (clon `tekora-etapa9a`, puerto **8012**, sin migraciones nuevas): [dashboard del prestador — Etapa 9A](docs/dashboard-prestador-etapa-9a.md).
+
+## API móvil — Etapa 9B
+
+API JSON `/api/v1` para autenticación de solicitantes y catálogo público. [Contrato y arquitectura](docs/api/ETAPA-9B.md), [OpenAPI 3.1](docs/api/openapi.json), [validación Windows/Laragon en clon aislado, puerto 8013](docs/api/LARAGON-9B.md) y [resultados de pruebas](docs/api/VALIDACION-9B.md). No incluye todavía la app Expo ni escrituras de 9C.

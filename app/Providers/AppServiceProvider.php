@@ -33,6 +33,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        RateLimiter::for('mobile-login', function (Request $request) {
+            $email = $request->input('email');
+            $identity = is_string($email) ? Str::lower(trim($email)) : '';
+
+            return [
+                Limit::perMinute(5)->by('mobile-login:'.hash('sha256', $identity.'|'.$request->ip())),
+                Limit::perMinute(20)->by('mobile-login-ip:'.$request->ip()),
+            ];
+        });
+        RateLimiter::for('mobile-catalog', fn (Request $request) =>
+            Limit::perMinute(120)->by('mobile-catalog:'.$request->ip()));
+
         Gate::policy(\App\Models\ActivityNotification::class, \App\Policies\ActivityNotificationPolicy::class);
         RateLimiter::for('activity-notification-reads', function (Request $request) {
             return Limit::perMinute(30)->by('activity-read:'.$request->user('web')->id)->response(function (Request $request, array $headers) {
