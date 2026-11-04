@@ -20,9 +20,11 @@ use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\GoogleProvider;
 use phpseclib3\Crypt\RSA;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\RequestInterface;
 use Tests\TestCase;
 
+#[Group('composer-security')]
 class ComposerDependencyCompatibilityTest extends TestCase
 {
     private function http(array $responses, array &$history): HttpClient
@@ -151,7 +153,7 @@ class ComposerDependencyCompatibilityTest extends TestCase
         $this->assertSame('fake-preserved-refresh', $professional->fresh()->google_refresh_token);
     }
 
-    public function test_phpseclib_and_pinned_jwt_verify_rs256_and_reject_a_modified_signature(): void
+    public function test_phpseclib_and_jwt_verify_rs256_and_reject_a_modified_signature(): void
     {
         $private = RSA::createKey(2048);
         $public = $private->getPublicKey()->toString('PKCS8');
@@ -163,6 +165,17 @@ class ComposerDependencyCompatibilityTest extends TestCase
         $parts[2] = JWT::urlsafeB64Encode($signature);
         $this->expectException(SignatureInvalidException::class);
         JWT::decode(implode('.', $parts), new Key($public, 'RS256'));
+    }
+
+    public function test_jwt_rejects_a_valid_signature_when_the_rsa_key_is_below_2048_bits(): void
+    {
+        $weak = RSA::createKey(1024);
+        $header = JWT::urlsafeB64Encode(json_encode(['alg' => 'RS256', 'typ' => 'JWT']));
+        $payload = JWT::urlsafeB64Encode(json_encode(['sub' => 'fake-subject', 'exp' => time() + 60]));
+        $this->assertTrue(openssl_sign($header.'.'.$payload, $signature, $weak->toString('PKCS8'), OPENSSL_ALGO_SHA256));
+        $token = $header.'.'.$payload.'.'.JWT::urlsafeB64Encode($signature);
+        $this->expectException(\DomainException::class);
+        JWT::decode($token, new Key($weak->getPublicKey()->toString('PKCS8'), 'RS256'));
     }
 
     public function test_emotion_pdf_route_still_generates_a_download_with_the_updated_dompdf(): void
