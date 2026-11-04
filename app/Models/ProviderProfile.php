@@ -45,4 +45,9 @@ class ProviderProfile extends Model
     {
         return $this->hasMany(ServiceReservation::class);
     }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ServiceReview::class);
+    }
 }

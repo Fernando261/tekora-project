@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ServiceReservation extends Model
 {
@@ -25,6 +26,7 @@ class ServiceReservation extends Model
     public function providerProfile(): BelongsTo { return $this->belongsTo(ProviderProfile::class); }
     public function client(): BelongsTo { return $this->belongsTo(User::class, 'client_user_id'); }
     public function events(): HasMany { return $this->hasMany(ReservationEvent::class); }
+    public function review(): HasOne { return $this->hasOne(ServiceReview::class); }
 
     public function scopeActive(Builder $query): void
     {

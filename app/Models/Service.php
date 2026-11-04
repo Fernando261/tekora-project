@@ -34,6 +34,11 @@ class Service extends Model
         return $this->hasMany(ServiceInquiry::class);
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ServiceReview::class);
+    }
+
     // Una sola regla para catálogo, detalle y fichas públicas. No carga datos de User.
     public function scopePubliclyVisible(Builder $query): void
     {

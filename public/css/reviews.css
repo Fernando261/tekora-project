@@ -1,0 +1,18 @@
+.review-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:20px}
+.review-card{margin:0;overflow-wrap:anywhere}
+.review-card h2{margin-top:18px}
+.review-badge{display:inline-block;padding:6px 12px;border:1px solid #9acbb0;border-radius:20px;background:#e4f5eb;color:#205b3e;font-size:.84rem;font-weight:750;line-height:1.4}
+.review-badge.is-withdrawn{background:#f1f1f4;border-color:#cdced6;color:#4d4d60}
+.review-stars{position:relative;display:inline-block;white-space:nowrap;color:#bbb8ae;letter-spacing:2px;font-size:1.3rem;line-height:1.5;vertical-align:middle}
+.review-stars-fill{position:absolute;left:0;top:0;overflow:hidden;color:#82600a}
+.review-comment{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7}
+.review-summary{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:20px 0;color:var(--account-text)}
+.public-review-list{list-style:none;padding:0;margin:24px 0}
+.public-review-list>li{padding:22px 0;border-top:1px solid #d6e5ea}
+.review-public-heading{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.review-rating{display:flex;flex-wrap:wrap;gap:12px;border:1px solid #b8d4dc;border-radius:12px;padding:16px;margin-bottom:12px}
+.review-rating legend{font-weight:750;padding:0 6px}
+.review-rating label{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #c7dce2;border-radius:10px;margin:0!important}
+.review-rating input[type=radio]{accent-color:#286d81;min-width:18px;min-height:18px}
+.review-form button{align-self:flex-start}
+@media(max-width:560px){.review-rating label{flex:1 1 100%}.review-form button{width:100%}}

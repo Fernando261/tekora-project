@@ -15,6 +15,7 @@
       @endif
       <p class="account-help">Duración: 60 minutos. No se han realizado pagos desde esta plataforma.</p>
       <x-reservation-actions :reservation="$reservation" />
+      <x-reservation-review :reservation="$reservation" />
       @if(! $reservation->status->active() && $reservation->inquiry->status === \App\Enums\InquiryStatus::Accepted)
         @can('propose', [\App\Models\ServiceReservation::class, $reservation->inquiry])<p><a href="{{ route('reservations.create', $reservation->service_inquiry_id) }}">Proponer otro horario</a></p>@endcan
       @endif

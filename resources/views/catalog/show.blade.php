@@ -1,5 +1,5 @@
 <x-catalog-layout :title="$service->title">
-  @push('styles')<link rel="stylesheet" href="{{ asset('css/availability.css') }}">@endpush
+  @push('styles')<link rel="stylesheet" href="{{ asset('css/availability.css') }}"><link rel="stylesheet" href="{{ asset('css/reviews.css') }}">@endpush
   <a class="catalog-back" href="{{ route('catalog.index') }}">← Explorar servicios</a>
   <article class="account-card catalog-detail">
     <div class="catalog-tags"><span>{{ $service->category->name }}</span><span>{{ $service->modality->label() }}</span></div>
@@ -22,4 +22,5 @@
     <p class="account-help">Enviar una solicitud no crea reservas, pagos ni contratos automáticos.</p>
   </article>
   <x-provider-availability :profile="$service->providerProfile" />
+  <x-public-reviews :reviews="$reviews" />
 </x-catalog-layout>

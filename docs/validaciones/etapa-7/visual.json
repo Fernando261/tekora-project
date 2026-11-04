@@ -1,0 +1,308 @@
+{
+  "checks": [
+    {
+      "page": "bandeja-vacia",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "reserva-completada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario-invalido",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-sin-resenas",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "publicada-privada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-propia",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-publicado",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "prestador-publicado",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "retirada-privada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "conflicto",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-tras-retiro",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "retirada-denegada",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "promedio-prestador",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "paginacion-servicio",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "reseña-inexistente",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 404,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "error-temporal",
+      "viewport": "escritorio",
+      "width": 1440,
+      "height": 1000,
+      "application_status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-vacia",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "reserva-completada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario-invalido",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-sin-resenas",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "publicada-privada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "bandeja-propia",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-publicado",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "prestador-publicado",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "retirada-privada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "conflicto",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 409,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "servicio-tras-retiro",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "retirada-denegada",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 403,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "promedio-prestador",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "paginacion-servicio",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 200,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "reseña-inexistente",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 404,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "error-temporal",
+      "viewport": "movil",
+      "width": 390,
+      "height": 844,
+      "application_status": 503,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "sin-js",
+      "width": 1440,
+      "height": 1000,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "publicada-privada",
+      "viewport": "sin-js",
+      "width": 1440,
+      "height": 1000,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "formulario",
+      "viewport": "sin-js",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false
+    },
+    {
+      "page": "publicada-privada",
+      "viewport": "sin-js",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false
+    }
+  ],
+  "count": 38,
+  "javascript_errors": [],
+  "external_requests": [],
+  "method": "Peticiones Laravel con fixtures nuevos en SQLite en memoria; Chromium revisa sus artefactos HTML estáticos, controles nativos, privacidad y formularios sin JavaScript."
+}
