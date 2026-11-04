@@ -291,7 +291,9 @@ class InquiryNotificationsTest extends TestCase
         $notice = InquiryNotification::sole();
         $notice->setRelation('inquiry', $inquiry);
         $fake = (object) ['id' => $notice->id, 'service_inquiry_id' => $inquiry->id, 'inquiry' => $inquiry,
-            'created_at' => now(), 'read_at' => now(), 'event' => new class {
+            'created_at' => now(), 'read_at' => now(), 'category' => 'Solicitudes',
+            'detail_url' => route('inquiries.show', $inquiry), 'detail_label' => 'Ver solicitud', 'unavailable_message' => '',
+            'read_url' => route('notifications.read', $notice), 'event' => new class {
                 public function label() { return '<script>BAD-EVENT()</script>'; }
                 public function title() { return '<img src=x onerror=BAD-TITLE()>'; }
             }];

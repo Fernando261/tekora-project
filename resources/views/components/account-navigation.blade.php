@@ -4,8 +4,8 @@
   <a class="menu-item" href="{{ route('public-providers.index') }}">Explorar prestadores</a>
   <a class="menu-item {{ request()->routeIs('account.index') ? 'active' : '' }}" href="{{ route('account.index') }}">Mi cuenta</a>
   @auth('web')
-    @php($unreadNotifications = auth('web')->user()->inquiryNotifications()->unread()->count())
-    <a class="menu-item {{ request()->routeIs('notifications.*') ? 'active' : '' }}" href="{{ route('notifications.index') }}">Notificaciones @if($unreadNotifications > 0)<span aria-label="{{ $unreadNotifications }} sin leer">({{ $unreadNotifications }})</span>@endif</a>
+    @php($unreadNotifications = app(\App\Services\NotificationInbox::class)->unreadCount(auth('web')->user()))
+    <a class="menu-item {{ request()->routeIs('notifications.*') ? 'active' : '' }}" href="{{ route('notifications.index') }}">Notificaciones @if($unreadNotifications === null)<span class="account-help" aria-label="Contador de avisos temporalmente no disponible"> · Contador no disponible</span>@elseif($unreadNotifications > 0)<span aria-label="{{ $unreadNotifications }} sin leer, avisos de solicitudes, reservas y reseñas">({{ $unreadNotifications }})</span>@endif</a>
   @endauth
   @can('conversations', \App\Models\ServiceInquiry::class)
     @php($unreadMessages = app(\App\Services\InquiryReadTracking::class)->totalUnread(auth('web')->user()))

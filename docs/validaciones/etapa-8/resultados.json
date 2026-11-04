@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-03",
+  "timezone": "America/Mexico_City",
+  "base_main": "3d9c183aaaeecc403a5dc16715894fd6b3e352a7",
+  "branch": "codex/etapa-8-notificaciones-reservas-resenas",
+  "php": "8.2.35",
+  "phpunit": "11.5.24",
+  "laravel": "12.19.3",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "database": "SQLite :memory:; concurrencia con dos PDO independientes sobre URI mode=memory&cache=shared y sin archivo físico",
+  "commands": [
+    {
+      "command": "Suite del commit de origen antes de implementar",
+      "exit_code": 0,
+      "tests": 319,
+      "assertions": 3903
+    },
+    {
+      "command": "composer install --no-interaction --prefer-dist",
+      "exit_code": 0,
+      "notes": "Copia nueva Etapa 8 sin .env ni red; paquetes del lock montados de solo lectura y metadatos propios. Autoload/package discovery correctos. Avisos previos Flysystem/Pint."
+    },
+    {
+      "command": "npm ci",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm audit --json",
+      "exit_code": 0,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "notes": "Mismos assets Vite; deprecaciones previas Sass/Bootstrap."
+    },
+    {
+      "command": "php vendor/bin/phpunit --do-not-cache-result",
+      "exit_code": 0,
+      "tests": 350,
+      "assertions": 4337
+    },
+    {
+      "command": "php artisan route:list --except-vendor",
+      "exit_code": 0,
+      "routes": 98,
+      "notes": "Sin .env ni SQLite persistente."
+    }
+  ],
+  "previous_tests_preserved": 319,
+  "previous_assertions_current_branch": 3903,
+  "previous_assertion_differences": [],
+  "new_tests": 31,
+  "new_assertions": 434,
+  "migration_count": 36,
+  "historical_migrations_unchanged": 35,
+  "new_tables": [
+    "activity_notifications"
+  ],
+  "migration_validation": "Upgrade 35→36, reversión exclusiva y reaplicación solo en memoria; todos los registros y columnas anteriores preservados, sin backfill.",
+  "foreign_key_check": "sin infracciones",
+  "integrity_check": "ok",
+  "protected_files_unchanged": true,
+  "business_workflows_unchanged": true,
+  "inbox_sql_page_size": 12,
+  "inbox_load_queries_maximum_excluding_navigation": 7,
+  "unread_counter_queries": 1,
+  "activity_read_limit_per_minute_per_account": 30,
+  "visual_checks": 34,
+  "visual_method": "15 estados renderizados por Laravel con fixtures sintéticos nuevos en memoria; Chromium revisa HTML estático en escritorio y móvil, más cuatro comprobaciones sin JavaScript. Escrituras verificadas con PHPUnit.",
+  "visual_javascript_errors": 0,
+  "visual_external_requests": 0,
+  "visual_horizontal_overflow": false,
+  "windows_laragon_executed": false,
+  "windows_review_directory": "C:\\laragon\\www\\tekora-etapa8",
+  "windows_review_port": 8011,
+  "persistent_migration_applied": false,
+  "persistent_migration_requires_independent_approval": true,
+  "previous_review_clones_modified": false,
+  "real_databases_modified": false,
+  "env_or_credentials_modified": false
+}

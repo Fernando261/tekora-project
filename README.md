@@ -154,3 +154,9 @@ Arquitectura, migración aditiva **33 → 34**, pruebas y guía aislada de Larag
 Reseñas inmutables de reservas centrales completadas, con 1–5 estrellas, comentario opcional y retiro público irreversible. Promedios por servicio/prestador basados en reseñas visibles y servicios autorizados, con identificación pública anónima y sin afirmar pagos.
 
 Arquitectura, migración aditiva **34 → 35**, pruebas y preparación de Laragon/PowerShell (clon `tekora-etapa7`, puerto **8010**, aplicación de migración pendiente de aprobación independiente): [reseñas verificadas — Etapa 7](docs/resenas-verificadas-etapa-7.md).
+
+### Etapa 8: notificaciones unificadas
+
+Una bandeja y un contador para solicitudes, reservas y reseñas. Los avisos nuevos se generan de forma transaccional en SQLite; los anteriores conservan su tabla y ruta de lectura. Los textos son genéricos y los enlaces respetan permisos actuales.
+
+Arquitectura, migración aditiva **35 → 36**, resultados y preparación de Laragon/PowerShell (clon `tekora-etapa8`, puerto **8011**, migración persistente pendiente de aprobación independiente): [notificaciones de actividad — Etapa 8](docs/notificaciones-actividad-etapa-8.md).
