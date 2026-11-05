@@ -42,7 +42,7 @@ class ActivityMigrationTest extends TestCase
         DB::table('profesionista_bloqueos')->insert(['profesionista_id' => $legacy->id, 'start_datetime' => '2030-01-08 10:00:00', 'end_datetime' => '2030-01-08 11:00:00']);
         DB::table('sessions')->insert(['id' => 'activity-session', 'user_id' => $client->id, 'payload' => 'opaque-fixture', 'last_activity' => 1]);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($t) => $t !== 'migrations')); $before = $this->snapshot($tables);
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'activity_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'activity_upgrade', '--path' => [database_path('migrations/2026_11_03_000002_create_activity_notifications.php')], '--realpath' => true, '--force' => true]));
         $this->assertDatabaseCount('migrations', 36); $this->assertDatabaseCount('activity_notifications', 0); $this->assertSame($before, $this->snapshot($tables));
         // El retiro es un hecho nuevo, aunque la publicación original preceda a esta migración.
         app(ReviewWorkflow::class)->withdraw($client, $review->id); $notice = ActivityNotification::sole();
@@ -55,7 +55,7 @@ class ActivityMigrationTest extends TestCase
         $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'activity_upgrade', '--step' => 1, '--force' => true]));
         $this->assertDatabaseCount('migrations', 35); $this->assertFalse(Schema::hasTable('activity_notifications')); $this->assertSame($afterAction, $this->snapshot($tables));
         $this->assertSame([], DB::select("SELECT name FROM sqlite_master WHERE type='trigger' AND name LIKE 'activity_%'"));
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'activity_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'activity_upgrade', '--path' => [database_path('migrations/2026_11_03_000002_create_activity_notifications.php')], '--realpath' => true, '--force' => true]));
         $this->assertDatabaseCount('migrations', 36); $this->assertDatabaseCount('activity_notifications', 0); $this->assertSame($afterAction, $this->snapshot($tables));
     }
 
