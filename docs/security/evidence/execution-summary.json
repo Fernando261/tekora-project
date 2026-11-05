@@ -1,0 +1,392 @@
+{
+  "source_sha": "f3d6c9462f9cdf88d1ada1cb1e6ace138a3856c6",
+  "implementation_sha": "389f329a1892841a6e58a14564dcdbcabaaf1dc2",
+  "pr15_source_sha": "07cb6dfa9de1916535999c6a9403cc5be948ae28",
+  "runtime": {
+    "baseline_php": "8.2.35",
+    "final_php": "8.2.28",
+    "composer": "2.8.11",
+    "phpunit": "11.5.57",
+    "node": "24.19.0",
+    "npm": "11.9.0"
+  },
+  "commands": {
+    "baseline-composer-results": {
+      "validate": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "validate"
+        ],
+        "exit_code": 0,
+        "seconds": 7.748
+      },
+      "validate-strict": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "validate",
+          "--strict"
+        ],
+        "exit_code": 1,
+        "seconds": 4.943
+      },
+      "install": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "install",
+          "--no-scripts",
+          "--no-interaction"
+        ],
+        "exit_code": 0,
+        "seconds": 23.847
+      },
+      "platform": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "check-platform-reqs"
+        ],
+        "exit_code": 0,
+        "seconds": 3.529
+      },
+      "audit": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked",
+          "--format=json"
+        ],
+        "exit_code": 1,
+        "seconds": 3.274
+      },
+      "audit-no-dev": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked",
+          "--no-dev",
+          "--format=json"
+        ],
+        "exit_code": 1,
+        "seconds": 3.857
+      }
+    },
+    "baseline-php-results": {
+      "phpunit": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "vendor/bin/phpunit",
+          "--do-not-cache-result"
+        ],
+        "exit_code": 0,
+        "seconds": 38.422
+      },
+      "routes": {
+        "command": [
+          "/workspace/.tekora-environment/bin/php",
+          "artisan",
+          "route:list",
+          "--except-vendor",
+          "--json"
+        ],
+        "exit_code": 0,
+        "seconds": 7.132
+      }
+    },
+    "baseline-npm-results": {
+      "npm-ci": {
+        "command": [
+          "npm",
+          "ci"
+        ],
+        "exit_code": 0,
+        "seconds": 3.813
+      },
+      "npm-audit": {
+        "command": [
+          "npm",
+          "audit",
+          "--json"
+        ],
+        "exit_code": 0,
+        "seconds": 0.619
+      },
+      "build": {
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "exit_code": 0,
+        "seconds": 5.484
+      }
+    },
+    "verified8228-composer-results": {
+      "validate": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "validate"
+        ],
+        "exit_code": 0,
+        "seconds": 4.96
+      },
+      "validate-strict": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "validate",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "seconds": 7.804
+      },
+      "install": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "install",
+          "--no-scripts",
+          "--no-interaction"
+        ],
+        "exit_code": 0,
+        "seconds": 16.593
+      },
+      "platform": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "check-platform-reqs"
+        ],
+        "exit_code": 0,
+        "seconds": 3.972
+      },
+      "audit": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked",
+          "--format=json"
+        ],
+        "exit_code": 0,
+        "seconds": 5.663
+      },
+      "audit-no-dev": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked",
+          "--no-dev",
+          "--format=json"
+        ],
+        "exit_code": 0,
+        "seconds": 5.414
+      }
+    },
+    "verified8228-php-results": {
+      "phpunit": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "vendor/bin/phpunit",
+          "--do-not-cache-result"
+        ],
+        "exit_code": 0,
+        "seconds": 38.723
+      },
+      "routes": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "artisan",
+          "route:list",
+          "--except-vendor",
+          "--json"
+        ],
+        "exit_code": 0,
+        "seconds": 4.962
+      }
+    },
+    "final-npm-results": {
+      "npm-ci": {
+        "command": [
+          "npm",
+          "ci"
+        ],
+        "exit_code": 0,
+        "seconds": 4.469
+      },
+      "npm-audit": {
+        "command": [
+          "npm",
+          "audit",
+          "--json"
+        ],
+        "exit_code": 0,
+        "seconds": 0.931
+      },
+      "build": {
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "exit_code": 0,
+        "seconds": 7.323
+      }
+    },
+    "integration-composer-results": {
+      "validate": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "validate"
+        ],
+        "exit_code": 0,
+        "seconds": 4.933
+      },
+      "validate-strict": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "validate",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "seconds": 2.752
+      },
+      "install": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "install",
+          "--no-scripts",
+          "--no-interaction"
+        ],
+        "exit_code": 0,
+        "seconds": 7.165
+      },
+      "platform": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "check-platform-reqs"
+        ],
+        "exit_code": 0,
+        "seconds": 2.404
+      },
+      "audit": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked",
+          "--format=json"
+        ],
+        "exit_code": 0,
+        "seconds": 5.272
+      },
+      "audit-no-dev": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked",
+          "--no-dev",
+          "--format=json"
+        ],
+        "exit_code": 0,
+        "seconds": 5.994
+      }
+    },
+    "integration-php-results": {
+      "phpunit": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "vendor/bin/phpunit",
+          "--do-not-cache-result"
+        ],
+        "exit_code": 0,
+        "seconds": 49.754
+      },
+      "routes": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "artisan",
+          "route:list",
+          "--except-vendor",
+          "--json"
+        ],
+        "exit_code": 0,
+        "seconds": 5.272
+      }
+    }
+  },
+  "routes": {
+    "base": 97,
+    "final": 97,
+    "compared_fields": [
+      "domain",
+      "method",
+      "uri",
+      "name",
+      "action",
+      "middleware"
+    ],
+    "identical": true,
+    "integration_api": 8,
+    "openapi_methods_and_paths_match": true
+  },
+  "protected_files": {
+    "original_env_and_sqlite_files_checked": 2,
+    "contents_unchanged": true,
+    "hashes_or_contents_published": false
+  },
+  "integration_lock": {
+    "only_addition": "laravel/sanctum",
+    "version": "v4.3.3",
+    "security_versions_preserved": true
+  },
+  "phpunit": {
+    "baseline": {
+      "php": "8.2.35",
+      "tests": 375,
+      "assertions": 4633,
+      "exit_code": 0
+    },
+    "google_candidate": {
+      "php": "8.2.28",
+      "tests": 381,
+      "assertions": 4680,
+      "exit_code": 0
+    },
+    "final_php8228": {
+      "php": "8.2.28",
+      "tests": 382,
+      "assertions": 4683,
+      "exit_code": 0
+    },
+    "final_php8235": {
+      "php": "8.2.35",
+      "tests": 382,
+      "assertions": 4683,
+      "exit_code": 0
+    },
+    "integration": {
+      "php": "8.2.28",
+      "tests": 403,
+      "assertions": 5165,
+      "exit_code": 0
+    },
+    "integration_original_9b": {
+      "php": "8.2.28",
+      "tests": 396,
+      "assertions": 5115,
+      "exit_code": 0
+    }
+  }
+}
