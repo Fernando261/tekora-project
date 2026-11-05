@@ -9,8 +9,8 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "doctrine/dbal": "^4.4",
-        "google/apiclient": "2.15",
-        "laravel/framework": "^12.0",
+        "google/apiclient": "^2.20.1",
+        "laravel/framework": "^12.69",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1",
@@ -75,6 +75,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.2.28"
         }
     },
     "minimum-stability": "stable",

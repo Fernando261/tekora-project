@@ -1,0 +1,423 @@
+{
+  "date": "2026-11-05",
+  "previous_9b_sha": "07cb6dfa9de1916535999c6a9403cc5be948ae28",
+  "main_merged_sha": "afb7f851fa8ea142e6639bc7c8431f541ef15dd9",
+  "branch": "codex/etapa-9b-api-movil-base",
+  "conflicts": [
+    "composer.json",
+    "composer.lock"
+  ],
+  "resolution": "Conservar composer.json/lock de main e incorporar Sanctum con composer require --no-update y composer update laravel/sanctum -W -m --no-scripts; sin editar registros bloqueados a mano.",
+  "runtime": {
+    "php": "8.2.28",
+    "composer": "2.8.11",
+    "phpunit": "11.5.57",
+    "node": "24.19.0",
+    "npm": "11.9.0"
+  },
+  "commands": {
+    "composer": {
+      "validate-strict": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "validate",
+          "--strict"
+        ],
+        "exit_code": 0,
+        "seconds": 5.947
+      },
+      "install": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "install",
+          "--no-scripts",
+          "--no-interaction"
+        ],
+        "exit_code": 0,
+        "seconds": 7.97
+      },
+      "platform": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "check-platform-reqs"
+        ],
+        "exit_code": 0,
+        "seconds": 3.265
+      },
+      "audit": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked"
+        ],
+        "exit_code": 0,
+        "seconds": 4.65
+      },
+      "audit-no-dev": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "/workspace/.tekora-security-tools/composer.phar",
+          "audit",
+          "--locked",
+          "--no-dev"
+        ],
+        "exit_code": 0,
+        "seconds": 3.766
+      }
+    },
+    "npm": {
+      "npm-ci": {
+        "command": [
+          "npm",
+          "ci"
+        ],
+        "exit_code": 0,
+        "seconds": 3.718
+      },
+      "npm-audit": {
+        "command": [
+          "npm",
+          "audit"
+        ],
+        "exit_code": 0,
+        "seconds": 0.615
+      },
+      "build": {
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "exit_code": 0,
+        "seconds": 5.439
+      }
+    },
+    "php": {
+      "phpunit": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "vendor/bin/phpunit",
+          "--do-not-cache-result"
+        ],
+        "exit_code": 0,
+        "seconds": 46.445
+      },
+      "phpunit-without-security": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "vendor/bin/phpunit",
+          "--exclude-group",
+          "composer-security",
+          "--do-not-cache-result"
+        ],
+        "exit_code": 0,
+        "seconds": 45.451
+      },
+      "api-routes": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "artisan",
+          "route:list",
+          "--path=api",
+          "-v"
+        ],
+        "exit_code": 0,
+        "seconds": 3.475
+      },
+      "api-json": {
+        "command": [
+          "/workspace/.tekora-security-tools/php8228",
+          "artisan",
+          "route:list",
+          "--path=api",
+          "--json"
+        ],
+        "exit_code": 0,
+        "seconds": 2.838
+      }
+    }
+  },
+  "phpunit": {
+    "phpunit": {
+      "php": "8.2.28",
+      "tests": 403,
+      "assertions": 5165,
+      "phpunit_time": "00:42.251"
+    },
+    "phpunit-without-security": {
+      "php": "8.2.28",
+      "tests": 396,
+      "assertions": 5115,
+      "phpunit_time": "00:42.396"
+    }
+  },
+  "lock": {
+    "main_sha": "afb7f851fa8ea142e6639bc7c8431f541ef15dd9",
+    "all_main_package_records_identical": true,
+    "sanctum_version": "v4.3.3",
+    "sanctum_record_identical_to_original_9b": true,
+    "historical_migrations_unchanged": 36,
+    "total_migrations": 37,
+    "versions": {
+      "barryvdh/laravel-dompdf": "v3.1.1",
+      "brick/math": "0.13.1",
+      "carbonphp/carbon-doctrine-types": "3.2.0",
+      "dflydev/dot-access-data": "v3.0.3",
+      "doctrine/dbal": "4.4.1",
+      "doctrine/deprecations": "1.1.6",
+      "doctrine/inflector": "2.0.10",
+      "doctrine/lexer": "3.0.1",
+      "dompdf/dompdf": "v3.1.6",
+      "dompdf/php-font-lib": "1.0.2",
+      "dompdf/php-svg-lib": "1.0.2",
+      "dragonmantank/cron-expression": "v3.4.0",
+      "egulias/email-validator": "4.0.4",
+      "firebase/php-jwt": "v7.2.1",
+      "fruitcake/php-cors": "v1.3.0",
+      "google/apiclient": "v2.20.1",
+      "google/apiclient-services": "v0.433.0",
+      "google/auth": "v1.55.3",
+      "graham-campbell/result-type": "v1.1.3",
+      "guzzlehttp/guzzle": "7.16.1",
+      "guzzlehttp/promises": "2.6.0",
+      "guzzlehttp/psr7": "2.13.2",
+      "guzzlehttp/uri-template": "v1.0.4",
+      "laravel/framework": "v12.71.0",
+      "laravel/prompts": "v0.3.5",
+      "laravel/sanctum": "v4.3.3",
+      "laravel/serializable-closure": "v2.0.4",
+      "laravel/socialite": "v5.24.2",
+      "laravel/tinker": "v2.10.1",
+      "laravel/ui": "v4.6.1",
+      "league/commonmark": "2.10.7",
+      "league/config": "v1.2.0",
+      "league/flysystem": "3.36.0",
+      "league/flysystem-local": "3.29.0",
+      "league/mime-type-detection": "1.16.0",
+      "league/oauth1-client": "v1.11.0",
+      "league/uri": "7.5.1",
+      "league/uri-interfaces": "7.5.0",
+      "masterminds/html5": "2.10.0",
+      "monolog/monolog": "3.10.0",
+      "nesbot/carbon": "3.10.1",
+      "nette/schema": "v1.3.2",
+      "nette/utils": "v4.0.7",
+      "nikic/php-parser": "v5.9.0",
+      "nunomaduro/termwind": "v2.3.1",
+      "paragonie/constant_time_encoding": "v3.1.3",
+      "paragonie/random_compat": "v9.99.100",
+      "phpoption/phpoption": "1.9.3",
+      "phpseclib/phpseclib": "3.0.58",
+      "psr/cache": "3.0.0",
+      "psr/clock": "1.0.0",
+      "psr/container": "2.0.2",
+      "psr/event-dispatcher": "1.0.0",
+      "psr/http-client": "1.0.3",
+      "psr/http-factory": "1.1.0",
+      "psr/http-message": "2.0",
+      "psr/log": "3.0.2",
+      "psr/simple-cache": "3.0.0",
+      "psy/psysh": "v0.12.24",
+      "ralouphie/getallheaders": "3.0.3",
+      "ramsey/collection": "2.1.1",
+      "ramsey/uuid": "4.8.1",
+      "sabberworm/php-css-parser": "v9.2.0",
+      "socialiteproviders/google": "4.1.0",
+      "socialiteproviders/manager": "v4.8.1",
+      "symfony/clock": "v7.3.0",
+      "symfony/console": "v7.3.0",
+      "symfony/css-selector": "v7.3.0",
+      "symfony/deprecation-contracts": "v3.6.0",
+      "symfony/error-handler": "v7.3.0",
+      "symfony/event-dispatcher": "v7.3.0",
+      "symfony/event-dispatcher-contracts": "v3.6.0",
+      "symfony/finder": "v7.3.0",
+      "symfony/http-foundation": "v7.4.23",
+      "symfony/http-kernel": "v7.4.23",
+      "symfony/mailer": "v7.4.22",
+      "symfony/mime": "v7.4.22",
+      "symfony/polyfill-ctype": "v1.32.0",
+      "symfony/polyfill-intl-grapheme": "v1.32.0",
+      "symfony/polyfill-intl-idn": "v1.43.0",
+      "symfony/polyfill-intl-normalizer": "v1.33.0",
+      "symfony/polyfill-mbstring": "v1.33.0",
+      "symfony/polyfill-php80": "v1.32.0",
+      "symfony/polyfill-php83": "v1.43.0",
+      "symfony/polyfill-php84": "v1.43.0",
+      "symfony/polyfill-php85": "v1.43.0",
+      "symfony/polyfill-uuid": "v1.32.0",
+      "symfony/process": "v7.4.22",
+      "symfony/routing": "v7.4.23",
+      "symfony/service-contracts": "v3.6.0",
+      "symfony/string": "v7.3.0",
+      "symfony/translation": "v7.3.0",
+      "symfony/translation-contracts": "v3.6.0",
+      "symfony/uid": "v7.3.0",
+      "symfony/var-dumper": "v7.3.0",
+      "thecodingmachine/safe": "v3.4.0",
+      "tijsverkoyen/css-to-inline-styles": "v2.3.0",
+      "vlucas/phpdotenv": "v5.6.2",
+      "voku/portable-ascii": "2.0.3",
+      "webmozart/assert": "1.11.0",
+      "fakerphp/faker": "v1.24.1",
+      "filp/whoops": "2.18.3",
+      "hamcrest/hamcrest-php": "v2.1.1",
+      "laravel/pail": "v1.2.3",
+      "laravel/pint": "v1.22.1",
+      "laravel/sail": "v1.43.1",
+      "mockery/mockery": "1.6.12",
+      "myclabs/deep-copy": "1.14.0",
+      "nunomaduro/collision": "v8.8.1",
+      "phar-io/manifest": "2.0.4",
+      "phar-io/version": "3.2.1",
+      "phpunit/php-code-coverage": "11.0.12",
+      "phpunit/php-file-iterator": "5.1.1",
+      "phpunit/php-invoker": "5.0.1",
+      "phpunit/php-text-template": "4.0.1",
+      "phpunit/php-timer": "7.0.1",
+      "phpunit/phpunit": "11.5.57",
+      "sebastian/cli-parser": "3.0.2",
+      "sebastian/code-unit": "3.0.3",
+      "sebastian/code-unit-reverse-lookup": "4.0.1",
+      "sebastian/comparator": "6.3.3",
+      "sebastian/complexity": "4.0.1",
+      "sebastian/diff": "6.0.2",
+      "sebastian/environment": "7.2.1",
+      "sebastian/exporter": "6.3.2",
+      "sebastian/global-state": "7.0.2",
+      "sebastian/lines-of-code": "3.0.1",
+      "sebastian/object-enumerator": "6.0.1",
+      "sebastian/object-reflector": "4.0.1",
+      "sebastian/recursion-context": "6.0.3",
+      "sebastian/type": "5.1.3",
+      "sebastian/version": "5.0.2",
+      "staabm/side-effects-detector": "1.0.5",
+      "symfony/yaml": "v7.4.23",
+      "theseer/tokenizer": "1.3.1"
+    }
+  },
+  "routes": {
+    "actual_count": 8,
+    "openapi_count": 8,
+    "methods_and_paths_identical": true,
+    "openapi_unchanged": true,
+    "registered": [
+      {
+        "domain": null,
+        "method": "POST",
+        "uri": "api/v1/auth/login",
+        "name": "api.v1.auth.login",
+        "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@login",
+        "middleware": [
+          "api",
+          "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-login"
+        ],
+        "path": null
+      },
+      {
+        "domain": null,
+        "method": "POST",
+        "uri": "api/v1/auth/logout",
+        "name": "api.v1.auth.logout",
+        "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@logout",
+        "middleware": [
+          "api",
+          "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+          "App\\Http\\Middleware\\MobileClient"
+        ],
+        "path": null
+      },
+      {
+        "domain": null,
+        "method": "GET|HEAD",
+        "uri": "api/v1/me",
+        "name": "api.v1.me",
+        "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@me",
+        "middleware": [
+          "api",
+          "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+          "App\\Http\\Middleware\\MobileClient"
+        ],
+        "path": null
+      },
+      {
+        "domain": null,
+        "method": "GET|HEAD",
+        "uri": "api/v1/providers",
+        "name": "api.v1.providers.index",
+        "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@providersIndex",
+        "middleware": [
+          "api",
+          "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+        ],
+        "path": null
+      },
+      {
+        "domain": null,
+        "method": "GET|HEAD",
+        "uri": "api/v1/providers/{provider}",
+        "name": "api.v1.providers.show",
+        "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@provider",
+        "middleware": [
+          "api",
+          "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+        ],
+        "path": null
+      },
+      {
+        "domain": null,
+        "method": "GET|HEAD",
+        "uri": "api/v1/services",
+        "name": "api.v1.services.index",
+        "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@index",
+        "middleware": [
+          "api",
+          "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+        ],
+        "path": null
+      },
+      {
+        "domain": null,
+        "method": "GET|HEAD",
+        "uri": "api/v1/services/{service}",
+        "name": "api.v1.services.show",
+        "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@show",
+        "middleware": [
+          "api",
+          "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+        ],
+        "path": null
+      },
+      {
+        "domain": null,
+        "method": "GET|HEAD",
+        "uri": "api/v1/services/{service}/availability",
+        "name": "api.v1.services.availability",
+        "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@availability",
+        "middleware": [
+          "api",
+          "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+        ],
+        "path": null
+      }
+    ]
+  },
+  "isolation": {
+    "protected_files_checked": 2,
+    "env_and_sqlite_contents_unchanged": true,
+    "persistent_app_key_unchanged": true,
+    "file_contents_or_hashes_published": false,
+    "database_for_phpunit": ":memory:",
+    "api_and_business_code_unchanged_from_original_9b": true
+  },
+  "audit_outputs": {
+    "audit": "No security vulnerability advisories found.",
+    "audit-no-dev": "No security vulnerability advisories found.",
+    "npm-audit": "found 0 vulnerabilities"
+  },
+  "git_diff_check_exit_code": 0
+}

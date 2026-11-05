@@ -1,3 +1,5 @@
+> Registro anterior de la Etapa 9B (`07cb6df`). Para la rama actual con seguridad incorporada, consultar [la integración de PR #16](INTEGRACION-SEGURIDAD-PR16.md) y [la guía Laragon actualizada](LARAGON-9B-SEGURIDAD.md).
+
 # Avisos de Composer observados — 9B
 
 Consulta real: `composer audit --locked --format=json`, 4 de noviembre de 2026. Resultado: **67 avisos en 18 paquetes**. Todos estos paquetes conservan exactamente la versión de `origin/main`; el único paquete añadido al lockfile es Sanctum 4.3.3, sin avisos en esta consulta. No se afirma que el backend esté libre de vulnerabilidades. Las actualizaciones de dependencias heredadas requieren validación separada. Composer 2.5.5 no incluyó severidad en esta salida.

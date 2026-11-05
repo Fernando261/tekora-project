@@ -1,3 +1,5 @@
+> Registro anterior de la Etapa 9B (`07cb6df`). Para la rama actual con seguridad incorporada, consultar [la integración de PR #16](INTEGRACION-SEGURIDAD-PR16.md) y [la guía Laragon actualizada](LARAGON-9B-SEGURIDAD.md).
+
 # Evidencia de validación — Etapa 9B
 
 Validación realizada el **4 de noviembre de 2026** en el entorno cloud Linux, con PHP **8.2.35**, Composer **2.5.5**, PHPUnit **11.5.24**, Node **24.19.0** y npm **11.9.0**. La guía Windows/Laragon es un procedimiento de revisión independiente: no se ejecutó Windows durante esta entrega.

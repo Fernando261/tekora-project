@@ -1,3 +1,5 @@
+> Registro anterior de la Etapa 9B (`07cb6df`). Para la rama actual con seguridad incorporada, consultar [la integración de PR #16](INTEGRACION-SEGURIDAD-PR16.md) y [la guía Laragon actualizada](LARAGON-9B-SEGURIDAD.md).
+
 # Validación independiente — Windows / Laragon, puerto 8013
 
 Este procedimiento se realiza en un clon separado: `C:\laragon\www\tekora-etapa9b`. No usar ni reemplazar la carpeta del proyecto actual. El PR permanece en borrador: validar no autoriza fusionar o desplegar.
