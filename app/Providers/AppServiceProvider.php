@@ -33,6 +33,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        foreach (['mobile-private' => 120, 'mobile-inquiry-writes' => 5, 'mobile-message-writes' => 10,
+            'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10] as $name => $limit) {
+            RateLimiter::for($name, fn (Request $request) => [
+                Limit::perMinute($limit)->by($name.':actor:'.$request->user('sanctum')->id),
+                Limit::perMinute($limit * 4)->by($name.':ip:'.hash('sha256', $request->ip())),
+            ]);
+        }
+
         RateLimiter::for('mobile-login', function (Request $request) {
             $email = $request->input('email');
             $identity = is_string($email) ? Str::lower(trim($email)) : '';

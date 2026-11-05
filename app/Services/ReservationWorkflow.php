@@ -22,6 +22,30 @@ class ReservationWorkflow
 {
     use DetectsConcurrencyErrors;
 
+    // Lectura coherente del mismo origen que propose(); no obtiene un bloqueo de escritura.
+    public function options(User $actor, int $inquiryId): array
+    {
+        return $this->safely(function () use ($actor, $inquiryId) {
+            return DB::transaction(function () use ($actor, $inquiryId) {
+                $inquiry = ServiceInquiry::where('client_user_id', $actor->id)->findOrFail($inquiryId);
+                Gate::forUser($actor)->authorize('propose', [ServiceReservation::class, $inquiry]);
+                if ($inquiry->status !== InquiryStatus::Accepted || $inquiry->reservations()->active()->exists()) {
+                    throw new ReservationFailure;
+                }
+                $setting = $this->setting($inquiry);
+                $schedule = app(ProviderAvailability::class)->publicFor($inquiry->service->providerProfile);
+                if (isset($schedule['unavailable'])) throw new ReservationFailure('Lectura temporalmente no disponible.', 503);
+                if (! $schedule || $schedule['days']->isEmpty()) throw new ReservationFailure;
+                $today = now($setting->timezone)->startOfDay();
+
+                return ['inquiry_id' => $inquiry->id, 'service_id' => $inquiry->service_id,
+                    'revision' => $setting->revision, 'schedule' => $schedule,
+                    'min_date' => $today->format('Y-m-d'),
+                    'max_date' => $today->addDays(max(1, (int) config('reservations.horizon_days', 90)))->format('Y-m-d')];
+            }, 3);
+        });
+    }
+
     /** @return array{reservation: ServiceReservation, created: bool} */
     public function propose(User $actor, int $inquiryId, array $input): array
     {

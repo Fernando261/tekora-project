@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tekora API móvil",
-    "version": "1.0.0",
-    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 409 se reserva para futuros workflows de escritura de 9C; 9B no añade esas operaciones.",
+    "version": "1.1.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow.",
     "license": {
       "name": "MIT",
       "identifier": "MIT"
@@ -653,6 +653,1295 @@
         ],
         "description": "Reutiliza ProviderAvailability::publicFor. No representa slots reservables ni revela reservas, motivos de bloqueo, revisiones o identidades. Fechas civiles y horas locales se interpretan con la zona IANA. No convertir una recurrencia semanal con un offset UTC fijo. Sin configuración: timezone=null e intervalos/fechas vacíos."
       }
+    },
+    "/inquiries": {
+      "get": {
+        "operationId": "myInquiries",
+        "summary": "Solicitudes propias del solicitante",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "accepted",
+                "rejected",
+                "cancelled",
+                "completed"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Inquiry"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/services/{service}/inquiries": {
+      "post": {
+        "operationId": "openInquiry",
+        "summary": "Crear o recuperar la solicitud activa propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "service",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Inquiry"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 31,
+                    "service_id": 21,
+                    "service_title": "Soporte remoto",
+                    "message": "Necesito revisar mi computadora.",
+                    "status": "pending",
+                    "created_at": "2030-01-01T12:00:00Z",
+                    "updated_at": "2030-01-01T12:00:00Z",
+                    "accepted_at": null,
+                    "rejected_at": null,
+                    "cancelled_at": null,
+                    "completed_at": null
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Recurso nuevo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Inquiry"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 31,
+                    "service_id": 21,
+                    "service_title": "Soporte remoto",
+                    "message": "Necesito revisar mi computadora.",
+                    "status": "pending",
+                    "created_at": "2030-01-01T12:00:00Z",
+                    "updated_at": "2030-01-01T12:00:00Z",
+                    "accepted_at": null,
+                    "rejected_at": null,
+                    "cancelled_at": null,
+                    "completed_at": null
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenInquiryInput"
+              },
+              "example": {
+                "message": "Necesito revisar mi computadora."
+              }
+            }
+          }
+        },
+        "description": "Solo servicio público y ajeno. 201 para nueva; 200 si ya existe una activa para el mismo servicio/solicitante. No sobrescribe el mensaje original aunque el nuevo cuerpo difiera. Límite compartido con cancelación: 5/minuto por usuario y 20/IP."
+      }
+    },
+    "/inquiries/{inquiry}": {
+      "get": {
+        "operationId": "myInquiry",
+        "summary": "Historial y estado de una solicitud propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Inquiry"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 31,
+                    "service_id": 21,
+                    "service_title": "Soporte remoto",
+                    "message": "Necesito revisar mi computadora.",
+                    "status": "pending",
+                    "created_at": "2030-01-01T12:00:00Z",
+                    "updated_at": "2030-01-01T12:00:00Z",
+                    "accepted_at": null,
+                    "rejected_at": null,
+                    "cancelled_at": null,
+                    "completed_at": null
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/inquiries/{inquiry}/cancel": {
+      "patch": {
+        "operationId": "cancelInquiry",
+        "summary": "Cancelar únicamente una solicitud pending",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Inquiry"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 31,
+                    "service_id": 21,
+                    "service_title": "Soporte remoto",
+                    "message": "Necesito revisar mi computadora.",
+                    "status": "cancelled",
+                    "created_at": "2030-01-01T12:00:00Z",
+                    "updated_at": "2030-01-01T12:00:00Z",
+                    "accepted_at": null,
+                    "rejected_at": null,
+                    "cancelled_at": "2030-01-01T12:05:00Z",
+                    "completed_at": null
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/conversations": {
+      "get": {
+        "operationId": "myConversations",
+        "summary": "Conversaciones propias con recuento de recibidos sin leer",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Conversation"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "description": "Solo client_user_id del Bearer, incluso en cuenta dual. Orden: conversaciones con recibidos sin leer primero, después último ID de mensaje descendente e ID de solicitud descendente. No marca lecturas."
+      }
+    },
+    "/inquiries/{inquiry}/messages": {
+      "get": {
+        "operationId": "inquiryMessages",
+        "summary": "Página de mensajes sin marcar lectura",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "messages_cursor",
+            "required": false,
+            "schema": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 1024,
+              "description": "Cursor opaco de next_cursor/previous_cursor. No construirlo ni reutilizar page/per_page."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessagePage"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 81,
+                      "inquiry_id": 31,
+                      "is_mine": false,
+                      "body": "¿Podemos acordar un horario?",
+                      "created_at": "2030-01-01T12:00:00Z"
+                    }
+                  ],
+                  "meta": {
+                    "per_page": 20,
+                    "next_cursor": null,
+                    "previous_cursor": null,
+                    "read_token": "<capacidad opaca de la página recibida>",
+                    "last_read_message_id": 0,
+                    "unread_messages_count": 1
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "description": "Orden estable created_at DESC, id DESC; límite fijo 20. Conserva el cursor de mensajería web. El token de lectura se genera solo con mensajes recibidos incluidos en esta página; GET no escribe marcadores. Un cursor no es autorización: ownership se comprueba antes de consultar."
+      },
+      "post": {
+        "operationId": "sendInquiryMessage",
+        "summary": "Enviar texto con idempotencia por autor/conversación",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Message"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 81,
+                    "inquiry_id": 31,
+                    "is_mine": true,
+                    "body": "¿Podemos acordar un horario?",
+                    "created_at": "2030-01-01T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Recurso nuevo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Message"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 81,
+                    "inquiry_id": 31,
+                    "is_mine": true,
+                    "body": "¿Podemos acordar un horario?",
+                    "created_at": "2030-01-01T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageInput"
+              },
+              "example": {
+                "body": "¿Podemos acordar un horario?",
+                "idempotency_key": "66fd633b-ec50-4b1a-b61f-29af184ae25b"
+              }
+            }
+          }
+        },
+        "description": "Normaliza CRLF/CR a LF y recorta extremos como la web. 201 nuevo; mismo UUID + contenido normalizado recupera el original con 200; otro texto con la misma clave devuelve 409. Mensajes nuevos solo en pending/accepted; reintentos reconocidos pueden recuperar mensajes tras el cierre. 10/minuto por usuario, 40/IP."
+      }
+    },
+    "/inquiries/{inquiry}/messages/read": {
+      "post": {
+        "operationId": "readInquiryMessages",
+        "summary": "Confirmar lectura de recibidos efectivamente mostrados",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReadProgress"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "inquiry_id": 31,
+                    "last_read_message_id": 81
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReadInput"
+              },
+              "example": {
+                "read_token": "<token de la página mostrada>"
+              }
+            }
+          }
+        },
+        "description": "Enviar solamente después de mostrar la página. El token está ligado a cuenta, conversación y límite recibido servido. Manipulación o token de otra conversación/cuenta: 422; ID ajeno: 404. El UPSERT nunca retrocede con un token anterior. Obtener uno nuevo con GET para nuevos recibidos. 30/minuto por usuario, 120/IP."
+      }
+    },
+    "/inquiries/{inquiry}/reservation-options": {
+      "get": {
+        "operationId": "reservationOptions",
+        "summary": "Instantánea privada y vigente para construir una propuesta",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ReservationOptions"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "service_id": 21,
+                    "inquiry_id": 31,
+                    "configured": true,
+                    "timezone": "America/Mexico_City",
+                    "kind": "informational_weekly_schedule",
+                    "intervals": [
+                      {
+                        "weekday": 1,
+                        "start_local": "08:00",
+                        "end_local": "18:00"
+                      }
+                    ],
+                    "blocked_dates": [
+                      "2030-01-08"
+                    ],
+                    "queried_at": "2030-01-01T12:00:00Z",
+                    "availability_revision": 2,
+                    "min_date": "2030-01-01",
+                    "max_date": "2030-04-01",
+                    "duration_minutes": 60,
+                    "guaranteed": false
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "description": "Solo propietario de solicitud aceptada sin reserva activa, con servicio/participantes autorizados y horarios publicados. 409 si no admite nueva propuesta; 503 ante fallo de lectura. La revisión, zona IANA, intervalos y fechas bloqueadas proceden de la misma transacción. Duración 60 minutos, min_date hoy civil, max_date hoy + horizonte configurado (90 días por defecto), inclusivo. No revela reservas ajenas ni garantiza un hueco: propose vuelve a validar todo. No cambia el GET público informativo de 9B."
+      }
+    },
+    "/inquiries/{inquiry}/reservations": {
+      "post": {
+        "operationId": "proposeReservation",
+        "summary": "Proponer horario de 60 minutos mediante el workflow existente",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 51,
+                    "inquiry_id": 31,
+                    "service_id": 21,
+                    "status": "requested",
+                    "version": 1,
+                    "timezone": "America/Mexico_City",
+                    "date": "2030-01-07",
+                    "time": "09:00",
+                    "end_time": "10:00",
+                    "starts_at": "2030-01-07T15:00:00Z",
+                    "ends_at": "2030-01-07T16:00:00Z",
+                    "created_at": "2030-01-01T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Recurso nuevo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 51,
+                    "inquiry_id": 31,
+                    "service_id": 21,
+                    "status": "requested",
+                    "version": 1,
+                    "timezone": "America/Mexico_City",
+                    "date": "2030-01-07",
+                    "time": "09:00",
+                    "end_time": "10:00",
+                    "starts_at": "2030-01-07T15:00:00Z",
+                    "ends_at": "2030-01-07T16:00:00Z",
+                    "created_at": "2030-01-01T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProposalInput"
+              },
+              "example": {
+                "date": "2030-01-07",
+                "time": "09:00",
+                "availability_revision": 2,
+                "idempotency_key": "66fd633b-ec50-4b1a-b61f-29af184ae25b"
+              }
+            }
+          }
+        },
+        "description": "Fecha/hora civiles y revisión del GET privado. 201 nueva; reintento del mismo UUID y date/time/revision devuelve 200. Reutilizar UUID con otros datos, revisión obsoleta, estado inválido, fecha bloqueada, horario pasado/solapado o reserva activa: 409. Hora civil inválida/ambigua por DST o fuera de horizonte: 422. No enviar timezone, IDs de participantes, status o version. 10/minuto por usuario, 40/IP, compartidos con cancelaciones."
+      }
+    },
+    "/reservations": {
+      "get": {
+        "operationId": "myReservations",
+        "summary": "Reservas exclusivamente propias",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "requested",
+                "confirmed",
+                "rejected",
+                "cancelled",
+                "completed"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Reservation"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/reservations/{reservation}": {
+      "get": {
+        "operationId": "myReservation",
+        "summary": "Detalle propio de reserva",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 51,
+                    "inquiry_id": 31,
+                    "service_id": 21,
+                    "status": "requested",
+                    "version": 1,
+                    "timezone": "America/Mexico_City",
+                    "date": "2030-01-07",
+                    "time": "09:00",
+                    "end_time": "10:00",
+                    "starts_at": "2030-01-07T15:00:00Z",
+                    "ends_at": "2030-01-07T16:00:00Z",
+                    "created_at": "2030-01-01T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/reservations/{reservation}/cancel": {
+      "patch": {
+        "operationId": "cancelMyReservation",
+        "summary": "Cancelar con versión optimista vigente",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 51,
+                    "inquiry_id": 31,
+                    "service_id": 21,
+                    "status": "cancelled",
+                    "version": 2,
+                    "timezone": "America/Mexico_City",
+                    "date": "2030-01-07",
+                    "time": "09:00",
+                    "end_time": "10:00",
+                    "starts_at": "2030-01-07T15:00:00Z",
+                    "ends_at": "2030-01-07T16:00:00Z",
+                    "created_at": "2030-01-01T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelReservationInput"
+              },
+              "example": {
+                "version": 1
+              }
+            }
+          }
+        },
+        "description": "Permite requested, o confirmed antes del inicio. Versión obsoleta o transición no permitida devuelve 409; obtener de nuevo el detalle antes de decidir. No hay rutas móviles para confirmar, rechazar o completar como prestador."
+      }
     }
   },
   "components": {
@@ -999,6 +2288,511 @@
           "revoked": {
             "type": "boolean",
             "const": true
+          }
+        }
+      },
+      "Inquiry": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "service_id",
+          "service_title",
+          "message",
+          "status",
+          "created_at",
+          "updated_at",
+          "accepted_at",
+          "rejected_at",
+          "cancelled_at",
+          "completed_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "accepted_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "rejected_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "cancelled_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "completed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "Conversation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "inquiry_id",
+          "service_id",
+          "service_title",
+          "status",
+          "unread_messages_count",
+          "latest_message_id",
+          "created_at"
+        ],
+        "properties": {
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "unread_messages_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "latest_message_id": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "inquiry_id",
+          "is_mine",
+          "body",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "is_mine": {
+            "type": "boolean"
+          },
+          "body": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MessagePage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "meta"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "per_page",
+              "next_cursor",
+              "previous_cursor",
+              "read_token",
+              "last_read_message_id",
+              "unread_messages_count"
+            ],
+            "properties": {
+              "per_page": {
+                "type": "integer",
+                "const": 20
+              },
+              "next_cursor": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "previous_cursor": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "read_token": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Capacidad cifrada del límite recibido de esta página. Null sin recibidos nuevos. Nunca enviar en URL/log."
+              },
+              "last_read_message_id": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unread_messages_count": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      },
+      "ReadProgress": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "inquiry_id",
+          "last_read_message_id"
+        ],
+        "properties": {
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "last_read_message_id": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "Reservation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "inquiry_id",
+          "service_id",
+          "status",
+          "version",
+          "timezone",
+          "date",
+          "time",
+          "end_time",
+          "starts_at",
+          "ends_at",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "requested",
+              "confirmed",
+              "rejected",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "timezone": {
+            "type": "string",
+            "description": "Zona IANA con la que se propuso la reserva."
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
+          },
+          "end_time": {
+            "type": "string"
+          },
+          "starts_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ends_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ReservationOptions": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "service_id",
+          "configured",
+          "timezone",
+          "kind",
+          "intervals",
+          "blocked_dates",
+          "queried_at",
+          "inquiry_id",
+          "availability_revision",
+          "min_date",
+          "max_date",
+          "duration_minutes",
+          "guaranteed"
+        ],
+        "properties": {
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "configured": {
+            "type": "boolean",
+            "const": true
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "informational_weekly_schedule"
+            ]
+          },
+          "intervals": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "weekday",
+                "start_local",
+                "end_local"
+              ],
+              "properties": {
+                "weekday": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 7,
+                  "description": "ISO: lunes=1, domingo=7"
+                },
+                "start_local": {
+                  "type": "string",
+                  "pattern": "^[0-2][0-9]:[0-5][0-9]$"
+                },
+                "end_local": {
+                  "type": "string",
+                  "pattern": "^[0-2][0-9]:[0-5][0-9]$",
+                  "description": "Puede ser 24:00: medianoche al final del día."
+                }
+              }
+            }
+          },
+          "blocked_dates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "queried_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "availability_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "min_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "max_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "duration_minutes": {
+            "type": "integer",
+            "const": 60
+          },
+          "guaranteed": {
+            "type": "boolean",
+            "const": false
+          }
+        }
+      },
+      "OpenInquiryInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 2000
+          }
+        }
+      },
+      "SendMessageInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "body",
+          "idempotency_key"
+        ],
+        "properties": {
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "idempotency_key": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ReadInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "read_token"
+        ],
+        "properties": {
+          "read_token": {
+            "type": "string",
+            "maxLength": 2048
+          }
+        }
+      },
+      "ProposalInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "date",
+          "time",
+          "availability_revision",
+          "idempotency_key"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
+          },
+          "availability_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "idempotency_key": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "CancelReservationInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
           }
         }
       }

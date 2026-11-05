@@ -21,6 +21,14 @@ return Application::configure(basePath: dirname(__DIR__))
         });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->report(function (\PDOException $exception) {
+            if (request()->is('api/v1', 'api/v1/*')) {
+                // Un fallo de INSERT puede llevar cuerpos privados en sus bindings.
+                \Illuminate\Support\Facades\Log::warning('Fallo de almacenamiento en API móvil.', ['exception' => $exception::class]);
+
+                return false;
+            }
+        });
         $exceptions->shouldRenderJsonWhen(fn (Request $request, \Throwable $exception) =>
             $request->is('api/v1', 'api/v1/*') || $request->expectsJson());
         $exceptions->render(function (\Throwable $exception, Request $request) {

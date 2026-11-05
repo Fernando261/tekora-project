@@ -22,6 +22,11 @@ final class ApiError
             return self::response(422, 'validation_failed', 'Los datos enviados no son válidos.', $exception->errors());
         }
         $status = match (true) {
+            $exception instanceof \App\Exceptions\InquiryConflict,
+            $exception instanceof \App\Exceptions\InquiryMessageConflict => 409,
+            $exception instanceof \App\Exceptions\InquiryMessageUnavailable => 503,
+            $exception instanceof \App\Exceptions\InquiryReadFailure,
+            $exception instanceof \App\Exceptions\ReservationFailure => $exception->status,
             $exception instanceof AuthenticationException => 401,
             $exception instanceof AuthorizationException => 403,
             $exception instanceof HttpExceptionInterface => $exception->getStatusCode(),

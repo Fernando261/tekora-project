@@ -172,3 +172,7 @@ Arquitectura, definiciones, resultados, capturas y validación independiente de 
 API JSON `/api/v1` para autenticación de solicitantes y catálogo público. [Contrato y arquitectura](docs/api/ETAPA-9B.md), [OpenAPI 3.1](docs/api/openapi.json), [validación Windows/Laragon en clon aislado, puerto 8013](docs/api/LARAGON-9B.md) y [resultados de pruebas](docs/api/VALIDACION-9B.md). No incluye todavía la app Expo ni escrituras de 9C.
 
 La rama de Etapa 9B incorpora ahora el merge de seguridad del PR #16: [resultados actuales](docs/api/INTEGRACION-SEGURIDAD-PR16.md) y [validación independiente en un clon Laragon nuevo](docs/api/LARAGON-9B-SEGURIDAD.md).
+
+## API móvil — Etapa 9C
+
+Solicitudes, conversaciones, lectura de recibidos y reservas propias del solicitante: [arquitectura y contrato](docs/api/ETAPA-9C.md), [validación real](docs/api/VALIDACION-9C.md) y [clon aislado Laragon sin bases persistentes](docs/api/LARAGON-9C.md). El OpenAPI incluye 21 operaciones; sin acciones móviles de prestador ni app Expo todavía.
