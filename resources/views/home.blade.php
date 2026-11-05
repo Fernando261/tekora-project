@@ -13,7 +13,7 @@
   <div class="home-layout">
     <aside class="sidebar" id="sidebar">
       <div class="brand">
-        <div class="brand-logo"><img class="brand-logo" src="img/logo.png" alt=""></div>
+        <div class="brand-logo"><img class="brand-logo" src="{{ asset('img/logo.png') }}" alt=""></div>
         <div class="brand-text">
           <span class="brand-title">MindBloom</span>
           <span class="brand-sub">Bienestar</span>
@@ -45,12 +45,12 @@
         <p>MindBloom es una plataforma dedicada a crear espacios de acompañamiento, reflexión y apoyo para todas las personas que buscan mejorar su bienestar emocional. Combinamos tecnología, diseño accesible y psicología para transformar la experiencia de salud mental en línea.</p>
         <div class="team">
           <div class="team-card">
-            <img src="img/alex.jpg" alt="Alex Fernando Flores Carrillo">
+            <img src="{{ asset('img/alex.jpg') }}" alt="Alex Fernando Flores Carrillo">
             <h3>Alex Fernando Flores Carrillo</h3>
             <p>Desarrollador Backend</p>
           </div>
           <div class="team-card">
-            <img src="img/roque.jpg" alt="Roque Joseph Guerrero Ponce">
+            <img src="{{ asset('img/roque.jpg') }}" alt="Roque Joseph Guerrero Ponce">
             <h3>Roque Joseph Guerrero Ponce</h3>
             <p>Desarrollador Frontend</p>
           </div>

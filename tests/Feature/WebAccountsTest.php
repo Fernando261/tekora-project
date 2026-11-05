@@ -154,7 +154,7 @@ class WebAccountsTest extends TestCase
     public function test_shared_navigation_is_available_from_existing_mindbloom_pages(): void
     {
         $this->actingAs($this->account(RoleName::Client, RoleName::Provider), 'web');
-        foreach (['/', '/perfil', '/citas', '/profesionistas', '/comunidad', '/conferencias', '/perfil/editar-nombre'] as $path) {
+        foreach ([route('home'), '/perfil', '/citas', '/profesionistas', '/comunidad', '/conferencias', '/perfil/editar-nombre'] as $path) {
             $this->get($path)->assertOk()->assertSee('href="'.route('account.provider').'"', false)
                 ->assertSee('MindBloom anterior')->assertDontSee('href="'.route('identity.roles.index').'"', false);
         }

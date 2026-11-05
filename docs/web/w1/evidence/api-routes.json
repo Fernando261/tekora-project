@@ -1,0 +1,288 @@
+[
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "api/v1/auth/login",
+    "name": "api.v1.auth.login",
+    "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@login",
+    "middleware": [
+      "api",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-login"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "api/v1/auth/logout",
+    "name": "api.v1.auth.logout",
+    "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@logout",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/conversations",
+    "name": "api.v1.conversations.index",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@conversations",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/inquiries",
+    "name": "api.v1.inquiries.index",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@inquiries",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/inquiries/{inquiry}",
+    "name": "api.v1.inquiries.show",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@inquiry",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "PATCH",
+    "uri": "api/v1/inquiries/{inquiry}/cancel",
+    "name": "api.v1.inquiries.cancel",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@cancelInquiry",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-inquiry-writes"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/inquiries/{inquiry}/messages",
+    "name": "api.v1.messages.index",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@messages",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "api/v1/inquiries/{inquiry}/messages",
+    "name": "api.v1.messages.store",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@send",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-message-writes"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "api/v1/inquiries/{inquiry}/messages/read",
+    "name": "api.v1.messages.read",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@read",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-read-writes"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/inquiries/{inquiry}/reservation-options",
+    "name": "api.v1.reservations.options",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@options",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "api/v1/inquiries/{inquiry}/reservations",
+    "name": "api.v1.reservations.store",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@propose",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-reservation-writes"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/me",
+    "name": "api.v1.me",
+    "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@me",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/providers",
+    "name": "api.v1.providers.index",
+    "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@providersIndex",
+    "middleware": [
+      "api",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/providers/{provider}",
+    "name": "api.v1.providers.show",
+    "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@provider",
+    "middleware": [
+      "api",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/reservations",
+    "name": "api.v1.reservations.index",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@reservations",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/reservations/{reservation}",
+    "name": "api.v1.reservations.show",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@reservation",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "PATCH",
+    "uri": "api/v1/reservations/{reservation}/cancel",
+    "name": "api.v1.reservations.cancel",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@cancelReservation",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-reservation-writes"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/services",
+    "name": "api.v1.services.index",
+    "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@index",
+    "middleware": [
+      "api",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/services/{service}",
+    "name": "api.v1.services.show",
+    "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@show",
+    "middleware": [
+      "api",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "GET|HEAD",
+    "uri": "api/v1/services/{service}/availability",
+    "name": "api.v1.services.availability",
+    "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@availability",
+    "middleware": [
+      "api",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-catalog"
+    ],
+    "path": null
+  },
+  {
+    "domain": null,
+    "method": "POST",
+    "uri": "api/v1/services/{service}/inquiries",
+    "name": "api.v1.inquiries.store",
+    "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@open",
+    "middleware": [
+      "api",
+      "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+      "App\\Http\\Middleware\\MobileClient",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-private",
+      "Illuminate\\Routing\\Middleware\\ThrottleRequests:mobile-inquiry-writes"
+    ],
+    "path": null
+  }
+]

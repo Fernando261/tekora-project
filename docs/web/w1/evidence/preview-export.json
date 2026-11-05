@@ -1,0 +1,9 @@
+{
+  "sqlite": ":memory:",
+  "environment": "testing",
+  "persistent_database": false,
+  "result": "success",
+  "temporary_output": "Linux /dev/shm tmpfs; static HTML transferred as archive",
+  "non_loopback_origin_rejected": true,
+  "non_loopback_exit_code": 1
+}

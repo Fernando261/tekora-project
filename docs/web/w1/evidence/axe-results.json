@@ -1,0 +1,138 @@
+{
+  "engine": "axe-core 4.10.3",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa"
+  ],
+  "results": [
+    {
+      "width": 375,
+      "path": "/",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 72,
+          "reasons": [
+            "Element content contains only non-text characters",
+            "Element content is too short to determine if it is actual text content",
+            "Element's background color could not be determined because it is overlapped by another element",
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "path": "/login",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 19,
+          "reasons": [
+            "Element's background color could not be determined because it is overlapped by another element",
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "path": "/registro",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 32,
+          "reasons": [
+            "Element's background color could not be determined because it is overlapped by another element",
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "path": "/errors",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 21,
+          "reasons": [
+            "Element's background color could not be determined because it is overlapped by another element",
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "path": "/",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 74,
+          "reasons": [
+            "Element content contains only non-text characters",
+            "Element content is too short to determine if it is actual text content",
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "path": "/login",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 26,
+          "reasons": [
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "path": "/registro",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 39,
+          "reasons": [
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "path": "/errors",
+      "violations": [],
+      "manual_checks": [
+        {
+          "rule": "color-contrast",
+          "node_count": 28,
+          "reasons": [
+            "Element's background color could not be determined due to a background gradient",
+            "Element's background color could not be determined due to a pseudo element"
+          ]
+        }
+      ]
+    }
+  ]
+}

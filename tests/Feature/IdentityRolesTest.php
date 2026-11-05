@@ -112,7 +112,7 @@ class IdentityRolesTest extends TestCase
     public function test_legacy_user_flows_remain_available_without_new_roles(): void
     {
         $user = $this->userWithRoles();
-        $this->actingAs($user, 'web')->get('/')->assertOk();
+        $this->actingAs($user, 'web')->get(route('home'))->assertOk();
         $this->get('/citas')->assertOk();
         $this->get('/perfil')->assertOk();
         $this->assertDatabaseCount('role_user', 0);
