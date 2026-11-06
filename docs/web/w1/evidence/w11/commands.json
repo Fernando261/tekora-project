@@ -1,0 +1,121 @@
+[
+  {
+    "name": "php-version",
+    "command": "php -v",
+    "exit_code": 0,
+    "seconds": 8.37
+  },
+  {
+    "name": "composer-version",
+    "command": "composer --version",
+    "exit_code": 0,
+    "seconds": 4.21
+  },
+  {
+    "name": "composer-validate",
+    "command": "composer validate --strict",
+    "exit_code": 0,
+    "seconds": 2.3
+  },
+  {
+    "name": "composer-install",
+    "command": "composer install --no-scripts --no-interaction",
+    "exit_code": 0,
+    "seconds": 7.39
+  },
+  {
+    "name": "composer-platform",
+    "command": "composer check-platform-reqs",
+    "exit_code": 0,
+    "seconds": 4.22
+  },
+  {
+    "name": "composer-audit",
+    "command": "composer audit --locked",
+    "exit_code": 0,
+    "seconds": 3.47
+  },
+  {
+    "name": "composer-audit-no-dev",
+    "command": "composer audit --locked --no-dev",
+    "exit_code": 0,
+    "seconds": 3.56
+  },
+  {
+    "name": "node-version",
+    "command": "node --version",
+    "exit_code": 0,
+    "seconds": 0.01
+  },
+  {
+    "name": "npm-version",
+    "command": "npm --version",
+    "exit_code": 0,
+    "seconds": 0.14
+  },
+  {
+    "name": "npm-ci",
+    "command": "npm ci",
+    "exit_code": 0,
+    "seconds": 3.93
+  },
+  {
+    "name": "npm-audit",
+    "command": "npm audit",
+    "exit_code": 0,
+    "seconds": 0.54
+  },
+  {
+    "name": "phpunit",
+    "command": "php vendor/bin/phpunit --do-not-cache-result",
+    "exit_code": 0,
+    "seconds": 65.35
+  },
+  {
+    "name": "phpunit-baseline",
+    "command": "php vendor/bin/phpunit --exclude-group web-w11 --do-not-cache-result",
+    "exit_code": 0,
+    "seconds": 53.47
+  },
+  {
+    "name": "api-routes",
+    "command": "php artisan route:list --path=api -v",
+    "exit_code": 0,
+    "seconds": 6.16
+  },
+  {
+    "name": "api-routes-json",
+    "command": "php artisan route:list --path=api --json",
+    "exit_code": 0,
+    "seconds": 3.37
+  },
+  {
+    "name": "npm-build",
+    "command": "npm run build",
+    "exit_code": 0
+  },
+  {
+    "name": "browser",
+    "command": "python tools/tekora-w11-browser-checks.py --base-url http://127.0.0.1:8022 --output <new-directory> --record",
+    "exit_code": 0,
+    "viewport_checks": 48,
+    "transitions": 4,
+    "checks": 14
+  },
+  {
+    "name": "native-post-cleanup",
+    "exit_code": 0,
+    "result": "Focused rerun passed after route cleanup"
+  },
+  {
+    "name": "axe",
+    "exit_code": 0,
+    "checks": 18,
+    "violations": 0
+  },
+  {
+    "name": "git-diff-check",
+    "command": "git diff --check",
+    "exit_code": 0
+  }
+]

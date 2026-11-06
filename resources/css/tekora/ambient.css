@@ -1,0 +1,109 @@
+/* Shared background only. The interiors keep their existing typography, cards and workflows. */
+.tekora-ambient-page {
+    isolation: isolate;
+    min-height: 100vh;
+}
+.tekora-ambient-page.tekora-interior {
+    background: #030817;
+    animation: none;
+}
+.tekora-ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    overflow: clip;
+    contain: strict;
+    pointer-events: none;
+}
+.tekora-ambient * {
+    pointer-events: none;
+}
+.tekora-ambient-halo,
+.tekora-ambient-reflection {
+    position: absolute;
+    display: block;
+    width: 85vmax;
+    height: 74vmax;
+    opacity: 0.3;
+    animation: tekora-ambient-drift 29s ease-in-out infinite;
+}
+.tekora-ambient-blue {
+    top: -38vmax;
+    left: -22vmax;
+    background: radial-gradient(
+        ellipse,
+        #0077b64a,
+        #03045e24 38%,
+        transparent 70%
+    );
+}
+.tekora-ambient-cyan {
+    right: -26vmax;
+    bottom: -45vmax;
+    background: radial-gradient(
+        ellipse,
+        #00b4d83b,
+        #0077b61a 38%,
+        transparent 70%
+    );
+    animation-duration: 31s;
+    animation-delay: -11s;
+}
+.tekora-ambient-reflection {
+    top: 15vh;
+    right: -10vw;
+    width: 60vw;
+    height: 50vh;
+    background: radial-gradient(ellipse, #90e0ef10, transparent 65%);
+    animation-duration: 23s;
+    animation-delay: -6s;
+    opacity: 0.2;
+}
+@keyframes tekora-ambient-drift {
+    0%,
+    100% {
+        transform: translate3d(-2vw, -2vh, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(7vw, 8vh, 0) scale(1.08);
+    }
+}
+/* Small, light surfaces preserve the existing interior contrast over the dark base. */
+.tekora-interior .catalog-container {
+    background: #f3f9fcf5;
+    border-radius: 20px;
+    margin-block: 24px;
+}
+.tekora-interior .catalog-footer {
+    color: #caf0f8;
+}
+.tekora-interior .sidebar {
+    background: #f3f9fcf5;
+}
+.tekora-interior .account-content {
+    background: #f3f9fcf5;
+}
+@media (max-width: 600px) {
+    .tekora-ambient {
+        opacity: 0.55;
+    }
+    .tekora-ambient-reflection {
+        display: none;
+    }
+}
+@media (prefers-reduced-motion: reduce), (update: slow) {
+    .tekora-ambient * {
+        animation: none;
+    }
+}
+@media (prefers-reduced-transparency: reduce) {
+    .tekora-ambient {
+        display: none;
+    }
+    .tekora-interior .catalog-container,
+    .tekora-interior .sidebar,
+    .tekora-interior .account-content {
+        background: #f3f9fc;
+    }
+}

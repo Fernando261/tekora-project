@@ -1,0 +1,115 @@
+{
+  "viewport_checks": [
+    {
+      "width": 320,
+      "page": "/",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 320,
+      "page": "/login",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 320,
+      "page": "/registro",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 320,
+      "page": "/empty",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 320,
+      "page": "/errors",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 375,
+      "page": "/",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 375,
+      "page": "/login",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 375,
+      "page": "/registro",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 375,
+      "page": "/empty",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 375,
+      "page": "/errors",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 768,
+      "page": "/",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 768,
+      "page": "/login",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 768,
+      "page": "/registro",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 768,
+      "page": "/empty",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 768,
+      "page": "/errors",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 1440,
+      "page": "/",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 1440,
+      "page": "/login",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 1440,
+      "page": "/registro",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 1440,
+      "page": "/empty",
+      "no_horizontal_overflow": true
+    },
+    {
+      "width": 1440,
+      "page": "/errors",
+      "no_horizontal_overflow": true
+    }
+  ],
+  "page_errors": [],
+  "blocked_resources": [],
+  "keyboard_menu_enter_escape": true,
+  "skip_link_keyboard": true,
+  "css_3d_pointer": true,
+  "zoom_200_reflow_720_css_px": true,
+  "reduced_motion_static_scene": true,
+  "reduced_motion_auth_visible": true,
+  "no_js_home_login_register": true,
+  "touch_static_scene": true,
+  "renderer": "Chromium headless, software (--disable-gpu)"
+}

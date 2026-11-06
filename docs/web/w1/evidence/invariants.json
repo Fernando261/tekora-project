@@ -1,0 +1,39 @@
+{
+  "base_sha": "208ee914ccf0aa614058ad084ebbbab90339a296",
+  "migrations": 37,
+  "api_operations": 21,
+  "api_route_records_unchanged": true,
+  "migration_files_unchanged": true,
+  "environment_and_persistent_sqlite_unchanged": true,
+  "composer_auth_business_api_unchanged": true,
+  "existing_npm_packages_unchanged": true,
+  "new_package": {
+    "animejs": "4.5.0"
+  },
+  "assets": [
+    {
+      "entry": "resources/css/tekora/tekora.css",
+      "file": "assets/tekora-CRJmRIXO.css",
+      "bytes": 22765,
+      "gzip_bytes": 6037
+    },
+    {
+      "entry": "resources/js/app.js",
+      "file": "assets/app-rIANMhMB.js",
+      "bytes": 133422,
+      "gzip_bytes": 43677
+    },
+    {
+      "entry": "resources/js/tekora/tekora.js",
+      "file": "assets/tekora-dkGR5rqN.js",
+      "bytes": 42592,
+      "gzip_bytes": 16258
+    },
+    {
+      "entry": "resources/sass/app.scss",
+      "file": "assets/app-DbaZCfaT.css",
+      "bytes": 227404,
+      "gzip_bytes": 30960
+    }
+  ]
+}

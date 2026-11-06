@@ -6,8 +6,10 @@
     <title>Recuperar contraseña - MindBloom</title>
     <link rel="stylesheet" href="/css/registro.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    @vite('resources/css/tekora/ambient.css')
 </head>
-<body>
+<body class="tekora-ambient-page tekora-interior">
+<x-tekora-ambient />
 
 <header>
     <h2>MindBloom</h2>

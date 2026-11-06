@@ -24,7 +24,7 @@ class RoutesAndGoogleSafetyTest extends TestCase
 
     public function test_guests_are_directed_to_the_login_for_each_guard(): void
     {
-        foreach (['/', '/perfil', '/comunidad', '/profesionistas', '/citas', '/consultas'] as $path) {
+        foreach ([route('home'), '/perfil', '/comunidad', '/profesionistas', '/citas', '/consultas'] as $path) {
             $this->get($path)->assertRedirect('/login');
         }
 
@@ -55,7 +55,7 @@ class RoutesAndGoogleSafetyTest extends TestCase
     {
         $this->actingAs(User::factory()->create(), 'web');
 
-        foreach (['/', '/perfil', '/perfil/editar-nombre', '/comunidad', '/profesionistas', '/citas', '/conferencias'] as $path) {
+        foreach ([route('home'), '/perfil', '/perfil/editar-nombre', '/comunidad', '/profesionistas', '/citas', '/conferencias'] as $path) {
             $this->get($path)->assertOk()
                 ->assertDontSee('href="/reuniones"', false)
                 ->assertDontSee('href="/notificaciones"', false);

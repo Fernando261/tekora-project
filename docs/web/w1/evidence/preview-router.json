@@ -1,0 +1,42 @@
+[
+  {
+    "method": "GET",
+    "path": "/",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/login",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/registro",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/empty",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/errors",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/.env",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "path": "/servicios",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/login",
+    "status": 405
+  }
+]

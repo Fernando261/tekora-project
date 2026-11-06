@@ -40,7 +40,8 @@ require __DIR__.'/notifications.php';
 */
 
 // Login central, con una sección explícita para el acceso heredado.
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('/', \App\Http\Controllers\TekoraHomeController::class)->middleware(\App\Http\Middleware\TekoraPageHeaders::class)->name('tekora.home');
+Route::get('/login', [AuthController::class, 'showLogin'])->middleware(\App\Http\Middleware\TekoraPageHeaders::class)->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.post');
 
 // ✅ GET login profesionista -> redirige al login unificado (modo profesionista)
@@ -49,7 +50,7 @@ Route::post('/login-profesionista', [ProfesionistaAuthController::class, 'login'
 
 
 // Registro único de User con intención de cliente, prestador o ambas.
-Route::get('/registro', [AuthController::class, 'create'])->name('registro.create');
+Route::get('/registro', [AuthController::class, 'create'])->middleware(\App\Http\Middleware\TekoraPageHeaders::class)->name('registro.create');
 
 // ✅ POST registro usuario
 Route::post('/registro', [AuthController::class, 'store'])->name('registro.store');
@@ -140,7 +141,7 @@ Route::middleware(['auth:profesionista'])->group(function () {
 */
 Route::middleware(['auth:web'])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/mindbloom/inicio', [HomeController::class, 'index'])->name('home');
     
     Route::get('/pdf/emociones/tarjetas', [PdfController::class, 'emotionCards'])
         ->name('pdf.emotions.cards');

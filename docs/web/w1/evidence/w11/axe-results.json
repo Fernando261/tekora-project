@@ -1,0 +1,195 @@
+[
+  {
+    "width": 375,
+    "path": "/",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 75
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/login",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 19
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/registro",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 32
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/errors",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 20
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/errors/registro",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 33
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/servicios",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 10
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/prestadores",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 4
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/cuenta",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 6
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "path": "/cuenta/prestador/dashboard",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 23
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 74
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/login",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 26
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/registro",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 39
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/errors",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 27
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/errors/registro",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 40
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/servicios",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 1
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/prestadores",
+    "violations": [],
+    "manual_checks": []
+  },
+  {
+    "width": 1440,
+    "path": "/cuenta",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 22
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "path": "/cuenta/prestador/dashboard",
+    "violations": [],
+    "manual_checks": [
+      {
+        "id": "color-contrast",
+        "nodes": 27
+      }
+    ]
+  }
+]

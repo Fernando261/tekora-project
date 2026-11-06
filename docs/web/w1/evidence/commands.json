@@ -1,0 +1,105 @@
+[
+  {
+    "name": "php-version",
+    "command": "php -v",
+    "exit_code": 0,
+    "seconds": 4.23
+  },
+  {
+    "name": "composer-version",
+    "command": "composer --version",
+    "exit_code": 0,
+    "seconds": 5.12
+  },
+  {
+    "name": "composer-validate",
+    "command": "composer validate --strict",
+    "exit_code": 0,
+    "seconds": 4.45
+  },
+  {
+    "name": "composer-install",
+    "command": "composer install --no-scripts --no-interaction",
+    "exit_code": 0,
+    "seconds": 7.58
+  },
+  {
+    "name": "composer-platform",
+    "command": "composer check-platform-reqs",
+    "exit_code": 0,
+    "seconds": 2.52
+  },
+  {
+    "name": "composer-audit",
+    "command": "composer audit --locked",
+    "exit_code": 0,
+    "seconds": 4.25
+  },
+  {
+    "name": "composer-audit-no-dev",
+    "command": "composer audit --locked --no-dev",
+    "exit_code": 0,
+    "seconds": 7.08
+  },
+  {
+    "name": "node-version",
+    "command": "node --version",
+    "exit_code": 0,
+    "seconds": 0.01
+  },
+  {
+    "name": "npm-version",
+    "command": "npm --version",
+    "exit_code": 0,
+    "seconds": 0.13
+  },
+  {
+    "name": "npm-ci",
+    "command": "npm ci",
+    "exit_code": 0,
+    "seconds": 2.5
+  },
+  {
+    "name": "npm-audit",
+    "command": "npm audit",
+    "exit_code": 0,
+    "seconds": 0.49
+  },
+  {
+    "name": "npm-build",
+    "command": "npm run build",
+    "exit_code": 0,
+    "seconds": 5.36
+  },
+  {
+    "name": "phpunit",
+    "command": "php vendor/bin/phpunit --do-not-cache-result",
+    "exit_code": 0,
+    "result": "442 tests, 5763 assertions",
+    "phpunit_time": "00:47.640"
+  },
+  {
+    "name": "phpunit-baseline",
+    "command": "php vendor/bin/phpunit --exclude-group web-w1 --do-not-cache-result",
+    "exit_code": 0,
+    "result": "433 tests, 5642 assertions",
+    "phpunit_time": "00:47.946"
+  },
+  {
+    "name": "phpunit-w1",
+    "command": "php vendor/bin/phpunit --group web-w1 --do-not-cache-result",
+    "exit_code": 0,
+    "result": "9 tests, 121 assertions"
+  },
+  {
+    "name": "routes-api",
+    "command": "php artisan route:list --path=api -v",
+    "exit_code": 0,
+    "result": "21 API operations"
+  },
+  {
+    "name": "git-diff-check",
+    "command": "git diff --check",
+    "exit_code": 0
+  }
+]

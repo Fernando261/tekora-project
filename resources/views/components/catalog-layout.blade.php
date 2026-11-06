@@ -7,9 +7,11 @@
   <title>{{ $title }} - MindBloom</title>
   <link rel="stylesheet" href="{{ asset('css/account.css') }}">
   <link rel="stylesheet" href="{{ asset('css/catalog.css') }}">
+  @vite('resources/css/tekora/ambient.css')
   @stack('styles')
 </head>
-<body class="account-access catalog-page">
+<body class="account-access catalog-page tekora-ambient-page tekora-interior">
+  <x-tekora-ambient />
   <a class="catalog-skip" href="#catalog-content">Ir al contenido</a>
   <header class="catalog-header">
     <a class="catalog-brand" href="{{ route('catalog.index') }}"><img src="{{ asset('img/logo.png') }}" alt=""><span>MindBloom<small>Catálogo Tekora</small></span></a>

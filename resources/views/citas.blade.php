@@ -12,7 +12,7 @@
     <h2>MindBloom</h2>
     <nav>
       <ul>
-            <li><a href="/">Inicio</a></li>
+            <li><a href="{{ route('home') }}">Inicio</a></li>
             <li><a href="/comunidad">Comunidad</a></li>
             <li><a href="/conferencias">Conferencias</a></li>
             <li><a href="/citas">Citas</a></li>

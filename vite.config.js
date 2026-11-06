@@ -7,6 +7,9 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/css/tekora/tekora.css',
+                'resources/css/tekora/ambient.css',
+                'resources/js/tekora/tekora.js',
             ],
             refresh: true,
         }),
