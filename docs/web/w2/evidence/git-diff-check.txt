@@ -1,0 +1,2 @@
+git diff --check: exit 0, no output.
+git diff --cached --check: exit 0, no output (including new files and evidence).

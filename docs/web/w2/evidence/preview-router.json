@@ -1,0 +1,76 @@
+{
+  "server": "PHP 8.2.28 cli-server; existing tools/tekora-w1-preview-router.php; loopback-only host port",
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/cuenta/cliente",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/cuenta/prestador/dashboard?period=7",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/cuenta/prestador/dashboard?period=30",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/cuenta/prestador/dashboard?period=90",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/preview/client-empty",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/preview/provider-empty",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/preview/provider-setup",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/.env",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/summaries.json",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "status": 405
+    },
+    {
+      "method": "HEAD",
+      "path": "/cuenta/cliente",
+      "status": 200
+    }
+  ],
+  "browser_smoke": {
+    "provider_native_get_30_to_7": true,
+    "client_values": [
+      3,
+      1,
+      1,
+      2
+    ],
+    "page_errors": [],
+    "failed_resources": []
+  }
+}

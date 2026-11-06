@@ -1,0 +1,641 @@
+.tk-dashboard-page .account-content {
+    background: transparent;
+    padding: 0;
+    color: var(--tk-text);
+    --account-text: var(--tk-text);
+    --account-muted: var(--tk-muted);
+    --account-border: var(--tk-line);
+    --primary: var(--tk-cyan);
+}
+.tk-dashboard {
+    min-width: 0;
+    animation: tekora-dashboard-arrive 140ms ease-out;
+}
+.tk-dashboard .account-heading {
+    padding: 0;
+    margin: 0 0 28px;
+    overflow-wrap: anywhere;
+}
+.tk-dashboard .account-eyebrow {
+    font: 500 10px var(--tk-display);
+    letter-spacing: 0.16em;
+    color: #90e0ef;
+    text-transform: uppercase;
+}
+.tk-dashboard .account-heading h1 {
+    font-size: clamp(30px, 3.2vw, 46px);
+    font-weight: 500;
+    line-height: 1.14;
+    color: #eafbff;
+    margin: 13px 0 12px;
+    letter-spacing: -0.05em;
+}
+.tk-dashboard .account-heading p {
+    font-size: 13px;
+    color: #a3b6cc;
+    max-width: 650px;
+    margin: 0;
+    line-height: 1.8;
+}
+.tk-dashboard-heading-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.tk-dashboard-heading-row > .account-button {
+    flex-shrink: 0;
+}
+.tk-dashboard .account-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(110deg, #56d8ed, #00b4d8);
+    border: 1px solid #90e0ef85;
+    color: #031526 !important;
+    border-radius: 10px;
+    box-shadow: 0 6px 25px #00b4d81f;
+    font-size: 12px;
+    font-weight: 700;
+    min-height: 44px;
+    padding: 12px 17px;
+    transition:
+        transform 0.18s,
+        box-shadow 0.18s;
+}
+.tk-dashboard .account-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 32px #00b4d83a;
+}
+.tk-dashboard .account-button.secondary {
+    background: #0d2941;
+    border-color: #90e0ef45;
+    color: #caf0f8 !important;
+    box-shadow: none;
+}
+.tk-dashboard .account-card {
+    position: relative;
+    padding: 24px;
+    margin: 0 0 24px;
+    border: 1px solid #90e0ef2d;
+    border-radius: 18px;
+    background: linear-gradient(130deg, #12304b61, #07152af0 55%);
+    box-shadow:
+        0 20px 50px #0002,
+        inset 0 1px 0 #90e0ef0b;
+    min-width: 0;
+    color: #eafbff;
+    max-width: none;
+}
+.tk-dashboard .account-card h2 {
+    font-family: var(--tk-display);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: #eafbff;
+    margin: 10px 0;
+}
+.tk-dashboard .account-card p {
+    line-height: 1.75;
+}
+.tk-dashboard .account-card a:not(.account-button) {
+    color: #90e0ef;
+}
+.tk-dashboard .account-help {
+    font-size: 11px;
+    color: #a3b6cc;
+    line-height: 1.8;
+}
+.tk-dashboard .account-note {
+    padding: 14px 16px;
+    border: 1px solid #90e0ef2d;
+    border-radius: 12px;
+    background: #0c2438;
+    color: #caf0f8;
+    font-size: 12px;
+}
+.tk-dashboard .account-alert {
+    background: #10323b;
+    color: #eafbff;
+    border-color: #64e5d355;
+}
+.tk-dashboard .account-alert.is-error {
+    background: #342034;
+    border-color: #ffbac555;
+    color: #ffe0e7;
+}
+.tk-dashboard .dashboard-period {
+    gap: 24px;
+    background: linear-gradient(110deg, #07334b91, #07152af5);
+    padding: 22px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tk-dashboard .dashboard-period h2 {
+    font-size: 16px;
+    margin: 0 0 7px;
+}
+.tk-dashboard .dashboard-period p {
+    font-size: 11px;
+    margin: 4px 0 0;
+    color: #b4c8dd;
+}
+.tk-dashboard .dashboard-filter label {
+    font-size: 11px;
+    color: #a3b6cc;
+    letter-spacing: 0.05em;
+}
+.tk-dashboard .dashboard-filter > div {
+    gap: 8px;
+}
+.tk-dashboard .dashboard-filter select {
+    background: #091d32;
+    color: #eafbff;
+    border: 1px solid #6286a3;
+    border-radius: 9px;
+    min-height: 44px;
+    font-size: 12px;
+    padding: 10px 12px;
+}
+.tk-dashboard .dashboard-filter .account-button {
+    min-height: 44px;
+    padding: 10px 15px;
+}
+.tk-dashboard .dashboard-kpis {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    padding: 0;
+    margin: 0 0 24px;
+    max-width: none;
+}
+.tk-dashboard .dashboard-kpi {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: auto;
+    padding: 20px 18px;
+    margin: 0;
+    min-height: 230px;
+    overflow: visible;
+}
+.tk-dashboard .dashboard-kpi::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 15px;
+    right: 15px;
+    height: 1px;
+    opacity: 0.4;
+    background: linear-gradient(90deg, transparent, #90e0ef, transparent);
+    pointer-events: none;
+    transition: opacity 0.22s;
+}
+.tk-dashboard .dashboard-kpi:hover::after,
+.tk-dashboard .dashboard-kpi:focus-within::after {
+    opacity: 1;
+}
+.tk-kpi-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+.tk-kpi-top > .tk-icon {
+    color: #90e0ef;
+    width: 18px;
+    height: 18px;
+    flex-basis: 18px;
+}
+.tk-dashboard .dashboard-scope {
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    border: 1px solid #90e0ef2d;
+    border-radius: 6px;
+    padding: 4px 6px;
+    background: #90e0ef08;
+    color: #b6deeb;
+    line-height: 1.5;
+    align-self: start;
+    margin: 0;
+}
+.tk-dashboard .dashboard-scope.is-period {
+    color: #c6cdfb;
+    background: #8b9ef90a;
+    border-color: #8b9ef940;
+}
+.tk-dashboard .dashboard-kpi h2 {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 16px 0 0;
+    letter-spacing: 0;
+}
+.tk-dashboard .dashboard-kpi .dashboard-value {
+    font: 500 34px/1.15 var(--tk-display);
+    color: #caf0f8;
+    letter-spacing: -0.05em;
+    margin: 12px 0;
+    overflow-wrap: break-word;
+}
+.tk-dashboard .dashboard-kpi .dashboard-value.tk-value-long {
+    font-size: 21px;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+}
+.tk-dashboard .dashboard-kpi .dashboard-explanation {
+    font-size: 11px;
+    color: #a3b6cc;
+    line-height: 1.7;
+    margin: 8px 0 15px;
+}
+.tk-dashboard .dashboard-note {
+    font-size: 11px;
+    line-height: 1.6;
+    color: #a3b6cc;
+}
+.tk-dashboard .dashboard-kpi-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: auto;
+    color: #90e0ef !important;
+    text-decoration: none;
+    padding-top: 10px;
+    gap: 8px;
+}
+.tk-dashboard .dashboard-kpi-link .tk-icon {
+    width: 14px;
+    height: 14px;
+    flex-basis: 14px;
+}
+.tk-dashboard .dashboard-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+.tk-dashboard .dashboard-columns > .account-card {
+    width: 100%;
+    min-width: 0;
+}
+.tk-dashboard .dashboard-chart figure {
+    margin: 24px 0 16px;
+}
+.tk-dashboard .dashboard-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 130px;
+}
+.tk-dashboard .dashboard-chart-axis {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 11px;
+    color: #a3b6cc;
+    margin-top: 12px;
+}
+.tk-dashboard .dashboard-data {
+    margin-top: 12px;
+}
+.tk-dashboard .dashboard-data summary {
+    font-size: 11px;
+    padding: 12px 0;
+    color: #90e0ef;
+    cursor: pointer;
+}
+.tk-dashboard .dashboard-table-scroll {
+    max-height: 260px;
+    overflow: auto;
+    border: 1px solid #90e0ef35;
+    border-radius: 10px;
+}
+.tk-dashboard .dashboard-data table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 11px;
+}
+.tk-dashboard .dashboard-data th,
+.tk-dashboard .dashboard-data td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #90e0ef25;
+}
+.tk-dashboard .dashboard-data caption {
+    padding: 12px;
+    text-align: left;
+    color: #a3b6cc;
+}
+.tk-dashboard .dashboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 16px;
+}
+.tk-dashboard .dashboard-list > li {
+    padding: 16px 0;
+    border-bottom: 1px solid #90e0ef20;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+.tk-dashboard .dashboard-list > li:last-child {
+    border-bottom: 0;
+}
+.tk-dashboard .dashboard-list a {
+    font-size: 12px;
+    color: #eafbff !important;
+    font-weight: 500;
+    text-decoration: none;
+}
+.tk-dashboard .dashboard-list a:hover {
+    text-decoration: underline;
+}
+.tk-dashboard .dashboard-list time {
+    display: block;
+    font-size: 11px;
+    color: #a3b6cc;
+    margin-top: 5px;
+}
+.tk-dashboard .dashboard-agenda > li {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 20px;
+}
+.tk-dashboard .dashboard-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.tk-dashboard .dashboard-section-heading > a,
+.tk-dashboard .tk-panel-link {
+    font-size: 11px;
+    color: #90e0ef;
+}
+.tk-dashboard .dashboard-empty {
+    padding: 25px 0;
+    color: #a3b6cc;
+    font-size: 12px;
+    line-height: 1.8;
+}
+.tk-dashboard .dashboard-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+.tk-dashboard .dashboard-shortcuts > a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px;
+    border: 1px solid #90e0ef2a;
+    border-radius: 10px;
+    color: #caf0f8 !important;
+    background: #0c2439;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+.tk-dashboard .dashboard-shortcuts > a:hover {
+    background: #12344b;
+    transform: translateY(-2px);
+}
+.tk-dashboard .dashboard-shortcuts .tk-icon {
+    width: 17px;
+    height: 17px;
+    flex-basis: 17px;
+    color: #90e0ef;
+}
+.tk-dashboard .tk-dashboard-empty {
+    padding: 34px;
+}
+.tk-dashboard-empty > .tk-icon {
+    color: #90e0ef;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+}
+.tk-dashboard .tk-history-note {
+    font-size: 11px;
+    color: #a3b6cc;
+    line-height: 1.8;
+}
+.tk-dashboard .tk-history-note strong {
+    color: #caf0f8;
+    font-weight: 500;
+}
+.tk-dashboard .tk-client-kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.tk-client-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 16px 0;
+    border-block: 1px solid #90e0ef20;
+}
+.tk-client-meta p {
+    color: #a3b6cc;
+    font-size: 11px;
+}
+.tk-client-meta > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #90e0ef;
+}
+.tk-dashboard .inquiry-status {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 7px;
+    border: 1px solid #90e0ef35;
+    border-radius: 6px;
+    color: #caf0f8;
+    background: #90e0ef0b;
+    margin-top: 9px;
+}
+.tk-dashboard .inquiry-rejected,
+.tk-dashboard .inquiry-cancelled {
+    color: #ffcad3;
+    border-color: #ffcad335;
+}
+.tk-dashboard .inquiry-accepted {
+    color: #a5efe0;
+    border-color: #a5efe035;
+}
+.tk-dashboard .tk-legacy-panel {
+    border-style: dashed;
+    background: #061324;
+}
+.tk-legacy-panel .tk-icon {
+    color: #a3b6cc;
+}
+.tk-dashboard .tk-legacy-panel p {
+    font-size: 12px;
+    color: #a3b6cc;
+}
+@media (max-width: 1399px) and (min-width: 1100px) {
+    .tk-dashboard .dashboard-kpis {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .tk-dashboard .tk-client-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tk-dashboard .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 1099px) {
+    .tk-dashboard .dashboard-kpis {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .tk-dashboard .tk-client-kpis {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .tk-dashboard .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+    .tk-dashboard .dashboard-period {
+        align-items: start;
+    }
+    .tk-dashboard .dashboard-shortcuts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+@media (max-width: 850px) {
+    .tk-dashboard .dashboard-kpis,
+    .tk-dashboard .tk-client-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tk-dashboard-heading-row {
+        align-items: start;
+    }
+    .tk-dashboard .dashboard-shortcuts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 600px) {
+    .tk-dashboard .account-card {
+        padding: 22px 20px;
+    }
+    .tk-dashboard .dashboard-kpis,
+    .tk-dashboard .tk-client-kpis {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .tk-dashboard .dashboard-kpi {
+        min-height: 0;
+        padding: 20px;
+    }
+    .tk-dashboard .dashboard-kpi h2 {
+        font-size: 14px;
+    }
+    .tk-dashboard .dashboard-kpi .dashboard-value {
+        font-size: 36px;
+    }
+    .tk-dashboard .dashboard-kpi .dashboard-explanation {
+        font-size: 11px;
+    }
+    .tk-dashboard .dashboard-kpi-link {
+        font-size: 11px;
+    }
+    .tk-dashboard .dashboard-kpi .dashboard-value.tk-value-long {
+        font-size: 27px;
+    }
+    .tk-dashboard-heading-row {
+        display: block;
+    }
+    .tk-dashboard-heading-row > .account-button {
+        margin-bottom: 24px;
+    }
+    .tk-dashboard .account-heading h1 {
+        font-size: 34px;
+    }
+    .tk-dashboard .dashboard-period {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .tk-dashboard .dashboard-filter {
+        width: 100%;
+    }
+    .tk-dashboard .dashboard-filter > div {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .tk-dashboard .dashboard-filter select {
+        flex: 1;
+        min-width: 0;
+    }
+    .tk-dashboard .dashboard-section-heading {
+        display: block;
+    }
+    .tk-dashboard .dashboard-agenda > li {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    .tk-dashboard .dashboard-shortcuts {
+        grid-template-columns: 1fr;
+    }
+    .tk-client-meta {
+        display: block;
+    }
+    .tk-client-meta > a {
+        margin-top: 10px;
+    }
+    .tk-dashboard .dashboard-chart-axis {
+        font-size: 11px;
+    }
+    .tk-dashboard .dashboard-empty {
+        font-size: 12px;
+    }
+    .tk-dashboard .dashboard-list a {
+        font-size: 13px;
+    }
+    .tk-dashboard .dashboard-list time {
+        font-size: 11px;
+    }
+}
+@keyframes tekora-dashboard-arrive {
+    from {
+        opacity: 0.92;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@media (prefers-reduced-transparency: reduce) {
+    .tk-dashboard .account-card,
+    .tk-dashboard .dashboard-period {
+        background: #07152a;
+        box-shadow: none;
+    }
+    .tk-dashboard .dashboard-kpi::after {
+        display: none;
+    }
+}
+.tk-dashboard .dashboard-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "file": "client-1440.webm",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 1440,
+        "height": 950
+      }
+    ],
+    "format": {
+      "duration": "5.400000",
+      "size": "738494"
+    }
+  },
+  {
+    "file": "client-375.webm",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 374,
+        "height": 950
+      }
+    ],
+    "format": {
+      "duration": "5.440000",
+      "size": "388235"
+    }
+  },
+  {
+    "file": "provider-1440.webm",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 1440,
+        "height": 950
+      }
+    ],
+    "format": {
+      "duration": "9.520000",
+      "size": "1206242"
+    }
+  },
+  {
+    "file": "provider-375.webm",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 374,
+        "height": 950
+      }
+    ],
+    "format": {
+      "duration": "9.080000",
+      "size": "653633"
+    }
+  },
+  {
+    "file": "reduced-motion.webm",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "width": 1440,
+        "height": 950
+      }
+    ],
+    "format": {
+      "duration": "5.040000",
+      "size": "657350"
+    }
+  }
+]

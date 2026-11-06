@@ -1,9 +1,12 @@
 @props(['metric'])
-<article class="account-card dashboard-kpi" data-kpi="{{ $metric['id'] }}">
+@php($icons = ['published' => 'briefcase', 'received' => 'chat', 'pending' => 'clock', 'acceptance' => 'check', 'requested' => 'calendar', 'upcoming' => 'calendar', 'completed' => 'check', 'cancellation' => 'clock', 'rating' => 'star', 'unread' => 'chat'])
+<article class="account-card dashboard-kpi" data-kpi="{{ $metric['id'] }}" data-dashboard-card>
+  <div class="tk-kpi-top">
   <span class="dashboard-scope {{ $metric['scope'] === 'period' ? 'is-period' : '' }}">{{ $metric['scope'] === 'period' ? 'Del periodo' : 'Estado actual' }}</span>
+  <x-tekora-icon :name="$icons[$metric['id']] ?? 'grid'" /></div>
   <h2>{{ $metric['label'] }}</h2>
-  <p class="dashboard-value">{{ $metric['value'] }}</p>
+  <p class="dashboard-value {{ mb_strlen((string) $metric['value']) > 14 ? 'tk-value-long' : '' }}">{{ $metric['value'] }}</p>
   @if($metric['note'])<p class="dashboard-note">{{ $metric['note'] }}</p>@endif
   <p class="dashboard-explanation">{{ $metric['description'] }}</p>
-  @if($metric['url'])<a class="dashboard-kpi-link" href="{{ $metric['url'] }}">Consultar <span class="dashboard-sr-only">{{ $metric['label'] }}</span><span aria-hidden="true"> →</span></a>@endif
+  @if($metric['url'])<a class="dashboard-kpi-link" href="{{ $metric['url'] }}">Consultar <span class="dashboard-sr-only">{{ $metric['label'] }}</span><x-tekora-icon name="arrow" /></a>@endif
 </article>
