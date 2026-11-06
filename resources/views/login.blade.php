@@ -1,5 +1,5 @@
 <x-access-layout title="Iniciar sesión">
-  <section class="account-card access-card tk-auth-card" data-auth-panel>
+  <x-tekora-auth-card>
     <span class="account-eyebrow">Cuenta única · Contrata y ofrece</span>
     <div class="tk-auth-symbol" aria-hidden="true"><span class="tk-mark"><i></i><i></i></span></div><h1>Iniciar sesión</h1>
     <p>Entra con tu cuenta para contratar servicios, ofrecerlos o hacer ambas cosas.</p>
@@ -13,9 +13,9 @@
       <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
       <button class="account-button" type="submit">Entrar a mi cuenta</button>
     </form>
-    <p class="access-footer">¿No tienes cuenta? <a href="{{ route('registro.create') }}">Crear una cuenta única <x-tekora-arrow /></a></p>
+    <p class="access-footer">¿No tienes cuenta? <a href="{{ route('registro.create') }}" data-auth-switch>Crear una cuenta única <x-tekora-arrow /></a></p>
     <p class="access-footer"><a href="{{ route('catalog.index') }}">Explorar servicios sin iniciar sesión</a></p>
-  </section>
+  </x-tekora-auth-card>
   <details class="account-card legacy-access tk-legacy" id="legacy-access" {{ request('role') === 'prof' || session('legacy_login') ? 'open' : '' }}>
     <summary>Ya tenía una cuenta de profesionista en MindBloom</summary>
     <p>Acceso heredado, solo para cuentas profesionales ya existentes. Conserva tu agenda y tus citas anteriores. Tu cuenta no se vincula automáticamente con la cuenta única.</p>

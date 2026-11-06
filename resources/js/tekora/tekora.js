@@ -1,6 +1,7 @@
-import { animate, stagger, createTimeline } from "animejs";
+import { animate, stagger } from "animejs";
+import { enableAuthTransitions } from "./auth-transition";
 
-// Progressive enhancement: no request interception, credentials, HTML injection or form substitution.
+// Progressive enhancement: POST and credentials stay with the browser and Laravel.
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 const animations = new Set();
@@ -46,18 +47,6 @@ if (!motion.matches) {
                 ease: "out(4)",
             }),
         );
-    const panel = document.querySelector("[data-auth-panel]");
-    // Validation must be visible immediately; never animate an error-bearing form.
-    if (panel && !document.querySelector('[role="alert"]')) {
-        track(
-            createTimeline().add(panel, {
-                opacity: { from: 0, to: 1 },
-                rotateY: { from: -5, to: 0 },
-                duration: 420,
-                ease: "out(3)",
-            }),
-        );
-    }
     if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -134,14 +123,14 @@ finePointer.addEventListener("change", () => {
 });
 
 const submitLabels = new WeakMap();
-document.querySelectorAll(".account-form").forEach((form) => {
-    form.addEventListener("submit", () => {
-        const button = form.querySelector('button[type="submit"]');
-        if (!button) return;
-        submitLabels.set(button, button.textContent);
-        button.setAttribute("aria-busy", "true");
-        button.textContent = "Enviando…";
-    });
+document.addEventListener("submit", (event) => {
+    const form = event.target;
+    if (!form.matches(".account-form")) return;
+    const button = form.querySelector('button[type="submit"]');
+    if (!button) return;
+    submitLabels.set(button, button.textContent);
+    button.setAttribute("aria-busy", "true");
+    button.textContent = "Enviando…";
 });
 window.addEventListener("pageshow", () => {
     document.querySelectorAll('button[aria-busy="true"]').forEach((button) => {
@@ -150,3 +139,4 @@ window.addEventListener("pageshow", () => {
             button.textContent = submitLabels.get(button);
     });
 });
+enableAuthTransitions(motion);

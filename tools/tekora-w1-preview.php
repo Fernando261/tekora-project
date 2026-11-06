@@ -27,16 +27,20 @@ try {
     $app->make(\Illuminate\Foundation\Vite::class)->useHotFile(sys_get_temp_dir().'/tekora-w1-no-hot-'.bin2hex(random_bytes(8)));
     mkdir($target, 0700, true);
     $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
-    $save = function (string $uri, string $file) use ($kernel, $origin, $target) {
+    $routes = [];
+    $save = function (string $uri, string $file) use ($kernel, $origin, $target, &$routes) {
         $response = $kernel->handle(\Illuminate\Http\Request::create($origin.$uri));
         if ($response->getStatusCode() !== 200) {
             throw new RuntimeException('Preview render failed.');
         }
         file_put_contents($target.'/'.$file, $response->getContent());
-        file_put_contents($target.'/headers.json', json_encode([
-            'Content-Security-Policy' => $response->headers->get('Content-Security-Policy'),
-            'X-Content-Type-Options' => $response->headers->get('X-Content-Type-Options'),
-        ], JSON_PRETTY_PRINT));
+        $routes[$uri] = $file;
+        if ($response->headers->has('Content-Security-Policy')) {
+            file_put_contents($target.'/headers.json', json_encode([
+                'Content-Security-Policy' => $response->headers->get('Content-Security-Policy'),
+                'X-Content-Type-Options' => $response->headers->get('X-Content-Type-Options'),
+            ], JSON_PRETTY_PRINT));
+        }
     };
     $save('/', 'empty.html');
     // Explicit synthetic fixtures for screenshots only; none live in production views or seeders.
@@ -45,19 +49,43 @@ try {
         ['Desarrollo de sitios web', 'Un sitio cuidado y funcional para el siguiente paso de tu negocio.', 'Tecnología', 'tecnologia', 'Daniel Ríos', 'Desarrollo web'],
         ['Soporte para tu equipo', 'Diagnóstico y acompañamiento para tus herramientas de trabajo.', 'Soporte técnico', 'soporte-tecnico', 'Lucía Vega', 'Soporte y mantenimiento'],
     ] as [$title, $description, $categoryName, $slug, $name, $headline]) {
-        $owner = \App\Models\User::factory()->create();
+        $owner = \App\Models\User::factory()->create(['name' => 'Cuenta de demostración', 'email' => 'demo-'.$slug.'@example.test']);
         $owner->roles()->attach(\App\Models\Role::where('slug', 'provider')->value('id'));
         $category = \App\Models\ServiceCategory::firstOrCreate(['slug' => $slug], ['name' => $categoryName, 'is_active' => true]);
         $profile = $owner->providerProfile()->create(['display_name' => $name, 'headline' => $headline]);
-        $profile->services()->create(['title' => $title, 'description' => $description, 'service_category_id' => $category->id, 'modality' => 'remote', 'status' => 'published']);
+        $service = $profile->services()->create(['title' => $title, 'description' => $description, 'service_category_id' => $category->id, 'modality' => 'remote', 'status' => 'published']);
     }
     $save('/', 'home.html');
     $save('/login', 'login.html');
     $save('/registro', 'register.html');
+    $save('/registro?intent=provider', 'register-provider.html');
+    $save('/registro?intent=both', 'register-both.html');
     $save('/login?role=prof', 'legacy.html');
-    file_put_contents($target.'/errors.html', view('login', ['errors' => (new \Illuminate\Support\ViewErrorBag)->put('default', new \Illuminate\Support\MessageBag([
+    $save('/servicios', 'catalog.html');
+    $save('/prestadores', 'providers.html');
+    $save(route('catalog.show', $service->id, false), 'service.html');
+    $save(route('public-providers.show', $profile->id, false), 'provider.html');
+    $originalErrors = view()->shared('errors');
+    view()->share('errors', (new \Illuminate\Support\ViewErrorBag)->put('default', new \Illuminate\Support\MessageBag([
         'email' => 'Las credenciales proporcionadas no coinciden.',
-    ]))])->render());
+    ])));
+    file_put_contents($target.'/errors.html', view('login')->render());
+    view()->share('errors', (new \Illuminate\Support\ViewErrorBag)->put('default', new \Illuminate\Support\MessageBag([
+        'email' => 'Revisa el correo electrónico antes de continuar.',
+    ])));
+    file_put_contents($target.'/register-errors.html', view('auth.registro')->render());
+    view()->share('errors', $originalErrors);
+    $routes['/empty'] = 'empty.html';
+    $routes['/errors'] = 'errors.html';
+    $routes['/errors/registro'] = 'register-errors.html';
+    // Authenticated snapshots also use the real controllers/policies and only synthetic memory fixtures.
+    $owner->roles()->attach(\App\Models\Role::where('slug', 'client')->value('id'));
+    $app['auth']->guard('web')->setUser($owner->fresh());
+    foreach (['account.index' => 'account', 'provider.dashboard' => 'dashboard', 'inquiries.index' => 'inquiries',
+        'conversations.index' => 'conversations', 'reservations.index' => 'reservations'] as $route => $file) {
+        $save(route($route, [], false), $file.'.html');
+    }
+    file_put_contents($target.'/routes.json', json_encode($routes, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     \Illuminate\Support\Facades\DB::disconnect();
     echo "Export complete: SQLite :memory: only; synthetic data; static preview has no login/POST backend.\n";
 } catch (\Throwable $exception) {

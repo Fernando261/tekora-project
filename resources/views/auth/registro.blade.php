@@ -2,7 +2,7 @@
   @php
     $selectedIntent = old('intent', request('intent', request('role') === 'prof' ? 'provider' : 'client'));
   @endphp
-  <section class="account-card access-card tk-auth-card" data-auth-panel>
+  <x-tekora-auth-card>
     <span class="account-eyebrow">Una cuenta para contratar y ofrecer</span>
     <div class="tk-auth-symbol" aria-hidden="true"><span class="tk-mark"><i></i><i></i></span></div><h1>Crear cuenta</h1>
     <p>No necesitas registrarte dos veces. Siempre podrás usar tu acceso de cliente y activar tu perfil de prestador.</p>
@@ -37,7 +37,7 @@
       @error('password_confirmation')<span id="password_confirmation-error" class="tk-field-error">{{ $message }}</span>@enderror
       <button class="account-button" type="submit">Crear mi cuenta única</button>
     </form>
-    <p class="access-footer">¿Ya tienes cuenta? <a href="{{ route('login') }}">Iniciar sesión</a></p>
+    <p class="access-footer">¿Ya tienes cuenta? <a href="{{ route('login') }}" data-auth-switch>Iniciar sesión</a></p>
     <p class="account-help">¿Tenías una cuenta profesional de MindBloom? <a href="{{ route('profesionista.login') }}">Utiliza el acceso heredado</a>; no se fusionará con esta cuenta.</p>
-  </section>
+  </x-tekora-auth-card>
 </x-access-layout>

@@ -7,9 +7,10 @@
   <meta name="color-scheme" content="dark">
   <meta name="description" content="Encuentra servicios, conversa con prestadores y acuerda una reserva. Una cuenta para contratar y ofrecer en Tekora.">
   <title>{{ $title }}</title>
-  @vite(['resources/css/tekora/tekora.css', 'resources/js/tekora/tekora.js'])
+  @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/tekora.css', 'resources/js/tekora/tekora.js'])
 </head>
-<body class="tk-page tk-page-{{ $page }}">
+<body class="tk-page tk-page-{{ $page }} tekora-ambient-page">
+  <x-tekora-ambient />
   <a class="tk-skip" href="#contenido">Saltar al contenido</a>
   <header class="tk-header tk-wrap">
     <x-tekora-brand />
@@ -27,6 +28,7 @@
       <a class="tk-button tk-button-small" href="{{ route('login') }}">Entrar <x-tekora-arrow /></a>
     @endauth
   </header>
+  @if($page === 'access')<p class="tk-auth-progress" data-auth-progress role="status" aria-live="polite" tabindex="-1"></p>@endif
   <main id="contenido">{{ $slot }}</main>
   <footer class="tk-footer tk-wrap">
     <x-tekora-brand />

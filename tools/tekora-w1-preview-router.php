@@ -21,19 +21,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'GET' && ($_SERVER['REQUEST_METHOD'] 
     return;
 }
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-if (preg_match('#^/(build/assets/|fonts/tekora/)[a-zA-Z0-9._/-]+\.(css|js|woff2)$#D', $path)) {
+if (preg_match('#^/(build/assets/|fonts/tekora/|css/|js/|img/)[a-zA-Z0-9._/-]+\.(css|js|woff2|png|jpg|jpeg|svg|webp)$#D', $path)) {
     $public = realpath(dirname(__DIR__).'/public');
     $asset = realpath($public.$path);
     if ($asset && str_starts_with($asset, $public.DIRECTORY_SEPARATOR) && is_file($asset)) {
         return false;
     }
 }
-parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) ?? '', $query);
-$file = match ($path) {
-    '/' => 'home.html', '/login' => ($query['role'] ?? '') === 'prof' ? 'legacy.html' : 'login.html',
-    '/registro' => 'register.html', '/empty' => 'empty.html', '/errors' => 'errors.html', default => null,
-};
-if (! $file || ! is_file($root.'/'.$file)) {
+$routes = json_decode(file_get_contents($root.'/routes.json'), true);
+$file = $routes[$_SERVER['REQUEST_URI']] ?? $routes[$path] ?? null;
+if (! is_string($file) || ! preg_match('/^[a-z0-9-]+\.html$/D', $file) || ! is_file($root.'/'.$file)) {
     http_response_code(404);
     echo 'Visual preview: this link targets the real Laravel application.';
 

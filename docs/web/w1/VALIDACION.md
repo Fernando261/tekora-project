@@ -1,5 +1,7 @@
 # Validación W1
 
+Este documento conserva la validación histórica de W1. Los resultados actuales de W1.1, su comparación **447/5925 frente a 442/5763** y las nuevas evidencias están en [W11.md](W11.md).
+
 Ejecutada el 5 de noviembre de 2026 con PHP **8.2.28**, Composer **2.8.11**, Node **24.19.0**, npm **11.9.0** y Chromium Linux. Los archivos de `evidence/` registran salidas y resultados. Las auditorías se ejecutaron con red disponible, sin modo offline; no se sustituyeron por un resultado de caché ante un fallo de red.
 
 | Comando | Código | Resultado |

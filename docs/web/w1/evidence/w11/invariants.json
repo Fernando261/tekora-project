@@ -1,0 +1,41 @@
+{
+  "baseline_w1_sha": "3ad84447f509ea7c4dd8a01fabe58dda8efdfe12",
+  "migrations": 37,
+  "api_operations": 21,
+  "api_route_records_unchanged": true,
+  "business_auth_and_dependencies_unchanged": true,
+  "approved_home_view_and_scene_unchanged": true,
+  "env_and_persistent_sqlite_hashes_unchanged": true,
+  "assets": [
+    {
+      "entry": "resources/css/tekora/ambient.css",
+      "file": "assets/ambient-CymvvgaS.css",
+      "bytes": 1685,
+      "gzip_bytes": 664
+    },
+    {
+      "entry": "resources/css/tekora/tekora.css",
+      "file": "assets/tekora-BruE_Ynv.css",
+      "bytes": 23885,
+      "gzip_bytes": 6256
+    },
+    {
+      "entry": "resources/js/app.js",
+      "file": "assets/app-rIANMhMB.js",
+      "bytes": 133422,
+      "gzip_bytes": 43677
+    },
+    {
+      "entry": "resources/js/tekora/tekora.js",
+      "file": "assets/tekora-BCqc-ClU.js",
+      "bytes": 47941,
+      "gzip_bytes": 18077
+    },
+    {
+      "entry": "resources/sass/app.scss",
+      "file": "assets/app-DbaZCfaT.css",
+      "bytes": 227404,
+      "gzip_bytes": 30960
+    }
+  ]
+}

@@ -827,6 +827,7 @@
 }
 .tk-access-content {
     min-width: 0;
+    perspective: 1600px;
 }
 .tk-auth-card {
     position: relative;
@@ -838,7 +839,6 @@
     box-shadow:
         0 30px 80px #0005,
         inset 0 0 40px #90e0ef06;
-    view-transition-name: auth-panel;
 }
 .tk-auth-card:before {
     content: "";
@@ -865,7 +865,7 @@
     letter-spacing: -0.055em;
     margin: 15px 0 12px;
 }
-.tk-auth-card > p {
+.tk-auth-content > p {
     font-size: 0.8rem;
     margin-bottom: 26px;
 }
@@ -1036,31 +1036,6 @@
     }
     .tk-auth-card {
         backdrop-filter: blur(18px);
-    }
-}
-@view-transition {
-    navigation: auto;
-}
-::view-transition-old(auth-panel) {
-    animation: tk-panel-out 240ms ease-in both;
-}
-::view-transition-new(auth-panel) {
-    animation: tk-panel-in 420ms ease-out both;
-}
-@keyframes tk-panel-out {
-    to {
-        opacity: 0;
-        transform: perspective(1200px) rotateY(9deg) translateX(-12px);
-    }
-}
-@keyframes tk-panel-in {
-    from {
-        opacity: 0;
-        transform: perspective(1200px) rotateY(-9deg) translateX(12px);
-    }
-    to {
-        opacity: 1;
-        transform: none;
     }
 }
 @media (min-width: 901px) {
@@ -1443,10 +1418,102 @@
     border-color: #6286a3;
 }
 .tk-access-content:has([role="alert"]) .tk-auth-card {
-    view-transition-name: none;
+    transform: none;
 }
 @media (max-width: 600px) {
     .tk-visual {
         overflow: clip;
+    }
+}
+
+/* One live form on the front; a purely decorative, non-interactive reverse. */
+.tk-auth-content {
+    display: flow-root;
+    backface-visibility: hidden;
+    transform: translateZ(1px);
+}
+.tk-auth-back {
+    display: none;
+}
+.tk-auth-progress {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+.tk-auth-card.is-flipping {
+    transform-style: preserve-3d;
+    isolation: auto;
+    backdrop-filter: none;
+    overflow: visible;
+}
+.tk-auth-card.is-flipping::before,
+.tk-auth-card.is-flipping::after {
+    opacity: 0;
+}
+.is-flipping .tk-auth-back {
+    position: absolute;
+    inset: -1px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #8ed9ef99;
+    border-radius: inherit;
+    backface-visibility: hidden;
+    transform: rotateY(180deg) translateZ(2px);
+    background: linear-gradient(145deg, #173c53, #0b2038 48%, #07152a);
+    box-shadow:
+        inset 0 0 65px #00b4d81c,
+        0 25px 75px #0005;
+    pointer-events: none;
+}
+.tk-auth-back-mark {
+    opacity: 0;
+    width: 90px;
+    height: 80px;
+    filter: drop-shadow(0 0 22px #00b4d8aa);
+}
+.tk-auth-back-mark i {
+    width: 55px;
+    height: 60px;
+    top: 0;
+}
+.tk-auth-back-mark i + i {
+    width: 35px;
+    height: 50px;
+    top: 18px;
+    left: 53px;
+}
+.tk-auth-pulse,
+.tk-auth-halo {
+    opacity: 0;
+    position: absolute;
+    width: min(240px, 70%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.tk-auth-pulse {
+    background: radial-gradient(circle, #00b4d855, transparent 68%);
+}
+.tk-auth-halo {
+    border: 1px solid #90e0ef55;
+    box-shadow: 0 0 22px #00b4d830;
+}
+.tk-auth-back-caption {
+    position: absolute;
+    bottom: 20%;
+    color: #caf0f8;
+    font: 500 0.6rem var(--tk-display);
+    letter-spacing: 0.18em;
+}
+@media (prefers-reduced-transparency: reduce) {
+    .is-flipping .tk-auth-back {
+        background: #0b1b30;
+    }
+    .tk-auth-pulse,
+    .tk-auth-halo {
+        display: none;
     }
 }

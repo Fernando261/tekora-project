@@ -7,10 +7,12 @@
   <title>{{ $title }} - MindBloom</title>
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
   <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+  @vite('resources/css/tekora/ambient.css')
   @stack('styles')
   <script src="{{ asset('js/account.js') }}" defer></script>
 </head>
-<body>
+<body class="tekora-ambient-page tekora-interior">
+  <x-tekora-ambient />
   <div class="home-layout">
     <aside class="sidebar" id="sidebar">
       <a class="brand" href="{{ route('account.index') }}">
