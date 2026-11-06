@@ -1,0 +1,32 @@
+{
+  "resources/js/tekora/account-shell.js": {
+    "asset": "assets/account-shell-CxPwebFb.js",
+    "bytes": 373,
+    "gzip_bytes": 249
+  },
+  "resources/js/tekora/dashboards.js": {
+    "asset": "assets/dashboards-DAlBwT-q.js",
+    "bytes": 918,
+    "gzip_bytes": 499
+  },
+  "_stagger-BRs9FORz.js": {
+    "asset": "assets/stagger-BRs9FORz.js",
+    "bytes": 37646,
+    "gzip_bytes": 14627
+  },
+  "resources/css/tekora/account-shell.css": {
+    "asset": "assets/account-shell-DFozpjeF.css",
+    "bytes": 7937,
+    "gzip_bytes": 2299
+  },
+  "resources/css/tekora/dashboards.css": {
+    "asset": "assets/dashboards-Bj1iN6eO.css",
+    "bytes": 11437,
+    "gzip_bytes": 2632
+  },
+  "resources/css/tekora/ambient.css": {
+    "asset": "assets/ambient-CymvvgaS.css",
+    "bytes": 1685,
+    "gzip_bytes": 664
+  }
+}

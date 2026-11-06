@@ -1,0 +1,53 @@
+{
+  "method": "WCAG relative luminance, solid color pairs; does not certify gradients or all rendered states",
+  "pairs": [
+    {
+      "label": "Texto principal",
+      "foreground": "#EAFBFF",
+      "background": "#07152A",
+      "ratio": 17.17
+    },
+    {
+      "label": "Texto secundario en panel",
+      "foreground": "#A3B6CC",
+      "background": "#07152A",
+      "ratio": 8.8
+    },
+    {
+      "label": "Enlace de hielo en nota",
+      "foreground": "#90E0EF",
+      "background": "#0C2439",
+      "ratio": 10.62
+    },
+    {
+      "label": "CTA en extremo cian",
+      "foreground": "#031526",
+      "background": "#00B4D8",
+      "ratio": 7.48
+    },
+    {
+      "label": "Texto secundario con fondo conservador más claro",
+      "foreground": "#A3B6CC",
+      "background": "#25495E",
+      "ratio": 4.61
+    },
+    {
+      "label": "Estado aceptado",
+      "foreground": "#A5EFE0",
+      "background": "#0C2439",
+      "ratio": 12.07
+    },
+    {
+      "label": "Estado cancelado/rechazado",
+      "foreground": "#FFCAD3",
+      "background": "#0C2439",
+      "ratio": 11.03
+    },
+    {
+      "label": "Input del filtro",
+      "foreground": "#EAFBFF",
+      "background": "#091D32",
+      "ratio": 16.01
+    }
+  ]
+}

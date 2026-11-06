@@ -1,0 +1,37 @@
+{
+    "client": [
+        {
+            "queries": 15,
+            "milliseconds": 7.7,
+            "sql_ms": 1.52
+        },
+        {
+            "queries": 15,
+            "milliseconds": 91.7,
+            "sql_ms": 0.85
+        },
+        {
+            "queries": 15,
+            "milliseconds": 31.55,
+            "sql_ms": 15.82
+        }
+    ],
+    "provider": [
+        {
+            "queries": 24,
+            "milliseconds": 23.04,
+            "sql_ms": 3.01
+        },
+        {
+            "queries": 24,
+            "milliseconds": 17.14,
+            "sql_ms": 2.39
+        },
+        {
+            "queries": 24,
+            "milliseconds": 35.35,
+            "sql_ms": 3.27
+        }
+    ],
+    "provider_service_queries": 11
+}
