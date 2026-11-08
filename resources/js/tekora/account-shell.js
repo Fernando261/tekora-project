@@ -6,6 +6,7 @@ if (navigation) {
         navigation.open = desktop.matches;
     };
     sync();
+    navigation.dataset.navigationReady = "true";
     desktop.addEventListener("change", sync);
     navigation.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && !desktop.matches && navigation.open) {

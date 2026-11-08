@@ -1,0 +1,16 @@
+[
+  {
+    "file": "phpunit-128m.log",
+    "original_bytes": 158996,
+    "original_lines": 3213,
+    "sha256": "c887b8d84ca949f9fa2ad936584fe7db2191054efa84738d2d1718a5c5b8c912",
+    "published": "First 25 lines, explicitly marked excerpt"
+  },
+  {
+    "file": "phpunit-baseline-128m.log",
+    "original_bytes": 140397,
+    "original_lines": 2820,
+    "sha256": "71a5659ed44f1968dc01f9f1bb5937a704c75d7a37562c554a8986c231fd540e",
+    "published": "First 25 lines, explicitly marked excerpt"
+  }
+]

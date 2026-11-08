@@ -1,0 +1,1208 @@
+{
+  "method": "Rendered PNG card backgrounds sampled at text-free inset columns; brightest sampled color compared with computed solid text colors. Pill checks use both gradient endpoints. Does not certify every intermediate pixel or full WCAG conformance.",
+  "samples": [
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "active",
+      "field": "dashboard-scope",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        58,
+        68
+      ],
+      "ratio": 7.44
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "active",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        58,
+        68
+      ],
+      "ratio": 11.18
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "active",
+      "field": "dashboard-value",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        58,
+        68
+      ],
+      "ratio": 11.18
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "active",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        58,
+        68
+      ],
+      "ratio": 7.35
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "active",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        144,
+        224,
+        239
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        58,
+        68
+      ],
+      "ratio": 8.21
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "confirmed",
+      "field": "dashboard-scope",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 7.81
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "confirmed",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 11.73
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "confirmed",
+      "field": "dashboard-value",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 11.73
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "confirmed",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 7.71
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "confirmed",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        147,
+        233,
+        210
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 9.06
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "requested",
+      "field": "dashboard-scope",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        51,
+        47,
+        34
+      ],
+      "ratio": 8.14
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "requested",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        51,
+        47,
+        34
+      ],
+      "ratio": 12.22
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "requested",
+      "field": "dashboard-value",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        51,
+        47,
+        34
+      ],
+      "ratio": 12.22
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "requested",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        51,
+        47,
+        34
+      ],
+      "ratio": 8.04
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "requested",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        242,
+        206,
+        153
+      ],
+      "brightest_sampled_card_background": [
+        51,
+        47,
+        34
+      ],
+      "ratio": 8.96
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-scope",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        42,
+        39
+      ],
+      "ratio": 8.39
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        42,
+        39
+      ],
+      "ratio": 12.6
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-value",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        42,
+        39
+      ],
+      "ratio": 12.6
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        42,
+        39
+      ],
+      "ratio": 8.29
+    },
+    {
+      "role": "client",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        241,
+        181,
+        166
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        42,
+        39
+      ],
+      "ratio": 7.81
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "pending",
+      "field": "dashboard-scope ",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        50,
+        48,
+        35
+      ],
+      "ratio": 8.07
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "pending",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        50,
+        48,
+        35
+      ],
+      "ratio": 12.13
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "pending",
+      "field": "dashboard-value ",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        50,
+        48,
+        35
+      ],
+      "ratio": 12.13
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "pending",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        50,
+        48,
+        35
+      ],
+      "ratio": 7.97
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "pending",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        242,
+        206,
+        153
+      ],
+      "brightest_sampled_card_background": [
+        50,
+        48,
+        35
+      ],
+      "ratio": 8.89
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "upcoming",
+      "field": "dashboard-scope ",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 7.81
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "upcoming",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 11.73
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "upcoming",
+      "field": "dashboard-value ",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 11.73
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "upcoming",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 7.71
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "upcoming",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        147,
+        233,
+        210
+      ],
+      "brightest_sampled_card_background": [
+        26,
+        55,
+        50
+      ],
+      "ratio": 9.06
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "published",
+      "field": "dashboard-scope ",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        55,
+        68
+      ],
+      "ratio": 7.71
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "published",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        55,
+        68
+      ],
+      "ratio": 11.58
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "published",
+      "field": "dashboard-value ",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        55,
+        68
+      ],
+      "ratio": 11.58
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "published",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        55,
+        68
+      ],
+      "ratio": 7.61
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "published",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        144,
+        224,
+        239
+      ],
+      "brightest_sampled_card_background": [
+        19,
+        55,
+        68
+      ],
+      "ratio": 8.5
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-scope ",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        41,
+        39
+      ],
+      "ratio": 8.47
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        41,
+        39
+      ],
+      "ratio": 12.72
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-value ",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        41,
+        39
+      ],
+      "ratio": 12.72
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        41,
+        39
+      ],
+      "ratio": 8.36
+    },
+    {
+      "role": "provider",
+      "view": "summary",
+      "kpi": "unread",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        241,
+        181,
+        166
+      ],
+      "brightest_sampled_card_background": [
+        55,
+        41,
+        39
+      ],
+      "ratio": 7.89
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "received",
+      "field": "dashboard-scope is-period",
+      "foreground": [
+        200,
+        188,
+        240
+      ],
+      "brightest_sampled_card_background": [
+        24,
+        39,
+        47
+      ],
+      "ratio": 8.69
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "received",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        24,
+        39,
+        47
+      ],
+      "ratio": 14.01
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "received",
+      "field": "dashboard-value ",
+      "foreground": [
+        147,
+        233,
+        210
+      ],
+      "brightest_sampled_card_background": [
+        24,
+        39,
+        47
+      ],
+      "ratio": 10.82
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "received",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        24,
+        39,
+        47
+      ],
+      "ratio": 9.21
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "received",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        147,
+        233,
+        210
+      ],
+      "brightest_sampled_card_background": [
+        24,
+        39,
+        47
+      ],
+      "ratio": 10.82
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "acceptance",
+      "field": "dashboard-scope is-period",
+      "foreground": [
+        200,
+        188,
+        240
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        47
+      ],
+      "ratio": 8.87
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "acceptance",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        47
+      ],
+      "ratio": 14.3
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "acceptance",
+      "field": "dashboard-value ",
+      "foreground": [
+        147,
+        233,
+        210
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        47
+      ],
+      "ratio": 11.05
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "acceptance",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        47
+      ],
+      "ratio": 9.4
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "acceptance",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        147,
+        233,
+        210
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        47
+      ],
+      "ratio": 11.05
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "requested",
+      "field": "dashboard-scope ",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 9.64
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "requested",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 14.48
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "requested",
+      "field": "dashboard-value ",
+      "foreground": [
+        242,
+        206,
+        153
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 10.61
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "requested",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 9.52
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "requested",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        242,
+        206,
+        153
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 10.61
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "completed",
+      "field": "dashboard-scope is-period",
+      "foreground": [
+        200,
+        188,
+        240
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        38,
+        47
+      ],
+      "ratio": 8.79
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "completed",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        38,
+        47
+      ],
+      "ratio": 14.17
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "completed",
+      "field": "dashboard-value ",
+      "foreground": [
+        144,
+        224,
+        239
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        38,
+        47
+      ],
+      "ratio": 10.4
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "completed",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        38,
+        47
+      ],
+      "ratio": 9.32
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "completed",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        144,
+        224,
+        239
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        38,
+        47
+      ],
+      "ratio": 10.4
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "cancellation",
+      "field": "dashboard-scope is-period",
+      "foreground": [
+        200,
+        188,
+        240
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        46
+      ],
+      "ratio": 8.88
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "cancellation",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        46
+      ],
+      "ratio": 14.32
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "cancellation",
+      "field": "dashboard-value ",
+      "foreground": [
+        241,
+        181,
+        166
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        46
+      ],
+      "ratio": 8.88
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "cancellation",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        46
+      ],
+      "ratio": 9.42
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "cancellation",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        241,
+        181,
+        166
+      ],
+      "brightest_sampled_card_background": [
+        23,
+        37,
+        46
+      ],
+      "ratio": 8.88
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "rating",
+      "field": "dashboard-scope ",
+      "foreground": [
+        185,
+        205,
+        215
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 9.64
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "rating",
+      "field": "H2",
+      "foreground": [
+        234,
+        247,
+        251
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 14.48
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "rating",
+      "field": "dashboard-value ",
+      "foreground": [
+        202,
+        185,
+        250
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 8.92
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "rating",
+      "field": "dashboard-explanation",
+      "foreground": [
+        188,
+        203,
+        211
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 9.52
+    },
+    {
+      "role": "provider",
+      "view": "activity",
+      "kpi": "rating",
+      "field": "dashboard-kpi-link",
+      "foreground": [
+        202,
+        185,
+        250
+      ],
+      "brightest_sampled_card_background": [
+        22,
+        36,
+        46
+      ],
+      "ratio": 8.92
+    }
+  ],
+  "pill_gradient_endpoints": [
+    {
+      "foreground": "#05202B",
+      "background": "#73D9E9",
+      "ratio": 10.28
+    },
+    {
+      "foreground": "#05202B",
+      "background": "#38B9DF",
+      "ratio": 7.35
+    }
+  ],
+  "minimum_card_ratio": 7.35
+}

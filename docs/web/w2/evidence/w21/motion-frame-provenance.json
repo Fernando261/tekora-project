@@ -1,0 +1,8 @@
+{
+  "video": "provider-1440.webm",
+  "frames": {
+    "compare-pill-motion.png": 1.25,
+    "compare-content-motion.png": 2.75
+  },
+  "method": "Direct FFmpeg extraction, no interpolation, compositing or generated interface"
+}

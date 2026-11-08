@@ -1,0 +1,8 @@
+{
+    "environment": "testing",
+    "connection": "sqlite",
+    "database": ":memory:",
+    "environment_file_exists": false,
+    "environment_directory_is_repository": false,
+    "post_backend": false
+}

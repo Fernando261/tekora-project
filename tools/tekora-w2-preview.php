@@ -19,6 +19,21 @@ final class TekoraW2VisualExport extends \Tests\TestCase
 {
     use \Tests\Support\DashboardFixtures;
 
+    public function createApplication()
+    {
+        $app = require dirname(__DIR__).'/bootstrap/app.php';
+        $this->traitsUsedByTest = array_flip(class_uses_recursive(self::class));
+        // Never let Dotenv read this checkout's persistent .env, even for optional settings.
+        $app->useEnvironmentPath(sys_get_temp_dir());
+        $app->loadEnvironmentFrom('tekora-preview-no-env-'.bin2hex(random_bytes(16)));
+        if (is_file($app->environmentFilePath())) {
+            throw new RuntimeException('Preview requires an absent environment file.');
+        }
+        $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+        return $app;
+    }
+
     public function export(string $target, string $origin): void
     {
         $this->setUp(); // Existing bootstrap/TestCase fail before migrating unless testing + SQLite :memory:.
@@ -119,6 +134,14 @@ final class TekoraW2VisualExport extends \Tests\TestCase
         $save('/login', 'login');
         $save('/registro', 'register');
         file_put_contents($target.'/routes.json', json_encode($routes, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        file_put_contents($target.'/safety.json', json_encode([
+            'environment' => $this->app->environment(),
+            'connection' => config('database.default'),
+            'database' => config('database.connections.sqlite.database'),
+            'environment_file_exists' => is_file($this->app->environmentFilePath()),
+            'environment_directory_is_repository' => realpath($this->app->environmentPath()) === realpath(dirname(__DIR__)),
+            'post_backend' => false,
+        ], JSON_PRETTY_PRINT));
         file_put_contents($target.'/headers.json', json_encode(['Content-Security-Policy' => "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'", 'X-Content-Type-Options' => 'nosniff'], JSON_PRETTY_PRINT));
         \Illuminate\Support\Facades\DB::disconnect();
         \Carbon\Carbon::setTestNow();

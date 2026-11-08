@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ $title }} · Tekora</title>
+  @if($dashboard)
+    <link rel="preload" href="{{ asset('fonts/tekora/dm-sans-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/tekora/space-grotesk-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  @endif
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
   <link rel="stylesheet" href="{{ asset('css/account.css') }}">
   @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/account-shell.css', 'resources/js/tekora/account-shell.js'])
@@ -13,9 +17,10 @@
 </head>
 <body class="tekora-ambient-page tekora-interior tk-account-shell {{ $dashboard ? 'tk-dashboard-page' : 'tk-account-page' }}">
   <x-tekora-ambient />
+  @if($dashboard)<div class="tk-dashboard-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>@endif
   <a class="tk-shell-skip" href="#main-content">Saltar al contenido</a>
   <div class="tk-account-frame">
-    <details class="tk-shell-navigation" data-account-navigation open>
+    <details class="tk-shell-navigation" data-account-navigation @if(! $dashboard) open @endif>
       <summary aria-controls="sidebar"><x-tekora-icon name="menu" /><span>Menú de tu cuenta</span></summary>
       <aside class="sidebar" id="sidebar">
         <div class="tk-shell-brand"><x-tekora-brand /><p>UN ESPACIO. TODAS TUS POSIBILIDADES.</p></div>
@@ -26,6 +31,7 @@
     </details>
     <div class="tk-shell-workspace">
       <header class="tk-shell-topbar">
+        @if($dashboard)<div class="tk-shell-dashboard-brand"><x-tekora-brand /></div>@endif
         <a href="{{ route('catalog.index') }}" class="tk-shell-explore"><x-tekora-icon name="search" /> Explorar talento <x-tekora-icon name="arrow" /></a>
         <nav aria-label="Tu cuenta"><a class="tk-shell-bell" href="{{ route('notifications.index') }}" aria-label="Notificaciones de toda la cuenta"><x-tekora-icon name="bell" /></a><a class="tk-shell-person" href="{{ route('account.index') }}"><span class="tk-shell-avatar" aria-hidden="true">{{ mb_strtoupper(mb_substr(auth('web')->user()->name, 0, 1)) }}</span><span>{{ auth('web')->user()->name }}<small>Mi cuenta Tekora</small></span></a></nav>
       </header>

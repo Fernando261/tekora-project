@@ -1,5 +1,7 @@
 # W2 · Dashboards Blue Obsidian
 
+**Iteración actual del PR #19: [W2.1 — comparación con el MP4, movimiento y validación](W21.md).** Este documento conserva la entrega histórica W2.
+
 W2 convierte `/cuenta/cliente` en un resumen funcional de la actividad del cliente y rediseña `/cuenta/prestador/dashboard` con la identidad Tekora de W1/W1.1. Base verificada: `dbb919939802d16c7ebd1737dc695f6bf88fcb1d`. Rama: `codex/web-w2-dashboards-blue-obsidian`. El PR se entrega en borrador para revisión independiente; no se fusiona ni despliega.
 
 ## Lecturas y autorización

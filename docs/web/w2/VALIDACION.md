@@ -1,5 +1,7 @@
 # Validación W2
 
+La iteración actual se documenta en [W21.md](W21.md); esta página conserva los resultados históricos W2.
+
 Ejecutada el **6 de noviembre de 2026**, con PHP **8.2.28**, Composer **2.8.11**, Node **24.19.0** y npm **11.9.0**. PHP corre en un contenedor aislado; PHPUnit y los exportadores usan el bootstrap existente de SQLite `:memory:`, sesión/cache en memoria y clave efímera del proceso. No se cambia la configuración persistente. Las auditorías se ejecutaron con red disponible.
 
 | Comando | Salida | Resultado |
