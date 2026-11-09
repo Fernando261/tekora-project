@@ -8,39 +8,13 @@
     background: #070d14;
 }
 .tk-dashboard-page .tk-account-frame {
-    grid-template-columns: 204px minmax(0, 1fr);
+    grid-template-columns: var(--tk-sidebar-width) minmax(0, 1fr);
     gap: 24px;
     max-width: 1780px;
     padding: 20px 28px 0 20px;
 }
-.tk-dashboard-page .sidebar {
-    background: #101923bf;
-    border-color: #c2d7df16;
-    border-radius: 15px;
-    box-shadow: none;
-    padding: 17px 10px;
-    backdrop-filter: none;
-}
 .tk-dashboard-page .tk-shell-brand {
     display: none;
-}
-.tk-dashboard-page .tk-nav-caption {
-    font-size: 10px;
-    letter-spacing: 0.07em;
-}
-.tk-dashboard-page .menu-item {
-    font-size: 13px;
-    padding: 9px 10px;
-    gap: 9px;
-}
-.tk-dashboard-page .menu-item.active {
-    background: #00b4d817;
-    border-color: #90e0ef21;
-    box-shadow: inset 2px 0 #00b4d8;
-}
-.tk-dashboard-page .tk-shell-footnote {
-    font-size: 11px;
-    padding-inline: 8px;
 }
 .tk-dashboard-page .tk-shell-topbar {
     margin-bottom: 12px;
@@ -1010,7 +984,6 @@
     .tk-dashboard-atmosphere {
         display: none;
     }
-    .tk-dashboard-page .sidebar,
     .tk-dashboard-navigation,
     .tk-dashboard .account-card,
     .tk-dashboard .dashboard-kpi,
@@ -1084,30 +1057,6 @@
 @media (max-width: 600px) {
     .tk-dashboard .dashboard-kpi-link {
         min-height: 44px;
-    }
-}
-/* Closed SSR navigation avoids a post-paint mobile collapse; still native without JS. */
-.tk-dashboard-page .tk-shell-navigation > summary {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 44px;
-    padding: 12px;
-    border: 1px solid #c2d7df20;
-    border-radius: 10px;
-    background: #101923;
-    color: #d2e7ef;
-    cursor: pointer;
-    font-size: 13px;
-}
-@media (min-width: 1100px) {
-    .tk-dashboard-page .tk-shell-navigation[data-navigation-ready] > summary {
-        display: none;
-    }
-    .tk-dashboard-page
-        .tk-shell-navigation:not([data-navigation-ready])
-        .sidebar {
-        max-height: calc(100vh - 110px);
     }
 }
 @media (max-width: 600px) {

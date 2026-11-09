@@ -5,10 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ $title }} · Tekora</title>
-  @if($dashboard)
     <link rel="preload" href="{{ asset('fonts/tekora/dm-sans-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ asset('fonts/tekora/space-grotesk-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
-  @endif
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
   <link rel="stylesheet" href="{{ asset('css/account.css') }}">
   @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/account-shell.css', 'resources/js/tekora/account-shell.js'])
@@ -20,13 +18,15 @@
   @if($dashboard)<div class="tk-dashboard-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>@endif
   <a class="tk-shell-skip" href="#main-content">Saltar al contenido</a>
   <div class="tk-account-frame">
-    <details class="tk-shell-navigation" data-account-navigation @if(! $dashboard) open @endif>
+    <details class="tk-shell-navigation" data-account-navigation>
       <summary aria-controls="sidebar"><x-tekora-icon name="menu" /><span>Menú de tu cuenta</span></summary>
       <aside class="sidebar" id="sidebar">
+        <div class="tk-sidebar-scroll" data-sidebar-scroll tabindex="0" role="region" aria-label="Navegación de la cuenta, desplazable">
         <div class="tk-shell-brand"><x-tekora-brand /><p>UN ESPACIO. TODAS TUS POSIBILIDADES.</p></div>
         <p class="tk-nav-caption">NAVEGACIÓN · CUENTA COMPLETA</p>
         <x-account-navigation :tekora="true" />
-        <p class="tk-shell-footnote">Los contadores del menú incluyen<br>toda la actividad de tu cuenta.</p>
+        <p class="tk-shell-footnote">Los contadores del menú incluyen toda la actividad de tu cuenta.</p>
+        </div>
       </aside>
     </details>
     <div class="tk-shell-workspace">

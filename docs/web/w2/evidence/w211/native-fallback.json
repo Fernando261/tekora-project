@@ -1,0 +1,26 @@
+[
+  {
+    "width": 375,
+    "path": "/cuenta",
+    "no_js": true,
+    "native_summary_space_and_tab_to_logout": true,
+    "focus_insets": {
+      "top": 505.390625,
+      "bottom": 50.609375,
+      "left": 12,
+      "right": 12
+    }
+  },
+  {
+    "width": 1440,
+    "path": "/cuenta",
+    "no_js": true,
+    "native_summary_space_and_tab_to_logout": true,
+    "focus_insets": {
+      "top": 722.390625,
+      "bottom": 23.609375,
+      "left": 12,
+      "right": 12
+    }
+  }
+]

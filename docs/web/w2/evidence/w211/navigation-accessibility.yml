@@ -1,0 +1,52 @@
+- navigation "Experiencias de la cuenta":
+  - group "Explorar":
+    - link "Explorar servicios":
+      - /url: http://127.0.0.1:8037/servicios
+    - link "Explorar prestadores":
+      - /url: http://127.0.0.1:8037/prestadores
+  - group "Mi cuenta":
+    - link "Mi cuenta":
+      - /url: http://127.0.0.1:8037/cuenta
+    - link "Notificaciones 29 sin leer, avisos de solicitudes, reservas y reseñas":
+      - /url: http://127.0.0.1:8037/cuenta/notificaciones
+      - text: Notificaciones 29
+    - link "Mensajes 5 mensajes sin leer":
+      - /url: http://127.0.0.1:8037/cuenta/mensajes
+      - text: Mensajes 5
+    - link "Mis reseñas":
+      - /url: http://127.0.0.1:8037/cuenta/resenas
+    - link "Mis reservas":
+      - /url: http://127.0.0.1:8037/cuenta/reservas
+  - group "Cliente":
+    - link "Cliente":
+      - /url: http://127.0.0.1:8037/cuenta/cliente
+    - link "Mis solicitudes":
+      - /url: http://127.0.0.1:8037/cuenta/solicitudes
+  - group "Prestador":
+    - link "Panel del prestador":
+      - /url: http://127.0.0.1:8037/cuenta/prestador/dashboard
+    - link "Disponibilidad":
+      - /url: http://127.0.0.1:8037/cuenta/disponibilidad
+    - link "Prestador · Mi perfil":
+      - /url: http://127.0.0.1:8037/cuenta/prestador
+    - link "Mis servicios":
+      - /url: http://127.0.0.1:8037/cuenta/servicios
+    - link "Solicitudes recibidas":
+      - /url: http://127.0.0.1:8037/cuenta/solicitudes/recibidas
+  - group "Preferencias y legado":
+    - link "Datos de mi cuenta":
+      - /url: http://127.0.0.1:8037/perfil
+    - group:
+      - text: MindBloom anterior
+      - link "Inicio MindBloom":
+        - /url: http://127.0.0.1:8037/mindbloom/inicio
+      - link "Comunidad":
+        - /url: http://127.0.0.1:8037/comunidad
+      - link "Conferencias":
+        - /url: http://127.0.0.1:8037/conferencias
+      - link "Citas MindBloom":
+        - /url: http://127.0.0.1:8037/citas
+      - link "Directorio MindBloom":
+        - /url: http://127.0.0.1:8037/profesionistas
+  - group "Salir":
+    - button "Cerrar sesión"
