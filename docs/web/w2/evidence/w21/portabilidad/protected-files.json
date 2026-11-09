@@ -1,0 +1,8 @@
+{
+  "unchanged": {
+    ".env": true,
+    "database/database.sqlite": true,
+    "public/hot": true,
+    "public/build/manifest.json": true
+  }
+}

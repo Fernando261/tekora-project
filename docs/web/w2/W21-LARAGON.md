@@ -18,18 +18,47 @@ composer install --no-scripts --no-interaction
 composer check-platform-reqs
 composer audit --locked
 composer audit --locked --no-dev
-npm ci
-npm audit
-npm run build
+# Escenario A: en un clon nuevo todavía sin build, comprobar los assets.
+# El test también reproduce un public path temporal sin manifiesto aunque ya haya build.
+php -d memory_limit=256M vendor/bin/phpunit --filter 'test_dashboard_assets_' --do-not-cache-result
+
+# Escenario B: build real; detener cualquier npm run dev de ESTE clon.
+# Conservar public/hot si existe: no debe ocultar los assets compilados.
+$hotW21 = Join-Path $cloneW21 'public/hot'
+$savedHotW21 = Join-Path $env:TEMP ('tekora-hot-' + [guid]::NewGuid().ToString('N'))
+$hadHotW21 = Test-Path $hotW21
+if ($hadHotW21) { Move-Item -LiteralPath $hotW21 -Destination $savedHotW21 }
+try {
+    npm ci
+    if ($LASTEXITCODE -ne 0) { throw 'npm ci falló.' }
+    npm audit
+    if ($LASTEXITCODE -ne 0) { throw 'npm audit falló.' }
+    npm run build
+    if ($LASTEXITCODE -ne 0) { throw 'El build falló.' }
+    if (!(Test-Path 'public/build/manifest.json')) { throw 'Falta el manifiesto real.' }
+    if (Test-Path $hotW21) { throw 'Vite recreó public/hot: detener el servidor de desarrollo.' }
+    php -d memory_limit=256M vendor/bin/phpunit --do-not-cache-result
+    if ($LASTEXITCODE -ne 0) { throw 'PHPUnit post-build falló.' }
+    php -d memory_limit=256M vendor/bin/phpunit --exclude-group web-w21 --do-not-cache-result
+    if ($LASTEXITCODE -ne 0) { throw 'La baseline falló.' }
+} finally {
+    if ($hadHotW21) {
+        if (Test-Path $hotW21) { throw "Conservar y restaurar manualmente el backup $savedHotW21; hay otro hotfile." }
+        Move-Item -LiteralPath $savedHotW21 -Destination $hotW21
+    }
+}
+# Ejecución habitual: respeta el entorno local. La prueba de assets usa el
+# manifiesto si existe, incluso cuando un public/hot activa Vite en otras vistas.
 php -d memory_limit=256M vendor/bin/phpunit --do-not-cache-result
-php -d memory_limit=256M vendor/bin/phpunit --exclude-group web-w21 --do-not-cache-result
 php artisan route:list --path=api --json
 (Get-ChildItem database/migrations -Filter '*.php').Count
 git diff --check
 git status --short
 ```
 
-Usar PHP 8.2.28 y Composer 2.8.11 cuando estén disponibles; registrar versiones diferentes y asegurar SQLite/PDO SQLite. Esperado: **463/6350**, baseline **456/6081**, **37 migraciones**, **21 operaciones API** y auditorías en cero. Se usan 256 MB solo en los procesos PHPUnit: el límite cloud de 128 MB se agotó en la ejecución larga. No modificar php.ini para reproducirlo.
+Usar PHP 8.2.28 y Composer 2.8.11 cuando estén disponibles; registrar versiones diferentes y asegurar SQLite/PDO SQLite. Esperado tras corregir la portabilidad de assets: **464/6366**, baseline **456/6081**, **37 migraciones**, **21 operaciones API** y auditorías en cero. Se usan 256 MB solo en los procesos PHPUnit: el límite cloud de 128 MB se agotó en la ejecución larga. No modificar php.ini para reproducirlo.
+
+La prueba obtiene las URLs compiladas desde `public/build/manifest.json` y exige un `script type="module" src=...` y un `link rel="stylesheet" href=...` exactos. Un preload o una mención textual no bastan. Sin build usa un hotfile temporal propio y comprueba ambas etiquetas de desarrollo; no necesita un servidor Vite porque solo inspecciona el HTML. Los temporales se eliminan al destruir la aplicación de prueba. No se borra el manifiesto ni se modifica el `public/hot` real desde la prueba.
 
 No crear/copiar `.env`, APP_KEY persistente, bases, Google o SMTP. No ejecutar `key:generate`, migraciones manuales, seeds o rollbacks. El bootstrap de pruebas fuerza `testing`, SQLite `:memory:`, DB_URL vacío y clave efímera; la clase de pruebas comprueba el aislamiento antes de migrar en memoria. Detener la revisión si esas condiciones no se cumplen.
 

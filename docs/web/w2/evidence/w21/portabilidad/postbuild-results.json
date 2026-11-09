@@ -1,0 +1,22 @@
+[
+  {
+    "name": "npm-ci",
+    "command": "npm ci",
+    "exit_code": 0
+  },
+  {
+    "name": "npm-build",
+    "command": "npm run build",
+    "exit_code": 0
+  },
+  {
+    "name": "phpunit-built",
+    "command": "/workspace/.tekora-security-tools/php8228 -d memory_limit=256M vendor/bin/phpunit --do-not-cache-result",
+    "exit_code": 0
+  },
+  {
+    "name": "baseline-built",
+    "command": "/workspace/.tekora-security-tools/php8228 -d memory_limit=256M vendor/bin/phpunit --exclude-group web-w21 --do-not-cache-result",
+    "exit_code": 0
+  }
+]

@@ -6,6 +6,7 @@ use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
 use DOMDocument;
 use DOMXPath;
+use Illuminate\Foundation\Vite;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Process\Process;
@@ -119,11 +120,12 @@ class TekoraW21Test extends TestCase
 
     public function test_dashboard_assets_csp_and_native_logout_are_preserved(): void
     {
+        $assets = $this->dashboardAssets();
         $user = $this->account(RoleName::Client);
         $response = $this->actingAs($user)->get(route('account.client'))->assertOk();
         $xpath = $this->document($response->getContent());
         $this->assertSame(0, $xpath->query('//script[not(@src)]')->length);
-        $response->assertSee('resources/js/tekora/dashboards.js')->assertSee('resources/css/tekora/dashboards.css');
+        $this->assertDashboardAssets($xpath, $assets);
         $form = $xpath->query('//form[contains(@class,"logout-form")]')->item(0);
         $this->assertSame('POST', $form->getAttribute('method'));
         $this->assertSame(route('logout'), $form->getAttribute('action'));
@@ -133,6 +135,64 @@ class TekoraW21Test extends TestCase
         $headers = $this->get('/login')->assertOk()->assertSee('data-auth-switch')->headers;
         $this->assertStringContainsString("script-src 'self'", $headers->get('Content-Security-Policy'));
         $this->assertStringNotContainsString("'unsafe-eval'", $headers->get('Content-Security-Policy'));
+    }
+
+    public function test_dashboard_assets_without_a_build_use_real_development_tags(): void
+    {
+        $public = sys_get_temp_dir().'/tekora-w21-public-'.bin2hex(random_bytes(8));
+        mkdir($public);
+        $this->beforeApplicationDestroyed(fn () => rmdir($public));
+        $this->app->usePublicPath($public);
+        $this->assertFileDoesNotExist(public_path('build/manifest.json'));
+        $assets = $this->dashboardAssets();
+        $response = $this->actingAs($this->account(RoleName::Client))->get(route('account.client'))->assertOk();
+        $this->assertDashboardAssets($this->document($response->getContent()), $assets);
+    }
+
+    private function dashboardAssets(): array
+    {
+        $vite = app(Vite::class);
+        $hot = tempnam(sys_get_temp_dir(), 'tekora-w21-hot-');
+        $this->beforeApplicationDestroyed(function () use ($hot) {
+            if (is_file($hot)) {
+                unlink($hot);
+            }
+        });
+        $vite->useHotFile($hot);
+        $entries = ['resources/js/tekora/dashboards.js', 'resources/css/tekora/dashboards.css'];
+        $manifestPath = public_path('build/manifest.json');
+        if (is_file($manifestPath)) {
+            // An existing public/hot must not mask the production manifest in this check.
+            unlink($hot);
+            $manifest = json_decode(file_get_contents($manifestPath), true, flags: JSON_THROW_ON_ERROR);
+            $urls = [];
+            foreach ($entries as $entry) {
+                $this->assertArrayHasKey($entry, $manifest);
+                $this->assertArrayHasKey('file', $manifest[$entry]);
+                $file = $manifest[$entry]['file'];
+                $this->assertIsString($file);
+                $this->assertStringEndsWith('.'.pathinfo($entry, PATHINFO_EXTENSION), $file);
+                $this->assertFileExists(public_path('build/'.$file));
+                $urls[] = asset('build/'.$file);
+            }
+
+            return $urls;
+        }
+        // Exercise a genuinely absent build location without deleting the real manifest.
+        $build = 'tekora-w21-no-build-'.bin2hex(random_bytes(8));
+        $this->assertFileDoesNotExist(public_path($build.'/manifest.json'));
+        $vite->useBuildDirectory($build);
+        file_put_contents($hot, 'http://127.0.0.1:5173');
+
+        return array_map(fn ($entry) => 'http://127.0.0.1:5173/'.$entry, $entries);
+    }
+
+    private function assertDashboardAssets(DOMXPath $xpath, array $assets): void
+    {
+        $scripts = array_map(fn ($node) => $node->nodeValue, iterator_to_array($xpath->query('//script[@type="module"]/@src')));
+        $styles = array_map(fn ($node) => $node->nodeValue, iterator_to_array($xpath->query('//link[@rel="stylesheet"]/@href')));
+        $this->assertContains($assets[0], $scripts, 'Falta el módulo JS del dashboard.');
+        $this->assertContains($assets[1], $styles, 'Falta la hoja CSS del dashboard.');
     }
 
     public function test_historical_mindbloom_keeps_its_layout_outside_the_dashboard(): void
