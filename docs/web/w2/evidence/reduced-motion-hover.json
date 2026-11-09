@@ -1,0 +1,14 @@
+{
+  "viewports": [
+    375,
+    1440
+  ],
+  "roles": [
+    "client",
+    "provider"
+  ],
+  "reduced_motion_hover_static": true,
+  "no_running_decorative_animations": true,
+  "page_errors": [],
+  "failed_resources": []
+}

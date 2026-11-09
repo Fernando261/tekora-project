@@ -1,0 +1,21 @@
+{
+  "base": "dbb919939802d16c7ebd1737dc695f6bf88fcb1d",
+  "migrations_unchanged": 37,
+  "api_operations_unchanged": 21,
+  "protected_files_byte_identical": true,
+  "dependency_files_unchanged": true,
+  "provider_backend_unchanged": true,
+  "unchanged_directories": [
+    "routes",
+    "app/Models",
+    "app/Policies",
+    "app/Enums",
+    "database",
+    "config",
+    "tests/Support",
+    "resources/views/layouts",
+    "public/css",
+    "public/js"
+  ],
+  "api_comparison": "Exact JSON equality with docs/web/w1/evidence/api-routes.json"
+}

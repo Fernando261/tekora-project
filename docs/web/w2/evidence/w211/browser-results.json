@@ -1,0 +1,6496 @@
+{
+  "matrix": [
+    {
+      "width": 320,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 292,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 320,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 292,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 320,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 292,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 320,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 292,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 320,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 288,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 320,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 292,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 320,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 288,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 320,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 288,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 347,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 347,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 347,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 347,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 343,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 347,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 343,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 375,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 343,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 768,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 720,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1024,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 976,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1100,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 240,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1280,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1440,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 256,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "provider-dual",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "client-dual",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "29",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "5",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "client-only",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "provider-only",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "admin",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Activar prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "dual-admin",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "large-counts",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        },
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    },
+    {
+      "width": 1920,
+      "role": "unavailable",
+      "initial_cls": 0,
+      "sidebar_width": 264,
+      "panel_inside_viewport": true,
+      "overflow": "auto",
+      "scrollbar": "none",
+      "scrollbar_webkit": "none",
+      "no_horizontal": true,
+      "global_no_horizontal": true,
+      "min_target": 44,
+      "labels": [
+        {
+          "text": "Explorar servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Explorar prestadores",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Notificaciones",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mensajes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reseñas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis reservas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cliente",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis solicitudes",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Panel del prestador",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Disponibilidad",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Prestador · Mi perfil",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Mis servicios",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Solicitudes recibidas",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Administración · Roles",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Datos de mi cuenta",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "MindBloom anterior",
+          "lines": 1,
+          "wrap": "normal"
+        },
+        {
+          "text": "Cerrar sesión",
+          "lines": 1,
+          "wrap": "normal"
+        }
+      ],
+      "badges": [
+        {
+          "value": "125",
+          "nowrap": "nowrap",
+          "inside": true
+        }
+      ],
+      "logout_reachable": true
+    }
+  ],
+  "axe": [
+    {
+      "width": 375,
+      "role": "provider-dual",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 95
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "role": "client-only",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 70
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "role": "admin",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 28
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "role": "large-counts",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 40
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "role": "unavailable",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 39
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "provider-dual",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 92
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "client-only",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 70
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 23
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "large-counts",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 35
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "unavailable",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 34
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "wheel_and_scroll_edges": true,
+    "all_links_tab_shift_tab_legacy_enter_and_exit": true,
+    "touch_escape_space_native_navigation_breakpoint": true,
+    "native_no_js_menu_and_last_control": true,
+    "reduced_motion_and_transparency": true
+  },
+  "page_errors": [],
+  "console_errors": [],
+  "failed_resources": [],
+  "environment": {
+    "browser": "154.0.8037.57",
+    "headless": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)"
+  },
+  "scroll_frame_intervals_ms": {
+    "samples": 46,
+    "median": 16.699999999999818,
+    "p95": 33.400000000000546
+  }
+}

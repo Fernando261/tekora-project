@@ -1,0 +1,97 @@
+[
+  {
+    "name": "php-version",
+    "command": "php -v",
+    "exit_code": 0
+  },
+  {
+    "name": "composer-version",
+    "command": "composer --version",
+    "exit_code": 0
+  },
+  {
+    "name": "composer-validate",
+    "command": "composer validate --strict",
+    "exit_code": 0
+  },
+  {
+    "name": "composer-install",
+    "command": "composer install --no-scripts --no-interaction",
+    "exit_code": 0
+  },
+  {
+    "name": "composer-platform",
+    "command": "composer check-platform-reqs",
+    "exit_code": 0
+  },
+  {
+    "name": "composer-audit",
+    "command": "composer audit --locked",
+    "exit_code": 0
+  },
+  {
+    "name": "composer-audit-no-dev",
+    "command": "composer audit --locked --no-dev",
+    "exit_code": 0
+  },
+  {
+    "name": "node-version",
+    "command": "node --version",
+    "exit_code": 0
+  },
+  {
+    "name": "npm-version",
+    "command": "npm --version",
+    "exit_code": 0
+  },
+  {
+    "name": "npm-ci",
+    "command": "npm ci",
+    "exit_code": 0
+  },
+  {
+    "name": "npm-audit",
+    "command": "npm audit",
+    "exit_code": 0
+  },
+  {
+    "name": "npm-build",
+    "command": "npm run build",
+    "exit_code": 0
+  },
+  {
+    "name": "phpunit",
+    "command": "php -d memory_limit=256M vendor/bin/phpunit --do-not-cache-result",
+    "exit_code": 0
+  },
+  {
+    "name": "phpunit-baseline",
+    "command": "php -d memory_limit=256M vendor/bin/phpunit --exclude-group web-w21 --do-not-cache-result",
+    "exit_code": 0
+  },
+  {
+    "name": "api-routes",
+    "command": "php artisan route:list --path=api -v",
+    "exit_code": 0
+  },
+  {
+    "name": "api-routes-json",
+    "command": "php artisan route:list --path=api --json",
+    "exit_code": 0
+  },
+  {
+    "name": "phpunit-w21",
+    "command": "php vendor/bin/phpunit --group web-w21 --do-not-cache-result",
+    "exit_code": 0
+  },
+  {
+    "name": "git-diff-check",
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  {
+    "name": "git-diff-cached-check",
+    "command": "git diff --cached --check",
+    "exit_code": 0
+  }
+]

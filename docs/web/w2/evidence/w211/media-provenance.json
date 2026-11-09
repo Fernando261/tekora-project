@@ -1,0 +1,189 @@
+{
+  "reference": "User supplied Windows screenshot in chat; before captures here are Linux renders of the validated SHA, not Windows screenshots.",
+  "before_sha": "d4081822a626ef27e3a1f30b5535ec67dd659547",
+  "export": "tools/tekora-w211-preview.php; real controllers and SQLite :memory: fixtures, no persistent .env or POST backend",
+  "after_environment": {
+    "browser": "154.0.8037.57",
+    "headless": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)"
+  },
+  "files": [
+    {
+      "file": "after-sidebar.png",
+      "bytes": 134332,
+      "sha256": "d3c31c5cc72da6c39787bcd24f98d3387158832244a51528f3f436f7c8c37948"
+    },
+    {
+      "file": "before-provider-1440.png",
+      "bytes": 795106,
+      "sha256": "03c6efc4e0d5964e23c5bde7ca07e3f631a6847ba6d366a0f99cef9a91291ea7"
+    },
+    {
+      "file": "before-sidebar.png",
+      "bytes": 52526,
+      "sha256": "14bdf8d20d3dc898e530627646233873aa8f374d64af9fd3292a78d8e0e08a3d"
+    },
+    {
+      "file": "client-1440.png",
+      "bytes": 799413,
+      "sha256": "0f1c0fc4baddcbddec08a61948f27b2c5ee4e16cdffd472077e1112add6d3e8f"
+    },
+    {
+      "file": "client-zoom-200-end.png",
+      "bytes": 113197,
+      "sha256": "055cdba39e7704afa6cd126eb716d95360b4c6c06ac872d1bfd52477a7638b1c"
+    },
+    {
+      "file": "client-zoom-200-start.png",
+      "bytes": 120589,
+      "sha256": "28c3c44656e296b7c917260366ffac87c73fbe303bdb99760d707eed3838e987"
+    },
+    {
+      "file": "dual-admin-1440.png",
+      "bytes": 791885,
+      "sha256": "01619a721ebae256a9f9044b8cd6ae0b2a25778da297e49234257de485a58213"
+    },
+    {
+      "file": "focus-logout.png",
+      "bytes": 677196,
+      "sha256": "dbde7ccea5e42536e5c6c9aa7cda143c7f3173d4e7e26fdf6b8135e1be269ce6"
+    },
+    {
+      "file": "focus-notifications.png",
+      "bytes": 836299,
+      "sha256": "ff2951ac9dcc839bbd53aee7925458cc4058654301edae2b4ac7bf7ed0cdd86d"
+    },
+    {
+      "file": "hover-notifications.png",
+      "bytes": 836590,
+      "sha256": "d77aebfcc61a4a0e9aa011f9973d62cd83f8f94d1a602ca8faed67def8333412"
+    },
+    {
+      "file": "large-counts-1440.png",
+      "bytes": 239613,
+      "sha256": "30e85e4df55f74a2d12c1f6f014796fbe11575930d5a9cd65fe8d606e58922d6"
+    },
+    {
+      "file": "mobile-320.png",
+      "bytes": 142534,
+      "sha256": "6967c1fca13eecf7f8fbb9181394fa54cf019a2e5f58e3c782c6d4c083c98806"
+    },
+    {
+      "file": "mobile-375.png",
+      "bytes": 155795,
+      "sha256": "09cf57a85c5dd5f442de6b79f49039abad10aaa41f8d6485e3ad23732625491c"
+    },
+    {
+      "file": "mobile-landscape.png",
+      "bytes": 86321,
+      "sha256": "e8f21526439f1f024e2b89275c2b8dc6a772af80d4a933d9443a75fbd195284d"
+    },
+    {
+      "file": "no-js-mobile.png",
+      "bytes": 156832,
+      "sha256": "6f4fd05f611a85010c6100292d22fb5294427ffbc1efd99ee41b7028fc97c175"
+    },
+    {
+      "file": "provider-1280.png",
+      "bytes": 740919,
+      "sha256": "63e169695fced1d82d2cb9e57bcac501af4d8cb7fde5198a74987ea25e740564"
+    },
+    {
+      "file": "provider-1440.png",
+      "bytes": 759504,
+      "sha256": "daa4b53e906169f7a2a75231b4aa4107bc0f3f1c8aae5f66487ffdc98af22d91"
+    },
+    {
+      "file": "provider-zoom-200-end.png",
+      "bytes": 113716,
+      "sha256": "8e1c58efaa2db2ca9f680a3da398ac7d65407ad46b6be5be231bb0bed57ac677"
+    },
+    {
+      "file": "provider-zoom-200-start.png",
+      "bytes": 125695,
+      "sha256": "cd5839b3a954aa554692bef1b6cb73689ce8924d4f5f6b6ae5b9528f0a0ecae1"
+    },
+    {
+      "file": "reduced-preferences.png",
+      "bytes": 185568,
+      "sha256": "63d50012451e22905bbb6e1dff25b2603562debd1857c8870b95fe6a881440fa"
+    },
+    {
+      "file": "scroll-end.png",
+      "bytes": 825620,
+      "sha256": "602056a141e4f7f25e986b65b2468db742cc5f6c4f7b9800d500e0ea182cc871"
+    },
+    {
+      "file": "scroll-middle.png",
+      "bytes": 827258,
+      "sha256": "941c20c87ed7b1f20d4abf713e6fe946f6f21f868e73f0040dc6f9634408e7fc"
+    },
+    {
+      "file": "scroll-start.png",
+      "bytes": 875256,
+      "sha256": "e06d6379c8827d2f8e146b3339bc68f20ed0f0997c965dcaf5336401cefb16ff"
+    },
+    {
+      "file": "sidebar-desktop.webm",
+      "bytes": 792492,
+      "sha256": "bf7b81873c09add99cdf26e90ef259de656434b3c97c5128f10b1258e045bb26",
+      "video": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "duration": "7.000000"
+        }
+      }
+    },
+    {
+      "file": "sidebar-mobile.webm",
+      "bytes": 410389,
+      "sha256": "f3c75783b04e76434dcf857fa5b118965f62e7eaee83d9d5815a379e3bf785b6",
+      "video": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 374,
+            "height": 844
+          }
+        ],
+        "format": {
+          "duration": "7.480000"
+        }
+      }
+    },
+    {
+      "file": "sidebar-native-zoom.webm",
+      "bytes": 1993748,
+      "sha256": "49a80818491819cc6b9d051859c72f39bff2c0931d09e005a2c1bd9871f56400",
+      "video": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "vp8",
+            "width": 1440,
+            "height": 1000
+          }
+        ],
+        "format": {
+          "duration": "16.480000"
+        }
+      }
+    },
+    {
+      "file": "unavailable-375.png",
+      "bytes": 133199,
+      "sha256": "c54376b52452b6f1e2be3f515d20acaefde3e65037ddf80b48bd815e2e94ed21"
+    }
+  ]
+}

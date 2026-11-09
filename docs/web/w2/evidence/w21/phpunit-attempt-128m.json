@@ -1,0 +1,26 @@
+[
+  {
+    "name": "phpunit",
+    "command": "/workspace/.tekora-security-tools/php8228 vendor/bin/phpunit --do-not-cache-result",
+    "exit_code": 255,
+    "seconds": 51.01
+  },
+  {
+    "name": "phpunit-baseline",
+    "command": "/workspace/.tekora-security-tools/php8228 vendor/bin/phpunit --exclude-group web-w21 --do-not-cache-result",
+    "exit_code": 255,
+    "seconds": 50.46
+  },
+  {
+    "name": "api-routes",
+    "command": "/workspace/.tekora-security-tools/php8228 artisan route:list --path=api -v",
+    "exit_code": 0,
+    "seconds": 3.82
+  },
+  {
+    "name": "api-routes-json",
+    "command": "/workspace/.tekora-security-tools/php8228 artisan route:list --path=api --json",
+    "exit_code": 0,
+    "seconds": 3.67
+  }
+]

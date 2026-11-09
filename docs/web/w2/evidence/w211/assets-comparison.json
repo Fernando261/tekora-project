@@ -1,0 +1,54 @@
+{
+  "before": {
+    "resources/css/tekora/account-shell.css": {
+      "file": "assets/account-shell-DFozpjeF.css",
+      "bytes": 7937,
+      "gzip_bytes": 2299,
+      "sha256": "c5a0e202617f24934a59546209223fc213c96b0eef8d04985203934c0194b4e6"
+    },
+    "resources/css/tekora/dashboards.css": {
+      "file": "assets/dashboards-wo_REznv.css",
+      "bytes": 21132,
+      "gzip_bytes": 4595,
+      "sha256": "82a26335ddf906538457e17f02e1c796badb57bbeea167ecd33941c9dc4ef492"
+    },
+    "resources/js/tekora/account-shell.js": {
+      "file": "assets/account-shell-BDlsbPK1.js",
+      "bytes": 406,
+      "gzip_bytes": 267,
+      "sha256": "9cce1e299f9ba20ed9f983af59c01b7a38eb08d669091d841b0500f16c113be8"
+    },
+    "resources/js/tekora/dashboards.js": {
+      "file": "assets/dashboards-D5p1_W1R.js",
+      "bytes": 6777,
+      "gzip_bytes": 2864,
+      "sha256": "8faf05efe9d81a77611127eed4c0bd5738e7f4e545e85ef0a987a8cf77398755"
+    }
+  },
+  "after": {
+    "resources/css/tekora/account-shell.css": {
+      "file": "assets/account-shell-DN46Jl3d.css",
+      "bytes": 12184,
+      "gzip_bytes": 3235,
+      "sha256": "8728363e3c53eba534e40f9ee779fdb4ce0afeb763d92672392704909be0b7bd"
+    },
+    "resources/css/tekora/dashboards.css": {
+      "file": "assets/dashboards-C9aJLWUw.css",
+      "bytes": 20174,
+      "gzip_bytes": 4415,
+      "sha256": "f7b69ed6cfe1b69152c937e7dfee8c00b293189747a3cb636cc5cf2219c23dba"
+    },
+    "resources/js/tekora/account-shell.js": {
+      "file": "assets/account-shell-CmQFvWJ9.js",
+      "bytes": 1175,
+      "gzip_bytes": 584,
+      "sha256": "e073079f97722e38682f0eb9f5213402ac5a8af0b8eee6c16ac161f0bec62020"
+    },
+    "resources/js/tekora/dashboards.js": {
+      "file": "assets/dashboards-D5p1_W1R.js",
+      "bytes": 6777,
+      "gzip_bytes": 2864,
+      "sha256": "8faf05efe9d81a77611127eed4c0bd5738e7f4e545e85ef0a987a8cf77398755"
+    }
+  }
+}

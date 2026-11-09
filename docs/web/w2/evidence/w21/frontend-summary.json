@@ -1,0 +1,130 @@
+[
+  {
+    "version": "w2",
+    "width": 375,
+    "role": "client",
+    "cls_samples": [
+      0.000282,
+      0.000282,
+      0.000282
+    ],
+    "cls_max": 0.000282,
+    "idle_raf_p95_ms": [
+      16.7,
+      16.7,
+      16.7
+    ]
+  },
+  {
+    "version": "w2",
+    "width": 375,
+    "role": "provider",
+    "cls_samples": [
+      1,
+      0,
+      0
+    ],
+    "cls_max": 1,
+    "idle_raf_p95_ms": [
+      16.7,
+      16.7,
+      16.7
+    ]
+  },
+  {
+    "version": "w2",
+    "width": 1440,
+    "role": "client",
+    "cls_samples": [
+      0.010491,
+      0.010492,
+      0.010494
+    ],
+    "cls_max": 0.010494,
+    "idle_raf_p95_ms": [
+      16.7,
+      16.7,
+      16.8
+    ]
+  },
+  {
+    "version": "w2",
+    "width": 1440,
+    "role": "provider",
+    "cls_samples": [
+      9e-06,
+      9e-06,
+      9e-06
+    ],
+    "cls_max": 9e-06,
+    "idle_raf_p95_ms": [
+      16.7,
+      16.7,
+      16.7
+    ]
+  },
+  {
+    "version": "w21",
+    "width": 375,
+    "role": "client",
+    "cls_samples": [
+      0,
+      0,
+      0
+    ],
+    "cls_max": 0,
+    "idle_raf_p95_ms": [
+      16.7,
+      16.8,
+      16.8
+    ]
+  },
+  {
+    "version": "w21",
+    "width": 375,
+    "role": "provider",
+    "cls_samples": [
+      0,
+      0,
+      0
+    ],
+    "cls_max": 0,
+    "idle_raf_p95_ms": [
+      16.8,
+      16.8,
+      16.8
+    ]
+  },
+  {
+    "version": "w21",
+    "width": 1440,
+    "role": "client",
+    "cls_samples": [
+      0,
+      0,
+      0
+    ],
+    "cls_max": 0,
+    "idle_raf_p95_ms": [
+      16.7,
+      16.7,
+      16.7
+    ]
+  },
+  {
+    "version": "w21",
+    "width": 1440,
+    "role": "provider",
+    "cls_samples": [
+      0,
+      0,
+      0
+    ],
+    "cls_max": 0,
+    "idle_raf_p95_ms": [
+      16.7,
+      16.7,
+      16.7
+    ]
+  }
+]

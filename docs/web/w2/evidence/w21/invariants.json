@@ -1,0 +1,26 @@
+{
+  "w2_base": "8749517e5ca53fc00e1240ad6cb6ade215a3ff08",
+  "pr_base": "dbb919939802d16c7ebd1737dc695f6bf88fcb1d",
+  "unchanged_paths": [
+    "app",
+    "routes",
+    "config",
+    "database",
+    "composer.json",
+    "composer.lock",
+    "package.json",
+    "package-lock.json",
+    "resources/js/tekora/auth-transition.js",
+    "resources/js/tekora/tekora.js",
+    "resources/css/tekora/ambient.css",
+    "resources/css/tekora/tekora.css",
+    "public",
+    "tests/Support",
+    "tests/bootstrap.php",
+    "tests/TestCase.php"
+  ],
+  "migrations_unchanged": 37,
+  "api_operations_identical": 21,
+  "persistent_files_identical": true,
+  "reference_sha256": "b23f5b2f905ce0ce374a6022d64d5a735e354e6aeae16c87e1aac44cf3a344db"
+}

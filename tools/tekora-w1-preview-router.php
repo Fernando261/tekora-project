@@ -21,6 +21,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'GET' && ($_SERVER['REQUEST_METHOD'] 
     return;
 }
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// The repository favicon is empty. Avoid an incidental browser 404 in static previews.
+if ($path === '/favicon.ico') {
+    http_response_code(204);
+
+    return;
+}
 if (preg_match('#^/(build/assets/|fonts/tekora/|css/|js/|img/)[a-zA-Z0-9._/-]+\.(css|js|woff2|png|jpg|jpeg|svg|webp)$#D', $path)) {
     $public = realpath(dirname(__DIR__).'/public');
     $asset = realpath($public.$path);

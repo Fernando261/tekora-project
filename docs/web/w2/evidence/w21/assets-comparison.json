@@ -1,0 +1,54 @@
+{
+  "w2": {
+    "assets/ambient-CymvvgaS.css": {
+      "bytes": 1685,
+      "gzip_bytes": 664
+    },
+    "assets/account-shell-DFozpjeF.css": {
+      "bytes": 7937,
+      "gzip_bytes": 2299
+    },
+    "assets/dashboards-Bj1iN6eO.css": {
+      "bytes": 11437,
+      "gzip_bytes": 2632
+    },
+    "assets/account-shell-CxPwebFb.js": {
+      "bytes": 373,
+      "gzip_bytes": 249
+    },
+    "assets/dashboards-DAlBwT-q.js": {
+      "bytes": 918,
+      "gzip_bytes": 499
+    },
+    "assets/stagger-BRs9FORz.js": {
+      "bytes": 37646,
+      "gzip_bytes": 14627
+    }
+  },
+  "w21": {
+    "assets/ambient-CymvvgaS.css": {
+      "bytes": 1685,
+      "gzip_bytes": 664
+    },
+    "assets/account-shell-DFozpjeF.css": {
+      "bytes": 7937,
+      "gzip_bytes": 2299
+    },
+    "assets/dashboards-wo_REznv.css": {
+      "bytes": 21132,
+      "gzip_bytes": 4595
+    },
+    "assets/account-shell-BDlsbPK1.js": {
+      "bytes": 406,
+      "gzip_bytes": 267
+    },
+    "assets/dashboards-D5p1_W1R.js": {
+      "bytes": 6777,
+      "gzip_bytes": 2864
+    },
+    "assets/index-eGWjRRuE.js": {
+      "bytes": 39994,
+      "gzip_bytes": 15377
+    }
+  }
+}

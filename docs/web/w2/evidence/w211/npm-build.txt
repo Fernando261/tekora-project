@@ -1,0 +1,231 @@
+
+> build
+> vite build
+
+vite v6.4.5 building for production...
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+5 │ @import 'variables';
+  │         ^^^^^^^^^^^
+  ╵
+    resources/sass/app.scss 5:9  root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+8 │ @import 'bootstrap/scss/bootstrap';
+  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  ╵
+    resources/sass/app.scss 8:9  root stylesheet
+
+transforming...
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+1 │ @import "mixins/banner";
+  │         ^^^^^^^^^^^^^^^
+  ╵
+    node_modules/bootstrap/scss/bootstrap.scss 1:9  @import
+    resources/sass/app.scss 8:9                     root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+7 │ @import "functions";
+  │         ^^^^^^^^^^^
+  ╵
+    node_modules/bootstrap/scss/bootstrap.scss 7:9  @import
+    resources/sass/app.scss 8:9                     root stylesheet
+
+DEPRECATION WARNING [import]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+  ╷
+8 │ @import "variables";
+  │         ^^^^^^^^^^^
+  ╵
+    node_modules/bootstrap/scss/bootstrap.scss 8:9  @import
+    resources/sass/app.scss 8:9                     root stylesheet
+
+
+/fonts/tekora/dm-sans-latin.woff2 referenced in /fonts/tekora/dm-sans-latin.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/fonts/tekora/space-grotesk-latin.woff2 referenced in /fonts/tekora/space-grotesk-latin.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+207 │   @return mix(white, $color, $weight);
+    │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    node_modules/bootstrap/scss/_functions.scss 207:11  tint-color()
+    node_modules/bootstrap/scss/_variables.scss 79:12   @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+212 │   @return mix(black, $color, $weight);
+    │           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    node_modules/bootstrap/scss/_functions.scss 212:11  shade-color()
+    node_modules/bootstrap/scss/_variables.scss 84:12   @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.mix instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+    ╷
+342 │ $light-bg-subtle:         mix($gray-100, $white) !default;
+    │                           ^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+    node_modules/bootstrap/scss/_variables.scss 342:27  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use math.unit instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+11 │     @if $prev-num == null or unit($num) == "%" or unit($prev-num) == "%" {
+   │                              ^^^^^^^^^^
+   ╵
+    node_modules/bootstrap/scss/_functions.scss 11:30  -assert-ascending()
+    node_modules/bootstrap/scss/_variables.scss 494:1  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9     @import
+    resources/sass/app.scss 8:9                        root stylesheet
+
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use math.unit instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+11 │     @if $prev-num == null or unit($num) == "%" or unit($prev-num) == "%" {
+   │                                                   ^^^^^^^^^^^^^^^
+   ╵
+    node_modules/bootstrap/scss/_functions.scss 11:51  -assert-ascending()
+    node_modules/bootstrap/scss/_variables.scss 494:1  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9     @import
+    resources/sass/app.scss 8:9                        root stylesheet
+
+DEPRECATION WARNING [color-functions]: red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+185 │     "r": red($color),
+    │          ^^^^^^^^^^^
+    ╵
+    node_modules/bootstrap/scss/_functions.scss 185:10  luminance()
+    node_modules/bootstrap/scss/_functions.scss 174:8   contrast-ratio()
+    node_modules/bootstrap/scss/_functions.scss 159:22  color-contrast()
+    node_modules/bootstrap/scss/_variables.scss 846:42  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+DEPRECATION WARNING [color-functions]: green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+186 │     "g": green($color),
+    │          ^^^^^^^^^^^^^
+    ╵
+    node_modules/bootstrap/scss/_functions.scss 186:10  luminance()
+    node_modules/bootstrap/scss/_functions.scss 174:8   contrast-ratio()
+    node_modules/bootstrap/scss/_functions.scss 159:22  color-contrast()
+    node_modules/bootstrap/scss/_variables.scss 846:42  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+DEPRECATION WARNING [color-functions]: blue() is deprecated. Suggestion:
+
+color.channel($color, "blue", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+    ╷
+187 │     "b": blue($color)
+    │          ^^^^^^^^^^^^
+    ╵
+    node_modules/bootstrap/scss/_functions.scss 187:10  luminance()
+    node_modules/bootstrap/scss/_functions.scss 174:8   contrast-ratio()
+    node_modules/bootstrap/scss/_functions.scss 159:22  color-contrast()
+    node_modules/bootstrap/scss/_variables.scss 846:42  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+DEPRECATION WARNING [color-functions]: red() is deprecated. Suggestion:
+
+color.channel($color, "red", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+37 │   @return red($value), green($value), blue($value);
+   │           ^^^^^^^^^^^
+   ╵
+    node_modules/bootstrap/scss/_functions.scss 37:11   to-rgb()
+    node_modules/bootstrap/scss/_variables.scss 846:31  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+DEPRECATION WARNING [color-functions]: green() is deprecated. Suggestion:
+
+color.channel($color, "green", $space: rgb)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+37 │   @return red($value), green($value), blue($value);
+   │                        ^^^^^^^^^^^^^
+   ╵
+    node_modules/bootstrap/scss/_functions.scss 37:24   to-rgb()
+    node_modules/bootstrap/scss/_variables.scss 846:31  @import
+    node_modules/bootstrap/scss/bootstrap.scss 8:9      @import
+    resources/sass/app.scss 8:9                         root stylesheet
+
+WARNING: 234 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+
+✓ 177 modules transformed.
+rendering chunks...
+computing gzip size...
+public/build/manifest.json                        1.83 kB │ gzip:  0.42 kB
+public/build/assets/ambient-CymvvgaS.css          1.69 kB │ gzip:  0.67 kB
+public/build/assets/account-shell-DN46Jl3d.css   12.18 kB │ gzip:  3.25 kB
+public/build/assets/dashboards-C9aJLWUw.css      20.17 kB │ gzip:  4.46 kB
+public/build/assets/tekora-BruE_Ynv.css          23.89 kB │ gzip:  6.28 kB
+public/build/assets/app-DbaZCfaT.css            227.40 kB │ gzip: 30.88 kB
+public/build/assets/account-shell-CmQFvWJ9.js     1.18 kB │ gzip:  0.59 kB
+public/build/assets/dashboards-D5p1_W1R.js        6.78 kB │ gzip:  2.86 kB
+public/build/assets/tekora-Baf5kkIu.js            8.16 kB │ gzip:  3.05 kB
+public/build/assets/index-eGWjRRuE.js            39.99 kB │ gzip: 15.49 kB
+public/build/assets/app-rIANMhMB.js             133.42 kB │ gzip: 43.87 kB
+✓ built in 3.23s

@@ -1,0 +1,80 @@
+{
+  "method": "Same Chromium build; three fresh contexts per version. 1 second rAF sample during native wheel input. Also cold account load with identical artificial 150ms delay on shell JS; not production/FPS certification.",
+  "runs": [
+    {
+      "version": "validated-w21",
+      "run": 1,
+      "samples": 60,
+      "median_ms": 16.699999999999818,
+      "p95_ms": 16.700000000000045,
+      "sticky_top_after_page_scroll": 24
+    },
+    {
+      "version": "validated-w21",
+      "run": 2,
+      "samples": 60,
+      "median_ms": 16.700000000000045,
+      "p95_ms": 16.799999999999955,
+      "sticky_top_after_page_scroll": 24
+    },
+    {
+      "version": "validated-w21",
+      "run": 3,
+      "samples": 60,
+      "median_ms": 16.699999999999932,
+      "p95_ms": 16.700000000000045,
+      "sticky_top_after_page_scroll": 24
+    },
+    {
+      "version": "w211",
+      "run": 1,
+      "samples": 60,
+      "median_ms": 16.700000000000045,
+      "p95_ms": 16.800000000000182,
+      "sticky_top_after_page_scroll": 24
+    },
+    {
+      "version": "w211",
+      "run": 2,
+      "samples": 59,
+      "median_ms": 16.699999999999818,
+      "p95_ms": 16.700000000000045,
+      "sticky_top_after_page_scroll": 24
+    },
+    {
+      "version": "w211",
+      "run": 3,
+      "samples": 60,
+      "median_ms": 16.699999999999818,
+      "p95_ms": 16.700000000000045,
+      "sticky_top_after_page_scroll": 24
+    }
+  ],
+  "account_cls": [
+    {
+      "version": "validated-w21",
+      "width": 375,
+      "cls": 1,
+      "shell_js_delay_ms": 150
+    },
+    {
+      "version": "validated-w21",
+      "width": 1440,
+      "cls": 2.0130248521090536e-05,
+      "shell_js_delay_ms": 150
+    },
+    {
+      "version": "w211",
+      "width": 375,
+      "cls": 0,
+      "shell_js_delay_ms": 150
+    },
+    {
+      "version": "w211",
+      "width": 1440,
+      "cls": 0,
+      "shell_js_delay_ms": 150
+    }
+  ],
+  "browser": "154.0.8037.57"
+}

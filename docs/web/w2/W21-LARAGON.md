@@ -1,0 +1,135 @@
+# W2.1.1 · Sidebar y validación Windows/Laragon
+
+Usar una carpeta completamente nueva, por ejemplo `C:\laragon\www\tekora-web-w211-validacion`. No reutilizar W1, W2, bases o instalaciones anteriores. Copiar el **SHA final W2.1.1 de la entrega del PR #19** en `$w21Sha`; fijar ese commit, no solo el nombre de rama.
+
+```powershell
+$cloneW21 = 'C:\laragon\www\tekora-web-w211-validacion'
+$w21Sha = 'PEGAR_SHA_FINAL_W211_DEL_PR_19'
+if (Test-Path $cloneW21) { throw 'Elegir una carpeta NUEVA.' }
+if ($w21Sha -notmatch '^[0-9a-f]{40}$') { throw 'Pegar el SHA final de 40 caracteres.' }
+git clone --no-checkout --single-branch --branch codex/web-w2-dashboards-blue-obsidian https://github.com/Fernando261/tekora-project.git $cloneW21
+Set-Location $cloneW21
+git switch --detach $w21Sha
+if ((git rev-parse HEAD) -ne $w21Sha) { throw 'No coincide el commit revisado.' }
+php -v
+composer --version
+composer validate --strict
+composer install --no-scripts --no-interaction
+composer check-platform-reqs
+composer audit --locked
+composer audit --locked --no-dev
+# Escenario A: en un clon nuevo todavía sin build, comprobar los assets.
+# El test también reproduce un public path temporal sin manifiesto aunque ya haya build.
+php -d memory_limit=256M vendor/bin/phpunit --filter 'test_dashboard_assets_' --do-not-cache-result
+
+# Escenario B: build real; detener cualquier npm run dev de ESTE clon.
+# Conservar public/hot si existe: no debe ocultar los assets compilados.
+$hotW21 = Join-Path $cloneW21 'public/hot'
+$savedHotW21 = Join-Path $env:TEMP ('tekora-hot-' + [guid]::NewGuid().ToString('N'))
+$hadHotW21 = Test-Path $hotW21
+if ($hadHotW21) { Move-Item -LiteralPath $hotW21 -Destination $savedHotW21 }
+try {
+    npm ci
+    if ($LASTEXITCODE -ne 0) { throw 'npm ci falló.' }
+    npm audit
+    if ($LASTEXITCODE -ne 0) { throw 'npm audit falló.' }
+    npm run build
+    if ($LASTEXITCODE -ne 0) { throw 'El build falló.' }
+    if (!(Test-Path 'public/build/manifest.json')) { throw 'Falta el manifiesto real.' }
+    if (Test-Path $hotW21) { throw 'Vite recreó public/hot: detener el servidor de desarrollo.' }
+    php -d memory_limit=256M vendor/bin/phpunit --do-not-cache-result
+    if ($LASTEXITCODE -ne 0) { throw 'PHPUnit post-build falló.' }
+    php -d memory_limit=256M vendor/bin/phpunit --group web-w211 --do-not-cache-result
+    if ($LASTEXITCODE -ne 0) { throw 'Las regresiones de sidebar fallaron.' }
+    php -d memory_limit=256M vendor/bin/phpunit --exclude-group web-w21 --do-not-cache-result
+    if ($LASTEXITCODE -ne 0) { throw 'La baseline falló.' }
+} finally {
+    if ($hadHotW21) {
+        if (Test-Path $hotW21) { throw "Conservar y restaurar manualmente el backup $savedHotW21; hay otro hotfile." }
+        Move-Item -LiteralPath $savedHotW21 -Destination $hotW21
+    }
+}
+# Ejecución habitual: respeta el entorno local. La prueba de assets usa el
+# manifiesto si existe, incluso cuando un public/hot activa Vite en otras vistas.
+php -d memory_limit=256M vendor/bin/phpunit --do-not-cache-result
+php -d auto_prepend_file=tests/bootstrap.php artisan route:list --path=api --json
+(Get-ChildItem database/migrations -Filter '*.php').Count
+git diff --check
+git status --short
+```
+
+Usar PHP 8.2.28 y Composer 2.8.11 cuando estén disponibles; registrar versiones diferentes y asegurar SQLite/PDO SQLite. Esperado tras W2.1.1 (con manifiesto generado): **476/6551**, baseline **456/6081**, **37 migraciones**, **21 operaciones API** y auditorías en cero. Se usan 256 MB solo en los procesos PHPUnit: el límite cloud de 128 MB se agotó en la ejecución larga. No modificar php.ini para reproducirlo.
+
+La prueba obtiene las URLs compiladas desde `public/build/manifest.json` y exige un `script type="module" src=...` y un `link rel="stylesheet" href=...` exactos. Un preload o una mención textual no bastan. Sin build usa un hotfile temporal propio y comprueba ambas etiquetas de desarrollo; no necesita un servidor Vite porque solo inspecciona el HTML. Los temporales se eliminan al destruir la aplicación de prueba. No se borra el manifiesto ni se modifica el `public/hot` real desde la prueba.
+
+No crear/copiar `.env`, APP_KEY persistente, bases, Google o SMTP. No ejecutar `key:generate`, migraciones manuales, seeds o rollbacks. El bootstrap de pruebas fuerza `testing`, SQLite `:memory:`, DB_URL vacío y clave efímera; la clase de pruebas comprueba el aislamiento antes de migrar en memoria. Detener la revisión si esas condiciones no se cumplen.
+
+## Preview estático seguro
+
+El exportador W2 reforzado para W2.1 establece un archivo de entorno **inexistente fuera del repositorio antes de bootstrapping**. Dotenv no lee el `.env` persistente. Usa fixtures y workflows reales solo dentro del proceso de pruebas y exporta las respuestas HTML a una carpeta temporal nueva. `safety.json` debe confirmar testing/sqlite/:memory:, archivo de entorno inexistente, directorio fuera del repositorio y ausencia de backend POST.
+
+```powershell
+$previewW21 = Join-Path $env:TEMP ('tekora-w21-preview-' + [guid]::NewGuid().ToString('N'))
+php tools/tekora-w211-preview.php $previewW21 http://127.0.0.1:8017
+if ($LASTEXITCODE -ne 0) { throw 'La exportación no terminó.' }
+Get-Content (Join-Path $previewW21 'safety.json')
+$env:TEKORA_W1_PREVIEW_DIR = $previewW21
+php -S 127.0.0.1:8017 -t public tools/tekora-w1-preview-router.php
+```
+
+La variable conserva su nombre histórico por compatibilidad. El router solo sirve HTML/assets de ese export por GET/HEAD, sin iniciar Laravel: POST devuelve 405, rutas no exportadas 404. No introducir credenciales reales ni exponerlo fuera de `127.0.0.1`. El origen al exportar y servir debe coincidir.
+
+Visitar en `http://127.0.0.1:8017`:
+
+- `/cuenta/cliente`: Resumen / Reservas / Solicitudes y contadores 3/1/1/2. Notificaciones globales rotuladas.
+- `/cuenta/prestador/dashboard`: Resumen / Actividad / Agenda / Solicitudes; cuatro KPI principales y seis de detalle. Aplicar GET 7/30/90 y abrir la tabla.
+- `/preview/client-empty`, `/preview/provider-empty`, `/preview/provider-setup`: roles exclusivos y estados vacíos.
+- `/preview/admin`, `/preview/dual-admin`, `/preview/large-counts` (125/125 reales en memoria), `/preview/unavailable-count` (simulación explícita de bandeja no disponible).
+- `/cuenta`, `/cuenta/prestador`, `/servicios`, `/login`, `/registro` para continuidad con formularios y W1.1.
+
+Probar 320/375/768/1024/1100/1280/1440/1920 px. La cápsula debe estirarse a derecha e izquierda y asentarse en el ancho de su opción. Alternar rápido, cambiar tamaño/orientación y usar etiquetas con distinto ancho. No debe bloquear clics ni producir scroll horizontal de la página.
+
+Con teclado: Tab/Shift+Tab, flechas, Home/End, Enter/Space y Escape. El foco sigue la pestaña; Tab pasa por acciones y filtros antes del contenido. Cambiar el **zoom nativo del navegador al 200%**, comprobar controles sin superposición y cápsula alineada, y volver al 100%. Esta revisión de Windows es independiente del zoom nativo al 200% ya probado en Chromium Linux headless, con perfil temporal y API de ajustes del navegador. También se comprobó reflow a 720 CSS px.
+
+Desactivar JS: todos los módulos deben quedar disponibles, con enlaces ancla, menú y tabla nativos. Activar movimiento reducido: no debe moverse la cápsula ni el fondo, y no debe haber desplazamiento en hover. Activar transparencia reducida: paneles opacos. En DevTools, bloquear el chunk de Anime y recargar: las secciones deben seguir funcionando instantáneamente.
+
+La previsualización no permite escribir reservas, enviar mensajes o autenticar usuarios. Los enlaces no exportados señalan rutas reales y pueden dar 404 aquí; esas operaciones y sus permisos se prueban con PHPUnit en memoria. Las cifras de enero de 2030 son fixtures, nunca actividad de producción.
+
+Si Python Playwright está disponible como herramienta externa:
+
+```powershell
+python tools/tekora-w21-browser-checks.py --base-url http://127.0.0.1:8017 --output (Join-Path $env:TEMP ('tekora-w21-checks-' + [guid]::NewGuid().ToString('N'))) --record
+```
+
+Acepta `--executable <chrome.exe>` y `--axe <axe.min.js>` opcional; la grabación necesita el FFmpeg de Playwright. No añadir paquetes al proyecto para ejecutar estas herramientas. El script exige la cabecera del router estático. Para consultas: `php tools/tekora-w2-benchmark.php`, exclusivamente en memoria. No interpretar tres tiempos locales o throttling de CPU como rendimiento de producción.
+
+Para W2.1.1, revisar primero el [sidebar antes/después y evidencia](W211-SIDEBAR.md). En el menú comprobar:
+
+- Scrollbar blanco ausente, «Notificaciones» sin cortes y badges **29 / 5** alineados. Verificar también **125 / 125**, cero y estado no disponible.
+- Grupos Explorar, Mi cuenta, Cliente, Prestador, Administración cuando esté autorizada, Preferencias y legado, Salir; ningún encabezado vacío ni enlace duplicado.
+- Rueda/trackpad/touch: inicio, mitad y final. Los fades deben aparecer solo donde quede contenido, sin tapar el foco. Al final debe verse Cerrar sesión y la aclaración de cuenta completa.
+- Tab desde la región desplazable hasta el último botón; Shift+Tab, Enter/Space para MindBloom, Escape para cerrar el menú móvil. Tab debe poder salir del menú.
+- En móvil abrir y cerrar el details nativo; al navegar a Mi cuenta debe cerrarse. En desktop la sidebar permanece sticky. Repetir sin JS.
+- Zoom nativo 200% en Windows: lectura completa, foco visible, último enlace alcanzable y cero scroll horizontal; volver al 100%. Repetir con movimiento reducido, transparencia reducida y contraste alto del sistema.
+- NVDA/Narrador: nombres de grupos, enlace actual, etiquetas de badges globales y aviso no disponible; no interpretar Axe como certificación de lector de pantalla.
+
+Si ya se dispone de Python Playwright, Chromium/Chrome y Axe como herramientas externas, sin añadir dependencias al repositorio:
+
+```powershell
+python tools/tekora-w211-browser-checks.py --base-url http://127.0.0.1:8017 --output (Join-Path $env:TEMP ('tekora-sidebar-checks-' + [guid]::NewGuid().ToString('N'))) --executable 'RUTA_A_CHROME_O_CHROMIUM' --axe 'RUTA_A_AXE_MIN_JS' --record
+python tools/tekora-w211-zoom-check.py --base-url http://127.0.0.1:8017 --output (Join-Path $env:TEMP ('tekora-sidebar-zoom-' + [guid]::NewGuid().ToString('N'))) --executable 'RUTA_A_CHROME_O_CHROMIUM'
+```
+
+La grabación requiere el FFmpeg de Playwright en su caché externa. El script de zoom utiliza la API interna de ajustes de Chromium en un perfil temporal; si no está disponible en la versión de Windows, realizar y grabar manualmente la misma secuencia 100→200→100. No sustituirla por zoom CSS ni emulación de viewport. Los tests del grupo `web-w211` deben dar **12/185**; el grupo `web-w21` incluye estas pruebas para conservar la baseline anterior en **456/6081**.
+
+Comparar con [W21.md](W21.md) y el [análisis original](W21-REFERENCIA.md). Completar contraste, lector de pantalla, navegadores y aceleración gráfica real. Conservar el PR #19 en borrador y esperar aprobación visual independiente.
+
+Cerrar con Ctrl+C y eliminar solo el export creado por estos pasos:
+
+```powershell
+Remove-Item Env:TEKORA_W1_PREVIEW_DIR
+Remove-Item -Recurse -LiteralPath $previewW21
+git status --short
+```
+
+No fusionar ni desplegar.

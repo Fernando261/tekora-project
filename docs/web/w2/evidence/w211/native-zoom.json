@@ -1,0 +1,61 @@
+{
+  "method": "chrome.settingsPrivate.setDefaultZoom in temporary profile; native browser zoom, no CSS zoom or viewport emulation",
+  "checks": [
+    {
+      "zoom_percent": 100,
+      "role": "provider",
+      "css_width": 1440,
+      "outer_width": 1440,
+      "dpr": 1,
+      "scroll_width": 1440,
+      "last_control_clear": true
+    },
+    {
+      "zoom_percent": 100,
+      "role": "client",
+      "css_width": 1440,
+      "outer_width": 1440,
+      "dpr": 1,
+      "scroll_width": 1440,
+      "last_control_clear": true
+    },
+    {
+      "zoom_percent": 200,
+      "role": "provider",
+      "css_width": 720,
+      "outer_width": 1440,
+      "dpr": 2,
+      "scroll_width": 720,
+      "last_control_clear": true
+    },
+    {
+      "zoom_percent": 200,
+      "role": "client",
+      "css_width": 720,
+      "outer_width": 1440,
+      "dpr": 2,
+      "scroll_width": 720,
+      "last_control_clear": true
+    },
+    {
+      "zoom_percent": 100,
+      "role": "provider",
+      "css_width": 1440,
+      "outer_width": 1440,
+      "dpr": 1,
+      "scroll_width": 1440,
+      "last_control_clear": true
+    },
+    {
+      "zoom_percent": 100,
+      "role": "client",
+      "css_width": 1440,
+      "outer_width": 1440,
+      "dpr": 1,
+      "scroll_width": 1440,
+      "last_control_clear": true
+    }
+  ],
+  "page_errors": [],
+  "failed_resources": []
+}
