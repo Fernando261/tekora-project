@@ -1,79 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva contraseña - MindBloom</title>
-    <link rel="stylesheet" href="/css/registro.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    @vite('resources/css/tekora/ambient.css')
-</head>
-<body class="tekora-ambient-page tekora-interior">
-<x-tekora-ambient />
-
-<header>
-    <h2>MindBloom</h2>
-    <nav>
-        <ul>
-            <li><a href="/login">Iniciar sesión</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <div class="container">
-        <div class="heading">Nueva contraseña</div>
-
-        @if ($errors->any())
-            <div class="errores">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('password.update') }}" class="form">
-            @csrf
-
-            <input type="hidden" name="token" value="{{ $token }}">
-
-            <input class="input" type="email" name="email"
-                   placeholder="Correo electrónico" required>
-
-            <input class="input" type="password" name="password"
-                   placeholder="Nueva contraseña" required>
-
-            <input class="input" type="password" name="password_confirmation"
-                   placeholder="Confirmar contraseña" required>
-
-            <input class="register-button" type="submit"
-                   value="Restablecer contraseña">
-        </form>
-
-        <div class="agreement">
-            <a href="/login">Volver al login</a>
-        </div>
-    </div>
-</main>
-
-<footer class="footer-links">
-    <div>
-        <strong>COMPANY</strong>
-        <p>How it Works</p>
-        <p>Pricing</p>
-    </div>
-    <div>
-        <strong>RESOURCES</strong>
-        <p>Blog Post Name List</p>
-    </div>
-    <div>
-        <strong>ABOUT</strong>
-        <p>Terms & Conditions</p>
-        <p>Privacy Policy</p>
-    </div>
-</footer>
-
-</body>
-</html>
+<x-access-layout title="Nueva contraseña" :identity="true">
+  <x-tekora-auth-card>
+    <p class="account-eyebrow">Seguridad de tu cuenta</p><h1>Nueva contraseña</h1><p>Elige tu nueva contraseña y confírmala para recuperar el acceso.</p>
+    <form class="account-form" method="POST" action="{{ route('password.update') }}">
+      @csrf
+      <input type="hidden" name="token" value="{{ $token }}">
+      <label for="reset-email">Correo electrónico</label><input id="reset-email" type="email" name="email" value="{{ is_string(old('email')) ? old('email') : '' }}" required autocomplete="email" @error('email') aria-invalid="true" @enderror>
+      <label for="reset-password">Nueva contraseña</label><input id="reset-password" type="password" name="password" required autocomplete="new-password" @error('password') aria-invalid="true" aria-describedby="reset-password-error" @enderror>
+      <label for="reset-confirmation">Confirmar contraseña</label><input id="reset-confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
+      @error('password')<p id="reset-password-error" class="tk-identity-field-error" role="alert">{{ $message }}</p>@enderror
+      <button class="account-button" type="submit">Restablecer contraseña</button>
+    </form><p class="access-footer"><a href="{{ route('login') }}">Volver al login</a></p>
+  </x-tekora-auth-card>
+</x-access-layout>

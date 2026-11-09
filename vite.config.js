@@ -18,6 +18,8 @@ export default defineConfig({
                 'resources/js/tekora/marketplace.js',
                 'resources/css/tekora/operations.css',
                 'resources/js/tekora/operations.js',
+                'resources/css/tekora/identity.css',
+                'resources/js/tekora/identity.js',
             ],
             refresh: true,
         }),

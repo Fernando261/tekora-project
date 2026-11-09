@@ -1,0 +1,131 @@
+{
+  "method": "Actual PHP 8.2.28 cli-server using W5 router in a read-only workspace container; stopped in finally",
+  "checks": [
+    {
+      "path": "/cuenta",
+      "method": "GET",
+      "status": 200,
+      "expected": 200,
+      "body_bytes": 15038
+    },
+    {
+      "path": "/cuenta",
+      "method": "HEAD",
+      "status": 200,
+      "expected": 200,
+      "body_bytes": 0
+    },
+    {
+      "path": "/preview/w5/reset",
+      "method": "GET",
+      "status": 200,
+      "expected": 200,
+      "body_bytes": 6556
+    },
+    {
+      "path": "/storage/avatars/w5-fixture.png",
+      "method": "GET",
+      "status": 200,
+      "expected": 200,
+      "body_bytes": 559
+    },
+    {
+      "path": "/storage/avatars/w5-fixture.png",
+      "method": "HEAD",
+      "status": 200,
+      "expected": 200,
+      "body_bytes": 0
+    },
+    {
+      "path": "/storage/avatars/real.png",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "body_bytes": 103
+    },
+    {
+      "path": "/.env",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "body_bytes": 103
+    },
+    {
+      "path": "/api/v1/services",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "body_bytes": 103
+    },
+    {
+      "path": "/preview/w5/account-client?q=unknown",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "body_bytes": 103
+    },
+    {
+      "path": "/preview/w5/client-error",
+      "method": "GET",
+      "status": 503,
+      "expected": 503,
+      "body_bytes": 1462
+    },
+    {
+      "path": "/preview/w5/provider-error",
+      "method": "GET",
+      "status": 503,
+      "expected": 503,
+      "body_bytes": 1439
+    },
+    {
+      "path": "/preview/w5/session-expired",
+      "method": "GET",
+      "status": 419,
+      "expected": 419,
+      "body_bytes": 1443
+    },
+    {
+      "path": "/favicon.ico",
+      "method": "GET",
+      "status": 204,
+      "expected": 204,
+      "body_bytes": 0
+    },
+    {
+      "path": "/build/assets/identity-CXARY9Ex.js",
+      "method": "GET",
+      "status": 200,
+      "expected": 200,
+      "body_bytes": 1746
+    },
+    {
+      "path": "/perfil/foto",
+      "method": "POST",
+      "status": 405,
+      "expected": 405,
+      "body_bytes": 53
+    },
+    {
+      "path": "/perfil/foto",
+      "method": "PUT",
+      "status": 405,
+      "expected": 405,
+      "body_bytes": 53
+    },
+    {
+      "path": "/perfil/foto",
+      "method": "PATCH",
+      "status": 405,
+      "expected": 405,
+      "body_bytes": 53
+    },
+    {
+      "path": "/perfil/foto",
+      "method": "DELETE",
+      "status": 405,
+      "expected": 405,
+      "body_bytes": 53
+    }
+  ]
+}

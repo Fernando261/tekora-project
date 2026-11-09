@@ -1,0 +1,47 @@
+[
+  {
+    "stage": "Fixtures photo tests",
+    "finding": "GD not installed in PHP 8.2.28 test container",
+    "resolution": "Valid small synthetic PNG/JPEG/WebP byte fixtures, fake uploaded files and public disk; no extension/dependency changes"
+  },
+  {
+    "stage": "Historical profile regression",
+    "finding": "Existing W1 test requires no legacy ambient/interior markers on /perfil",
+    "resolution": "Optional ambient property defaults true; personal profile/editor use own W5 background; old test unchanged"
+  },
+  {
+    "stage": "W5 early visual matrix",
+    "finding": "Late font swap shifted recovery content",
+    "resolution": "W5-only local font aliases with optional display; final W5 matrix CLS 0"
+  },
+  {
+    "stage": "Native zoom instrumentation",
+    "finding": "Read-only roles catalog deliberately has no actionable control in main",
+    "resolution": "Focus check runs when an existing main control exists; explicit roles-only exception, layout/zoom assertions remain"
+  },
+  {
+    "stage": "Dashboard stress regression",
+    "finding": "Initial concurrent browser/PHP load collected too few capsule frames",
+    "resolution": "Approved dashboard tool unchanged; isolated rerun passed full matrix and capsule checks"
+  },
+  {
+    "stage": "Preview resource isolation",
+    "finding": "Idle temporary PHP Docker router plus PHP workload exhausted ephemeral disk; subsequent sidebar run could not start",
+    "resolution": "Stopped only task-owned router; sequential PHP containers, final sidebar and operations reruns passed"
+  },
+  {
+    "stage": "Browser launch sandbox",
+    "finding": "Chromium launch rejected local socket option inside restricted process",
+    "resolution": "Used approved external execution permission for browser runtime; no product change"
+  },
+  {
+    "stage": "Performance sampling",
+    "finding": "Fixed 100ms pause could read before CPU4 second rAF callback",
+    "resolution": "Wait for the actual recorded callback after each native click; exact five-record assertion retained and metrics rerun"
+  },
+  {
+    "stage": "Native zoom screenshot review",
+    "finding": "Playwright screenshot clip used CSS dimensions at native 200% and cropped the physical surface; layout/zoom checks were correct",
+    "resolution": "Raw unclipped CDP Page.captureScreenshot now captures the physical 1440px surface; visible focused-control bounds additionally asserted; all 21 native checks repeated successfully and 13 PNG/fourth video replaced"
+  }
+]

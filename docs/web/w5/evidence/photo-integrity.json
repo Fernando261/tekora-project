@@ -1,0 +1,11 @@
+{
+  "scenario": "Existing controller with a valid synthetic PNG and public fake disk returning false on put; no real storage touched",
+  "status": 302,
+  "success_reported": true,
+  "old_fake_photo_exists": false,
+  "new_fake_file_exists": false,
+  "db_reference_changed": true,
+  "controller_unchanged_from_approved_base": true,
+  "controller_hash_verification": "Verified on host against git blob; diagnostic PHP container has no git.",
+  "controller_sha256": "d5ab0e49f8047f3b5d599cef22e5eb1d1bbbb355da64ebbace6f8598d5beb084"
+}

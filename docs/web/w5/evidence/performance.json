@@ -1,0 +1,802 @@
+{
+  "method": "Two fresh contexts per page/width/version, 1200ms observation after network idle; seven families, 375/1440px. Seven extra W5 CPU4 samples. Loopback Linux/software; not field INP.",
+  "runs": [
+    {
+      "lcp_ms": 324,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "account-client",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 420,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "account-client",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 416,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "activation-pending",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 284,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "activation-pending",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 328,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 75965,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "profile-photo",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 296,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 75965,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "profile-photo",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 412,
+      "cls": 0,
+      "requests": 6,
+      "encoded_resource_bytes": 21918,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "edit-name",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 312,
+      "cls": 0,
+      "requests": 6,
+      "encoded_resource_bytes": 21918,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "edit-name",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 444,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "roles",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 304,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "roles",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 272,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "forgot",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 188,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "forgot",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 288,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "reset",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 184,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 375,
+      "page": "reset",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 360,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "account-client",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 348,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "account-client",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 504,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "activation-pending",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 480,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "activation-pending",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 416,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 75965,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "profile-photo",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 520,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 75965,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "profile-photo",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 256,
+      "cls": 0,
+      "requests": 6,
+      "encoded_resource_bytes": 21918,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "edit-name",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 292,
+      "cls": 0,
+      "requests": 6,
+      "encoded_resource_bytes": 21918,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "edit-name",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 356,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "roles",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 360,
+      "cls": 0,
+      "requests": 8,
+      "encoded_resource_bytes": 98453,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "roles",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 352,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "forgot",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 360,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "forgot",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 264,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "reset",
+      "run": 1,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 248,
+      "cls": 0,
+      "requests": 5,
+      "encoded_resource_bytes": 4817,
+      "no_horizontal": true,
+      "version": "base-w4",
+      "width": 1440,
+      "page": "reset",
+      "run": 2,
+      "errors": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      ]
+    },
+    {
+      "lcp_ms": 288,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "account-client",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 296,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "account-client",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 296,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "activation-pending",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 540,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "activation-pending",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 196,
+      "cls": 0,
+      "requests": 11,
+      "encoded_resource_bytes": 115775,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "profile-photo",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 500,
+      "cls": 0,
+      "requests": 11,
+      "encoded_resource_bytes": 115775,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "profile-photo",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 212,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "edit-name",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 312,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "edit-name",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 388,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "roles",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 448,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "roles",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 424,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "forgot",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 392,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "forgot",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 572,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "reset",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 400,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 375,
+      "page": "reset",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 520,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "account-client",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 324,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "account-client",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 476,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "activation-pending",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 476,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "activation-pending",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 552,
+      "cls": 0,
+      "requests": 11,
+      "encoded_resource_bytes": 115775,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "profile-photo",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 516,
+      "cls": 0,
+      "requests": 11,
+      "encoded_resource_bytes": 115775,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "profile-photo",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 392,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "edit-name",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 340,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "edit-name",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 216,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "roles",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 300,
+      "cls": 0,
+      "requests": 10,
+      "encoded_resource_bytes": 115216,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "roles",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 432,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "forgot",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 452,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "forgot",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 464,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "reset",
+      "run": 1,
+      "errors": []
+    },
+    {
+      "lcp_ms": 472,
+      "cls": 0,
+      "requests": 7,
+      "encoded_resource_bytes": 101553,
+      "no_horizontal": true,
+      "version": "w5",
+      "width": 1440,
+      "page": "reset",
+      "run": 2,
+      "errors": []
+    },
+    {
+      "lcp_ms": 600,
+      "cls": 0,
+      "version": "w5",
+      "page": "account-client",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 588,
+      "cls": 0,
+      "version": "w5",
+      "page": "activation-pending",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 844,
+      "cls": 0,
+      "version": "w5",
+      "page": "profile-photo",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 500,
+      "cls": 0,
+      "version": "w5",
+      "page": "edit-name",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 592,
+      "cls": 0,
+      "version": "w5",
+      "page": "roles",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 752,
+      "cls": 0,
+      "version": "w5",
+      "page": "forgot",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 908,
+      "cls": 0,
+      "version": "w5",
+      "page": "reset",
+      "width": 1440,
+      "cpu_rate": 4
+    }
+  ],
+  "interaction": [
+    {
+      "cpu_rate": 1,
+      "method": "Actual native history-summary clicks: event timestamp to second rAF; presentation proxy, not INP. Scroll rAF cadence is diagnostic, not GPU FPS.",
+      "click_to_second_raf_ms": [
+        82.80000000074506,
+        72.19999999925494,
+        57.80000000074506,
+        68.80000000074506,
+        69.69999999925494
+      ],
+      "scroll": {
+        "frames": 20,
+        "mean_frame_ms": 37.77499999996276,
+        "max_frame_ms": 133.4000000000001,
+        "no_horizontal": true
+      }
+    },
+    {
+      "cpu_rate": 4,
+      "method": "Actual native history-summary clicks: event timestamp to second rAF; presentation proxy, not INP. Scroll rAF cadence is diagnostic, not GPU FPS.",
+      "click_to_second_raf_ms": [
+        82.5,
+        168.19999999925494,
+        151,
+        66.69999999925494,
+        172.29999999701977
+      ],
+      "scroll": {
+        "frames": 10,
+        "mean_frame_ms": 70.6000000002235,
+        "max_frame_ms": 99.90000000000009,
+        "no_horizontal": true
+      }
+    }
+  ],
+  "browser": "154.0.8037.57"
+}

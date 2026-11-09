@@ -1,0 +1,23 @@
+{
+    "client-dashboard": {
+        "path": "/preview/w5/linked-client-dashboard",
+        "original_uri": "/cuenta/cliente",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "provider-form": {
+        "path": "/preview/w5/linked-provider-form",
+        "original_uri": "/cuenta/prestador",
+        "role": "provider",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "provider-dashboard": {
+        "path": "/preview/w5/linked-provider-dashboard",
+        "original_uri": "/cuenta/prestador/dashboard",
+        "role": "provider",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    }
+}

@@ -1,0 +1,2435 @@
+{
+  "matrix": [
+    {
+      "width": 320,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "account-client",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "account-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "account-dual",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "account-admin",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "account-none",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "activation-pending",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "profile-no-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "edit-name",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "name-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "profile-photo",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "photo-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "activation-active",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "roles",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "forgot",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "forgot-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "forgot-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reset",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reset-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "client-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "provider-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "session-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    }
+  ],
+  "axe": [
+    {
+      "width": 375,
+      "page": "account-client",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 12
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "account-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "account-dual",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "account-admin",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "account-none",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 12
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "activation-pending",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "profile-no-photo",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 30
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "edit-name",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "name-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "profile-photo",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 28
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "photo-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 29
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "activation-active",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "roles",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "forgot",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "forgot-sent",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "forgot-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reset",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reset-invalid",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "client-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "provider-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "session-expired",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "account-client",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 36
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "account-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 37
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "account-dual",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 41
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "account-admin",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 35
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "account-none",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 30
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "activation-pending",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 35
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "profile-no-photo",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 54
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "edit-name",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 38
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "name-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 39
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "profile-photo",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 52
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "photo-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 53
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "activation-active",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 35
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "roles",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 28
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "forgot",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 21
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "forgot-sent",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 21
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "forgot-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 22
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reset",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 25
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reset-invalid",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 25
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "client-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "provider-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "session-expired",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "account-client_3d": {
+      "perspective": "1000px",
+      "preserve": "preserve-3d",
+      "z": [
+        -55,
+        25,
+        85
+      ]
+    },
+    "profile-no-photo_3d": {
+      "perspective": "1000px",
+      "preserve": "preserve-3d",
+      "z": [
+        -55,
+        35,
+        90
+      ]
+    },
+    "forgot_3d": {
+      "perspective": "1000px",
+      "preserve": "preserve-3d",
+      "z": [
+        -55,
+        35,
+        90
+      ]
+    },
+    "targets_fixed": true,
+    "native_center_profile_edit_navigation": true,
+    "keyboard_focus_order": true,
+    "file_selection_never_auto_uploads": true,
+    "no_js_native_forms": true,
+    "reduced_preferences": true,
+    "touch_static": true,
+    "failed_module_keeps_forms": true
+  },
+  "page_errors": [],
+  "console_errors": [],
+  "expected_http_errors": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/client-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/provider-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 419 ()",
+      "location": {
+        "url": "http://127.0.0.1:8073/preview/w5/session-expired",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "failed_resources": [],
+  "environment": {
+    "browser": "154.0.8037.57",
+    "headless": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)"
+  }
+}

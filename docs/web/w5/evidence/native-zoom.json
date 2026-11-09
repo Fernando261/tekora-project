@@ -1,0 +1,196 @@
+{
+  "method": "Chromium settingsPrivate.setDefaultZoom in a deleted temporary profile; no CSS zoom or viewport emulation. Native screenshots use unclipped CDP surface capture in physical pixels.",
+  "checks": [
+    {
+      "zoom_percent": 100,
+      "page": "account-client",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "activation-pending",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "profile-photo",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "edit-name",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "roles",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "forgot",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "reset",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "account-client",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "activation-pending",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "profile-photo",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "edit-name",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "roles",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "forgot",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "reset",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "account-client",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "activation-pending",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "profile-photo",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "edit-name",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "roles",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "forgot",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "reset",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    }
+  ],
+  "page_errors": [],
+  "failed_resources": []
+}

@@ -1,0 +1,17 @@
+{
+  "base": "521a081b039d8f8ee4d25a9e8936eb6ca4c0de05",
+  "protected_files_checked": 404,
+  "protected_changed": [],
+  "env_key_unchanged": true,
+  "persistent_sqlite_unchanged": true,
+  "public_hot_restored_unchanged": true,
+  "app_config_bootstrap_routes_old_tests_unchanged": true,
+  "lockfiles_and_dependency_manifests_unchanged": true,
+  "old_tools_and_assets_sources_unchanged": true,
+  "persistent_database_commands_run": false,
+  "real_media_read_copied_or_uploaded": false,
+  "migration_files": 37,
+  "api_operations": 21,
+  "api_json_identical_to_approved_w4": true,
+  "deleted_tracked_files": []
+}

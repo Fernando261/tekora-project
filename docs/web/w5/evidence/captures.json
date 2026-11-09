@@ -1,0 +1,222 @@
+[
+  {
+    "version": "before",
+    "page": "account-client",
+    "width": 375,
+    "file": "before-account-client-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "activation-pending",
+    "width": 375,
+    "file": "before-activation-pending-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "profile-photo",
+    "width": 375,
+    "file": "before-profile-photo-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "edit-name",
+    "width": 375,
+    "file": "before-edit-name-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "roles",
+    "width": 375,
+    "file": "before-roles-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "forgot",
+    "width": 375,
+    "file": "before-forgot-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "reset",
+    "width": 375,
+    "file": "before-reset-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "account-client",
+    "width": 1440,
+    "file": "before-account-client-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "activation-pending",
+    "width": 1440,
+    "file": "before-activation-pending-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "profile-photo",
+    "width": 1440,
+    "file": "before-profile-photo-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "edit-name",
+    "width": 1440,
+    "file": "before-edit-name-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "roles",
+    "width": 1440,
+    "file": "before-roles-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "forgot",
+    "width": 1440,
+    "file": "before-forgot-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "before",
+    "page": "reset",
+    "width": 1440,
+    "file": "before-reset-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "account-client",
+    "width": 375,
+    "file": "after-account-client-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "activation-pending",
+    "width": 375,
+    "file": "after-activation-pending-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "profile-photo",
+    "width": 375,
+    "file": "after-profile-photo-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "edit-name",
+    "width": 375,
+    "file": "after-edit-name-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "roles",
+    "width": 375,
+    "file": "after-roles-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "forgot",
+    "width": 375,
+    "file": "after-forgot-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "reset",
+    "width": 375,
+    "file": "after-reset-375.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "account-client",
+    "width": 1440,
+    "file": "after-account-client-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "activation-pending",
+    "width": 1440,
+    "file": "after-activation-pending-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "profile-photo",
+    "width": 1440,
+    "file": "after-profile-photo-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "edit-name",
+    "width": 1440,
+    "file": "after-edit-name-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "roles",
+    "width": 1440,
+    "file": "after-roles-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "forgot",
+    "width": 1440,
+    "file": "after-forgot-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "version": "after",
+    "page": "reset",
+    "width": 1440,
+    "file": "after-reset-1440.png",
+    "source": "Actual Chromium screenshot, unchanged synthetic fixtures"
+  },
+  {
+    "page": "account-client",
+    "selector": "[data-identity-scene]",
+    "file": "widget-account-client-scene.png",
+    "source": "Actual Chromium element screenshot"
+  },
+  {
+    "page": "profile-photo",
+    "selector": "[data-identity-scene]",
+    "file": "widget-profile-photo-scene.png",
+    "source": "Actual Chromium element screenshot"
+  },
+  {
+    "page": "forgot",
+    "selector": "[data-identity-scene]",
+    "file": "widget-forgot-scene.png",
+    "source": "Actual Chromium element screenshot"
+  },
+  {
+    "page": "profile-photo",
+    "selector": ".tk-identity-profile-grid",
+    "file": "widget-profile-photo-data.png",
+    "source": "Actual Chromium element screenshot"
+  }
+]

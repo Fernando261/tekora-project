@@ -1,0 +1,982 @@
+{
+  "matrix": [
+    {
+      "width": 320,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "catalog",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "service",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "providers",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "search",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "no-reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "providers-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "long-text",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    }
+  ],
+  "axe": [
+    {
+      "width": 375,
+      "page": "catalog",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 100
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "service",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 77
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "providers",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 92
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "profile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 160
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 20
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "invalid",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 10
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "catalog",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 98
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "service",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 76
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "providers",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 94
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "profile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 157
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 21
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "invalid",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 8
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "real_3d_geometry_and_bounded_pointer": {
+      "geometry": {
+        "perspective": "1000px",
+        "preserve": "preserve-3d",
+        "z": [
+          -50,
+          5,
+          65,
+          100
+        ]
+      },
+      "pointer": {
+        "x": 1.2,
+        "y": 2.1
+      }
+    },
+    "card_background_3d_targets_fixed": true,
+    "native_search_filter_clear_and_independent_pagination": true,
+    "public_journey_provider_and_guest_request_login": true,
+    "cpu_4_native_controls": true,
+    "no_js_four_pages_and_native_search": true,
+    "touch_static_scene": true,
+    "reduced_motion_transparency": true,
+    "failed_js_module_static_fallback": true
+  },
+  "expected_http_errors": [
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+    "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "failed_resources": [],
+  "environment": {
+    "browser": "154.0.8037.57",
+    "headless": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)"
+  }
+}

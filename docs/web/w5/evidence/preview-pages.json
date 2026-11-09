@@ -1,0 +1,146 @@
+{
+    "account-client": {
+        "path": "/preview/w5/account-client",
+        "original_uri": "/cuenta",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "account-provider": {
+        "path": "/preview/w5/account-provider",
+        "original_uri": "/cuenta",
+        "role": "provider",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "account-dual": {
+        "path": "/preview/w5/account-dual",
+        "original_uri": "/cuenta",
+        "role": "dual",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "account-admin": {
+        "path": "/preview/w5/account-admin",
+        "original_uri": "/cuenta",
+        "role": "admin",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "account-none": {
+        "path": "/preview/w5/account-none",
+        "original_uri": "/cuenta",
+        "role": "none",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "activation-pending": {
+        "path": "/preview/w5/activation-pending",
+        "original_uri": "/cuenta/activar-prestador",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "profile-no-photo": {
+        "path": "/preview/w5/profile-no-photo",
+        "original_uri": "/perfil",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "edit-name": {
+        "path": "/preview/w5/edit-name",
+        "original_uri": "/perfil/editar-nombre",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "name-validation": {
+        "path": "/preview/w5/name-validation",
+        "original_uri": "/perfil/editar-nombre",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "profile-photo": {
+        "path": "/preview/w5/profile-photo",
+        "original_uri": "/perfil",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "photo-validation": {
+        "path": "/preview/w5/photo-validation",
+        "original_uri": "/perfil",
+        "role": "client",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "activation-active": {
+        "path": "/preview/w5/activation-active",
+        "original_uri": "/cuenta/activar-prestador",
+        "role": "provider",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "roles": {
+        "path": "/preview/w5/roles",
+        "original_uri": "/administracion/roles",
+        "role": "admin",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "forgot": {
+        "path": "/preview/w5/forgot",
+        "original_uri": "/forgot-password",
+        "role": "guest",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "forgot-sent": {
+        "path": "/preview/w5/forgot-sent",
+        "original_uri": "/forgot-password",
+        "role": "guest · synthetic status only",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "forgot-validation": {
+        "path": "/preview/w5/forgot-validation",
+        "original_uri": "/forgot-password",
+        "role": "guest",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reset": {
+        "path": "/preview/w5/reset",
+        "original_uri": "/reset-password/W5-SYNTHETIC-NONFUNCTIONAL-TOKEN",
+        "role": "guest",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reset-invalid": {
+        "path": "/preview/w5/reset-invalid",
+        "original_uri": "/reset-password/W5-SYNTHETIC-NONFUNCTIONAL-TOKEN",
+        "role": "guest",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "client-error": {
+        "path": "/preview/w5/client-error",
+        "role": "fallback",
+        "status": 503,
+        "source": "Existing fallback Blade with synthetic message; no failed operation simulated"
+    },
+    "provider-error": {
+        "path": "/preview/w5/provider-error",
+        "role": "fallback",
+        "status": 503,
+        "source": "Existing fallback Blade with synthetic message; no failed operation simulated"
+    },
+    "session-expired": {
+        "path": "/preview/w5/session-expired",
+        "role": "fallback",
+        "status": 419,
+        "source": "Existing fallback Blade with synthetic message; no failed operation simulated"
+    }
+}
