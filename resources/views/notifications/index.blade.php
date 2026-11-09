@@ -1,10 +1,10 @@
-<x-account-layout title="Notificaciones">
+<x-account-layout :operations="true" title="Notificaciones">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/catalog.css') }}"><link rel="stylesheet" href="{{ asset('css/notifications.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Tu cuenta</span><h1>Notificaciones</h1><p>Novedades de tus solicitudes, reservas y reseñas. Abrir esta página no marca los avisos como leídos.</p></header>
+  <x-ops-heading variant="connect"><span class="account-eyebrow">Tu cuenta</span><h1>Notificaciones</h1><p>Novedades de tus solicitudes, reservas y reseñas. Abrir esta página no marca los avisos como leídos.</p></x-ops-heading>
   <p class="account-help">{{ $notifications->total() }} avisos. Fechas en horario de Ciudad de México.</p>
   <div class="notification-list">
     @forelse($notifications as $notification)
-      <article class="account-card notification-card {{ $notification->read_at ? 'is-read' : 'is-unread' }}">
+      <article data-ops-card class="account-card notification-card {{ $notification->read_at ? 'is-read' : 'is-unread' }}">
         <div class="notification-meta"><span class="notification-state">{{ $notification->read_at ? 'Leída' : 'No leída' }}</span><x-inquiry-time :at="$notification->created_at" /></div>
         <p class="account-eyebrow">{{ $notification->category }} · {{ $notification->event->label() }}</p>
         <h2>{{ $notification->event->title() }}</h2>

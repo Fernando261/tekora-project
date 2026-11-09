@@ -1,0 +1,95 @@
+{
+  "base-w3": {
+    "samples": 44,
+    "median_lcp_ms": 306.0,
+    "max_lcp_ms": 540,
+    "max_cls": 0.0018298260271990738
+  },
+  "w4": {
+    "samples": 44,
+    "median_lcp_ms": 434.0,
+    "max_lcp_ms": 696,
+    "max_cls": 0
+  },
+  "cpu4": [
+    {
+      "page": "request-create",
+      "lcp_ms": 596,
+      "cls": 0
+    },
+    {
+      "page": "request-detail",
+      "lcp_ms": 632,
+      "cls": 0
+    },
+    {
+      "page": "conversations",
+      "lcp_ms": 916,
+      "cls": 0
+    },
+    {
+      "page": "reservation-propose",
+      "lcp_ms": 1016,
+      "cls": 0
+    },
+    {
+      "page": "reservation-provider",
+      "lcp_ms": 756,
+      "cls": 0
+    },
+    {
+      "page": "review-create",
+      "lcp_ms": 652,
+      "cls": 0
+    },
+    {
+      "page": "review-withdrawn",
+      "lcp_ms": 628,
+      "cls": 0
+    },
+    {
+      "page": "availability",
+      "lcp_ms": 548,
+      "cls": 0
+    },
+    {
+      "page": "services",
+      "lcp_ms": 864,
+      "cls": 0
+    },
+    {
+      "page": "notifications",
+      "lcp_ms": 904,
+      "cls": 0
+    },
+    {
+      "page": "profile",
+      "lcp_ms": 840,
+      "cls": 0
+    }
+  ],
+  "interaction": [
+    {
+      "cpu_rate": 1,
+      "median_click_to_second_raf_ms": 25.5,
+      "max_click_to_second_raf_ms": 29.199999999720603,
+      "scroll": {
+        "frames": 40,
+        "mean_frame_ms": 16.31250000000698,
+        "max_frame_ms": 16.799999999999955,
+        "no_horizontal": true
+      }
+    },
+    {
+      "cpu_rate": 4,
+      "median_click_to_second_raf_ms": 26.699999999720603,
+      "max_click_to_second_raf_ms": 42.5,
+      "scroll": {
+        "frames": 35,
+        "mean_frame_ms": 18.81142857143389,
+        "max_frame_ms": 50,
+        "no_horizontal": true
+      }
+    }
+  ]
+}

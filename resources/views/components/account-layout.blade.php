@@ -1,4 +1,4 @@
-@props(['title', 'dashboard' => false])
+@props(['title', 'dashboard' => false, 'operations' => false])
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,8 +12,12 @@
   @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/account-shell.css', 'resources/js/tekora/account-shell.js'])
   @if($dashboard) @vite(['resources/css/tekora/dashboards.css', 'resources/js/tekora/dashboards.js']) @endif
   @stack('styles')
+  @if($operations)
+    @unless(app()->isLocal())<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">@endunless
+    @vite(['resources/css/tekora/operations.css', 'resources/js/tekora/operations.js'])
+  @endif
 </head>
-<body class="tekora-ambient-page tekora-interior tk-account-shell {{ $dashboard ? 'tk-dashboard-page' : 'tk-account-page' }}">
+<body class="tekora-ambient-page tekora-interior tk-account-shell {{ $dashboard ? 'tk-dashboard-page' : 'tk-account-page' }} {{ $operations ? 'tk-ops' : '' }}">
   <x-tekora-ambient />
   @if($dashboard)<div class="tk-dashboard-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>@endif
   <a class="tk-shell-skip" href="#main-content">Saltar al contenido</a>

@@ -1,0 +1,15 @@
+{
+  "matrix_and_initial_flow": {
+    "exit_code": 1,
+    "completed_matrix": 400,
+    "completed_axe": 100,
+    "app_errors": 0,
+    "reason": "Python Playwright emulate_media has no reduced_transparency keyword. Use CDP Emulation.setEmulatedMedia.",
+    "resolution": "All functional checks and recordings repeated with --resume-flows, exit 0; matrix preserved."
+  },
+  "initial_dashboard_server": {
+    "exit_code": 1,
+    "reason": "Temporary Python server expected optional redirects/status metadata absent from historical W2 export; ERR_EMPTY_RESPONSE.",
+    "resolution": "Temporary server accepts absent metadata; original app, W2 exporter and W21/W211 checks unchanged; both rerun successfully."
+  }
+}

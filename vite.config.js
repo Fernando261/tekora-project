@@ -16,6 +16,8 @@ export default defineConfig({
                 'resources/js/tekora/dashboards.js',
                 'resources/css/tekora/marketplace.css',
                 'resources/js/tekora/marketplace.js',
+                'resources/css/tekora/operations.css',
+                'resources/js/tekora/operations.js',
             ],
             refresh: true,
         }),

@@ -1,0 +1,13 @@
+{
+  "native_cursor_roundtrip": true,
+  "older_url": "http://127.0.0.1:8063/cuenta/solicitudes/3?messages_cursor=eyJjcmVhdGVkX2F0IjoiMjAzMC0wMS0yMCAxMjowMDowMCIsImlkIjo2LCJfcG9pbnRzVG9OZXh0SXRlbXMiOnRydWV9#conversacion",
+  "newer_url": "http://127.0.0.1:8063/cuenta/solicitudes/3?messages_cursor=eyJjcmVhdGVkX2F0IjoiMjAzMC0wMS0yMCAxMjowMDowMCIsImlkIjo1LCJfcG9pbnRzVG9OZXh0SXRlbXMiOmZhbHNlfQ#conversacion",
+  "rendered_messages_after_return": 20,
+  "reduced_preferences": {
+    "motion": true,
+    "transparency": true,
+    "background": "rgb(9, 23, 34)",
+    "image": "none",
+    "animated_planes": false
+  }
+}

@@ -1,6 +1,6 @@
-<x-account-layout :title="'Reserva #'.$reservation->id">
+<x-account-layout :operations="true" :title="'Reserva #'.$reservation->id">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/reservations.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Seguimiento privado</span><h1>Reserva #{{ $reservation->id }}</h1><p>{{ $reservation->inquiry->service_title }}</p></header>
+  <x-ops-heading variant="time"><span class="account-eyebrow">Seguimiento privado</span><h1>Reserva #{{ $reservation->id }}</h1><p>{{ $reservation->inquiry->service_title }}</p></x-ops-heading>
   <div class="account-grid">
     <section class="account-card"><x-reservation-status :reservation="$reservation" />
       <h2>Horario de la reserva</h2><x-reservation-schedule :reservation="$reservation" />
@@ -22,7 +22,7 @@
       <p><a href="{{ route('inquiries.show', $reservation->service_inquiry_id) }}">Consultar solicitud y conversación</a></p>
     </section>
     <section class="account-card"><h2>Historial de la reserva</h2><p class="account-help">Fechas de decisiones expresadas en UTC. El horario del servicio aparece en su zona original.</p>
-      <ol class="reservation-history">@foreach($reservation->events->sortBy('version') as $event)<li>
+      <ol class="reservation-history tk-ops-timeline">@foreach($reservation->events->sortBy('version') as $event)<li>
         <strong>{{ \App\Enums\ReservationStatus::from($event->to_status)->label() }}</strong>
         <span>{{ $event->actor->name }} · <time>{{ $event->occurred_at_utc }} UTC</time></span>
         @if($event->reason === 'inquiry_completed')<span>Decisión conjunta al finalizar la solicitud.</span>@endif

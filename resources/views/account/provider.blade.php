@@ -1,9 +1,11 @@
-<x-account-layout title="Mi perfil profesional">
-  <header class="account-heading"><span class="account-eyebrow">Experiencia de prestador</span><h1>Mi perfil profesional</h1><p>Presenta tu experiencia como técnico o freelancer usando tu misma cuenta.</p></header>
-  <p class="account-alert">Activación sin verificación profesional. Este perfil no aparece todavía en el directorio de MindBloom ni recibe sus citas.</p>
+<x-account-layout :operations="true" title="Mi perfil profesional">
+  <x-ops-heading variant="studio"><span class="account-eyebrow">Experiencia de prestador</span><h1>Mi perfil profesional</h1><p>Presenta tu experiencia como técnico o freelancer usando tu misma cuenta.</p></x-ops-heading>
+  <p class="account-alert">Activación sin verificación profesional. Tu presentación pública depende de los servicios que publiques en Tekora. La agenda y los registros anteriores permanecen separados; no se han migrado.</p>
+  <div class="tk-ops-tools">
   <section class="account-card"><h2>Mis horarios de atención</h2><p>Publica horarios orientativos y fechas sin atención para tus servicios de Tekora.</p><a class="account-button secondary" href="{{ route('availability.edit') }}">Gestionar disponibilidad</a></section>
   <section class="account-card"><h2>Solicitudes de tus servicios</h2><p>Revisa las necesidades de tus clientes y consulta su seguimiento.</p><a class="account-button" href="{{ route('inquiries.received') }}">Solicitudes recibidas</a></section>
   <section class="account-card"><h2>Los servicios que ofreces</h2><p>Al publicar un servicio en el catálogo Tekora, tu nombre público, titular y biografía aparecen en tu ficha pública de prestador.</p><a class="account-button secondary" href="{{ route('provider-services.index') }}">Mis servicios</a> @can('create', \App\Models\Service::class)<a class="account-button" href="{{ route('provider-services.create') }}">Crear servicio</a>@endcan</section>
+  </div>
   <div class="account-grid profile-grid">
     <section class="account-card">
       <h2>{{ $profile ? 'Editar mi presentación' : 'Completar mi presentación' }}</h2>

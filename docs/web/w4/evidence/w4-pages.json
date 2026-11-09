@@ -1,0 +1,366 @@
+{
+    "request-create": {
+        "path": "/preview/w4/request-create",
+        "original_uri": "/cuenta/solicitudes/servicios/23/crear",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "request-validation": {
+        "path": "/preview/w4/request-validation",
+        "original_uri": "/cuenta/solicitudes/servicios/23/crear",
+        "role": "cliente · validación",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "requests-sent": {
+        "path": "/preview/w4/requests-sent",
+        "original_uri": "/cuenta/solicitudes",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "requests-page-2": {
+        "path": "/preview/w4/requests-page-2",
+        "original_uri": "/cuenta/solicitudes?page=2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "requests-filtered": {
+        "path": "/preview/w4/requests-filtered",
+        "original_uri": "/cuenta/solicitudes?status=pending",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "request-detail": {
+        "path": "/preview/w4/request-detail",
+        "original_uri": "/cuenta/solicitudes/3",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "conversation-older": {
+        "path": "/preview/w4/conversation-older",
+        "original_uri": "http://127.0.0.1:8063/cuenta/solicitudes/3?messages_cursor=eyJjcmVhdGVkX2F0IjoiMjAzMC0wMS0yMCAxMjowMDowMCIsImlkIjo2LCJfcG9pbnRzVG9OZXh0SXRlbXMiOnRydWV9#conversacion",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "conversations": {
+        "path": "/preview/w4/conversations",
+        "original_uri": "/cuenta/mensajes",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "conversation-readonly": {
+        "path": "/preview/w4/conversation-readonly",
+        "original_uri": "/cuenta/solicitudes/4",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservations": {
+        "path": "/preview/w4/reservations",
+        "original_uri": "/cuenta/reservas",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservation-propose": {
+        "path": "/preview/w4/reservation-propose",
+        "original_uri": "/cuenta/reservas/solicitudes/1/crear",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservation-requested": {
+        "path": "/preview/w4/reservation-requested",
+        "original_uri": "/cuenta/reservas/4",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservation-confirmed": {
+        "path": "/preview/w4/reservation-confirmed",
+        "original_uri": "/cuenta/reservas/5",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservation-expired": {
+        "path": "/preview/w4/reservation-expired",
+        "original_uri": "/cuenta/reservas/6",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservation-completed": {
+        "path": "/preview/w4/reservation-completed",
+        "original_uri": "/cuenta/reservas/1",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reviews": {
+        "path": "/preview/w4/reviews",
+        "original_uri": "/cuenta/resenas",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "review-create": {
+        "path": "/preview/w4/review-create",
+        "original_uri": "/cuenta/resenas/reservas/2/crear",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "review-published": {
+        "path": "/preview/w4/review-published",
+        "original_uri": "/cuenta/resenas/1",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "review-withdrawn": {
+        "path": "/preview/w4/review-withdrawn",
+        "original_uri": "/cuenta/resenas/2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "notifications": {
+        "path": "/preview/w4/notifications",
+        "original_uri": "/cuenta/notificaciones",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "notifications-page-2": {
+        "path": "/preview/w4/notifications-page-2",
+        "original_uri": "/cuenta/notificaciones?page=2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "notifications-unavailable": {
+        "path": "/preview/w4/notifications-unavailable",
+        "original_uri": "/cuenta/notificaciones",
+        "role": "cuenta sin permiso actual de destino",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "request-invalid": {
+        "path": "/preview/w4/request-invalid",
+        "original_uri": "/cuenta/solicitudes?status=invalid",
+        "role": "cliente",
+        "status": 422,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "notifications-error": {
+        "path": "/preview/w4/notifications-error",
+        "original_uri": "/cuenta/notificaciones?page=0",
+        "role": "cliente",
+        "status": 422,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "requests-received": {
+        "path": "/preview/w4/requests-received",
+        "original_uri": "/cuenta/solicitudes/recibidas",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "request-provider": {
+        "path": "/preview/w4/request-provider",
+        "original_uri": "/cuenta/solicitudes/3",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservation-provider": {
+        "path": "/preview/w4/reservation-provider",
+        "original_uri": "/cuenta/reservas/4",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "availability": {
+        "path": "/preview/w4/availability",
+        "original_uri": "/cuenta/disponibilidad",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "services": {
+        "path": "/preview/w4/services",
+        "original_uri": "/cuenta/servicios",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "service-create": {
+        "path": "/preview/w4/service-create",
+        "original_uri": "/cuenta/servicios/crear",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "service-edit": {
+        "path": "/preview/w4/service-edit",
+        "original_uri": "/cuenta/servicios/20/editar",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "service-inactive-category": {
+        "path": "/preview/w4/service-inactive-category",
+        "original_uri": "/cuenta/servicios/22/editar",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "profile": {
+        "path": "/preview/w4/profile",
+        "original_uri": "/cuenta/prestador",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "profile-show": {
+        "path": "/preview/w4/profile-show",
+        "original_uri": "/perfiles-profesionales/1",
+        "role": "cuenta dual · prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "dual-sent": {
+        "path": "/preview/w4/dual-sent",
+        "original_uri": "/cuenta/solicitudes",
+        "role": "cuenta dual · cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "dual-request-detail": {
+        "path": "/preview/w4/dual-request-detail",
+        "original_uri": "/cuenta/solicitudes/20",
+        "role": "cuenta dual · cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "inquiries-conflict": {
+        "path": "/preview/w4/inquiries-conflict",
+        "original_uri": "/preview/w4/inquiries-conflict",
+        "role": "fallback",
+        "status": 409,
+        "source": "Existing POST-only failure Blade rendered with synthetic message; no operation simulated"
+    },
+    "inquiries-message-error": {
+        "path": "/preview/w4/inquiries-message-error",
+        "original_uri": "/preview/w4/inquiries-message-error",
+        "role": "fallback",
+        "status": 409,
+        "source": "Existing POST-only failure Blade rendered with synthetic message; no operation simulated"
+    },
+    "inquiries-rate-limited": {
+        "path": "/preview/w4/inquiries-rate-limited",
+        "original_uri": "/preview/w4/inquiries-rate-limited",
+        "role": "fallback",
+        "status": 409,
+        "source": "Existing POST-only failure Blade rendered with synthetic message; no operation simulated"
+    },
+    "conversations-read-error": {
+        "path": "/preview/w4/conversations-read-error",
+        "original_uri": "/preview/w4/conversations-read-error",
+        "role": "fallback",
+        "status": 409,
+        "source": "Existing POST-only failure Blade rendered with synthetic message; no operation simulated"
+    },
+    "reservations-error": {
+        "path": "/preview/w4/reservations-error",
+        "original_uri": "/preview/w4/reservations-error",
+        "role": "fallback",
+        "status": 409,
+        "source": "Existing POST-only failure Blade rendered with synthetic message; no operation simulated"
+    },
+    "reviews-error": {
+        "path": "/preview/w4/reviews-error",
+        "original_uri": "/preview/w4/reviews-error",
+        "role": "fallback",
+        "status": 409,
+        "source": "Existing POST-only failure Blade rendered with synthetic message; no operation simulated"
+    },
+    "availability-error": {
+        "path": "/preview/w4/availability-error",
+        "original_uri": "/preview/w4/availability-error",
+        "role": "fallback",
+        "status": 409,
+        "source": "Existing POST-only failure Blade rendered with synthetic message; no operation simulated"
+    },
+    "requests-empty": {
+        "path": "/preview/w4/requests-empty",
+        "original_uri": "/cuenta/solicitudes",
+        "role": "cuenta dual · vacía",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "conversations-empty": {
+        "path": "/preview/w4/conversations-empty",
+        "original_uri": "/cuenta/mensajes",
+        "role": "cuenta dual · vacía",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reservations-empty": {
+        "path": "/preview/w4/reservations-empty",
+        "original_uri": "/cuenta/reservas",
+        "role": "cuenta dual · vacía",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "reviews-empty": {
+        "path": "/preview/w4/reviews-empty",
+        "original_uri": "/cuenta/resenas",
+        "role": "cuenta dual · vacía",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "notifications-empty": {
+        "path": "/preview/w4/notifications-empty",
+        "original_uri": "/cuenta/notificaciones",
+        "role": "cuenta dual · vacía",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "services-setup": {
+        "path": "/preview/w4/services-setup",
+        "original_uri": "/cuenta/servicios",
+        "role": "cuenta dual · vacía",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "profile-create": {
+        "path": "/preview/w4/profile-create",
+        "original_uri": "/cuenta/prestador",
+        "role": "cuenta dual · vacía",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "services-empty": {
+        "path": "/preview/w4/services-empty",
+        "original_uri": "/cuenta/servicios",
+        "role": "prestador sin servicios",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "availability-empty": {
+        "path": "/preview/w4/availability-empty",
+        "original_uri": "/cuenta/disponibilidad",
+        "role": "prestador sin horarios",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    }
+}

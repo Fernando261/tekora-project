@@ -1,0 +1,18 @@
+[
+    {
+        "render_environment": "testing",
+        "database": ":memory:",
+        "queries": 0,
+        "csp_meta": true,
+        "compiled_css": true,
+        "local_vite_css": false
+    },
+    {
+        "render_environment": "local",
+        "database": ":memory:",
+        "queries": 0,
+        "csp_meta": false,
+        "compiled_css": false,
+        "local_vite_css": true
+    }
+]

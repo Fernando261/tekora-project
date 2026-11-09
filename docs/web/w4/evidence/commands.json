@@ -1,0 +1,351 @@
+[
+  {
+    "name": "php-version",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "--version"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "composer-version",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "/workspace/.tekora-security-tools/composer.phar",
+      "--version"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "composer-validate",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "/workspace/.tekora-security-tools/composer.phar",
+      "validate",
+      "--strict"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "composer-install",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "/workspace/.tekora-security-tools/composer.phar",
+      "install",
+      "--no-scripts",
+      "--no-interaction"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "composer-platform",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "/workspace/.tekora-security-tools/composer.phar",
+      "check-platform-reqs"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "composer-audit",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "/workspace/.tekora-security-tools/composer.phar",
+      "audit",
+      "--locked"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "composer-audit-no-dev",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "/workspace/.tekora-security-tools/composer.phar",
+      "audit",
+      "--locked",
+      "--no-dev"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "api-routes",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "auto_prepend_file=tests/bootstrap.php",
+      "artisan",
+      "route:list",
+      "--path=api",
+      "--json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "api-routes-verbose",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "auto_prepend_file=tests/bootstrap.php",
+      "artisan",
+      "route:list",
+      "--path=api",
+      "-v"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "preview-delivery",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "tools/tekora-w4-preview.php",
+      "/workspace/w4-preview-delivery",
+      "http://127.0.0.1:8063"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "preview-reference",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "tools/tekora-w4-preview.php",
+      "/workspace/w4-preview-reference",
+      "http://127.0.0.1:8060"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "sidebar-preview",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "tools/tekora-w211-preview.php",
+      "/workspace/w4-sidebar-preview",
+      "http://127.0.0.1:8065"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "phpunit-baseline",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "vendor/bin/phpunit",
+      "--exclude-group",
+      "web-w4",
+      "--do-not-cache-result"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "w4-tests",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "vendor/bin/phpunit",
+      "--group",
+      "web-w4",
+      "--do-not-cache-result"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "preview-complete",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "tools/tekora-w4-preview.php",
+      "/workspace/w4-preview-complete",
+      "http://127.0.0.1:8063"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "preview-complete-reference",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "/workspace/w4-baseline-source/tools/tekora-w4-preview.php",
+      "/workspace/w4-preview-complete-reference",
+      "http://127.0.0.1:8060"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "pint-check",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "vendor/bin/pint",
+      "--test",
+      "tests/Feature/TekoraW4Test.php",
+      "tools/tekora-w4-preview.php",
+      "tools/tekora-w4-preview-router.php"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "local-csp",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "/workspace/w4-evidence/local-csp.php"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "phpunit",
+    "command": [
+      "/workspace/.tekora-security-tools/php8228",
+      "-d",
+      "memory_limit=256M",
+      "vendor/bin/phpunit",
+      "--do-not-cache-result"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "marketplace-regression",
+    "command": [
+      "python3",
+      "tools/tekora-w3-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8061",
+      "--fixture",
+      "/workspace/w4-preview-v2/marketplace-fixtures.json",
+      "--output",
+      "/workspace/w4-marketplace-regression",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "dashboard-regression",
+    "command": [
+      "python3",
+      "tools/tekora-w21-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8065",
+      "--output",
+      "/workspace/w4-dashboard-regression-final",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "sidebar-regression",
+    "command": [
+      "python3",
+      "tools/tekora-w211-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8065",
+      "--output",
+      "/workspace/w4-sidebar-regression-final",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "npm-ci",
+    "command": [
+      "npm",
+      "ci"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "npm-audit",
+    "command": [
+      "npm",
+      "audit",
+      "--json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "npm-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "w4-browser-resume",
+    "command": [
+      "python3",
+      "tools/tekora-w4-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8063",
+      "--pages",
+      "/workspace/w4-preview-complete/w4-pages.json",
+      "--output",
+      "/workspace/w4-browser-final",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js",
+      "--record",
+      "--resume-flows"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "w4-browser-supplement",
+    "command": [
+      "python3",
+      "tools/tekora-w4-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8063",
+      "--pages",
+      "/workspace/w4-preview-complete/w4-pages.json",
+      "--output",
+      "/workspace/w4-browser-supplement",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js",
+      "--names",
+      "profile-show",
+      "dual-request-detail",
+      "--matrix-only"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "native-zoom",
+    "command": [
+      "python3",
+      "tools/tekora-w4-zoom-check.py",
+      "--base-url",
+      "http://127.0.0.1:8063",
+      "--pages",
+      "/workspace/w4-preview-delivery/w4-pages.json",
+      "--output",
+      "/workspace/w4-zoom-final"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "performance",
+    "command": [
+      "python3",
+      "tools/tekora-w4-performance.py",
+      "--baseline-url",
+      "http://127.0.0.1:8060",
+      "--base-url",
+      "http://127.0.0.1:8063",
+      "--output",
+      "/workspace/w4-evidence/performance.json"
+    ],
+    "exit_code": 0
+  }
+]

@@ -1,6 +1,6 @@
-<x-account-layout title="Proponer un horario">
+<x-account-layout :operations="true" title="Proponer un horario">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/reservations.css') }}"><link rel="stylesheet" href="{{ asset('css/availability.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Solicitud aceptada #{{ $inquiry->id }}</span><h1>Proponer un horario</h1><p>{{ $inquiry->service_title }} · {{ $inquiry->service->providerProfile->display_name }}</p></header>
+  <x-ops-heading variant="time"><span class="account-eyebrow">Solicitud aceptada #{{ $inquiry->id }}</span><h1>Proponer un horario</h1><p>{{ $inquiry->service_title }} · {{ $inquiry->service->providerProfile->display_name }}</p></x-ops-heading>
   <div class="account-grid">
     <section class="account-card"><h2>Tu propuesta de 60 minutos</h2>
       <p class="account-note">Elige fecha y hora en la zona <strong>{{ $setting->timezone }}</strong>, aunque te encuentres en otra zona. El prestador deberá confirmar el horario. No se realiza ningún pago.</p>

@@ -1,6 +1,6 @@
-<x-account-layout :title="'Solicitud #'.$inquiry->id">
+<x-account-layout :operations="true" :title="'Solicitud #'.$inquiry->id">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Seguimiento privado</span><h1>Solicitud #{{ $inquiry->id }}</h1><p>Consulta el estado y las decisiones de esta solicitud.</p></header>
+  <x-ops-heading variant="connect"><span class="account-eyebrow">Seguimiento privado</span><h1>Solicitud #{{ $inquiry->id }}</h1><p>Consulta el estado y las decisiones de esta solicitud.</p></x-ops-heading>
   <div class="inquiry-detail-grid">
     <section class="account-card">
       <x-inquiry-status :status="$inquiry->status" />
@@ -14,7 +14,7 @@
       <x-inquiry-actions :inquiry="$inquiry" />
       @if($inquiry->status === \App\Enums\InquiryStatus::Completed)<p class="account-note">Finalizada es un estado operativo. No confirma pago, garantía, satisfacción del cliente ni un contrato formal.</p>@else<p class="account-help">Aceptar una solicitud no crea una reserva, pago ni contrato automático.</p>@endif
     </section>
-    <section class="account-card inquiry-timeline"><h2>Historial de decisiones</h2><p class="account-help">Horario de Ciudad de México.</p><ol>@foreach($inquiry->timeline() as $event)<li><strong>{{ $event['label'] }}</strong><x-inquiry-time :at="$event['at']" /></li>@endforeach</ol></section>
+    <section class="account-card inquiry-timeline tk-ops-timeline"><h2>Historial de decisiones</h2><p class="account-help">Horario de Ciudad de México.</p><ol>@foreach($inquiry->timeline() as $event)<li><strong>{{ $event['label'] }}</strong><x-inquiry-time :at="$event['at']" /></li>@endforeach</ol></section>
   </div>
   <x-inquiry-reservations :inquiry="$inquiry" />
   <x-inquiry-conversation :inquiry="$inquiry" :messages="$messages" :read-marker="$readMarker" :unread-messages-count="$unreadMessagesCount" :message-read-token="$messageReadToken" />

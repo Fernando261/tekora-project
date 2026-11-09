@@ -1,7 +1,7 @@
-<x-account-layout title="Solicitar servicio">
+<x-account-layout :operations="true" title="Solicitar servicio">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Experiencia de cliente</span><h1>Solicitar servicio</h1><p>Cuéntale al prestador qué necesitas. Podrás seguir su respuesta desde Mis solicitudes.</p></header>
-  <section class="account-card account-narrow">
+  <x-ops-heading variant="connect"><span class="account-eyebrow">Experiencia de cliente</span><h1>Solicitar servicio</h1><p>Cuéntale al prestador qué necesitas. Podrás seguir su respuesta desde Mis solicitudes.</p></x-ops-heading>
+  <section class="account-card account-narrow tk-ops-compose">
     <h2>{{ $service->title }}</h2><p>Prestador: {{ $service->providerProfile->display_name }}</p>
     <p class="account-note">Esta solicitud no crea una reserva ni un contrato automático. No incluye pagos ni confirmación de disponibilidad.</p>
     @php $message = old('message'); @endphp

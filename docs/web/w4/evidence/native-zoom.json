@@ -1,0 +1,304 @@
+{
+  "method": "Chromium settingsPrivate.setDefaultZoom in a deleted temporary profile; no CSS zoom and no viewport emulation",
+  "checks": [
+    {
+      "zoom_percent": 100,
+      "page": "request-create",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "request-detail",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "conversations",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "reservation-propose",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "reservation-provider",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "review-create",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "review-withdrawn",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "availability",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "services",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "notifications",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "profile",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "request-create",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "request-detail",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "conversations",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "reservation-propose",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "reservation-provider",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "review-create",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "review-withdrawn",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "availability",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "services",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "notifications",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "profile",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "request-create",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "request-detail",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "conversations",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "reservation-propose",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "reservation-provider",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "review-create",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "review-withdrawn",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "availability",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "services",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "notifications",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "profile",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    }
+  ],
+  "page_errors": [],
+  "failed_resources": []
+}

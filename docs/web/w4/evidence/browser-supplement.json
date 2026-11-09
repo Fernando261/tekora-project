@@ -1,0 +1,220 @@
+{
+  "matrix": [
+    {
+      "width": 320,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "profile-show",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "dual-request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    }
+  ],
+  "axe": [
+    {
+      "width": 375,
+      "page": "profile-show",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "dual-request-detail",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 28
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "profile-show",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 36
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "dual-request-detail",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 61
+        }
+      ]
+    }
+  ],
+  "checks": {},
+  "page_errors": [],
+  "console_errors": [],
+  "expected_http_errors": [],
+  "failed_resources": [],
+  "environment": {
+    "browser": "154.0.8037.57",
+    "headless": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)"
+  }
+}
