@@ -33,7 +33,7 @@
   <footer class="tk-footer tk-wrap">
     <x-tekora-brand />
     <p>Una cuenta. Tu talento. Nuevas posibilidades.</p>
-    <nav aria-label="Enlaces complementarios"><a href="{{ route('public-providers.index') }}">Prestadores</a><a href="{{ route('home') }}">MindBloom</a></nav>
+    <nav aria-label="Enlaces complementarios"><a href="{{ route('public-providers.index') }}">Prestadores</a><a href="{{ route('catalog.index') }}">Servicios</a></nav>
   </footer>
 </body>
 </html>

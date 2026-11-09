@@ -1,0 +1,48 @@
+{
+  "base-w211": {
+    "samples": 16,
+    "median_lcp_ms": 274.0,
+    "max_lcp_ms": 352,
+    "max_cls": 0
+  },
+  "w3": {
+    "samples": 16,
+    "median_lcp_ms": 282.0,
+    "max_lcp_ms": 388,
+    "max_cls": 0
+  },
+  "cpu4": [
+    {
+      "lcp_ms": 488,
+      "cls": 0,
+      "version": "w3",
+      "page": "catalog",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 560,
+      "cls": 0,
+      "version": "w3",
+      "page": "service",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 540,
+      "cls": 0,
+      "version": "w3",
+      "page": "providers",
+      "width": 1440,
+      "cpu_rate": 4
+    },
+    {
+      "lcp_ms": 536,
+      "cls": 0,
+      "version": "w3",
+      "page": "profile",
+      "width": 1440,
+      "cpu_rate": 4
+    }
+  ]
+}
