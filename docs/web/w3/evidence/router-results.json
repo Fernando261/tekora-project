@@ -1,0 +1,62 @@
+[
+  {
+    "method": "GET",
+    "uri": "/servicios",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "uri": "/servicios?q=Dise%C3%B1o&category=diseno&modality=remote&page=2",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "uri": "/servicios?q=&category=&modality=",
+    "status": 200
+  },
+  {
+    "method": "HEAD",
+    "uri": "/prestadores",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "uri": "/preview/invalid-filters",
+    "status": 422
+  },
+  {
+    "method": "GET",
+    "uri": "/servicios?q=NOT-EXPORTED",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "uri": "/servicios?q[]=bad",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "uri": "/servicios",
+    "status": 405
+  },
+  {
+    "method": "GET",
+    "uri": "/.env",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "uri": "/api/v1/services",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "uri": "/favicon.ico",
+    "status": 204
+  },
+  {
+    "method": "GET",
+    "uri": "/build/assets/marketplace-qM7nyvDY.js",
+    "status": 200
+  }
+]

@@ -1,0 +1,425 @@
+{
+  "method": "Static search of tracked source, excluding docs/vendor/build; zero references is a candidate, never proof that historical URLs or data paths are unused.",
+  "css_assets": [
+    {
+      "file": "public/css/account.css",
+      "reference_files": [
+        {
+          "file": "resources/views/citas/create.blade.php",
+          "lines": [
+            12
+          ]
+        },
+        {
+          "file": "resources/views/citas/mis-citas.blade.php",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "lines": [
+            11
+          ]
+        },
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "file": "resources/views/conferencias.blade.php",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "lines": [
+            8
+          ]
+        },
+        {
+          "file": "resources/views/editar-nombre.blade.php",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "file": "resources/views/home.blade.php",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "file": "resources/views/perfil.blade.php",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "lines": [
+            11
+          ]
+        },
+        {
+          "file": "resources/views/profesionistas/index.blade.php",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+          "lines": [
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/auth-portal.css",
+      "reference_files": [
+        {
+          "file": "resources/views/auth/portal.blade.php",
+          "lines": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/availability.css",
+      "reference_files": [
+        {
+          "file": "resources/views/availability/edit.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/reservations/create.blade.php",
+          "lines": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/catalog.css",
+      "reference_files": [
+        {
+          "file": "resources/views/conversations/index.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/inquiries/index.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/notifications/index.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/provider-services/form.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/provider-services/index.blade.php",
+          "lines": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/citas.css",
+      "reference_files": []
+    },
+    {
+      "file": "public/css/citas2.css",
+      "reference_files": [
+        {
+          "file": "resources/views/citas/create.blade.php",
+          "lines": [
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/comunidad.css",
+      "reference_files": [
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "lines": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/conferencias.css",
+      "reference_files": [
+        {
+          "file": "resources/views/conferencias.blade.php",
+          "lines": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/consultas.css",
+      "reference_files": [
+        {
+          "file": "resources/views/citas.blade.php",
+          "lines": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/dashboard-profesionista.css",
+      "reference_files": [
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "lines": [
+            7
+          ]
+        },
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "lines": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/disponibilidad.css",
+      "reference_files": [
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "lines": [
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/editar.css",
+      "reference_files": [
+        {
+          "file": "resources/views/editar-nombre.blade.php",
+          "lines": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/home.css",
+      "reference_files": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "file": "resources/views/home.blade.php",
+          "lines": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/inquiries.css",
+      "reference_files": [
+        {
+          "file": "resources/views/conversations/index.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/inquiries/create.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/inquiries/index.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/inquiries/show.blade.php",
+          "lines": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/login-unificado.css",
+      "reference_files": []
+    },
+    {
+      "file": "public/css/login.css",
+      "reference_files": []
+    },
+    {
+      "file": "public/css/mis-citas.css",
+      "reference_files": [
+        {
+          "file": "resources/views/citas/mis-citas.blade.php",
+          "lines": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/notifications.css",
+      "reference_files": [
+        {
+          "file": "resources/views/notifications/index.blade.php",
+          "lines": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/perfil.css",
+      "reference_files": [
+        {
+          "file": "resources/views/editar-nombre.blade.php",
+          "lines": [
+            7
+          ]
+        },
+        {
+          "file": "resources/views/perfil.blade.php",
+          "lines": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/profesionistas.css",
+      "reference_files": [
+        {
+          "file": "resources/views/profesionistas/index.blade.php",
+          "lines": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/provider-dashboard.css",
+      "reference_files": []
+    },
+    {
+      "file": "public/css/registro-unificado.css",
+      "reference_files": []
+    },
+    {
+      "file": "public/css/registro.css",
+      "reference_files": [
+        {
+          "file": "resources/views/auth/forgot-password.blade.php",
+          "lines": [
+            7
+          ]
+        },
+        {
+          "file": "resources/views/auth/reset-password.blade.php",
+          "lines": [
+            7
+          ]
+        },
+        {
+          "file": "resources/views/login-profesionista.blade.php",
+          "lines": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/reservations.css",
+      "reference_files": [
+        {
+          "file": "resources/views/reservations/create.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/reservations/index.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/reservations/show.blade.php",
+          "lines": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/reviews.css",
+      "reference_files": [
+        {
+          "file": "resources/views/reviews/create.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/reviews/index.blade.php",
+          "lines": [
+            2
+          ]
+        },
+        {
+          "file": "resources/views/reviews/show.blade.php",
+          "lines": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "file": "public/css/solicitudes.css",
+      "reference_files": [
+        {
+          "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+          "lines": [
+            9
+          ]
+        }
+      ]
+    }
+  ],
+  "deleted_files": []
+}

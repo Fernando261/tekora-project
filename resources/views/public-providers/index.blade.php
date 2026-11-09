@@ -1,11 +1,6 @@
-<x-catalog-layout title="Explorar prestadores">
-  <header class="account-heading catalog-heading"><span class="account-eyebrow">Talento técnico y profesional</span><h1>Explorar prestadores</h1><p>Conoce a quienes tienen servicios publicados en el catálogo.</p></header>
-  <div class="catalog-grid">
-    @forelse($providers as $profile)
-      <article class="account-card provider-card"><h2><a href="{{ route('public-providers.show', $profile) }}">{{ $profile->display_name }}</a></h2><p class="provider-headline">{{ $profile->headline }}</p><p class="service-excerpt">{{ \Illuminate\Support\Str::limit($profile->bio ?? '', 180) }}</p><p>{{ $profile->published_services_count }} {{ $profile->published_services_count === 1 ? 'servicio publicado' : 'servicios publicados' }}</p><a class="account-button secondary" href="{{ route('public-providers.show', $profile) }}">Ver perfil y servicios</a></article>
-    @empty
-      <section class="account-card catalog-empty"><h2>Aún no hay prestadores con servicios publicados</h2><p>Vuelve pronto para conocer sus propuestas.</p></section>
-    @endforelse
-  </div>
+<x-catalog-layout title="Explorar prestadores" description="Conoce a los prestadores que tienen servicios publicados en Tekora. Explora sus perfiles y encuentra una propuesta para tu proyecto.">
+  <header class="mp-hero mp-hero-people"><div class="mp-hero-copy"><span class="mp-kicker" data-market-enter>EL VALOR ESTÁ EN LAS PERSONAS</span><h1 data-market-enter>Conecta con<br>otra <em>perspectiva.</em></h1><p data-market-enter>Conoce a quienes tienen servicios publicados en el catálogo. Descubre qué ofrecen y encuentra una forma de comenzar.</p><span class="mp-directory-count">{{ $providers->total() }} {{ $providers->total() === 1 ? 'prestador con servicios disponibles' : 'prestadores con servicios disponibles' }}</span></div><x-marketplace-scene variant="people" /></header>
+  <div class="mp-results-heading"><div><span class="mp-kicker">EXPLORAR PRESTADORES</span><h2>Personas detrás de las ideas.</h2></div><a class="mp-text-link" href="{{ route('catalog.index') }}">Ver todos los servicios <x-tekora-icon name="arrow" /></a></div>
+  <div class="catalog-grid mp-provider-grid">@forelse($providers as $profile)<x-provider-card :profile="$profile" />@empty<x-marketplace-empty title="Aún no hay prestadores con servicios publicados"><p>Vuelve pronto para conocer sus propuestas.</p><a class="mp-text-link" href="{{ route('catalog.index') }}">Explorar servicios <x-tekora-icon name="arrow" /></a></x-marketplace-empty>@endforelse</div>
   <x-catalog-pagination :paginator="$providers" />
 </x-catalog-layout>

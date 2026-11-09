@@ -1,0 +1,67 @@
+{
+  "new_assets": {
+    "resources/css/tekora/marketplace.css": {
+      "file": "assets/marketplace-CtKInQcc.css",
+      "bytes": 24550,
+      "gzip_bytes": 5602,
+      "sha256": "b7c5937c673af9b4b1c74d5515b257ed696ff073fe46554371398e13380c5f3b"
+    },
+    "resources/js/tekora/marketplace.js": {
+      "file": "assets/marketplace-qM7nyvDY.js",
+      "bytes": 2556,
+      "gzip_bytes": 1071,
+      "sha256": "af91fc7b5c37b9da24038a182381ec37e94fdfb91b50c735a22b9a9cfc1fe965"
+    },
+    "resources/css/tekora/ambient.css": {
+      "file": "assets/ambient-CymvvgaS.css",
+      "bytes": 1685,
+      "gzip_bytes": 664,
+      "sha256": "4d12d5e2b14bddd17196d73276ae3cf36259a76138925a3a84d61354019a026f"
+    },
+    "resources/css/tekora/account-shell.css": {
+      "file": "assets/account-shell-DN46Jl3d.css",
+      "bytes": 12184,
+      "gzip_bytes": 3235,
+      "sha256": "8728363e3c53eba534e40f9ee779fdb4ce0afeb763d92672392704909be0b7bd"
+    },
+    "resources/css/tekora/dashboards.css": {
+      "file": "assets/dashboards-C9aJLWUw.css",
+      "bytes": 20174,
+      "gzip_bytes": 4415,
+      "sha256": "f7b69ed6cfe1b69152c937e7dfee8c00b293189747a3cb636cc5cf2219c23dba"
+    },
+    "resources/js/tekora/tekora.js": {
+      "file": "assets/tekora-Baf5kkIu.js",
+      "bytes": 8164,
+      "gzip_bytes": 3052,
+      "sha256": "3636b33ae977bab053bae3acc5ac755d75f4457dc3944ce3a911145e55e8cb1f"
+    },
+    "resources/js/tekora/account-shell.js": {
+      "file": "assets/account-shell-CmQFvWJ9.js",
+      "bytes": 1175,
+      "gzip_bytes": 584,
+      "sha256": "e073079f97722e38682f0eb9f5213402ac5a8af0b8eee6c16ac161f0bec62020"
+    },
+    "resources/js/tekora/dashboards.js": {
+      "file": "assets/dashboards-D5p1_W1R.js",
+      "bytes": 6777,
+      "gzip_bytes": 2864,
+      "sha256": "8faf05efe9d81a77611127eed4c0bd5738e7f4e545e85ef0a987a8cf77398755"
+    }
+  },
+  "baseline_css_served_unminified": {
+    "account.css": 7674,
+    "catalog.css": 5192,
+    "availability.css": 1423,
+    "reviews.css": 1655
+  },
+  "existing_local_fonts_bytes": {
+    "dm-sans-latin.woff2": 36932,
+    "space-grotesk-latin.woff2": 22288
+  },
+  "budgets_bytes": {
+    "new_css": 24576,
+    "new_js": 5120
+  },
+  "approved_bundles_unchanged": true
+}

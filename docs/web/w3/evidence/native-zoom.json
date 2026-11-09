@@ -1,0 +1,115 @@
+{
+  "method": "Chromium settingsPrivate.setDefaultZoom in deleted temporary profile; native zoom without CSS zoom or viewport emulation",
+  "checks": [
+    {
+      "zoom_percent": 100,
+      "page": "catalog",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "service",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "providers",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "profile",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "catalog",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "service",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "providers",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 200,
+      "page": "profile",
+      "outer": 1440,
+      "css": 720,
+      "dpr": 2,
+      "scroll": 720,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "catalog",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "service",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "providers",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    },
+    {
+      "zoom_percent": 100,
+      "page": "profile",
+      "outer": 1440,
+      "css": 1440,
+      "dpr": 1,
+      "scroll": 1440,
+      "controls_inside": true
+    }
+  ],
+  "page_errors": [],
+  "failed_resources": []
+}

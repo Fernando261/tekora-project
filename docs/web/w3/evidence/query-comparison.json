@@ -1,0 +1,42 @@
+{
+  "/servicios": {
+    "before": {
+      "queries": 5,
+      "write_queries": 0
+    },
+    "after": {
+      "queries": 5,
+      "write_queries": 0
+    }
+  },
+  "/servicios/1": {
+    "before": {
+      "queries": 11,
+      "write_queries": 0
+    },
+    "after": {
+      "queries": 11,
+      "write_queries": 0
+    }
+  },
+  "/prestadores": {
+    "before": {
+      "queries": 2,
+      "write_queries": 0
+    },
+    "after": {
+      "queries": 2,
+      "write_queries": 0
+    }
+  },
+  "/prestadores/1": {
+    "before": {
+      "queries": 13,
+      "write_queries": 0
+    },
+    "after": {
+      "queries": 13,
+      "write_queries": 0
+    }
+  }
+}
