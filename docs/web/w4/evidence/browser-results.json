@@ -1,0 +1,5901 @@
+{
+  "matrix": [
+    {
+      "width": 320,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "request-validation",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "requests-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "requests-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "requests-filtered",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "conversation-older",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "conversation-readonly",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-requested",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-confirmed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-expired",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-completed",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reviews",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "review-published",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "notifications-page-2",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "notifications-unavailable",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "request-invalid",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "notifications-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "requests-received",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "request-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "service-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "service-edit",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "service-inactive-category",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "dual-sent",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "inquiries-conflict",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "inquiries-message-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "inquiries-rate-limited",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "conversations-read-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservations-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reviews-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "availability-error",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "requests-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "conversations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservations-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reviews-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "notifications-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "services-setup",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "profile-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "services-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "availability-empty",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    }
+  ],
+  "axe": [
+    {
+      "width": 375,
+      "page": "request-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "request-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 10
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "requests-sent",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 123
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "requests-page-2",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 73
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "requests-filtered",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "request-detail",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 29
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "conversation-older",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 29
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "conversations",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 71
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "conversation-readonly",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 27
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservations",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 61
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-propose",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 28
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-requested",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 19
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-confirmed",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 21
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-expired",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-completed",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 25
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reviews",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "review-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "review-published",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "review-withdrawn",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "notifications",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 73
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "notifications-page-2",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 74
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "notifications-unavailable",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 73
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "request-invalid",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "notifications-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "requests-received",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 123
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "request-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 30
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "availability",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 60
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "services",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 81
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "service-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "service-edit",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 12
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "service-inactive-category",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "profile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 17
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "dual-sent",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 16
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "inquiries-conflict",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "inquiries-message-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "inquiries-rate-limited",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "conversations-read-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservations-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reviews-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "availability-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "requests-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 8
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "conversations-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservations-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 8
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reviews-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "notifications-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "services-setup",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 3
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "profile-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 15
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "services-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "availability-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 60
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "request-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 38
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "request-validation",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 38
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "requests-sent",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 152
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "requests-page-2",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 102
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "requests-filtered",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 43
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "request-detail",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 58
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "conversation-older",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 58
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "conversations",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 100
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "conversation-readonly",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 56
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservations",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 90
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-propose",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 58
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-requested",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 48
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-confirmed",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 51
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-expired",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 48
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-completed",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 55
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reviews",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 42
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "review-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 43
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "review-published",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 40
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "review-withdrawn",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 41
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "notifications",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 102
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "notifications-page-2",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 103
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "notifications-unavailable",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 95
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "request-invalid",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 6
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "notifications-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 4
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "requests-received",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 156
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "request-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 63
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 52
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "availability",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 93
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "services",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 114
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "service-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 45
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "service-edit",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 46
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "service-inactive-category",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 46
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "profile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 51
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "dual-sent",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 47
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "inquiries-conflict",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "inquiries-message-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "inquiries-rate-limited",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "conversations-read-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservations-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reviews-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "availability-error",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "requests-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 36
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "conversations-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 34
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservations-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 36
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reviews-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 35
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "notifications-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 34
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "services-setup",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 34
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "profile-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 47
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "services-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 34
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "availability-empty",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 91
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "request-create_3d": {
+      "perspective": "900px",
+      "preserve": "preserve-3d",
+      "planes": [
+        {
+          "matrix": "matrix3d(0.961262, -0.275637, 0, 0, 0.275637, 0.961262, 0, 0, 0, 0, 1, 0, 0, 0, -45, 1)",
+          "z": -45
+        },
+        {
+          "matrix": "matrix3d(0.99863, 0.052336, 0, 0, -0.052336, 0.99863, 0, 0, 0, 0, 1, 0, 0, 0, 24, 1)",
+          "z": 24
+        },
+        {
+          "matrix": "matrix3d(0.978148, 0.207912, 0, 0, -0.207912, 0.978148, 0, 0, 0, 0, 1, 0, 0, 0, 78, 1)",
+          "z": 78
+        }
+      ]
+    },
+    "reservation-propose_3d": {
+      "perspective": "900px",
+      "preserve": "preserve-3d",
+      "planes": [
+        {
+          "matrix": "matrix3d(0.984808, 0.173648, 0, 0, -0.173648, 0.984808, 0, 0, 0, 0, 1, 0, 0, 0, -45, 1)",
+          "z": -45
+        },
+        {
+          "matrix": "matrix3d(0.992546, -0.121869, 0, 0, 0.121869, 0.992546, 0, 0, 0, 0, 1, 0, 0, 0, 24, 1)",
+          "z": 24
+        },
+        {
+          "matrix": "matrix3d(0.997564, 0.0697565, 0, 0, -0.0697565, 0.997564, 0, 0, 0, 0, 1, 0, 0, 0, 85, 1)",
+          "z": 85
+        }
+      ]
+    },
+    "services_3d": {
+      "perspective": "900px",
+      "preserve": "preserve-3d",
+      "planes": [
+        {
+          "matrix": "matrix3d(0.970296, -0.198171, -0.138761, 0, 0.241922, 0.79482, 0.556539, 0, 0, -0.573576, 0.819152, 0, 0, 0, -45, 1)",
+          "z": -45
+        },
+        {
+          "matrix": "matrix3d(0.980631, -0.139173, 0.137819, 0, 0.137819, 0.990268, 0.0193692, 0, -0.139173, 0, 0.990268, 0, 0, 0, 30, 1)",
+          "z": 30
+        },
+        {
+          "matrix": "matrix3d(0.984808, 0.173648, 0, 0, -0.173648, 0.984808, 0, 0, 0, 0, 1, 0, 0, 0, 85, 1)",
+          "z": 85
+        }
+      ]
+    },
+    "hover_targets_fixed": true,
+    "keyboard_focus_order": true,
+    "native_filters_clear_pagination": true,
+    "native_cursor_temporal_navigation": true,
+    "availability_add_remove_unique_42_limit": true,
+    "no_js_eight_form_pages": true,
+    "reduced_motion_and_transparency": true,
+    "touch_static": true,
+    "failed_module_static_form": true
+  },
+  "page_errors": [],
+  "console_errors": [],
+  "expected_http_errors": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/request-invalid",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/notifications-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-conflict",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-message-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/inquiries-rate-limited",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/conversations-read-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reservations-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/reviews-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)",
+      "location": {
+        "url": "http://127.0.0.1:8062/preview/w4/availability-error",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "failed_resources": [],
+  "environment": {
+    "browser": "154.0.8037.57",
+    "headless": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)"
+  }
+}

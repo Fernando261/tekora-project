@@ -1,6 +1,6 @@
-<x-account-layout :title="$received ? 'Solicitudes recibidas' : 'Mis solicitudes'">
+<x-account-layout :operations="true" :title="$received ? 'Solicitudes recibidas' : 'Mis solicitudes'">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/catalog.css') }}"><link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Experiencia de {{ $received ? 'prestador' : 'cliente' }}</span><h1>{{ $received ? 'Solicitudes recibidas' : 'Mis solicitudes' }}</h1><p>{{ $received ? 'Revisa las necesidades enviadas a tus servicios y decide cómo continuar.' : 'Consulta las solicitudes que has enviado y su seguimiento.' }}</p></header>
+  <x-ops-heading variant="connect"><span class="account-eyebrow">Experiencia de {{ $received ? 'prestador' : 'cliente' }}</span><h1>{{ $received ? 'Solicitudes recibidas' : 'Mis solicitudes' }}</h1><p>{{ $received ? 'Revisa las necesidades enviadas a tus servicios y decide cómo continuar.' : 'Consulta las solicitudes que has enviado y su seguimiento.' }}</p></x-ops-heading>
   <form class="account-card inquiry-filters" method="GET" action="{{ route($received ? 'inquiries.received' : 'inquiries.index') }}">
     <div><label for="status">Estado</label><select id="status" name="status"><option value="">Todos los estados</option>@foreach(\App\Enums\InquiryStatus::cases() as $status)<option value="{{ $status->value }}" @selected(($filters['status'] ?? '') === $status->value)>{{ $status->label() }}</option>@endforeach</select></div>
     <button class="account-button" type="submit">Filtrar</button><a href="{{ route($received ? 'inquiries.received' : 'inquiries.index') }}">Limpiar filtros</a>
@@ -8,7 +8,7 @@
   <p class="account-help">{{ $inquiries->total() }} solicitudes. Fechas en horario de Ciudad de México.</p>
   <div class="inquiry-list">
     @forelse($inquiries as $inquiry)
-      <article class="account-card inquiry-card">
+      <article data-ops-card class="account-card inquiry-card">
         <div class="inquiry-card-heading"><span>Solicitud #{{ $inquiry->id }}</span><x-inquiry-status :status="$inquiry->status" /></div>
         <h2>{{ $inquiry->service_title }}</h2>
         <p>{{ $received ? 'Cliente: '.$inquiry->client->name : 'Prestador: '.$inquiry->service->providerProfile->display_name }}</p>

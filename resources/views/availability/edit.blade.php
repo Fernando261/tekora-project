@@ -1,6 +1,6 @@
-<x-account-layout title="Mi disponibilidad">
+<x-account-layout :operations="true" title="Mi disponibilidad">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/availability.css') }}"><script src="{{ asset('js/availability.js') }}" defer></script>@endpush
-  <header class="account-heading"><span class="account-eyebrow">Experiencia de prestador</span><h1>Mi disponibilidad</h1><p>Publica horarios semanales y fechas sin atención. No se crean reservas ni citas.</p></header>
+  <x-ops-heading variant="studio"><span class="account-eyebrow">Experiencia de prestador</span><h1>Mi disponibilidad</h1><p>Publica horarios semanales y fechas sin atención. No se crean reservas ni citas.</p></x-ops-heading>
   <p class="account-note">Horarios orientativos, sujetos a confirmación con el prestador</p>
   @if(!$setting)<p class="account-alert">Horario no publicado. La zona inicial propuesta es America/Mexico_City; se guardará al publicar tu configuración.</p>@endif
   @php

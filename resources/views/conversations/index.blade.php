@@ -1,10 +1,10 @@
-<x-account-layout title="Mensajes">
+<x-account-layout :operations="true" title="Mensajes">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/catalog.css') }}"><link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Conversaciones privadas</span><h1>Mensajes</h1><p>Solicitudes en las que participas. Primero aparecen las que tienen mensajes recibidos sin leer.</p></header>
+  <x-ops-heading variant="connect"><span class="account-eyebrow">Conversaciones privadas</span><h1>Mensajes</h1><p>Solicitudes en las que participas. Primero aparecen las que tienen mensajes recibidos sin leer.</p></x-ops-heading>
   <p class="account-help">{{ $conversations->total() }} conversaciones. Abrir la bandeja o el detalle no marca mensajes como leídos.</p>
   <div class="inquiry-list">
     @forelse($conversations as $inquiry)
-      <article class="account-card inquiry-card">
+      <article data-ops-card class="account-card inquiry-card">
         <div class="inquiry-card-heading"><span>Solicitud #{{ $inquiry->id }}</span><x-inquiry-status :status="$inquiry->status" /></div>
         <h2>{{ $inquiry->service_title }}</h2>
         <p>{{ $inquiry->unread_messages_count }} {{ $inquiry->unread_messages_count === 1 ? 'mensaje recibido sin leer' : 'mensajes recibidos sin leer' }}</p>

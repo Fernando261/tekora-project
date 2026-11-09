@@ -1,0 +1,611 @@
+{
+    "linked-conversation-newer": {
+        "path": "/preview/w4/linked-conversation-newer",
+        "original_uri": "http://127.0.0.1:8063/cuenta/solicitudes/3?messages_cursor=eyJjcmVhdGVkX2F0IjoiMjAzMC0wMS0yMCAxMjowMDowMCIsImlkIjo1LCJfcG9pbnRzVG9OZXh0SXRlbXMiOmZhbHNlfQ#conversacion",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-requests-first": {
+        "path": "/preview/w4/linked-requests-first",
+        "original_uri": "/cuenta/solicitudes?page=1",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-conversations-page-2": {
+        "path": "/preview/w4/linked-conversations-page-2",
+        "original_uri": "/cuenta/mensajes?page=2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-notifications-first": {
+        "path": "/preview/w4/linked-notifications-first",
+        "original_uri": "/cuenta/notificaciones?page=1",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-1": {
+        "path": "/preview/w4/linked-request-1",
+        "original_uri": "/cuenta/solicitudes/1",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-2": {
+        "path": "/preview/w4/linked-request-2",
+        "original_uri": "/cuenta/solicitudes/2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-5": {
+        "path": "/preview/w4/linked-request-5",
+        "original_uri": "/cuenta/solicitudes/5",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-6": {
+        "path": "/preview/w4/linked-request-6",
+        "original_uri": "/cuenta/solicitudes/6",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-7": {
+        "path": "/preview/w4/linked-request-7",
+        "original_uri": "/cuenta/solicitudes/7",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-8": {
+        "path": "/preview/w4/linked-request-8",
+        "original_uri": "/cuenta/solicitudes/8",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-9": {
+        "path": "/preview/w4/linked-request-9",
+        "original_uri": "/cuenta/solicitudes/9",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-10": {
+        "path": "/preview/w4/linked-request-10",
+        "original_uri": "/cuenta/solicitudes/10",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-11": {
+        "path": "/preview/w4/linked-request-11",
+        "original_uri": "/cuenta/solicitudes/11",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-12": {
+        "path": "/preview/w4/linked-request-12",
+        "original_uri": "/cuenta/solicitudes/12",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-13": {
+        "path": "/preview/w4/linked-request-13",
+        "original_uri": "/cuenta/solicitudes/13",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-14": {
+        "path": "/preview/w4/linked-request-14",
+        "original_uri": "/cuenta/solicitudes/14",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-15": {
+        "path": "/preview/w4/linked-request-15",
+        "original_uri": "/cuenta/solicitudes/15",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-16": {
+        "path": "/preview/w4/linked-request-16",
+        "original_uri": "/cuenta/solicitudes/16",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-17": {
+        "path": "/preview/w4/linked-request-17",
+        "original_uri": "/cuenta/solicitudes/17",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-18": {
+        "path": "/preview/w4/linked-request-18",
+        "original_uri": "/cuenta/solicitudes/18",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-19": {
+        "path": "/preview/w4/linked-request-19",
+        "original_uri": "/cuenta/solicitudes/19",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-4": {
+        "path": "/preview/w4/linked-request-4",
+        "original_uri": "/cuenta/solicitudes/4",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-3": {
+        "path": "/preview/w4/linked-request-3",
+        "original_uri": "/cuenta/solicitudes/3",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-reservation-1": {
+        "path": "/preview/w4/linked-reservation-1",
+        "original_uri": "/cuenta/reservas/1",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-reservation-2": {
+        "path": "/preview/w4/linked-reservation-2",
+        "original_uri": "/cuenta/reservas/2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-reservation-3": {
+        "path": "/preview/w4/linked-reservation-3",
+        "original_uri": "/cuenta/reservas/3",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-reservation-4": {
+        "path": "/preview/w4/linked-reservation-4",
+        "original_uri": "/cuenta/reservas/4",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-reservation-5": {
+        "path": "/preview/w4/linked-reservation-5",
+        "original_uri": "/cuenta/reservas/5",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-reservation-6": {
+        "path": "/preview/w4/linked-reservation-6",
+        "original_uri": "/cuenta/reservas/6",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-1": {
+        "path": "/preview/w4/linked-public-service-1",
+        "original_uri": "/servicios/1",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-2": {
+        "path": "/preview/w4/linked-public-service-2",
+        "original_uri": "/servicios/2",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-3": {
+        "path": "/preview/w4/linked-public-service-3",
+        "original_uri": "/servicios/3",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-4": {
+        "path": "/preview/w4/linked-public-service-4",
+        "original_uri": "/servicios/4",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-create-4": {
+        "path": "/preview/w4/linked-request-create-4",
+        "original_uri": "/cuenta/solicitudes/servicios/4/crear",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-5": {
+        "path": "/preview/w4/linked-public-service-5",
+        "original_uri": "/servicios/5",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-6": {
+        "path": "/preview/w4/linked-public-service-6",
+        "original_uri": "/servicios/6",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-7": {
+        "path": "/preview/w4/linked-public-service-7",
+        "original_uri": "/servicios/7",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-8": {
+        "path": "/preview/w4/linked-public-service-8",
+        "original_uri": "/servicios/8",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-9": {
+        "path": "/preview/w4/linked-public-service-9",
+        "original_uri": "/servicios/9",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-10": {
+        "path": "/preview/w4/linked-public-service-10",
+        "original_uri": "/servicios/10",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-11": {
+        "path": "/preview/w4/linked-public-service-11",
+        "original_uri": "/servicios/11",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-12": {
+        "path": "/preview/w4/linked-public-service-12",
+        "original_uri": "/servicios/12",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-13": {
+        "path": "/preview/w4/linked-public-service-13",
+        "original_uri": "/servicios/13",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-14": {
+        "path": "/preview/w4/linked-public-service-14",
+        "original_uri": "/servicios/14",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-15": {
+        "path": "/preview/w4/linked-public-service-15",
+        "original_uri": "/servicios/15",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-16": {
+        "path": "/preview/w4/linked-public-service-16",
+        "original_uri": "/servicios/16",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-17": {
+        "path": "/preview/w4/linked-public-service-17",
+        "original_uri": "/servicios/17",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-18": {
+        "path": "/preview/w4/linked-public-service-18",
+        "original_uri": "/servicios/18",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-19": {
+        "path": "/preview/w4/linked-public-service-19",
+        "original_uri": "/servicios/19",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-23": {
+        "path": "/preview/w4/linked-public-service-23",
+        "original_uri": "/servicios/23",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-create-23": {
+        "path": "/preview/w4/linked-request-create-23",
+        "original_uri": "/cuenta/solicitudes/servicios/23/crear",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-service-24": {
+        "path": "/preview/w4/linked-public-service-24",
+        "original_uri": "/servicios/24",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-request-create-24": {
+        "path": "/preview/w4/linked-request-create-24",
+        "original_uri": "/cuenta/solicitudes/servicios/24/crear",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-catalog": {
+        "path": "/preview/w4/linked-catalog",
+        "original_uri": "/servicios",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-providers": {
+        "path": "/preview/w4/linked-providers",
+        "original_uri": "/prestadores",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-public-profile": {
+        "path": "/preview/w4/linked-public-profile",
+        "original_uri": "/prestadores/1",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-catalog-page-2": {
+        "path": "/preview/w4/linked-catalog-page-2",
+        "original_uri": "/servicios?page=2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-reservations-page-2": {
+        "path": "/preview/w4/linked-reservations-page-2",
+        "original_uri": "/cuenta/reservas?page=2",
+        "role": "cliente",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-profile-1": {
+        "path": "/preview/w4/linked-profile-1",
+        "original_uri": "/prestadores/1",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-profile-page-2-1": {
+        "path": "/preview/w4/linked-profile-page-2-1",
+        "original_uri": "/prestadores/1?page=2",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-profile-2": {
+        "path": "/preview/w4/linked-profile-2",
+        "original_uri": "/prestadores/2",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-profile-page-2-2": {
+        "path": "/preview/w4/linked-profile-page-2-2",
+        "original_uri": "/prestadores/2?page=2",
+        "role": "p\u00fablico",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-services-page-2": {
+        "path": "/preview/w4/linked-services-page-2",
+        "original_uri": "/cuenta/servicios?page=2",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-received-page-2": {
+        "path": "/preview/w4/linked-received-page-2",
+        "original_uri": "/cuenta/solicitudes/recibidas?page=2",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-20": {
+        "path": "/preview/w4/linked-service-edit-20",
+        "original_uri": "/cuenta/servicios/20/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-21": {
+        "path": "/preview/w4/linked-service-edit-21",
+        "original_uri": "/cuenta/servicios/21/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-1": {
+        "path": "/preview/w4/linked-service-edit-1",
+        "original_uri": "/cuenta/servicios/1/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-2": {
+        "path": "/preview/w4/linked-service-edit-2",
+        "original_uri": "/cuenta/servicios/2/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-3": {
+        "path": "/preview/w4/linked-service-edit-3",
+        "original_uri": "/cuenta/servicios/3/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-4": {
+        "path": "/preview/w4/linked-service-edit-4",
+        "original_uri": "/cuenta/servicios/4/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-5": {
+        "path": "/preview/w4/linked-service-edit-5",
+        "original_uri": "/cuenta/servicios/5/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-6": {
+        "path": "/preview/w4/linked-service-edit-6",
+        "original_uri": "/cuenta/servicios/6/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-7": {
+        "path": "/preview/w4/linked-service-edit-7",
+        "original_uri": "/cuenta/servicios/7/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-8": {
+        "path": "/preview/w4/linked-service-edit-8",
+        "original_uri": "/cuenta/servicios/8/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-9": {
+        "path": "/preview/w4/linked-service-edit-9",
+        "original_uri": "/cuenta/servicios/9/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-10": {
+        "path": "/preview/w4/linked-service-edit-10",
+        "original_uri": "/cuenta/servicios/10/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-11": {
+        "path": "/preview/w4/linked-service-edit-11",
+        "original_uri": "/cuenta/servicios/11/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-12": {
+        "path": "/preview/w4/linked-service-edit-12",
+        "original_uri": "/cuenta/servicios/12/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-13": {
+        "path": "/preview/w4/linked-service-edit-13",
+        "original_uri": "/cuenta/servicios/13/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-14": {
+        "path": "/preview/w4/linked-service-edit-14",
+        "original_uri": "/cuenta/servicios/14/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-15": {
+        "path": "/preview/w4/linked-service-edit-15",
+        "original_uri": "/cuenta/servicios/15/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-16": {
+        "path": "/preview/w4/linked-service-edit-16",
+        "original_uri": "/cuenta/servicios/16/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-17": {
+        "path": "/preview/w4/linked-service-edit-17",
+        "original_uri": "/cuenta/servicios/17/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-18": {
+        "path": "/preview/w4/linked-service-edit-18",
+        "original_uri": "/cuenta/servicios/18/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-19": {
+        "path": "/preview/w4/linked-service-edit-19",
+        "original_uri": "/cuenta/servicios/19/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-22": {
+        "path": "/preview/w4/linked-service-edit-22",
+        "original_uri": "/cuenta/servicios/22/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    },
+    "linked-service-edit-23": {
+        "path": "/preview/w4/linked-service-edit-23",
+        "original_uri": "/cuenta/servicios/23/editar",
+        "role": "prestador",
+        "status": 200,
+        "source": "Real controller GET over synthetic memory fixtures"
+    }
+}

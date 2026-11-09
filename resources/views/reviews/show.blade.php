@@ -1,6 +1,6 @@
-<x-account-layout title="Mi reseña">
+<x-account-layout :operations="true" title="Mi reseña">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/reviews.css') }}">@endpush
-  <header class="account-heading"><span class="account-eyebrow">Registro privado del autor</span><h1>Mi reseña</h1><p>{{ $review->service->title }}</p></header>
+  <x-ops-heading variant="connect"><span class="account-eyebrow">Registro privado del autor</span><h1>Mi reseña</h1><p>{{ $review->service->title }}</p></x-ops-heading>
   <section class="account-card account-narrow">
     <span class="review-badge {{ $review->status === \App\Enums\ReviewVisibility::Withdrawn ? 'is-withdrawn' : '' }}">{{ $review->status->label() }}</span>
     <p><x-review-stars :rating="$review->rating" /> <strong>{{ $review->rating }} / 5</strong></p>
@@ -11,7 +11,7 @@
       <p class="account-help">Retirada: {{ $review->withdrawn_at_utc }} UTC.</p>
     @else
       <p class="account-note">La reseña solo se muestra públicamente mientras el servicio cumpla las reglas del catálogo. No puedes editarla. Retirarla es irreversible y no permite reemplazarla.</p>
-      @can('withdraw', $review)<form method="POST" action="{{ route('reviews.withdraw', $review) }}">@csrf @method('PATCH')<button class="account-button secondary" type="submit">Retirar reseña de la vista pública</button></form>@endcan
+      @can('withdraw', $review)<form method="POST" action="{{ route('reviews.withdraw', $review) }}">@csrf @method('PATCH')<button class="account-button secondary tk-ops-danger" type="submit">Retirar reseña de la vista pública</button></form>@endcan
     @endif
     <p><a href="{{ route('reservations.show', $review->service_reservation_id) }}">Consultar mi reserva</a></p>
     <p><a href="{{ route('reviews.index') }}">Volver a Mis reseñas</a></p>

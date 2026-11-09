@@ -1,0 +1,1300 @@
+{
+  "method": "Direct Chromium screenshots/element captures and Playwright recordings. No image editing or composition. Raw media copied byte for byte.",
+  "files": [
+    {
+      "file": "services-empty-1440.png",
+      "source": "/workspace/w4-browser-final/services-empty-1440.png",
+      "bytes": 298025,
+      "sha256": "a5950866a7bb0928cd00221f509c02346e8f304072905a2372ae47444ec13237",
+      "edited": false
+    },
+    {
+      "file": "review-published-375.png",
+      "source": "/workspace/w4-browser-final/review-published-375.png",
+      "bytes": 106109,
+      "sha256": "8ced68638cd79c0007acda4c2ab877b404d1c0a52d8788246c6b97d2ee296643",
+      "edited": false
+    },
+    {
+      "file": "inquiries-conflict-375.png",
+      "source": "/workspace/w4-browser-final/inquiries-conflict-375.png",
+      "bytes": 93423,
+      "sha256": "3593b139cc048b15916438f7a9ee1c3d84a4d5d2b7f4d52366a03d4e2a10450d",
+      "edited": false
+    },
+    {
+      "file": "request-validation-375.png",
+      "source": "/workspace/w4-browser-final/request-validation-375.png",
+      "bytes": 96299,
+      "sha256": "65172d20429acedb1d951ae65458328cdb6f44754a6cd810616e45532740e03b",
+      "edited": false
+    },
+    {
+      "file": "dual-sent-375.png",
+      "source": "/workspace/w4-browser-final/dual-sent-375.png",
+      "bytes": 97543,
+      "sha256": "67e4a4826a77a8e062eb67ea744fa29636ce67b74579b9e698864702e1839c80",
+      "edited": false
+    },
+    {
+      "file": "availability-empty-375.png",
+      "source": "/workspace/w4-browser-final/availability-empty-375.png",
+      "bytes": 89489,
+      "sha256": "7eadda45842ecf23ff03193e2bbbef9a6962c925ea14fcb12bd6237e290481c2",
+      "edited": false
+    },
+    {
+      "file": "profile-375.png",
+      "source": "/workspace/w4-browser-final/profile-375.png",
+      "bytes": 95097,
+      "sha256": "6ce74922b9d1bc6a1e35ef6a81e01330c7fc8505432a5594e8bbec8d0800031b",
+      "edited": false
+    },
+    {
+      "file": "request-invalid-1440.png",
+      "source": "/workspace/w4-browser-final/request-invalid-1440.png",
+      "bytes": 169822,
+      "sha256": "18b6998a3251d709db037e5d9ce062df108a861525f32e5b41c6e08b1c7567e6",
+      "edited": false
+    },
+    {
+      "file": "notifications-empty-1440.png",
+      "source": "/workspace/w4-browser-final/notifications-empty-1440.png",
+      "bytes": 287714,
+      "sha256": "6565295abb01c338080fb301612b810bf84cd4c7339da94ee1bc61bbc29eaecc",
+      "edited": false
+    },
+    {
+      "file": "review-create-1440.png",
+      "source": "/workspace/w4-browser-final/review-create-1440.png",
+      "bytes": 319562,
+      "sha256": "feec36c50b31f60b02f09a8ddde2c56a48011285e0887b51e5c1d5372b099269",
+      "edited": false
+    },
+    {
+      "file": "review-published-1440.png",
+      "source": "/workspace/w4-browser-final/review-published-1440.png",
+      "bytes": 321209,
+      "sha256": "736ca4cd163e15568a7882c9915d6c0aa11ac4c79f50ab7e5e144efbfd918af3",
+      "edited": false
+    },
+    {
+      "file": "request-provider-1440.png",
+      "source": "/workspace/w4-browser-final/request-provider-1440.png",
+      "bytes": 334528,
+      "sha256": "d115459016d83bd7010717af7ac45b7ced496dba59b4013dab0cfde0ce44516e",
+      "edited": false
+    },
+    {
+      "file": "conversation-pagination.png",
+      "source": "/workspace/w4-browser-final/conversation-pagination.png",
+      "bytes": 324230,
+      "sha256": "0c94eb51808c65a86e56eb82ef1c6a490a98aaf221e841eaf511571626827903",
+      "edited": false
+    },
+    {
+      "file": "inquiries-message-error-375.png",
+      "source": "/workspace/w4-browser-final/inquiries-message-error-375.png",
+      "bytes": 91335,
+      "sha256": "20707444c51eb5f8c1868518be491f4293c13a97c22a5dc6b0ae6aebd90b656c",
+      "edited": false
+    },
+    {
+      "file": "reviews-error-1440.png",
+      "source": "/workspace/w4-browser-final/reviews-error-1440.png",
+      "bytes": 184299,
+      "sha256": "f185a23b0673c296b538c1dcaa126baf298999415e625a8080fd37e8371b7e49",
+      "edited": false
+    },
+    {
+      "file": "review-withdrawn-375.png",
+      "source": "/workspace/w4-browser-final/review-withdrawn-375.png",
+      "bytes": 105873,
+      "sha256": "d0ddb386f30d8f314b5da3757d492f9ae7549b036ccea741b0f6335e001d71ce",
+      "edited": false
+    },
+    {
+      "file": "service-create-375.png",
+      "source": "/workspace/w4-browser-final/service-create-375.png",
+      "bytes": 70295,
+      "sha256": "4c37e703759fe13029e202ef033a336b2fbd93aebe622b29f31f4c5303a8cdb6",
+      "edited": false
+    },
+    {
+      "file": "reservation-confirmed-1440.png",
+      "source": "/workspace/w4-browser-final/reservation-confirmed-1440.png",
+      "bytes": 357292,
+      "sha256": "eaf63ee97ed724891541c32164240282c3508115955e8a7073c33a3833d9097c",
+      "edited": false
+    },
+    {
+      "file": "request-create-375.png",
+      "source": "/workspace/w4-browser-final/request-create-375.png",
+      "bytes": 85841,
+      "sha256": "d7c53ee8d5954f2e5f14ffb1336d68588e46c3f02501dd115961fde975d65698",
+      "edited": false
+    },
+    {
+      "file": "service-edit-1440.png",
+      "source": "/workspace/w4-browser-final/service-edit-1440.png",
+      "bytes": 290037,
+      "sha256": "ca817af82a48fa34e4bea37cc7d7d825c12a389cc75027f983eecfcef4eb8b98",
+      "edited": false
+    },
+    {
+      "file": "notifications-page-2-375.png",
+      "source": "/workspace/w4-browser-final/notifications-page-2-375.png",
+      "bytes": 100785,
+      "sha256": "2b42e60ac4daf6d6fa36bf52a325942172ed6046f17bd8cd2cad1c7e6779d7ef",
+      "edited": false
+    },
+    {
+      "file": "conversations-1440.png",
+      "source": "/workspace/w4-browser-final/conversations-1440.png",
+      "bytes": 356768,
+      "sha256": "25e46d25aab4db2ba67102db3025c922d5b7886d8e75f96ca106a8a0fbca517e",
+      "edited": false
+    },
+    {
+      "file": "reservation-provider-375.png",
+      "source": "/workspace/w4-browser-final/reservation-provider-375.png",
+      "bytes": 92213,
+      "sha256": "5a0f2640ae8cc256db39211da35506c1388d0c91d13332d931ecf19b906e6681",
+      "edited": false
+    },
+    {
+      "file": "requests-filtered-1440.png",
+      "source": "/workspace/w4-browser-final/requests-filtered-1440.png",
+      "bytes": 343699,
+      "sha256": "efb4a26130fad8ba56d574d5a0c483301dde8cef046cdf26f8e459a81a49eb61",
+      "edited": false
+    },
+    {
+      "file": "service-edit-375.png",
+      "source": "/workspace/w4-browser-final/service-edit-375.png",
+      "bytes": 78073,
+      "sha256": "7486bb829afc070b7050903c1f1ccd7e3da687c8cedbb90135a9f3f041964ceb",
+      "edited": false
+    },
+    {
+      "file": "inquiries-conflict-1440.png",
+      "source": "/workspace/w4-browser-final/inquiries-conflict-1440.png",
+      "bytes": 182473,
+      "sha256": "2d7b3ccdf53fabaa2ab24f994a909573cb8ebdc22dce3a6566432984f6e7f7d5",
+      "edited": false
+    },
+    {
+      "file": "conversation-readonly-1440.png",
+      "source": "/workspace/w4-browser-final/conversation-readonly-1440.png",
+      "bytes": 342164,
+      "sha256": "eb1e217e509a4058b2b1cb388fbeee0768f05ffe48fa38d1676cfca633b6a103",
+      "edited": false
+    },
+    {
+      "file": "profile-create-1440.png",
+      "source": "/workspace/w4-browser-final/profile-create-1440.png",
+      "bytes": 377839,
+      "sha256": "d80985af6cf8cccc5d8976d9401bdb2148c401cd0ba5f6a7796e9b75ff15f79e",
+      "edited": false
+    },
+    {
+      "file": "reservation-requested-1440.png",
+      "source": "/workspace/w4-browser-final/reservation-requested-1440.png",
+      "bytes": 344581,
+      "sha256": "2ab2e0d564b5b3af807c5f138e11c1acc46e73dbbf07c5924093fbcb43998afe",
+      "edited": false
+    },
+    {
+      "file": "review-withdrawn-1440.png",
+      "source": "/workspace/w4-browser-final/review-withdrawn-1440.png",
+      "bytes": 317039,
+      "sha256": "77d4aa71d12161192d11e8d6ae72408dc44c3898ff4f77714af96234693bd172",
+      "edited": false
+    },
+    {
+      "file": "reviews-1440.png",
+      "source": "/workspace/w4-browser-final/reviews-1440.png",
+      "bytes": 326284,
+      "sha256": "121292901bc7067df8d6834557a717f32054be6ca576d29c54485161755ab6ef",
+      "edited": false
+    },
+    {
+      "file": "no-js-availability.png",
+      "source": "/workspace/w4-browser-final/no-js-availability.png",
+      "bytes": 77471,
+      "sha256": "4ab3c462c1fec4c799e187829c3fdeefa3de5433bf1749b8910e5428c61ae914",
+      "edited": false
+    },
+    {
+      "file": "inquiries-message-error-1440.png",
+      "source": "/workspace/w4-browser-final/inquiries-message-error-1440.png",
+      "bytes": 180414,
+      "sha256": "01c6c24cfab6b6fda0feaf7a9f3556851774febf14929ed3c7fa9074893a40a6",
+      "edited": false
+    },
+    {
+      "file": "reservations-error-1440.png",
+      "source": "/workspace/w4-browser-final/reservations-error-1440.png",
+      "bytes": 188138,
+      "sha256": "536f34e593191f7eec3999adc9cbf9a79df42ae830995c59a5b9bccebb6e5c52",
+      "edited": false
+    },
+    {
+      "file": "reservation-provider-1440.png",
+      "source": "/workspace/w4-browser-final/reservation-provider-1440.png",
+      "bytes": 347142,
+      "sha256": "6fc345aba907525cc1878bcbce0b666bd15bb69bb71c7a76ed779d75e3dba0d1",
+      "edited": false
+    },
+    {
+      "file": "services-setup-1440.png",
+      "source": "/workspace/w4-browser-final/services-setup-1440.png",
+      "bytes": 288797,
+      "sha256": "1374457ad2b4a79692ed1aeac21dec87a639ef04616b93913e63f9f1b8e17762",
+      "edited": false
+    },
+    {
+      "file": "reservations-error-375.png",
+      "source": "/workspace/w4-browser-final/reservations-error-375.png",
+      "bytes": 97535,
+      "sha256": "80dd0c416482891fb818e799707e3a120a67fcb869795d8866c04059dabf12b0",
+      "edited": false
+    },
+    {
+      "file": "no-js-review-stars.png",
+      "source": "/workspace/w4-browser-final/no-js-review-stars.png",
+      "bytes": 60835,
+      "sha256": "332aefd525c5c67479f8d25ef65ecf522c940dd66548e232ce934f56c51d1a82",
+      "edited": false
+    },
+    {
+      "file": "services-375.png",
+      "source": "/workspace/w4-browser-final/services-375.png",
+      "bytes": 99536,
+      "sha256": "67d123e465202c4a70c025e7b6db516ac0b4b5f6a184574e3a2938b251bd9422",
+      "edited": false
+    },
+    {
+      "file": "operations-desktop.webm",
+      "source": "/workspace/w4-browser-final/operations-desktop.webm",
+      "bytes": 3596219,
+      "sha256": "75009820b77d6fb35352a9266109b21194c13a95e53a2094c58c02cba8ac20ef",
+      "edited": false
+    },
+    {
+      "file": "request-detail-1440.png",
+      "source": "/workspace/w4-browser-final/request-detail-1440.png",
+      "bytes": 334458,
+      "sha256": "a56a17549aa01e0182ab6761b9621cd0b513ae09d15b35294e017ee1b2364d56",
+      "edited": false
+    },
+    {
+      "file": "reviews-empty-1440.png",
+      "source": "/workspace/w4-browser-final/reviews-empty-1440.png",
+      "bytes": 276167,
+      "sha256": "56e4d11da00a39a0cdc3177808def896f367d905ade570ac7273a7a4d47b1456",
+      "edited": false
+    },
+    {
+      "file": "services-empty-375.png",
+      "source": "/workspace/w4-browser-final/services-empty-375.png",
+      "bytes": 83562,
+      "sha256": "1515088e1b0288435303ada2c0945b61d9c2c04439e766bb50fcc3eb6ecf2feb",
+      "edited": false
+    },
+    {
+      "file": "operations-reduced-motion.webm",
+      "source": "/workspace/w4-browser-final/operations-reduced-motion.webm",
+      "bytes": 2948879,
+      "sha256": "2bec11ce490db6cdde9fee5c001924157439e5371a055beca0893ac6bba17608",
+      "edited": false
+    },
+    {
+      "file": "requests-page-2-375.png",
+      "source": "/workspace/w4-browser-final/requests-page-2-375.png",
+      "bytes": 95405,
+      "sha256": "975052988fa697d9c4b59391fece597012bbbcafa7a0abe8d24d56045ba57a31",
+      "edited": false
+    },
+    {
+      "file": "reduced-motion-profile.png",
+      "source": "/workspace/w4-browser-final/reduced-motion-profile.png",
+      "bytes": 182594,
+      "sha256": "0adb52e6d4ab4ff95ead8c4eb99705614d5b1b4f28ed956b616d2abf0e156edd",
+      "edited": false
+    },
+    {
+      "file": "reservation-expired-375.png",
+      "source": "/workspace/w4-browser-final/reservation-expired-375.png",
+      "bytes": 92040,
+      "sha256": "e9919c4826fe18e657d1154a22a0954d96d0f252ce6ca6849248353e8206085e",
+      "edited": false
+    },
+    {
+      "file": "reviews-375.png",
+      "source": "/workspace/w4-browser-final/reviews-375.png",
+      "bytes": 108509,
+      "sha256": "00a09f04b830c6ee029533aa6c7314c2acbaa1e35c19e7cf0db1d930e9ccf1e4",
+      "edited": false
+    },
+    {
+      "file": "requests-sent-375.png",
+      "source": "/workspace/w4-browser-final/requests-sent-375.png",
+      "bytes": 95484,
+      "sha256": "335063c34678d23bb275ac2eeb1955a10c09f84392731c72941068c5e77b84a0",
+      "edited": false
+    },
+    {
+      "file": "services-setup-375.png",
+      "source": "/workspace/w4-browser-final/services-setup-375.png",
+      "bytes": 83156,
+      "sha256": "ac16df771a7a6d85add95e067058662b6de1a4a16021285756e3e09c59a8ef58",
+      "edited": false
+    },
+    {
+      "file": "reservation-completed-375.png",
+      "source": "/workspace/w4-browser-final/reservation-completed-375.png",
+      "bytes": 92687,
+      "sha256": "c393acf2f9f241ebce7d45f7d757921815f82b75df77a404f3e4a636c8962def",
+      "edited": false
+    },
+    {
+      "file": "review-stars-selected.png",
+      "source": "/workspace/w4-browser-final/review-stars-selected.png",
+      "bytes": 322526,
+      "sha256": "55f0499b7fbe7ba754e585732a0e4976ba617ea1fc0191dca2a54d9e5acfbef7",
+      "edited": false
+    },
+    {
+      "file": "dual-sent-1440.png",
+      "source": "/workspace/w4-browser-final/dual-sent-1440.png",
+      "bytes": 344566,
+      "sha256": "05eac97a2d31a0f9587acc4faecd5d1ac9e6dec985c34267eabad539c3156691",
+      "edited": false
+    },
+    {
+      "file": "availability-error-1440.png",
+      "source": "/workspace/w4-browser-final/availability-error-1440.png",
+      "bytes": 183732,
+      "sha256": "5769091816d7c679c7ebaef3bfd154719869103610c54865908c9098dbdf449c",
+      "edited": false
+    },
+    {
+      "file": "conversations-empty-375.png",
+      "source": "/workspace/w4-browser-final/conversations-empty-375.png",
+      "bytes": 78316,
+      "sha256": "b343c2e8dd501cd3316b928960bbb2e5bccf5b1a6d6d1acb96e932607d61708c",
+      "edited": false
+    },
+    {
+      "file": "requests-empty-1440.png",
+      "source": "/workspace/w4-browser-final/requests-empty-1440.png",
+      "bytes": 297420,
+      "sha256": "1cef62ad4cc2ba4edaf386612edc65d8952dce1b7ec4b1e0a77ab10a24ee7309",
+      "edited": false
+    },
+    {
+      "file": "reservations-1440.png",
+      "source": "/workspace/w4-browser-final/reservations-1440.png",
+      "bytes": 343756,
+      "sha256": "0a83515edeb7843056ffff21960f5f66f93ec8eba31e772a02ac506a737a73aa",
+      "edited": false
+    },
+    {
+      "file": "profile-create-375.png",
+      "source": "/workspace/w4-browser-final/profile-create-375.png",
+      "bytes": 95274,
+      "sha256": "a4aea02a0480451e1c4acb4a47728523ffeb09c1cd55456468c3f2bcc10ad290",
+      "edited": false
+    },
+    {
+      "file": "services-1440.png",
+      "source": "/workspace/w4-browser-final/services-1440.png",
+      "bytes": 371712,
+      "sha256": "b07a6c9ba019dd59b93f4c2611d16c21d3a6f39508502477b9b370346a98d4e4",
+      "edited": false
+    },
+    {
+      "file": "review-create-375.png",
+      "source": "/workspace/w4-browser-final/review-create-375.png",
+      "bytes": 95757,
+      "sha256": "ac0e9bbb8341c7c1ad6cd5f0c0f0cabdc5e2016f6c147a4fc8ff161f97483f41",
+      "edited": false
+    },
+    {
+      "file": "profile-1440.png",
+      "source": "/workspace/w4-browser-final/profile-1440.png",
+      "bytes": 373569,
+      "sha256": "1bbb25d310b21f355668c58d77d1bad64bffaeb6d92ee43f434ad82dd14bed46",
+      "edited": false
+    },
+    {
+      "file": "requests-empty-375.png",
+      "source": "/workspace/w4-browser-final/requests-empty-375.png",
+      "bytes": 85029,
+      "sha256": "f277f03897be298848d9813ae63905220d3652a09a7dfe0e1a291931b9891155",
+      "edited": false
+    },
+    {
+      "file": "reservation-expired-1440.png",
+      "source": "/workspace/w4-browser-final/reservation-expired-1440.png",
+      "bytes": 346224,
+      "sha256": "ee91f5c323e06ab944350b476358e8efa787d54507fb1ba73b118d1f392f03e2",
+      "edited": false
+    },
+    {
+      "file": "conversation-older-1440.png",
+      "source": "/workspace/w4-browser-final/conversation-older-1440.png",
+      "bytes": 334363,
+      "sha256": "7e4667aa58168b6b706e7d4feaa91e3481ceb872647b169cc1c85924618d5120",
+      "edited": false
+    },
+    {
+      "file": "service-inactive-category-375.png",
+      "source": "/workspace/w4-browser-final/service-inactive-category-375.png",
+      "bytes": 81099,
+      "sha256": "2229fdecf721dc5eaa76db1f6180c03be6bb2999d46dddc7ef4c2a5f9952c802",
+      "edited": false
+    },
+    {
+      "file": "requests-filtered-375.png",
+      "source": "/workspace/w4-browser-final/requests-filtered-375.png",
+      "bytes": 97738,
+      "sha256": "8905cfda09584d82dba340390a352b53036f98e16fe03cea92fd3bf8445f2c99",
+      "edited": false
+    },
+    {
+      "file": "requests-received-375.png",
+      "source": "/workspace/w4-browser-final/requests-received-375.png",
+      "bytes": 98087,
+      "sha256": "6dae7f104b5de4eda841f4685ad8bcd2722aa2306f98f5cd75c1547b57ad9e5d",
+      "edited": false
+    },
+    {
+      "file": "conversations-read-error-375.png",
+      "source": "/workspace/w4-browser-final/conversations-read-error-375.png",
+      "bytes": 91150,
+      "sha256": "c1684331af4b05ef4acf1ff7b0e673eb8a6125a6011eee4796cd4149f7179bc2",
+      "edited": false
+    },
+    {
+      "file": "availability-error-375.png",
+      "source": "/workspace/w4-browser-final/availability-error-375.png",
+      "bytes": 92732,
+      "sha256": "956e65467d4758eb359e69761e6118553fcdad8d3b4635631e0427c359f1d01b",
+      "edited": false
+    },
+    {
+      "file": "failed-module-form.png",
+      "source": "/workspace/w4-browser-final/failed-module-form.png",
+      "bytes": 300084,
+      "sha256": "1a10d123fc2dd565b5fa939beade6b59a1b6c7c4a3b2641d38bb7b2279391879",
+      "edited": false
+    },
+    {
+      "file": "notifications-unavailable-1440.png",
+      "source": "/workspace/w4-browser-final/notifications-unavailable-1440.png",
+      "bytes": 354831,
+      "sha256": "6958c60df177fc9aab779ec2b86a2c772b86f5476a277928b9f2b61c4440151a",
+      "edited": false
+    },
+    {
+      "file": "notifications-page-2-1440.png",
+      "source": "/workspace/w4-browser-final/notifications-page-2-1440.png",
+      "bytes": 362867,
+      "sha256": "ca7a06b6c33e1af1e44229546c40e0e0b69f6704cafe1d9faffc53e0daab21c3",
+      "edited": false
+    },
+    {
+      "file": "reviews-error-375.png",
+      "source": "/workspace/w4-browser-final/reviews-error-375.png",
+      "bytes": 93556,
+      "sha256": "86256c21b62ffdcc3e743deca2a95cd6177cb2bce1feb43531c08634e1f82e3b",
+      "edited": false
+    },
+    {
+      "file": "conversations-empty-1440.png",
+      "source": "/workspace/w4-browser-final/conversations-empty-1440.png",
+      "bytes": 284913,
+      "sha256": "f86612fd26e4d727294fbd00438a448531b983f672ae630d34d8af90a61234d8",
+      "edited": false
+    },
+    {
+      "file": "reservations-375.png",
+      "source": "/workspace/w4-browser-final/reservations-375.png",
+      "bytes": 95456,
+      "sha256": "ab655781bff719d2a53ac9f4525ec2a44b3bba67486a2bc4d5d19bb09a40bb02",
+      "edited": false
+    },
+    {
+      "file": "inquiries-rate-limited-1440.png",
+      "source": "/workspace/w4-browser-final/inquiries-rate-limited-1440.png",
+      "bytes": 184639,
+      "sha256": "88efa7d14008d401bfc57f36c1ab22414ac32c01c46ecc6d222b82fe25c245c1",
+      "edited": false
+    },
+    {
+      "file": "notifications-error-375.png",
+      "source": "/workspace/w4-browser-final/notifications-error-375.png",
+      "bytes": 88097,
+      "sha256": "94e1ec012b0e3c2e868da2399e3c6427c29669af541c85e48f4f6d2169d04d61",
+      "edited": false
+    },
+    {
+      "file": "notifications-error-1440.png",
+      "source": "/workspace/w4-browser-final/notifications-error-1440.png",
+      "bytes": 176568,
+      "sha256": "4befc3cfdb24371c9657efc3d14b7f86a96557db5d7cf5680e564926b9d10dbf",
+      "edited": false
+    },
+    {
+      "file": "requests-page-2-1440.png",
+      "source": "/workspace/w4-browser-final/requests-page-2-1440.png",
+      "bytes": 335914,
+      "sha256": "17ef29d6a6fe7946cd12ef4ee4420a257cd2c922bed42722064c24d40b22c573",
+      "edited": false
+    },
+    {
+      "file": "request-validation-1440.png",
+      "source": "/workspace/w4-browser-final/request-validation-1440.png",
+      "bytes": 294485,
+      "sha256": "b637f18c40c78d4e196d16c928874e8b2c21bbdbc177a6050fb275ecd23142fa",
+      "edited": false
+    },
+    {
+      "file": "request-detail-375.png",
+      "source": "/workspace/w4-browser-final/request-detail-375.png",
+      "bytes": 97273,
+      "sha256": "c302d156fcb5e793c0bacd963333eae24a3a8a38b54357e5e0812764a5ac3493",
+      "edited": false
+    },
+    {
+      "file": "requests-sent-1440.png",
+      "source": "/workspace/w4-browser-final/requests-sent-1440.png",
+      "bytes": 335130,
+      "sha256": "ddcb0bbd4b138fd15dca82611921e631b589b791399e566d586793e3ece0d14e",
+      "edited": false
+    },
+    {
+      "file": "availability-42-rows.png",
+      "source": "/workspace/w4-browser-final/availability-42-rows.png",
+      "bytes": 379585,
+      "sha256": "c1a35c6118c720ae734929156b3ea6cb3161fb43067eae000f1b910406bcd946",
+      "edited": false
+    },
+    {
+      "file": "conversations-read-error-1440.png",
+      "source": "/workspace/w4-browser-final/conversations-read-error-1440.png",
+      "bytes": 181111,
+      "sha256": "831e53095e80b6a8509c21fb7dfa6eef1981dbb6268bafaa9f3b1b2716abeff0",
+      "edited": false
+    },
+    {
+      "file": "notifications-1440.png",
+      "source": "/workspace/w4-browser-final/notifications-1440.png",
+      "bytes": 362879,
+      "sha256": "d8f7a928f21acee96650e5d51b8a9f26c12e40e3a6e32775d88977c800d866f7",
+      "edited": false
+    },
+    {
+      "file": "request-create-1440.png",
+      "source": "/workspace/w4-browser-final/request-create-1440.png",
+      "bytes": 299754,
+      "sha256": "11fa2a00da30f7398d7b0c49d3e5e0253ace15d8107416ec0653fd38f69244ef",
+      "edited": false
+    },
+    {
+      "file": "request-provider-375.png",
+      "source": "/workspace/w4-browser-final/request-provider-375.png",
+      "bytes": 97347,
+      "sha256": "1d7bb03b435464eaf0292d7da271c9f58701e81c0f693d798c5a6ea9a699d366",
+      "edited": false
+    },
+    {
+      "file": "notifications-375.png",
+      "source": "/workspace/w4-browser-final/notifications-375.png",
+      "bytes": 101047,
+      "sha256": "787b13f841837ec229275827a5c913d44f21a8d0a7b12da4bc9a7993c9dea450",
+      "edited": false
+    },
+    {
+      "file": "reservation-confirmed-375.png",
+      "source": "/workspace/w4-browser-final/reservation-confirmed-375.png",
+      "bytes": 91793,
+      "sha256": "70788436c3e29501a31325be98a98e00ef2d842036c6912c1301d98953c6a283",
+      "edited": false
+    },
+    {
+      "file": "request-focus.png",
+      "source": "/workspace/w4-browser-final/request-focus.png",
+      "bytes": 301835,
+      "sha256": "1362b2e447ce07ec65e57ef8bfe184d9b4c67142f7ff46aa7957bc499ab83cbc",
+      "edited": false
+    },
+    {
+      "file": "request-invalid-375.png",
+      "source": "/workspace/w4-browser-final/request-invalid-375.png",
+      "bytes": 83330,
+      "sha256": "74d3a7bc276c034e462e2d710ad6a0350cacd8cb55c60cd88d862f0bfdd58adb",
+      "edited": false
+    },
+    {
+      "file": "conversation-readonly-375.png",
+      "source": "/workspace/w4-browser-final/conversation-readonly-375.png",
+      "bytes": 96456,
+      "sha256": "535aca7f6e938345d2cca341cce4d1333c2fae3c622347ad22eb9e2fcccb5083",
+      "edited": false
+    },
+    {
+      "file": "availability-375.png",
+      "source": "/workspace/w4-browser-final/availability-375.png",
+      "bytes": 89226,
+      "sha256": "171d32f545649f448bdc6ec2ea3cdb022174ac61fbc505f9670f9f1736397cf5",
+      "edited": false
+    },
+    {
+      "file": "inquiries-rate-limited-375.png",
+      "source": "/workspace/w4-browser-final/inquiries-rate-limited-375.png",
+      "bytes": 95414,
+      "sha256": "2aebc5d660f1c453a62b23b288f8be29b2bcefdce0a1cf4d006dd7b0ac8edc4c",
+      "edited": false
+    },
+    {
+      "file": "availability-empty-1440.png",
+      "source": "/workspace/w4-browser-final/availability-empty-1440.png",
+      "bytes": 323836,
+      "sha256": "0c5adb15dddd67a5e3c8e30ba0ba90bba493af763144ebbcfdc3820cd065de58",
+      "edited": false
+    },
+    {
+      "file": "reservation-propose-1440.png",
+      "source": "/workspace/w4-browser-final/reservation-propose-1440.png",
+      "bytes": 392673,
+      "sha256": "ec20bd8cd12a6e1fe06c3085d6c77df57d819d416fb2213d2f9b20be0f411a72",
+      "edited": false
+    },
+    {
+      "file": "service-inactive-category-1440.png",
+      "source": "/workspace/w4-browser-final/service-inactive-category-1440.png",
+      "bytes": 302933,
+      "sha256": "fb69b0271282bb326a375beec9aab4214095d89e2273f7878eb15f301e5b7ffd",
+      "edited": false
+    },
+    {
+      "file": "availability-1440.png",
+      "source": "/workspace/w4-browser-final/availability-1440.png",
+      "bytes": 352088,
+      "sha256": "0bd1ae83fb777da03f83b690092b0e8077dae0d25c9a1c43117c0b951eee3a00",
+      "edited": false
+    },
+    {
+      "file": "reservation-completed-1440.png",
+      "source": "/workspace/w4-browser-final/reservation-completed-1440.png",
+      "bytes": 366426,
+      "sha256": "788e3f64ecc72a22954119234cc3c8ee9be5e1ae9ca69f6e2c2384350fcb2fb6",
+      "edited": false
+    },
+    {
+      "file": "reviews-empty-375.png",
+      "source": "/workspace/w4-browser-final/reviews-empty-375.png",
+      "bytes": 75098,
+      "sha256": "1d671c207aa50f81ec7b0ccd0033301c27cc75958bf852de60983e55a4b804d4",
+      "edited": false
+    },
+    {
+      "file": "card-hover.png",
+      "source": "/workspace/w4-browser-final/card-hover.png",
+      "bytes": 403391,
+      "sha256": "8a6b526bdd7612f33547aa0752db9b573d2eb02eff6a6744313ee3853fbc41f8",
+      "edited": false
+    },
+    {
+      "file": "reservations-empty-375.png",
+      "source": "/workspace/w4-browser-final/reservations-empty-375.png",
+      "bytes": 94225,
+      "sha256": "626fa5267fdeb10a06d58536ff89952efa93087f62ea18422db2b4bfe5d55de9",
+      "edited": false
+    },
+    {
+      "file": "conversations-375.png",
+      "source": "/workspace/w4-browser-final/conversations-375.png",
+      "bytes": 100736,
+      "sha256": "ef87a019a14bdf21efc6c93f7ab2cf5af961ca8ca587bc0ae9bd90eebdf70da4",
+      "edited": false
+    },
+    {
+      "file": "reservation-propose-375.png",
+      "source": "/workspace/w4-browser-final/reservation-propose-375.png",
+      "bytes": 96484,
+      "sha256": "ea4a65bb7a0be3c843597cd5e9391a53da5c84d9b4faf5f3874912e70d470ac2",
+      "edited": false
+    },
+    {
+      "file": "operations-mobile.webm",
+      "source": "/workspace/w4-browser-final/operations-mobile.webm",
+      "bytes": 1258987,
+      "sha256": "d40c21a76115f12f50d05171f7286333be0a82d3b274cb399e3b4c2a59ef627a",
+      "edited": false
+    },
+    {
+      "file": "requests-received-1440.png",
+      "source": "/workspace/w4-browser-final/requests-received-1440.png",
+      "bytes": 342178,
+      "sha256": "e24106f0b52b71f5a65cc15379c312a08241aa914cdab600363393454528707c",
+      "edited": false
+    },
+    {
+      "file": "notifications-empty-375.png",
+      "source": "/workspace/w4-browser-final/notifications-empty-375.png",
+      "bytes": 83529,
+      "sha256": "72e7496b688c48303ac664a7b77a61d0549c9aa8c54b23cf33b369e29d1e7531",
+      "edited": false
+    },
+    {
+      "file": "service-create-1440.png",
+      "source": "/workspace/w4-browser-final/service-create-1440.png",
+      "bytes": 287170,
+      "sha256": "715d17a9b3c2b0b6ae02c5bd856cdfbc61548e0bb66ddd1959f7aab2deb3b512",
+      "edited": false
+    },
+    {
+      "file": "notifications-unavailable-375.png",
+      "source": "/workspace/w4-browser-final/notifications-unavailable-375.png",
+      "bytes": 102745,
+      "sha256": "ee1e042454968f605fdceb1147d38da9c60c56f199f9976fecf3571aada21964",
+      "edited": false
+    },
+    {
+      "file": "conversation-older-375.png",
+      "source": "/workspace/w4-browser-final/conversation-older-375.png",
+      "bytes": 97387,
+      "sha256": "34b196b74fd93b66afe16c540b147cea29363b2f00861429d324eac6423cec8c",
+      "edited": false
+    },
+    {
+      "file": "reservations-empty-1440.png",
+      "source": "/workspace/w4-browser-final/reservations-empty-1440.png",
+      "bytes": 307056,
+      "sha256": "c630a42a30dc06793b75dc6e7ed0492d2ccd06889a0b4e680a5d61982185a022",
+      "edited": false
+    },
+    {
+      "file": "reservation-requested-375.png",
+      "source": "/workspace/w4-browser-final/reservation-requested-375.png",
+      "bytes": 91495,
+      "sha256": "e94b51716b7e2e39ee70c4c5f7e2692ff7af35e5307a9fbe3583df8cf87170c7",
+      "edited": false
+    },
+    {
+      "file": "profile-show-375.png",
+      "source": "/workspace/w4-browser-supplement/profile-show-375.png",
+      "bytes": 97026,
+      "sha256": "417f668a29c1bdc81959a81518cb25e9b8b82b7cbbc89c39f5f3177c38b533de",
+      "edited": false
+    },
+    {
+      "file": "dual-request-detail-1440.png",
+      "source": "/workspace/w4-browser-supplement/dual-request-detail-1440.png",
+      "bytes": 334976,
+      "sha256": "7ffd13292e81a2c4ce01376f5440512783c032b5b0fc9a3152dbd496f4b46f86",
+      "edited": false
+    },
+    {
+      "file": "profile-show-1440.png",
+      "source": "/workspace/w4-browser-supplement/profile-show-1440.png",
+      "bytes": 307472,
+      "sha256": "b3c329c4501cc5019b283e2a3b37862b66578bbcfffdc989bd47a5c54c11264d",
+      "edited": false
+    },
+    {
+      "file": "dual-request-detail-375.png",
+      "source": "/workspace/w4-browser-supplement/dual-request-detail-375.png",
+      "bytes": 96858,
+      "sha256": "821381ae6a56cdefe77eea4e12fbfb7a980fdcccd72939fe26ae56b253dc55dc",
+      "edited": false
+    },
+    {
+      "file": "notifications-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/notifications-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "review-create-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/review-create-zoom-200.png",
+      "bytes": 20914,
+      "sha256": "d031e82dcaf275d2c4bd388413401d08539902a78ac07baa927009d46a14270b",
+      "edited": false
+    },
+    {
+      "file": "request-detail-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/request-detail-zoom-200.png",
+      "bytes": 20971,
+      "sha256": "5629c980715efeeac13aa8110873df6bb95aa012850cb6d71cb50b9ecb4270cf",
+      "edited": false
+    },
+    {
+      "file": "request-detail-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/request-detail-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "conversations-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/conversations-zoom-200.png",
+      "bytes": 20706,
+      "sha256": "9b83bb3b379cc1025eb7168354967c6ab7200edafa6917b5c702d0fd2ff0914a",
+      "edited": false
+    },
+    {
+      "file": "operations-native-zoom.webm",
+      "source": "/workspace/w4-zoom-final/operations-native-zoom.webm",
+      "bytes": 8501205,
+      "sha256": "ba51aab57953ef9441d200e06a3d30b761d9d2a2d5fff2ab171dcd36d865b9e4",
+      "edited": false
+    },
+    {
+      "file": "request-create-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/request-create-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "services-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/services-zoom-200.png",
+      "bytes": 21010,
+      "sha256": "f5a5a7afc59a5ae7ac16962e2bcd85c71e506b8b63a6d21534d7f735aab39820",
+      "edited": false
+    },
+    {
+      "file": "conversations-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/conversations-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "request-create-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/request-create-zoom-200.png",
+      "bytes": 21119,
+      "sha256": "758a0892d80b349f970aad8748bd08a1720d87b166a971bd623c1c18676bec67",
+      "edited": false
+    },
+    {
+      "file": "availability-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/availability-zoom-200.png",
+      "bytes": 21213,
+      "sha256": "9b3539e9caf6e544a471049629350424181cfe61c3cb92fc69e5baf7bf65adf2",
+      "edited": false
+    },
+    {
+      "file": "review-withdrawn-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/review-withdrawn-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "reservation-propose-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/reservation-propose-zoom-200.png",
+      "bytes": 20747,
+      "sha256": "068db61f243707805e34e0f51df88387e53d730e2407704168c4ada5e533f96f",
+      "edited": false
+    },
+    {
+      "file": "reservation-provider-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/reservation-provider-zoom-200.png",
+      "bytes": 21135,
+      "sha256": "82c45bfb9580ce23b4ca09effd23aff14be85eebabc9416dbe6617e32747da9c",
+      "edited": false
+    },
+    {
+      "file": "review-create-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/review-create-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "profile-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/profile-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "reservation-provider-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/reservation-provider-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "review-withdrawn-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/review-withdrawn-zoom-200.png",
+      "bytes": 20988,
+      "sha256": "bbaab5e11e0135f8805b639f8c3a9329cd32ffe1f86e11aef514c03332e533bf",
+      "edited": false
+    },
+    {
+      "file": "reservation-propose-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/reservation-propose-zoom-200-focus.png",
+      "bytes": 1985,
+      "sha256": "61afebc5abedd8ffcb702b3320434ad420894a486aa7d07eebce5ade004fc7cd",
+      "edited": false
+    },
+    {
+      "file": "services-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/services-zoom-200-focus.png",
+      "bytes": 29805,
+      "sha256": "2a59fba16ae7f7b24a61ad3105db855ef67ee4cfb195e056951b934021521118",
+      "edited": false
+    },
+    {
+      "file": "notifications-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/notifications-zoom-200.png",
+      "bytes": 21022,
+      "sha256": "e636312305bd276420caaf0fb5559de859bb8dd61dd19a3ebf245ddeb5650a61",
+      "edited": false
+    },
+    {
+      "file": "availability-zoom-200-focus.png",
+      "source": "/workspace/w4-zoom-final/availability-zoom-200-focus.png",
+      "bytes": 2795,
+      "sha256": "f3065acb5b69274fbae429105a0acaecb17be4fe3936602c9f490a9b3a55f1ed",
+      "edited": false
+    },
+    {
+      "file": "profile-zoom-200.png",
+      "source": "/workspace/w4-zoom-final/profile-zoom-200.png",
+      "bytes": 21016,
+      "sha256": "7ab170ce1a275e71e37cbd73b047e19acbc8ea5c737ffd846b6e6e0d8b941ba5",
+      "edited": false
+    },
+    {
+      "file": "before-profile-375.png",
+      "source": "/workspace/w4-captures/before-profile-375.png",
+      "bytes": 73298,
+      "sha256": "49366acb2ffe0bc3dbb6636a9e5913e171386dead1bd9ddcae588401c078aa91",
+      "edited": false
+    },
+    {
+      "file": "conversation-complete.png",
+      "source": "/workspace/w4-captures/conversation-complete.png",
+      "bytes": 742081,
+      "sha256": "18b4e4ec535cc6154a3da605b7e7ecd52766d50b482402928ec0a6c63b52b02c",
+      "edited": false
+    },
+    {
+      "file": "before-review-create-375.png",
+      "source": "/workspace/w4-captures/before-review-create-375.png",
+      "bytes": 61321,
+      "sha256": "b093e6390f335afd48d5e32f1dfbf9f8acbd8c524cd1262cb8e6f7307e80a5e3",
+      "edited": false
+    },
+    {
+      "file": "availability-blocked-dates.png",
+      "source": "/workspace/w4-captures/availability-blocked-dates.png",
+      "bytes": 5289,
+      "sha256": "76c07477220be604776eac0b43bee92cd4728018da8724a96404016547f4800e",
+      "edited": false
+    },
+    {
+      "file": "profile-full-375.png",
+      "source": "/workspace/w4-captures/profile-full-375.png",
+      "bytes": 251407,
+      "sha256": "1889788bee815d85a9e895725d80aedef29b8547dde972c2e19180dd6cd82bb1",
+      "edited": false
+    },
+    {
+      "file": "before-reservation-propose-1440.png",
+      "source": "/workspace/w4-captures/before-reservation-propose-1440.png",
+      "bytes": 291060,
+      "sha256": "c60dac9885a3e91c69b1ee2f830dadaf89506a35932371611fde9395c83daeca",
+      "edited": false
+    },
+    {
+      "file": "notifications-read-and-unread.png",
+      "source": "/workspace/w4-captures/notifications-read-and-unread.png",
+      "bytes": 786803,
+      "sha256": "97be2d70072c192a69d2ff7911bf5f4e58e4128926ca6d86a8d0fe42d8bef075",
+      "edited": false
+    },
+    {
+      "file": "before-availability-375.png",
+      "source": "/workspace/w4-captures/before-availability-375.png",
+      "bytes": 64115,
+      "sha256": "5717a1d61d8554679906f0ef969df29775bc92fe8717a24e028cb6f7b474667d",
+      "edited": false
+    },
+    {
+      "file": "before-notifications-375.png",
+      "source": "/workspace/w4-captures/before-notifications-375.png",
+      "bytes": 70596,
+      "sha256": "be59f460e663c46d49c40e79259f81f431f92f210d5b8a9dc2c45642a62c029c",
+      "edited": false
+    },
+    {
+      "file": "before-services-375.png",
+      "source": "/workspace/w4-captures/before-services-375.png",
+      "bytes": 68771,
+      "sha256": "06d2fba102e4fa1f8fb59d969d6b2a94a094adaca094c90dc7195b285267e396",
+      "edited": false
+    },
+    {
+      "file": "before-profile-1440.png",
+      "source": "/workspace/w4-captures/before-profile-1440.png",
+      "bytes": 261668,
+      "sha256": "f29f2f3661ba977da3c3f3e8edbcb840247693c686c508e01806b83502ca7649",
+      "edited": false
+    },
+    {
+      "file": "before-services-1440.png",
+      "source": "/workspace/w4-captures/before-services-1440.png",
+      "bytes": 282810,
+      "sha256": "2cb750a96209bae36a83fcfd1fc220ee1afef552c3214ec3879c867812847e25",
+      "edited": false
+    },
+    {
+      "file": "request-create-full-375.png",
+      "source": "/workspace/w4-captures/request-create-full-375.png",
+      "bytes": 113873,
+      "sha256": "e8f77ac1af6afeae11fb713bfe5e3a466050d43da598165e3af525147db1ad03",
+      "edited": false
+    },
+    {
+      "file": "review-published-panel.png",
+      "source": "/workspace/w4-captures/review-published-panel.png",
+      "bytes": 89677,
+      "sha256": "f933aef142fb9229f7d4b1091949e1d6744850b88d47f00caa39cd768fdc9d17",
+      "edited": false
+    },
+    {
+      "file": "reduced-transparency-services.png",
+      "source": "/workspace/w4-captures/reduced-transparency-services.png",
+      "bytes": 191963,
+      "sha256": "915b50d50268f778a2cd17b9299608eb700b5f743fa9ae85e03c004ae56e6dd0",
+      "edited": false
+    },
+    {
+      "file": "request-detail-full-375.png",
+      "source": "/workspace/w4-captures/request-detail-full-375.png",
+      "bytes": 651967,
+      "sha256": "a12ae6d688f8f0b5d3c3767abd2f534d50a55c846bb4d5f8d5a82c879c4e5a7d",
+      "edited": false
+    },
+    {
+      "file": "availability-full-375.png",
+      "source": "/workspace/w4-captures/availability-full-375.png",
+      "bytes": 638735,
+      "sha256": "6ba32b389dcece99c3c596474fa7bc24e74fd30d9926d3d6f145e3598295f484",
+      "edited": false
+    },
+    {
+      "file": "notifications-full-375.png",
+      "source": "/workspace/w4-captures/notifications-full-375.png",
+      "bytes": 518042,
+      "sha256": "93a1e7a20230bb9f311c62acc72e6813a379267fab7627687dc0433052c5ac26",
+      "edited": false
+    },
+    {
+      "file": "before-request-detail-375.png",
+      "source": "/workspace/w4-captures/before-request-detail-375.png",
+      "bytes": 60692,
+      "sha256": "bec3cf505ee2579226ffc145a3cf797817726e38f22d0b8adcf7d0b953197b6e",
+      "edited": false
+    },
+    {
+      "file": "before-review-create-1440.png",
+      "source": "/workspace/w4-captures/before-review-create-1440.png",
+      "bytes": 242783,
+      "sha256": "155bf7b8703494888f1c39e206ba038ce5fb8c6dc3d6079c2d2c161e2275f5e8",
+      "edited": false
+    },
+    {
+      "file": "before-request-create-375.png",
+      "source": "/workspace/w4-captures/before-request-create-375.png",
+      "bytes": 58015,
+      "sha256": "67d4cdbcef74d07b538519d53d771cb589ac49bd0789eff0100badf150c97161",
+      "edited": false
+    },
+    {
+      "file": "before-request-detail-1440.png",
+      "source": "/workspace/w4-captures/before-request-detail-1440.png",
+      "bytes": 247954,
+      "sha256": "17ea7261491e57a60b0e8e18001f79a3ede3f2cc77258e6588d475472c230805",
+      "edited": false
+    },
+    {
+      "file": "review-create-full-375.png",
+      "source": "/workspace/w4-captures/review-create-full-375.png",
+      "bytes": 135342,
+      "sha256": "521d1ede5d62a8b02c32de53e35aa5760ca3ba39d36c135187f9bdbd323d07e6",
+      "edited": false
+    },
+    {
+      "file": "review-withdrawn-panel.png",
+      "source": "/workspace/w4-captures/review-withdrawn-panel.png",
+      "bytes": 85072,
+      "sha256": "6912d4102cb95fa974dd3956969217a237294976fe547a3202a7ce65ed518a38",
+      "edited": false
+    },
+    {
+      "file": "request-timeline.png",
+      "source": "/workspace/w4-captures/request-timeline.png",
+      "bytes": 25227,
+      "sha256": "ad72062525080c4eeb05d9592586280d18b3fe1787978ecc9a60ca6ed3272b73",
+      "edited": false
+    },
+    {
+      "file": "before-conversations-1440.png",
+      "source": "/workspace/w4-captures/before-conversations-1440.png",
+      "bytes": 291444,
+      "sha256": "de5a9d64cd6b65afb8019b81608b39fca9fd5e8985adf4b1d1010a2074a43108",
+      "edited": false
+    },
+    {
+      "file": "reservation-provider-full-375.png",
+      "source": "/workspace/w4-captures/reservation-provider-full-375.png",
+      "bytes": 161204,
+      "sha256": "e68738ee3fa1e79df55fa682980318afd12dca274e605711767d1e1fb3647f8a",
+      "edited": false
+    },
+    {
+      "file": "reservation-propose-full-375.png",
+      "source": "/workspace/w4-captures/reservation-propose-full-375.png",
+      "bytes": 207034,
+      "sha256": "999023a948d87fc36604fe14530bd089fa1ce830d0eeee15bfe8976dce2e0e5d",
+      "edited": false
+    },
+    {
+      "file": "conversations-full-375.png",
+      "source": "/workspace/w4-captures/conversations-full-375.png",
+      "bytes": 589942,
+      "sha256": "4884dccc5abb35028b6b1ca356c785ccf6b54d9f762849e2d9fb75cc84041f3a",
+      "edited": false
+    },
+    {
+      "file": "before-conversations-375.png",
+      "source": "/workspace/w4-captures/before-conversations-375.png",
+      "bytes": 68324,
+      "sha256": "edd387ace13a8b1f7b860192e8b43250a3467a9fa017b67c138d30823075d99e",
+      "edited": false
+    },
+    {
+      "file": "availability-week.png",
+      "source": "/workspace/w4-captures/availability-week.png",
+      "bytes": 588564,
+      "sha256": "b032845cab41d19fc0ffc1d2abf7abe2f8ac4ee124af4aa7c2a3b4c601ae192c",
+      "edited": false
+    },
+    {
+      "file": "before-review-withdrawn-375.png",
+      "source": "/workspace/w4-captures/before-review-withdrawn-375.png",
+      "bytes": 63143,
+      "sha256": "4e7eaac5a489a8f80d22dc94cac5ee1dc55bda1733b5b0cfefb63eda6c81b7c3",
+      "edited": false
+    },
+    {
+      "file": "before-reservation-provider-1440.png",
+      "source": "/workspace/w4-captures/before-reservation-provider-1440.png",
+      "bytes": 261753,
+      "sha256": "e318f7b4a89beec6aafba0f2c32794c401c8d73306ee92a3c7d3ba0348cac21c",
+      "edited": false
+    },
+    {
+      "file": "before-request-create-1440.png",
+      "source": "/workspace/w4-captures/before-request-create-1440.png",
+      "bytes": 233750,
+      "sha256": "f218a3fa60014fd475b142979e04c1309212810e84b6606f1a312923b4cc7c6d",
+      "edited": false
+    },
+    {
+      "file": "conversation-own.png",
+      "source": "/workspace/w4-captures/conversation-own.png",
+      "bytes": 10509,
+      "sha256": "3e80f6789b17362f60eb82482c074069dade859855cffad8ad0d7e4385625261",
+      "edited": false
+    },
+    {
+      "file": "before-reservation-propose-375.png",
+      "source": "/workspace/w4-captures/before-reservation-propose-375.png",
+      "bytes": 66919,
+      "sha256": "6e916c6bacc1bfd62d0c8967e1837c2a94b303307150f63489e8d866844fedb0",
+      "edited": false
+    },
+    {
+      "file": "conversation-received.png",
+      "source": "/workspace/w4-captures/conversation-received.png",
+      "bytes": 12180,
+      "sha256": "196ddbcefddaf058b3afa58caba750b51de29f6ffc95a7f7cd592e9a77bb1ee1",
+      "edited": false
+    },
+    {
+      "file": "before-reservation-provider-375.png",
+      "source": "/workspace/w4-captures/before-reservation-provider-375.png",
+      "bytes": 66353,
+      "sha256": "09dc2895f26057c6ec71405446342109d1bb8b9db7da6fb1e929c8b1f8d549c2",
+      "edited": false
+    },
+    {
+      "file": "before-review-withdrawn-1440.png",
+      "source": "/workspace/w4-captures/before-review-withdrawn-1440.png",
+      "bytes": 239260,
+      "sha256": "3597a30f1cc168c905d9a7cd6d148f64a30637d72c3336060f36ef118dbd5cf3",
+      "edited": false
+    },
+    {
+      "file": "services-full-375.png",
+      "source": "/workspace/w4-captures/services-full-375.png",
+      "bytes": 743211,
+      "sha256": "f270bd56cdd6d4f2e5b4922ea8e787234315e67227ac3c1693b9678c51eabaaa",
+      "edited": false
+    },
+    {
+      "file": "reservation-history.png",
+      "source": "/workspace/w4-captures/reservation-history.png",
+      "bytes": 20948,
+      "sha256": "5294e9251775eb28c2cba58b6022662d531c76974d639eb709247c116c729770",
+      "edited": false
+    },
+    {
+      "file": "before-availability-1440.png",
+      "source": "/workspace/w4-captures/before-availability-1440.png",
+      "bytes": 245112,
+      "sha256": "05fa297200370d8ddb146d1e36f26432212870276ab1b9086b4e6fb49728d9ee",
+      "edited": false
+    },
+    {
+      "file": "review-withdrawn-full-375.png",
+      "source": "/workspace/w4-captures/review-withdrawn-full-375.png",
+      "bytes": 115831,
+      "sha256": "7a0500bf9057915b94fec3ddfe918a3299d6e1ee94d81a0f31dd636d7257a1eb",
+      "edited": false
+    },
+    {
+      "file": "before-notifications-1440.png",
+      "source": "/workspace/w4-captures/before-notifications-1440.png",
+      "bytes": 258277,
+      "sha256": "5c80ebf4f25e25bb550d79bc636f4efdeb2f82ba7e2cd63cc26d00f2c0ff816c",
+      "edited": false
+    },
+    {
+      "file": "reference-w3-catalog-1440.png",
+      "source": "/workspace/w4-marketplace-regression/catalog-1440.png",
+      "bytes": 249422,
+      "sha256": "595b6dafb53e2d8837dd7376e5ab90013f0905ab74b72fda195e6e380e9de9ee",
+      "edited": false
+    },
+    {
+      "file": "reference-approved-dashboard-1440.png",
+      "source": "/workspace/w4-dashboard-regression-final/provider-summary-1440.png",
+      "bytes": 1029225,
+      "sha256": "cb55ade2c95178d135cf403aa0f9e6de637abdd489701f43eb7e68da24be6bc1",
+      "edited": false
+    }
+  ]
+}

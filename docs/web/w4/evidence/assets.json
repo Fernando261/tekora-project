@@ -1,0 +1,36 @@
+{
+  "new": {
+    "css": {
+      "entry": "resources/css/tekora/operations.css",
+      "file": "assets/operations-DYhB3mcC.css",
+      "bytes": 22430,
+      "gzip_bytes": 5255,
+      "sha256": "b600c52755c07da0494d5a1e883fb1618dc8e78f2152c1190408f772c5564b6f",
+      "budget_bytes": 24576
+    },
+    "js": {
+      "entry": "resources/js/tekora/operations.js",
+      "file": "assets/operations-DVr2slB9.js",
+      "bytes": 2040,
+      "gzip_bytes": 930,
+      "sha256": "f93446b2774372dc6b9a3bb07ef3c8cee05567705a322764f8faf8af7f149641",
+      "budget_bytes": 4096
+    }
+  },
+  "prior_manifest_assets_identical": {
+    "node_modules/animejs/dist/modules/index.js": true,
+    "resources/css/tekora/account-shell.css": true,
+    "resources/css/tekora/ambient.css": true,
+    "resources/css/tekora/dashboards.css": true,
+    "resources/css/tekora/marketplace.css": true,
+    "resources/css/tekora/tekora.css": true,
+    "resources/js/app.js": true,
+    "resources/js/tekora/account-shell.js": true,
+    "resources/js/tekora/dashboards.js": true,
+    "resources/js/tekora/marketplace.js": true,
+    "resources/js/tekora/tekora.js": true,
+    "resources/sass/app.scss": true
+  },
+  "new_font_files": 0,
+  "new_dependencies": 0
+}
