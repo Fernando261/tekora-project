@@ -1,0 +1,133 @@
+{
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "origin_main_sha_checked": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "branch": "codex/w62a-tekora-legacy-decoupling",
+  "phase": "Final candidate verified before implementation commit; implementation/final SHAs are recorded in PR/delivery",
+  "files_changed": 44,
+  "code_and_test_files": 8,
+  "git_modes": "100644 only; no symlinks/executables",
+  "git_diff_check_cached_exit_code": 0,
+  "scope_matches_delivery_manifest": true,
+  "previous_tests_unchanged": true,
+  "w61_documentation_and_evidence_unchanged": true,
+  "protected_routes_migrations_guards_policies_native_models_locks_unchanged": true,
+  "api_operations": 21,
+  "migration_files": 37,
+  "relative_links_checked": 25,
+  "json_valid": true,
+  "source_hashes": [
+    {
+      "file": "app/Http/Controllers/ProfileController.php",
+      "sha256": "b5e4c79d0475fed147d9293e7de2c24dccfe5373551d381a438fe64dc76dd2a5"
+    },
+    {
+      "file": "app/Services/ProfilePhotoReferences.php",
+      "sha256": "efbca48a1cd9a9a50db814974c1cb791a20506501f2a28edb528642c13c735fb"
+    },
+    {
+      "file": "app/Services/LegacyPhotoReferences.php",
+      "sha256": "98473bdc2d050b0e2d268d8be994e2ff0f74f5b1d23031e47e1d90cfac16e83f"
+    },
+    {
+      "file": "resources/views/components/account-layout.blade.php",
+      "sha256": "9fc80af5971e2038f9687dced96b445dc1245e3c960b65ffda86ec5f2e239a64"
+    },
+    {
+      "file": "public/css/tekora/account-base.css",
+      "sha256": "6f781da08e6d4a0160f01a73e45a48dc832a397e9baa3ec992c7485238fbda07"
+    },
+    {
+      "file": "tests/Feature/LegacyPhotoDecouplingTest.php",
+      "sha256": "66607c599a18ef381e751659a1e1b0687e5c9809b5c4e0cdc56dc40af4441448"
+    },
+    {
+      "file": "tests/Feature/NativeLegacyIndependenceTest.php",
+      "sha256": "e03924f0409e6904d8a27fa81e4bab7ab3bb626eb5c4500f08ad7d60f4a8e082"
+    },
+    {
+      "file": "tests/Support/WithoutLegacySchema.php",
+      "sha256": "39611b1e38d0a1166e73045f036e7be777567e9b99b37d3d755b996286e1b756"
+    }
+  ],
+  "text_output_normalization": {
+    "method": "Only trailing terminal spaces and trailing empty EOF lines removed for git diff --check; semantic output preserved; JSON and screenshots unchanged",
+    "files": [
+      {
+        "file": "W62A-no-build-baseline-diagnostic.txt",
+        "original_sha256": "35a88b641f6ef987cd8b5885e668132c060f169212c41a56569c06a040f31957",
+        "published_sha256": "35a88b641f6ef987cd8b5885e668132c060f169212c41a56569c06a040f31957"
+      },
+      {
+        "file": "W62A-no-build-full-diagnostic.txt",
+        "original_sha256": "4028b28adbe327633088bd71fb6e979563160236b93143040c2327baf4376789",
+        "published_sha256": "4028b28adbe327633088bd71fb6e979563160236b93143040c2327baf4376789"
+      },
+      {
+        "file": "W62A-no-build-targeted.txt",
+        "original_sha256": "82b7d5c796b6bbf9446d6cbf3575371cc3ad17ab2975f0c1acc08243ce6aad6f",
+        "published_sha256": "82b7d5c796b6bbf9446d6cbf3575371cc3ad17ab2975f0c1acc08243ce6aad6f"
+      },
+      {
+        "file": "W62A-npm-build.txt",
+        "original_sha256": "70ce83163be66cefbe203ff3c53d28c53d347c5a5daa38fe02a5b1ef4c21ff6c",
+        "published_sha256": "70ce83163be66cefbe203ff3c53d28c53d347c5a5daa38fe02a5b1ef4c21ff6c"
+      },
+      {
+        "file": "W62A-npm-ci.txt",
+        "original_sha256": "c236044c08997f03f1be6ec010bd1e7c921222ab88597a50b9913406b23b8818",
+        "published_sha256": "c236044c08997f03f1be6ec010bd1e7c921222ab88597a50b9913406b23b8818"
+      },
+      {
+        "file": "W62A-composer-audit-no-dev.txt",
+        "original_sha256": "dac04dda7966b04d2eb83ba22b729e4025f820bba102192effa983b1fa377af8",
+        "published_sha256": "dac04dda7966b04d2eb83ba22b729e4025f820bba102192effa983b1fa377af8"
+      },
+      {
+        "file": "W62A-composer-audit.txt",
+        "original_sha256": "dac04dda7966b04d2eb83ba22b729e4025f820bba102192effa983b1fa377af8",
+        "published_sha256": "dac04dda7966b04d2eb83ba22b729e4025f820bba102192effa983b1fa377af8"
+      },
+      {
+        "file": "W62A-composer-platform.txt",
+        "original_sha256": "9cb04939f43955b73ad1b6bc91487de422ae9e0340ada0fcad027fd857972cef",
+        "published_sha256": "77a090498af38af9476e84590b6063fccf869e315766cc3a2a8b920193800386"
+      },
+      {
+        "file": "W62A-composer-validate.txt",
+        "original_sha256": "43add299dc97ecbd90ec2dc456ef5a0bd824bb9abdae2a3d7cdb520e21f8e86d",
+        "published_sha256": "43add299dc97ecbd90ec2dc456ef5a0bd824bb9abdae2a3d7cdb520e21f8e86d"
+      },
+      {
+        "file": "W62A-pint.txt",
+        "original_sha256": "d4c0f98c6aabce5c15c404a55f0b15a9d62b82376009cd78e88ae22f2d743de2",
+        "published_sha256": "1117e4d558594edc4ca4511d00fa3f7793cfe95c5f8104ef013a4b54fdb1609f"
+      },
+      {
+        "file": "W62A-decoupling.txt",
+        "original_sha256": "106926362548d96836bc0f2d59093a80f178bb68ebfe68969203cee65ec2e6c1",
+        "published_sha256": "106926362548d96836bc0f2d59093a80f178bb68ebfe68969203cee65ec2e6c1"
+      },
+      {
+        "file": "W62A-w51-regression.txt",
+        "original_sha256": "f179d7abeafa79ed0aeb267f1fc058fe1b51fb479d5f9be84425782d9a92dcf6",
+        "published_sha256": "f179d7abeafa79ed0aeb267f1fc058fe1b51fb479d5f9be84425782d9a92dcf6"
+      },
+      {
+        "file": "W62A-phpunit-built.txt",
+        "original_sha256": "8ebaf34fc7a38f618a4e8d67de3bae1f794f35b38ce6c052a3f8ea4d0b0bbcd8",
+        "published_sha256": "8ebaf34fc7a38f618a4e8d67de3bae1f794f35b38ce6c052a3f8ea4d0b0bbcd8"
+      },
+      {
+        "file": "W62A-phpunit-habitual.txt",
+        "original_sha256": "65d8c2e13a494a1fcac4b4abf235da7640c4bc0d045c5120c18ee10f84890a3c",
+        "published_sha256": "65d8c2e13a494a1fcac4b4abf235da7640c4bc0d045c5120c18ee10f84890a3c"
+      },
+      {
+        "file": "W62A-phpunit-baseline.txt",
+        "original_sha256": "30ddcee1b8fad36b6499a92c82a99d1459b884b06facffbb73ee794e58082383",
+        "published_sha256": "30ddcee1b8fad36b6499a92c82a99d1459b884b06facffbb73ee794e58082383"
+      }
+    ]
+  },
+  "merge_deploy_auto_merge_data_operations_or_w62b_w62c_started": false
+}

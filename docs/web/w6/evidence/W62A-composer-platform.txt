@@ -1,0 +1,20 @@
+Checking platform requirements for packages in the vendor dir
+composer-runtime-api 2.2.2      success
+ext-ctype            *          success provided by symfony/polyfill-ctype
+ext-dom              20031129   success
+ext-fileinfo         8.2.35     success
+ext-filter           8.2.35     success
+ext-hash             8.2.35     success
+ext-iconv            8.2.35     success
+ext-json             8.2.35     success
+ext-libxml           8.2.35     success
+ext-mbstring         *          success provided by symfony/polyfill-mbstring
+ext-openssl          8.2.35     success
+ext-pcre             8.2.35     success
+ext-phar             8.2.35     success
+ext-session          8.2.35     success
+ext-tokenizer        8.2.35     success
+ext-xml              8.2.35     success
+ext-xmlwriter        8.2.35     success
+lib-pcre             10.46      success
+php                  8.2.35     success

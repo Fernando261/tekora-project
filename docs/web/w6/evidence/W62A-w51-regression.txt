@@ -1,0 +1,10 @@
+PHPUnit 11.5.57 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.35
+Configuration: /tmp/tekora-w62a-project/phpunit.xml
+
+.................................................                 49 / 49 (100%)
+
+Time: 00:02.683, Memory: 79.00 MB
+
+OK (49 tests, 459 assertions)

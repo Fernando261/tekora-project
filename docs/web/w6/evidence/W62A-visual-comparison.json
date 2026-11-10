@@ -1,0 +1,645 @@
+{
+  "method": "Chromium on same 20 native synthetic GET exports; before intercept serves unchanged original home.css at the new base URL; after serves actual extracted CSS. Full computed styles for every element and ::before/::after, same DOM/data/assets, reduced motion, animations/transitions frozen for determinism. Not a comparison of personal data or old screenshots.",
+  "screens": [
+    {
+      "page": "client-account-index.html",
+      "route": "account.index",
+      "role": "client",
+      "width": 375,
+      "nodes": 184,
+      "equal": true,
+      "before_sha256": "ee8716ecfab765400cedb7925686a00fe5e50c808929aa3bb3ef0e53ed03f6e3",
+      "after_sha256": "ee8716ecfab765400cedb7925686a00fe5e50c808929aa3bb3ef0e53ed03f6e3"
+    },
+    {
+      "page": "client-account-index.html",
+      "route": "account.index",
+      "role": "client",
+      "width": 1440,
+      "nodes": 184,
+      "equal": true,
+      "before_sha256": "41d14ba3f26780fe366d4e37d9472e44b5e2b0e6a6da34de4ea385e132edb254",
+      "after_sha256": "41d14ba3f26780fe366d4e37d9472e44b5e2b0e6a6da34de4ea385e132edb254"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 320,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "1d2032b84f2aee0b4bb6fe105be2a60ceca6d351421b70a8d0b656a16e2dbf4a",
+      "after_sha256": "1d2032b84f2aee0b4bb6fe105be2a60ceca6d351421b70a8d0b656a16e2dbf4a"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 375,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "76505e0c7047e05e1d59f3f7eccf9f6e9d8d1eb81516c84e94ec09e983ecfa83",
+      "after_sha256": "76505e0c7047e05e1d59f3f7eccf9f6e9d8d1eb81516c84e94ec09e983ecfa83"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 768,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "97e71bc53d095e25d283d4bce1f73a8a1f9abf0f225825b22dec5172aa066981",
+      "after_sha256": "97e71bc53d095e25d283d4bce1f73a8a1f9abf0f225825b22dec5172aa066981"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 980,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "16bacd02db9612707753e715641abe09641ae13bc31b216f61d97edef923482c",
+      "after_sha256": "16bacd02db9612707753e715641abe09641ae13bc31b216f61d97edef923482c"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 1024,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "e1925ac2becdb0125cfb0702b84d0a54303daa46dfaf18572b064bbcb741d85e",
+      "after_sha256": "e1925ac2becdb0125cfb0702b84d0a54303daa46dfaf18572b064bbcb741d85e"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 1280,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "4ac4e1b32bf59a64310cce89466450a7497fd791d2e8074d0613c351cabf7ef6",
+      "after_sha256": "4ac4e1b32bf59a64310cce89466450a7497fd791d2e8074d0613c351cabf7ef6"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 1440,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "1afd54c589f3c49a711835e5087813e4b9233c3121f60052be3135e92d0b6cb1",
+      "after_sha256": "1afd54c589f3c49a711835e5087813e4b9233c3121f60052be3135e92d0b6cb1"
+    },
+    {
+      "page": "client-account-client.html",
+      "route": "account.client",
+      "role": "client",
+      "width": 1920,
+      "nodes": 336,
+      "equal": true,
+      "before_sha256": "941ef557c26fd4800d1238533e7ecb3f7724a06c167467b006f8abc234e91d69",
+      "after_sha256": "941ef557c26fd4800d1238533e7ecb3f7724a06c167467b006f8abc234e91d69"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 320,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "75c4b2f34db0279c811c21dd143697ac27346405592c31b0a9ca1b59f8a1a3cc",
+      "after_sha256": "75c4b2f34db0279c811c21dd143697ac27346405592c31b0a9ca1b59f8a1a3cc"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 375,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "eb2116edd7a614bf1ab1eedb9bc9610a9f366045ca4579e198c6b30fc9f94273",
+      "after_sha256": "eb2116edd7a614bf1ab1eedb9bc9610a9f366045ca4579e198c6b30fc9f94273"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 768,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "2e80e323d7983cbcda511fe7f52a533d96dc4e6183e6d5f5b22c7b69d7e147ea",
+      "after_sha256": "2e80e323d7983cbcda511fe7f52a533d96dc4e6183e6d5f5b22c7b69d7e147ea"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 980,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "8e5162803085693cd6266107f16e44f904c018780d3dec670c2a0bb4004a968c",
+      "after_sha256": "8e5162803085693cd6266107f16e44f904c018780d3dec670c2a0bb4004a968c"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 1024,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "4351a28037049ae115bdb48efb36cb4fff6a785f49798e632d7c26d361b858d2",
+      "after_sha256": "4351a28037049ae115bdb48efb36cb4fff6a785f49798e632d7c26d361b858d2"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 1280,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "f9df97c4bb4d8e2d546de0eaa119ac4c346bdd4bb5dd8ae0aa7863931efad465",
+      "after_sha256": "f9df97c4bb4d8e2d546de0eaa119ac4c346bdd4bb5dd8ae0aa7863931efad465"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 1440,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "c70b1280c9f5c3f47833d88c12095996735e7fd03b439d58df994eaea691585b",
+      "after_sha256": "c70b1280c9f5c3f47833d88c12095996735e7fd03b439d58df994eaea691585b"
+    },
+    {
+      "page": "client-perfil.html",
+      "route": "perfil",
+      "role": "client",
+      "width": 1920,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "a850ce1e81745f9a814d34ecda04047e45bef219bdbd628c89079cfbb662c6c5",
+      "after_sha256": "a850ce1e81745f9a814d34ecda04047e45bef219bdbd628c89079cfbb662c6c5"
+    },
+    {
+      "page": "client-inquiries-index.html",
+      "route": "inquiries.index",
+      "role": "client",
+      "width": 375,
+      "nodes": 200,
+      "equal": true,
+      "before_sha256": "44fd69a5de17b1177068b753b70f0a5d416ceb213157048211d88696c4e5e46e",
+      "after_sha256": "44fd69a5de17b1177068b753b70f0a5d416ceb213157048211d88696c4e5e46e"
+    },
+    {
+      "page": "client-inquiries-index.html",
+      "route": "inquiries.index",
+      "role": "client",
+      "width": 1440,
+      "nodes": 200,
+      "equal": true,
+      "before_sha256": "2e30e465906bb42c6ce93dce1fe93b1556d4241127ec0f84642d7596400fd189",
+      "after_sha256": "2e30e465906bb42c6ce93dce1fe93b1556d4241127ec0f84642d7596400fd189"
+    },
+    {
+      "page": "client-conversations-index.html",
+      "route": "conversations.index",
+      "role": "client",
+      "width": 375,
+      "nodes": 178,
+      "equal": true,
+      "before_sha256": "976a67a46d1f63417944553a43d2d5541d9316296e41ccb4ae5ba85c53e5bf12",
+      "after_sha256": "976a67a46d1f63417944553a43d2d5541d9316296e41ccb4ae5ba85c53e5bf12"
+    },
+    {
+      "page": "client-conversations-index.html",
+      "route": "conversations.index",
+      "role": "client",
+      "width": 1440,
+      "nodes": 178,
+      "equal": true,
+      "before_sha256": "1b256bbb524ba0b1f49daf1e3f003fcad4477ac5413b721a083aad5d9d448842",
+      "after_sha256": "1b256bbb524ba0b1f49daf1e3f003fcad4477ac5413b721a083aad5d9d448842"
+    },
+    {
+      "page": "client-reservations-index.html",
+      "route": "reservations.index",
+      "role": "client",
+      "width": 375,
+      "nodes": 185,
+      "equal": true,
+      "before_sha256": "96d4b41fc8b8f9f0f9f54c3184354b788abb0c5f252e20bf0e9896ba3072186d",
+      "after_sha256": "96d4b41fc8b8f9f0f9f54c3184354b788abb0c5f252e20bf0e9896ba3072186d"
+    },
+    {
+      "page": "client-reservations-index.html",
+      "route": "reservations.index",
+      "role": "client",
+      "width": 1440,
+      "nodes": 185,
+      "equal": true,
+      "before_sha256": "8d385aa534737d0b65f973e00649dde562752bc99c4abff7c1da291beedff82f",
+      "after_sha256": "8d385aa534737d0b65f973e00649dde562752bc99c4abff7c1da291beedff82f"
+    },
+    {
+      "page": "client-reviews-index.html",
+      "route": "reviews.index",
+      "role": "client",
+      "width": 375,
+      "nodes": 177,
+      "equal": true,
+      "before_sha256": "7b06c4312e1eb2bac5773dcb1bcf84c8b590d9afc0dc05b289e897d349f4e8d1",
+      "after_sha256": "7b06c4312e1eb2bac5773dcb1bcf84c8b590d9afc0dc05b289e897d349f4e8d1"
+    },
+    {
+      "page": "client-reviews-index.html",
+      "route": "reviews.index",
+      "role": "client",
+      "width": 1440,
+      "nodes": 177,
+      "equal": true,
+      "before_sha256": "8e7a78b4b794aab1df10013c205d9299f230338addb3330b4b1ebf5f26cce256",
+      "after_sha256": "8e7a78b4b794aab1df10013c205d9299f230338addb3330b4b1ebf5f26cce256"
+    },
+    {
+      "page": "client-notifications-index.html",
+      "route": "notifications.index",
+      "role": "client",
+      "width": 375,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "a136c41bac7b396d7c5c50c2105ac48c8c988471704e0a35ee678024aa1d1b56",
+      "after_sha256": "a136c41bac7b396d7c5c50c2105ac48c8c988471704e0a35ee678024aa1d1b56"
+    },
+    {
+      "page": "client-notifications-index.html",
+      "route": "notifications.index",
+      "role": "client",
+      "width": 1440,
+      "nodes": 206,
+      "equal": true,
+      "before_sha256": "a02f56b42db7b104a74efe5d30a942a48ff628f9c19428ac16c4daaa4c54147a",
+      "after_sha256": "a02f56b42db7b104a74efe5d30a942a48ff628f9c19428ac16c4daaa4c54147a"
+    },
+    {
+      "page": "provider-account-index.html",
+      "route": "account.index",
+      "role": "provider",
+      "width": 375,
+      "nodes": 202,
+      "equal": true,
+      "before_sha256": "07ff6c336d184e6abce15882298ee43180ccd6b2a1667bbfb69b2146fa4fdae9",
+      "after_sha256": "07ff6c336d184e6abce15882298ee43180ccd6b2a1667bbfb69b2146fa4fdae9"
+    },
+    {
+      "page": "provider-account-index.html",
+      "route": "account.index",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 202,
+      "equal": true,
+      "before_sha256": "1eb14e889e637e9a3e9c6f03bdfe4030f30fbde66d9b8b01e587acc17b00d0fe",
+      "after_sha256": "1eb14e889e637e9a3e9c6f03bdfe4030f30fbde66d9b8b01e587acc17b00d0fe"
+    },
+    {
+      "page": "provider-account-client.html",
+      "route": "account.client",
+      "role": "provider",
+      "width": 375,
+      "nodes": 348,
+      "equal": true,
+      "before_sha256": "c0dd3477a1893dc71156589cb17326cc4214174d353d3f7b2e3a9b3590d664b6",
+      "after_sha256": "c0dd3477a1893dc71156589cb17326cc4214174d353d3f7b2e3a9b3590d664b6"
+    },
+    {
+      "page": "provider-account-client.html",
+      "route": "account.client",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 348,
+      "equal": true,
+      "before_sha256": "d82c6d96b8824371754cc3a286a31f9d16352cde989918890367cbc406718d21",
+      "after_sha256": "d82c6d96b8824371754cc3a286a31f9d16352cde989918890367cbc406718d21"
+    },
+    {
+      "page": "provider-perfil.html",
+      "route": "perfil",
+      "role": "provider",
+      "width": 375,
+      "nodes": 222,
+      "equal": true,
+      "before_sha256": "7860d6e446ca8646e0bb018078a9b777e9848207db2ef7373502ccc7faac6731",
+      "after_sha256": "7860d6e446ca8646e0bb018078a9b777e9848207db2ef7373502ccc7faac6731"
+    },
+    {
+      "page": "provider-perfil.html",
+      "route": "perfil",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 222,
+      "equal": true,
+      "before_sha256": "436050b3e0fdb9aceec4402af29b57e7a4a55ba37cedae3237319bdeef3d3338",
+      "after_sha256": "436050b3e0fdb9aceec4402af29b57e7a4a55ba37cedae3237319bdeef3d3338"
+    },
+    {
+      "page": "provider-inquiries-index.html",
+      "route": "inquiries.index",
+      "role": "provider",
+      "width": 375,
+      "nodes": 202,
+      "equal": true,
+      "before_sha256": "ec303618426d18dbd2e30288c826b8337d92be0bb5a93a0775bd53b150aab029",
+      "after_sha256": "ec303618426d18dbd2e30288c826b8337d92be0bb5a93a0775bd53b150aab029"
+    },
+    {
+      "page": "provider-inquiries-index.html",
+      "route": "inquiries.index",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 202,
+      "equal": true,
+      "before_sha256": "e084e5bedd6919740c48b53e1ff1992ab6838075921203619e4a5c8e1ddd8113",
+      "after_sha256": "e084e5bedd6919740c48b53e1ff1992ab6838075921203619e4a5c8e1ddd8113"
+    },
+    {
+      "page": "provider-conversations-index.html",
+      "route": "conversations.index",
+      "role": "provider",
+      "width": 375,
+      "nodes": 194,
+      "equal": true,
+      "before_sha256": "f4a9432956cb30b53749ca0782bfed9a521718f037b04eb2f6b0a68bfa6ca47f",
+      "after_sha256": "f4a9432956cb30b53749ca0782bfed9a521718f037b04eb2f6b0a68bfa6ca47f"
+    },
+    {
+      "page": "provider-conversations-index.html",
+      "route": "conversations.index",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 194,
+      "equal": true,
+      "before_sha256": "88f490549e8f5ad42538e491a5e883414c90f2446146ddf99eca7a867ed07ef3",
+      "after_sha256": "88f490549e8f5ad42538e491a5e883414c90f2446146ddf99eca7a867ed07ef3"
+    },
+    {
+      "page": "provider-reservations-index.html",
+      "route": "reservations.index",
+      "role": "provider",
+      "width": 375,
+      "nodes": 201,
+      "equal": true,
+      "before_sha256": "4f96b23c0586b838d51228e406a43538a3dd9c326edf7a3014639b61e9b80434",
+      "after_sha256": "4f96b23c0586b838d51228e406a43538a3dd9c326edf7a3014639b61e9b80434"
+    },
+    {
+      "page": "provider-reservations-index.html",
+      "route": "reservations.index",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 201,
+      "equal": true,
+      "before_sha256": "5ded44c9f26df2eb6e446fad68a7ecde5ffd4bd0caf21890b3dbc99e1282f340",
+      "after_sha256": "5ded44c9f26df2eb6e446fad68a7ecde5ffd4bd0caf21890b3dbc99e1282f340"
+    },
+    {
+      "page": "provider-reviews-index.html",
+      "route": "reviews.index",
+      "role": "provider",
+      "width": 375,
+      "nodes": 187,
+      "equal": true,
+      "before_sha256": "ad0211fce2dba23d526ed24bb35d746540cec07de202929a63ccbfd7fc04cad0",
+      "after_sha256": "ad0211fce2dba23d526ed24bb35d746540cec07de202929a63ccbfd7fc04cad0"
+    },
+    {
+      "page": "provider-reviews-index.html",
+      "route": "reviews.index",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 187,
+      "equal": true,
+      "before_sha256": "36c9d39c82c5e26ce1707fe626d5b25eb22c817ccdf1561c396612111e64597a",
+      "after_sha256": "36c9d39c82c5e26ce1707fe626d5b25eb22c817ccdf1561c396612111e64597a"
+    },
+    {
+      "page": "provider-notifications-index.html",
+      "route": "notifications.index",
+      "role": "provider",
+      "width": 375,
+      "nodes": 222,
+      "equal": true,
+      "before_sha256": "e5315c1083875258c9653cb8342f71c7751b9ae3cdc448cf8ee9ea8b1854f6ff",
+      "after_sha256": "e5315c1083875258c9653cb8342f71c7751b9ae3cdc448cf8ee9ea8b1854f6ff"
+    },
+    {
+      "page": "provider-notifications-index.html",
+      "route": "notifications.index",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 222,
+      "equal": true,
+      "before_sha256": "da9e85b7d9fbe460f7593c891b74d2ac5d4f33f4e14f1a5c9e747c5bbaa5e2e6",
+      "after_sha256": "da9e85b7d9fbe460f7593c891b74d2ac5d4f33f4e14f1a5c9e747c5bbaa5e2e6"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 320,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "f561d116ce34c0b271d46636c74f27f1eb6fd6cb4052ba75a7dbfdb00fa93bcd",
+      "after_sha256": "f561d116ce34c0b271d46636c74f27f1eb6fd6cb4052ba75a7dbfdb00fa93bcd"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 375,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "425abd6091667abe8eb0925e356edd0d036d2b1a5e3666b2aae1022149018f94",
+      "after_sha256": "425abd6091667abe8eb0925e356edd0d036d2b1a5e3666b2aae1022149018f94"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 768,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "0b63ed3c7a3be5168b3d18a8dbcfe98b22e47b7af20da0bfc8c63151bde99aae",
+      "after_sha256": "0b63ed3c7a3be5168b3d18a8dbcfe98b22e47b7af20da0bfc8c63151bde99aae"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 980,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "b0cf82c587d5161bf99e7242ac5988f72814f3212447868144da29cecd8e7281",
+      "after_sha256": "b0cf82c587d5161bf99e7242ac5988f72814f3212447868144da29cecd8e7281"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 1024,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "15f18bb6d24e134c854eec43434bbb9736deaf7c818f2bc1abfe86ce644b0547",
+      "after_sha256": "15f18bb6d24e134c854eec43434bbb9736deaf7c818f2bc1abfe86ce644b0547"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 1280,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "d1213fd104e8bbb0aea38f1c4045ac04b4e85af8a64b2a2fbb61d3d16cf12e5c",
+      "after_sha256": "d1213fd104e8bbb0aea38f1c4045ac04b4e85af8a64b2a2fbb61d3d16cf12e5c"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "e8c747abe54479fbd28934d70cd6594ff6b3a2cfcbfa8f6a1990eec513421c6a",
+      "after_sha256": "e8c747abe54479fbd28934d70cd6594ff6b3a2cfcbfa8f6a1990eec513421c6a"
+    },
+    {
+      "page": "provider-provider-dashboard.html",
+      "route": "provider.dashboard",
+      "role": "provider",
+      "width": 1920,
+      "nodes": 607,
+      "equal": true,
+      "before_sha256": "5714ba2acb01f1aad0f94966f91501ff7596399233e3cff19368149d53f4b119",
+      "after_sha256": "5714ba2acb01f1aad0f94966f91501ff7596399233e3cff19368149d53f4b119"
+    },
+    {
+      "page": "provider-account-provider.html",
+      "route": "account.provider",
+      "role": "provider",
+      "width": 375,
+      "nodes": 217,
+      "equal": true,
+      "before_sha256": "dbd65e2cb1f5dfd5354516b9e0ad5dc7e0b0cc8e64d1e8e888cea054c722873d",
+      "after_sha256": "dbd65e2cb1f5dfd5354516b9e0ad5dc7e0b0cc8e64d1e8e888cea054c722873d"
+    },
+    {
+      "page": "provider-account-provider.html",
+      "route": "account.provider",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 217,
+      "equal": true,
+      "before_sha256": "dce52d9d870ac624e2ffcdf75155286f5ac04d6824d8d26672f73b882704d9c7",
+      "after_sha256": "dce52d9d870ac624e2ffcdf75155286f5ac04d6824d8d26672f73b882704d9c7"
+    },
+    {
+      "page": "provider-provider-services-index.html",
+      "route": "provider-services.index",
+      "role": "provider",
+      "width": 375,
+      "nodes": 200,
+      "equal": true,
+      "before_sha256": "d9fab60da2583a37f615a1c3d65db29c9d6d6c57e63446749ca5ba5e9175bc76",
+      "after_sha256": "d9fab60da2583a37f615a1c3d65db29c9d6d6c57e63446749ca5ba5e9175bc76"
+    },
+    {
+      "page": "provider-provider-services-index.html",
+      "route": "provider-services.index",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 200,
+      "equal": true,
+      "before_sha256": "e1a3e8490bcbfca9381b2f63a3df98b3001f05770635bfa3fbff74dcbe131c48",
+      "after_sha256": "e1a3e8490bcbfca9381b2f63a3df98b3001f05770635bfa3fbff74dcbe131c48"
+    },
+    {
+      "page": "provider-availability-edit.html",
+      "route": "availability.edit",
+      "role": "provider",
+      "width": 375,
+      "nodes": 946,
+      "equal": true,
+      "before_sha256": "46e1b6476540f070ceb5dbc1b4f1dfea670c061c6a6f8764a145cdfd3f25ae1a",
+      "after_sha256": "46e1b6476540f070ceb5dbc1b4f1dfea670c061c6a6f8764a145cdfd3f25ae1a"
+    },
+    {
+      "page": "provider-availability-edit.html",
+      "route": "availability.edit",
+      "role": "provider",
+      "width": 1440,
+      "nodes": 946,
+      "equal": true,
+      "before_sha256": "ccc52507447d63a8c00436814c65adff0624527e21f41d67ef575db5ced317cd",
+      "after_sha256": "ccc52507447d63a8c00436814c65adff0624527e21f41d67ef575db5ced317cd"
+    }
+  ],
+  "javascript_errors": [],
+  "all_equal": true,
+  "pages": 20,
+  "comparisons": 58,
+  "widths": [
+    320,
+    375,
+    768,
+    980,
+    1024,
+    1280,
+    1440,
+    1920
+  ],
+  "computed_property_names_sorted_before_hashing": true,
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "captures": [
+    {
+      "file": "W62A-before-client-account-client.png",
+      "source": "Actual Chromium screenshot over synthetic fixtures only",
+      "width": 1440,
+      "mode": "before",
+      "page": "client-account-client"
+    },
+    {
+      "file": "W62A-after-client-account-client.png",
+      "source": "Actual Chromium screenshot over synthetic fixtures only",
+      "width": 1440,
+      "mode": "after",
+      "page": "client-account-client"
+    },
+    {
+      "file": "W62A-before-provider-provider-dashboard.png",
+      "source": "Actual Chromium screenshot over synthetic fixtures only",
+      "width": 1440,
+      "mode": "before",
+      "page": "provider-provider-dashboard"
+    },
+    {
+      "file": "W62A-after-provider-provider-dashboard.png",
+      "source": "Actual Chromium screenshot over synthetic fixtures only",
+      "width": 1440,
+      "mode": "after",
+      "page": "provider-provider-dashboard"
+    },
+    {
+      "file": "W62A-before-client-perfil.png",
+      "source": "Actual Chromium screenshot over synthetic fixtures only",
+      "width": 1440,
+      "mode": "before",
+      "page": "client-perfil"
+    },
+    {
+      "file": "W62A-after-client-perfil.png",
+      "source": "Actual Chromium screenshot over synthetic fixtures only",
+      "width": 1440,
+      "mode": "after",
+      "page": "client-perfil"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "source_fingerprints": [
+    {
+      "path": "routes",
+      "base_git_object": "18a4abdb7c14614f5f6d424608a171b6c72314d1",
+      "unchanged": true
+    },
+    {
+      "path": "database/migrations",
+      "base_git_object": "8cf3d6f6225fc95ab8142d4f8d179c3857cefb5d",
+      "unchanged": true
+    },
+    {
+      "path": "config",
+      "base_git_object": "3831bce26913650f8a10b850c54ed5cd081b8b19",
+      "unchanged": true
+    },
+    {
+      "path": "bootstrap",
+      "base_git_object": "0e04ad5071f86383e0571ab84346acc21702b108",
+      "unchanged": true
+    },
+    {
+      "path": "app/Models",
+      "base_git_object": "6fa305f1b34912b0a2ca7c7f0ce13739d8b0fa39",
+      "unchanged": true
+    },
+    {
+      "path": "app/Policies",
+      "base_git_object": "a76a42a7b20f03a5b70119df06460baf735f48e4",
+      "unchanged": true
+    },
+    {
+      "path": "resources/css",
+      "base_git_object": "8abb39deb7d3ce5f7ceae61212b6265700573721",
+      "unchanged": true
+    },
+    {
+      "path": "resources/js",
+      "base_git_object": "97b377609be0c3a4514fac61d933f452a6fcf9c4",
+      "unchanged": true
+    },
+    {
+      "path": "public/css/home.css",
+      "base_git_object": "e972d5ec17bf5f7bbe90c3b6b9c8d13c58f0c5bd",
+      "unchanged": true
+    },
+    {
+      "path": "public/css/account.css",
+      "base_git_object": "e1932ed1ba8ede745b20c6b0dfcd0380d2b57d4d",
+      "unchanged": true
+    },
+    {
+      "path": "public/js",
+      "base_git_object": "09c4949b29777fa81ab5e708820749db88ccd653",
+      "unchanged": true
+    },
+    {
+      "path": "composer.json",
+      "base_git_object": "ad03e65cb86c4c5eb8db1009b4ebea89f2590ee0",
+      "unchanged": true
+    },
+    {
+      "path": "composer.lock",
+      "base_git_object": "a66d6ae54619eabb601d866656a2a0a8b863720f",
+      "unchanged": true
+    },
+    {
+      "path": "package.json",
+      "base_git_object": "4e900c32cacd91d0f72712d7d6ad17b89963c68c",
+      "unchanged": true
+    },
+    {
+      "path": "package-lock.json",
+      "base_git_object": "d276cc4d6b5c8cbffdacd27f35cba0f098246d17",
+      "unchanged": true
+    },
+    {
+      "path": "vite.config.js",
+      "base_git_object": "82b7f7f9b204f6b5018aff416d112e6d955bd418",
+      "unchanged": true
+    },
+    {
+      "path": "tests/bootstrap.php",
+      "base_git_object": "c96e3611c564b388edfb86ca2af40eb226fad7b6",
+      "unchanged": true
+    },
+    {
+      "path": "tests/TestCase.php",
+      "base_git_object": "798fb471e5e75c402383a34ff008df2397e5c5f8",
+      "unchanged": true
+    },
+    {
+      "path": "tests/Feature/ProfilePhotoIntegrityTest.php",
+      "base_git_object": "499bb410e6b4715db1dd8f2ed1b06a477ed3bc38",
+      "unchanged": true
+    }
+  ],
+  "existing_native_service_sources_unchanged": true,
+  "all_previous_test_sources_unchanged": true,
+  "api_explicit": 8,
+  "api_loop_entries": 13,
+  "api_operations": 21,
+  "migration_files": 37,
+  "method": "Git object metadata and source comparisons only; no persistent database or personal media inspected"
+}

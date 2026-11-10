@@ -1,0 +1,32 @@
+{
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "w61_prior_proposals_superseded": "No archivo ni historial MindBloom; eliminación posterior de código/datos exclusivamente antiguos, sin operaciones destructivas en W6.2a",
+  "before_after": [
+    {
+      "element": "ProfileController",
+      "before": "users + posts/comments/emotions obligatorias al limpiar/compensar; tabla ausente causaba retención conservadora por excepción",
+      "after": "ProfilePhotoReferences consulta users obligatorio; LegacyPhotoReferences prueba esquema writer y consulta solo tablas presentes; errores siguen reteniendo archivos",
+      "proof": "LegacyPhotoDecouplingTest: 20 casos; ProfilePhotoIntegrityTest: 49 casos sin modificaciones"
+    },
+    {
+      "element": "account-layout CSS",
+      "before": "public/css/home.css completo, incluida galería y secciones anteriores",
+      "after": "public/css/tekora/account-base.css con declaraciones compartidas copiadas sin cambios; account.css y capas Cinematic intactas",
+      "proof": "Extracción de 22 nodos; NativeLegacyIndependenceTest y comparación Chromium de 20 páginas"
+    },
+    {
+      "element": "Workflows/identidad/API",
+      "before": "No referencias directas a modelos antiguos encontradas; User expone relaciones antiguas perezosas, guard/OAuth separados",
+      "after": "Mismo código nativo; pruebas ejecutan identidad, contratación, mensajes, disponibilidad, reservas/reseñas/avisos y API con 9 tablas ausentes, guard/proveedor prof y configuración Google retirados solo en fixtures",
+      "proof": "NativeLegacyIndependenceTest: 5 pruebas; cero SQL de dominio hacia tablas retiradas; Socialite prohibido, HTTP sin llamadas inesperadas"
+    },
+    {
+      "element": "Navegación, rutas, modelos antiguos y paquetes",
+      "before": "Entry points y marcas anteriores presentes",
+      "after": "Sin retirada en W6.2a; inventario exacto para W6.2b y destrucción de datos separada W6.2c",
+      "proof": "Diff: no rutas/guards/policies/servicios nativos/migraciones/manifests/locks modificados"
+    }
+  ],
+  "persistent_data_inspected": false,
+  "oauth_executed": false
+}

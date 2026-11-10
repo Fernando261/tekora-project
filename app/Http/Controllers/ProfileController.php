@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\ProfilePhotoReferences;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -144,19 +145,7 @@ class ProfileController extends Controller
 
     private function photoMayBeReferenced(User $user, string $path): bool
     {
-        // Retain possible references even within old URLs, cache queries or fragments.
-        $referencePattern = '%'.str_replace('_', '!_', strtolower($path)).'%';
-        $connection = $user->getConnection();
-        if ($user->newQuery()->useWritePdo()->whereRaw("LOWER(profile_photo_path) LIKE ? ESCAPE '!'", [$referencePattern])->exists()) {
-            return true;
-        }
-        foreach (['posts' => 'media_path', 'comments' => 'media_path', 'emotions' => 'image_path'] as $table => $column) {
-            if ($connection->table($table)->useWritePdo()->whereRaw("LOWER({$column}) LIKE ? ESCAPE '!'", [$referencePattern])->exists()) {
-                return true;
-            }
-        }
-
-        return false;
+        return app(ProfilePhotoReferences::class)->mayReference($user, $path);
     }
 
     private function insidePublicRoot(FilesystemAdapter $disk, string $path): bool

@@ -1,0 +1,51 @@
+PHPUnit 11.5.57 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.35
+Configuration: /tmp/tekora-w62a-project/phpunit.xml
+
+EE                                                                  2 / 2 (100%)
+
+Time: 00:01.232, Memory: 61.00 MB
+
+There were 2 errors:
+
+1) Tests\Feature\TekoraW21Test::test_preview_bootstraps_without_reading_a_repository_environment_or_database
+Symfony\Component\Process\Exception\ProcessFailedException: The command "'/tmp/tekora-w62a-php' '/tmp/tekora-w62a-project/tools/tekora-w2-preview.php' '/tmp/tekora-w21-test-15864311e2ae696e6e7e' 'http://127.0.0.1:8017'" failed.
+
+Exit Code: 1(General error)
+
+Working directory: /tmp/tekora-w62a-project
+
+Output:
+================
+
+
+Error Output:
+================
+W2 export failed: Visual export failed for /cuenta/cliente
+
+
+/tmp/tekora-w62a-project/vendor/symfony/process/Process.php:289
+/tmp/tekora-w62a-project/tests/Feature/TekoraW21Test.php:211
+
+2) Tests\Feature\TekoraW3Test::test_preview_is_memory_only_and_native_get_query_normalization_does_not_fake_unknown_searches
+Symfony\Component\Process\Exception\ProcessFailedException: The command "'/tmp/tekora-w62a-php' '/tmp/tekora-w62a-project/tools/tekora-w3-preview.php' '/tmp/tekora-w3-test-731103597c5af4e5684a' 'http://127.0.0.1:8051'" failed.
+
+Exit Code: 1(General error)
+
+Working directory: /tmp/tekora-w62a-project
+
+Output:
+================
+
+
+Error Output:
+================
+W2 export failed: Visual export failed for /cuenta/cliente
+
+
+/tmp/tekora-w62a-project/vendor/symfony/process/Process.php:289
+/tmp/tekora-w62a-project/tests/Feature/TekoraW3Test.php:275
+
+ERRORS!
+Tests: 2, Assertions: 5, Errors: 2.

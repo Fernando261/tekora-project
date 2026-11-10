@@ -1,0 +1,64 @@
+{
+  "with_build_full_assertions": 8659,
+  "without_build_full_assertions": 8562,
+  "difference": 97,
+  "difference_explained_by_cases": 97,
+  "cases": [
+    {
+      "class": "Tests.Feature.TekoraW21Test",
+      "test": "test_dashboard_assets_csp_and_native_logout_are_preserved",
+      "with_build": 23,
+      "without_build": 14,
+      "delta": 9,
+      "without_build_status": "passed"
+    },
+    {
+      "class": "Tests.Feature.TekoraW21Test",
+      "test": "test_preview_bootstraps_without_reading_a_repository_environment_or_database",
+      "with_build": 4,
+      "without_build": 1,
+      "delta": 3,
+      "without_build_status": "error"
+    },
+    {
+      "class": "Tests.Feature.TekoraW3Test",
+      "test": "test_marketplace_assets_are_referenced_with_and_without_a_vite_build with data set #0",
+      "with_build": 9,
+      "without_build": 6,
+      "delta": 3,
+      "without_build_status": "passed"
+    },
+    {
+      "class": "Tests.Feature.TekoraW3Test",
+      "test": "test_preview_is_memory_only_and_native_get_query_normalization_does_not_fake_unknown_searches",
+      "with_build": 78,
+      "without_build": 4,
+      "delta": 74,
+      "without_build_status": "error"
+    },
+    {
+      "class": "Tests.Feature.TekoraW4Test",
+      "test": "test_operational_assets_reference_both_real_manifest_files_or_both_hot_entries with data set #1",
+      "with_build": 4,
+      "without_build": 1,
+      "delta": 3,
+      "without_build_status": "skipped"
+    },
+    {
+      "class": "Tests.Feature.TekoraW5Test",
+      "test": "test_real_recovery_notification_is_faked_and_valid_token_resets_only_the_web_password",
+      "with_build": 61,
+      "without_build": 59,
+      "delta": 2,
+      "without_build_status": "passed"
+    },
+    {
+      "class": "Tests.Feature.TekoraW5Test",
+      "test": "test_identity_assets_reference_actual_js_and_css_with_a_manifest_or_without_a_build with data set #1",
+      "with_build": 4,
+      "without_build": 1,
+      "delta": 3,
+      "without_build_status": "skipped"
+    }
+  ]
+}

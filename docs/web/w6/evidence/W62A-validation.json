@@ -1,0 +1,170 @@
+{
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "branch": "codex/w62a-tekora-legacy-decoupling",
+  "executed_checks": [
+    {
+      "name": "approved-base PHPUnit",
+      "php": "8.2.28",
+      "tests": 626,
+      "assertions": 8258,
+      "exit_code": 0,
+      "log": "W62A-phpunit-baseline.txt"
+    },
+    {
+      "name": "habitual PHPUnit after changes, existing manifest/hot",
+      "php": "8.2.28",
+      "tests": 651,
+      "assertions": 8659,
+      "exit_code": 0,
+      "log": "W62A-phpunit-habitual.txt"
+    },
+    {
+      "name": "npm ci → npm audit → npm run build → full PHPUnit; actual manifest, no hot",
+      "php": "8.2.35",
+      "tests": 651,
+      "assertions": 8659,
+      "exit_code": 0,
+      "log": "W62A-phpunit-built.txt"
+    },
+    {
+      "name": "W5.1 unchanged regression",
+      "php": "8.2.35",
+      "tests": 49,
+      "assertions": 459,
+      "exit_code": 0,
+      "log": "W62A-w51-regression.txt"
+    },
+    {
+      "name": "W6.2a regression",
+      "php": "8.2.35",
+      "tests": 25,
+      "assertions": 401,
+      "exit_code": 0,
+      "log": "W62A-decoupling.txt"
+    },
+    {
+      "name": "isolated no-build dashboard asset test",
+      "php": "8.2.35",
+      "tests": 1,
+      "assertions": 6,
+      "exit_code": 0,
+      "log": "W62A-no-build-targeted.txt"
+    },
+    {
+      "name": "Pint --test, six changed/new PHP files",
+      "php": "8.2.35",
+      "exit_code": 0,
+      "log": "W62A-pint.txt"
+    },
+    {
+      "name": "composer validate --strict",
+      "composer": "2.8.11",
+      "php": "8.2.35",
+      "exit_code": 0,
+      "log": "W62A-composer-validate.txt"
+    },
+    {
+      "name": "composer check-platform-reqs",
+      "php": "8.2.35",
+      "exit_code": 0,
+      "log": "W62A-composer-platform.txt"
+    },
+    {
+      "name": "composer audit --locked",
+      "advisories": 0,
+      "exit_code": 0,
+      "log": "W62A-composer-audit.txt"
+    },
+    {
+      "name": "composer audit --locked --no-dev",
+      "advisories": 0,
+      "exit_code": 0,
+      "log": "W62A-composer-audit-no-dev.txt"
+    },
+    {
+      "name": "npm ci",
+      "node": "24.19.0",
+      "npm": "11.9.0",
+      "exit_code": 0,
+      "log": "W62A-npm-ci.txt"
+    },
+    {
+      "name": "npm audit --json",
+      "vulnerabilities": 0,
+      "exit_code": 0,
+      "log": "W62A-npm-audit.json"
+    },
+    {
+      "name": "npm run build",
+      "exit_code": 0,
+      "log": "W62A-npm-build.txt",
+      "warnings": "Existing Bootstrap/Sass deprecations; preserved full output"
+    },
+    {
+      "name": "Chromium computed styles, all elements and pseudos",
+      "native_pages": 20,
+      "comparisons": 58,
+      "equal": 58,
+      "javascript_errors": 0,
+      "exit_code": 0,
+      "log": "W62A-visual-comparison.json"
+    },
+    {
+      "name": "CSS extraction declaration and order equality",
+      "top_level_nodes": 22,
+      "exit_code": 0,
+      "log": "W62A-css-extraction.json"
+    }
+  ],
+  "count_delta": {
+    "tests": 25,
+    "assertions": 401,
+    "all_626_previous_tests_unchanged": true
+  },
+  "additional_diagnostic_not_a_passing_check": {
+    "name": "Full suite with generated build preserved outside public; unsupported preview precondition",
+    "php": "8.2.35",
+    "tests": 651,
+    "assertions": 8562,
+    "errors": 2,
+    "skipped": 2,
+    "exit_code": 2,
+    "log": "W62A-no-build-full-diagnostic.txt",
+    "baseline_confirmation": {
+      "method": "Only two modified existing sources restored temporarily to approved base; all other existing source unchanged, then restored to final candidate",
+      "tests": 2,
+      "assertions": 5,
+      "errors": 2,
+      "exit_code": 2,
+      "log": "W62A-no-build-baseline-diagnostic.txt"
+    },
+    "cause": "W2/W3 visual CLI exports intentionally require actual production bundles; two manifest cases explicitly skip without build. No tests or tools changed to hide this precondition. Windows guide builds before full suite.",
+    "assertion_delta": "W62A-assertion-delta.json",
+    "manifest_restored_identical": "W62A-manifest-integrity.json"
+  },
+  "environment": {
+    "primary_php": "8.2.28 in existing tools container; approved-base and habitual suites passed",
+    "final_php": "8.2.35 portable runtime in /tmp with complete extensions and tzdata; no application container started",
+    "final_checkout": "/tmp/tekora-w62a-project; isolated sparse source clone excluding .env, uploads, existing storage and source images",
+    "reason": "Docker filesystem became full; cache metadata preserved in /tmp, one unused dangling image removed, continued on separately mounted temporary filesystem",
+    "resolved_tool_setup_issues": [
+      "npm/esbuild sandbox EPERM: rerun authorized with workspace cache",
+      "PHP child processes: inherited php.ini required",
+      "IANA aliases: runtime tzdata mounted read-only",
+      "Phar/iconv required for Pint/platform checks",
+      "CSSOM enumeration order canonicalized; every computed property value still compared"
+    ]
+  },
+  "isolation": {
+    "database": "sqlite :memory: enforced before each migration by unchanged TestCase/bootstrap",
+    "storage": "Storage::fake, temporary roots for new tests and visual exports",
+    "fixture_only_table_drops": 9,
+    "persistent_databases_accounts_credentials_sessions_or_real_media_inspected_or_modified": false,
+    "persistent_env_or_appkey_modified": false,
+    "oauth_or_external_account_connections": false,
+    "production_deployment_merge_or_auto_merge": false,
+    "w62b_or_w62c_implemented": false
+  },
+  "api_static_operations": 21,
+  "historical_migrations_unchanged": 37
+}
