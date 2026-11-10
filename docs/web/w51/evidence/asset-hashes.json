@@ -1,0 +1,90 @@
+{
+  "method": "Byte-identical before/after npm ci/build; same entries and manifest as approved W5",
+  "files": [
+    {
+      "file": "assets/account-shell-CmQFvWJ9.js",
+      "sha256": "e073079f97722e38682f0eb9f5213402ac5a8af0b8eee6c16ac161f0bec62020",
+      "unchanged": true
+    },
+    {
+      "file": "assets/account-shell-DN46Jl3d.css",
+      "sha256": "8728363e3c53eba534e40f9ee779fdb4ce0afeb763d92672392704909be0b7bd",
+      "unchanged": true
+    },
+    {
+      "file": "assets/ambient-CymvvgaS.css",
+      "sha256": "4d12d5e2b14bddd17196d73276ae3cf36259a76138925a3a84d61354019a026f",
+      "unchanged": true
+    },
+    {
+      "file": "assets/app-DbaZCfaT.css",
+      "sha256": "52eb5a312f5691eebeae2813013fd360fce8ff16e230a54630b7b400e139248b",
+      "unchanged": true
+    },
+    {
+      "file": "assets/app-rIANMhMB.js",
+      "sha256": "3043ea570e5da3d3b94053a9954c0eb9f6e533b8090be3f2cefc3b667f601573",
+      "unchanged": true
+    },
+    {
+      "file": "assets/dashboards-C9aJLWUw.css",
+      "sha256": "f7b69ed6cfe1b69152c937e7dfee8c00b293189747a3cb636cc5cf2219c23dba",
+      "unchanged": true
+    },
+    {
+      "file": "assets/dashboards-D5p1_W1R.js",
+      "sha256": "8faf05efe9d81a77611127eed4c0bd5738e7f4e545e85ef0a987a8cf77398755",
+      "unchanged": true
+    },
+    {
+      "file": "assets/identity-CXARY9Ex.js",
+      "sha256": "a8a8c0797d67b72f294bbad1d2007191b5aa8f6e3088bc8888539acb2b9b56d7",
+      "unchanged": true
+    },
+    {
+      "file": "assets/identity-Cfe1HA5Q.css",
+      "sha256": "5b0e0413e7baafc1f9dfe0792ec6fae7ed8991bdc06e64d29319daee9eac6f4b",
+      "unchanged": true
+    },
+    {
+      "file": "assets/index-eGWjRRuE.js",
+      "sha256": "13c540ceacad6a06dcc4739f24b1e2e7cc4686dd7c798ed50608715181a146fc",
+      "unchanged": true
+    },
+    {
+      "file": "assets/marketplace-CtKInQcc.css",
+      "sha256": "b7c5937c673af9b4b1c74d5515b257ed696ff073fe46554371398e13380c5f3b",
+      "unchanged": true
+    },
+    {
+      "file": "assets/marketplace-qM7nyvDY.js",
+      "sha256": "af91fc7b5c37b9da24038a182381ec37e94fdfb91b50c735a22b9a9cfc1fe965",
+      "unchanged": true
+    },
+    {
+      "file": "assets/operations-DVr2slB9.js",
+      "sha256": "f93446b2774372dc6b9a3bb07ef3c8cee05567705a322764f8faf8af7f149641",
+      "unchanged": true
+    },
+    {
+      "file": "assets/operations-DYhB3mcC.css",
+      "sha256": "b600c52755c07da0494d5a1e883fb1618dc8e78f2152c1190408f772c5564b6f",
+      "unchanged": true
+    },
+    {
+      "file": "assets/tekora-Baf5kkIu.js",
+      "sha256": "3636b33ae977bab053bae3acc5ac755d75f4457dc3944ce3a911145e55e8cb1f",
+      "unchanged": true
+    },
+    {
+      "file": "assets/tekora-BruE_Ynv.css",
+      "sha256": "b05f8fb5a4422cdb376e4379346c54e7dd880c3a2f17b35f3f4543e2674bc197",
+      "unchanged": true
+    },
+    {
+      "file": "manifest.json",
+      "sha256": "36cfb059963cc44ec219d98b663beb1324c8a9e0579e3b54700cc1b8807d7c63",
+      "unchanged": true
+    }
+  ]
+}

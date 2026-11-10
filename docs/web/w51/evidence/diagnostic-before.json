@@ -1,0 +1,15 @@
+{
+    "mode": "before",
+    "connection": "sqlite",
+    "database": ":memory:",
+    "environment_file_exists": false,
+    "fake_disk": true,
+    "status": 302,
+    "success_reported": true,
+    "photo_error": false,
+    "previous_reference_preserved": false,
+    "previous_file_exists": false,
+    "previous_bytes_preserved": false,
+    "referenced_file_exists": false,
+    "fake_files": 0
+}
