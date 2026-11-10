@@ -1,0 +1,30 @@
+[
+  {
+    "stage": "Baseline red test",
+    "result": "Expected failure: a false put changed SQL reference. Same assertion passes after the fix."
+  },
+  {
+    "stage": "First new-group run",
+    "result": "Adjusted new test to snapshot database defaults for legacy guard; cached photo reference required safe SQL refresh after commit for existing W5 render contract. No old tests changed."
+  },
+  {
+    "stage": "Confirmation concurrency test",
+    "result": "Cleared any success flash on error as well as at request start so losing request cannot display interleaved success."
+  },
+  {
+    "stage": "Post-build runtime capacity",
+    "result": "49 setup errors, zero assertions, unable to create fake disk; cleared only runtime download caches and mounted container /tmp in memory. Same tests rerun successfully. Raw initial output retained."
+  },
+  {
+    "stage": "Standalone diagnostic lifecycle",
+    "result": "Normal PHPUnit teardown requires its runner registry. CLI diagnostic now explicitly disconnects only its memory DB, removes its own fake directory and verifies/closes Mockery. Before and after rerun with exit 0."
+  },
+  {
+    "stage": "Final isolation review",
+    "result": "All new tests use a log spy and register fake storage cleanup before disk creation; group and full suite rerun successfully without count changes."
+  },
+  {
+    "stage": "Final media-reference review",
+    "result": "Conservative literal-key matching also protects case variants and historical-domain URLs with query/fragment. Shared-file regression updated; all required suites reconfirmed with unchanged counts."
+  }
+]

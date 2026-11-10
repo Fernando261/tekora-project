@@ -1,0 +1,601 @@
+PHPUnit 11.5.57 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.28
+Configuration: /workspace/tekora-project/phpunit.xml
+
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                 49 / 49 (100%)
+
+Time: 00:03.413, Memory: 73.00 MB
+
+There were 49 errors:
+
+1) Tests\Feature\ProfilePhotoIntegrityTest::test_a_false_write_preserves_the_old_reference_and_file_and_reports_photo_error
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-3db5a8b2435ca03a/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+2) Tests\Feature\ProfilePhotoIntegrityTest::test_first_photo_is_written_verified_and_committed
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-42aa6b95b64d6fce/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+3) Tests\Feature\ProfilePhotoIntegrityTest::test_replacement_keeps_both_files_until_the_new_reference_is_committed
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-8b34718ed98c0da1/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+4) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file with data set #0 ('empty')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-339b0190a4458cbb/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+5) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file with data set #1 ('exception')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-b0001763ed0ca292/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+6) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file with data set #2 ('partial-false')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-d4aacfc828da312c/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+7) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file with data set #3 ('partial-exception')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-84d848c601345ab9/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+8) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file with data set #4 ('truncated-success')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-ccba553ae6da4893/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+9) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file with data set #5 ('corrupt-success')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-35cc3c94b55ade08/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+10) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file with data set #6 ('missing-success')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-2e7b5b5f8081cce8/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+11) Tests\Feature\ProfilePhotoIntegrityTest::test_readback_failure_is_not_reported_as_a_successful_upload
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-8e6d5332fb36bdf7/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+12) Tests\Feature\ProfilePhotoIntegrityTest::test_sql_error_rolls_back_the_reference_and_removes_the_verified_new_file
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-b533dff77a8e802e/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+13) Tests\Feature\ProfilePhotoIntegrityTest::test_a_silently_ignored_sql_update_is_not_mistaken_for_persistence
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-85a4c51ec2b70600/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+14) Tests\Feature\ProfilePhotoIntegrityTest::test_a_model_veto_is_a_failed_persistence_and_cleans_the_candidate
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-366e8a9da76d5fb3/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+15) Tests\Feature\ProfilePhotoIntegrityTest::test_commit_failure_keeps_the_original_reference_and_file with data set #0 ('exception')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-cbc3e97376485820/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+16) Tests\Feature\ProfilePhotoIntegrityTest::test_commit_failure_keeps_the_original_reference_and_file with data set #1 ('false')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-d6be022cb76df06f/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+17) Tests\Feature\ProfilePhotoIntegrityTest::test_commit_failure_keeps_the_original_reference_and_file with data set #2 ('false-after-rollback')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-f9c5ba1beee7309c/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+18) Tests\Feature\ProfilePhotoIntegrityTest::test_an_exception_after_durable_commit_never_deletes_the_referenced_new_photo
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-eaa745b03c6947f4/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+19) Tests\Feature\ProfilePhotoIntegrityTest::test_unconfirmed_rollback_retains_both_files_instead_of_deleting_a_possible_reference
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-1cdb2a3f803b17bb/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+20) Tests\Feature\ProfilePhotoIntegrityTest::test_old_cleanup_failure_keeps_the_committed_photo_and_records_only_a_safe_phase with data set #0 ('false')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-12b7c479bbb26b16/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+21) Tests\Feature\ProfilePhotoIntegrityTest::test_old_cleanup_failure_keeps_the_committed_photo_and_records_only_a_safe_phase with data set #1 ('exception')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-19dcdd45f302c222/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+22) Tests\Feature\ProfilePhotoIntegrityTest::test_failed_compensation_is_reported_and_never_removes_the_old_photo
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-da0c9e18c35c862f/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+23) Tests\Feature\ProfilePhotoIntegrityTest::test_two_uploads_in_the_same_second_have_independent_names_and_bytes
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-f3d2a1064af5e58b/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+24) Tests\Feature\ProfilePhotoIntegrityTest::test_stale_authenticated_attributes_cannot_overwrite_sql_or_delete_the_winner
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-cdd21a845027c23d/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+25) Tests\Feature\ProfilePhotoIntegrityTest::test_a_second_upload_can_commit_while_the_first_waits_to_publish_its_file
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-5c91921a730bbc1a/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+26) Tests\Feature\ProfilePhotoIntegrityTest::test_delayed_old_cleanup_cannot_delete_a_later_requests_winning_photo
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-77af039cf54f9538/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+27) Tests\Feature\ProfilePhotoIntegrityTest::test_a_winner_committed_before_confirmation_is_preserved_without_claiming_an_unconfirmed_success
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-71622147247bfdc4/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+28) Tests\Feature\ProfilePhotoIntegrityTest::test_guest_upload_is_rejected_before_any_file_write
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-72ab6bbb35122dcf/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+29) Tests\Feature\ProfilePhotoIntegrityTest::test_legacy_professional_session_does_not_authorize_a_web_photo_upload
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-874cea5bb6d159e6/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+30) Tests\Feature\ProfilePhotoIntegrityTest::test_invalid_csrf_never_reaches_storage_or_changes_the_reference
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-f82d088228f67451/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+31) Tests\Feature\ProfilePhotoIntegrityTest::test_original_image_validation_keeps_reference_and_bytes with data set #0 ('missing')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-eabef1ef40d3c844/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+32) Tests\Feature\ProfilePhotoIntegrityTest::test_original_image_validation_keeps_reference_and_bytes with data set #1 ('text')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-7e660c3ac91ab93e/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+33) Tests\Feature\ProfilePhotoIntegrityTest::test_original_image_validation_keeps_reference_and_bytes with data set #2 ('large')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-2bcb9b6be708dd2c/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+34) Tests\Feature\ProfilePhotoIntegrityTest::test_original_image_validation_keeps_reference_and_bytes with data set #3 ('php-extension')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-74ce530440d515e6/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+35) Tests\Feature\ProfilePhotoIntegrityTest::test_profile_keeps_the_native_photo_form_and_public_storage_url
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-e086257e8fab92c7/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+36) Tests\Feature\ProfilePhotoIntegrityTest::test_another_users_current_or_legacy_shared_file_is_never_deleted
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-539a7dde6bad9bcb/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+37) Tests\Feature\ProfilePhotoIntegrityTest::test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted with data set #0 ('avatars/avatar_999_1700000000.png', 'avatars/avatar_999_1700000000.png')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-ccc387b1e6f89e88/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+38) Tests\Feature\ProfilePhotoIntegrityTest::test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted with data set #1 ('uploads/posts/images/keep.png', 'uploads/posts/images/keep.png')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-080d4f6588ee7dd0/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+39) Tests\Feature\ProfilePhotoIntegrityTest::test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted with data set #2 ('emotions/keep.png', 'emotions/keep.png')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-753941cb2aae8b40/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+40) Tests\Feature\ProfilePhotoIntegrityTest::test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted with data set #3 ('avatars/../keep.png', 'keep.png')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-da651d491f3a1392/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+41) Tests\Feature\ProfilePhotoIntegrityTest::test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted with data set #4 ('../keep.png', 'keep.png')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-9a1409cbb3f3e48d/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+42) Tests\Feature\ProfilePhotoIntegrityTest::test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted with data set #5 ('/keep.png', 'keep.png')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-93b36909fe0bd1e7/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+43) Tests\Feature\ProfilePhotoIntegrityTest::test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted with data set #6 ('https://example.invalid/keep.png', 'keep.png')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-54e96e9fe332daf9/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+44) Tests\Feature\ProfilePhotoIntegrityTest::test_other_modules_references_prevent_legacy_photo_deletion with data set #0 ('posts', 'media_path')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-04e738aa316529dd/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+45) Tests\Feature\ProfilePhotoIntegrityTest::test_other_modules_references_prevent_legacy_photo_deletion with data set #1 ('comments', 'media_path')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-b7413c17a257c97f/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+46) Tests\Feature\ProfilePhotoIntegrityTest::test_other_modules_references_prevent_legacy_photo_deletion with data set #2 ('emotions', 'image_path')
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-07246d3f2d1e938a/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+47) Tests\Feature\ProfilePhotoIntegrityTest::test_an_existing_random_target_is_not_overwritten_or_compensated
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-17a2cefb6f127828/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+48) Tests\Feature\ProfilePhotoIntegrityTest::test_local_target_resolving_outside_the_public_root_is_rejected_before_writing
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-ec5212c84540c089/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+49) Tests\Feature\ProfilePhotoIntegrityTest::test_an_outer_transaction_is_not_mistaken_for_a_durable_photo_commit
+League\Flysystem\UnableToCreateDirectory: Unable to create a directory at /tmp/tekora-w51-0f34461334e55e5a/framework/testing/disks/public.
+
+/workspace/tekora-project/vendor/league/flysystem/src/UnableToCreateDirectory.php:18
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:333
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:101
+/workspace/tekora-project/vendor/league/flysystem-local/LocalFilesystemAdapter.php:91
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:186
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:363
+/workspace/tekora-project/vendor/laravel/framework/src/Illuminate/Support/Facades/Storage.php:111
+/workspace/tekora-project/tests/Feature/ProfilePhotoIntegrityTest.php:41
+
+ERRORS!
+Tests: 49, Assertions: 0, Errors: 49.

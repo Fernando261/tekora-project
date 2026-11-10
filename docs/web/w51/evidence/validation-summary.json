@@ -1,0 +1,45 @@
+{
+  "phpunit": {
+    "tests": 626,
+    "assertions": 8258,
+    "exit_code": 0
+  },
+  "phpunit-baseline": {
+    "tests": 577,
+    "assertions": 7799,
+    "exit_code": 0
+  },
+  "w51-tests": {
+    "tests": 49,
+    "assertions": 459,
+    "exit_code": 0
+  },
+  "w5-tests": {
+    "tests": 29,
+    "assertions": 397,
+    "exit_code": 0
+  },
+  "auth-profile-tests": {
+    "tests": 58,
+    "assertions": 619,
+    "exit_code": 0
+  },
+  "historical-tests": {
+    "tests": 28,
+    "assertions": 380,
+    "exit_code": 0
+  },
+  "after-false-write": {
+    "tests": 1,
+    "assertions": 10,
+    "exit_code": 0
+  },
+  "composer_advisories": 0,
+  "composer_no_dev_advisories": 0,
+  "npm_vulnerabilities": 0,
+  "phpunit_peak_memory_mb": 143,
+  "api_operations": 21,
+  "migrations": 37,
+  "built_files_unchanged": 17,
+  "visual_matrix_repeated": false
+}

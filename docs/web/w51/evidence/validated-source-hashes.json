@@ -1,0 +1,5 @@
+{
+  "app/Http/Controllers/ProfileController.php": "e6cfd84a992a44f5a9cb309b5aadff2954e8139338e1b2ed3c003d4c27827c12",
+  "tests/Feature/ProfilePhotoIntegrityTest.php": "77c13789ce32289f10c972b0204c2ec4f95d01b9603da77850131b2f3a21eb32",
+  "docs/web/w51/evidence/reproduce-false-write.php": "cd267d59867f544981a13e599db509c5c4d1f09faec04192914d39bce71dce4d"
+}

@@ -1,0 +1,37 @@
+{
+  "approved_base": "cc27543de2f7c24aa405c218b580cc3b52ed2532",
+  "approved_controller_sha256": "d5ab0e49f8047f3b5d599cef22e5eb1d1bbbb355da64ebbace6f8598d5beb084",
+  "before_regression_exit_code": 1,
+  "before_failure_expected": true,
+  "after_regression_exit_code": 0,
+  "before": {
+    "mode": "before",
+    "connection": "sqlite",
+    "database": ":memory:",
+    "environment_file_exists": false,
+    "fake_disk": true,
+    "status": 302,
+    "success_reported": true,
+    "photo_error": false,
+    "previous_reference_preserved": false,
+    "previous_file_exists": false,
+    "previous_bytes_preserved": false,
+    "referenced_file_exists": false,
+    "fake_files": 0
+  },
+  "after": {
+    "mode": "after",
+    "connection": "sqlite",
+    "database": ":memory:",
+    "environment_file_exists": false,
+    "fake_disk": true,
+    "status": 302,
+    "success_reported": false,
+    "photo_error": true,
+    "previous_reference_preserved": true,
+    "previous_file_exists": true,
+    "previous_bytes_preserved": true,
+    "referenced_file_exists": true,
+    "fake_files": 1
+  }
+}

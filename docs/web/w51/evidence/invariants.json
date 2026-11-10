@@ -1,0 +1,20 @@
+{
+  "base_sha": "cc27543de2f7c24aa405c218b580cc3b52ed2532",
+  "protected_files_checked": 1341,
+  "changed_protected_paths": [],
+  "private_env_db_hot_digests_published": false,
+  "env_unchanged": true,
+  "persistent_sqlite_unchanged": true,
+  "public_hot_restored_unchanged": true,
+  "dependency_manifests_and_lockfiles_unchanged": true,
+  "views_and_asset_sources_unchanged": 155,
+  "built_files_byte_identical": 17,
+  "old_tests_config_routes_models_policies_guards_middleware_workflows_unchanged": true,
+  "api_operations": 21,
+  "api_identical_to_approved_base": true,
+  "migration_files": 37,
+  "manual_persistent_database_commands_run": false,
+  "real_media_read_moved_deleted_or_uploaded": false,
+  "new_tests_sqlite_memory_fake_public_disk_and_fake_logging": true,
+  "deleted_tracked_files": []
+}
