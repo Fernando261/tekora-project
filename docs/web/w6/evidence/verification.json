@@ -2,7 +2,7 @@
   "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
   "origin_main_sha_checked": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
   "branch": "codex/w61-mindbloom-decommission-audit",
-  "phase": "Candidate documentation verified before implementation commit; final commit SHA is reported in the PR and delivery",
+  "phase": "Candidate documentation including PR metadata verified before final documentation commit; final SHA is reported in the PR and delivery",
   "checks": {
     "outside_documentation_diff_empty": true,
     "all_new_files_inside_docs_web_w6": true,

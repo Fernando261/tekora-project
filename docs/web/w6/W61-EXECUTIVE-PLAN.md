@@ -2,6 +2,8 @@
 
 Estado: **auditoría documental para revisión; ningún corte implementado**. Base exacta de `main`: `576c937fa3cbd31e6af95eedc1651cb59a16d898`. Rama: `codex/w61-mindbloom-decommission-audit`.
 
+Entrega: [PR #24 en borrador](https://github.com/Fernando261/tekora-project/pull/24). SHA de implementación documental: `876fb061db277be0ef652da036365c24962661c1`. Un commit posterior registra estos metadatos y su verificación; el SHA final se publica en la descripción del PR y en la entrega, evitando un hash autorreferencial dentro del documento.
+
 ## Resultado propuesto
 
 Tekora debe ser la única experiencia de producto. No se propone rediseñar MindBloom, crear otra comunidad, convertir la maqueta de conferencias en una agenda ni importar citas como reservas. Se propone preservar el historial y retirar progresivamente los accesos y superficies anteriores, después de resolver propiedad, compatibilidad y conservación.
