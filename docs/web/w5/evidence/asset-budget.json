@@ -1,0 +1,34 @@
+{
+  "new_bundles": [
+    {
+      "entry": "resources/css/tekora/identity.css",
+      "file": "assets/identity-Cfe1HA5Q.css",
+      "bytes": 15017,
+      "gzip_bytes": 3644
+    },
+    {
+      "entry": "resources/js/tekora/identity.js",
+      "file": "assets/identity-CXARY9Ex.js",
+      "bytes": 1746,
+      "gzip_bytes": 816
+    }
+  ],
+  "unchanged_approved_assets": [
+    "assets/index-eGWjRRuE.js",
+    "assets/account-shell-DN46Jl3d.css",
+    "assets/ambient-CymvvgaS.css",
+    "assets/dashboards-C9aJLWUw.css",
+    "assets/marketplace-CtKInQcc.css",
+    "assets/operations-DYhB3mcC.css",
+    "assets/tekora-BruE_Ynv.css",
+    "assets/app-rIANMhMB.js",
+    "assets/account-shell-CmQFvWJ9.js",
+    "assets/dashboards-D5p1_W1R.js",
+    "assets/marketplace-qM7nyvDY.js",
+    "assets/operations-DVr2slB9.js",
+    "assets/tekora-Baf5kkIu.js",
+    "assets/app-DbaZCfaT.css"
+  ],
+  "new_packages": 0,
+  "new_remote_fonts": 0
+}

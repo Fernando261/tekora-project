@@ -1,4 +1,4 @@
-@props(['title' => 'Tekora · Ideas que encuentran talento', 'page' => 'home'])
+@props(['title' => 'Tekora · Ideas que encuentran talento', 'page' => 'home', 'identity' => false])
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,9 +7,14 @@
   <meta name="color-scheme" content="dark">
   <meta name="description" content="Encuentra servicios, conversa con prestadores y acuerda una reserva. Una cuenta para contratar y ofrecer en Tekora.">
   <title>{{ $title }}</title>
+  @if($identity)
+    @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/tekora.css'])
+  @else
   @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/tekora.css', 'resources/js/tekora/tekora.js'])
+  @endif
+  @if($identity)<x-identity-assets />@endif
 </head>
-<body class="tk-page tk-page-{{ $page }} tekora-ambient-page">
+<body class="tk-page tk-page-{{ $page }} tekora-ambient-page {{ $identity ? 'tk-identity tk-identity-access' : '' }}">
   <x-tekora-ambient />
   <a class="tk-skip" href="#contenido">Saltar al contenido</a>
   <header class="tk-header tk-wrap">

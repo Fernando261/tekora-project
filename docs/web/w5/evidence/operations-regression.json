@@ -1,0 +1,1138 @@
+{
+  "matrix": [
+    {
+      "width": 320,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 320,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 375,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0.04397519270833333
+    },
+    {
+      "width": 768,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 768,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1024,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1100,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1280,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1440,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "request-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "request-detail",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "conversations",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-propose",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "reservation-provider",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "review-create",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "review-withdrawn",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "availability",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "services",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "notifications",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    },
+    {
+      "width": 1920,
+      "page": "profile",
+      "no_horizontal": true,
+      "controls_inside": true,
+      "duplicate_ids": 0,
+      "h1": 1,
+      "inline_scripts": 0,
+      "cls": 0
+    }
+  ],
+  "axe": [
+    {
+      "width": 375,
+      "page": "request-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "request-detail",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 29
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "conversations",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 71
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-propose",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 28
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "reservation-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 18
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "review-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "review-withdrawn",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 14
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "availability",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 60
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "services",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 81
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "notifications",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 73
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "profile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 17
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "request-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 38
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "request-detail",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 58
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "conversations",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 100
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-propose",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 58
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "reservation-provider",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 52
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "review-create",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 43
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "review-withdrawn",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 41
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "availability",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 93
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "services",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 114
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "notifications",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 102
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "profile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 51
+        }
+      ]
+    }
+  ],
+  "checks": {},
+  "page_errors": [],
+  "console_errors": [],
+  "expected_http_errors": [],
+  "failed_resources": [],
+  "environment": {
+    "browser": "154.0.8037.57",
+    "headless": true,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver-5.0.0)"
+  }
+}

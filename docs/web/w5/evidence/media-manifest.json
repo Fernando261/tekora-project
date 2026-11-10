@@ -1,0 +1,765 @@
+[
+  {
+    "file": "reference-w2-1440.png",
+    "source": "/workspace/w5-dashboard-refined/provider-summary-1440.png",
+    "bytes": 1029033,
+    "sha256": "083b258b77703d0946c0b56d0346128453647298c7730086d4c7a573424496e8",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "reference-w2-375.png",
+    "source": "/workspace/w5-dashboard-refined/provider-summary-375.png",
+    "bytes": 595953,
+    "sha256": "b7836f458a346b49ade77d40b7e92546d057de18c21853a6d571f17be69a9ee0",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "reference-w3-1440.png",
+    "source": "/workspace/w5-marketplace-regression/catalog-1440.png",
+    "bytes": 249312,
+    "sha256": "a810dae051835ad213952cb1c516d1b5e7a1960cc37fde7085cea12601479827",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "reference-w3-375.png",
+    "source": "/workspace/w5-marketplace-regression/catalog-375.png",
+    "bytes": 107943,
+    "sha256": "8c2ce10bb7d20981e5c43204231a9c49704bcc8d19dd12628b80c1bb2249e71f",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "reference-w4-1440.png",
+    "source": "/workspace/w5-operations-regression/request-detail-1440.png",
+    "bytes": 334174,
+    "sha256": "b39f6f394d09cb45e5cd80ff8833a58e612b0f6f8aaae8e169a1654ad9a8a1a7",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "reference-w4-375.png",
+    "source": "/workspace/w5-operations-regression/request-detail-375.png",
+    "bytes": 97216,
+    "sha256": "e0cab68d95cf0a56f53d6722a69c4d7bece45120aede0778190affc9d4b42a9d",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "reference-sidebar-hover.png",
+    "source": "/workspace/w5-sidebar-final/hover-notifications.png",
+    "bytes": 841822,
+    "sha256": "bd71a272a8e2b26dd9465d0d86b2b1dfa63e123a5ddbda4c8ec3ca994e0181b2",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "reference-sidebar-focus.png",
+    "source": "/workspace/w5-sidebar-final/focus-notifications.png",
+    "bytes": 833172,
+    "sha256": "e13eb11fb1446e12c4f85e1dc904e13cf95296e39d6e0b89601eb99f2ddfd619",
+    "method": "Unmodified actual Chromium screenshot, moved to delivery media"
+  },
+  {
+    "file": "account-admin-1440.png",
+    "source": "/workspace/w5-browser-final/account-admin-1440.png",
+    "bytes": 427234,
+    "sha256": "770e3283fe8c4d40dc760031b5271335c1f1efe505b9e694763658eb55ad85ff",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-admin-375.png",
+    "source": "/workspace/w5-browser-final/account-admin-375.png",
+    "bytes": 112096,
+    "sha256": "c726fa9f598cb0e16edd3b7df0a653be7eb72dd2ae95c5ac91ba29268e94244b",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-client-1440.png",
+    "source": "/workspace/w5-browser-final/account-client-1440.png",
+    "bytes": 424549,
+    "sha256": "8d2d64cc6e42d5238d1b8e25bd9a9b2b43f450733eb740509d2f41763ef7a99a",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-client-375.png",
+    "source": "/workspace/w5-browser-final/account-client-375.png",
+    "bytes": 112542,
+    "sha256": "0c0554778b0154ed2d002afb2022b412e1efd0b79d1e2b734247b705a4e01edf",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-dual-1440.png",
+    "source": "/workspace/w5-browser-final/account-dual-1440.png",
+    "bytes": 437965,
+    "sha256": "23cad3380310a8b3948953e6a74332a3f92f90aa430c4bd7445423f7364d37bf",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-dual-375.png",
+    "source": "/workspace/w5-browser-final/account-dual-375.png",
+    "bytes": 112433,
+    "sha256": "be333149a0f709aa6aa0571507bce6650fe3230e17c60d3ad8a3356365196e9e",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-none-1440.png",
+    "source": "/workspace/w5-browser-final/account-none-1440.png",
+    "bytes": 408796,
+    "sha256": "ed95ca9c629d5bdbab3eeefc7084ce89e69753debb8df4d1c9e6c1880ba8630e",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-none-375.png",
+    "source": "/workspace/w5-browser-final/account-none-375.png",
+    "bytes": 112029,
+    "sha256": "42060aca7203bef8ed929872e81d6b4e0fa1db59cd4e962788951bbe62ef90d5",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-provider-1440.png",
+    "source": "/workspace/w5-browser-final/account-provider-1440.png",
+    "bytes": 441038,
+    "sha256": "a3193486ed7ca8ba118b46c586a87e87f99d2d2ddcf1cedf9322f847c97a27d2",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-provider-375.png",
+    "source": "/workspace/w5-browser-final/account-provider-375.png",
+    "bytes": 112137,
+    "sha256": "129941c850479a7ae33f2279ff1130b07d8e2c6a5efca27e8d8bae8ca89c5682",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "activation-active-1440.png",
+    "source": "/workspace/w5-browser-final/activation-active-1440.png",
+    "bytes": 453030,
+    "sha256": "2703df71954dd9603a98f3d17cc18faa0be93c19dd2b072bb7f0f17c50041927",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "activation-active-375.png",
+    "source": "/workspace/w5-browser-final/activation-active-375.png",
+    "bytes": 135803,
+    "sha256": "04a25dd4934596506c9120d0e7c6219052e4f176da3cfe73825600472cd780d1",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "activation-pending-1440.png",
+    "source": "/workspace/w5-browser-final/activation-pending-1440.png",
+    "bytes": 457565,
+    "sha256": "4026585dcea583fdc18cad34f5c5f3a4e322f20faad6b4a2e48ec9a5e5f3f048",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "activation-pending-375.png",
+    "source": "/workspace/w5-browser-final/activation-pending-375.png",
+    "bytes": 135402,
+    "sha256": "10910ebe9491abf7be416bf5dc1a3907537739347587825843fe1f1338f4e5c0",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "card-hover.png",
+    "source": "/workspace/w5-browser-final/card-hover.png",
+    "bytes": 480364,
+    "sha256": "60bcfc7fd01987558f2e716b611edf2ad8b5e1aaee13901d46b34ac5d4d1dcdd",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "client-error-1440.png",
+    "source": "/workspace/w5-browser-final/client-error-1440.png",
+    "bytes": 235784,
+    "sha256": "b81f443f4156187cc1aaa4a4eefc1ab6a74b4f9220f72d3bc4fd4b1633db8e56",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "client-error-375.png",
+    "source": "/workspace/w5-browser-final/client-error-375.png",
+    "bytes": 106193,
+    "sha256": "d0c60237a9f6a707390c5c149e650292e0cfb1aa519086dc28da805f85bf1eb3",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "edit-name-1440.png",
+    "source": "/workspace/w5-browser-final/edit-name-1440.png",
+    "bytes": 421587,
+    "sha256": "3dc3a70b8d35366648447b4362da90f5963cd762cadd82118b063aca7dd7651a",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "edit-name-375.png",
+    "source": "/workspace/w5-browser-final/edit-name-375.png",
+    "bytes": 133403,
+    "sha256": "2e567a8bfbce149627ed005621107a6c1122d81ae3fc4604d51bb7609fb372aa",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "edit-name-focus.png",
+    "source": "/workspace/w5-browser-final/edit-name-focus.png",
+    "bytes": 421118,
+    "sha256": "889f2a40ee6fc6e3a5f39a080200f29c714a9a010db2d165eee78fd4c0c00d4c",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "failed-module-reset.png",
+    "source": "/workspace/w5-browser-final/failed-module-reset.png",
+    "bytes": 316301,
+    "sha256": "413d48a42aa583015043ed4f427ab9ea47d2e283219a90955dbc86ea629bd8aa",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "forgot-1440.png",
+    "source": "/workspace/w5-browser-final/forgot-1440.png",
+    "bytes": 298956,
+    "sha256": "2afbd4a57c647a4000f695b070eaaf11a5915d64985f0df78f7464228073f5b0",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "forgot-375.png",
+    "source": "/workspace/w5-browser-final/forgot-375.png",
+    "bytes": 117055,
+    "sha256": "08c0c7d74b1fa9fea5b5f696735d28159b2201e134107597101ead5dfd8ee75b",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "forgot-sent-1440.png",
+    "source": "/workspace/w5-browser-final/forgot-sent-1440.png",
+    "bytes": 300411,
+    "sha256": "62db565941f8a2b0843de7d7b399b2d4937e736762683094650b5f56d57e17bf",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "forgot-sent-375.png",
+    "source": "/workspace/w5-browser-final/forgot-sent-375.png",
+    "bytes": 120557,
+    "sha256": "820f023bc876bfa63e05362468e72d1841bf1fb9f9d92c47cea6103f16327fb8",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "forgot-validation-1440.png",
+    "source": "/workspace/w5-browser-final/forgot-validation-1440.png",
+    "bytes": 323142,
+    "sha256": "79e72c13e3d2231bc89a4cb6b155124acbbbf61e913e6d4756663c3729915bf7",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "forgot-validation-375.png",
+    "source": "/workspace/w5-browser-final/forgot-validation-375.png",
+    "bytes": 139865,
+    "sha256": "86494b2c2ddc302079acfe878978363ec797eced4165152ac0d17112443b2a5a",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "identity-desktop.webm",
+    "source": "/workspace/w5-browser-final/identity-desktop.webm",
+    "bytes": 2896703,
+    "sha256": "9502ef55aec8509af976894f5c29f9b26b043d1bbc4555b3b0d1e92cd134a175",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "identity-mobile.webm",
+    "source": "/workspace/w5-browser-final/identity-mobile.webm",
+    "bytes": 693344,
+    "sha256": "daa6f88895a33cf5048b83d09106603a9ef49bb119fc289f6d2c1f5a10c972fe",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "identity-reduced-motion.webm",
+    "source": "/workspace/w5-browser-final/identity-reduced-motion.webm",
+    "bytes": 2487398,
+    "sha256": "a6c7628907d189d9e52e62b5501e79598447008ded78a40ec71d1db412eeaf04",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "name-validation-1440.png",
+    "source": "/workspace/w5-browser-final/name-validation-1440.png",
+    "bytes": 446889,
+    "sha256": "58cb9e490f53524c0640263e4e4d0d85354f961b01a3eb7a8e78bf1b13a56a5d",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "name-validation-375.png",
+    "source": "/workspace/w5-browser-final/name-validation-375.png",
+    "bytes": 142112,
+    "sha256": "43cc1d38b172e31a6285cd34e2b9edea54c601173f9360edda994008e97e850f",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "native-file-selected.png",
+    "source": "/workspace/w5-browser-final/native-file-selected.png",
+    "bytes": 546958,
+    "sha256": "a88337fd35b62de766b1c801521f4ddae1f96b28e119e3623f3cff4a9c263ae9",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "no-js-activation-pending.png",
+    "source": "/workspace/w5-browser-final/no-js-activation-pending.png",
+    "bytes": 101423,
+    "sha256": "eb60f3dec32116219a939ad2755571dafc55ae6fefeaa8817630d2d43c457732",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "no-js-edit-name.png",
+    "source": "/workspace/w5-browser-final/no-js-edit-name.png",
+    "bytes": 122484,
+    "sha256": "413be22822a69f1094124d08e8687b34e3e6f970f30d50a9184014adfa8d97f1",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "no-js-forgot.png",
+    "source": "/workspace/w5-browser-final/no-js-forgot.png",
+    "bytes": 84756,
+    "sha256": "502501af9145c2a04f8d443f5db91f3629ed817cf8a0d8c5176c9888f8868a23",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "no-js-profile-no-photo.png",
+    "source": "/workspace/w5-browser-final/no-js-profile-no-photo.png",
+    "bytes": 133559,
+    "sha256": "eee447f66dc95c1750de415d614f5eb750047866832de9ef9299c5859c49aa7d",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "no-js-reset.png",
+    "source": "/workspace/w5-browser-final/no-js-reset.png",
+    "bytes": 96641,
+    "sha256": "463664957c64548803b2e91f36062c2cb661c70c823eeea61072c59973d8e35e",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "photo-validation-1440.png",
+    "source": "/workspace/w5-browser-final/photo-validation-1440.png",
+    "bytes": 536162,
+    "sha256": "de2ab4a1e90959c39421e513d9896c0a64baeac51f66bb546a2e05b5bc4430e4",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "photo-validation-375.png",
+    "source": "/workspace/w5-browser-final/photo-validation-375.png",
+    "bytes": 139204,
+    "sha256": "f0f6d4b7e36fbc1fd1b197fc41b27b3e071513872e4c5f23d9d4a13e6827e0ab",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "profile-no-photo-1440.png",
+    "source": "/workspace/w5-browser-final/profile-no-photo-1440.png",
+    "bytes": 547105,
+    "sha256": "cc4661a5f28812d7040a29227a361437d7dddcad90b56a9326b66b93514604e2",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "profile-no-photo-375.png",
+    "source": "/workspace/w5-browser-final/profile-no-photo-375.png",
+    "bytes": 159666,
+    "sha256": "8fdbe8dcd6e4a189821b2b6b20d6a69cce35ce0bb987cd553ce1916f39011157",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "profile-photo-1440.png",
+    "source": "/workspace/w5-browser-final/profile-photo-1440.png",
+    "bytes": 542228,
+    "sha256": "195fe66b1e892856468e091c15d5a8cd511e36a43c5a8eb885a11580fb39cc16",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "profile-photo-375.png",
+    "source": "/workspace/w5-browser-final/profile-photo-375.png",
+    "bytes": 153346,
+    "sha256": "65a366e4f74b0865af07686274a87b38c33fa0b2e0e006824a3af6b6be235316",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "provider-error-1440.png",
+    "source": "/workspace/w5-browser-final/provider-error-1440.png",
+    "bytes": 225119,
+    "sha256": "3126b09d0a1a00f1271f7c4a815eebae3c94669ea014e2172a9c86d231f17a87",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "provider-error-375.png",
+    "source": "/workspace/w5-browser-final/provider-error-375.png",
+    "bytes": 104288,
+    "sha256": "c396ede498b3e3e925ddf686d46cef0463ac4346193a650eec2b8ac0d46c0ebe",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "reduced-security.png",
+    "source": "/workspace/w5-browser-final/reduced-security.png",
+    "bytes": 215993,
+    "sha256": "1a108fb963100a42e9d0d2ab4ad68c8e5e7e89d17215972ffe8a3718585c88b6",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "reset-1440.png",
+    "source": "/workspace/w5-browser-final/reset-1440.png",
+    "bytes": 316618,
+    "sha256": "8e0d829d56ab648f548bf51a5721fb4078ae6d43d56b77ea8b3faa3fdd3c9349",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "reset-375.png",
+    "source": "/workspace/w5-browser-final/reset-375.png",
+    "bytes": 133778,
+    "sha256": "e3c5ffb355a3886279d0237d1f905ffc4701d3891f11b565e6f247d8c9e37e5a",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "reset-invalid-1440.png",
+    "source": "/workspace/w5-browser-final/reset-invalid-1440.png",
+    "bytes": 331399,
+    "sha256": "87efb5654d3be7b778b6873d3f628e82276f9088bb40c2169a39fa112580c675",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "reset-invalid-375.png",
+    "source": "/workspace/w5-browser-final/reset-invalid-375.png",
+    "bytes": 135218,
+    "sha256": "1d5e4ed894dc8c7e927eafc9ff7c73343ddefab5e770816b00d4643f3cb20c1c",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "roles-1440.png",
+    "source": "/workspace/w5-browser-final/roles-1440.png",
+    "bytes": 339902,
+    "sha256": "39020f1beb3b53342e4764b848337b03d57bb093816f6e9d4781295fee873042",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "roles-375.png",
+    "source": "/workspace/w5-browser-final/roles-375.png",
+    "bytes": 100841,
+    "sha256": "71d0152a7947fd628bacc47849222872835bc27bc62cfc127461a01cab05a91c",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "session-expired-1440.png",
+    "source": "/workspace/w5-browser-final/session-expired-1440.png",
+    "bytes": 240408,
+    "sha256": "a8f8b6933d8b70759df7b8e8759637a372bea7db417305b7824585ce9edbaece",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "session-expired-375.png",
+    "source": "/workspace/w5-browser-final/session-expired-375.png",
+    "bytes": 112342,
+    "sha256": "4384df3aa6a414c550f2b14b7065102237e80c3754e58f0464d12f061c733145",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "account-client-zoom-200-focus.png",
+    "source": "/workspace/w5-zoom-final-native/account-client-zoom-200-focus.png",
+    "bytes": 450457,
+    "sha256": "ddfd82d5b667c28ccddcfa66fc804ea1c120b6ffe3a4a54f68f850d72051b0b2",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "account-client-zoom-200.png",
+    "source": "/workspace/w5-zoom-final-native/account-client-zoom-200.png",
+    "bytes": 149446,
+    "sha256": "c1d998350e58e54e65e2f2355f4ca8d57170a8f48dd4193199067d5784b82a5a",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "activation-pending-zoom-200-focus.png",
+    "source": "/workspace/w5-zoom-final-native/activation-pending-zoom-200-focus.png",
+    "bytes": 217091,
+    "sha256": "3ecca01102a385384381cde434e9c7ce7f4c8f7f4584cec4f5887dd4ef362c6d",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "activation-pending-zoom-200.png",
+    "source": "/workspace/w5-zoom-final-native/activation-pending-zoom-200.png",
+    "bytes": 142163,
+    "sha256": "eba99cb9f9dfc9ed682527f8d36b82110e33836837a7dbecaba48ab0cc419b81",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "edit-name-zoom-200-focus.png",
+    "source": "/workspace/w5-zoom-final-native/edit-name-zoom-200-focus.png",
+    "bytes": 271973,
+    "sha256": "83acd56c7f5b788c615e57b4d42f51d436385f89474c300bf9f3b4f17e900bf4",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "edit-name-zoom-200.png",
+    "source": "/workspace/w5-zoom-final-native/edit-name-zoom-200.png",
+    "bytes": 260204,
+    "sha256": "0e9e0953836a1aa398cff722632c31a6b5562c92472c6f8428f766d355ec91f6",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "forgot-zoom-200-focus.png",
+    "source": "/workspace/w5-zoom-final-native/forgot-zoom-200-focus.png",
+    "bytes": 193798,
+    "sha256": "ad56fa3687fa1dd88f582e5feb0c3b5faf7af6b68c89da9fbf51e8bdb01031d4",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "forgot-zoom-200.png",
+    "source": "/workspace/w5-zoom-final-native/forgot-zoom-200.png",
+    "bytes": 392724,
+    "sha256": "45730031cd5cf8c32918aac041a0e06b30a9763f6d1a8335a1506c90861219a8",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "identity-native-zoom.webm",
+    "source": "/workspace/w5-zoom-final-native/identity-native-zoom.webm",
+    "bytes": 4350651,
+    "sha256": "d3f79ef0d169d9c1b5ec68a03578790e52d9d6f48ddf497ced7f784b0798e2d8",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "profile-photo-zoom-200-focus.png",
+    "source": "/workspace/w5-zoom-final-native/profile-photo-zoom-200-focus.png",
+    "bytes": 302802,
+    "sha256": "7d553acec6d6b9009457afb697e6aab378c3e30c85411a8c0426d45ab727991b",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "profile-photo-zoom-200.png",
+    "source": "/workspace/w5-zoom-final-native/profile-photo-zoom-200.png",
+    "bytes": 337886,
+    "sha256": "54de739c6423437ac9ddced15dcc7cab024a79c77491709799ee1f3d0657415a",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "reset-zoom-200-focus.png",
+    "source": "/workspace/w5-zoom-final-native/reset-zoom-200-focus.png",
+    "bytes": 199259,
+    "sha256": "24871cefd02d3a7551da2d04e04dbe5189f20342430b4641608d03872051ea2d",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "reset-zoom-200.png",
+    "source": "/workspace/w5-zoom-final-native/reset-zoom-200.png",
+    "bytes": 408696,
+    "sha256": "82abac70fee55cba78894518106bed5c4f852805260b1c960485416e62deb6ea",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "roles-zoom-200.png",
+    "source": "/workspace/w5-zoom-final-native/roles-zoom-200.png",
+    "bytes": 147582,
+    "sha256": "077b709b101fb2cf777fe703cf2e68f65b8aa93ec07b662cb025f2bc079a58a9",
+    "method": "Unmodified Chromium physical-surface capture via CDP, or native browser video"
+  },
+  {
+    "file": "after-account-client-1440.png",
+    "source": "/workspace/w5-comparatives/after-account-client-1440.png",
+    "bytes": 431932,
+    "sha256": "9c8d9341e4cbadfde74858ff748465945af780959ef71d3aea33b02434069af5",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-account-client-375.png",
+    "source": "/workspace/w5-comparatives/after-account-client-375.png",
+    "bytes": 223957,
+    "sha256": "f196d78603baa7af0075d034c8b82b0a893d862dca37223fbf871a71121428bb",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-activation-pending-1440.png",
+    "source": "/workspace/w5-comparatives/after-activation-pending-1440.png",
+    "bytes": 478502,
+    "sha256": "697526821bfc7e3c340477a71981704783a3845a36196af9253bbf08edbb7f7e",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-activation-pending-375.png",
+    "source": "/workspace/w5-comparatives/after-activation-pending-375.png",
+    "bytes": 197672,
+    "sha256": "6335fd49c82e262a6f060f3d8c0f2d95cd42f66fb189e1d0a44ebf60fcdef0fe",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-edit-name-1440.png",
+    "source": "/workspace/w5-comparatives/after-edit-name-1440.png",
+    "bytes": 421715,
+    "sha256": "b483f5d20c5088f2c9be579386d9145b8cb8b77d4fe7e76aa1a153fcb5fb063d",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-edit-name-375.png",
+    "source": "/workspace/w5-comparatives/after-edit-name-375.png",
+    "bytes": 138919,
+    "sha256": "8f8ab7358d3989d6fc7ca6f8c33eb8a6d8aed0c57c1dd75df3cf462a129c1b1f",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-forgot-1440.png",
+    "source": "/workspace/w5-comparatives/after-forgot-1440.png",
+    "bytes": 296372,
+    "sha256": "b0b0f7b98cbbc512dbb0d57344f8a81d6ca53d45803637adbb2361ab05e32062",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-forgot-375.png",
+    "source": "/workspace/w5-comparatives/after-forgot-375.png",
+    "bytes": 117039,
+    "sha256": "39fffadeca8a96447311e46c0ae7d2afc2233a790758f2e9c9db8aed33acd2d2",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-profile-photo-1440.png",
+    "source": "/workspace/w5-comparatives/after-profile-photo-1440.png",
+    "bytes": 663596,
+    "sha256": "a4c9cd5c02c03ed3f96b3cbf9956656ed5fa4eee9d7fbc13a334a47827f6303b",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-profile-photo-375.png",
+    "source": "/workspace/w5-comparatives/after-profile-photo-375.png",
+    "bytes": 323793,
+    "sha256": "98afb425435c9c63c0b1f7846798e21ac131ce4c9a2f31cf1f8421bb51bf154d",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-reset-1440.png",
+    "source": "/workspace/w5-comparatives/after-reset-1440.png",
+    "bytes": 322607,
+    "sha256": "9aae09ef1ab2a4a121e27ac069c408bd86bd25177f66ffc6bed4fd19c3f4198b",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-reset-375.png",
+    "source": "/workspace/w5-comparatives/after-reset-375.png",
+    "bytes": 133894,
+    "sha256": "53d650d259d8ad3094fb4bbe0501d6bd46148d249a696b213522de762f5b51f0",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-roles-1440.png",
+    "source": "/workspace/w5-comparatives/after-roles-1440.png",
+    "bytes": 339685,
+    "sha256": "885020867364a40a1fb2c68f94c2e5e8a25b1ae6403ac0299b18a891d959d515",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "after-roles-375.png",
+    "source": "/workspace/w5-comparatives/after-roles-375.png",
+    "bytes": 116109,
+    "sha256": "e2d29bc5daa4511938aa1824c180d536d23d7f9d49d0c080dac6db6e1060514d",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-account-client-1440.png",
+    "source": "/workspace/w5-comparatives/before-account-client-1440.png",
+    "bytes": 244787,
+    "sha256": "a7b1094d4cc335d50fe0b24c267dc08c11cf44cba72172f4668aae2e1b20b3bc",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-account-client-375.png",
+    "source": "/workspace/w5-comparatives/before-account-client-375.png",
+    "bytes": 74022,
+    "sha256": "c45ec3f967b89c05deb32e2b84104a28f3d8909023b1c460293fbbe5c2ba2c26",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-activation-pending-1440.png",
+    "source": "/workspace/w5-comparatives/before-activation-pending-1440.png",
+    "bytes": 245965,
+    "sha256": "838da40ff80badc0757682e441e7b61112df6bab1c11169060ba1584968024d9",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-activation-pending-375.png",
+    "source": "/workspace/w5-comparatives/before-activation-pending-375.png",
+    "bytes": 75203,
+    "sha256": "96614d7bf80d33ff26705d45aeebd376523c37ce36d3607ecb97e44737f1d521",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-edit-name-1440.png",
+    "source": "/workspace/w5-comparatives/before-edit-name-1440.png",
+    "bytes": 383105,
+    "sha256": "03a3eacd83f7b4d1e06c2e0a424147e2a187739fe5fcf031b78dff78e73efdb0",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-edit-name-375.png",
+    "source": "/workspace/w5-comparatives/before-edit-name-375.png",
+    "bytes": 82585,
+    "sha256": "a82e3e7c442ee2b258f69b64b5b73d2a6621df695b81e679571f5653dda1f8ae",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-forgot-1440.png",
+    "source": "/workspace/w5-comparatives/before-forgot-1440.png",
+    "bytes": 84545,
+    "sha256": "0d8c7be7b85aed878e49c37e4d30db39d8ca2b2bb702b857d4b8462f3911895b",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-forgot-375.png",
+    "source": "/workspace/w5-comparatives/before-forgot-375.png",
+    "bytes": 51552,
+    "sha256": "d7e11a22f10bc2a52181efa26afc9d30624e42a8a7c6d759b77f366c4f5e7055",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-profile-photo-1440.png",
+    "source": "/workspace/w5-comparatives/before-profile-photo-1440.png",
+    "bytes": 443668,
+    "sha256": "3da5b21cca4399cb817acf582e73d3685bb77a59b33dab48dc6af28887116b5c",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-profile-photo-375.png",
+    "source": "/workspace/w5-comparatives/before-profile-photo-375.png",
+    "bytes": 186188,
+    "sha256": "9e6c07aab82d544f73c6963fc5ec595feb38ff5c871d2bfc961af775d1b0a51d",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-reset-1440.png",
+    "source": "/workspace/w5-comparatives/before-reset-1440.png",
+    "bytes": 92047,
+    "sha256": "887db37899a9faadc8b6c0f940a15d586e8c7f04f45e1910e8e3f0008dd87cab",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-reset-375.png",
+    "source": "/workspace/w5-comparatives/before-reset-375.png",
+    "bytes": 57804,
+    "sha256": "f70a7e9bfd82ffb2b882ae4c8193fbe2f917665ff1f20e896e06667e5078c4a4",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-roles-1440.png",
+    "source": "/workspace/w5-comparatives/before-roles-1440.png",
+    "bytes": 212959,
+    "sha256": "870ea58413bf8212e35ad470e24d74c2e4177391e673977b7ae185df0a356f79",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "before-roles-375.png",
+    "source": "/workspace/w5-comparatives/before-roles-375.png",
+    "bytes": 40534,
+    "sha256": "3bfed4e864963399e5cd614233f58b89ae7952bd6b7a068976f1a04e5c2c66c5",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "widget-account-client-scene.png",
+    "source": "/workspace/w5-comparatives/widget-account-client-scene.png",
+    "bytes": 27730,
+    "sha256": "60adbfdc240ab33a7c793872c55f18f134ce46907498098a5a5191ba0ed381bf",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "widget-forgot-scene.png",
+    "source": "/workspace/w5-comparatives/widget-forgot-scene.png",
+    "bytes": 33500,
+    "sha256": "167f1d5ad7749372c9205c3ca47b5ef72f28c9a9ae2c371c2b591b6e63a213da",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "widget-profile-photo-data.png",
+    "source": "/workspace/w5-comparatives/widget-profile-photo-data.png",
+    "bytes": 247101,
+    "sha256": "352a984fcb0d0475e3cc0618a096cbcaa76c604411023edb6335d1277190843d",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  },
+  {
+    "file": "widget-profile-photo-scene.png",
+    "source": "/workspace/w5-comparatives/widget-profile-photo-scene.png",
+    "bytes": 33646,
+    "sha256": "0a60f2bc5c43bf39511469688899003d4b31e9f41346997f7c45762547041eda",
+    "method": "Byte-for-byte unmodified actual Chromium capture"
+  }
+]

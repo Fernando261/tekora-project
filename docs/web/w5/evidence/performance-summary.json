@@ -1,0 +1,66 @@
+{
+  "method": "Two fresh contexts per page/width/version, 1200ms observation after network idle; seven families, 375/1440px. Seven extra W5 CPU4 samples. Loopback Linux/software; not field INP.",
+  "samples": 63,
+  "normal": {
+    "base-w4": {
+      "samples": 28,
+      "median_lcp_ms": 338.0,
+      "max_lcp_ms": 520,
+      "max_cls": 0,
+      "failed_resources_or_page_errors": 16,
+      "median_encoded_resource_bytes": 75965.0
+    },
+    "w5": {
+      "samples": 28,
+      "median_lcp_ms": 412.0,
+      "max_lcp_ms": 572,
+      "max_cls": 0,
+      "failed_resources_or_page_errors": 0,
+      "median_encoded_resource_bytes": 115216.0
+    }
+  },
+  "w5_cpu4": {
+    "samples": 7,
+    "median_lcp_ms": 600,
+    "max_lcp_ms": 908,
+    "max_cls": 0
+  },
+  "interaction": [
+    {
+      "cpu_rate": 1,
+      "method": "Actual native history-summary clicks: event timestamp to second rAF; presentation proxy, not INP. Scroll rAF cadence is diagnostic, not GPU FPS.",
+      "click_to_second_raf_ms": [
+        82.80000000074506,
+        72.19999999925494,
+        57.80000000074506,
+        68.80000000074506,
+        69.69999999925494
+      ],
+      "scroll": {
+        "frames": 20,
+        "mean_frame_ms": 37.77499999996276,
+        "max_frame_ms": 133.4000000000001,
+        "no_horizontal": true
+      }
+    },
+    {
+      "cpu_rate": 4,
+      "method": "Actual native history-summary clicks: event timestamp to second rAF; presentation proxy, not INP. Scroll rAF cadence is diagnostic, not GPU FPS.",
+      "click_to_second_raf_ms": [
+        82.5,
+        168.19999999925494,
+        151,
+        66.69999999925494,
+        172.29999999701977
+      ],
+      "scroll": {
+        "frames": 10,
+        "mean_frame_ms": 70.6000000002235,
+        "max_frame_ms": 99.90000000000009,
+        "no_horizontal": true
+      }
+    }
+  ],
+  "baseline_limitations": "Offline local preview blocks historic remote Google Fonts and inline scripts; not a production comparison",
+  "median_lcp_delta_ms": 74.0
+}

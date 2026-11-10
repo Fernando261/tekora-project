@@ -1,0 +1,75 @@
+[
+  {
+    "name": "marketplace-regression",
+    "command": [
+      "python3",
+      "tools/tekora-w3-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8072",
+      "--fixture",
+      "/workspace/w5-marketplace-preview/marketplace-fixtures.json",
+      "--output",
+      "/workspace/w5-marketplace-regression",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "dashboard-regression",
+    "command": [
+      "python3",
+      "tools/tekora-w21-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8075",
+      "--output",
+      "/workspace/w5-dashboard-refined",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "sidebar-regression",
+    "command": [
+      "python3",
+      "tools/tekora-w211-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8075",
+      "--output",
+      "/workspace/w5-sidebar-final",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "operations-regression",
+    "command": [
+      "python3",
+      "tools/tekora-w4-browser-checks.py",
+      "--base-url",
+      "http://127.0.0.1:8074",
+      "--pages",
+      "/workspace/w5-operations-preview/w4-pages.json",
+      "--output",
+      "/workspace/w5-operations-regression",
+      "--axe",
+      "/workspace/w1-evidence/axe.min.js",
+      "--names",
+      "request-create",
+      "request-detail",
+      "conversations",
+      "reservation-propose",
+      "reservation-provider",
+      "review-create",
+      "review-withdrawn",
+      "availability",
+      "services",
+      "notifications",
+      "profile",
+      "--matrix-only"
+    ],
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,11 @@
+{
+    "environment": "testing",
+    "connection": "sqlite",
+    "database": ":memory:",
+    "environment_file_exists": false,
+    "post_backend": false,
+    "mail_backend": false,
+    "storage_fake": true,
+    "real_media_copied": false,
+    "token": "Synthetic nonfunctional fixture only"
+}

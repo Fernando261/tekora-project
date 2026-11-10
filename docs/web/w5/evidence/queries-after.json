@@ -1,0 +1,98 @@
+{
+    "account-client": {
+        "count": 16,
+        "writes": 0
+    },
+    "account-provider": {
+        "count": 18,
+        "writes": 0
+    },
+    "account-dual": {
+        "count": 16,
+        "writes": 0
+    },
+    "account-admin": {
+        "count": 15,
+        "writes": 0
+    },
+    "account-none": {
+        "count": 15,
+        "writes": 0
+    },
+    "activation-pending": {
+        "count": 14,
+        "writes": 0
+    },
+    "profile-no-photo": {
+        "count": 13,
+        "writes": 0
+    },
+    "edit-name": {
+        "count": 13,
+        "writes": 0
+    },
+    "name-validation": {
+        "count": 13,
+        "writes": 0
+    },
+    "profile-photo": {
+        "count": 13,
+        "writes": 0
+    },
+    "photo-validation": {
+        "count": 13,
+        "writes": 0
+    },
+    "activation-active": {
+        "count": 16,
+        "writes": 0
+    },
+    "roles": {
+        "count": 14,
+        "writes": 0
+    },
+    "forgot": {
+        "count": 0,
+        "writes": 0
+    },
+    "forgot-sent": {
+        "count": 0,
+        "writes": 0
+    },
+    "forgot-validation": {
+        "count": 0,
+        "writes": 0
+    },
+    "reset": {
+        "count": 0,
+        "writes": 0
+    },
+    "reset-invalid": {
+        "count": 0,
+        "writes": 0
+    },
+    "client-error": {
+        "count": 0,
+        "writes": 0
+    },
+    "provider-error": {
+        "count": 0,
+        "writes": 0
+    },
+    "session-expired": {
+        "count": 0,
+        "writes": 0
+    },
+    "linked-client-dashboard": {
+        "count": 22,
+        "writes": 0
+    },
+    "linked-provider-form": {
+        "count": 20,
+        "writes": 0
+    },
+    "linked-provider-dashboard": {
+        "count": 17,
+        "writes": 0
+    }
+}

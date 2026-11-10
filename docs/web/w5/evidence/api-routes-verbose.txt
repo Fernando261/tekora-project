@@ -1,0 +1,100 @@
+
+  POST       api/v1/auth/login api.v1.auth.login › Api\V1\AuthController@login
+             ⇂ api
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-login
+  POST       api/v1/auth/logout api.v1.auth.logout › Api\V1\AuthController@logout
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+  GET|HEAD   api/v1/conversations api.v1.conversations.index › Api\V1\OperationsController@conversations
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+  GET|HEAD   api/v1/inquiries api.v1.inquiries.index › Api\V1\OperationsController@inquiries
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+  GET|HEAD   api/v1/inquiries/{inquiry} api.v1.inquiries.show › Api\V1\OperationsController@inquiry
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+  PATCH      api/v1/inquiries/{inquiry}/cancel api.v1.inquiries.cancel › Api\V1\OperationsController@cancelInquiry
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-inquiry-writes
+  GET|HEAD   api/v1/inquiries/{inquiry}/messages api.v1.messages.index › Api\V1\OperationsController@messages
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+  POST       api/v1/inquiries/{inquiry}/messages api.v1.messages.store › Api\V1\OperationsController@send
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-message-writes
+  POST       api/v1/inquiries/{inquiry}/messages/read api.v1.messages.read › Api\V1\OperationsController@read
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-read-writes
+  GET|HEAD   api/v1/inquiries/{inquiry}/reservation-options api.v1.reservations.options › Api\V1\OperationsController@options
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+  POST       api/v1/inquiries/{inquiry}/reservations api.v1.reservations.store › Api\V1\OperationsController@propose
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-reservation-writes
+  GET|HEAD   api/v1/me .................. api.v1.me › Api\V1\AuthController@me
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+  GET|HEAD   api/v1/providers api.v1.providers.index › Api\V1\CatalogController@providersIndex
+             ⇂ api
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-catalog
+  GET|HEAD   api/v1/providers/{provider} api.v1.providers.show › Api\V1\CatalogController@provider
+             ⇂ api
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-catalog
+  GET|HEAD   api/v1/reservations api.v1.reservations.index › Api\V1\OperationsController@reservations
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+  GET|HEAD   api/v1/reservations/{reservation} api.v1.reservations.show › Api\V1\OperationsController@reservation
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+  PATCH      api/v1/reservations/{reservation}/cancel api.v1.reservations.cancel › Api\V1\OperationsController@cancelReservation
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-reservation-writes
+  GET|HEAD   api/v1/services api.v1.services.index › Api\V1\CatalogController@index
+             ⇂ api
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-catalog
+  GET|HEAD   api/v1/services/{service} api.v1.services.show › Api\V1\CatalogController@show
+             ⇂ api
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-catalog
+  GET|HEAD   api/v1/services/{service}/availability api.v1.services.availability › Api\V1\CatalogController@availability
+             ⇂ api
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-catalog
+  POST       api/v1/services/{service}/inquiries api.v1.inquiries.store › Api\V1\OperationsController@open
+             ⇂ api
+             ⇂ Illuminate\Auth\Middleware\Authenticate:sanctum
+             ⇂ App\Http\Middleware\MobileClient
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-private
+             ⇂ Illuminate\Routing\Middleware\ThrottleRequests:mobile-inquiry-writes
+
+                                                           Showing [21] routes

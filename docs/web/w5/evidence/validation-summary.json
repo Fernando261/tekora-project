@@ -1,0 +1,71 @@
+{
+  "phpunit": {
+    "tests": 577,
+    "assertions": 7799,
+    "memory_mb": 139,
+    "exit_code": 0
+  },
+  "phpunit_habitual_restored_hot": {
+    "tests": 577,
+    "assertions": 7799,
+    "exit_code": 0
+  },
+  "baseline": {
+    "tests": 548,
+    "assertions": 7402,
+    "exit_code": 0
+  },
+  "web_w5": {
+    "tests": 29,
+    "assertions": 397,
+    "exit_code": 0
+  },
+  "composer_advisories": 0,
+  "composer_no_dev_advisories": 0,
+  "npm_vulnerabilities": 0,
+  "native_zoom_checks": 21,
+  "router_http_checks": 18,
+  "matrix_total": 490,
+  "axe_total": 100,
+  "scopes": {
+    "w5": {
+      "matrix": 168,
+      "axe": 42,
+      "violations": 0,
+      "max_cls": 0,
+      "unexpected_errors": 0
+    },
+    "w2": {
+      "matrix": 90,
+      "axe": 14,
+      "violations": 0,
+      "max_cls": 0,
+      "unexpected_errors": 0
+    },
+    "sidebar": {
+      "matrix": 64,
+      "axe": 10,
+      "violations": 0,
+      "max_cls": 0,
+      "unexpected_errors": 0
+    },
+    "w3": {
+      "matrix": 80,
+      "axe": 12,
+      "violations": 0,
+      "max_cls": 0,
+      "unexpected_errors": 0
+    },
+    "w4_representative_11_families": {
+      "matrix": 88,
+      "axe": 22,
+      "violations": 0,
+      "max_cls": 0.04397519270833333,
+      "unexpected_errors": 0
+    }
+  },
+  "media": {
+    "png": 105,
+    "webm": 4
+  }
+}
