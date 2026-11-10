@@ -1,0 +1,121 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "origin_main_sha_checked": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "branch": "codex/w61-mindbloom-decommission-audit",
+  "phase": "Candidate documentation verified before implementation commit; final commit SHA is reported in the PR and delivery",
+  "checks": {
+    "outside_documentation_diff_empty": true,
+    "all_new_files_inside_docs_web_w6": true,
+    "allowed_extensions": [
+      ".md",
+      ".json",
+      ".csv",
+      ".txt"
+    ],
+    "new_file_git_mode": "100644",
+    "api_static_operations": 21,
+    "api_explicit_declarations": 8,
+    "api_loop_entries": 13,
+    "migration_files": 37,
+    "matrix_rows": 34,
+    "matrix_required_fields": 15,
+    "json_csv_field_parity": true,
+    "pinned_source_links_checked": 94,
+    "source_files_cited": 57,
+    "relative_document_links_checked": 35,
+    "base_source_line_references_valid": true,
+    "git_diff_check_cached_exit_code": 0
+  },
+  "source_fingerprints": [
+    {
+      "path": "app",
+      "base_git_object": "6c5340cfd7ce23a1aef72c5abb04baabd0754b9a",
+      "unchanged": true
+    },
+    {
+      "path": "bootstrap",
+      "base_git_object": "0e04ad5071f86383e0571ab84346acc21702b108",
+      "unchanged": true
+    },
+    {
+      "path": "config",
+      "base_git_object": "3831bce26913650f8a10b850c54ed5cd081b8b19",
+      "unchanged": true
+    },
+    {
+      "path": "routes",
+      "base_git_object": "18a4abdb7c14614f5f6d424608a171b6c72314d1",
+      "unchanged": true
+    },
+    {
+      "path": "resources",
+      "base_git_object": "de14cc0f146edd41f91c8763529000dd3fd7729c",
+      "unchanged": true
+    },
+    {
+      "path": "public",
+      "base_git_object": "f871097bf7c8b4afb83038058e0aa7b884d24ad9",
+      "unchanged": true
+    },
+    {
+      "path": "tests",
+      "base_git_object": "03fdf737ba57b49672037f8656eb152c65de0350",
+      "unchanged": true
+    },
+    {
+      "path": "database",
+      "base_git_object": "ef5b97488bf5daa0ca3b6f6c65e2e50bba566f8b",
+      "unchanged": true
+    },
+    {
+      "path": "tools",
+      "base_git_object": "c1d5de505bfbad9670931204901bdb35eebe7b31",
+      "unchanged": true
+    },
+    {
+      "path": ".github",
+      "present_in_base": false,
+      "unchanged": true
+    },
+    {
+      "path": "composer.json",
+      "base_git_object": "ad03e65cb86c4c5eb8db1009b4ebea89f2590ee0",
+      "unchanged": true
+    },
+    {
+      "path": "composer.lock",
+      "base_git_object": "a66d6ae54619eabb601d866656a2a0a8b863720f",
+      "unchanged": true
+    },
+    {
+      "path": "package.json",
+      "base_git_object": "4e900c32cacd91d0f72712d7d6ad17b89963c68c",
+      "unchanged": true
+    },
+    {
+      "path": "package-lock.json",
+      "base_git_object": "d276cc4d6b5c8cbffdacd27f35cba0f098246d17",
+      "unchanged": true
+    },
+    {
+      "path": "vite.config.js",
+      "base_git_object": "82b7f7f9b204f6b5018aff416d112e6d955bd418",
+      "unchanged": true
+    },
+    {
+      "path": "phpunit.xml",
+      "base_git_object": "b8b12c832b26bc96a311560dad9b165d99400657",
+      "unchanged": true
+    }
+  ],
+  "execution": {
+    "phpunit": "NOT RUN; baseline Windows previously approved: 626 tests / 8258 assertions",
+    "composer_npm_build_audits": "NOT RUN; documentation-only change",
+    "application_boot_or_http_requests": false,
+    "oauth_calls": false,
+    "persistent_databases_env_appkey_credentials_sessions_accounts_or_media_modified": false,
+    "persistent_data_credentials_sessions_or_media_contents_inspected": false,
+    "new_executables": false
+  },
+  "delivery_file_count": 18
+}

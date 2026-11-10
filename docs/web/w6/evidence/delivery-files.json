@@ -1,0 +1,24 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "scope": "Added documentation only; no executables",
+  "files": [
+    "docs/web/w6/W61-CUTOVER-ROADMAP.md",
+    "docs/web/w6/W61-DECISION-MATRIX.md",
+    "docs/web/w6/W61-DEPENDENCY-MAP.md",
+    "docs/web/w6/W61-EXECUTIVE-PLAN.md",
+    "docs/web/w6/W61-LARAGON.md",
+    "docs/web/w6/evidence/README.md",
+    "docs/web/w6/evidence/api-static-inventory.json",
+    "docs/web/w6/evidence/asset-reference-inventory.json",
+    "docs/web/w6/evidence/branding-occurrences.json",
+    "docs/web/w6/evidence/decision-matrix.csv",
+    "docs/web/w6/evidence/decision-matrix.json",
+    "docs/web/w6/evidence/delivery-files.json",
+    "docs/web/w6/evidence/dormant-candidates.json",
+    "docs/web/w6/evidence/inventory-method.json",
+    "docs/web/w6/evidence/schema-inventory.json",
+    "docs/web/w6/evidence/source-index.json",
+    "docs/web/w6/evidence/verification.json",
+    "docs/web/w6/evidence/web-route-declarations.json"
+  ]
+}

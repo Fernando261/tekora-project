@@ -1,0 +1,1077 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "status": "Propuestas para revisión; ninguna decisión ejecutada",
+  "fields": [
+    "Elemento",
+    "Función actual",
+    "Consumidores",
+    "Datos",
+    "Dependencias",
+    "Valor para Tekora",
+    "Solapamiento",
+    "Decisión",
+    "Justificación",
+    "Riesgo",
+    "Condiciones previas",
+    "Compatibilidad",
+    "Pruebas",
+    "PR futuro",
+    "Reversión"
+  ],
+  "rows": [
+    {
+      "id": "D01",
+      "Elemento": "components/account-navigation + account-layout footer",
+      "Función actual": "Ofrece MindBloom anterior y cinco destinos; footer enlaza home",
+      "Consumidores": "Shell de dashboards, operaciones e identidad; vistas históricas",
+      "Datos": "No datos propios; lectura de permisos/contadores",
+      "Dependencias": "web; Permission; NotificationInbox; InquiryReadTracking",
+      "Valor para Tekora": "Conservar navegación nativa y sus controles",
+      "Solapamiento": "Tekora ya tiene cliente/prestador, mensajes, reservas y reseñas",
+      "Decisión": "SUSTITUIR",
+      "Justificación": "Bloque legado explícito y footer activo; no es solo CSS",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Historia Tekora autorizada y compatibilidad aprobada; no dejar propietarios sin acceso",
+      "Compatibilidad": "Destinos antiguos siguen resolviendo hasta corte; no cambiar POST logout",
+      "Pruebas": "Roles/teclado/sidebar W2; todos los consumidores W4/W5; CSRF/logout",
+      "PR futuro": "W6.2b",
+      "Reversión": "Revertir solo cambio de navegación; conservar handlers y datos",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/components/account-navigation.blade.php",
+          "line": 63,
+          "symbol": "account-legacy"
+        },
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 49,
+          "symbol": "footer"
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "Elemento": "account/client y /cuenta/citas",
+      "Función actual": "Panel moderno enlaza historial Cita; alias exige client.appointments.view",
+      "Consumidores": "Dashboard cliente, enlaces guardados",
+      "Datos": "citas.user_id; usuarios centrales",
+      "Dependencias": "web + can en alias; UserCitaController",
+      "Valor para Tekora": "Historial propio con procedencia verdadera",
+      "Solapamiento": "Dashboard moderno ya resume solicitudes/reservas, no citas antiguas",
+      "Decisión": "ADAPTAR",
+      "Justificación": "El alias y /citas usan el mismo controlador con permisos distintos",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Acceso de propietarios sin rol definido; contrato de historial nativo",
+      "Compatibilidad": "No redirigir /citas a /cuenta/citas a ciegas: puede generar 403",
+      "Pruebas": "Propiedad, usuario sin roles, alias, métricas sin mezclar Cita/reserva",
+      "PR futuro": "W6.2a",
+      "Reversión": "Restaurar enlace/alias previo; no alterar tablas",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/account/client.blade.php",
+          "line": 38,
+          "symbol": "client-legacy-title"
+        },
+        {
+          "file": "routes/identities.php",
+          "line": 23,
+          "symbol": "identity.citas"
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "Elemento": "perfil: details Historial anterior",
+      "Función actual": "Conserva enlaces a citas, comunidad y conferencias",
+      "Consumidores": "GET /perfil autenticado",
+      "Datos": "users.profile_photo_path y campos privados; referencias antiguas",
+      "Dependencias": "web; componentes W5; W5.1",
+      "Valor para Tekora": "Perfil personal Tekora vigente",
+      "Solapamiento": "W5 ya resolvió perfil, nombre y foto",
+      "Decisión": "SUSTITUIR",
+      "Justificación": "Solo retirar selector de producto tras ofrecer destinos seguros",
+      "Riesgo": "Medio",
+      "Condiciones previas": "Decisión de cada destino y acceso histórico",
+      "Compatibilidad": "Mantener /perfil y endpoints de nombre/foto; no redirigir escrituras",
+      "Pruebas": "W5 y photo-integrity-w51; formulario sin JS; URL Storage",
+      "PR futuro": "W6.2b",
+      "Reversión": "Revertir links únicamente",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/perfil.blade.php",
+          "line": 21,
+          "symbol": "tk-identity-history"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 168,
+          "symbol": "Perfil"
+        }
+      ]
+    },
+    {
+      "id": "D04",
+      "Elemento": "login/registro y aliases profesionales",
+      "Función actual": "Login central ofrece formulario profesional; registro profesional ya cerrado",
+      "Consumidores": "Público; enlaces viejos; sesiones intended",
+      "Datos": "users y profesionistas separados",
+      "Dependencias": "AuthController; ProfesionistaAuthController; throttle:login; CSRF",
+      "Valor para Tekora": "Mantener autenticación central; compatibilidad de propietarios",
+      "Solapamiento": "No se necesita otro registro de prestador",
+      "Decisión": "ADAPTAR",
+      "Justificación": "POST retirado responde 410 JSON o 303 web; no debe volver a crear cuentas",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Plan de acceso histórico sin falsa vinculación y textos aprobados",
+      "Compatibilidad": "Conservar verbos y query role=prof / intent=provider mientras dure transición",
+      "Pruebas": "AuthenticationTest; WebAccountsTest; intended, errores, throttling y ambos guards",
+      "PR futuro": "W6.2b / W6.5c",
+      "Reversión": "Restaurar formulario/enlaces y handlers; no cambiar contraseñas",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/login.blade.php",
+          "line": 19,
+          "symbol": "legacy-access"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaController.php",
+          "line": 23,
+          "symbol": "store"
+        }
+      ]
+    },
+    {
+      "id": "D05",
+      "Elemento": "legacy-account-notice y navegación profesional",
+      "Función actual": "Explica separación de cuenta; panel profesional tiene menú propio",
+      "Consumidores": "dashboard-profesionista, disponibilidad, solicitudes-citas",
+      "Datos": "Referencia informativa a identidad existente",
+      "Dependencias": "profesionista; logout propio; OAuth",
+      "Valor para Tekora": "Información de procedencia útil durante corte",
+      "Solapamiento": "No es panel del prestador Tekora",
+      "Decisión": "ADAPTAR",
+      "Justificación": "El aviso no sustituye una política de identidad ni el menú profesional",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Experiencia de historial Tekora segura y enlace de acceso de propietarios",
+      "Compatibilidad": "Mantener sesiones existentes hasta corte; no apuntar guard antiguo a User",
+      "Pruebas": "RoutesAndGoogleSafetyTest; sesión dual y logout",
+      "PR futuro": "W6.2b / W6.5c",
+      "Reversión": "Restaurar aviso/menú anterior sin cambios SQL",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/components/legacy-account-notice.blade.php",
+          "line": 1,
+          "symbol": "legacy-account-notice"
+        },
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "line": 24,
+          "symbol": "menu"
+        }
+      ]
+    },
+    {
+      "id": "D06",
+      "Elemento": "GET /comunidad + comunidad.blade",
+      "Función actual": "Feed global para web con posts/comentarios/reacciones, sin paginar",
+      "Consumidores": "account-navigation, perfil, enlaces guardados",
+      "Datos": "posts/comments/likes; autores users; medios públicos",
+      "Dependencias": "web; Post::with; estilos y JS inline",
+      "Valor para Tekora": "No hay necesidad de comunidad de producto confirmada",
+      "Solapamiento": "Conversaciones cubren coordinación privada, no publicación social",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Existencia del feed no justifica reconstruir comunidad; acceso actual no es solo del autor",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Decisión de conservación, audiencia histórica y moderación",
+      "Compatibilidad": "Proponer cierre de experiencia visible; archivo/exportación con reglas aprobadas",
+      "Pruebas": "Visibilidad histórica, autor/terceros, permisos, paginación si se conserva",
+      "PR futuro": "W6.2a / W6.5a",
+      "Reversión": "Mantener endpoint anterior hasta comprobar alternativa; sin borrar registros",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 14,
+          "symbol": "index"
+        },
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "line": 64,
+          "symbol": "feed"
+        }
+      ]
+    },
+    {
+      "id": "D07",
+      "Elemento": "POST /comunidad y DELETE /posts/{post}",
+      "Función actual": "Sube hasta 20 MB a public/uploads; unlink antes de soft delete",
+      "Consumidores": "Formulario de posts y modal de borrado",
+      "Datos": "posts.media_path/type; deleted_at; comments/likes asociados",
+      "Dependencias": "public_path; MIME allowlist; autor por user_id",
+      "Valor para Tekora": "Lista MIME y patrón de nombre solo como referencia técnica",
+      "Solapamiento": "W5.1 no cubre estos adjuntos ni esta raíz física",
+      "Decisión": "ADAPTAR",
+      "Justificación": "Escritura anterior al INSERT sin compensación; borrado no verifica referencias compartidas",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Si siguen escrituras: endurecimiento específico; si se cierran: plan de conservación",
+      "Compatibilidad": "Nunca reenviar estos POST a solicitudes ni a foto de perfil",
+      "Pruebas": "SQL/archivo fallido; 403; compartidos; restauración de soft delete; sin medios reales",
+      "PR futuro": "W6.3b-condicional / W6.5a",
+      "Reversión": "Revertir código sin barrido; conservar medios y metadata",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 23,
+          "symbol": "saveToPublicUploads"
+        },
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 139,
+          "symbol": "destroy"
+        }
+      ]
+    },
+    {
+      "id": "D08",
+      "Elemento": "POST/DELETE /comments + renderer",
+      "Función actual": "Comentarios con adjuntos; render interno repite media del post",
+      "Consumidores": "Feed, formularios, modales",
+      "Datos": "comments con soft delete, post_id, user_id, media_path/type",
+      "Dependencias": "web; parent exists; public/uploads/community/comments",
+      "Valor para Tekora": "No portar helper de archivos sin rediseñar ciclo de integridad",
+      "Solapamiento": "Mensajes de solicitud ya tienen reglas de participantes e idempotencia",
+      "Decisión": "ADAPTAR",
+      "Justificación": "commentMediaUrl se calcula, pero bloque 206 usa post.media_path; riesgo de presentación equivocada",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Decisión comunidad; si se conserva, contrato padre/autor y adjuntos correcto",
+      "Compatibilidad": "No convertir comentarios en mensajes de solicitudes por ID",
+      "Pruebas": "Padre borrado; comentario ajeno; representación del adjunto correcto; fallos archivo/SQL",
+      "PR futuro": "W6.3b-condicional / W6.5a",
+      "Reversión": "Revertir renderer/handler; archivos previos retenidos",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/CommentController.php",
+          "line": 73,
+          "symbol": "store/destroy"
+        },
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "line": 173,
+          "symbol": "comments-section"
+        }
+      ]
+    },
+    {
+      "id": "D09",
+      "Elemento": "Post/Comment/Like y reacciones",
+      "Función actual": "morphMany/morphTo y legado post_id nullable; toggle sin protocolo de idempotencia",
+      "Consumidores": "/posts/*/like y /comments/*/like",
+      "Datos": "likes.user_id/post_id/likeable_type/likeable_id; dos índices únicos",
+      "Dependencias": "users; clases PHP persistidas por morph; soft deletes",
+      "Valor para Tekora": "No necesidad de likes Tekora confirmada",
+      "Solapamiento": "Reseñas son transacciones completadas; un like no equivale a una reseña",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "No hay backfill en migración que añade likeable; no se conocen filas efectivas",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Inventario autorizado de ambas representaciones y política de reacciones",
+      "Compatibilidad": "No renombrar clases/morph aliases sin compatibilidad explícita",
+      "Pruebas": "Like post/comentario, legado nullable, doble toggle, clases retiradas",
+      "PR futuro": "W6.5a",
+      "Reversión": "Mantener clases/tabla y contrato anteriores hasta validar archivo",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Models/Post.php",
+          "line": 29,
+          "symbol": "likes"
+        },
+        {
+          "file": "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+          "line": 9,
+          "symbol": "up"
+        }
+      ]
+    },
+    {
+      "id": "D10",
+      "Elemento": "/citas/create/{profesionista} y availability",
+      "Función actual": "Slots de 50 min, semana domingo=0, zona México, FreeBusy opcional",
+      "Consumidores": "Directorio profesional y JS de citas/create",
+      "Datos": "profesionista_disponibilidades; OAuth de profesionista",
+      "Dependencias": "web; CitasController; Google SDK; fetch de slots",
+      "Valor para Tekora": "No copiar cálculo temporal: Tekora ya tiene motor de disponibilidad",
+      "Solapamiento": "ProviderAvailability y ReservationTime usan otro dominio, 60 min e ISO",
+      "Decisión": "SUSTITUIR",
+      "Justificación": "Disponibilidad falla abierta ante error FreeBusy; calendario viejo no equivale al nativo",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Política de nuevas citas; historial y decisión sobre Calendar",
+      "Compatibilidad": "No convertir ID profesionista en provider_profile ni URI JSON a servicio por coincidencia",
+      "Pruebas": "TZ/DST, semana, error externo, forma JSON y permisos",
+      "PR futuro": "W6.5a/b",
+      "Reversión": "Restaurar GET/JS anterior; sin copiar rangos SQL",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 66,
+          "symbol": "availability"
+        },
+        {
+          "file": "app/Services/ReservationTime.php",
+          "line": 12,
+          "symbol": "resolve"
+        }
+      ]
+    },
+    {
+      "id": "D11",
+      "Elemento": "POST /citas",
+      "Función actual": "Crea solicitud pendiente en pares de fecha/estado; no crea evento aún",
+      "Consumidores": "Formulario antiguo con starts_at/ends_at",
+      "Datos": "citas FK users/profesionistas; unique prof+start",
+      "Dependencias": "web; validación fechas; consulta colisión aceptadas",
+      "Valor para Tekora": "No duplicar una segunda fuente de reservas",
+      "Solapamiento": "InquiryWorkflow + ReservationWorkflow ya cubren contratación nativa",
+      "Decisión": "SUSTITUIR",
+      "Justificación": "POST no exige la disponibilidad consultada por GET; no hay conversión semántica uno-a-uno",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Decidir cierre de nuevas solicitudes y obligaciones de pendientes existentes",
+      "Compatibilidad": "POST no redirigido a endpoint nuevo; rechazo futuro negociado, sin replay 307/308",
+      "Pruebas": "CitasRegressionTest; duración/colisión/propiedad/estados; conservación de ambas fechas",
+      "PR futuro": "W6.5a",
+      "Reversión": "Reabrir handler solo con autorización operativa; conservar filas",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 171,
+          "symbol": "store"
+        },
+        {
+          "file": "database/migrations/2026_02_16_031436_create_citas_table.php",
+          "line": 9,
+          "symbol": "citas"
+        }
+      ]
+    },
+    {
+      "id": "D12",
+      "Elemento": "GET /citas, /consultas, /cuenta/citas",
+      "Función actual": "Listado propio de Cita; /consultas redirige; alias central agrega permiso",
+      "Consumidores": "Nav, home, perfil, directorio y favoritos externos",
+      "Datos": "citas + relación Profesionista; motivo/estado históricos",
+      "Dependencias": "UserCitaController; web; can adicional en /cuenta/citas",
+      "Valor para Tekora": "Historial legítimo del titular, con origen antiguo",
+      "Solapamiento": "Reservas nativas no contienen estas citas",
+      "Decisión": "ADAPTAR",
+      "Justificación": "WHERE user_id protege titular; las tres rutas no tienen contrato idéntico",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Historial Tekora con autorización de propietario incluso sin rol nativo",
+      "Compatibilidad": "302 temporal solo a historial equivalente; mantener nombre user.citas hasta migrar consumidores",
+      "Pruebas": "No-rol, titular/tercero, orden/fechas, redirección sin bucles",
+      "PR futuro": "W6.2a / W6.5a",
+      "Reversión": "Volver al listado previo; no reescribir IDs ni estados",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/UserCitaController.php",
+          "line": 10,
+          "symbol": "index"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 153,
+          "symbol": "consultas"
+        }
+      ]
+    },
+    {
+      "id": "D13",
+      "Elemento": "/solicitudes-citas; aceptar/rechazar",
+      "Función actual": "Pendientes del profesional; aceptar inserta evento y luego guarda SQL; rechazar actualiza pares",
+      "Consumidores": "Panel profesional y formularios",
+      "Datos": "citas.google_event_id y estados; profesionistas OAuth",
+      "Dependencias": "profesionista; filtro owner; Calendar API",
+      "Valor para Tekora": "Referencia para integración externa solo si se justifica producto",
+      "Solapamiento": "ReservationWorkflow ya decide reservas sin Calendar",
+      "Decisión": "ADAPTAR",
+      "Justificación": "Aceptación externa/SQL no es atómica ni idempotente; no se debe cortar con pendientes sin plan",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Resolver estado de pendientes y reconciliación sin duplicar eventos; autorización externa aparte",
+      "Compatibilidad": "Conservar POST de decisión hasta cierre aprobado; no redirigir a confirmación de reserva",
+      "Pruebas": "Reintento/doble aceptar, fallo Google/SQL, propietario, rechazo sin Google",
+      "PR futuro": "W6.5a/b",
+      "Reversión": "Restaurar handler sin recrear eventos; reconciliar IDs existentes",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 83,
+          "symbol": "aceptar"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 177,
+          "symbol": "rechazar"
+        }
+      ]
+    },
+    {
+      "id": "D14",
+      "Elemento": "/profesionista/disponibilidad",
+      "Función actual": "Reemplaza rangos por delete+create sin transacción explícita",
+      "Consumidores": "Panel histórico",
+      "Datos": "profesionista_disponibilidades: domingo=0, horas y is_active",
+      "Dependencias": "profesionista; validador rangos",
+      "Valor para Tekora": "No portar reemplazo no versionado a motor actual",
+      "Solapamiento": "Native availability tiene revision, TZ, intervalos y bloqueos por fecha",
+      "Decisión": "SUSTITUIR",
+      "Justificación": "Diferencia de propietario, día de semana, zona y control concurrente",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Congelar edición o migración consentida específica; no mezclar agendas",
+      "Compatibilidad": "GET historial de rangos y POST cerrado explícito al retirar",
+      "Pruebas": "Validación, sobrescritura simultánea, propietario y diferencias ISO",
+      "PR futuro": "W6.5a",
+      "Reversión": "Mantener tablas originales y endpoint anterior mientras sea necesario",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+          "line": 25,
+          "symbol": "store"
+        },
+        {
+          "file": "app/Services/ProviderAvailability.php",
+          "line": 19,
+          "symbol": "save"
+        }
+      ]
+    },
+    {
+      "id": "D15",
+      "Elemento": "/profesionistas y /dashboard-profesionista",
+      "Función actual": "Directorio muestra nombre/email/cédula; panel tiene contadores — y estado token no vacío",
+      "Consumidores": "Nav, inicio, login e intended profesional",
+      "Datos": "profesionistas + sus citas; no provider_profiles",
+      "Dependencias": "web para directorio; profesionista para panel",
+      "Valor para Tekora": "Directorio Tekora vigente debe seguir /prestadores",
+      "Solapamiento": "PublicProviderController y ProviderDashboardMetrics ya existen",
+      "Decisión": "SUSTITUIR",
+      "Justificación": "No afirmar verificación, identidad equivalente ni salud real del token por estado visual",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Titulares con citas antiguas conservan acceso a datos; decidir exposición de directorio viejo",
+      "Compatibilidad": "Lista puede orientar a /prestadores sin mapear IDs; panel requiere historial nativo antes de retirar",
+      "Pruebas": "Email/cédula no expuestos de más; guard, favoritos, no estadísticas ficticias",
+      "PR futuro": "W6.2b / W6.5a/c",
+      "Reversión": "Restaurar enlaces/plantillas previas; no mover cuentas",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaController.php",
+          "line": 12,
+          "symbol": "index"
+        },
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "line": 89,
+          "symbol": "cards"
+        }
+      ]
+    },
+    {
+      "id": "D16",
+      "Elemento": "/google/connect, callback, disconnect",
+      "Función actual": "Socialite con state, scopes calendar/calendar.events, refresh preservado; desconexión local",
+      "Consumidores": "Panel profesional y flujo de aceptar Cita",
+      "Datos": "Campos OAuth en profesionistas; IDs eventos en citas",
+      "Dependencias": "Socialite/Google SDK; config/services.php; sesión y URI registrada",
+      "Valor para Tekora": "Reutilizables: state, preservación refresh y errores sin secretos, con diseño nuevo",
+      "Solapamiento": "No existe integración Calendar en reservas Tekora",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Credenciales/consentimiento pertenecen a otra identidad; desconexión no revoca remotamente",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Necesidad aprobada; identidad/consentimiento y callback nuevo; reconciliación de eventos",
+      "Compatibilidad": "No redirigir callback ni limpiar tokens para retirar marca; preservar state/intended",
+      "Pruebas": "Mocks de scopes/state/refresh/error/desconexión y duplicados; ninguna cuenta real en auditoría",
+      "PR futuro": "W6.5b",
+      "Reversión": "Conservar callback anterior hasta agotar retornos; revocación no siempre reversible",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaGoogleController.php",
+          "line": 11,
+          "symbol": "redirect/callback/disconnect"
+        },
+        {
+          "file": "config/services.php",
+          "line": 17,
+          "symbol": "google"
+        }
+      ]
+    },
+    {
+      "id": "D17",
+      "Elemento": "GoogleCalendarController auxiliar",
+      "Función actual": "SDK OAuth alternativo, sin ruta encontrada; guarda token JSON y no comprueba state aquí",
+      "Consumidores": "Cero referencias de ruta estáticas fuera de definición",
+      "Datos": "Supone usuario con campos Google; formato distinto del flujo activo",
+      "Dependencias": "Google SDK; Auth genérico; config Google",
+      "Valor para Tekora": "No reutilizar como integración lista para producción",
+      "Solapamiento": "Duplicado del flujo Socialite activo",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Cero consumidor estático no prueba inactividad; una conexión futura introduciría contratos distintos",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Descartar invocadores dinámicos/deploy externos con autorización; probar contrato de formato",
+      "Compatibilidad": "Ningún cambio actual; candidato a retirar clase si se confirma sin consumidores",
+      "Pruebas": "Inventario de rutas/providers y prueba de ausencia de invocación autorizada",
+      "PR futuro": "W6.4a / W6.5b",
+      "Reversión": "Revertir eliminación de clase; no ejecutarlo ni trasladar tokens",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/GoogleCalendarController.php",
+          "line": 9,
+          "symbol": "GoogleCalendarController"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 125,
+          "symbol": "Google Calendar connect"
+        }
+      ]
+    },
+    {
+      "id": "D18",
+      "Elemento": "guard profesionistas y cuentas históricas",
+      "Función actual": "Identidad separada, login propio, mismo contenedor de sesión Laravel",
+      "Consumidores": "Citas, disponibilidad, OAuth y dashboard",
+      "Datos": "profesionistas/remember_token/OAuth; users; sesiones",
+      "Dependencias": "config/auth; redirectGuestsTo; ambos logout invalidan sesión",
+      "Valor para Tekora": "Acceso seguro de titulares requiere plan de identidad",
+      "Solapamiento": "provider_profiles pertenece a User, no es Profesionista",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Email/ID coincidente no prueba misma persona; reset broker actual solo users",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Prueba de titularidad/consentimiento y diseño reversible; decisión del propietario",
+      "Compatibilidad": "Mantener acceso técnico sin ofrecer producto alternativo; no asignar provider automáticamente",
+      "Pruebas": "AuthenticationTest; ambos guards juntos, logout, CSRF, intended, state OAuth y reset",
+      "PR futuro": "W6.5c",
+      "Reversión": "Mantener identidades originales; revocar enlace nuevo sin reasignar historia",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "config/auth.php",
+          "line": 38,
+          "symbol": "guards/providers"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaAuthController.php",
+          "line": 32,
+          "symbol": "logout"
+        }
+      ]
+    },
+    {
+      "id": "D19",
+      "Elemento": "/mindbloom/inicio + HomeController/home",
+      "Función actual": "Producto de bienestar, equipo, estadísticas y galería",
+      "Consumidores": "Nav/footer de cuenta; home route name; usuarios web",
+      "Datos": "emotions para galería; valores editoriales constantes",
+      "Dependencias": "web + auth constructor; home.css; logo; imágenes de equipo",
+      "Valor para Tekora": "No hay necesidad de bienestar acreditada para marketplace",
+      "Solapamiento": "Portada Tekora ya es / con TekoraHomeController",
+      "Decisión": "RETIRAR",
+      "Justificación": "25%, 3% y 8.237/2022 son texto/targets no métricas de Tekora verificadas",
+      "Riesgo": "Medio",
+      "Condiciones previas": "Aprobar retirada visible; resolver enlaces a emociones/PDF y titulares",
+      "Compatibilidad": "home named-route no se cambia a ciegas; 302 a destino aprobado, sin atribuir datos viejos",
+      "Pruebas": "W1/W3/W4/W5 prueban home y branding; actualizar intención en futuro PR aprobado",
+      "PR futuro": "W6.2b / W6.4b",
+      "Reversión": "Restaurar route/view y enlaces; conservar emociones y archivos",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 38,
+          "symbol": "hero/statistics"
+        },
+        {
+          "file": "app/Http/Controllers/HomeController.php",
+          "line": 15,
+          "symbol": "index"
+        }
+      ]
+    },
+    {
+      "id": "D20",
+      "Elemento": "/emociones/{slug} y Emotion",
+      "Función actual": "Detalle público por slug con imagen de Storage; galería usa modal propio",
+      "Consumidores": "URLs externas posibles; tests; galería no activa su link Ver más",
+      "Datos": "emotions.image_path/subtitle/description/order",
+      "Dependencias": "Closure pública; modelo; W5.1 referencia tabla",
+      "Valor para Tekora": "No necesidad nativa confirmada",
+      "Solapamiento": "Escenas CSS 3D Tekora ya existen; no equivalen a recursos de salud",
+      "Decisión": "RETIRAR",
+      "Justificación": "Retirar experiencia visible, investigar conservación de contenidos; no borrar tabla",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Política de archivo y resolución de W5.1 antes de cualquier retiro de tabla",
+      "Compatibilidad": "Sin redirigir a servicio inexistente; 302/archivo/410 según decisión expresa",
+      "Pruebas": "Slug válido/404; privacidad del archivo; fotos compartidas W5.1",
+      "PR futuro": "W6.2b / W6.5d",
+      "Reversión": "Restaurar handler y contenido sin alterar slugs",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "routes/web.php",
+          "line": 73,
+          "symbol": "emociones"
+        },
+        {
+          "file": "resources/views/emotion/show.blade.php",
+          "line": 1,
+          "symbol": "emotion.show"
+        }
+      ]
+    },
+    {
+      "id": "D21",
+      "Elemento": "/pdf/emociones/tarjetas y PdfController",
+      "Función actual": "PDF A4, 6/9 tarjetas; lee imágenes del disco public; descarga con nombre MindBloom",
+      "Consumidores": "Home; enlaces/descargas guardados; pruebas SDK/Dompdf",
+      "Datos": "emotions.image_path; archivos externos a UI; PDF generado",
+      "Dependencias": "web; laravel-dompdf; lectura/base64",
+      "Valor para Tekora": "Exportador podría adaptarse solo a documento Tekora justificado",
+      "Solapamiento": "No hace falta un nuevo PDF por existir el anterior",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Lectura de datos/archivos persiste aunque se retire navegación; no renombrar descarga en auditoría",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Necesidad de exportación/archivo y contratos de descarga aprobados",
+      "Compatibilidad": "Conservar nombre exacto y ruta hasta corte; historial con procedencia, no nueva reserva",
+      "Pruebas": "PDF con/sin imagen, 6/9, MIME, nombre y compatibilidad; fake disk",
+      "PR futuro": "W6.3-condicional / W6.5d",
+      "Reversión": "Restaurar descarga original; ningún archivo previo borrado",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/PdfController.php",
+          "line": 12,
+          "symbol": "emotionCards"
+        },
+        {
+          "file": "resources/views/pdf/emotions/cards.blade.php",
+          "line": 97,
+          "symbol": "page-title"
+        }
+      ]
+    },
+    {
+      "id": "D22",
+      "Elemento": "/conferencias y conferencias.blade",
+      "Función actual": "Calendario fijo JUNIO 2025; chat es alert; sin agenda/eventos reales",
+      "Consumidores": "Nav, perfil y URL directa",
+      "Datos": "Sin modelo ni controlador de conferencias",
+      "Dependencias": "web; closure; conferencias.css; sidebar-banner referenciado",
+      "Valor para Tekora": "Ninguna capacidad operativa que integrar",
+      "Solapamiento": "Reservas Tekora ya son agenda de servicio, no conferencias",
+      "Decisión": "RETIRAR",
+      "Justificación": "No convertir esta maqueta en otra funcionalidad; no afirmar citas del día por texto fijo",
+      "Riesgo": "Bajo",
+      "Condiciones previas": "Decisión explícita sobre enlace y URL; evitar promesa de sustituto inexistente",
+      "Compatibilidad": "Retirar de navegación; 302 informativo/410 posterior aprobado; no redirigir como reserva",
+      "Pruebas": "GET/auth, navegación sin enlaces rotos, ausencia de falsas funciones",
+      "PR futuro": "W6.2b / W6.4a",
+      "Reversión": "Restaurar plantilla/route sin datos que recuperar",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/conferencias.blade.php",
+          "line": 23,
+          "symbol": "calendar-container"
+        },
+        {
+          "file": "resources/views/conferencias.blade.php",
+          "line": 76,
+          "symbol": "openChat"
+        }
+      ]
+    },
+    {
+      "id": "D23",
+      "Elemento": "User/roles/provider_profiles/perfil",
+      "Función actual": "Identidad, permisos y perfil centrales ya nativos",
+      "Consumidores": "Toda Tekora, API y parte de legado",
+      "Datos": "users, roles, role_user, provider_profiles; FK históricas",
+      "Dependencias": "Permission::ViewClientAppointments también protege dashboard moderno",
+      "Valor para Tekora": "REUTILIZAR infraestructura vigente sin mezclar dominios",
+      "Solapamiento": "Ya se reutiliza User para solicitantes antiguos y modernos",
+      "Decisión": "REUTILIZAR",
+      "Justificación": "No retirar permiso por su nombre antiguo ni borrar users para limpiar marca",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Ninguna migración automática; separar cualquier renombre de permisos en PR propio",
+      "Compatibilidad": "Conservar /perfil, reset users, registro y roles actuales",
+      "Pruebas": "IdentityMigrationTest; WebAccountsTest; API y separación de guards",
+      "PR futuro": "Preservar en todas las fases",
+      "Reversión": "Revertir cambio puntual; nunca reconstruir identidad por email",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Models/User.php",
+          "line": 56,
+          "symbol": "roles/providerProfile"
+        },
+        {
+          "file": "routes/identities.php",
+          "line": 14,
+          "symbol": "account.client"
+        }
+      ]
+    },
+    {
+      "id": "D24",
+      "Elemento": "W5.1 ProfileController y tablas de referencia",
+      "Función actual": "Foto nueva verificada, SQL confirmado, limpieza consulta posts/comments/emotions",
+      "Consumidores": "POST /perfil/foto y perfil W5",
+      "Datos": "users.profile_photo_path; disco public avatars/historical; referencias en tres tablas",
+      "Dependencias": "Schema de legado aun sin UI; Query primaria; validación de dueño/ruta",
+      "Valor para Tekora": "REUTILIZAR protocolo de integridad, adaptándolo al recurso concreto",
+      "Solapamiento": "No equivale a public/uploads de comunidad",
+      "Decisión": "REUTILIZAR",
+      "Justificación": "Eliminar tablas rompe comprobación de referencia y puede dejar compensación/limpieza pendiente",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Registro de referencias sustituto y pruebas antes de retirar tablas consultadas",
+      "Compatibilidad": "Mantener rutas/medios y política actual hasta reemplazo probado",
+      "Pruebas": "49 pruebas photo-integrity-w51; fallos SQL/storage/commit y referencias cruzadas",
+      "PR futuro": "Bloquea W6.5d; adaptación solo en PR propio",
+      "Reversión": "Restaurar consulta/tabla disponible; no desactivar guard para hacer pasar tests",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ProfileController.php",
+          "line": 145,
+          "symbol": "photoMayBeReferenced"
+        },
+        {
+          "file": "tests/Feature/ProfilePhotoIntegrityTest.php",
+          "line": 543,
+          "symbol": "other_modules_references"
+        }
+      ]
+    },
+    {
+      "id": "D25",
+      "Elemento": "public/css/home.css y account.css",
+      "Función actual": "Estilos genéricos compartidos más galería antigua",
+      "Consumidores": "account-layout moderno y varias páginas legadas",
+      "Datos": "Sin SQL; clases sidebar/menu/content y namespaces",
+      "Dependencias": "W2–W5 y CSS opt-in",
+      "Valor para Tekora": "Conservar partes que sostienen shell Tekora",
+      "Solapamiento": "Escenas actuales ya cubren diseño 3D; no portar coverflow por inercia",
+      "Decisión": "ADAPTAR",
+      "Justificación": "home.css tiene consumidor moderno directo; no se puede borrar el archivo entero",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Separación selectores compartidos/mb con regresión aprobada",
+      "Compatibilidad": "Sin cambios en clases compartidas hasta demostrar equivalencia visual",
+      "Pruebas": "W2/sidebar/W3/W4/W5, 8 anchos, zoom y reduced motion si cambian estilos",
+      "PR futuro": "W6.4b",
+      "Reversión": "Revertir CSS/links; sin cambios de datos",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 10,
+          "symbol": "stylesheet"
+        },
+        {
+          "file": "public/css/home.css",
+          "line": 393,
+          "symbol": "MindBloom Emotional Gallery"
+        }
+      ]
+    },
+    {
+      "id": "D26",
+      "Elemento": "Vistas, Auth/* scaffold y CSS candidatos",
+      "Función actual": "auth.portal, login-profesionista, auth.registro_profesionista, citas, layouts.app sin renderer exacto; Auth/* con redirect /home sin cableado encontrado",
+      "Consumidores": "Referencias textuales/docs; algunos assets solo desde esas vistas",
+      "Datos": "No se concluye ausencia de URLs/consumidores externos",
+      "Dependencias": "Vite mantiene app.js/app.scss aunque layouts.app no tenga herederos",
+      "Valor para Tekora": "No hay funcionalidad nueva que portar de scaffolding",
+      "Solapamiento": "Login y registro activos W1 ya sustituyen interfaces",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Cero referencia de render exacto no elimina imports, providers o dependencias de build",
+      "Riesgo": "Medio",
+      "Condiciones previas": "Validar entrypoints dinámicos y transitorios; lista de consumidores cero documentada",
+      "Compatibilidad": "Retirar hojas primero; conservar aliases que ya redirigen",
+      "Pruebas": "Build y FrontendCsrfHeadersTest; ausencia de view dinámica; Auth completo",
+      "PR futuro": "W6.4a",
+      "Reversión": "Restaurar archivos por commit; no borrar backups de datos",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaAuthController.php",
+          "line": 10,
+          "symbol": "showLogin"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 7,
+          "symbol": "input"
+        }
+      ]
+    },
+    {
+      "id": "D27",
+      "Elemento": "Logos/imágenes antiguas y archivos con cero literal",
+      "Función actual": "logo.png tiene consumidores; otras imágenes no tienen literal runtime",
+      "Consumidores": "Templates, CSS, seeds, posibles valores guardados",
+      "Datos": "Solo metadata Git; imágenes de datos no inspeccionadas",
+      "Dependencias": "asset() / Storage::url / image_path / rutas guardadas",
+      "Valor para Tekora": "Logotipo Tekora actual es componente, no sustitución global de archivos",
+      "Solapamiento": "No reutilizar imágenes editoriales sin necesidad/derechos",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Falta de literal no prueba que un medio no esté referenciado en BD",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Inventario autorizado por dueño/licencia y todos los canales de referencia",
+      "Compatibilidad": "No borrar imágenes ni cambiar paths persistidos en W6.1",
+      "Pruebas": "Imágenes ausentes/presentes, licencia, enlaces externos; sin inspección actual de medios",
+      "PR futuro": "W6.4a/b tras autorización",
+      "Reversión": "Restaurar objeto con misma ruta; no reescribir historial Git sin permiso",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 16,
+          "symbol": "brand-logo"
+        },
+        {
+          "file": "database/seeders/EmotionSeeder.php",
+          "line": 17,
+          "symbol": "image_path"
+        }
+      ]
+    },
+    {
+      "id": "D28",
+      "Elemento": "Fuentes locales Tekora y sus licencias OFL",
+      "Función actual": "dm-sans/space-grotesk se cargan desde CSS modernos; licencias sin refs runtime",
+      "Consumidores": "W1–W5; namespace identity; archivos de licencia distribuidos",
+      "Datos": "Archivos binarios/licencias, sin datos de usuario",
+      "Dependencias": "@font-face; precargas; condiciones legales",
+      "Valor para Tekora": "REUTILIZAR archivos/licencias aprobados",
+      "Solapamiento": "No confundir nombres genéricos con producto anterior",
+      "Decisión": "REUTILIZAR",
+      "Justificación": "Una licencia no necesita referencias de ejecución para ser necesaria",
+      "Riesgo": "Medio",
+      "Condiciones previas": "Mantener licencias mientras se distribuyan fuentes; revisar derechos antes de retirar",
+      "Compatibilidad": "Sin cambios de URL ni tipografía actual",
+      "Pruebas": "Build y hashes; auditoría de licencia si cambia distribución",
+      "PR futuro": "Conservar; no retirar por scan cero",
+      "Reversión": "Revertir fuente/licencia conjuntamente",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "resources/css/tekora/identity.css",
+          "line": 2,
+          "symbol": "@font-face"
+        },
+        {
+          "file": "public/fonts/tekora/DM-Sans-OFL.txt",
+          "line": 1,
+          "symbol": "OFL"
+        }
+      ]
+    },
+    {
+      "id": "D29",
+      "Elemento": "public/uploads histórico (metadata Git)",
+      "Función actual": "Medios de comunidad bajo public root, no disco public de Storage",
+      "Consumidores": "posts/comments.media_path y render /<path>",
+      "Datos": "9 objetos versionados bajo prefijo, solo conteo Git; volumen real desconocido",
+      "Dependencias": "Webserver; metadata SQL; soft deletes y archivos compartidos",
+      "Valor para Tekora": "Preservación de contenidos, no un nuevo módulo",
+      "Solapamiento": "W5.1 avatars tiene otra raíz y política",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "No abrir, copiar ni deducir actividad a partir de objetos versionados",
+      "Riesgo": "Crítico",
+      "Condiciones previas": "Autorización explícita para revisar datos/medios y política de retención/exportación",
+      "Compatibilidad": "No cambiar prefijos ni despublicar objetos hasta plan aprobado",
+      "Pruebas": "Inventario sintético de archivo/SQL; compartidos y restauración; no medios reales aquí",
+      "PR futuro": "W6.5a/d",
+      "Reversión": "Preservar originales; restauración de backup solo con autorización",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 62,
+          "symbol": "public_path"
+        },
+        {
+          "file": "app/Http/Controllers/CommentController.php",
+          "line": 95,
+          "symbol": "community/comments"
+        }
+      ]
+    },
+    {
+      "id": "D30",
+      "Elemento": "ReminderController, Reminder, reminders",
+      "Función actual": "Controlador sin ruta estática; modelo aún relacionado con User",
+      "Consumidores": "User::reminders; migración; no consumidor HTTP encontrado",
+      "Datos": "reminders.user_id/title/description/remind_at",
+      "Dependencias": "Controlador refiere clases sin importar; no funcionalidad lista",
+      "Valor para Tekora": "No necesidad de recordatorios personalizados confirmada",
+      "Solapamiento": "Avisos Tekora son eventos del workflow, no recordatorios equivalentes",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "No crear una agenda a partir de clase huérfana ni borrar tabla por falta de ruta",
+      "Riesgo": "Medio",
+      "Condiciones previas": "Verificar consumidores dinámicos y datos autorizados; decisión producto",
+      "Compatibilidad": "Ningún nuevo endpoint; no exponer código inactivo para probarlo",
+      "Pruebas": "Inventario y futura prueba de ausencia; preservación de User relación si se conserva",
+      "PR futuro": "W6.4a / W6.5d",
+      "Reversión": "Restaurar código; tabla retenida",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Http/Controllers/ReminderController.php",
+          "line": 9,
+          "symbol": "store"
+        },
+        {
+          "file": "app/Models/User.php",
+          "line": 104,
+          "symbol": "reminders"
+        }
+      ]
+    },
+    {
+      "id": "D31",
+      "Elemento": "profesionista_bloqueos y esquema histórico",
+      "Función actual": "Tabla de intervalos con FK; sin consumidor productivo literal localizado",
+      "Consumidores": "Migraciones y fixtures de regresión",
+      "Datos": "FK profesionista_id; rangos datetime y motivo",
+      "Dependencias": "Migraciones de instalación; historial no inspeccionado",
+      "Valor para Tekora": "No asumir conversión a bloqueos nativos de día completo",
+      "Solapamiento": "provider_blocked_dates usa otro dueño y semántica",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "Conservar por esquema/datos aunque no tenga modelo/ruta activa",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Inventario autorizado y política de archivo; revisar cascadas",
+      "Compatibilidad": "No mapear intervalos a días por igualdad de ID",
+      "Pruebas": "Installation/Identity/Availability/ReservationMigrationTest",
+      "PR futuro": "W6.5d",
+      "Reversión": "Mantener tabla y migraciones previas; sin rollback destructivo",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php",
+          "line": 9,
+          "symbol": "profesionista_bloqueos"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 62,
+          "symbol": "legacy fixtures"
+        }
+      ]
+    },
+    {
+      "id": "D32",
+      "Elemento": "Google/Socialite/Dompdf/DBAL/laravel-ui y frontend scaffolding",
+      "Función actual": "Dependencias directas, transitorias, de migraciones, build o exportación",
+      "Consumidores": "composer.json, migraciones, tests, Vite y servicios auditados",
+      "Datos": "Sin cambio de lockfiles ni versiones",
+      "Dependencias": "Paquetes tienen consumidores indirectos/auto-discovery",
+      "Valor para Tekora": "Reutilizar solo si queda necesidad documentada",
+      "Solapamiento": "Dompdf y Google no deben borrarse con una plantilla; DBAL ligado a historia",
+      "Decisión": "INVESTIGAR",
+      "Justificación": "La búsqueda de clase no basta para resolver dependencias de paquetes",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Mapa transitivo/instalación desde cero y exportación; aprobación de PR de dependencias",
+      "Compatibilidad": "No cambiar callbacks ni descargas al retirar librería",
+      "Pruebas": "ComposerDependencyCompatibilityTest; install/platform/audits/build y 37 migraciones",
+      "PR futuro": "W6.4a / W6.5b/d por paquete",
+      "Reversión": "Revertir manifests/locks juntos; no alterar versiones en W6.1",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "composer.json",
+          "line": 10,
+          "symbol": "require"
+        },
+        {
+          "file": "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+          "line": 11,
+          "symbol": "DBAL comment"
+        }
+      ]
+    },
+    {
+      "id": "D33",
+      "Elemento": "Servicios nativos Tekora y policies",
+      "Función actual": "Solicitudes, conversación privada, disponibilidad, reservas y reseñas con propietarios/estados",
+      "Consumidores": "W2–W5 y API v1",
+      "Datos": "service_inquiries/messages; provider_*; service_reservations/events/reviews; avisos",
+      "Dependencias": "User/ProviderProfile; policies; version/idempotency; UTC/DST",
+      "Valor para Tekora": "REUTILIZAR como única fuente de operaciones nuevas",
+      "Solapamiento": "Ya resuelve contratación; no necesita clonar citas/feed/likes",
+      "Decisión": "REUTILIZAR",
+      "Justificación": "No existen referencias directas Cita/Profesionista/Google en estos servicios auditados",
+      "Riesgo": "Alto",
+      "Condiciones previas": "Preservar invariantes; cualquier capacidad nueva exige necesidad probada",
+      "Compatibilidad": "21 API intactas; no inyectar datos viejos en métricas nuevas",
+      "Pruebas": "Suite moderna completa, aislamiento de historial, auth, API y concurrencia",
+      "PR futuro": "Preservar; W6.3 solo adaptaciones justificadas",
+      "Reversión": "Revertir integración nueva; no escribir sobre registros nativos previos",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "app/Services/ReservationWorkflow.php",
+          "line": 50,
+          "symbol": "propose/decide"
+        },
+        {
+          "file": "app/Services/InquiryMessaging.php",
+          "line": 21,
+          "symbol": "send"
+        }
+      ]
+    },
+    {
+      "id": "D34",
+      "Elemento": "Pruebas/documentos/tools históricos",
+      "Función actual": "Guardan contratos anteriores y pruebas de origen; algunos asserts exigen marca vieja",
+      "Consumidores": "CI y herramientas de preview aislado",
+      "Datos": "Evidencia versionada y fixtures sintéticos",
+      "Dependencias": "W1/W3/W4/W5 tests; compatibilidad y migraciones",
+      "Valor para Tekora": "REUTILIZAR cobertura; cambiar intención solo en PR futuro autorizado",
+      "Solapamiento": "Palabras en evidencia no son un producto visible",
+      "Decisión": "ADAPTAR",
+      "Justificación": "Borrar marca en tests/docs globalmente oculta pruebas y procedencia",
+      "Riesgo": "Medio",
+      "Condiciones previas": "Cada corte añade nueva regresión y explica cambio intencional, no debilita permisos",
+      "Compatibilidad": "Conservar evidencia histórica; previews son herramientas, no tráfico real",
+      "Pruebas": "626/8.258 baseline previa; nuevos conteos futuros justificados",
+      "PR futuro": "Todas las fases futuras; ningún test cambia W6.1",
+      "Reversión": "Revertir expectativa junto al cambio funcional; preservar evidencia previa",
+      "sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+      "evidence": [
+        {
+          "file": "tests/Feature/TekoraW3Test.php",
+          "line": 211,
+          "symbol": "historical compatibility"
+        },
+        {
+          "file": "tests/Feature/TekoraW5Test.php",
+          "line": 371,
+          "symbol": "opt-in"
+        }
+      ]
+    }
+  ]
+}

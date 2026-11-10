@@ -1,0 +1,412 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "scope": "web.php and identities.php only; guards and nested middleware interpreted in dependency map, not by this regex",
+  "routes": [
+    {
+      "method": "GET",
+      "uri": "/",
+      "file": "routes/web.php",
+      "line": 43,
+      "declaration": "Route::get('/', \\App\\Http\\Controllers\\TekoraHomeController::class)->middleware(\\App\\Http\\Middleware\\TekoraPageHeaders::class)->name('tekora.home');"
+    },
+    {
+      "method": "GET",
+      "uri": "/login",
+      "file": "routes/web.php",
+      "line": 44,
+      "declaration": "Route::get('/login', [AuthController::class, 'showLogin'])->middleware(\\App\\Http\\Middleware\\TekoraPageHeaders::class)->name('login');"
+    },
+    {
+      "method": "POST",
+      "uri": "/login",
+      "file": "routes/web.php",
+      "line": 45,
+      "declaration": "Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.post');"
+    },
+    {
+      "method": "GET",
+      "uri": "/login-profesionista",
+      "file": "routes/web.php",
+      "line": 48,
+      "declaration": "Route::get('/login-profesionista', [ProfesionistaAuthController::class, 'showLogin'])->name('profesionista.login');"
+    },
+    {
+      "method": "POST",
+      "uri": "/login-profesionista",
+      "file": "routes/web.php",
+      "line": 49,
+      "declaration": "Route::post('/login-profesionista', [ProfesionistaAuthController::class, 'login'])->middleware('throttle:login')->name('profesionista.login.post');"
+    },
+    {
+      "method": "GET",
+      "uri": "/registro",
+      "file": "routes/web.php",
+      "line": 53,
+      "declaration": "Route::get('/registro', [AuthController::class, 'create'])->middleware(\\App\\Http\\Middleware\\TekoraPageHeaders::class)->name('registro.create');"
+    },
+    {
+      "method": "POST",
+      "uri": "/registro",
+      "file": "routes/web.php",
+      "line": 56,
+      "declaration": "Route::post('/registro', [AuthController::class, 'store'])->name('registro.store');"
+    },
+    {
+      "method": "GET",
+      "uri": "/registro-profesionista",
+      "file": "routes/web.php",
+      "line": 59,
+      "declaration": "Route::get('/registro-profesionista', function () {"
+    },
+    {
+      "method": "POST",
+      "uri": "/registro-profesionista",
+      "file": "routes/web.php",
+      "line": 64,
+      "declaration": "Route::post('/registro-profesionista', [ProfesionistaController::class, 'store'])->name('profesionista.store');"
+    },
+    {
+      "method": "POST",
+      "uri": "/logout",
+      "file": "routes/web.php",
+      "line": 68,
+      "declaration": "Route::post('/logout', [AuthController::class, 'logout'])->name('logout');"
+    },
+    {
+      "method": "POST",
+      "uri": "/logout-profesionista",
+      "file": "routes/web.php",
+      "line": 71,
+      "declaration": "Route::post('/logout-profesionista', [ProfesionistaAuthController::class, 'logout'])->name('profesionista.logout');"
+    },
+    {
+      "method": "GET",
+      "uri": "/emociones/{slug}",
+      "file": "routes/web.php",
+      "line": 73,
+      "declaration": "Route::get('/emociones/{slug}', function ($slug) {"
+    },
+    {
+      "method": "GET",
+      "uri": "/forgot-password",
+      "file": "routes/web.php",
+      "line": 84,
+      "declaration": "Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/forgot-password",
+      "file": "routes/web.php",
+      "line": 87,
+      "declaration": "Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/reset-password/{token}",
+      "file": "routes/web.php",
+      "line": 90,
+      "declaration": "Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/reset-password",
+      "file": "routes/web.php",
+      "line": 93,
+      "declaration": "Route::post('/reset-password', [ResetPasswordController::class, 'reset'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/dashboard-profesionista",
+      "file": "routes/web.php",
+      "line": 104,
+      "declaration": "Route::get('/dashboard-profesionista', function () {"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionista/disponibilidad",
+      "file": "routes/web.php",
+      "line": 109,
+      "declaration": "Route::get('/profesionista/disponibilidad', [ProfesionistaDisponibilidadController::class, 'index'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/profesionista/disponibilidad",
+      "file": "routes/web.php",
+      "line": 112,
+      "declaration": "Route::post('/profesionista/disponibilidad', [ProfesionistaDisponibilidadController::class, 'store'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/solicitudes-citas",
+      "file": "routes/web.php",
+      "line": 116,
+      "declaration": "Route::get('/solicitudes-citas', [ProfesionistaCitaController::class, 'index'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas/{id}/aceptar",
+      "file": "routes/web.php",
+      "line": 119,
+      "declaration": "Route::post('/citas/{id}/aceptar', [ProfesionistaCitaController::class, 'aceptar'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas/{id}/rechazar",
+      "file": "routes/web.php",
+      "line": 122,
+      "declaration": "Route::post('/citas/{id}/rechazar', [ProfesionistaCitaController::class, 'rechazar'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/google/connect",
+      "file": "routes/web.php",
+      "line": 126,
+      "declaration": "Route::get('/google/connect', [ProfesionistaGoogleController::class, 'redirect'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/google/callback",
+      "file": "routes/web.php",
+      "line": 129,
+      "declaration": "Route::get('/google/callback', [ProfesionistaGoogleController::class, 'callback'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/google/disconnect",
+      "file": "routes/web.php",
+      "line": 132,
+      "declaration": "Route::post('/google/disconnect', [ProfesionistaGoogleController::class, 'disconnect'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/mindbloom/inicio",
+      "file": "routes/web.php",
+      "line": 144,
+      "declaration": "Route::get('/mindbloom/inicio', [HomeController::class, 'index'])->name('home');"
+    },
+    {
+      "method": "GET",
+      "uri": "/pdf/emociones/tarjetas",
+      "file": "routes/web.php",
+      "line": 146,
+      "declaration": "Route::get('/pdf/emociones/tarjetas', [PdfController::class, 'emotionCards'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/conferencias",
+      "file": "routes/web.php",
+      "line": 149,
+      "declaration": "Route::get('/conferencias', function () {"
+    },
+    {
+      "method": "GET",
+      "uri": "/consultas",
+      "file": "routes/web.php",
+      "line": 154,
+      "declaration": "Route::get('/consultas', fn () => redirect()->route('user.citas'));"
+    },
+    {
+      "method": "GET",
+      "uri": "/comunidad",
+      "file": "routes/web.php",
+      "line": 157,
+      "declaration": "Route::get('/comunidad', [ComunidadController::class, 'index'])->name('comunidad');"
+    },
+    {
+      "method": "POST",
+      "uri": "/comunidad",
+      "file": "routes/web.php",
+      "line": 158,
+      "declaration": "Route::post('/comunidad', [ComunidadController::class, 'store'])->name('comunidad.store');"
+    },
+    {
+      "method": "POST",
+      "uri": "/posts/{post}/like",
+      "file": "routes/web.php",
+      "line": 160,
+      "declaration": "Route::post('/posts/{post}/like', [ComunidadController::class, 'like'])->name('like');"
+    },
+    {
+      "method": "DELETE",
+      "uri": "/posts/{post}",
+      "file": "routes/web.php",
+      "line": 161,
+      "declaration": "Route::delete('/posts/{post}', [ComunidadController::class, 'destroy'])->name('eliminar');"
+    },
+    {
+      "method": "POST",
+      "uri": "/comments",
+      "file": "routes/web.php",
+      "line": 164,
+      "declaration": "Route::post('/comments', [CommentController::class, 'store'])->name('comentario_cre');"
+    },
+    {
+      "method": "DELETE",
+      "uri": "/comments/{comment}",
+      "file": "routes/web.php",
+      "line": 165,
+      "declaration": "Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('eliminar_com');"
+    },
+    {
+      "method": "POST",
+      "uri": "/comments/{comment}/like",
+      "file": "routes/web.php",
+      "line": 166,
+      "declaration": "Route::post('/comments/{comment}/like', [CommentLikeController::class, 'store']);"
+    },
+    {
+      "method": "GET",
+      "uri": "/perfil",
+      "file": "routes/web.php",
+      "line": 169,
+      "declaration": "Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil');"
+    },
+    {
+      "method": "POST",
+      "uri": "/perfil/foto",
+      "file": "routes/web.php",
+      "line": 170,
+      "declaration": "Route::post('/perfil/foto', [ProfileController::class, 'updatePhoto'])->name('perfil.updatePhoto');"
+    },
+    {
+      "method": "GET",
+      "uri": "/perfil/editar-nombre",
+      "file": "routes/web.php",
+      "line": 171,
+      "declaration": "Route::get('/perfil/editar-nombre', [PerfilController::class, 'editNombre'])->name('perfil.editNombre');"
+    },
+    {
+      "method": "PUT",
+      "uri": "/perfil/actualizar-nombre",
+      "file": "routes/web.php",
+      "line": 172,
+      "declaration": "Route::put('/perfil/actualizar-nombre', [PerfilController::class, 'updateNombre'])->name('perfil.updateNombre');"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionistas",
+      "file": "routes/web.php",
+      "line": 175,
+      "declaration": "Route::get('/profesionistas', [ProfesionistaController::class, 'index'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/citas/create/{profesionista}",
+      "file": "routes/web.php",
+      "line": 179,
+      "declaration": "Route::get('/citas/create/{profesionista}', [CitasController::class, 'create'])->name('citas.create');"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionistas/{profesionista}/availability",
+      "file": "routes/web.php",
+      "line": 181,
+      "declaration": "Route::get('/profesionistas/{profesionista}/availability', [CitasController::class, 'availability'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas",
+      "file": "routes/web.php",
+      "line": 185,
+      "declaration": "Route::post('/citas', [CitasController::class, 'store'])->name('citas.store');"
+    },
+    {
+      "method": "GET",
+      "uri": "/citas",
+      "file": "routes/web.php",
+      "line": 188,
+      "declaration": "Route::get('/citas', [UserCitaController::class, 'index'])->name('user.citas');"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta",
+      "file": "routes/identities.php",
+      "line": 13,
+      "declaration": "Route::get('/cuenta', [AccountController::class, 'index'])->name('account.index');"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/cliente",
+      "file": "routes/identities.php",
+      "line": 14,
+      "declaration": "Route::get('/cuenta/cliente', [AccountController::class, 'client'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/activar-prestador",
+      "file": "routes/identities.php",
+      "line": 16,
+      "declaration": "Route::get('/cuenta/activar-prestador', [AccountController::class, 'activate'])->name('account.activate-provider');"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/prestador",
+      "file": "routes/identities.php",
+      "line": 17,
+      "declaration": "Route::get('/cuenta/prestador', [AccountController::class, 'provider'])"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/prestador/dashboard",
+      "file": "routes/identities.php",
+      "line": 19,
+      "declaration": "Route::get('/cuenta/prestador/dashboard', \\App\\Http\\Controllers\\ProviderDashboardController::class)->name('provider.dashboard');"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/identidad",
+      "file": "routes/identities.php",
+      "line": 20,
+      "declaration": "Route::get('/cuenta/identidad', [IdentityController::class, 'show'])->name('identity.show');"
+    },
+    {
+      "method": "POST",
+      "uri": "/cuenta/roles",
+      "file": "routes/identities.php",
+      "line": 21,
+      "declaration": "Route::post('/cuenta/roles', [RoleMembershipController::class, 'store'])->name('identity.roles.store');"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/citas",
+      "file": "routes/identities.php",
+      "line": 23,
+      "declaration": "Route::get('/cuenta/citas', [UserCitaController::class, 'index'])"
+    },
+    {
+      "method": "POST",
+      "uri": "/perfil-profesional",
+      "file": "routes/identities.php",
+      "line": 26,
+      "declaration": "Route::post('/perfil-profesional', [ProviderProfileController::class, 'store'])->name('provider-profiles.store');"
+    },
+    {
+      "method": "GET",
+      "uri": "/perfiles-profesionales/{providerProfile}",
+      "file": "routes/identities.php",
+      "line": 27,
+      "declaration": "Route::get('/perfiles-profesionales/{providerProfile}', [ProviderProfileController::class, 'show'])->name('provider-profiles.show');"
+    },
+    {
+      "method": "PUT",
+      "uri": "/perfiles-profesionales/{providerProfile}",
+      "file": "routes/identities.php",
+      "line": 28,
+      "declaration": "Route::put('/perfiles-profesionales/{providerProfile}', [ProviderProfileController::class, 'update'])->name('provider-profiles.update');"
+    },
+    {
+      "method": "GET",
+      "uri": "/administracion/roles",
+      "file": "routes/identities.php",
+      "line": 31,
+      "declaration": "Route::get('/administracion/roles', [RoleMembershipController::class, 'index'])->name('identity.roles.index');"
+    },
+    {
+      "method": "PUT",
+      "uri": "/administracion/usuarios/{user}/roles",
+      "file": "routes/identities.php",
+      "line": 32,
+      "declaration": "Route::put('/administracion/usuarios/{user}/roles', [RoleMembershipController::class, 'update'])->name('identity.roles.update');"
+    }
+  ]
+}
