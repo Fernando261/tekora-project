@@ -1,0 +1,3283 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "method": "Literal relative-public/full-resource paths plus explicitly separated relative import candidates. No execution/traffic/DB/media inspection. Zero references is not proof of inactivity. CSS imports, variables, saved paths and external URLs require further checks. Uploaded media intentionally excluded.",
+  "assets": [
+    {
+      "file": "public/css/account.css",
+      "git_blob": "e1932ed1ba8ede745b20c6b0dfcd0380d2b57d4d",
+      "literal_key": "css/account.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/citas/create.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/citas/mis-citas.blade.php",
+          "line": 10,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 11,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "line": 10,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/conferencias.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "line": 8,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "line": 11,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/index.blade.php",
+          "line": 10,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+          "line": 10,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/registro-perfiles-etapa-2b.md",
+          "line": 230,
+          "category": "docs"
+        },
+        {
+          "file": "docs/solicitudes-servicios-etapa-3b.md",
+          "line": 341,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 28,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 235,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 5,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 311,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 5,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/auth-portal.css",
+      "git_blob": "86403f5499797d2f0bc9a0c875f4bcc070fd51bc",
+      "literal_key": "css/auth-portal.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/auth/portal.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 82,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 312,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 9,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/availability.css",
+      "git_blob": "e86cad59b08b495c52961c88a8c96b9e31dc65a9",
+      "literal_key": "css/availability.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/availability/edit.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/reservations/create.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/disponibilidad-prestadores-etapa-6a.md",
+          "line": 138,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 237,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 93,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 313,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 13,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/catalog.css",
+      "git_blob": "085369bbd5d97fcfd6e315ed7e18e37aed5fab06",
+      "literal_key": "css/catalog.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/conversations/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/inquiries/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/notifications/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/provider-services/form.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/provider-services/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/catalogo-servicios-etapa-3a.md",
+          "line": 323,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 236,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 110,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 314,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 17,
+          "category": "docs"
+        },
+        {
+          "file": "tests/Feature/TekoraW3Test.php",
+          "line": 52,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/citas.css",
+      "git_blob": "c73365d95f49752354bc39c7aa9ff66850c7c346",
+      "literal_key": "css/citas.css",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 42,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 145,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 315,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 21,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/citas2.css",
+      "git_blob": "ad6e5ce330a9283ec73b8b8d973b9d61abc1e605",
+      "literal_key": "css/citas2.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/citas/create.blade.php",
+          "line": 11,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 149,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 316,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 25,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/comunidad.css",
+      "git_blob": "c7fc9b22f62872f34ed53b37965b1a17b8015c2a",
+      "literal_key": "css/comunidad.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 160,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 317,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 29,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/conferencias.css",
+      "git_blob": "b2bdaca61828f8ce3206a995140292caf5b0fee5",
+      "literal_key": "css/conferencias.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/conferencias.blade.php",
+          "line": 8,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 171,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 318,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 33,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/consultas.css",
+      "git_blob": "acdf7ae317d0424ea5b830f3b22b5d20d64a4931",
+      "literal_key": "css/consultas.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/citas.blade.php",
+          "line": 7,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 319,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 37,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/dashboard-profesionista.css",
+      "git_blob": "5160b94605fbdd381010c08c1f2bc8c6d709313a",
+      "literal_key": "css/dashboard-profesionista.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "line": 7,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 193,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 320,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 41,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/disponibilidad.css",
+      "git_blob": "77af950fe74e397f1c46fcf5d16da962d5ed39d5",
+      "literal_key": "css/disponibilidad.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "line": 10,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 210,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 321,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 45,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/editar.css",
+      "git_blob": "0165327ac88330934a7b73a4da6a5eb0e50545cb",
+      "literal_key": "css/editar.css",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 221,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 322,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/W5-MINDBLOOM-INVENTORY.md",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 49,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/home.css",
+      "git_blob": "e972d5ec17bf5f7bbe90c3b6b9c8d13c58f0c5bd",
+      "literal_key": "css/home.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 10,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 8,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 232,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 323,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 53,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/inquiries.css",
+      "git_blob": "0de1bbaf83384909c19df142d8196a8685e8f678",
+      "literal_key": "css/inquiries.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/conversations/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/inquiries/create.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/inquiries/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/inquiries/show.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/mensajeria-solicitudes-etapa-5a.md",
+          "line": 163,
+          "category": "docs"
+        },
+        {
+          "file": "docs/mensajes-no-leidos-etapa-5b.md",
+          "line": 133,
+          "category": "docs"
+        },
+        {
+          "file": "docs/solicitudes-servicios-etapa-3b.md",
+          "line": 342,
+          "category": "docs"
+        },
+        {
+          "file": "docs/validaciones/etapa-5a/resultados.json",
+          "line": 35,
+          "category": "docs"
+        },
+        {
+          "file": "docs/validaciones/etapa-5b/resultados.json",
+          "line": 35,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 249,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 324,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 57,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/login-unificado.css",
+      "git_blob": "d15212d0a356b08e752c69ca3d0d4a919f7b1456",
+      "literal_key": "css/login-unificado.css",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 39,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 278,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 325,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 61,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/login.css",
+      "git_blob": "016a2faffa2a2be914a8d024911571ba75fcbccb",
+      "literal_key": "css/login.css",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 38,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 282,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 326,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 65,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/mis-citas.css",
+      "git_blob": "cc27768097a929592bbddc440c8a7e626853b832",
+      "literal_key": "css/mis-citas.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/citas/mis-citas.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 286,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 327,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 69,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/notifications.css",
+      "git_blob": "8c9bfcb0707b60fd4698f48740903dbbeae2d33b",
+      "literal_key": "css/notifications.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/notifications/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/notificaciones-internas-etapa-4b.md",
+          "line": 124,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 297,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 328,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 73,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/perfil.css",
+      "git_blob": "a1969cdd584888ff0580d831d7e5cc14e68febbe",
+      "literal_key": "css/perfil.css",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 308,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 329,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/W5-MINDBLOOM-INVENTORY.md",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 77,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/profesionistas.css",
+      "git_blob": "45177789e2390f31ded726d8accde630c2fefc4c",
+      "literal_key": "css/profesionistas.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/profesionistas/index.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 325,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 330,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 81,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/provider-dashboard.css",
+      "git_blob": "7c265a7ca04a9a181b9ec1b9834683813d5c2adc",
+      "literal_key": "css/provider-dashboard.css",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/dashboard-prestador-etapa-9a.md",
+          "line": 97,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 41,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 336,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 336,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 85,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/registro-unificado.css",
+      "git_blob": "6cbc3ee0ca7e9cd6bbd768ded63713a5996a0175",
+      "literal_key": "css/registro-unificado.css",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 40,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 340,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 331,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 89,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/registro.css",
+      "git_blob": "c20f7e6868069c814460d5b6878c8a1e86705ae6",
+      "literal_key": "css/registro.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/login-profesionista.blade.php",
+          "line": 7,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 344,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 332,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/W5-MINDBLOOM-INVENTORY.md",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 93,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/reservations.css",
+      "git_blob": "3efabc2c51ee4c3ab0955294f91bd6bf3ea87491",
+      "literal_key": "css/reservations.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/reservations/create.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/reservations/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/reservations/show.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/reservas-servicios-etapa-6b.md",
+          "line": 123,
+          "category": "docs"
+        },
+        {
+          "file": "docs/validaciones/etapa-6b/resultados.json",
+          "line": 35,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 367,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 333,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 97,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/reviews.css",
+      "git_blob": "f2db6af062e581acf85892766bd9af8df3960523",
+      "literal_key": "css/reviews.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/reviews/create.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/reviews/index.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/reviews/show.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/resenas-verificadas-etapa-7.md",
+          "line": 109,
+          "category": "docs"
+        },
+        {
+          "file": "docs/validaciones/etapa-7/resultados.json",
+          "line": 41,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 238,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 390,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 334,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 101,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/css/solicitudes.css",
+      "git_blob": "bf23775a243b1d442377cf1ba841701a19d649dd",
+      "literal_key": "css/solicitudes.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/legacy-static-references.json",
+          "line": 413,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 335,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 105,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/fonts/tekora/DM-Sans-OFL.txt",
+      "git_blob": "a0eedfbf0df0e9ef2cc76bb0943bcde49c3b3a25",
+      "literal_key": "fonts/tekora/DM-Sans-OFL.txt",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 109,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/fonts/tekora/Space-Grotesk-OFL.txt",
+      "git_blob": "d5666d70873cb905b4421d2c0d2e60747aae8573",
+      "literal_key": "fonts/tekora/Space-Grotesk-OFL.txt",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 113,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/fonts/tekora/dm-sans-latin.woff2",
+      "git_blob": "01383d7e5c4340847b8fe4570ad0458e6582989d",
+      "literal_key": "fonts/tekora/dm-sans-latin.woff2",
+      "runtime_source_refs": [
+        {
+          "file": "resources/css/tekora/account-shell.css",
+          "line": 3,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/identity.css",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/marketplace.css",
+          "line": 4,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/operations.css",
+          "line": 2,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/tekora.css",
+          "line": 4,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 8,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/catalog-layout.blade.php",
+          "line": 10,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/identity-error-layout.blade.php",
+          "line": 4,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/ops-error-layout.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 61,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 117,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/fonts/tekora/space-grotesk-latin.woff2",
+      "git_blob": "0f3474ee8af2f8253225f3b41bf79be986a1ae13",
+      "literal_key": "fonts/tekora/space-grotesk-latin.woff2",
+      "runtime_source_refs": [
+        {
+          "file": "resources/css/tekora/account-shell.css",
+          "line": 10,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/identity.css",
+          "line": 3,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/marketplace.css",
+          "line": 11,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/operations.css",
+          "line": 3,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/css/tekora/tekora.css",
+          "line": 11,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 9,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/catalog-layout.blade.php",
+          "line": 11,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 63,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 121,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/alex.jpg",
+      "git_blob": "b523fcd77f491b0e3e01300880f234fc36f615fa",
+      "literal_key": "img/alex.jpg",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 48,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/emociones.png",
+      "git_blob": "3cf2c0fb9a7bb2ec0caa52aee825f136007c0723",
+      "literal_key": "img/emociones.png",
+      "runtime_source_refs": [],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/esperanza.png",
+      "git_blob": "9bd2c0699544310ec323efb3a869003b8b0709b4",
+      "literal_key": "img/esperanza.png",
+      "runtime_source_refs": [],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/fondo.jpg",
+      "git_blob": "ca6a3aea54ad4f16ad0b20e22065f9bcb8ce828d",
+      "literal_key": "img/fondo.jpg",
+      "runtime_source_refs": [],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/foto1.png",
+      "git_blob": "9fca28f18dc3600be8a6d1224016eec6bd9115ca",
+      "literal_key": "img/foto1.png",
+      "runtime_source_refs": [],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/logo.png",
+      "git_blob": "cd63054e1c4a4c8fc5354bddabfc1e8353ff6401",
+      "literal_key": "img/logo.png",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/citas/create.blade.php",
+          "line": 23,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/citas/mis-citas.blade.php",
+          "line": 21,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "line": 40,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 16,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/index.blade.php",
+          "line": 21,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "tests/Feature/TekoraW1Test.php",
+          "line": 71,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/roque.jpg",
+      "git_blob": "7a06065f7b674c8898201e9b54377a2ece2ee245",
+      "literal_key": "img/roque.jpg",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 53,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/salud.jpg",
+      "git_blob": "ec3d1118f2d3beb608110bff547a895a9aaebea8",
+      "literal_key": "img/salud.jpg",
+      "runtime_source_refs": [],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/tranquilidad.png",
+      "git_blob": "ca238002f3a8fc1973d868d17eb83d3de7f4a634",
+      "literal_key": "img/tranquilidad.png",
+      "runtime_source_refs": [],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/img/user1.jpg",
+      "git_blob": "b523fcd77f491b0e3e01300880f234fc36f615fa",
+      "literal_key": "img/user1.jpg",
+      "runtime_source_refs": [],
+      "other_literal_refs": [],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/js/account.js",
+      "git_blob": "b211fd6f2f73f90f481e0a78f4949b97014227a5",
+      "literal_key": "js/account.js",
+      "runtime_source_refs": [],
+      "other_literal_refs": [
+        {
+          "file": "docs/catalogo-servicios-etapa-3a.md",
+          "line": 120,
+          "category": "docs"
+        },
+        {
+          "file": "docs/registro-perfiles-etapa-2b.md",
+          "line": 89,
+          "category": "docs"
+        },
+        {
+          "file": "docs/registro-perfiles-etapa-2b.md",
+          "line": 231,
+          "category": "docs"
+        },
+        {
+          "file": "docs/solicitudes-servicios-etapa-3b.md",
+          "line": 137,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 337,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 125,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": true,
+      "delete_authorized": false
+    },
+    {
+      "file": "public/js/availability.js",
+      "git_blob": "32e68952b73ce43f1609f9aaa3dc2c8bd3924b4f",
+      "literal_key": "js/availability.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/availability/edit.blade.php",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/disponibilidad-prestadores-etapa-6a.md",
+          "line": 138,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/W4-MINDBLOOM-CLEANUP.md",
+          "line": 26,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 338,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 129,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/css/tekora/account-shell.css",
+      "git_blob": "0ded0c3fce92c24a8610c0c048f9d1fe0c32d44a",
+      "literal_key": "resources/css/tekora/account-shell.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 13,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w2/W211-SIDEBAR.md",
+          "line": 39,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/assets.json",
+          "line": 17,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 3,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 29,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 21,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 229,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 22,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 343,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 133,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/css/tekora/ambient.css",
+      "git_blob": "0f711a2792c08601a7d88a31a216d8ec558749b3",
+      "literal_key": "resources/css/tekora/ambient.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/catalog-layout.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/tekora-layout.blade.php",
+          "line": 11,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/tekora-layout.blade.php",
+          "line": 13,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 11,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w1/evidence/w11/invariants.json",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/assets.json",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/invariants.json",
+          "line": 15,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 15,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 232,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 23,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 340,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 137,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/css/tekora/dashboards.css",
+      "git_blob": "657c4403233edf98d3c70b6cf21407aa5f8a88b4",
+      "literal_key": "resources/css/tekora/dashboards.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 13,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 14,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w2/W211-SIDEBAR.md",
+          "line": 40,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/assets.json",
+          "line": 22,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 9,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 35,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 230,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 342,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 141,
+          "category": "docs"
+        },
+        {
+          "file": "tests/Feature/TekoraW21Test.php",
+          "line": 162,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/css/tekora/identity.css",
+      "git_blob": "10095422d5e98f17fba42ec8e8f896989df9176d",
+      "literal_key": "resources/css/tekora/identity.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/identity-assets.blade.php",
+          "line": 3,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 21,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w5/evidence/asset-budget.json",
+          "line": 4,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/changed-source-files.json",
+          "line": 2,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 145,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/css/tekora/marketplace.css",
+      "git_blob": "69d9321c5f11e3eadf769da97cf56386f37307d7",
+      "literal_key": "resources/css/tekora/marketplace.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/catalog-layout.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 17,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/W3.md",
+          "line": 53,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 3,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 25,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 339,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 149,
+          "category": "docs"
+        },
+        {
+          "file": "tests/Feature/TekoraW3Test.php",
+          "line": 243,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/css/tekora/operations.css",
+      "git_blob": "52e89772bced447ac4b466bd2d00e45562593804",
+      "literal_key": "resources/css/tekora/operations.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 17,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/ops-error-layout.blade.php",
+          "line": 13,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 19,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 4,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/changed-source-files.json",
+          "line": 2,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 153,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/css/tekora/tekora.css",
+      "git_blob": "598aae42818765e4ad87d77fe9efd1d836e95fcf",
+      "literal_key": "resources/css/tekora/tekora.css",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/tekora-layout.blade.php",
+          "line": 11,
+          "category": "runtime-source"
+        },
+        {
+          "file": "resources/views/components/tekora-layout.blade.php",
+          "line": 13,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 10,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w1/README.md",
+          "line": 25,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/invariants.json",
+          "line": 15,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/invariants.json",
+          "line": 17,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/invariants.json",
+          "line": 16,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 231,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 26,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 341,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 157,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/app.js",
+      "git_blob": "e59d6a0adf70fff0492083b03ad0baa283434008",
+      "literal_key": "resources/js/app.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/layouts/app.blade.php",
+          "line": 17,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 9,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/auditorias/etapa-4a/modulos-browser.json",
+          "line": 113,
+          "category": "docs"
+        },
+        {
+          "file": "docs/seguridad-dependencias-etapa-4a.md",
+          "line": 67,
+          "category": "docs"
+        },
+        {
+          "file": "docs/seguridad-dependencias-etapa-4a.md",
+          "line": 88,
+          "category": "docs"
+        },
+        {
+          "file": "docs/seguridad-dependencias-etapa-4a.md",
+          "line": 194,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/README.md",
+          "line": 26,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/invariants.json",
+          "line": 21,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/invariants.json",
+          "line": 23,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 161,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/bootstrap.js",
+      "git_blob": "46f7a33d3b20a73f25983591fbaf297042ff44ae",
+      "literal_key": "resources/js/bootstrap.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/js/app.js",
+          "line": 1,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/auditorias/etapa-4a/modulos-browser.json",
+          "line": 114,
+          "category": "docs"
+        },
+        {
+          "file": "docs/solicitudes-servicios-etapa-3b.md",
+          "line": 284,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 165,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [
+        {
+          "file": "resources/js/app.js",
+          "line": 1,
+          "category": "runtime-source"
+        }
+      ],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/account-shell.js",
+      "git_blob": "eff57ad332a0c94372ef1e5ef2e173d3f6e457bb",
+      "literal_key": "resources/js/tekora/account-shell.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 15,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w2/W211-SIDEBAR.md",
+          "line": 41,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/assets.json",
+          "line": 2,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 15,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 41,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 39,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 228,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 28,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 346,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 169,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/auth-transition.js",
+      "git_blob": "314163fb3d60b1b1e9fe700e18b851ce3f8ce6a2",
+      "literal_key": "resources/js/tekora/auth-transition.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/js/tekora/tekora.js",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w2/evidence/w21/invariants.json",
+          "line": 13,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 225,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 350,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 173,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [
+        {
+          "file": "resources/js/tekora/tekora.js",
+          "line": 2,
+          "category": "runtime-source"
+        }
+      ],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/dashboard-pill.js",
+      "git_blob": "17f1af2af054b0c304b65fd866ab4b204174cce8",
+      "literal_key": "resources/js/tekora/dashboard-pill.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/js/tekora/dashboard-sections.js",
+          "line": 1,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 227,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 347,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 177,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [
+        {
+          "file": "resources/js/tekora/dashboard-sections.js",
+          "line": 1,
+          "category": "runtime-source"
+        }
+      ],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/dashboard-sections.js",
+      "git_blob": "eeb810e3ec33b38d57f35346bd5b5306fb913296",
+      "literal_key": "resources/js/tekora/dashboard-sections.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/js/tekora/dashboards.js",
+          "line": 1,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 345,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 181,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [
+        {
+          "file": "resources/js/tekora/dashboards.js",
+          "line": 1,
+          "category": "runtime-source"
+        }
+      ],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/dashboards.js",
+      "git_blob": "dde087048e6e1397655314964796ff93476b29ae",
+      "literal_key": "resources/js/tekora/dashboards.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 13,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 16,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w2/evidence/assets.json",
+          "line": 7,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 21,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/assets-comparison.json",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 45,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 226,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 29,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 349,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 185,
+          "category": "docs"
+        },
+        {
+          "file": "tests/Feature/TekoraW21Test.php",
+          "line": 162,
+          "category": "tests"
+        },
+        {
+          "file": "tests/Feature/TekoraW21Test.php",
+          "line": 202,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/identity.js",
+      "git_blob": "1740ba413b725f2ce39a436be37efe1b84f3298d",
+      "literal_key": "resources/js/tekora/identity.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/identity-assets.blade.php",
+          "line": 3,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 22,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w5/evidence/asset-budget.json",
+          "line": 10,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/changed-source-files.json",
+          "line": 3,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/commands.json",
+          "line": 300,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 189,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/marketplace.js",
+      "git_blob": "e1ad3e96637d6d7e8f3829541cbc8a4317d5a462",
+      "literal_key": "resources/js/tekora/marketplace.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/catalog-layout.blade.php",
+          "line": 12,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 18,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w3/W3.md",
+          "line": 53,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 9,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 30,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 348,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 193,
+          "category": "docs"
+        },
+        {
+          "file": "tests/Feature/TekoraW3Test.php",
+          "line": 243,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/operations.js",
+      "git_blob": "3cdd7fa65a83dc759c58d3df26e767ef0c4c2a3d",
+      "literal_key": "resources/js/tekora/operations.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 17,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 20,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 12,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/changed-source-files.json",
+          "line": 3,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "tests/Feature/TekoraW4Test.php",
+          "line": 105,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/js/tekora/tekora.js",
+      "git_blob": "f31148b7869ab6f22b9963d0fa009190fbfc01b8",
+      "literal_key": "resources/js/tekora/tekora.js",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/components/tekora-layout.blade.php",
+          "line": 13,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 12,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/web/w1/evidence/invariants.json",
+          "line": 27,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/invariants.json",
+          "line": 29,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/invariants.json",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/assets.json",
+          "line": 33,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 224,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 31,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 344,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/visual-source-hashes.json",
+          "line": 201,
+          "category": "docs"
+        },
+        {
+          "file": "tests/Feature/TekoraW11Test.php",
+          "line": 43,
+          "category": "tests"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/sass/_variables.scss",
+      "git_blob": "172daaadb3cfe1aa44eaee8cb5d7b4b0e2413427",
+      "literal_key": "resources/sass/_variables.scss",
+      "runtime_source_refs": [
+        {
+          "file": "resources/sass/app.scss",
+          "line": 5,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [],
+      "relative_import_candidates": [
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 12,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 11,
+          "category": "docs"
+        },
+        {
+          "file": "resources/sass/app.scss",
+          "line": 5,
+          "category": "runtime-source"
+        }
+      ],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    },
+    {
+      "file": "resources/sass/app.scss",
+      "git_blob": "1026a0bfe493c88c4a94a5067a49c9eff8fc0fbe",
+      "literal_key": "resources/sass/app.scss",
+      "runtime_source_refs": [
+        {
+          "file": "resources/views/layouts/app.blade.php",
+          "line": 17,
+          "category": "runtime-source"
+        },
+        {
+          "file": "vite.config.js",
+          "line": 8,
+          "category": "runtime-source"
+        }
+      ],
+      "other_literal_refs": [
+        {
+          "file": "docs/auditorias/etapa-4a/modulos-browser.json",
+          "line": 115,
+          "category": "docs"
+        },
+        {
+          "file": "docs/seguridad-dependencias-etapa-4a.md",
+          "line": 67,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/invariants.json",
+          "line": 33,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/invariants.json",
+          "line": 35,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w1/evidence/w11/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w21/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w2/evidence/w211/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 15,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 25,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/assets.json",
+          "line": 32,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w5/evidence/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 14,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 24,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 36,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 47,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 58,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 76,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 103,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 117,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 131,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 148,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 165,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 182,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 197,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w51/evidence/npm-build.txt",
+          "line": 212,
+          "category": "docs"
+        }
+      ],
+      "relative_import_candidates": [],
+      "zero_runtime_literal_refs": false,
+      "delete_authorized": false
+    }
+  ]
+}

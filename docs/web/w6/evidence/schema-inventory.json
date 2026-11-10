@@ -1,0 +1,364 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "migration_count": 37,
+  "migration_files": [
+    "database/migrations/0001_01_01_000000_create_users_table.php",
+    "database/migrations/0001_01_01_000001_create_cache_table.php",
+    "database/migrations/0001_01_01_000002_create_jobs_table.php",
+    "database/migrations/2025_08_02_085013_create_posts_table.php",
+    "database/migrations/2025_08_02_092303_create_reminders_table.php",
+    "database/migrations/2025_08_13_022507_create_profesionistas_table.php",
+    "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php",
+    "database/migrations/2026_02_15_192040_create_likes_table.php",
+    "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php",
+    "database/migrations/2026_02_15_200848_create_comments_table.php",
+    "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php",
+    "database/migrations/2026_02_16_031436_create_citas_table.php",
+    "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php",
+    "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php",
+    "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php",
+    "database/migrations/2026_02_23_235730_create_emotions_table.php",
+    "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php",
+    "database/migrations/2026_02_24_041833_add_media_to_posts_table.php",
+    "database/migrations/2026_02_24_041908_add_media_to_comments_table.php",
+    "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php",
+    "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+    "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php",
+    "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+    "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php",
+    "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php",
+    "database/migrations/2026_10_23_000001_create_provider_profiles_table.php",
+    "database/migrations/2026_10_28_000000_create_service_categories_table.php",
+    "database/migrations/2026_10_28_000001_create_services_table.php",
+    "database/migrations/2026_10_28_000002_create_service_inquiries_table.php",
+    "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php",
+    "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php",
+    "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php",
+    "database/migrations/2026_10_30_000002_create_provider_availability_tables.php",
+    "database/migrations/2026_11_03_000000_create_service_reservations.php",
+    "database/migrations/2026_11_03_000001_create_service_reviews.php",
+    "database/migrations/2026_11_03_000002_create_activity_notifications.php",
+    "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php"
+  ],
+  "schema_declarations": [
+    {
+      "file": "database/migrations/0001_01_01_000000_create_users_table.php",
+      "line": 14,
+      "operation": "create",
+      "table": "users"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000000_create_users_table.php",
+      "line": 26,
+      "operation": "create",
+      "table": "password_reset_tokens"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000000_create_users_table.php",
+      "line": 32,
+      "operation": "create",
+      "table": "sessions"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000001_create_cache_table.php",
+      "line": 14,
+      "operation": "create",
+      "table": "cache"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000001_create_cache_table.php",
+      "line": 20,
+      "operation": "create",
+      "table": "cache_locks"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000002_create_jobs_table.php",
+      "line": 14,
+      "operation": "create",
+      "table": "jobs"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000002_create_jobs_table.php",
+      "line": 24,
+      "operation": "create",
+      "table": "job_batches"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000002_create_jobs_table.php",
+      "line": 37,
+      "operation": "create",
+      "table": "failed_jobs"
+    },
+    {
+      "file": "database/migrations/2025_08_02_085013_create_posts_table.php",
+      "line": 14,
+      "operation": "create",
+      "table": "posts"
+    },
+    {
+      "file": "database/migrations/2025_08_02_092303_create_reminders_table.php",
+      "line": 16,
+      "operation": "create",
+      "table": "reminders"
+    },
+    {
+      "file": "database/migrations/2025_08_13_022507_create_profesionistas_table.php",
+      "line": 13,
+      "operation": "create",
+      "table": "profesionistas"
+    },
+    {
+      "file": "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php",
+      "line": 14,
+      "operation": "table",
+      "table": "profesionistas"
+    },
+    {
+      "file": "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php",
+      "line": 21,
+      "operation": "table",
+      "table": "profesionistas"
+    },
+    {
+      "file": "database/migrations/2026_02_15_192040_create_likes_table.php",
+      "line": 14,
+      "operation": "create",
+      "table": "likes"
+    },
+    {
+      "file": "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php",
+      "line": 14,
+      "operation": "table",
+      "table": "posts"
+    },
+    {
+      "file": "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php",
+      "line": 25,
+      "operation": "table",
+      "table": "posts"
+    },
+    {
+      "file": "database/migrations/2026_02_15_200848_create_comments_table.php",
+      "line": 14,
+      "operation": "create",
+      "table": "comments"
+    },
+    {
+      "file": "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php",
+      "line": 9,
+      "operation": "create",
+      "table": "profesionista_bloqueos"
+    },
+    {
+      "file": "database/migrations/2026_02_16_031436_create_citas_table.php",
+      "line": 9,
+      "operation": "create",
+      "table": "citas"
+    },
+    {
+      "file": "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php",
+      "line": 16,
+      "operation": "table",
+      "table": "profesionistas"
+    },
+    {
+      "file": "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php",
+      "line": 18,
+      "operation": "table",
+      "table": "citas"
+    },
+    {
+      "file": "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php",
+      "line": 24,
+      "operation": "table",
+      "table": "citas"
+    },
+    {
+      "file": "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php",
+      "line": 28,
+      "operation": "table",
+      "table": "citas"
+    },
+    {
+      "file": "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php",
+      "line": 10,
+      "operation": "create",
+      "table": "profesionista_disponibilidades"
+    },
+    {
+      "file": "database/migrations/2026_02_23_235730_create_emotions_table.php",
+      "line": 9,
+      "operation": "create",
+      "table": "emotions"
+    },
+    {
+      "file": "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php",
+      "line": 10,
+      "operation": "table",
+      "table": "users"
+    },
+    {
+      "file": "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php",
+      "line": 17,
+      "operation": "table",
+      "table": "users"
+    },
+    {
+      "file": "database/migrations/2026_02_24_041833_add_media_to_posts_table.php",
+      "line": 10,
+      "operation": "table",
+      "table": "posts"
+    },
+    {
+      "file": "database/migrations/2026_02_24_041833_add_media_to_posts_table.php",
+      "line": 18,
+      "operation": "table",
+      "table": "posts"
+    },
+    {
+      "file": "database/migrations/2026_02_24_041908_add_media_to_comments_table.php",
+      "line": 10,
+      "operation": "table",
+      "table": "comments"
+    },
+    {
+      "file": "database/migrations/2026_02_24_041908_add_media_to_comments_table.php",
+      "line": 18,
+      "operation": "table",
+      "table": "comments"
+    },
+    {
+      "file": "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php",
+      "line": 10,
+      "operation": "table",
+      "table": "posts"
+    },
+    {
+      "file": "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php",
+      "line": 17,
+      "operation": "table",
+      "table": "posts"
+    },
+    {
+      "file": "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+      "line": 11,
+      "operation": "table",
+      "table": "likes"
+    },
+    {
+      "file": "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+      "line": 19,
+      "operation": "table",
+      "table": "likes"
+    },
+    {
+      "file": "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php",
+      "line": 14,
+      "operation": "table",
+      "table": "likes"
+    },
+    {
+      "file": "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php",
+      "line": 24,
+      "operation": "table",
+      "table": "likes"
+    },
+    {
+      "file": "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+      "line": 11,
+      "operation": "table",
+      "table": "likes"
+    },
+    {
+      "file": "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+      "line": 19,
+      "operation": "table",
+      "table": "likes"
+    },
+    {
+      "file": "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php",
+      "line": 11,
+      "operation": "table",
+      "table": "comments"
+    },
+    {
+      "file": "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php",
+      "line": 21,
+      "operation": "table",
+      "table": "comments"
+    },
+    {
+      "file": "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php",
+      "line": 12,
+      "operation": "create",
+      "table": "roles"
+    },
+    {
+      "file": "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php",
+      "line": 25,
+      "operation": "create",
+      "table": "role_user"
+    },
+    {
+      "file": "database/migrations/2026_10_23_000001_create_provider_profiles_table.php",
+      "line": 11,
+      "operation": "create",
+      "table": "provider_profiles"
+    },
+    {
+      "file": "database/migrations/2026_10_28_000000_create_service_categories_table.php",
+      "line": 11,
+      "operation": "create",
+      "table": "service_categories"
+    },
+    {
+      "file": "database/migrations/2026_10_28_000001_create_services_table.php",
+      "line": 11,
+      "operation": "create",
+      "table": "services"
+    },
+    {
+      "file": "database/migrations/2026_10_28_000002_create_service_inquiries_table.php",
+      "line": 17,
+      "operation": "create",
+      "table": "service_inquiries"
+    },
+    {
+      "file": "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php",
+      "line": 11,
+      "operation": "create",
+      "table": "inquiry_notifications"
+    },
+    {
+      "file": "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php",
+      "line": 11,
+      "operation": "create",
+      "table": "service_inquiry_messages"
+    },
+    {
+      "file": "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php",
+      "line": 11,
+      "operation": "table",
+      "table": "service_inquiry_messages"
+    },
+    {
+      "file": "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php",
+      "line": 15,
+      "operation": "create",
+      "table": "service_inquiry_reads"
+    },
+    {
+      "file": "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php",
+      "line": 30,
+      "operation": "table",
+      "table": "service_inquiry_messages"
+    },
+    {
+      "file": "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php",
+      "line": 14,
+      "operation": "create",
+      "table": "personal_access_tokens"
+    }
+  ],
+  "actual_schema_inspected": false
+}

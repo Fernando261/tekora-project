@@ -1,0 +1,105 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "candidates": [
+    {
+      "symbol": "GoogleCalendarController",
+      "definition": "app/Http/Controllers/GoogleCalendarController.php",
+      "references": [
+        {
+          "file": "docs/web/w3/W3-MINDBLOOM-INVENTORY.md",
+          "line": 44,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 90,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 90,
+          "category": "docs"
+        }
+      ],
+      "decision": "INVESTIGAR; no route consumer found in routes/*.php"
+    },
+    {
+      "symbol": "ReminderController",
+      "definition": "app/Http/Controllers/ReminderController.php",
+      "references": [
+        {
+          "file": "docs/web/w3/evidence/invariants.json",
+          "line": 107,
+          "category": "docs"
+        },
+        {
+          "file": "docs/web/w4/evidence/invariants.json",
+          "line": 107,
+          "category": "docs"
+        }
+      ],
+      "decision": "INVESTIGAR; no route consumer found in routes/*.php"
+    },
+    {
+      "view": "auth.portal",
+      "exact_render_include_inheritance_refs": [],
+      "decision": "INVESTIGAR; zero exact renderer is not proof against dynamic consumers"
+    },
+    {
+      "view": "auth.registro_profesionista",
+      "exact_render_include_inheritance_refs": [],
+      "decision": "INVESTIGAR; zero exact renderer is not proof against dynamic consumers"
+    },
+    {
+      "view": "login-profesionista",
+      "exact_render_include_inheritance_refs": [],
+      "decision": "INVESTIGAR; zero exact renderer is not proof against dynamic consumers"
+    },
+    {
+      "view": "citas",
+      "exact_render_include_inheritance_refs": [],
+      "decision": "INVESTIGAR; zero exact renderer is not proof against dynamic consumers"
+    },
+    {
+      "view": "layouts.app",
+      "exact_render_include_inheritance_refs": [],
+      "decision": "INVESTIGAR; zero exact renderer is not proof against dynamic consumers"
+    },
+    {
+      "symbol": "App\\Http\\Controllers\\Auth\\ConfirmPasswordController",
+      "definition": "app/Http/Controllers/Auth/ConfirmPasswordController.php",
+      "full_class_references": [],
+      "decision": "INVESTIGAR; no Auth::routes or full class consumer found; short/dynamic references require review"
+    },
+    {
+      "symbol": "App\\Http\\Controllers\\Auth\\ForgotPasswordController",
+      "definition": "app/Http/Controllers/Auth/ForgotPasswordController.php",
+      "full_class_references": [],
+      "decision": "INVESTIGAR; no Auth::routes or full class consumer found; short/dynamic references require review"
+    },
+    {
+      "symbol": "App\\Http\\Controllers\\Auth\\LoginController",
+      "definition": "app/Http/Controllers/Auth/LoginController.php",
+      "full_class_references": [],
+      "decision": "INVESTIGAR; no Auth::routes or full class consumer found; short/dynamic references require review"
+    },
+    {
+      "symbol": "App\\Http\\Controllers\\Auth\\RegisterController",
+      "definition": "app/Http/Controllers/Auth/RegisterController.php",
+      "full_class_references": [],
+      "decision": "INVESTIGAR; no Auth::routes or full class consumer found; short/dynamic references require review"
+    },
+    {
+      "symbol": "App\\Http\\Controllers\\Auth\\ResetPasswordController",
+      "definition": "app/Http/Controllers/Auth/ResetPasswordController.php",
+      "full_class_references": [],
+      "decision": "INVESTIGAR; no Auth::routes or full class consumer found; short/dynamic references require review"
+    },
+    {
+      "symbol": "App\\Http\\Controllers\\Auth\\VerificationController",
+      "definition": "app/Http/Controllers/Auth/VerificationController.php",
+      "full_class_references": [],
+      "decision": "INVESTIGAR; no Auth::routes or full class consumer found; short/dynamic references require review"
+    }
+  ]
+}

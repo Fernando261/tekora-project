@@ -1,0 +1,1064 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "method": "Only source files cited in the matrix or pinned source links; no media contents",
+  "sources": [
+    {
+      "file": "app/Enums/Permission.php",
+      "git_blob": "f85ad0bba99308f068ec5e40ea86137c2c500646",
+      "references": [
+        {
+          "line": 7,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/AuthController.php",
+      "git_blob": "86ff4a802752e15ca0bee188789af9f32fb72482",
+      "references": [
+        {
+          "line": 23,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/CitasController.php",
+      "git_blob": "b6f196b4395a3a80880ad8a99c7c59485276ae0a",
+      "references": [
+        {
+          "line": 66,
+          "symbol": "availability",
+          "decision": "D10"
+        },
+        {
+          "line": 171,
+          "symbol": "store",
+          "decision": "D11"
+        },
+        {
+          "line": 66,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 171,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 66,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/CommentController.php",
+      "git_blob": "13fa703fc4f49e73cf1f31a879012a0f31aede93",
+      "references": [
+        {
+          "line": 73,
+          "symbol": "store/destroy",
+          "decision": "D08"
+        },
+        {
+          "line": 95,
+          "symbol": "community/comments",
+          "decision": "D29"
+        },
+        {
+          "line": 73,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 95,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ComunidadController.php",
+      "git_blob": "ab50defd72619c9797efed0ce132cc2f06aaa44d",
+      "references": [
+        {
+          "line": 14,
+          "symbol": "index",
+          "decision": "D06"
+        },
+        {
+          "line": 23,
+          "symbol": "saveToPublicUploads",
+          "decision": "D07"
+        },
+        {
+          "line": 139,
+          "symbol": "destroy",
+          "decision": "D07"
+        },
+        {
+          "line": 62,
+          "symbol": "public_path",
+          "decision": "D29"
+        },
+        {
+          "line": 14,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 23,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 139,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 62,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 14,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/GoogleCalendarController.php",
+      "git_blob": "69de4ed0a40704c833c163939de0afdc0f39011a",
+      "references": [
+        {
+          "line": 9,
+          "symbol": "GoogleCalendarController",
+          "decision": "D17"
+        },
+        {
+          "line": 9,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 11,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/HomeController.php",
+      "git_blob": "b52c377fce494385f26beb03c2591fd249ea8f9f",
+      "references": [
+        {
+          "line": 15,
+          "symbol": "index",
+          "decision": "D19"
+        },
+        {
+          "line": 15,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 10,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/PdfController.php",
+      "git_blob": "badf29a9822740932f5de4cc8e313b0b56adf2bc",
+      "references": [
+        {
+          "line": 12,
+          "symbol": "emotionCards",
+          "decision": "D21"
+        },
+        {
+          "line": 12,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 12,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaAuthController.php",
+      "git_blob": "11a56b6d5b6acf162e8063994d8ab38965a5774c",
+      "references": [
+        {
+          "line": 32,
+          "symbol": "logout",
+          "decision": "D18"
+        },
+        {
+          "line": 10,
+          "symbol": "showLogin",
+          "decision": "D26"
+        },
+        {
+          "line": 32,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 10,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 10,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+      "git_blob": "f8685417e4259a56f72edfdb37853a1d76da1a58",
+      "references": [
+        {
+          "line": 83,
+          "symbol": "aceptar",
+          "decision": "D13"
+        },
+        {
+          "line": 177,
+          "symbol": "rechazar",
+          "decision": "D13"
+        },
+        {
+          "line": 83,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 177,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 83,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaController.php",
+      "git_blob": "1674ee903cf6bcee8e037450c112771e771811d5",
+      "references": [
+        {
+          "line": 23,
+          "symbol": "store",
+          "decision": "D04"
+        },
+        {
+          "line": 12,
+          "symbol": "index",
+          "decision": "D15"
+        },
+        {
+          "line": 23,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 12,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+      "git_blob": "c96974fc748920d7a325fc9764e186cacaa26404",
+      "references": [
+        {
+          "line": 25,
+          "symbol": "store",
+          "decision": "D14"
+        },
+        {
+          "line": 25,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaGoogleController.php",
+      "git_blob": "dd6793aa3b83a4c05851bace9bc9207f9375d0fe",
+      "references": [
+        {
+          "line": 11,
+          "symbol": "redirect/callback/disconnect",
+          "decision": "D16"
+        },
+        {
+          "line": 11,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 11,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ProfileController.php",
+      "git_blob": "e92632d48ade3503ea9c4c5a62aaee86fa31ccae",
+      "references": [
+        {
+          "line": 145,
+          "symbol": "photoMayBeReferenced",
+          "decision": "D24"
+        },
+        {
+          "line": 145,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 120,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/ReminderController.php",
+      "git_blob": "9ab9a5d7827c10fbbac43d046b5726491339bedf",
+      "references": [
+        {
+          "line": 9,
+          "symbol": "store",
+          "decision": "D30"
+        },
+        {
+          "line": 9,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Http/Controllers/UserCitaController.php",
+      "git_blob": "b692b9009392d20659fa1257fb181df03fa558e8",
+      "references": [
+        {
+          "line": 10,
+          "symbol": "index",
+          "decision": "D12"
+        },
+        {
+          "line": 10,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Models/Cita.php",
+      "git_blob": "b076fa5b94fc10ca470394babbab410b19e19ac8",
+      "references": [
+        {
+          "line": 12,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Models/Comment.php",
+      "git_blob": "62edb224e58c310b5322d99c98d6962f7ad4aefb",
+      "references": [
+        {
+          "line": 9,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Models/Emotion.php",
+      "git_blob": "035f0671304b0d4f3bb003ab93b2792e10af0a4c",
+      "references": [
+        {
+          "line": 9,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Models/Like.php",
+      "git_blob": "43e3daac203297ad36cae8fd5a4a31afd7fb9d18",
+      "references": [
+        {
+          "line": 9,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Models/Post.php",
+      "git_blob": "afe744e8f37b42c289a112d58b7e9f8b23672a04",
+      "references": [
+        {
+          "line": 29,
+          "symbol": "likes",
+          "decision": "D09"
+        },
+        {
+          "line": 29,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 13,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Models/Profesionista.php",
+      "git_blob": "0279175faa1a159675c40d5cafbe045b88e39f15",
+      "references": [
+        {
+          "line": 18,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Models/User.php",
+      "git_blob": "aa5f1691b80d86743950b0c03584293a574ef184",
+      "references": [
+        {
+          "line": 56,
+          "symbol": "roles/providerProfile",
+          "decision": "D23"
+        },
+        {
+          "line": 104,
+          "symbol": "reminders",
+          "decision": "D30"
+        },
+        {
+          "line": 56,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 104,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 56,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Services/InquiryMessaging.php",
+      "git_blob": "2de234e7bc46842a42e9cb3a8fa2e0a565285745",
+      "references": [
+        {
+          "line": 21,
+          "symbol": "send",
+          "decision": "D33"
+        },
+        {
+          "line": 21,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Services/ProviderAvailability.php",
+      "git_blob": "d52ed12f3fb451ff4278e57fce9bb420e7afecf5",
+      "references": [
+        {
+          "line": 19,
+          "symbol": "save",
+          "decision": "D14"
+        },
+        {
+          "line": 19,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 19,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Services/ReservationTime.php",
+      "git_blob": "1579b2eab493f697c21f07821b943106a92a5769",
+      "references": [
+        {
+          "line": 12,
+          "symbol": "resolve",
+          "decision": "D10"
+        },
+        {
+          "line": 12,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 12,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "app/Services/ReservationWorkflow.php",
+      "git_blob": "f5bbefb195efa68e6d74192ddfb65033604cb99c",
+      "references": [
+        {
+          "line": 50,
+          "symbol": "propose/decide",
+          "decision": "D33"
+        },
+        {
+          "line": 50,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 50,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "composer.json",
+      "git_blob": "ad03e65cb86c4c5eb8db1009b4ebea89f2590ee0",
+      "references": [
+        {
+          "line": 10,
+          "symbol": "require",
+          "decision": "D32"
+        },
+        {
+          "line": 10,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "config/auth.php",
+      "git_blob": "dba3e3adc1e56877a74e393bd24e00616d71c0e9",
+      "references": [
+        {
+          "line": 38,
+          "symbol": "guards/providers",
+          "decision": "D18"
+        },
+        {
+          "line": 38,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 38,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "config/services.php",
+      "git_blob": "a36c6577f78f5e7c325901d8ee2f8af4ca49b815",
+      "references": [
+        {
+          "line": 17,
+          "symbol": "google",
+          "decision": "D16"
+        },
+        {
+          "line": 17,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php",
+      "git_blob": "af13e0846231e001765752b1c40816a78f2dd421",
+      "references": [
+        {
+          "line": 9,
+          "symbol": "profesionista_bloqueos",
+          "decision": "D31"
+        },
+        {
+          "line": 9,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "database/migrations/2026_02_16_031436_create_citas_table.php",
+      "git_blob": "79914f681612dd976f5801d263e521cf8dc376a1",
+      "references": [
+        {
+          "line": 9,
+          "symbol": "citas",
+          "decision": "D11"
+        },
+        {
+          "line": 9,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+      "git_blob": "e32e9476854d31d108672b42f978e69076c5f0ee",
+      "references": [
+        {
+          "line": 9,
+          "symbol": "up",
+          "decision": "D09"
+        },
+        {
+          "line": 9,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+      "git_blob": "687eb10f84b8a2d90adafe8c025da9dc6c65b566",
+      "references": [
+        {
+          "line": 11,
+          "symbol": "DBAL comment",
+          "decision": "D32"
+        },
+        {
+          "line": 11,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "database/seeders/EmotionSeeder.php",
+      "git_blob": "cda4729765c6cf8310ba0aec5dab9f51d2e104d1",
+      "references": [
+        {
+          "line": 17,
+          "symbol": "image_path",
+          "decision": "D27"
+        },
+        {
+          "line": 17,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "public/css/home.css",
+      "git_blob": "e972d5ec17bf5f7bbe90c3b6b9c8d13c58f0c5bd",
+      "references": [
+        {
+          "line": 393,
+          "symbol": "MindBloom Emotional Gallery",
+          "decision": "D25"
+        },
+        {
+          "line": 393,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "public/fonts/tekora/DM-Sans-OFL.txt",
+      "git_blob": "a0eedfbf0df0e9ef2cc76bb0943bcde49c3b3a25",
+      "references": [
+        {
+          "line": 1,
+          "symbol": "OFL",
+          "decision": "D28"
+        },
+        {
+          "line": 1,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/css/tekora/identity.css",
+      "git_blob": "10095422d5e98f17fba42ec8e8f896989df9176d",
+      "references": [
+        {
+          "line": 2,
+          "symbol": "@font-face",
+          "decision": "D28"
+        },
+        {
+          "line": 2,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/account/client.blade.php",
+      "git_blob": "3e313b852739cb79c1afe1127ef56aa7329c62ab",
+      "references": [
+        {
+          "line": 38,
+          "symbol": "client-legacy-title",
+          "decision": "D02"
+        },
+        {
+          "line": 38,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/components/account-layout.blade.php",
+      "git_blob": "c9aa0a90341fae2804ed51c4b8a44d62dc4bd78b",
+      "references": [
+        {
+          "line": 49,
+          "symbol": "footer",
+          "decision": "D01"
+        },
+        {
+          "line": 10,
+          "symbol": "stylesheet",
+          "decision": "D25"
+        },
+        {
+          "line": 49,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 10,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "git_blob": "da38b05039be04ab93fb2948ccf68fd418ffc6c7",
+      "references": [
+        {
+          "line": 63,
+          "symbol": "account-legacy",
+          "decision": "D01"
+        },
+        {
+          "line": 63,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/components/legacy-account-notice.blade.php",
+      "git_blob": "52ccc679365a4e1928fdbfe37c5bd275c55b5b21",
+      "references": [
+        {
+          "line": 1,
+          "symbol": "legacy-account-notice",
+          "decision": "D05"
+        },
+        {
+          "line": 1,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "git_blob": "1890f9fc0375a8ce6bacb894327251ef1256e97b",
+      "references": [
+        {
+          "line": 64,
+          "symbol": "feed",
+          "decision": "D06"
+        },
+        {
+          "line": 173,
+          "symbol": "comments-section",
+          "decision": "D08"
+        },
+        {
+          "line": 64,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 173,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 173,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/conferencias.blade.php",
+      "git_blob": "92bb3a5ee0c121694f0bb08bcae66f86e3707c18",
+      "references": [
+        {
+          "line": 23,
+          "symbol": "calendar-container",
+          "decision": "D22"
+        },
+        {
+          "line": 76,
+          "symbol": "openChat",
+          "decision": "D22"
+        },
+        {
+          "line": 23,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 76,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 27,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/dashboard-profesionista.blade.php",
+      "git_blob": "a2055ec25c7c45366c5639aa4ebe688f63dc2327",
+      "references": [
+        {
+          "line": 24,
+          "symbol": "menu",
+          "decision": "D05"
+        },
+        {
+          "line": 89,
+          "symbol": "cards",
+          "decision": "D15"
+        },
+        {
+          "line": 24,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 89,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/emotion/show.blade.php",
+      "git_blob": "d8f56f57c8214aa9caa35ad7ccfcbea33f6329b6",
+      "references": [
+        {
+          "line": 1,
+          "symbol": "emotion.show",
+          "decision": "D20"
+        },
+        {
+          "line": 1,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "git_blob": "8bdd0256e91e72bf2d3a3ced3cbd26b38a20d88f",
+      "references": [
+        {
+          "line": 38,
+          "symbol": "hero/statistics",
+          "decision": "D19"
+        },
+        {
+          "line": 16,
+          "symbol": "brand-logo",
+          "decision": "D27"
+        },
+        {
+          "line": 38,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 16,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/login.blade.php",
+      "git_blob": "df75aaf19da7bd9efe4f30ea44d6fbec5f05d392",
+      "references": [
+        {
+          "line": 19,
+          "symbol": "legacy-access",
+          "decision": "D04"
+        },
+        {
+          "line": 19,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/pdf/emotions/cards.blade.php",
+      "git_blob": "71c0590af491f94055546db8356c0f39d19ef2f5",
+      "references": [
+        {
+          "line": 97,
+          "symbol": "page-title",
+          "decision": "D21"
+        },
+        {
+          "line": 97,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "resources/views/perfil.blade.php",
+      "git_blob": "424bd761c591dada7c531bf15bf52a8db033e99e",
+      "references": [
+        {
+          "line": 21,
+          "symbol": "tk-identity-history",
+          "decision": "D03"
+        },
+        {
+          "line": 21,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "routes/identities.php",
+      "git_blob": "e909b282deb848d83c8ec477d072171ceee01b93",
+      "references": [
+        {
+          "line": 23,
+          "symbol": "identity.citas",
+          "decision": "D02"
+        },
+        {
+          "line": 14,
+          "symbol": "account.client",
+          "decision": "D23"
+        },
+        {
+          "line": 23,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 14,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "routes/web.php",
+      "git_blob": "7f8a5b567538fe0586b4ef49bc60976649a5cc7c",
+      "references": [
+        {
+          "line": 168,
+          "symbol": "Perfil",
+          "decision": "D03"
+        },
+        {
+          "line": 153,
+          "symbol": "consultas",
+          "decision": "D12"
+        },
+        {
+          "line": 125,
+          "symbol": "Google Calendar connect",
+          "decision": "D17"
+        },
+        {
+          "line": 73,
+          "symbol": "emociones",
+          "decision": "D20"
+        },
+        {
+          "line": 168,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 153,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 125,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 73,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 43,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    },
+    {
+      "file": "tests/Feature/IdentityMigrationTest.php",
+      "git_blob": "cddc2a5722cb92cd86bec694316ab77d01eaf77d",
+      "references": [
+        {
+          "line": 62,
+          "symbol": "legacy fixtures",
+          "decision": "D31"
+        },
+        {
+          "line": 62,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "tests/Feature/ProfilePhotoIntegrityTest.php",
+      "git_blob": "499bb410e6b4715db1dd8f2ed1b06a477ed3bc38",
+      "references": [
+        {
+          "line": 543,
+          "symbol": "other_modules_references",
+          "decision": "D24"
+        },
+        {
+          "line": 543,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "tests/Feature/TekoraW3Test.php",
+      "git_blob": "fe62c22224c03d288b1a676120dc319d486f7d25",
+      "references": [
+        {
+          "line": 211,
+          "symbol": "historical compatibility",
+          "decision": "D34"
+        },
+        {
+          "line": 211,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "tests/Feature/TekoraW5Test.php",
+      "git_blob": "980ebb8fc0203317698cd755743bf30a7ea990f3",
+      "references": [
+        {
+          "line": 371,
+          "symbol": "opt-in",
+          "decision": "D34"
+        },
+        {
+          "line": 371,
+          "document": "W61-DECISION-MATRIX.md"
+        }
+      ]
+    },
+    {
+      "file": "vite.config.js",
+      "git_blob": "82b7f7f9b204f6b5018aff416d112e6d955bd418",
+      "references": [
+        {
+          "line": 7,
+          "symbol": "input",
+          "decision": "D26"
+        },
+        {
+          "line": 7,
+          "document": "W61-DECISION-MATRIX.md"
+        },
+        {
+          "line": 7,
+          "document": "W61-DEPENDENCY-MAP.md"
+        }
+      ]
+    }
+  ]
+}

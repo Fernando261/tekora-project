@@ -1,0 +1,19 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "tracked_blobs": 1381,
+  "tracked_text_sources_examined": 839,
+  "mindbloom_source_occurrences": 93,
+  "assets_in_inventory": 62,
+  "assets_zero_runtime_literal_refs": 17,
+  "versioned_upload_media_count_metadata_only": 9,
+  "migration_files": 37,
+  "api_static_operations": 21,
+  "new_phpunit_run": false,
+  "approved_windows_baseline": {
+    "tests": 626,
+    "assertions": 8258
+  },
+  "persistent_data_credentials_sessions_or_media_contents_inspected": false,
+  "oauth_calls": false,
+  "executables_added": false
+}

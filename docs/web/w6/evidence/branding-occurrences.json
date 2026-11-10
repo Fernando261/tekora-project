@@ -1,0 +1,564 @@
+{
+  "base_sha": "576c937fa3cbd31e6af95eedc1651cb59a16d898",
+  "method": "Case-insensitive mind.?bloom over tracked source; documents/tools excluded from runtime inventory; no persistent data inspected",
+  "occurrences": [
+    {
+      "file": "app/Http/Controllers/PdfController.php",
+      "line": 50,
+      "category": "runtime-source",
+      "text": "return $pdf->download('mindbloom-tarjetas-emociones.pdf');"
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+      "line": 130,
+      "category": "runtime-source",
+      "text": "'summary' => 'Cita MindBloom',"
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+      "line": 131,
+      "category": "runtime-source",
+      "text": "'description' => 'Cita aceptada en MindBloom.',"
+    },
+    {
+      "file": "resources/views/account/activate-provider.blade.php",
+      "line": 5,
+      "category": "runtime-source",
+      "text": "<p class=\"account-note\">La activación no es una verificación profesional. No crea una identidad histórica de MindBloom ni fusiona cuentas automáticamente. Tu ficha pública de Tekora depende de los servicios que publiques.</p>"
+    },
+    {
+      "file": "resources/views/account/client.blade.php",
+      "line": 38,
+      "category": "runtime-source",
+      "text": "<section class=\"account-card tk-legacy-panel\" data-dashboard-section aria-labelledby=\"client-legacy-title\"><x-tekora-icon name=\"shield\" /><h2 id=\"client-legacy-title\">Actividad anterior en MindBloom</h2><p>Puedes seguir consultando tus citas anteriores. Están separadas de las solicitudes y reservas del marketplace Tekora.</p><a class=\"tk-panel-link\" href=\"{{ route('identity.citas') }}\">Consultar mis citas de MindBloom <x-tekora-icon name=\"arrow\" /></a></section>"
+    },
+    {
+      "file": "resources/views/auth/portal.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Acceso - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/auth/portal.blade.php",
+      "line": 19,
+      "category": "runtime-source",
+      "text": "<div class=\"mb-brand-title\">MindBloom</div>"
+    },
+    {
+      "file": "resources/views/auth/portal.blade.php",
+      "line": 30,
+      "category": "runtime-source",
+      "text": "Elige cómo quieres entrar a MindBloom:"
+    },
+    {
+      "file": "resources/views/auth/portal.blade.php",
+      "line": 112,
+      "category": "runtime-source",
+      "text": "<span>MindBloom</span>"
+    },
+    {
+      "file": "resources/views/auth/registro.blade.php",
+      "line": 41,
+      "category": "runtime-source",
+      "text": "<p class=\"account-help\">¿Tenías una cuenta profesional de MindBloom? <a href=\"{{ route('profesionista.login') }}\">Utiliza el acceso heredado</a>; no se fusionará con esta cuenta.</p>"
+    },
+    {
+      "file": "resources/views/citas.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>MindBloom - Consultas</title>"
+    },
+    {
+      "file": "resources/views/citas.blade.php",
+      "line": 12,
+      "category": "runtime-source",
+      "text": "<h2>MindBloom</h2>"
+    },
+    {
+      "file": "resources/views/citas/create.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Agendar cita - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/citas/create.blade.php",
+      "line": 26,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "resources/views/citas/create.blade.php",
+      "line": 35,
+      "category": "runtime-source",
+      "text": "<strong>Tip MindBloom</strong>"
+    },
+    {
+      "file": "resources/views/citas/create.blade.php",
+      "line": 48,
+      "category": "runtime-source",
+      "text": "<!-- ✅ Hero MindBloom -->"
+    },
+    {
+      "file": "resources/views/citas/create.blade.php",
+      "line": 54,
+      "category": "runtime-source",
+      "text": "<!-- ✅ Card MindBloom -->"
+    },
+    {
+      "file": "resources/views/citas/mis-citas.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Mis citas - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/citas/mis-citas.blade.php",
+      "line": 24,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "resources/views/citas/mis-citas.blade.php",
+      "line": 33,
+      "category": "runtime-source",
+      "text": "<strong>Tip MindBloom</strong>"
+    },
+    {
+      "file": "resources/views/components/account-layout.blade.php",
+      "line": 49,
+      "category": "runtime-source",
+      "text": "<footer class=\"tk-shell-footer\"><span>tekora<span aria-hidden=\"true\">.</span></span><p>Conecta con lo que viene.</p><a href=\"{{ route('home') }}\">Acceso a MindBloom anterior <x-tekora-icon name=\"arrow\" /></a></footer>"
+    },
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "line": 66,
+      "category": "runtime-source",
+      "text": "<summary class=\"menu-item\">@if($cinematic)<x-tekora-icon name=\"grid\" /><span class=\"tk-nav-label\">MindBloom anterior</span><span class=\"tk-nav-chevron\" aria-hidden=\"true\">⌄</span>@else MindBloom anterior @endif</summary>"
+    },
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "line": 68,
+      "category": "runtime-source",
+      "text": "<a class=\"submenu-item\" href=\"{{ route('home') }}\">Inicio MindBloom</a>"
+    },
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "line": 71,
+      "category": "runtime-source",
+      "text": "<a class=\"submenu-item\" href=\"{{ route('user.citas') }}\">Citas MindBloom</a>"
+    },
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "line": 72,
+      "category": "runtime-source",
+      "text": "<a class=\"submenu-item\" href=\"{{ route('profesionistas.index') }}\">Directorio MindBloom</a>"
+    },
+    {
+      "file": "resources/views/components/legacy-account-notice.blade.php",
+      "line": 1,
+      "category": "runtime-source",
+      "text": "<aside class=\"legacy-account-notice\" role=\"note\"><strong>Acceso heredado de MindBloom.</strong> Esta cuenta conserva tus citas y disponibilidad anteriores. No está vinculada a un perfil de la cuenta única. <a href=\"{{ route('login') }}\">Acceso a cuenta única</a></aside>"
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Comunidad - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "line": 44,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "line": 53,
+      "category": "runtime-source",
+      "text": "<strong>Tip MindBloom</strong>"
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "line": 67,
+      "category": "runtime-source",
+      "text": "<p>Comparte, comenta y apóyate con otras personas dentro de MindBloom.</p>"
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "line": 85,
+      "category": "runtime-source",
+      "text": "{{-- ✅ Uploader MindBloom (solo estilo, misma funcionalidad) --}}"
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "line": 307,
+      "category": "runtime-source",
+      "text": "// ✅ Uploaders MindBloom: nombre de archivo + preview + quitar (solo UI)"
+    },
+    {
+      "file": "resources/views/conferencias.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Conferencias - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/conferencias.blade.php",
+      "line": 13,
+      "category": "runtime-source",
+      "text": "<h2>MindBloom</h2>"
+    },
+    {
+      "file": "resources/views/dashboard-profesionista.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Dashboard Profesionista - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/dashboard-profesionista.blade.php",
+      "line": 19,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "resources/views/dashboard-profesionista.blade.php",
+      "line": 84,
+      "category": "runtime-source",
+      "text": "<h1>MindBloom Profesionista</h1>"
+    },
+    {
+      "file": "resources/views/dashboard-profesionista.blade.php",
+      "line": 85,
+      "category": "runtime-source",
+      "text": "<p>Resumen rápido de tu actividad en MindBloom.</p>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>MindBloom - Inicio</title>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 18,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 27,
+      "category": "runtime-source",
+      "text": "<strong>Tip MindBloom</strong>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 39,
+      "category": "runtime-source",
+      "text": "<h1>Bienvenido a MindBloom</h1>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 45,
+      "category": "runtime-source",
+      "text": "<p>MindBloom es una plataforma dedicada a crear espacios de acompañamiento, reflexión y apoyo para todas las personas que buscan mejorar su bienestar emocional. Combinamos tecnología, diseño accesible y psicología para transformar la experiencia de salud mental en línea.</p>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 82,
+      "category": "runtime-source",
+      "text": "En MindBloom contamos con profesionistas aliados capacitados para acompañarte"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 97,
+      "category": "runtime-source",
+      "text": "<p>Explora emociones con una experiencia MindBloom: gira, elige y descubre.</p>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 117,
+      "category": "runtime-source",
+      "text": "<div class=\"mb-pill\">MindBloom • emoción</div>"
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "line": 160,
+      "category": "runtime-source",
+      "text": "<div class=\"mb-pill\">MindBloom • emoción</div>"
+    },
+    {
+      "file": "resources/views/login-profesionista.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Iniciar sesión - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/login-profesionista.blade.php",
+      "line": 13,
+      "category": "runtime-source",
+      "text": "<h2>MindBloom Profesionistas</h2>"
+    },
+    {
+      "file": "resources/views/login.blade.php",
+      "line": 20,
+      "category": "runtime-source",
+      "text": "<summary>Ya tenía una cuenta de profesionista en MindBloom</summary>"
+    },
+    {
+      "file": "resources/views/pdf/emotions/cards.blade.php",
+      "line": 5,
+      "category": "runtime-source",
+      "text": "<title>MindBloom • Tarjetas de emociones</title>"
+    },
+    {
+      "file": "resources/views/pdf/emotions/cards.blade.php",
+      "line": 97,
+      "category": "runtime-source",
+      "text": "<p class=\"page-title\">MindBloom • Tarjetas de emociones</p>"
+    },
+    {
+      "file": "resources/views/pdf/emotions/cards.blade.php",
+      "line": 124,
+      "category": "runtime-source",
+      "text": "<div class=\"pill\">MindBloom • emoción</div>"
+    },
+    {
+      "file": "resources/views/pdf/emotions/cards.blade.php",
+      "line": 138,
+      "category": "runtime-source",
+      "text": "<div class=\"footer\">MindBloom — bienestar emocional</div>"
+    },
+    {
+      "file": "resources/views/perfil.blade.php",
+      "line": 21,
+      "category": "runtime-source",
+      "text": "<details class=\"account-card tk-identity-history\"><summary>Historial anterior · MindBloom</summary><p>Estos accesos mantienen su origen y funcionamiento. No se han migrado ni fusionado tus registros.</p><nav aria-label=\"Accesos históricos del perfil\"><a href=\"{{ route('user.citas') }}\">Citas anteriores</a><a href=\"{{ route('comunidad') }}\">Comunidad anterior</a><a href=\"/conferencias\">Conferencias anteriores</a></nav></details>"
+    },
+    {
+      "file": "resources/views/profesionistas/disponibilidad.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Disponibilidad - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/profesionistas/disponibilidad.blade.php",
+      "line": 22,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "resources/views/profesionistas/index.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Profesionistas - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/profesionistas/index.blade.php",
+      "line": 24,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "resources/views/profesionistas/index.blade.php",
+      "line": 33,
+      "category": "runtime-source",
+      "text": "<strong>Tip MindBloom</strong>"
+    },
+    {
+      "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+      "line": 6,
+      "category": "runtime-source",
+      "text": "<title>Solicitudes - MindBloom</title>"
+    },
+    {
+      "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+      "line": 23,
+      "category": "runtime-source",
+      "text": "<span class=\"brand-title\">MindBloom</span>"
+    },
+    {
+      "file": "routes/web.php",
+      "line": 144,
+      "category": "runtime-source",
+      "text": "Route::get('/mindbloom/inicio', [HomeController::class, 'index'])->name('home');"
+    },
+    {
+      "file": "tests/Feature/ExampleTest.php",
+      "line": 13,
+      "category": "tests",
+      "text": "public function test_the_named_mindbloom_home_page_requires_a_user_session(): void"
+    },
+    {
+      "file": "tests/Feature/TekoraW11Test.php",
+      "line": 51,
+      "category": "tests",
+      "text": "public function test_historical_mindbloom_pages_and_professional_guard_keep_their_identity(): void"
+    },
+    {
+      "file": "tests/Feature/TekoraW1Test.php",
+      "line": 26,
+      "category": "tests",
+      "text": "$this->assertSame('/mindbloom/inicio', parse_url(route('home'), PHP_URL_PATH));"
+    },
+    {
+      "file": "tests/Feature/TekoraW1Test.php",
+      "line": 67,
+      "category": "tests",
+      "text": "public function test_mindbloom_stays_authenticated_and_named_links_and_assets_work(): void"
+    },
+    {
+      "file": "tests/Feature/TekoraW1Test.php",
+      "line": 71,
+      "category": "tests",
+      "text": "->assertSee(asset('img/logo.png'), false)->assertSee('Bienvenido a MindBloom');"
+    },
+    {
+      "file": "tests/Feature/TekoraW21Test.php",
+      "line": 198,
+      "category": "tests",
+      "text": "public function test_historical_mindbloom_keeps_its_layout_outside_the_dashboard(): void"
+    },
+    {
+      "file": "tests/Feature/TekoraW3Test.php",
+      "line": 39,
+      "category": "tests",
+      "text": "$response = $this->get($url)->assertOk()->assertDontSee('MindBloom')->assertSee('tk-marketplace');"
+    },
+    {
+      "file": "tests/Feature/TekoraW3Test.php",
+      "line": 211,
+      "category": "tests",
+      "text": "$this->get('/')->assertOk()->assertDontSee('MindBloom')->assertDontSee('href=\"'.route('home').'\"', false);"
+    },
+    {
+      "file": "tests/Feature/TekoraW3Test.php",
+      "line": 212,
+      "category": "tests",
+      "text": "$this->get('/mindbloom/inicio')->assertRedirect(route('login'));"
+    },
+    {
+      "file": "tests/Feature/TekoraW3Test.php",
+      "line": 213,
+      "category": "tests",
+      "text": "$this->actingAs($this->account(RoleName::Client))->get('/mindbloom/inicio')->assertOk()->assertSee('Bienvenido a MindBloom')->assertDontSee('tk-marketplace');"
+    },
+    {
+      "file": "tests/Feature/TekoraW3Test.php",
+      "line": 214,
+      "category": "tests",
+      "text": "$this->get('/cuenta')->assertOk()->assertSee('MindBloom anterior')->assertSee('href=\"'.route('home').'\"', false);"
+    },
+    {
+      "file": "tests/Feature/TekoraW4Test.php",
+      "line": 82,
+      "category": "tests",
+      "text": "$response = $this->get($url)->assertOk()->assertSee('tk-ops')->assertSee('· Tekora')->assertDontSee('directorio de MindBloom');"
+    },
+    {
+      "file": "tests/Feature/TekoraW4Test.php",
+      "line": 400,
+      "category": "tests",
+      "text": "$this->get('/mindbloom/inicio')->assertOk()->assertSee('Bienvenido a MindBloom');"
+    },
+    {
+      "file": "tests/Feature/TekoraW5Test.php",
+      "line": 281,
+      "category": "tests",
+      "text": "$response = $this->get($uri)->assertOk()->assertDontSee('MindBloom')->assertDontSee('private-password')->assertDontSee('<script>W5-XSS', false);"
+    },
+    {
+      "file": "tests/Feature/TekoraW5Test.php",
+      "line": 371,
+      "category": "tests",
+      "text": "foreach (['/', '/login', '/cuenta/cliente', '/cuenta/prestador/dashboard', '/servicios', '/prestadores', '/cuenta/servicios', '/cuenta/prestador', '/mindbloom/inicio'] as $uri) {"
+    },
+    {
+      "file": "tests/Feature/WebAccountsTest.php",
+      "line": 154,
+      "category": "tests",
+      "text": "public function test_shared_navigation_is_available_from_existing_mindbloom_pages(): void"
+    },
+    {
+      "file": "tests/Feature/WebAccountsTest.php",
+      "line": 159,
+      "category": "tests",
+      "text": "->assertSee('MindBloom anterior')->assertDontSee('href=\"'.route('identity.roles.index').'\"', false);"
+    },
+    {
+      "file": "tests/Feature/WebAccountsTest.php",
+      "line": 187,
+      "category": "tests",
+      "text": "$this->get('/dashboard-profesionista')->assertOk()->assertSee('Acceso heredado de MindBloom.')->assertDontSee('fake-private-token');"
+    },
+    {
+      "file": "public/css/citas2.css",
+      "line": 45,
+      "category": "runtime-source",
+      "text": "/* ✅ Sidebar MindBloom */"
+    },
+    {
+      "file": "public/css/comunidad.css",
+      "line": 621,
+      "category": "runtime-source",
+      "text": "/* ===== MindBloom Uploader ===== */"
+    },
+    {
+      "file": "public/css/comunidad.css",
+      "line": 751,
+      "category": "runtime-source",
+      "text": "/* ===== MindBloom media (posts y comments) ===== */"
+    },
+    {
+      "file": "public/css/comunidad.css",
+      "line": 793,
+      "category": "runtime-source",
+      "text": "/* ===== Bonus: marco MindBloom con “glow” suave al hover ===== */"
+    },
+    {
+      "file": "public/css/dashboard-profesionista.css",
+      "line": 4,
+      "category": "runtime-source",
+      "text": "/* MindBloom palette */"
+    },
+    {
+      "file": "public/css/dashboard-profesionista.css",
+      "line": 27,
+      "category": "runtime-source",
+      "text": "/* ✅ Fondo animado MindBloom */"
+    },
+    {
+      "file": "public/css/dashboard-profesionista.css",
+      "line": 59,
+      "category": "runtime-source",
+      "text": "/* ✅ Glass + gradient MindBloom */"
+    },
+    {
+      "file": "public/css/home.css",
+      "line": 80,
+      "category": "runtime-source",
+      "text": "/* SIDEBAR (estilo similar a la foto pero MindBloom) */"
+    },
+    {
+      "file": "public/css/home.css",
+      "line": 393,
+      "category": "runtime-source",
+      "text": "MindBloom Emotional Gallery (3D)"
+    },
+    {
+      "file": "public/css/home.css",
+      "line": 558,
+      "category": "runtime-source",
+      "text": "/* ===== MindBloom Coverflow (tipo video) ===== */"
+    },
+    {
+      "file": "public/css/home.css",
+      "line": 655,
+      "category": "runtime-source",
+      "text": "/* ===== MindBloom Modal ===== */"
+    },
+    {
+      "file": "public/css/login-unificado.css",
+      "line": 350,
+      "category": "runtime-source",
+      "text": "/* Un poquito más “MindBloom” */"
+    }
+  ]
+}
