@@ -1,0 +1,134 @@
+{
+  "images": [
+    {
+      "file": "public/img/alex.jpg",
+      "git_blob": "b523fcd77f491b0e3e01300880f234fc36f615fa",
+      "bytes": 197008,
+      "historical_source_references": [
+        "00798bfab31f6608760ec252ac20e15573f8e5ce:resources/views/home.blade.php:48:            <img src=\"{{ asset('img/alex.jpg') }}\" alt=\"Alex Fernando Flores Carrillo\">"
+      ],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/emociones.png",
+      "git_blob": "3cf2c0fb9a7bb2ec0caa52aee825f136007c0723",
+      "bytes": 9540,
+      "historical_source_references": [],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/esperanza.png",
+      "git_blob": "9bd2c0699544310ec323efb3a869003b8b0709b4",
+      "bytes": 8257,
+      "historical_source_references": [],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/fondo.jpg",
+      "git_blob": "ca6a3aea54ad4f16ad0b20e22065f9bcb8ce828d",
+      "bytes": 84084,
+      "historical_source_references": [],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/foto1.png",
+      "git_blob": "9fca28f18dc3600be8a6d1224016eec6bd9115ca",
+      "bytes": 37482,
+      "historical_source_references": [],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/logo.png",
+      "git_blob": "cd63054e1c4a4c8fc5354bddabfc1e8353ff6401",
+      "bytes": 55329,
+      "historical_source_references": [
+        "00798bfab31f6608760ec252ac20e15573f8e5ce:resources/views/citas/create.blade.php:23:          <img class=\"brand-logo\" src=\"{{ asset('img/logo.png') }}\" alt=\"\">",
+        "00798bfab31f6608760ec252ac20e15573f8e5ce:resources/views/citas/mis-citas.blade.php:21:        <img class=\"brand-logo\" src=\"{{ asset('img/logo.png') }}\" alt=\"\">",
+        "00798bfab31f6608760ec252ac20e15573f8e5ce:resources/views/comunidad.blade.php:40:          <img class=\"brand-logo\" src=\"{{ asset('img/logo.png') }}\" alt=\"\">",
+        "00798bfab31f6608760ec252ac20e15573f8e5ce:resources/views/home.blade.php:16:        <div class=\"brand-logo\"><img class=\"brand-logo\" src=\"{{ asset('img/logo.png') }}\" alt=\"\"></div>",
+        "00798bfab31f6608760ec252ac20e15573f8e5ce:resources/views/profesionistas/index.blade.php:21:          <img class=\"brand-logo\" src=\"{{ asset('img/logo.png') }}\" alt=\"\">"
+      ],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/roque.jpg",
+      "git_blob": "7a06065f7b674c8898201e9b54377a2ece2ee245",
+      "bytes": 149500,
+      "historical_source_references": [
+        "00798bfab31f6608760ec252ac20e15573f8e5ce:resources/views/home.blade.php:53:            <img src=\"{{ asset('img/roque.jpg') }}\" alt=\"Roque Joseph Guerrero Ponce\">"
+      ],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/salud.jpg",
+      "git_blob": "ec3d1118f2d3beb608110bff547a895a9aaebea8",
+      "bytes": 224554,
+      "historical_source_references": [],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/tranquilidad.png",
+      "git_blob": "ca238002f3a8fc1973d868d17eb83d3de7f4a634",
+      "bytes": 18016,
+      "historical_source_references": [],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    },
+    {
+      "file": "public/img/user1.jpg",
+      "git_blob": "b523fcd77f491b0e3e01300880f234fc36f615fa",
+      "bytes": 197008,
+      "historical_source_references": [],
+      "current_literal_references": [],
+      "classification": "Retired source asset candidate; exclusivity in stored data unproven",
+      "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
+      "image_opened": false
+    }
+  ],
+  "roots": [
+    {
+      "root": "public/uploads/community/posts y community/comments",
+      "contract": "Archivos directos bajo raíz pública; no Storage::disk public; soft delete puede haber perdido bytes antes de borrar fila",
+      "gate": "Verificar referencias y compartidos en inventario autorizado; quitar UI no despublica URL; ningún borrado real W6.2a/b por inferencia"
+    },
+    {
+      "root": "storage/app/public y URL storage",
+      "contract": "Fotos nativas/anteriores y emotions.image_path; W5.1 solo limpia paths avatars/historical válidos de su dueño",
+      "gate": "Conservar todo archivo referenciado por users u otro módulo nativo; bridge mantiene filas antiguas mientras existan; no GC general"
+    },
+    {
+      "root": "public/img y medios versionados",
+      "contract": "Source assets distintos de valores guardados; inventario por metadata, no imágenes abiertas",
+      "gate": "No eliminar por cero literal; resolver SQL/dinámicos y licencias primero"
+    }
+  ],
+  "native_resources": "public/fonts/tekora incluidas licencias OFL; CSS/JS/iconos Tekora protegidos; sin cambios",
+  "real_media_read": false,
+  "real_deletion_authorized": false
+}

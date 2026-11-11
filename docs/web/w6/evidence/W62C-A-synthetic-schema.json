@@ -1,0 +1,5378 @@
+{
+  "scope": "synthetic SQLite :memory: only",
+  "sqlite_version": "3.46.1",
+  "tables": {
+    "activity_notifications": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_reservation_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_review_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "event",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "reservation_version",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "read_at",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "service_reservation_id",
+            "reservation_version"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "reservation_events",
+          "foreign_columns": [
+            "service_reservation_id",
+            "version"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_review_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_reviews",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_reservation_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_reservations",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "activity_inbox_order",
+          "columns": [
+            "user_id",
+            "created_at",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "activity_one_reservation_version",
+          "columns": [
+            "user_id",
+            "service_reservation_id",
+            "reservation_version"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "activity_one_review_event",
+          "columns": [
+            "user_id",
+            "service_review_id",
+            "event"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "activity_unread",
+          "columns": [
+            "user_id",
+            "created_at",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "cache": {
+      "columns": [
+        {
+          "name": "key",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "value",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "expiration",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": {
+        "1": {
+          "name": "sqlite_autoindex_cache_1",
+          "columns": [
+            "key"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      }
+    },
+    "cache_locks": {
+      "columns": [
+        {
+          "name": "key",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "owner",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "expiration",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": {
+        "1": {
+          "name": "sqlite_autoindex_cache_locks_1",
+          "columns": [
+            "key"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      }
+    },
+    "citas": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "profesionista_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "start_datetime",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "end_datetime",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "motivo",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "estado",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": "'pendiente'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "starts_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "ends_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "google_event_id",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "status",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": "'pending'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "profesionista_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "profesionistas",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        },
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "citas_profesionista_id_estado_index",
+          "columns": [
+            "profesionista_id",
+            "estado"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "uniq_prof_slot",
+          "columns": [
+            "profesionista_id",
+            "start_datetime"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "comments": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "content",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "post_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "deleted_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "media_path",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "media_type",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        },
+        {
+          "name": null,
+          "columns": [
+            "post_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "posts",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "emotions": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "name",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "slug",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "image_path",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "subtitle",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "description",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "accent",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "order",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": "'0'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "emotions_slug_unique",
+          "columns": [
+            "slug"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "failed_jobs": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "uuid",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "connection",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "queue",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "payload",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "exception",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "failed_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "failed_jobs_uuid_unique",
+          "columns": [
+            "uuid"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "inquiry_notifications": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_inquiry_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "event",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "read_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "service_inquiry_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_inquiries",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "inquiry_notifications_one_event",
+          "columns": [
+            "user_id",
+            "service_inquiry_id",
+            "event"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "inquiry_notifications_user_id_id_index",
+          "columns": [
+            "user_id",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "inquiry_notifications_user_id_read_at_index",
+          "columns": [
+            "user_id",
+            "read_at"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "job_batches": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "name",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "total_jobs",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "pending_jobs",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "failed_jobs",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "failed_job_ids",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "options",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "cancelled_at",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "finished_at",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": {
+        "1": {
+          "name": "sqlite_autoindex_job_batches_1",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      }
+    },
+    "jobs": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "queue",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "payload",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "attempts",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "reserved_at",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "available_at",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "jobs_queue_index",
+          "columns": [
+            "queue"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "likes": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "post_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "likeable_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "likeable_type",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        },
+        {
+          "name": null,
+          "columns": [
+            "post_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "posts",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "likes_user_id_post_id_unique",
+          "columns": [
+            "user_id",
+            "post_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "likes_user_likeable_unique",
+          "columns": [
+            "user_id",
+            "likeable_id",
+            "likeable_type"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "migrations": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "migration",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "batch",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "password_reset_tokens": {
+      "columns": [
+        {
+          "name": "email",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "token",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": {
+        "1": {
+          "name": "sqlite_autoindex_password_reset_tokens_1",
+          "columns": [
+            "email"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      }
+    },
+    "personal_access_tokens": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "tokenable_type",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "tokenable_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "name",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "token",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "abilities",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "last_used_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "expires_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "personal_access_tokens_expires_at_index",
+          "columns": [
+            "expires_at"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "personal_access_tokens_token_unique",
+          "columns": [
+            "token"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "personal_access_tokens_tokenable_type_tokenable_id_index",
+          "columns": [
+            "tokenable_type",
+            "tokenable_id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "posts": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "content",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "deleted_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "media_path",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "media_type",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "profesionista_bloqueos": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "profesionista_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "start_datetime",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "end_datetime",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "motivo",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "profesionista_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "profesionistas",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_prof_blk_range",
+          "columns": [
+            "profesionista_id",
+            "start_datetime",
+            "end_datetime"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "profesionista_disponibilidades": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "profesionista_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "day_of_week",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "start_time",
+          "type_name": "time",
+          "type": "time",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "end_time",
+          "type_name": "time",
+          "type": "time",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "is_active",
+          "type_name": "tinyint",
+          "type": "tinyint(1)",
+          "collation": null,
+          "nullable": false,
+          "default": "'1'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "profesionista_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "profesionistas",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "pd_prof_dow_idx",
+          "columns": [
+            "profesionista_id",
+            "day_of_week"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "profesionistas": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "nombre",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "email",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "password",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "cedula",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "google_access_token",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "google_refresh_token",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "google_calendar_id",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "google_token_expires_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "remember_token",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "profesionistas_cedula_unique",
+          "columns": [
+            "cedula"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "profesionistas_email_unique",
+          "columns": [
+            "email"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "provider_availability_settings": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "provider_profile_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "timezone",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "revision",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "provider_profile_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "provider_profiles",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "sqlite_autoindex_provider_availability_settings_1",
+          "columns": [
+            "provider_profile_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "provider_blocked_dates": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "provider_profile_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "blocked_date",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "provider_profile_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "provider_profiles",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "sqlite_autoindex_provider_blocked_dates_1",
+          "columns": [
+            "provider_profile_id",
+            "blocked_date"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "provider_profiles": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "display_name",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "headline",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "bio",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "provider_profiles_user_id_unique",
+          "columns": [
+            "user_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "provider_weekly_intervals": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "provider_profile_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "day_of_week",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "start_minute",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "end_minute",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "provider_profile_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "provider_profiles",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "provider_weekly_order",
+          "columns": [
+            "provider_profile_id",
+            "day_of_week",
+            "start_minute"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "sqlite_autoindex_provider_weekly_intervals_1",
+          "columns": [
+            "provider_profile_id",
+            "day_of_week",
+            "start_minute",
+            "end_minute"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "reminders": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "title",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "description",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "remind_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "reservation_events": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_reservation_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "version",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "from_status",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "to_status",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "actor_user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "reason",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "occurred_at_utc",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "actor_user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_reservation_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_reservations",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "sqlite_autoindex_reservation_events_1",
+          "columns": [
+            "service_reservation_id",
+            "version"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "role_user": {
+      "columns": [
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "role_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "role_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "roles",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "indexes": {
+        "1": {
+          "name": "role_user_role_id_index",
+          "columns": [
+            "role_id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        "2": {
+          "name": "sqlite_autoindex_role_user_1",
+          "columns": [
+            "user_id",
+            "role_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      }
+    },
+    "roles": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "slug",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "name",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "roles_slug_unique",
+          "columns": [
+            "slug"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "service_categories": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "name",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "slug",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "description",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "is_active",
+          "type_name": "tinyint",
+          "type": "tinyint(1)",
+          "collation": null,
+          "nullable": false,
+          "default": "'1'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "sort_order",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": "'0'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "service_categories_is_active_sort_order_index",
+          "columns": [
+            "is_active",
+            "sort_order"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "service_categories_slug_unique",
+          "columns": [
+            "slug"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "service_inquiries": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "client_user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_title",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "message",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "status",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": "'pending'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "accepted_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "rejected_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "cancelled_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "completed_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "client_user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "services",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "service_inquiries_client_user_id_status_id_index",
+          "columns": [
+            "client_user_id",
+            "status",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "service_inquiries_one_active",
+          "columns": [
+            "service_id",
+            "client_user_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "service_inquiries_service_id_status_id_index",
+          "columns": [
+            "service_id",
+            "status",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        }
+      ]
+    },
+    "service_inquiry_messages": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_inquiry_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "author_user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "idempotency_key",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "body",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "author_user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_inquiry_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_inquiries",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "inquiry_messages_conversation_order",
+          "columns": [
+            "service_inquiry_id",
+            "created_at",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "inquiry_messages_identity",
+          "columns": [
+            "service_inquiry_id",
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "inquiry_messages_one_submission",
+          "columns": [
+            "service_inquiry_id",
+            "author_user_id",
+            "idempotency_key"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "inquiry_messages_received_order",
+          "columns": [
+            "service_inquiry_id",
+            "author_user_id",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "service_inquiry_reads": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_inquiry_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "last_read_message_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "service_inquiry_id",
+            "last_read_message_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_inquiry_messages",
+          "foreign_columns": [
+            "service_inquiry_id",
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_inquiry_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_inquiries",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "inquiry_reads_one_participant",
+          "columns": [
+            "service_inquiry_id",
+            "user_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      ]
+    },
+    "service_reservations": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_inquiry_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "provider_profile_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "client_user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "timezone",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "local_date",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "local_start_minute",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "starts_at_utc",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "ends_at_utc",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "availability_revision",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "idempotency_key",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "status",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": "'requested'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "version",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": "1",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "last_actor_user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "last_reason",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "last_actor_user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "client_user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "provider_profile_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "provider_profiles",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "services",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_inquiry_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_inquiries",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "reservations_client_list",
+          "columns": [
+            "client_user_id",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "reservations_one_active_inquiry",
+          "columns": [
+            "service_inquiry_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        },
+        {
+          "name": "reservations_provider_list",
+          "columns": [
+            "provider_profile_id",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "reservations_provider_occupancy",
+          "columns": [
+            "provider_profile_id",
+            "starts_at_utc",
+            "ends_at_utc"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "sqlite_autoindex_service_reservations_1",
+          "columns": [
+            "client_user_id",
+            "service_inquiry_id",
+            "idempotency_key"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "service_reviews": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_reservation_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "provider_profile_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "client_user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "rating",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "comment",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "status",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": "'published'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "withdrawn_at_utc",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "withdrawn_by_user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "withdrawn_by_user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "client_user_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "users",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "provider_profile_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "provider_profiles",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "services",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "service_reservation_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_reservations",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "reviews_client_private",
+          "columns": [
+            "client_user_id",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "reviews_provider_public",
+          "columns": [
+            "provider_profile_id",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "reviews_service_public",
+          "columns": [
+            "service_id",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "sqlite_autoindex_service_reviews_1",
+          "columns": [
+            "service_reservation_id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    },
+    "services": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "provider_profile_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "service_category_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "title",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "description",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "modality",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "status",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": "'draft'",
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [
+        {
+          "name": null,
+          "columns": [
+            "service_category_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "service_categories",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        },
+        {
+          "name": null,
+          "columns": [
+            "provider_profile_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "provider_profiles",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "restrict"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "services_provider_profile_id_status_id_index",
+          "columns": [
+            "provider_profile_id",
+            "status",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "services_service_category_id_status_id_index",
+          "columns": [
+            "service_category_id",
+            "status",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        {
+          "name": "services_status_modality_id_index",
+          "columns": [
+            "status",
+            "modality",
+            "id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        }
+      ]
+    },
+    "sessions": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "ip_address",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "user_agent",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "payload",
+          "type_name": "text",
+          "type": "text",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "last_activity",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": {
+        "1": {
+          "name": "sessions_last_activity_index",
+          "columns": [
+            "last_activity"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        "2": {
+          "name": "sessions_user_id_index",
+          "columns": [
+            "user_id"
+          ],
+          "type": null,
+          "unique": false,
+          "primary": false
+        },
+        "3": {
+          "name": "sqlite_autoindex_sessions_1",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        }
+      }
+    },
+    "users": {
+      "columns": [
+        {
+          "name": "id",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": true,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "name",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "email",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "age",
+          "type_name": "integer",
+          "type": "integer",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "gender",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "email_verified_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "password",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": false,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "remember_token",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "created_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "updated_at",
+          "type_name": "datetime",
+          "type": "datetime",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        },
+        {
+          "name": "profile_photo_path",
+          "type_name": "varchar",
+          "type": "varchar",
+          "collation": null,
+          "nullable": true,
+          "default": null,
+          "auto_increment": false,
+          "comment": null,
+          "generation": null
+        }
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "primary",
+          "columns": [
+            "id"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": true
+        },
+        {
+          "name": "users_email_unique",
+          "columns": [
+            "email"
+          ],
+          "type": null,
+          "unique": true,
+          "primary": false
+        }
+      ]
+    }
+  },
+  "edges": [
+    {
+      "child": "activity_notifications",
+      "name": null,
+      "columns": [
+        "service_reservation_id",
+        "reservation_version"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "reservation_events",
+      "foreign_columns": [
+        "service_reservation_id",
+        "version"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "activity_notifications",
+      "name": null,
+      "columns": [
+        "service_review_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_reviews",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "activity_notifications",
+      "name": null,
+      "columns": [
+        "service_reservation_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_reservations",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "activity_notifications",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "citas",
+      "name": null,
+      "columns": [
+        "profesionista_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "profesionistas",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "citas",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "comments",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "comments",
+      "name": null,
+      "columns": [
+        "post_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "posts",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "inquiry_notifications",
+      "name": null,
+      "columns": [
+        "service_inquiry_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_inquiries",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "inquiry_notifications",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "likes",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "likes",
+      "name": null,
+      "columns": [
+        "post_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "posts",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "posts",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "profesionista_bloqueos",
+      "name": null,
+      "columns": [
+        "profesionista_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "profesionistas",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "profesionista_disponibilidades",
+      "name": null,
+      "columns": [
+        "profesionista_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "profesionistas",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "provider_availability_settings",
+      "name": null,
+      "columns": [
+        "provider_profile_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "provider_profiles",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "provider_blocked_dates",
+      "name": null,
+      "columns": [
+        "provider_profile_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "provider_profiles",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "provider_profiles",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "provider_weekly_intervals",
+      "name": null,
+      "columns": [
+        "provider_profile_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "provider_profiles",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "reminders",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "reservation_events",
+      "name": null,
+      "columns": [
+        "actor_user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "reservation_events",
+      "name": null,
+      "columns": [
+        "service_reservation_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_reservations",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "role_user",
+      "name": null,
+      "columns": [
+        "role_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "roles",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "role_user",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "cascade"
+    },
+    {
+      "child": "service_inquiries",
+      "name": null,
+      "columns": [
+        "client_user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_inquiries",
+      "name": null,
+      "columns": [
+        "service_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "services",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_inquiry_messages",
+      "name": null,
+      "columns": [
+        "author_user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_inquiry_messages",
+      "name": null,
+      "columns": [
+        "service_inquiry_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_inquiries",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_inquiry_reads",
+      "name": null,
+      "columns": [
+        "service_inquiry_id",
+        "last_read_message_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_inquiry_messages",
+      "foreign_columns": [
+        "service_inquiry_id",
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_inquiry_reads",
+      "name": null,
+      "columns": [
+        "user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_inquiry_reads",
+      "name": null,
+      "columns": [
+        "service_inquiry_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_inquiries",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reservations",
+      "name": null,
+      "columns": [
+        "last_actor_user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reservations",
+      "name": null,
+      "columns": [
+        "client_user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reservations",
+      "name": null,
+      "columns": [
+        "provider_profile_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "provider_profiles",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reservations",
+      "name": null,
+      "columns": [
+        "service_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "services",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reservations",
+      "name": null,
+      "columns": [
+        "service_inquiry_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_inquiries",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reviews",
+      "name": null,
+      "columns": [
+        "withdrawn_by_user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reviews",
+      "name": null,
+      "columns": [
+        "client_user_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "users",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reviews",
+      "name": null,
+      "columns": [
+        "provider_profile_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "provider_profiles",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reviews",
+      "name": null,
+      "columns": [
+        "service_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "services",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "service_reviews",
+      "name": null,
+      "columns": [
+        "service_reservation_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_reservations",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "services",
+      "name": null,
+      "columns": [
+        "service_category_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "service_categories",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    },
+    {
+      "child": "services",
+      "name": null,
+      "columns": [
+        "provider_profile_id"
+      ],
+      "foreign_schema": "main",
+      "foreign_table": "provider_profiles",
+      "foreign_columns": [
+        "id"
+      ],
+      "on_update": "no action",
+      "on_delete": "restrict"
+    }
+  ],
+  "triggers": [
+    {
+      "name": "provider_weekly_no_overlap_insert",
+      "tbl_name": "provider_weekly_intervals",
+      "sql": "CREATE TRIGGER provider_weekly_no_overlap_insert BEFORE INSERT ON provider_weekly_intervals\n            WHEN EXISTS (SELECT 1 FROM provider_weekly_intervals WHERE provider_profile_id = NEW.provider_profile_id\n            AND day_of_week = NEW.day_of_week AND start_minute < NEW.end_minute AND end_minute > NEW.start_minute)\n            BEGIN SELECT RAISE(ABORT, 'Overlapping weekly intervals'); END"
+    },
+    {
+      "name": "provider_weekly_no_overlap_update",
+      "tbl_name": "provider_weekly_intervals",
+      "sql": "CREATE TRIGGER provider_weekly_no_overlap_update BEFORE UPDATE ON provider_weekly_intervals\n            WHEN EXISTS (SELECT 1 FROM provider_weekly_intervals WHERE id != OLD.id AND provider_profile_id = NEW.provider_profile_id\n            AND day_of_week = NEW.day_of_week AND start_minute < NEW.end_minute AND end_minute > NEW.start_minute)\n            BEGIN SELECT RAISE(ABORT, 'Overlapping weekly intervals'); END"
+    },
+    {
+      "name": "reservations_identity_insert",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_identity_insert BEFORE INSERT ON service_reservations\n                WHEN NOT EXISTS (SELECT 1 FROM service_inquiries i JOIN services s ON s.id = i.service_id\n                    JOIN provider_profiles p ON p.id = s.provider_profile_id\n                    WHERE i.id = NEW.service_inquiry_id AND i.service_id = NEW.service_id AND i.client_user_id = NEW.client_user_id\n                    AND p.id = NEW.provider_profile_id AND p.user_id != NEW.client_user_id)\n                BEGIN SELECT RAISE(ABORT, 'reservation_identity'); END"
+    },
+    {
+      "name": "reservations_accepted_insert",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_accepted_insert BEFORE INSERT ON service_reservations\n                WHEN NEW.status IN ('requested','confirmed') AND NOT EXISTS\n                    (SELECT 1 FROM service_inquiries WHERE id = NEW.service_inquiry_id AND status = 'accepted')\n                BEGIN SELECT RAISE(ABORT, 'reservation_inquiry_closed'); END"
+    },
+    {
+      "name": "reservations_no_overlap_insert",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_no_overlap_insert BEFORE INSERT ON service_reservations\n                WHEN NEW.status = 'confirmed' AND EXISTS\n                    (SELECT 1 FROM service_reservations r WHERE r.provider_profile_id = NEW.provider_profile_id AND r.status = 'confirmed'\n                     AND r.starts_at_utc < NEW.ends_at_utc AND r.ends_at_utc > NEW.starts_at_utc )\n                BEGIN SELECT RAISE(ABORT, 'reservation_overlap'); END"
+    },
+    {
+      "name": "reservations_identity_update",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_identity_update BEFORE UPDATE ON service_reservations\n                WHEN NOT EXISTS (SELECT 1 FROM service_inquiries i JOIN services s ON s.id = i.service_id\n                    JOIN provider_profiles p ON p.id = s.provider_profile_id\n                    WHERE i.id = NEW.service_inquiry_id AND i.service_id = NEW.service_id AND i.client_user_id = NEW.client_user_id\n                    AND p.id = NEW.provider_profile_id AND p.user_id != NEW.client_user_id)\n                BEGIN SELECT RAISE(ABORT, 'reservation_identity'); END"
+    },
+    {
+      "name": "reservations_accepted_update",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_accepted_update BEFORE UPDATE ON service_reservations\n                WHEN NEW.status IN ('requested','confirmed') AND NOT EXISTS\n                    (SELECT 1 FROM service_inquiries WHERE id = NEW.service_inquiry_id AND status = 'accepted')\n                BEGIN SELECT RAISE(ABORT, 'reservation_inquiry_closed'); END"
+    },
+    {
+      "name": "reservations_no_overlap_update",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_no_overlap_update BEFORE UPDATE ON service_reservations\n                WHEN NEW.status = 'confirmed' AND EXISTS\n                    (SELECT 1 FROM service_reservations r WHERE r.provider_profile_id = NEW.provider_profile_id AND r.status = 'confirmed'\n                     AND r.starts_at_utc < NEW.ends_at_utc AND r.ends_at_utc > NEW.starts_at_utc AND r.id != OLD.id)\n                BEGIN SELECT RAISE(ABORT, 'reservation_overlap'); END"
+    },
+    {
+      "name": "reservations_initial_state",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_initial_state BEFORE INSERT ON service_reservations\nWHEN NEW.status != 'requested' OR NEW.version != 1 OR NEW.last_actor_user_id != NEW.client_user_id OR NEW.last_reason != 'proposal'\nBEGIN SELECT RAISE(ABORT, 'reservation_initial_state'); END"
+    },
+    {
+      "name": "reservations_immutable",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_immutable BEFORE UPDATE ON service_reservations\nWHEN NEW.id IS NOT OLD.id OR NEW.service_inquiry_id IS NOT OLD.service_inquiry_id OR NEW.service_id IS NOT OLD.service_id\n    OR NEW.provider_profile_id IS NOT OLD.provider_profile_id OR NEW.client_user_id IS NOT OLD.client_user_id\n    OR NEW.timezone IS NOT OLD.timezone OR NEW.local_date IS NOT OLD.local_date OR NEW.local_start_minute IS NOT OLD.local_start_minute\n    OR NEW.starts_at_utc IS NOT OLD.starts_at_utc OR NEW.ends_at_utc IS NOT OLD.ends_at_utc\n    OR NEW.availability_revision IS NOT OLD.availability_revision OR NEW.idempotency_key IS NOT OLD.idempotency_key OR NEW.created_at IS NOT OLD.created_at\nBEGIN SELECT RAISE(ABORT, 'reservation_immutable'); END"
+    },
+    {
+      "name": "reservations_transition",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_transition BEFORE UPDATE ON service_reservations\nWHEN NEW.version != OLD.version + 1 OR NEW.updated_at < OLD.updated_at OR NOT (\n    (OLD.status = 'requested' AND NEW.status = 'confirmed' AND NEW.last_reason = 'confirm' AND NEW.updated_at < NEW.starts_at_utc\n        AND NEW.last_actor_user_id = (SELECT user_id FROM provider_profiles WHERE id = NEW.provider_profile_id)) OR\n    (OLD.status = 'requested' AND NEW.status = 'rejected' AND NEW.last_reason = 'reject'\n        AND NEW.last_actor_user_id = (SELECT user_id FROM provider_profiles WHERE id = NEW.provider_profile_id)) OR\n    (OLD.status IN ('requested','confirmed') AND NEW.status = 'cancelled' AND NEW.last_reason = 'cancel'\n        AND (OLD.status = 'requested' OR NEW.updated_at < NEW.starts_at_utc)\n        AND (NEW.last_actor_user_id = NEW.client_user_id OR NEW.last_actor_user_id = (SELECT user_id FROM provider_profiles WHERE id = NEW.provider_profile_id))) OR\n    (OLD.status = 'requested' AND NEW.status = 'cancelled' AND NEW.last_reason = 'inquiry_completed'\n        AND NEW.last_actor_user_id = (SELECT user_id FROM provider_profiles WHERE id = NEW.provider_profile_id)) OR\n    (OLD.status = 'confirmed' AND NEW.status = 'completed' AND NEW.last_reason IN ('complete','inquiry_completed') AND NEW.updated_at >= NEW.ends_at_utc\n        AND NEW.last_actor_user_id = (SELECT user_id FROM provider_profiles WHERE id = NEW.provider_profile_id))\n)\nBEGIN SELECT RAISE(ABORT, 'reservation_transition'); END"
+    },
+    {
+      "name": "reservations_history_insert",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_history_insert AFTER INSERT ON service_reservations\nBEGIN INSERT INTO reservation_events(service_reservation_id, version, from_status, to_status, actor_user_id, reason, occurred_at_utc)\n    VALUES(NEW.id, NEW.version, NULL, NEW.status, NEW.last_actor_user_id, NEW.last_reason, NEW.updated_at); END"
+    },
+    {
+      "name": "reservations_history_update",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_history_update AFTER UPDATE ON service_reservations\nBEGIN INSERT INTO reservation_events(service_reservation_id, version, from_status, to_status, actor_user_id, reason, occurred_at_utc)\n    VALUES(NEW.id, NEW.version, OLD.status, NEW.status, NEW.last_actor_user_id, NEW.last_reason, NEW.updated_at); END"
+    },
+    {
+      "name": "reservations_no_delete",
+      "tbl_name": "service_reservations",
+      "sql": "CREATE TRIGGER reservations_no_delete BEFORE DELETE ON service_reservations\nBEGIN SELECT RAISE(ABORT, 'reservation_history_required'); END"
+    },
+    {
+      "name": "reservation_events_no_update",
+      "tbl_name": "reservation_events",
+      "sql": "CREATE TRIGGER reservation_events_no_update BEFORE UPDATE ON reservation_events\nBEGIN SELECT RAISE(ABORT, 'reservation_event_immutable'); END"
+    },
+    {
+      "name": "reservation_events_no_delete",
+      "tbl_name": "reservation_events",
+      "sql": "CREATE TRIGGER reservation_events_no_delete BEFORE DELETE ON reservation_events\nBEGIN SELECT RAISE(ABORT, 'reservation_event_immutable'); END"
+    },
+    {
+      "name": "reservation_events_consistent",
+      "tbl_name": "reservation_events",
+      "sql": "CREATE TRIGGER reservation_events_consistent BEFORE INSERT ON reservation_events\nWHEN NOT EXISTS (SELECT 1 FROM service_reservations r WHERE r.id = NEW.service_reservation_id AND r.version = NEW.version\n    AND r.status = NEW.to_status AND r.last_actor_user_id = NEW.actor_user_id AND r.last_reason = NEW.reason AND r.updated_at = NEW.occurred_at_utc)\nBEGIN SELECT RAISE(ABORT, 'reservation_event_inconsistent'); END"
+    },
+    {
+      "name": "reservation_inquiry_closure",
+      "tbl_name": "service_inquiries",
+      "sql": "CREATE TRIGGER reservation_inquiry_closure BEFORE UPDATE OF status ON service_inquiries\nWHEN NEW.status != 'accepted' AND EXISTS (SELECT 1 FROM service_reservations WHERE service_inquiry_id = OLD.id AND status IN ('requested','confirmed'))\nBEGIN SELECT RAISE(ABORT, 'reservation_active_inquiry'); END"
+    },
+    {
+      "name": "reservation_inquiry_identity",
+      "tbl_name": "service_inquiries",
+      "sql": "CREATE TRIGGER reservation_inquiry_identity BEFORE UPDATE OF service_id, client_user_id ON service_inquiries\nWHEN (NEW.service_id != OLD.service_id OR NEW.client_user_id != OLD.client_user_id) AND EXISTS (SELECT 1 FROM service_reservations WHERE service_inquiry_id = OLD.id)\nBEGIN SELECT RAISE(ABORT, 'reservation_identity_immutable'); END"
+    },
+    {
+      "name": "reservation_service_identity",
+      "tbl_name": "services",
+      "sql": "CREATE TRIGGER reservation_service_identity BEFORE UPDATE OF provider_profile_id ON services\nWHEN NEW.provider_profile_id != OLD.provider_profile_id AND EXISTS (SELECT 1 FROM service_reservations WHERE service_id = OLD.id)\nBEGIN SELECT RAISE(ABORT, 'reservation_identity_immutable'); END"
+    },
+    {
+      "name": "reservation_profile_identity",
+      "tbl_name": "provider_profiles",
+      "sql": "CREATE TRIGGER reservation_profile_identity BEFORE UPDATE OF user_id ON provider_profiles\nWHEN NEW.user_id != OLD.user_id AND EXISTS (SELECT 1 FROM service_reservations WHERE provider_profile_id = OLD.id)\nBEGIN SELECT RAISE(ABORT, 'reservation_identity_immutable'); END"
+    },
+    {
+      "name": "reviews_completed_identity_insert",
+      "tbl_name": "service_reviews",
+      "sql": "CREATE TRIGGER reviews_completed_identity_insert BEFORE INSERT ON service_reviews\n                WHEN NOT EXISTS (SELECT 1 FROM service_reservations r JOIN service_inquiries i ON i.id = r.service_inquiry_id\n                    JOIN services s ON s.id = r.service_id JOIN provider_profiles p ON p.id = r.provider_profile_id\n                    WHERE r.id = NEW.service_reservation_id AND r.status = 'completed'\n                    AND r.service_id = NEW.service_id AND r.provider_profile_id = NEW.provider_profile_id AND r.client_user_id = NEW.client_user_id\n                    AND i.service_id = r.service_id AND i.client_user_id = r.client_user_id AND s.provider_profile_id = p.id\n                    AND p.user_id != NEW.client_user_id AND NEW.created_at >= r.updated_at)\n                BEGIN SELECT RAISE(ABORT, 'review_completed_identity'); END"
+    },
+    {
+      "name": "reviews_completed_identity_update",
+      "tbl_name": "service_reviews",
+      "sql": "CREATE TRIGGER reviews_completed_identity_update BEFORE UPDATE ON service_reviews\n                WHEN NOT EXISTS (SELECT 1 FROM service_reservations r JOIN service_inquiries i ON i.id = r.service_inquiry_id\n                    JOIN services s ON s.id = r.service_id JOIN provider_profiles p ON p.id = r.provider_profile_id\n                    WHERE r.id = NEW.service_reservation_id AND r.status = 'completed'\n                    AND r.service_id = NEW.service_id AND r.provider_profile_id = NEW.provider_profile_id AND r.client_user_id = NEW.client_user_id\n                    AND i.service_id = r.service_id AND i.client_user_id = r.client_user_id AND s.provider_profile_id = p.id\n                    AND p.user_id != NEW.client_user_id AND NEW.created_at >= r.updated_at)\n                BEGIN SELECT RAISE(ABORT, 'review_completed_identity'); END"
+    },
+    {
+      "name": "reviews_initial_state",
+      "tbl_name": "service_reviews",
+      "sql": "CREATE TRIGGER reviews_initial_state BEFORE INSERT ON service_reviews\nWHEN NEW.status != 'published' OR NEW.withdrawn_at_utc IS NOT NULL OR NEW.withdrawn_by_user_id IS NOT NULL\nBEGIN SELECT RAISE(ABORT, 'review_initial_state'); END"
+    },
+    {
+      "name": "reviews_immutable",
+      "tbl_name": "service_reviews",
+      "sql": "CREATE TRIGGER reviews_immutable BEFORE UPDATE ON service_reviews\nWHEN NEW.id IS NOT OLD.id OR NEW.service_reservation_id IS NOT OLD.service_reservation_id OR NEW.service_id IS NOT OLD.service_id\n    OR NEW.provider_profile_id IS NOT OLD.provider_profile_id OR NEW.client_user_id IS NOT OLD.client_user_id\n    OR NEW.rating IS NOT OLD.rating OR NEW.comment IS NOT OLD.comment OR NEW.created_at IS NOT OLD.created_at\n    OR OLD.status != 'published' OR NEW.status != 'withdrawn'\nBEGIN SELECT RAISE(ABORT, 'review_immutable'); END"
+    },
+    {
+      "name": "reviews_no_delete",
+      "tbl_name": "service_reviews",
+      "sql": "CREATE TRIGGER reviews_no_delete BEFORE DELETE ON service_reviews\nBEGIN SELECT RAISE(ABORT, 'review_history_required'); END"
+    },
+    {
+      "name": "activity_reservation_recipient",
+      "tbl_name": "activity_notifications",
+      "sql": "CREATE TRIGGER activity_reservation_recipient BEFORE INSERT ON activity_notifications\nWHEN NEW.service_reservation_id IS NOT NULL AND NOT EXISTS (\n    SELECT 1 FROM reservation_events e JOIN service_reservations r ON r.id = e.service_reservation_id\n    JOIN provider_profiles p ON p.id = r.provider_profile_id\n    WHERE r.id = NEW.service_reservation_id AND e.version = NEW.reservation_version\n    AND NEW.event = 'reservation_' || e.to_status AND NEW.created_at = e.occurred_at_utc\n    AND NEW.user_id != e.actor_user_id\n    AND NEW.user_id = CASE WHEN e.to_status = 'requested' OR (e.to_status = 'cancelled' AND e.actor_user_id = r.client_user_id)\n        THEN p.user_id ELSE r.client_user_id END\n) BEGIN SELECT RAISE(ABORT, 'activity_reservation_recipient'); END"
+    },
+    {
+      "name": "activity_review_recipient",
+      "tbl_name": "activity_notifications",
+      "sql": "CREATE TRIGGER activity_review_recipient BEFORE INSERT ON activity_notifications\nWHEN NEW.service_review_id IS NOT NULL AND NOT EXISTS (\n    SELECT 1 FROM service_reviews r JOIN provider_profiles p ON p.id = r.provider_profile_id\n    WHERE r.id = NEW.service_review_id AND NEW.user_id = p.user_id AND NEW.user_id != r.client_user_id\n    AND ((NEW.event = 'review_published' AND NEW.created_at = r.created_at)\n        OR (NEW.event = 'review_withdrawn' AND r.status = 'withdrawn' AND NEW.created_at = r.withdrawn_at_utc))\n) BEGIN SELECT RAISE(ABORT, 'activity_review_recipient'); END"
+    },
+    {
+      "name": "activity_initial_unread",
+      "tbl_name": "activity_notifications",
+      "sql": "CREATE TRIGGER activity_initial_unread BEFORE INSERT ON activity_notifications\nWHEN NEW.read_at IS NOT NULL BEGIN SELECT RAISE(ABORT, 'activity_initial_unread'); END"
+    },
+    {
+      "name": "activity_immutable",
+      "tbl_name": "activity_notifications",
+      "sql": "CREATE TRIGGER activity_immutable BEFORE UPDATE ON activity_notifications\nWHEN NEW.id IS NOT OLD.id OR NEW.user_id IS NOT OLD.user_id OR NEW.service_reservation_id IS NOT OLD.service_reservation_id\n    OR NEW.service_review_id IS NOT OLD.service_review_id OR NEW.event IS NOT OLD.event\n    OR NEW.reservation_version IS NOT OLD.reservation_version OR NEW.created_at IS NOT OLD.created_at\n    OR OLD.read_at IS NOT NULL OR NEW.read_at IS NULL\nBEGIN SELECT RAISE(ABORT, 'activity_immutable'); END"
+    },
+    {
+      "name": "activity_no_delete",
+      "tbl_name": "activity_notifications",
+      "sql": "CREATE TRIGGER activity_no_delete BEFORE DELETE ON activity_notifications\nBEGIN SELECT RAISE(ABORT, 'activity_history_required'); END"
+    },
+    {
+      "name": "activity_reservation_event",
+      "tbl_name": "reservation_events",
+      "sql": "CREATE TRIGGER activity_reservation_event AFTER INSERT ON reservation_events\nBEGIN\n    INSERT INTO activity_notifications(user_id, service_reservation_id, reservation_version, event, created_at)\n    SELECT CASE WHEN NEW.to_status = 'requested' OR (NEW.to_status = 'cancelled' AND NEW.actor_user_id = r.client_user_id)\n            THEN p.user_id ELSE r.client_user_id END,\n        r.id, NEW.version, 'reservation_' || NEW.to_status, NEW.occurred_at_utc\n    FROM service_reservations r JOIN provider_profiles p ON p.id = r.provider_profile_id\n    WHERE r.id = NEW.service_reservation_id AND NEW.actor_user_id !=\n        CASE WHEN NEW.to_status = 'requested' OR (NEW.to_status = 'cancelled' AND NEW.actor_user_id = r.client_user_id)\n            THEN p.user_id ELSE r.client_user_id END;\nEND"
+    },
+    {
+      "name": "activity_review_published",
+      "tbl_name": "service_reviews",
+      "sql": "CREATE TRIGGER activity_review_published AFTER INSERT ON service_reviews\nBEGIN\n    INSERT INTO activity_notifications(user_id, service_review_id, event, created_at)\n    SELECT p.user_id, NEW.id, 'review_published', NEW.created_at FROM provider_profiles p\n    WHERE p.id = NEW.provider_profile_id AND p.user_id != NEW.client_user_id;\nEND"
+    },
+    {
+      "name": "activity_review_withdrawn",
+      "tbl_name": "service_reviews",
+      "sql": "CREATE TRIGGER activity_review_withdrawn AFTER UPDATE OF status ON service_reviews\nWHEN OLD.status = 'published' AND NEW.status = 'withdrawn'\nBEGIN\n    INSERT INTO activity_notifications(user_id, service_review_id, event, created_at)\n    SELECT p.user_id, NEW.id, 'review_withdrawn', NEW.withdrawn_at_utc FROM provider_profiles p\n    WHERE p.id = NEW.provider_profile_id AND p.user_id != NEW.withdrawn_by_user_id;\nEND"
+    }
+  ]
+}

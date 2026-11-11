@@ -1,0 +1,67 @@
+{
+  "base_sha": "ce7cf62670a1c559247fa6993bcd26e73a334c80",
+  "branch": "codex/w62c-a-retirement-preflight",
+  "php": "8.4.27",
+  "baseline": {
+    "tests": 669,
+    "assertions": 9026
+  },
+  "new": {
+    "tests": 18,
+    "assertions": 182
+  },
+  "final": {
+    "name": "/workspace/tekora-project/phpunit.xml",
+    "tests": "687",
+    "assertions": "9208",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "time": "131.477284"
+  },
+  "w51": {
+    "tests": 49,
+    "assertions": 459
+  },
+  "w62a": {
+    "tests": 25,
+    "assertions": 406
+  },
+  "w62b": {
+    "tests": 34,
+    "assertions": 586
+  },
+  "composer_validate": "pass",
+  "platform": "pass",
+  "composer_audit_with_and_without_dev": "BLOCKED: proxy 403 CONNECT to packagist.org API; not reported as passing",
+  "npm_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "build": "pass",
+  "pint_new_test": "pass",
+  "api_operations_unchanged": 21,
+  "historical_migrations_unchanged": 37,
+  "application_changes": false,
+  "simulation_database": "SQLite :memory:, guarded actual connection; FK enabled during retirement",
+  "restore": "Logical DDL+rows restored to separate PDO sqlite::memory:; restored checksum/FK/object checks; not a production backup certification",
+  "storage": "Storage::fake in random temporary root",
+  "mysql": "NOT TESTED; future gate",
+  "windows_laragon": "prepared, not executed",
+  "real_counts_and_classification": "PENDIENTE DE AUTORIZACIÓN",
+  "persistent_database_read_or_modified": false,
+  "media_modified": false,
+  "credentials_modified": false,
+  "scope_incident": {
+    "byte_reads_of_versioned_uploads": 9,
+    "cause": "Auxiliary source integrity loop filtered uploads after reading, corrected to filter before reading.",
+    "content_viewed_or_interpreted": false,
+    "media_bytes_or_hashes_persisted_in_evidence": false,
+    "real_media_zero_read_compliance": false
+  },
+  "publication": "one draft PR only; no merge/deployment/auto-merge; no real purge"
+}
