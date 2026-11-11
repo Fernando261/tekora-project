@@ -1,0 +1,1286 @@
+{
+  "base_sha": "ce7cf62670a1c559247fa6993bcd26e73a334c80",
+  "unchanged_files": [
+    {
+      "file": "app/Enums/ActivityNotificationEvent.php",
+      "sha256": "186b5691eeec4c2d7f36af9eabafc9aa449991b7eba4eec2f760584b9a8409ef"
+    },
+    {
+      "file": "app/Enums/AvailabilityDay.php",
+      "sha256": "c87854f85821e9d62196d3e70ac873527ceb565a768f6e7556c8542a6a9bc49b"
+    },
+    {
+      "file": "app/Enums/InquiryAction.php",
+      "sha256": "fbacac3ab50462985ad34ed6f162797b7dd1da2385339cfe279a3b0d74ec9a07"
+    },
+    {
+      "file": "app/Enums/InquiryNotificationEvent.php",
+      "sha256": "0721f1029c0b762ab780475fcdfc51a772ffbe728b50c3f973ffa46ae1310ceb"
+    },
+    {
+      "file": "app/Enums/InquiryStatus.php",
+      "sha256": "d5be4f3fd6b69344de2adff517d47528f127b6a8d675e7fc7362d2dabaf85f7c"
+    },
+    {
+      "file": "app/Enums/Permission.php",
+      "sha256": "b702408582f166b98ce1c4605177c8a4d8355fa3aa48626830c715d6937baf9c"
+    },
+    {
+      "file": "app/Enums/ReservationStatus.php",
+      "sha256": "31dcf311c751d39915c8e5ebbde62b479d800bc80f53d743bee118523ef842d9"
+    },
+    {
+      "file": "app/Enums/ReviewVisibility.php",
+      "sha256": "7358ed9dc40fd0f3592d48eaa1507ef223a6de1d382212d3b2887b5ca1c69bf0"
+    },
+    {
+      "file": "app/Enums/RoleName.php",
+      "sha256": "ae54c8d30d887dfd9860c9e4ac2acc146d277e077018d2d9e3cb53383311bc5e"
+    },
+    {
+      "file": "app/Enums/ServiceModality.php",
+      "sha256": "8ec385f43e9d74a7e1b4a383e357d67619fa67a96db552770bfd98732defcd0c"
+    },
+    {
+      "file": "app/Enums/ServiceStatus.php",
+      "sha256": "527cac8e032c750cb9f15861b668da921fa4ce386cdfd4d993fdb27d940d4488"
+    },
+    {
+      "file": "app/Exceptions/AvailabilityFailure.php",
+      "sha256": "050a6a03256eba9aa749fe5a0017515a6e564832c2a35a7f9c757ce6206f97c1"
+    },
+    {
+      "file": "app/Exceptions/ClientDashboardFailure.php",
+      "sha256": "b7e45052867fff86fb52db110d1f64ae8beaac966c3b1ef94d783f910da5d6bd"
+    },
+    {
+      "file": "app/Exceptions/DashboardFailure.php",
+      "sha256": "9d21c04417ab3ef7306d01b70d69482db6a4ccb525909705481b738172fa7138"
+    },
+    {
+      "file": "app/Exceptions/InquiryConflict.php",
+      "sha256": "0874191ff34df49419812d821ab457f1e5b4d8cf9efe142a180e369fb744641d"
+    },
+    {
+      "file": "app/Exceptions/InquiryMessageConflict.php",
+      "sha256": "dee6a0d3e40baaf0445bf19ccb79e8a09ef5b5c5073a514b5a36ea7984f375c0"
+    },
+    {
+      "file": "app/Exceptions/InquiryMessageUnavailable.php",
+      "sha256": "cc02461a74671eca908381c505fa4705d25d190a1b8b249bdddd6d319a840a92"
+    },
+    {
+      "file": "app/Exceptions/InquiryReadFailure.php",
+      "sha256": "c96d676277bc78f65c7094f07a0d3528aa46a0365aeac5da1532317a34605ee9"
+    },
+    {
+      "file": "app/Exceptions/NotificationFailure.php",
+      "sha256": "c0dcaf5e0ae2865098f9266353ef5801009be3ef4046c0f132c0f61ca7e4b260"
+    },
+    {
+      "file": "app/Exceptions/ReservationFailure.php",
+      "sha256": "b3b2157e3bb11eaf4ed97bfbc7d314bdd75431b0f54de6e1d750eee7f87771aa"
+    },
+    {
+      "file": "app/Exceptions/ReviewFailure.php",
+      "sha256": "38ca9641abbe86d9e42bb97a1dae112bead6a3b720ecf6002ada94df3acdbc6f"
+    },
+    {
+      "file": "app/Http/Controllers/AccountController.php",
+      "sha256": "61a7817be8cc9442778ec88ecfdf0d25f8a758cd0203bf2dd1770ed7209f8f3c"
+    },
+    {
+      "file": "app/Http/Controllers/Api/V1/AuthController.php",
+      "sha256": "4d6be66c1d2e81fedc7c47d2440d4718383f4b3d1eeb7dd2d8022e3be7020bf5"
+    },
+    {
+      "file": "app/Http/Controllers/Api/V1/CatalogController.php",
+      "sha256": "331bbbc86edcf8667fb44eda1b7479c8103e5ce7c2f665bc24706cfde84f4789"
+    },
+    {
+      "file": "app/Http/Controllers/Api/V1/OperationsController.php",
+      "sha256": "25f5bc33c1526fae5327e089f004b074ffafb7ecf55165b851a25f9a153e351c"
+    },
+    {
+      "file": "app/Http/Controllers/AuthController.php",
+      "sha256": "4d1ef894d3fc7a214e4f199b567ce9666654b85f245fe3b425c2b4631b0b9ae4"
+    },
+    {
+      "file": "app/Http/Controllers/Controller.php",
+      "sha256": "663e9f40be59adb09c7acd871da814b78216e79120f10375da0a31a6cef968eb"
+    },
+    {
+      "file": "app/Http/Controllers/ConversationController.php",
+      "sha256": "f721c8267adc8021bedce7a51a1c724468d0efa9c1306c91126867984f9c2839"
+    },
+    {
+      "file": "app/Http/Controllers/ForgotPasswordController.php",
+      "sha256": "b985013f054434f31a903adf6d5dd10c224a6037c50820efe75b5585393b7275"
+    },
+    {
+      "file": "app/Http/Controllers/IdentityController.php",
+      "sha256": "7ce2d941197a61dbea0c1667fd98761db0677910dc8f87e3c40109f9a08316fa"
+    },
+    {
+      "file": "app/Http/Controllers/InquiryMessageController.php",
+      "sha256": "27d67cdeb681506200a5a1fa06428100eff51b76b1bacc4181dfd079f7f337a8"
+    },
+    {
+      "file": "app/Http/Controllers/InquiryNotificationController.php",
+      "sha256": "8fe36bd7eb131e82bd71448445914a391a1e9f49ca1355c6bba6e2fe4abaa046"
+    },
+    {
+      "file": "app/Http/Controllers/PerfilController.php",
+      "sha256": "3cafc92ae88a7dad24ad5bd9cb76b7da77ca6c4e33987215cc4c0a9bffd895cd"
+    },
+    {
+      "file": "app/Http/Controllers/ProfileController.php",
+      "sha256": "b5e4c79d0475fed147d9293e7de2c24dccfe5373551d381a438fe64dc76dd2a5"
+    },
+    {
+      "file": "app/Http/Controllers/ProviderAvailabilityController.php",
+      "sha256": "06558237682fee6eab4efd6ce561b93cf22b7f10b999c92d68bff7deb9df687a"
+    },
+    {
+      "file": "app/Http/Controllers/ProviderDashboardController.php",
+      "sha256": "f74c539c5fdcdf392fef679d0a7dabd5fab07ce6f7bc5b77cd8f76ae4811fcfe"
+    },
+    {
+      "file": "app/Http/Controllers/ProviderProfileController.php",
+      "sha256": "9167709e84a3ab187328d00f81a9596d42b735288c695145b472bfc9ea5c5e53"
+    },
+    {
+      "file": "app/Http/Controllers/ProviderServiceController.php",
+      "sha256": "e925bc28abcb689c8eec7a0c4575dd1770292544ca8da68e0c1a870b49844a48"
+    },
+    {
+      "file": "app/Http/Controllers/PublicProviderController.php",
+      "sha256": "469eca00476aedf31439042d87e05f343b09c0cb43896a5160b28652f299c89c"
+    },
+    {
+      "file": "app/Http/Controllers/ResetPasswordController.php",
+      "sha256": "e3c7cb8dac45500691fc301e9e13dd9fd9caafe63d89d669b6412d5b0fbc2fdb"
+    },
+    {
+      "file": "app/Http/Controllers/RoleMembershipController.php",
+      "sha256": "b25a76bd2129663a1447d06bfaf3cc4362cbb8e77c349894e50c307682e7f0cd"
+    },
+    {
+      "file": "app/Http/Controllers/ServiceCatalogController.php",
+      "sha256": "24fa53b619791be1b7f7bec5f8054cd045a9b05f614fc0c98c18f6df6cccef87"
+    },
+    {
+      "file": "app/Http/Controllers/ServiceInquiryController.php",
+      "sha256": "b6361bc477d50c44f350816158ab0a359d5516ba12c512e251a28ddcd0d1816f"
+    },
+    {
+      "file": "app/Http/Controllers/ServiceReservationController.php",
+      "sha256": "2c1dd95f26f2198ef4ae8a69d44b382256180c6560472125414d5e262741a0f7"
+    },
+    {
+      "file": "app/Http/Controllers/ServiceReviewController.php",
+      "sha256": "4f1cc2f0976bf8809212c4353c2d4c04616a462e95ceb1e92bc5753d2276731a"
+    },
+    {
+      "file": "app/Http/Controllers/TekoraHomeController.php",
+      "sha256": "fbb9e8ab9a79e00bdab1f5cac380274c5dea9b22c9d702104c74f964f66185eb"
+    },
+    {
+      "file": "app/Http/Middleware/ApiHeaders.php",
+      "sha256": "82710cfff546d2dc7a72c602f9f6993d33c08c64546a3b0717a14c8c9d08d9a7"
+    },
+    {
+      "file": "app/Http/Middleware/MobileClient.php",
+      "sha256": "1c957c62618e8338b9c9448b660ae2cd148084c6f862d01624e85ce89b76b808"
+    },
+    {
+      "file": "app/Http/Middleware/TekoraPageHeaders.php",
+      "sha256": "3a58144a41d5e3bbfca42da038ab1d2cebee424bc58a2402f5da3672e69129f0"
+    },
+    {
+      "file": "app/Http/Requests/Api/V1/ApiRequest.php",
+      "sha256": "3e33b6d37c708459a59861271ccf286d7d887789ed9bbc591849e0fb7886273b"
+    },
+    {
+      "file": "app/Http/Requests/Api/V1/CatalogRequest.php",
+      "sha256": "31d631dc6a971cdbcdca16fe06e0e489ae383fec603d40b8a033ac8e88f4c35f"
+    },
+    {
+      "file": "app/Http/Requests/Api/V1/LoginRequest.php",
+      "sha256": "62c35b672a8daca5e3779354c0cf842f760e813f003a744e240295edd354cbac"
+    },
+    {
+      "file": "app/Http/Requests/Api/V1/OperationRequest.php",
+      "sha256": "d8569417126829890687a1b105fb0290127023039c2ff3a2cac5f3d35ec7df76"
+    },
+    {
+      "file": "app/Http/Requests/CatalogFilterRequest.php",
+      "sha256": "019acf91f07cd6db70379227b81ddd3f492aae0ab5253878facec4ca3eff7d9a"
+    },
+    {
+      "file": "app/Http/Requests/DecideInquiryRequest.php",
+      "sha256": "2c94ea073777ddfc164f31c6dfb77e98808a092aba004baeb9c4d50f1b2193f3"
+    },
+    {
+      "file": "app/Http/Requests/EnrollRoleRequest.php",
+      "sha256": "d3bba10fe04ba3fee7f6e483bebdf26c288a3ae4ad632d8f54e28bbbddc86eb0"
+    },
+    {
+      "file": "app/Http/Requests/InquiryConversationRequest.php",
+      "sha256": "2c8f31f851f991715d4001e757610d579f2415f9a6c23a9616525a387d653c0f"
+    },
+    {
+      "file": "app/Http/Requests/InquiryIndexRequest.php",
+      "sha256": "f839a87d0fbe495f22a19937923b7171c2380316b3f94e528c6d494fcb6f2e0e"
+    },
+    {
+      "file": "app/Http/Requests/MarkInquiryMessagesReadRequest.php",
+      "sha256": "9719ea97b2152b6f22dea43ae615c531bcc80dbe267e1d4b1765600e3632ff43"
+    },
+    {
+      "file": "app/Http/Requests/ProviderAvailabilityRequest.php",
+      "sha256": "68f647c784e2140ef3ea4edd10ac815ad03fbca08090c4c4ebc398b2df3a8a29"
+    },
+    {
+      "file": "app/Http/Requests/ProviderProfileRequest.php",
+      "sha256": "663abafeec1e71ed76d091ed0842a00c92df2373cda79fe223d1f1dbb82a118f"
+    },
+    {
+      "file": "app/Http/Requests/RegisterUserRequest.php",
+      "sha256": "78a665c7e43da6d671acb18a6bb38f876f001b4e2ec20e090f9e396cb05e21a5"
+    },
+    {
+      "file": "app/Http/Requests/ServiceRequest.php",
+      "sha256": "38c285f23ce36ee81f2793558cf742b5e54997b39de1c6345df9dd7b763d50d9"
+    },
+    {
+      "file": "app/Http/Requests/ServiceStatusRequest.php",
+      "sha256": "8f3e34e2ddb563634f5cff0f4e634d4ba1244348a33b960c48c1b8efbb470070"
+    },
+    {
+      "file": "app/Http/Requests/StoreInquiryMessageRequest.php",
+      "sha256": "06d8ebbe06671399d13a657706fdc01bdd8f66eb4a92011c29b3b89745af162c"
+    },
+    {
+      "file": "app/Http/Requests/StoreInquiryRequest.php",
+      "sha256": "bf854d3b0b867b630e78db8a5b589fd580c257eb372aac662c95f1cbcdf22db3"
+    },
+    {
+      "file": "app/Http/Requests/UpdateBusinessRolesRequest.php",
+      "sha256": "38bf0742a3efbbc099a3b91f8598f4a23b901d8491c2e1be4ccb09019ffb326e"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/ApiCollection.php",
+      "sha256": "79e2ba3a219a72e48f1b2f8c70f54b8e65518701a273e10092a3f488495ad078"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/AvailabilityResource.php",
+      "sha256": "c2a552561733812f75885cc76e8ab63064aa2ce84d0286682eae79bb6f028ff4"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/ClientResource.php",
+      "sha256": "f160c50768043f550e1f93758240737201e1639fda66bca6ba9b42cd0db9555c"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/ConversationResource.php",
+      "sha256": "96ce45050a835786ad45b73421ba9c028f78495a11b537d5428f36ba77e5828d"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/InquiryResource.php",
+      "sha256": "672f6a3525825a66987f2a2f1cedcf8486762d7af1a507284cda896f78711076"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/MessageResource.php",
+      "sha256": "d8e04607a0320dca8a344e4b21d80710efc27f0e4348c94ddc7013eb100bc7e5"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/ProviderResource.php",
+      "sha256": "3b43297f3e9e1ce062feb573601b050aecadf7fbd547203b3017d91d8ea0e0da"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/ReservationOptionsResource.php",
+      "sha256": "7991131953940e69c2d0abd78b80b8526a32a045d95138e76bb0a55f5f360386"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/ReservationResource.php",
+      "sha256": "e1565ad01cfa98fa28e06636ae8cf3e310013c87e61a0189e68136d5d41f8613"
+    },
+    {
+      "file": "app/Http/Resources/Api/V1/ServiceResource.php",
+      "sha256": "1ac474d5f799f426a5b82ec73f55a1d9d8be5eca26f6e133b7dcf4f12b0da705"
+    },
+    {
+      "file": "app/Models/ActivityNotification.php",
+      "sha256": "bf91a38fca8e31c046a77dd38424f016ebacbc8d3903b5b10cc1b25e584f5b9d"
+    },
+    {
+      "file": "app/Models/InquiryNotification.php",
+      "sha256": "281b897e94b98aa4b8770eb142482a5640208d55f98a682fd708bd6b30649998"
+    },
+    {
+      "file": "app/Models/InquiryReadProgress.php",
+      "sha256": "b14a3eb86de00d4ea8302efcd434b72ebba7bb792d73ba177ba709b1c83c1540"
+    },
+    {
+      "file": "app/Models/ProviderAvailabilitySetting.php",
+      "sha256": "525beae2e53524e5348f1f8eb78aed92afc4a63790bdb63e37c38acb7da33e38"
+    },
+    {
+      "file": "app/Models/ProviderBlockedDate.php",
+      "sha256": "6b07d07045ce6011236d354a58cb581191e4242a57a5ed8852d5088e9b3acced"
+    },
+    {
+      "file": "app/Models/ProviderProfile.php",
+      "sha256": "fdeb09af37f098197df29c729c7f4dd08abcd4618cc6aed654a72eb5b4f60b2a"
+    },
+    {
+      "file": "app/Models/ProviderWeeklyInterval.php",
+      "sha256": "6d215b409fd1ed1f5da7dc8d1421cf89ab0f76f1b322f3e6220f36b888f2cf81"
+    },
+    {
+      "file": "app/Models/ReservationEvent.php",
+      "sha256": "c85547b39b752cbe0c6f532454938fcf184f64eb798ffd707a626c6137d3ab73"
+    },
+    {
+      "file": "app/Models/Role.php",
+      "sha256": "31ea4f196f280013e884984db4c229c274b4d7e5d19b9b0a20074fb2c3cb5146"
+    },
+    {
+      "file": "app/Models/Service.php",
+      "sha256": "c820acddbb2c1806cdba2451d0755bb21901a05e0a6b86a3ca391516f4d1cf21"
+    },
+    {
+      "file": "app/Models/ServiceCategory.php",
+      "sha256": "504ed14523fae64aca86a399bf4fcdcd76ff8447b0f9f846aefc0406da6f11ba"
+    },
+    {
+      "file": "app/Models/ServiceInquiry.php",
+      "sha256": "fbd02d1ed5078c2a93db60ecd941a70aac86e4a7753a0b44909139c93c950b4e"
+    },
+    {
+      "file": "app/Models/ServiceInquiryMessage.php",
+      "sha256": "7282222012bb5c5ca678f1991616781971276820b25d5e807ef1f881388389cf"
+    },
+    {
+      "file": "app/Models/ServiceReservation.php",
+      "sha256": "c7a7f6e240a4b5a982fec2c72402a4576d86c6414a0d6b7ffa50a853054df4c4"
+    },
+    {
+      "file": "app/Models/ServiceReview.php",
+      "sha256": "6aabb590022d2fc9dfe7b33c7254a21c41f66170b2c5bb34cd567af07c129175"
+    },
+    {
+      "file": "app/Models/User.php",
+      "sha256": "27334b717090eb6efc8e2c4a6185767882820fb998374869bf99227bb1ee473a"
+    },
+    {
+      "file": "app/Policies/ActivityNotificationPolicy.php",
+      "sha256": "750f68b2a8ab195352f18529f2270ee50a005f7c1d6f604c1d8aad4918291a7e"
+    },
+    {
+      "file": "app/Policies/ProviderProfilePolicy.php",
+      "sha256": "9bdcbd290d098e33c4304f6a10b2ba13b151620eeb9119a06c2d098d0cd1c42c"
+    },
+    {
+      "file": "app/Policies/ServiceInquiryPolicy.php",
+      "sha256": "6b3ae256c4e2b72a0020d531c5b7b9e3708267174d086d3422c36367eed5896f"
+    },
+    {
+      "file": "app/Policies/ServicePolicy.php",
+      "sha256": "ca12a8d0761239f5810374c40e5f0bbce0672e80a5d4419ffa5a577097c4c6fa"
+    },
+    {
+      "file": "app/Policies/ServiceReservationPolicy.php",
+      "sha256": "db5381b6bcab9519a2f4da3197552f09863f8d457c1a0289aa2dd762f98d5c51"
+    },
+    {
+      "file": "app/Policies/ServiceReviewPolicy.php",
+      "sha256": "25e5f1b983f5a5496ef2e03680b8afcacc06d149ac925cda9269cc42138faf72"
+    },
+    {
+      "file": "app/Providers/AppServiceProvider.php",
+      "sha256": "5bd3291d9a8e0169fa82c6e739291d68a136e3c32ce9bbf104f137e1002178bd"
+    },
+    {
+      "file": "app/Services/ClientDashboardSummary.php",
+      "sha256": "d02067d98b3f92ed9e473309fbebfa4bbb7f76fd83702237f16d69859c4213ed"
+    },
+    {
+      "file": "app/Services/InquiryMessaging.php",
+      "sha256": "541a873dec6699fc956941ffe4cbfaae5a832b1230fada4afcef7ab2e67a0563"
+    },
+    {
+      "file": "app/Services/InquiryReadTracking.php",
+      "sha256": "35de185499cf0f2214e31f39572093bd1fc576980e30534e248f7c2195d50720"
+    },
+    {
+      "file": "app/Services/InquiryWorkflow.php",
+      "sha256": "1cff5e6a4e07f0186dcd1e6a0989376de8b31ef6f44ef2ad221de6e14975470b"
+    },
+    {
+      "file": "app/Services/LegacyPhotoReferences.php",
+      "sha256": "98473bdc2d050b0e2d268d8be994e2ff0f74f5b1d23031e47e1d90cfac16e83f"
+    },
+    {
+      "file": "app/Services/MobileClientOperations.php",
+      "sha256": "a4f9364a30356b567d9da9e80700c6fabdf9f1ce1c92fc9a388118abf252fb6a"
+    },
+    {
+      "file": "app/Services/MobileTokens.php",
+      "sha256": "ddeb2103c52f23a42ed3cc47df092e255a64327c5b49f5ad6ed0d5a865be1dc1"
+    },
+    {
+      "file": "app/Services/NotificationInbox.php",
+      "sha256": "9c6795863d9a5071d32283dbf35108084210879f0be4434cdd6f23406c6e1733"
+    },
+    {
+      "file": "app/Services/ProfilePhotoReferences.php",
+      "sha256": "efbca48a1cd9a9a50db814974c1cb791a20506501f2a28edb528642c13c735fb"
+    },
+    {
+      "file": "app/Services/ProviderAvailability.php",
+      "sha256": "1afa871eae9b849c4b494077ae59666442f7b18a2cc5bdd901f56364f7642d20"
+    },
+    {
+      "file": "app/Services/ProviderDashboardMetrics.php",
+      "sha256": "ae5a937ec75fba61b21b0654cf60e87d523344e1d0bddb9bf67a8eeff32850de"
+    },
+    {
+      "file": "app/Services/PublicReviews.php",
+      "sha256": "06d9e7fa929c83011016a0212c8d1aabfc5aad07832af55abbe3157755644e5e"
+    },
+    {
+      "file": "app/Services/ReservationTime.php",
+      "sha256": "c534d1c75d079db56985321deae0f641aec2605bc9d4c4913e6ce215e8cafa08"
+    },
+    {
+      "file": "app/Services/ReservationWorkflow.php",
+      "sha256": "34cfde281447bc3964cecda32d0a444dfed01acad3e243858645b321c225d3e9"
+    },
+    {
+      "file": "app/Services/ReviewWorkflow.php",
+      "sha256": "3684a7bf2cb2e6746b64ee1ef103dff9c9f90a672d7d620e38f9cb452ee28eaa"
+    },
+    {
+      "file": "app/Services/RoleMemberships.php",
+      "sha256": "f36f15f1cce58fe463074a88f62e90adf7e377cb7ad12e97ea4a10b5068d2c5c"
+    },
+    {
+      "file": "app/Support/Api/ApiError.php",
+      "sha256": "2a4f09f71ab4d2690f37c023c1f50ffee813cb0bde6d5a875c49b9a2456f1d28"
+    },
+    {
+      "file": "app/Support/AvailabilityInput.php",
+      "sha256": "4819213e96ef99ac97a6c49ab145134cd03f12fa5abc41f67d97e868fd216670"
+    },
+    {
+      "file": "app/Support/NotificationEntry.php",
+      "sha256": "91e32b5d2fe999e4e6ca1caeed1e42fc700ba591f95defa537f1b3a3ad47694e"
+    },
+    {
+      "file": "app/Support/ReservationInput.php",
+      "sha256": "664cea6fee045e3a008081796b0eafb05a2196242809f1c16fb5f5e176c270cd"
+    },
+    {
+      "file": "app/Support/ReviewInput.php",
+      "sha256": "aff483f7ee476c027c39fe29c0ab05583704e4cbd5063c639830c338c7f8ecda"
+    },
+    {
+      "file": "bootstrap/app.php",
+      "sha256": "d55692ef21c04956fedc6eaa2a0ab75505f130aa28aa79a9b6f96176c0c1ebbf"
+    },
+    {
+      "file": "bootstrap/cache/.gitignore",
+      "sha256": "240a3e0d37d2e86b614063f5347eb02d4f99ca6c254de6b82871ff8d95532a7d"
+    },
+    {
+      "file": "bootstrap/providers.php",
+      "sha256": "2ef405f988a6ef3f5222bfbdd89352a6ad7b2e9e21aa25e236ac5dff58358953"
+    },
+    {
+      "file": "composer.json",
+      "sha256": "74fad1305694c0598cd576f06988d99d06ae83ff5f8e8332494d94ef21352dfe"
+    },
+    {
+      "file": "composer.lock",
+      "sha256": "62b9f864b4b255b08d5271406f30a6c0393fd0c8dc838a71a5e8914b22f7cdfd"
+    },
+    {
+      "file": "config/app.php",
+      "sha256": "c8863128d674a2c067542d6d83b9f0a899a8ad1c5f84a60e5cc9ca5e37654935"
+    },
+    {
+      "file": "config/auth.php",
+      "sha256": "6385d017a4886aec0eaaf3c970adc8676ff94b3c04c0c0b7fdc5d9002d6dbef5"
+    },
+    {
+      "file": "config/cache.php",
+      "sha256": "dc3a64749bc19946ba6a054be0b67ae8c450c9401799cb176ac0a0b8d4756664"
+    },
+    {
+      "file": "config/database.php",
+      "sha256": "4c831a869f4335805c6ca67c3f583e71329622ee8f70dbdc70c57a523a6b6021"
+    },
+    {
+      "file": "config/filesystems.php",
+      "sha256": "46b977d9555ed617aa0d42055a0c76a34c9d16c63ee634ff6683bc95712c9317"
+    },
+    {
+      "file": "config/logging.php",
+      "sha256": "dfcab580b07e112860a5cdd87af09b1f7f231914d282514d18c34d744d5f300c"
+    },
+    {
+      "file": "config/mail.php",
+      "sha256": "99e5b3764b54f52336d30f41a74687998f050d81bc2fcb25a30ad4fbc324e0f6"
+    },
+    {
+      "file": "config/mobile_api.php",
+      "sha256": "90cd581d882568513e152525151061aa4735477c216f540cd2bfd63b67280a58"
+    },
+    {
+      "file": "config/queue.php",
+      "sha256": "a185a3e86b65db26938204f4f50cf0c0ca99974e9926b9cdcef6b7743feea482"
+    },
+    {
+      "file": "config/reservations.php",
+      "sha256": "412e9fd116aba2977257354cd6c2316f736a7f6c62acec2844bdc78632e41435"
+    },
+    {
+      "file": "config/sanctum.php",
+      "sha256": "659d0f294b793540b2ceceb929bcc904df7dcc5277b7ea6f4740dc1e697907aa"
+    },
+    {
+      "file": "config/services.php",
+      "sha256": "4edcfb0bcee9523fc1173ca11cb193313af3d073e9a86c547ba08f927cf942d2"
+    },
+    {
+      "file": "config/session.php",
+      "sha256": "6467c087eb4cbb2c4f6f9050b5a7864a033a86317d2e6b00594457a40a67616d"
+    },
+    {
+      "file": "database/.gitignore",
+      "sha256": "e758642d95e83e907e010b6e46b07b3f953c7cef11fe5ebefc2a77b9d7b4d5f7"
+    },
+    {
+      "file": "database/factories/UserFactory.php",
+      "sha256": "fd829bb249d94b0a0f2ba7f926212afc3ddf5b5ac5e217648cff40362f6c4c61"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000000_create_users_table.php",
+      "sha256": "116d943de3cfa774f955fb309867f9c35099bae4c9f156e940200c08c045f1fd"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000001_create_cache_table.php",
+      "sha256": "20f769d3c11748c1cc42c41cd3789b0b9b2cd0db44ee22d378addac3ff8aed4f"
+    },
+    {
+      "file": "database/migrations/0001_01_01_000002_create_jobs_table.php",
+      "sha256": "7c9c712adf4091c87bf2612f4d0dccdfa1df4501553e4ac068b83d7bd5462fa5"
+    },
+    {
+      "file": "database/migrations/2025_08_02_085013_create_posts_table.php",
+      "sha256": "10ae453bb7d6898572fc067258fb70ae34177867da857cb002e148eb0b680669"
+    },
+    {
+      "file": "database/migrations/2025_08_02_092303_create_reminders_table.php",
+      "sha256": "21dd7ff15a00216489147d58659600d123e02c062e592bc5ab8481a875e213c1"
+    },
+    {
+      "file": "database/migrations/2025_08_13_022507_create_profesionistas_table.php",
+      "sha256": "801bdb43588f15c086978de665676dae2cbe1fae8164a98a1bbc861e08225daf"
+    },
+    {
+      "file": "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php",
+      "sha256": "8297e7a16edeaf0cfa6c6b782529edba6b53842097a606839e201bcab8042216"
+    },
+    {
+      "file": "database/migrations/2026_02_15_192040_create_likes_table.php",
+      "sha256": "2f0e5479eec39fdfb8994ac96ddbc8228537b31739e7c04e1f39097c089da4e7"
+    },
+    {
+      "file": "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php",
+      "sha256": "103b5d9938e3551ce4698209350f0164b47e55c41d931927860a70150a483454"
+    },
+    {
+      "file": "database/migrations/2026_02_15_200848_create_comments_table.php",
+      "sha256": "d2f7e8dfc7fed6dcf6632732f831802e9ba5811a8de829e38b901bc5a8c48162"
+    },
+    {
+      "file": "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php",
+      "sha256": "53ae789fe749e10800a75dffcb4ec7032d4138369f68f6f63444ac9d8b9f523f"
+    },
+    {
+      "file": "database/migrations/2026_02_16_031436_create_citas_table.php",
+      "sha256": "45bc07fbb7df8029b935d838d11b9661770c9493500df628c7e084007c152d41"
+    },
+    {
+      "file": "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php",
+      "sha256": "e0636f0b5344270d3ef4903b7f9899b7ff19d5c00ec58ec0aa606a6635b9ebd6"
+    },
+    {
+      "file": "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php",
+      "sha256": "10d42907cd47cf9b5d309d8f1755d7e780b2c36b35f7e64cd37d02b284397fc8"
+    },
+    {
+      "file": "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php",
+      "sha256": "f9362f4e19867852dbf581fca198227800f5967bd2645a87e242f4fc1d42672c"
+    },
+    {
+      "file": "database/migrations/2026_02_23_235730_create_emotions_table.php",
+      "sha256": "33693b3e6558fdb16fe1df52a4134292c20ee2184a539e275cf184959257589a"
+    },
+    {
+      "file": "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php",
+      "sha256": "f586bb403a7ccda46e4201b0714f1f826735200322821afc4e2e55538c220f3f"
+    },
+    {
+      "file": "database/migrations/2026_02_24_041833_add_media_to_posts_table.php",
+      "sha256": "a9c09ab56cae94eee830d07204fb2ada634077f879911586627817f4295aa6da"
+    },
+    {
+      "file": "database/migrations/2026_02_24_041908_add_media_to_comments_table.php",
+      "sha256": "677cead791277c33487fa02e0a4a74b6466c0693ad1658087ba51f8c101869eb"
+    },
+    {
+      "file": "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php",
+      "sha256": "13e13652d4ab690ee72282faeefc0fa668f947c0cb0e9ac0531b6e9462a7f008"
+    },
+    {
+      "file": "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+      "sha256": "b7e17c701414b0faa9a4a42327fb88811f9ef52f47038ac61ac01298ff594aba"
+    },
+    {
+      "file": "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php",
+      "sha256": "81ede4a83f328602329d2a561b0ac67cab0c6ea06fc7f6b7d9bca4615f72c876"
+    },
+    {
+      "file": "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+      "sha256": "838eaa921f476d78050f17a0eca77b1af8c71ee10b6473a5d8a88ae1caf3d58a"
+    },
+    {
+      "file": "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php",
+      "sha256": "fbdeab59c720f5abdc88f408bf3cd496dfc70abefd5118a088a707f364a389b2"
+    },
+    {
+      "file": "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php",
+      "sha256": "a7e26defffaf5176b84a15f0bac265c01469a948d59ce5ed99e0f33829cc3395"
+    },
+    {
+      "file": "database/migrations/2026_10_23_000001_create_provider_profiles_table.php",
+      "sha256": "859bc5f00a4f0e4f7e7649a287e5d060aa4b4681c1390aaf2b28a7d41f4868b5"
+    },
+    {
+      "file": "database/migrations/2026_10_28_000000_create_service_categories_table.php",
+      "sha256": "7c436ef233df60dc33ec77b75892fa54e2afed000526c5f4d84fd7274ebd87f7"
+    },
+    {
+      "file": "database/migrations/2026_10_28_000001_create_services_table.php",
+      "sha256": "9402e17acb1f803a1db7e0a9aebf02316a5aeefb34c83ae8f51f4932994a2b19"
+    },
+    {
+      "file": "database/migrations/2026_10_28_000002_create_service_inquiries_table.php",
+      "sha256": "bc0ded238e6d42de488263454ca863f8589874d72acf4ff26b73990364a3715d"
+    },
+    {
+      "file": "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php",
+      "sha256": "49ae7b0e1ee5d20098df8fcd2b93e85db242026c3000eb377a56e43c6f11f0b7"
+    },
+    {
+      "file": "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php",
+      "sha256": "c8c464e419a1c63ca1b63b26e0b22b340210844c4f7a980800353f72ab85b28b"
+    },
+    {
+      "file": "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php",
+      "sha256": "3fe86c122ac04efa7378d9c41c4f36a32a504bb4240bdca36ba1beac15fffa4e"
+    },
+    {
+      "file": "database/migrations/2026_10_30_000002_create_provider_availability_tables.php",
+      "sha256": "026c92dbf6c808f8f9378379395dc36e8536df2d43c3fdb1ed74faad499badfb"
+    },
+    {
+      "file": "database/migrations/2026_11_03_000000_create_service_reservations.php",
+      "sha256": "21031ec1dddd8ba0eac718e7d12a505a527964d97f30d2266d84e711dc2c3c58"
+    },
+    {
+      "file": "database/migrations/2026_11_03_000001_create_service_reviews.php",
+      "sha256": "49d5140e9b4b7455f313e4f0123ba424aef48358ca24a76fec1276c502a86a98"
+    },
+    {
+      "file": "database/migrations/2026_11_03_000002_create_activity_notifications.php",
+      "sha256": "0e6d333fb8fc7c769d91bd3d2c939b642c75ebe3248e503ff214e8df9a545b8b"
+    },
+    {
+      "file": "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php",
+      "sha256": "c81ecde85ea5072188c468dcaf79776728b6eb8f684d63fc0d88a4908484ca75"
+    },
+    {
+      "file": "database/seeders/DatabaseSeeder.php",
+      "sha256": "85144e5044af35b62c29ee68876e5ce5f62609a31c72b7c79281eda01a1cc91c"
+    },
+    {
+      "file": "database/seeders/ServiceCategorySeeder.php",
+      "sha256": "2dfda010f2559ef64dc8ea8d1690da79196bd10cf8b78c681b4d9e1b3db36c32"
+    },
+    {
+      "file": "package-lock.json",
+      "sha256": "1b5b3f59b9c6e50a1698d491fd382aad1b792cd1541c570520cdc0995c8d7314"
+    },
+    {
+      "file": "package.json",
+      "sha256": "549d710adb4f9c916edc8f952cc4f4262bdcf074fade55bafe299f045a2a167a"
+    },
+    {
+      "file": "public/.htaccess",
+      "sha256": "b7e379c77639fd56144947dbae84c84eb466d9c686ea81f2f013ae85421da923"
+    },
+    {
+      "file": "public/css/account.css",
+      "sha256": "477dec63206fdca73044f84d104abe5944789c3fc79ff3d41fc0705b542c8405"
+    },
+    {
+      "file": "public/css/availability.css",
+      "sha256": "b5f3ace11749b31493c81600696333c9702055d7ffb03d2e41aa53c03433a467"
+    },
+    {
+      "file": "public/css/catalog.css",
+      "sha256": "a9ad6e6954f270dd53ce7bb74f3060d3809a68e701b96f68b7077c335a29975f"
+    },
+    {
+      "file": "public/css/inquiries.css",
+      "sha256": "eae73062c56f1d33c6ea03d08f4d045d06e67f7316dd3d3b2ee7845fa99b969d"
+    },
+    {
+      "file": "public/css/notifications.css",
+      "sha256": "b71433852b542c7f7faa47133b1d139d4cfedbba1c5109fc0e22677e018fa412"
+    },
+    {
+      "file": "public/css/reservations.css",
+      "sha256": "fd76904d700ab6fdb357100e8eba1ab240a3c665ced3218976d10eefac06edb7"
+    },
+    {
+      "file": "public/css/reviews.css",
+      "sha256": "d52bad774d793dc5693ebe1b93ebb1974e9523ef8e5495562c87f63d96a0a765"
+    },
+    {
+      "file": "public/css/tekora/account-base.css",
+      "sha256": "6f781da08e6d4a0160f01a73e45a48dc832a397e9baa3ec992c7485238fbda07"
+    },
+    {
+      "file": "public/favicon.ico",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "public/fonts/tekora/DM-Sans-OFL.txt",
+      "sha256": "7ec15e79c59bc14b86436a17e5eb7926b46cbcaeb08e1a7e6c110b415e6eb2a2"
+    },
+    {
+      "file": "public/fonts/tekora/Space-Grotesk-OFL.txt",
+      "sha256": "18a4de52385f6b988782639d5d0cc1326e5a8c2de9a7f01d7b20d9aedcc60943"
+    },
+    {
+      "file": "public/fonts/tekora/dm-sans-latin.woff2",
+      "sha256": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543"
+    },
+    {
+      "file": "public/fonts/tekora/space-grotesk-latin.woff2",
+      "sha256": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d"
+    },
+    {
+      "file": "public/index.php",
+      "sha256": "eba77cba39695b6bd091fe5211d481f7ebb2ce2d8d26230b5a609465d0a4aff9"
+    },
+    {
+      "file": "public/js/availability.js",
+      "sha256": "2f27909f026b4f9c53254af9d4a414f2b4f7c526bdd889b0e3495c3301c9702f"
+    },
+    {
+      "file": "public/robots.txt",
+      "sha256": "e5c4b84484ee4216e9373be99380320c25dd94805f99f0a805846f087636553f"
+    },
+    {
+      "file": "resources/css/tekora/account-shell.css",
+      "sha256": "c688bde383b300cc6a0ca97c93cb6d0378f4dab86b7b5ae2ce5f09e2ac5f8cb5"
+    },
+    {
+      "file": "resources/css/tekora/ambient.css",
+      "sha256": "ae69cbe8ef85e1f07495a9e8182f751976f6dd8462dab46cd59ad41d0d1bda60"
+    },
+    {
+      "file": "resources/css/tekora/dashboards.css",
+      "sha256": "e9cd9e30b01a92c2ecaf7c47277f2f8d44c722d7e5110a490bd4489262ac8fe5"
+    },
+    {
+      "file": "resources/css/tekora/identity.css",
+      "sha256": "58b2e0bcf6f40a1f3b8e2a69b92cd08dc5011767e0dba7acbed86ae29b4a6873"
+    },
+    {
+      "file": "resources/css/tekora/marketplace.css",
+      "sha256": "e621cee2a10f8cfdbdaeece7e53e18efa411df1db20bb5d83a558bd89c52ecbb"
+    },
+    {
+      "file": "resources/css/tekora/operations.css",
+      "sha256": "349c534b7a936c3bac326b4d9034c171b0ecfa7e71ca7f5d5ace3009ee3e252a"
+    },
+    {
+      "file": "resources/css/tekora/tekora.css",
+      "sha256": "9e141901ad96b5b7a999681de9113e2b16811c126b03789a93f78a45e7b2a700"
+    },
+    {
+      "file": "resources/js/tekora/account-shell.js",
+      "sha256": "9b67cf4004e40fc6a6f5c479c0ae4e77aae76a9cf873d3b453a359b53178cef0"
+    },
+    {
+      "file": "resources/js/tekora/auth-transition.js",
+      "sha256": "4f9444ce3551b0263374fc8c29aa497179e412d2f6e24c6523a566a887a11c83"
+    },
+    {
+      "file": "resources/js/tekora/dashboard-pill.js",
+      "sha256": "2304625eb7f818ba1cd6dd1b20c9affae50331b499fc78321069b07660ea7793"
+    },
+    {
+      "file": "resources/js/tekora/dashboard-sections.js",
+      "sha256": "03d1086a22f5e3ad971de90ec111471f52774599df98bbeddb1df2c8a7039bdd"
+    },
+    {
+      "file": "resources/js/tekora/dashboards.js",
+      "sha256": "e74665241558680d0de3825d5e9b95de1d79281550832d9d4fec65c0134c2ab0"
+    },
+    {
+      "file": "resources/js/tekora/identity.js",
+      "sha256": "45f4f053c07de528d26a96a8079285ae3bf076224bc0ace96ba93b602f1b989a"
+    },
+    {
+      "file": "resources/js/tekora/marketplace.js",
+      "sha256": "1d6acab091d583b8a88e0728bd3df0397617997703f03f2a9511af47419bb801"
+    },
+    {
+      "file": "resources/js/tekora/operations.js",
+      "sha256": "2a5eac7a5e3e19db22ce287f7292a58ac70fbe4e018d7674bdcbadfdf60950af"
+    },
+    {
+      "file": "resources/js/tekora/tekora.js",
+      "sha256": "5aef268f0a7f4f0eb2b299a4932143a0b2f3571ed987627dc4984db26bd19095"
+    },
+    {
+      "file": "resources/views/account/activate-provider.blade.php",
+      "sha256": "325ec2ebaa6e7511f1f019a4599d60d4310c54a13539fa914d0565cccfbb9735"
+    },
+    {
+      "file": "resources/views/account/client-error.blade.php",
+      "sha256": "7915edbdc1fcfd6ab7908c1cb6b01ecc6f875c076728b1df3b98e65e9c07c1e6"
+    },
+    {
+      "file": "resources/views/account/client.blade.php",
+      "sha256": "c7dfcda5b60fb8767cee7582338ca99b35e5af7eb02847f39e9187c0f0db3634"
+    },
+    {
+      "file": "resources/views/account/index.blade.php",
+      "sha256": "6382e102605ef2c989d2851de04d7522a117e5d8dd939156934752788a8cb232"
+    },
+    {
+      "file": "resources/views/account/provider-show.blade.php",
+      "sha256": "a766228405bce481172a41d68ef4a140a3ef81d266977f811e2604caa889e207"
+    },
+    {
+      "file": "resources/views/account/provider.blade.php",
+      "sha256": "bd6aa4380b216dce0fd8cf8e6d1b5d1b998e12494cc631d019480a7016140650"
+    },
+    {
+      "file": "resources/views/account/roles.blade.php",
+      "sha256": "736d4bf3681594b26a15263c80aa68b370af50ce63489f02fd5936aba1e893ba"
+    },
+    {
+      "file": "resources/views/auth/forgot-password.blade.php",
+      "sha256": "ba18ee8b3607e840a55aad199857611d2f9bd01063277b7b98f4dd01d7066b4e"
+    },
+    {
+      "file": "resources/views/auth/registro.blade.php",
+      "sha256": "3305f28514bfd4f5f01d600186fb0456ded828686016ee41adacf77c22ead40e"
+    },
+    {
+      "file": "resources/views/auth/reset-password.blade.php",
+      "sha256": "dc147d0bb2f66c7bf3b4c18287be15313a0cf6222ce8d0bc4f2295211de7f40d"
+    },
+    {
+      "file": "resources/views/availability/edit.blade.php",
+      "sha256": "8dd26c9d7f7b48405209df00ed87442720b0ff1986fa75b5f16b4deb2d63d3ba"
+    },
+    {
+      "file": "resources/views/availability/error.blade.php",
+      "sha256": "a9ae7657d8e970162da6af3fed5d449b3b17784a421beda7652621a422544c98"
+    },
+    {
+      "file": "resources/views/catalog/index.blade.php",
+      "sha256": "2b85dd77b049a48a97be989be8d4a2dacbb2375031d88c5f3b6f7990b2cf32b0"
+    },
+    {
+      "file": "resources/views/catalog/invalid-filters.blade.php",
+      "sha256": "7628a28a0136d99b8665bd22d5fd39a4fd755541c644e45c8341291ea7454d76"
+    },
+    {
+      "file": "resources/views/catalog/show.blade.php",
+      "sha256": "ea27ea6a19100b1ead6333d504a4afcc232fd693f8a0c2312383eb383e573357"
+    },
+    {
+      "file": "resources/views/components/access-layout.blade.php",
+      "sha256": "52c271857513648ade55e25f0ad105def1d4d4043b75c007aa4cade57e2da378"
+    },
+    {
+      "file": "resources/views/components/account-layout.blade.php",
+      "sha256": "d6c6261936d1ce00042316ecb4d305e84f01c12bc68216b8e484cb4af3b52de5"
+    },
+    {
+      "file": "resources/views/components/account-navigation-group.blade.php",
+      "sha256": "d6e6463f1b2e87fd3b214e4c0552781f42f47b3f5ccf82b63d3fe0715ef1acf7"
+    },
+    {
+      "file": "resources/views/components/account-navigation-link.blade.php",
+      "sha256": "756eb14a27748d7f1bb08dcf3b4c3b665f1eb05ffa47c9d5dab9c704bbf208d5"
+    },
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "sha256": "de63f4bbbf6e77a9ab974d3b57bdc02ca51352b58ce7b79fc61e0ad326a4f5f1"
+    },
+    {
+      "file": "resources/views/components/catalog-layout.blade.php",
+      "sha256": "5a5824672f9ff9bc672ccdbaa673b4a27fca703de2ae1fb1482eb1d8a58a9f64"
+    },
+    {
+      "file": "resources/views/components/catalog-pagination.blade.php",
+      "sha256": "c3099c918c50a22f7d1c547663f4aa21fac2b76ebf26d43a62d5923f1e148778"
+    },
+    {
+      "file": "resources/views/components/dashboard-navigation.blade.php",
+      "sha256": "b0de34e2c648de4dfdaa9d3809896c7e0eb836492b21fe63e14ebe2e5599ee82"
+    },
+    {
+      "file": "resources/views/components/flash-messages.blade.php",
+      "sha256": "3baee213ebf49bfcdf76a324f0a82ede66e28b9f60a4a19eece7987ada94c41d"
+    },
+    {
+      "file": "resources/views/components/identity-assets.blade.php",
+      "sha256": "98cf86b2b2481e9ee904fb7079a8834436f7632edf26131b752b07e784b9104a"
+    },
+    {
+      "file": "resources/views/components/identity-avatar.blade.php",
+      "sha256": "e42ca3edc0b6757e0aa21c660af2ca0dfbac06147725a983af1cb0536bb9a7f7"
+    },
+    {
+      "file": "resources/views/components/identity-error-layout.blade.php",
+      "sha256": "e14779d0c59fa30fa336b9e91d6752a23c4136d701613f22a05c28dafc40c67e"
+    },
+    {
+      "file": "resources/views/components/identity-heading.blade.php",
+      "sha256": "ee93287371805346d2ea5b2eb70cf1546ae381c8057f6af1c801d73e5823e3db"
+    },
+    {
+      "file": "resources/views/components/identity-scene.blade.php",
+      "sha256": "da5653b0eb24832971cbd3fb075f3ad1d87863cf11221c75beb5d5f121dc2dbf"
+    },
+    {
+      "file": "resources/views/components/inquiry-actions.blade.php",
+      "sha256": "10ac2f745ce98eb7220069955e18f347803a950e204432a702b4e14f2975d3d9"
+    },
+    {
+      "file": "resources/views/components/inquiry-conversation.blade.php",
+      "sha256": "ecae4017b86cd3ead49b3c2b3ba5bc76c2ad2d597cc3e15d85052ad773ab4091"
+    },
+    {
+      "file": "resources/views/components/inquiry-reservations.blade.php",
+      "sha256": "354da8b26f28bf2d18499fe0ef54f69e4615062acb7effd6c8b5a9ac4babfb80"
+    },
+    {
+      "file": "resources/views/components/inquiry-status.blade.php",
+      "sha256": "a8517470e8d5a7ca703edafbf0f25b9389254c86e19eb38ca0621bd9f21444f0"
+    },
+    {
+      "file": "resources/views/components/inquiry-time.blade.php",
+      "sha256": "1437ace415f53a7fb61c0a013ccb64dc97ffedf2720b6a65c849dda3cba2d3d1"
+    },
+    {
+      "file": "resources/views/components/marketplace-avatar.blade.php",
+      "sha256": "cabde0c15ad547b6d28313110e5616dcf44d55183dcdf6ef9fd4a9d452e012dd"
+    },
+    {
+      "file": "resources/views/components/marketplace-empty.blade.php",
+      "sha256": "f691ac1329a05796b5e7f62fde1384a0bd18be02203adc8bba500611865f377a"
+    },
+    {
+      "file": "resources/views/components/marketplace-scene.blade.php",
+      "sha256": "383d074d302bfdab28813f4b2a8cb6509e9dc0e33f40f812d4cd830068bc309c"
+    },
+    {
+      "file": "resources/views/components/marketplace-tags.blade.php",
+      "sha256": "6279c021e1979920f1dc7317ae05c9b54537e04e3e7a21ee50fdd9e5b5056a03"
+    },
+    {
+      "file": "resources/views/components/ops-error-layout.blade.php",
+      "sha256": "07c01bdbfe639406d00ba4746ffeb0f57c8f553f3485d00c96a9b4cd6603d7af"
+    },
+    {
+      "file": "resources/views/components/ops-heading.blade.php",
+      "sha256": "09d974d43913e10b55259380636831d9f58b6bdae93a5d46e84ea265226d2d9a"
+    },
+    {
+      "file": "resources/views/components/ops-scene.blade.php",
+      "sha256": "e38269810aef7e13b078ffee159170af76ea349857f6a5247e11ebd3677154de"
+    },
+    {
+      "file": "resources/views/components/provider-availability.blade.php",
+      "sha256": "3b6f145a91798f1a5e1b2522c878053656d5ed13bc18e50037f71cacfe45b55e"
+    },
+    {
+      "file": "resources/views/components/provider-card.blade.php",
+      "sha256": "a9710a7414178f2d28af248d77116859a8d6fab40691772b4d0a53dd90f83100"
+    },
+    {
+      "file": "resources/views/components/provider-kpi.blade.php",
+      "sha256": "1689d7346da33f26948485725116e6677f2c47855534a12ac27665ffb4a1104c"
+    },
+    {
+      "file": "resources/views/components/public-reviews.blade.php",
+      "sha256": "2acef28317f2f29c370037e9b957751af6ba8ac48d5255c8b975ab3fff7cb7a0"
+    },
+    {
+      "file": "resources/views/components/reservation-actions.blade.php",
+      "sha256": "111bf1348d8a84271bb87cb08232b660bb505b988d4024bc29865550da89bbd7"
+    },
+    {
+      "file": "resources/views/components/reservation-review.blade.php",
+      "sha256": "16fb31896aa979e2b546021537a12b518a7afe4a9735a2c0695b7ac51868b4ce"
+    },
+    {
+      "file": "resources/views/components/reservation-schedule.blade.php",
+      "sha256": "971620413e51ba196cb78226709b09152f6c1860790f13f1196381b0a0576b65"
+    },
+    {
+      "file": "resources/views/components/reservation-status.blade.php",
+      "sha256": "f593541afebec993676881fe0f2dab6250ea1dda74509ea7a250569d44255f02"
+    },
+    {
+      "file": "resources/views/components/review-stars.blade.php",
+      "sha256": "db65f5396c9649b243db1a61ca3d442358f1a09193527985aa1bb039d2810862"
+    },
+    {
+      "file": "resources/views/components/service-card.blade.php",
+      "sha256": "4e31b2bc6d353808bf1b9abd673502c08d4fbb57c79c64e80c90b862573c0e43"
+    },
+    {
+      "file": "resources/views/components/tekora-ambient.blade.php",
+      "sha256": "10421695bc479b877d4e45f4726f2d2dd5b741d634e64730141e23644b1b0160"
+    },
+    {
+      "file": "resources/views/components/tekora-arrow.blade.php",
+      "sha256": "450f6565c81adee0dba9ad955c263665af6d4eebf2a197311ee2410b64c57d09"
+    },
+    {
+      "file": "resources/views/components/tekora-auth-card.blade.php",
+      "sha256": "adde58a6b40d4053e17f2506b37aea7f7c95e096d391dae419aed087ba2b0c7f"
+    },
+    {
+      "file": "resources/views/components/tekora-brand.blade.php",
+      "sha256": "0b7aa13145cb7be72a450660c02dd477206e1453248a339ad4b04cc266e085f5"
+    },
+    {
+      "file": "resources/views/components/tekora-icon.blade.php",
+      "sha256": "46691c06a7f98df471db7e0ac10b588c17707d0f1c8948a76e9068f89fa4aa98"
+    },
+    {
+      "file": "resources/views/components/tekora-layout.blade.php",
+      "sha256": "cd1dd4c9a37c78fbfdf0a3a5ace1cd7596b9158acd0b7e66433d88a1d686ed21"
+    },
+    {
+      "file": "resources/views/components/tekora-scene.blade.php",
+      "sha256": "057179c8f8f4e96129e42c69d0e40a7c4b2a20a81645a24c0b7048b003c9e791"
+    },
+    {
+      "file": "resources/views/conversations/index.blade.php",
+      "sha256": "98fc6a4f091aa8bac8dfb01b224309ee6f8c28b1631c0826f7902a4a449d879e"
+    },
+    {
+      "file": "resources/views/conversations/read-error.blade.php",
+      "sha256": "493724dbf7090c75c78ae92abf2133188bb7472c9162b2b423c9bb20d94a236c"
+    },
+    {
+      "file": "resources/views/editar-nombre.blade.php",
+      "sha256": "e1f82da39aa5a595e060dff5c4c81009497a8bad6c75d52fe3497a7c38522330"
+    },
+    {
+      "file": "resources/views/errors/419.blade.php",
+      "sha256": "52810197bf6bc115d25632da406f3050cf413c74024c8be75cd4c23694ab2edc"
+    },
+    {
+      "file": "resources/views/inquiries/conflict.blade.php",
+      "sha256": "b8fed5eea1f232131cd4265514ccfe1bc3b3c7435ca1e8032d5c0a9e4e352557"
+    },
+    {
+      "file": "resources/views/inquiries/create.blade.php",
+      "sha256": "c9ee7f67c2c3ae9483f300dd36d47109feded302914b585c9d3a351ee77bc149"
+    },
+    {
+      "file": "resources/views/inquiries/index.blade.php",
+      "sha256": "7e68d30445a86c16c3b39c979b24ab8809363b80f97f45d39a9377202c467c53"
+    },
+    {
+      "file": "resources/views/inquiries/invalid-filters.blade.php",
+      "sha256": "d77f0f83e9468a4c91b6ada01dca6a9d99c2d84371706ec194f772a083a8ea14"
+    },
+    {
+      "file": "resources/views/inquiries/message-error.blade.php",
+      "sha256": "173a5a77e42c7f8421cf172a61ba38eeadedfa7fbbe10db11473806b4d612f51"
+    },
+    {
+      "file": "resources/views/inquiries/rate-limited.blade.php",
+      "sha256": "32e2d08ade2544dcd1d6b3c0581bc3f182f5943060ee7892861aa7fb70609cce"
+    },
+    {
+      "file": "resources/views/inquiries/show.blade.php",
+      "sha256": "0ffc822b206e433fa374488ef9c052a7660ce60865be3c33358de3fd95f3fb27"
+    },
+    {
+      "file": "resources/views/login.blade.php",
+      "sha256": "0744c80440df7a96c39e0f10b73699ddd3efae1e3b53fc62583f89e736063a3c"
+    },
+    {
+      "file": "resources/views/notifications/error.blade.php",
+      "sha256": "7e73b9259a3ccd00237f99df3a22a939b0dcedf3fb70519f27104fd500c335ce"
+    },
+    {
+      "file": "resources/views/notifications/index.blade.php",
+      "sha256": "65c13285f9233b97364cb614f3d29346412453b7c69a0015a31d471fba5877a9"
+    },
+    {
+      "file": "resources/views/perfil.blade.php",
+      "sha256": "122c3e924565eb5e6caea1678219819eb78f44b13010f3e71ef835ade697a0c4"
+    },
+    {
+      "file": "resources/views/provider-dashboard/error.blade.php",
+      "sha256": "cfa617e0cff63bbfeaa4ad4a49bcfc17a0192f8398be77a0ce7707f865cc1fff"
+    },
+    {
+      "file": "resources/views/provider-dashboard/index.blade.php",
+      "sha256": "2bc176879455d63e703e60cf5d040ee06161c2da3b2cc3f50bb59e984e7098b2"
+    },
+    {
+      "file": "resources/views/provider-services/form.blade.php",
+      "sha256": "04aa18a8e37f3be5d124906c15292db681ca4e42db1ec1597125229ab5c49ab6"
+    },
+    {
+      "file": "resources/views/provider-services/index.blade.php",
+      "sha256": "a31385cc0cbc73987e970736e402c43dceeb24fd6f37b6c103ceb3d58fc3fea9"
+    },
+    {
+      "file": "resources/views/public-providers/index.blade.php",
+      "sha256": "3cd5400b6071e4ce3ede3a172cf19849450030b7212e5b721fd292381d1a526e"
+    },
+    {
+      "file": "resources/views/public-providers/show.blade.php",
+      "sha256": "72066f92e6f3acec47e5e30a006514442a51a9991a6bce3b284efb22bad94e53"
+    },
+    {
+      "file": "resources/views/reservations/create.blade.php",
+      "sha256": "25f599b69ab59e92985a6d81b89a8d703b758bbf4f61a1ba22606b226b34185f"
+    },
+    {
+      "file": "resources/views/reservations/error.blade.php",
+      "sha256": "1da91266e4eddff6afce5e1f74629adf68937d4e9279db322010bad9e91a2a90"
+    },
+    {
+      "file": "resources/views/reservations/index.blade.php",
+      "sha256": "0198835a0810600c63ef8e55e36864e0d777c397de42e512ff6dcbcab3d0b7e7"
+    },
+    {
+      "file": "resources/views/reservations/show.blade.php",
+      "sha256": "49f60cdec63ce2c9c3a559cef47ff50ea55e0dc6b04b563dbf411c3808fe9894"
+    },
+    {
+      "file": "resources/views/reviews/create.blade.php",
+      "sha256": "b22c220ddde0e2a0f897c9c1ed0c70b991cd157ec7255f54a5edc2733715ec90"
+    },
+    {
+      "file": "resources/views/reviews/error.blade.php",
+      "sha256": "d7a72dfe02ff0dda7065f7d3e38960754319bbfc83dcb6dbaa7e21ac37a85074"
+    },
+    {
+      "file": "resources/views/reviews/index.blade.php",
+      "sha256": "288eb81bd4c02b4bc2c929ddf108d477cd4fa865d2f50a5c521aee8150a254ed"
+    },
+    {
+      "file": "resources/views/reviews/show.blade.php",
+      "sha256": "11bd22fa0998c93873831357d781db2e7f2d2ae4068f3e4d1a958fde07df5e25"
+    },
+    {
+      "file": "resources/views/tekora/home.blade.php",
+      "sha256": "5a7b9197bf1303999b1efbd3c00250cfe0f74c3fc4566d3d1377630528fc1398"
+    },
+    {
+      "file": "routes/api.php",
+      "sha256": "722e9494ff6073637c592c499c59160e146ae156bdc4b8e25d50bd3b29ec1b71"
+    },
+    {
+      "file": "routes/availability.php",
+      "sha256": "344c8229c044ccb99077fa3a13e7881b3e5b1f1f4b4dc40e59900b799e43c76a"
+    },
+    {
+      "file": "routes/catalog.php",
+      "sha256": "29c84f41ad16a5412df45ffc26f7059ee2806860611af07942578390e94adb02"
+    },
+    {
+      "file": "routes/console.php",
+      "sha256": "9adccc33e7dd400683e434774077c7fdb2f299c5712cedf16a43fdf56f2850fa"
+    },
+    {
+      "file": "routes/conversations.php",
+      "sha256": "a4531117746c2b2ca07d8e66c4f24cf7ee3a8d008eb4afc707958c5219038074"
+    },
+    {
+      "file": "routes/identities.php",
+      "sha256": "127526f7840ff748abd76f8cc0e0f3581b6ee53d7db7bc1251c2c7320b00d202"
+    },
+    {
+      "file": "routes/inquiries.php",
+      "sha256": "a88ca55d3cdc4e0c8e8382d34d0e8ed8ac3d457be55c42d4a045962412bda130"
+    },
+    {
+      "file": "routes/notifications.php",
+      "sha256": "196360e816469747f0a18633e10c85ddd6319e3877cde98b9e3d51250d9cb195"
+    },
+    {
+      "file": "routes/reservations.php",
+      "sha256": "ee468c8ae3b9b07e0246ae0426bb20dc2fdf9fb88a4349e0962e8515c896703e"
+    },
+    {
+      "file": "routes/reviews.php",
+      "sha256": "797c70459e1674763fbcc0f20459a8c92a4e544ad7d4b3917e6b83c74b2fa6cd"
+    },
+    {
+      "file": "routes/web.php",
+      "sha256": "021dd970cd98f9346703f6be653ee6aaa67e53802edfbc0b565b39425dbe9de2"
+    }
+  ],
+  "migrations": 37,
+  "api_operations": 21,
+  "production_changes": false,
+  "provenance": {
+    "reviewed_head": "298905f5e3009da8404ffd628335740c6e5069e9",
+    "historical_entry_count": 324,
+    "current_entry_count": 314,
+    "retained_hashes": "Previously calculated from working-tree bytes, compared to git show blob bytes. Reused from reviewed evidence; not recomputed during this correction.",
+    "removed_image_sha256_entries": [
+      "public/img/alex.jpg",
+      "public/img/emociones.png",
+      "public/img/esperanza.png",
+      "public/img/fondo.jpg",
+      "public/img/foto1.png",
+      "public/img/logo.png",
+      "public/img/roque.jpg",
+      "public/img/salud.jpg",
+      "public/img/tranquilidad.png",
+      "public/img/user1.jpg"
+    ],
+    "removed_image_sha256_method": "Path(p).read_bytes() followed by hashlib.sha256(data), NOT derived from Git object metadata; git show also read image blob contents for comparison.",
+    "history_retained_in_reviewed_commit": true,
+    "new_media_hashes_generated": false,
+    "media_bytes_read_during_this_review": false
+  }
+}

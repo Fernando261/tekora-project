@@ -1,0 +1,1498 @@
+{
+  "base_sha": "ce7cf62670a1c559247fa6993bcd26e73a334c80",
+  "scope": "Source and synthetic schema only; not an installed schema certification",
+  "tables": [
+    {
+      "table": "likes",
+      "order": 1,
+      "historical_migrations": [
+        "database/migrations/2026_02_15_192040_create_likes_table.php",
+        "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+        "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php",
+        "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "user_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "post_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "likeable_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "likeable_type",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "name": null,
+            "columns": [
+              "user_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "users",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          },
+          {
+            "name": null,
+            "columns": [
+              "post_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "posts",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "likes_user_id_post_id_unique",
+            "columns": [
+              "user_id",
+              "post_id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": false
+          },
+          {
+            "name": "likes_user_likeable_unique",
+            "columns": [
+              "user_id",
+              "likeable_id",
+              "likeable_type"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": false
+          },
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          }
+        ]
+      },
+      "incoming_foreign_keys": [],
+      "remaining_runtime_consumers": [],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "comments",
+      "order": 2,
+      "historical_migrations": [
+        "database/migrations/2026_02_15_200848_create_comments_table.php",
+        "database/migrations/2026_02_24_041908_add_media_to_comments_table.php",
+        "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "content",
+            "type_name": "text",
+            "type": "text",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "user_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "post_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "deleted_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "media_path",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "media_type",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "name": null,
+            "columns": [
+              "user_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "users",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          },
+          {
+            "name": null,
+            "columns": [
+              "post_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "posts",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          }
+        ]
+      },
+      "incoming_foreign_keys": [],
+      "remaining_runtime_consumers": [
+        "app/Services/LegacyPhotoReferences.php"
+      ],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "posts",
+      "order": 3,
+      "historical_migrations": [
+        "database/migrations/2025_08_02_085013_create_posts_table.php",
+        "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php",
+        "database/migrations/2026_02_24_041833_add_media_to_posts_table.php",
+        "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "user_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "content",
+            "type_name": "text",
+            "type": "text",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "deleted_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "media_path",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "media_type",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "name": null,
+            "columns": [
+              "user_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "users",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          }
+        ]
+      },
+      "incoming_foreign_keys": [
+        {
+          "child": "comments",
+          "name": null,
+          "columns": [
+            "post_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "posts",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        },
+        {
+          "child": "likes",
+          "name": null,
+          "columns": [
+            "post_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "posts",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "remaining_runtime_consumers": [
+        "app/Services/LegacyPhotoReferences.php"
+      ],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "reminders",
+      "order": 4,
+      "historical_migrations": [
+        "database/migrations/2025_08_02_092303_create_reminders_table.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "user_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "title",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "description",
+            "type_name": "text",
+            "type": "text",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "remind_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "name": null,
+            "columns": [
+              "user_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "users",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          }
+        ]
+      },
+      "incoming_foreign_keys": [],
+      "remaining_runtime_consumers": [],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "emotions",
+      "order": 5,
+      "historical_migrations": [
+        "database/migrations/2026_02_23_235730_create_emotions_table.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "name",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "slug",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "image_path",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "subtitle",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "description",
+            "type_name": "text",
+            "type": "text",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "accent",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "order",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": "'0'",
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [],
+        "indexes": [
+          {
+            "name": "emotions_slug_unique",
+            "columns": [
+              "slug"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": false
+          },
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          }
+        ]
+      },
+      "incoming_foreign_keys": [],
+      "remaining_runtime_consumers": [
+        "app/Services/LegacyPhotoReferences.php"
+      ],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "citas",
+      "order": 6,
+      "historical_migrations": [
+        "database/migrations/2026_02_16_031436_create_citas_table.php",
+        "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "user_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "profesionista_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "start_datetime",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "end_datetime",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "motivo",
+            "type_name": "text",
+            "type": "text",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "estado",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": "'pendiente'",
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "starts_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "ends_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "google_event_id",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "status",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": "'pending'",
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "name": null,
+            "columns": [
+              "profesionista_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "profesionistas",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          },
+          {
+            "name": null,
+            "columns": [
+              "user_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "users",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "citas_profesionista_id_estado_index",
+            "columns": [
+              "profesionista_id",
+              "estado"
+            ],
+            "type": null,
+            "unique": false,
+            "primary": false
+          },
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "name": "uniq_prof_slot",
+            "columns": [
+              "profesionista_id",
+              "start_datetime"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": false
+          }
+        ]
+      },
+      "incoming_foreign_keys": [],
+      "remaining_runtime_consumers": [],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "profesionista_bloqueos",
+      "order": 7,
+      "historical_migrations": [
+        "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "profesionista_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "start_datetime",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "end_datetime",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "motivo",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "name": null,
+            "columns": [
+              "profesionista_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "profesionistas",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_prof_blk_range",
+            "columns": [
+              "profesionista_id",
+              "start_datetime",
+              "end_datetime"
+            ],
+            "type": null,
+            "unique": false,
+            "primary": false
+          },
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          }
+        ]
+      },
+      "incoming_foreign_keys": [],
+      "remaining_runtime_consumers": [],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "profesionista_disponibilidades",
+      "order": 8,
+      "historical_migrations": [
+        "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "profesionista_id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "day_of_week",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "start_time",
+            "type_name": "time",
+            "type": "time",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "end_time",
+            "type_name": "time",
+            "type": "time",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "is_active",
+            "type_name": "tinyint",
+            "type": "tinyint(1)",
+            "collation": null,
+            "nullable": false,
+            "default": "'1'",
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [
+          {
+            "name": null,
+            "columns": [
+              "profesionista_id"
+            ],
+            "foreign_schema": "main",
+            "foreign_table": "profesionistas",
+            "foreign_columns": [
+              "id"
+            ],
+            "on_update": "no action",
+            "on_delete": "cascade"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "pd_prof_dow_idx",
+            "columns": [
+              "profesionista_id",
+              "day_of_week"
+            ],
+            "type": null,
+            "unique": false,
+            "primary": false
+          },
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          }
+        ]
+      },
+      "incoming_foreign_keys": [],
+      "remaining_runtime_consumers": [],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    },
+    {
+      "table": "profesionistas",
+      "order": 9,
+      "historical_migrations": [
+        "database/migrations/2025_08_13_022507_create_profesionistas_table.php",
+        "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php",
+        "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php",
+        "database/migrations/2026_02_16_031436_create_citas_table.php",
+        "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php",
+        "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php"
+      ],
+      "synthetic_definition": {
+        "columns": [
+          {
+            "name": "id",
+            "type_name": "integer",
+            "type": "integer",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": true,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "nombre",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "email",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "password",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "cedula",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": false,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "google_access_token",
+            "type_name": "text",
+            "type": "text",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "google_refresh_token",
+            "type_name": "text",
+            "type": "text",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "google_calendar_id",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "google_token_expires_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "created_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "updated_at",
+            "type_name": "datetime",
+            "type": "datetime",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          },
+          {
+            "name": "remember_token",
+            "type_name": "varchar",
+            "type": "varchar",
+            "collation": null,
+            "nullable": true,
+            "default": null,
+            "auto_increment": false,
+            "comment": null,
+            "generation": null
+          }
+        ],
+        "foreign_keys": [],
+        "indexes": [
+          {
+            "name": "primary",
+            "columns": [
+              "id"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": true
+          },
+          {
+            "name": "profesionistas_cedula_unique",
+            "columns": [
+              "cedula"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": false
+          },
+          {
+            "name": "profesionistas_email_unique",
+            "columns": [
+              "email"
+            ],
+            "type": null,
+            "unique": true,
+            "primary": false
+          }
+        ]
+      },
+      "incoming_foreign_keys": [
+        {
+          "child": "citas",
+          "name": null,
+          "columns": [
+            "profesionista_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "profesionistas",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        },
+        {
+          "child": "profesionista_bloqueos",
+          "name": null,
+          "columns": [
+            "profesionista_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "profesionistas",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        },
+        {
+          "child": "profesionista_disponibilidades",
+          "name": null,
+          "columns": [
+            "profesionista_id"
+          ],
+          "foreign_schema": "main",
+          "foreign_table": "profesionistas",
+          "foreign_columns": [
+            "id"
+          ],
+          "on_update": "no action",
+          "on_delete": "cascade"
+        }
+      ],
+      "remaining_runtime_consumers": [],
+      "test_consumers": "Historical migration preservation, synthetic record fixtures and absent-schema regression tests; no product writer.",
+      "cross_references": "users foreign keys remain protected; likes has polymorphic references without FK; media may reference native avatars",
+      "real_rows_schema_and_media": "PENDIENTE DE AUTORIZACIÓN"
+    }
+  ],
+  "protected_native": [
+    "users",
+    "roles",
+    "role_user",
+    "provider_profiles",
+    "service_categories",
+    "services",
+    "service_inquiries",
+    "service_inquiry_messages",
+    "service_inquiry_reads",
+    "inquiry_notifications",
+    "provider_availability_settings",
+    "provider_weekly_intervals",
+    "provider_blocked_dates",
+    "service_reservations",
+    "reservation_events",
+    "service_reviews",
+    "activity_notifications",
+    "personal_access_tokens"
+  ],
+  "protected_infrastructure": [
+    "migrations",
+    "password_reset_tokens",
+    "sessions",
+    "cache",
+    "cache_locks",
+    "jobs",
+    "job_batches",
+    "failed_jobs"
+  ],
+  "native_to_retired_fks_in_synthetic_schema": []
+}

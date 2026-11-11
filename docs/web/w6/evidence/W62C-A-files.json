@@ -1,0 +1,29 @@
+{
+  "base_sha": "ce7cf62670a1c559247fa6993bcd26e73a334c80",
+  "files": [
+    "docs/web/w6/W62C-A-LARAGON.md",
+    "docs/web/w6/W62C-A-PREFLIGHT.md",
+    "docs/web/w6/evidence/W62C-A-baseline.txt",
+    "docs/web/w6/evidence/W62C-A-build.txt",
+    "docs/web/w6/evidence/W62C-A-composer-audit-no-dev.txt",
+    "docs/web/w6/evidence/W62C-A-composer-audit.txt",
+    "docs/web/w6/evidence/W62C-A-composer-validate.txt",
+    "docs/web/w6/evidence/W62C-A-files.json",
+    "docs/web/w6/evidence/W62C-A-final.txt",
+    "docs/web/w6/evidence/W62C-A-final.xml",
+    "docs/web/w6/evidence/W62C-A-media-matrix.json",
+    "docs/web/w6/evidence/W62C-A-new.txt",
+    "docs/web/w6/evidence/W62C-A-nine-table-matrix.json",
+    "docs/web/w6/evidence/W62C-A-npm-audit.json",
+    "docs/web/w6/evidence/W62C-A-pint.txt",
+    "docs/web/w6/evidence/W62C-A-platform.txt",
+    "docs/web/w6/evidence/W62C-A-protected-source-integrity.json",
+    "docs/web/w6/evidence/W62C-A-review-correction.json",
+    "docs/web/w6/evidence/W62C-A-synthetic-schema.json",
+    "docs/web/w6/evidence/W62C-A-validation.json",
+    "docs/web/w6/evidence/W62C-A-w51.txt",
+    "docs/web/w6/evidence/W62C-A-w62a.txt",
+    "docs/web/w6/evidence/W62C-A-w62b.txt",
+    "tests/Feature/RetirementPreflightTest.php"
+  ]
+}

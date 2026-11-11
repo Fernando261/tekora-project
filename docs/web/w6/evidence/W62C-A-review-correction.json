@@ -1,0 +1,56 @@
+{
+  "reviewed_head": "298905f5e3009da8404ffd628335740c6e5069e9",
+  "base_sha": "ce7cf62670a1c559247fa6993bcd26e73a334c80",
+  "scope": "PR #27 tests and evidence only",
+  "historical_media_reads": {
+    "versioned_uploads": 9,
+    "public_img_files_hashed": 10,
+    "upload_hashes_persisted": false,
+    "public_img_sha256_persisted_in_reviewed_head": true,
+    "zero_media_read_compliance": false
+  },
+  "historical_source_excerpt": [
+    "data = Path(p).read_bytes()",
+    "original = subprocess.check_output(['git', 'show', base+':'+p]); assert data == original",
+    "checks.append({'file': p, 'sha256': hashlib.sha256(data).hexdigest()})"
+  ],
+  "provenance_evidence": "Existing auxiliary script text and recorded prior execution; no execution of that script during review",
+  "git_object_metadata": "git_blob and bytes from git ls-tree -l, not SHA-256 of working-tree files",
+  "active_evidence_image_sha256_removed": 10,
+  "retained_source_hashes_not_recomputed": 314,
+  "new_media_reads_or_hashes": false,
+  "protected_trigger_stop": "Reject all new/modified/missing protected triggers compared with fresh historical schema before any DROP; synthetic users trigger writes to posts; retained and demonstrably active after rejection",
+  "historical_verification": {
+    "new_tests": 18,
+    "new_assertions": 182,
+    "full_tests": 687,
+    "full_assertions": 9208
+  },
+  "production_changes": false,
+  "corrected_verification": {
+    "new_tests": 19,
+    "new_assertions": 198,
+    "full_tests": 688,
+    "full_assertions": 9224,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "pint_test": "pass"
+  },
+  "original_contradiction": {
+    "media_matrix_real_media_read": false,
+    "conclusion": "Incorrect historical claim; corrected to true; history remains in reviewed commit"
+  },
+  "files_changed_from_reviewed_head": [
+    "docs/web/w6/W62C-A-PREFLIGHT.md",
+    "docs/web/w6/evidence/W62C-A-files.json",
+    "docs/web/w6/evidence/W62C-A-final.txt",
+    "docs/web/w6/evidence/W62C-A-final.xml",
+    "docs/web/w6/evidence/W62C-A-media-matrix.json",
+    "docs/web/w6/evidence/W62C-A-new.txt",
+    "docs/web/w6/evidence/W62C-A-protected-source-integrity.json",
+    "docs/web/w6/evidence/W62C-A-review-correction.json",
+    "docs/web/w6/evidence/W62C-A-validation.json",
+    "tests/Feature/RetirementPreflightTest.php"
+  ]
+}
