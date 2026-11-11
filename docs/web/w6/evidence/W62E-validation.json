@@ -1,0 +1,259 @@
+{
+  "task": "W6.2e",
+  "base_sha": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+  "branch": "codex/w62e-sqlite-persistent-lab",
+  "preflight": {
+    "main_exact": true,
+    "pr30_integrated": true,
+    "initial_checkout_clean": true,
+    "space_available": "43 GiB",
+    "free_inodes": 3759127
+  },
+  "historical_pr30": {
+    "tests": 789,
+    "assertions": 10344,
+    "scope": "Historical reference; new full suite result below"
+  },
+  "executed": {
+    "full": {
+      "tests": 790,
+      "assertions": 10349,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 194.819007,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "rehearsal": {
+      "tests": 120,
+      "assertions": 1318,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 12.551835,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "w51": {
+      "tests": 49,
+      "assertions": 459,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 3.29673,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "w62a": {
+      "tests": 25,
+      "assertions": 406,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.842038,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "w62b": {
+      "tests": 34,
+      "assertions": 586,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.498852,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "originals": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.539866,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "shadow": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.373183,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "independent": {
+      "tests": 26,
+      "assertions": 168,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.297639,
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "new-regressions": {
+      "tests": 15,
+      "assertions": 322,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 1.840815,
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  },
+  "physical": {
+    "status": "PASS",
+    "tests": 14,
+    "sqlite": "3.53.1",
+    "python": "3.12.14",
+    "cases": [
+      "test_committed_retirement_with_reader_and_independent_restore",
+      "test_incomplete_and_altered_backups_rejected_before_destination_creation",
+      "test_native_reservation_and_trigger_event_are_atomic_across_child_exits",
+      "test_online_backup_restore_and_tamper_detection",
+      "test_ownership_marker_unknown_file_and_symlink_stop_safely",
+      "test_process_exit_after_commit_recovers_whole_workflow",
+      "test_process_exit_before_commit_recovers_last_committed_state",
+      "test_retirement_serializes_with_competing_protected_writer",
+      "test_synthetic_retirement_rollback_persists_all_26_tables",
+      "test_temp_shadow_schema_drift_and_high_water_stop_before_retirement",
+      "contention",
+      "test_two_process_writer_busy_retry_and_idempotency",
+      "test_unknown_dependency_and_corrupt_sequence_reject_before_drop",
+      "test_unregistered_sidecar_is_not_claimed_by_cleanup",
+      "checkpoints",
+      "test_wal_snapshot_checkpoint_and_normal_reopen"
+    ]
+  },
+  "independent_adversarial": {
+    "status": "PASS",
+    "tests": 5
+  },
+  "quality": {
+    "pint": {
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "composer-validate": {
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "platform": {
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "composer-audit": {
+      "exit_code": 100,
+      "status": "BLOCKED",
+      "reason": "CONNECT 403; no PHP vulnerability conclusion"
+    },
+    "composer-audit-no-dev": {
+      "exit_code": 100,
+      "status": "BLOCKED",
+      "reason": "CONNECT 403; no PHP vulnerability conclusion"
+    },
+    "npm-audit": {
+      "exit_code": 0,
+      "status": "PASS",
+      "metadata": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "dependencies": {
+          "prod": 2,
+          "dev": 94,
+          "optional": 52,
+          "peer": 0,
+          "peerOptional": 0,
+          "total": 95
+        }
+      }
+    },
+    "build": {
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "git-diff-check": {
+      "status": "PASS",
+      "exit_code": 0
+    }
+  },
+  "runtime": {
+    "php_runtime": [
+      "PHP 8.4.27 (cli) (built: Nov  5 2026 07:23:05) (NTS)",
+      "Copyright (c) The PHP Group",
+      "Built by https://github.com/docker-library/php",
+      "Zend Engine v4.4.27, Copyright (c) Zend Technologies",
+      "    with Zend OPcache v8.4.27, Copyright (c), by Zend Technologies",
+      "SQLite 3.46.1",
+      "Laravel 12.71.0",
+      "PHPUnit 11.5.57",
+      "Tests source /app/tests/TestCase.php",
+      "App source /app/app/Models/User.php"
+    ],
+    "composer": "Composer version 2.11.2 2026-11-10 10:09:37",
+    "node_npm": [
+      "v24.22.1",
+      "11.9.0"
+    ],
+    "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "physical_sqlite_driver": "Python sqlite3, separate from PHP PDO",
+    "dependencies": "113 installed PHP versions/dist refs from existing lock; no dependency modifications"
+  },
+  "isolation": {
+    "source_only_runner": true,
+    "phpunit_network": "none",
+    "physical_root": "new random /tmp/tekora-w62e-* for each test,0700",
+    "database_paths_from_user_or_env": false,
+    "marker": "random secret token+creator PID; not exported",
+    "resource_identity": "device/inode/UID/type, no symlinks,0600 files",
+    "final_run_roots_removed": true,
+    "real_env_db_storage_media_accessed": false,
+    "production_migrations_api_config_dependencies_changed": false,
+    "pr28_accessed": false,
+    "cold_reopen_after_child_exit_no_surviving_connections": true
+  },
+  "incidents": [
+    {
+      "status": "FAIL",
+      "case": "initial backup sidecar registration",
+      "errors": 1,
+      "evidence": "initial failed output retained outside Git; no raw fixture published",
+      "resolution": "register sidecars after owned backup/manifest operation; cleanup never auto-adopts unknown files"
+    },
+    {
+      "status": "FAIL",
+      "case": "fixture DDL exact-name validation initially only accepted quoted identifiers",
+      "physical_errors": 13,
+      "adversarial_errors": 5,
+      "resolution": "accept exact known name bare or quoted followed by parenthesis; addCleanup before setup"
+    },
+    {
+      "status": "BLOCKED",
+      "case": "cleanup of18 roots from earlier failed setup attempts",
+      "reason": "Original complete identity ledger not retained; no automatic deletion or prefix purge performed",
+      "scope": "historical preparation only; final14+5 tests demonstrate their own root cleanup"
+    }
+  ],
+  "not_run": [
+    "Windows11/Laragon/Docker Desktop",
+    "persistent PHP PDO driver concurrency",
+    "concurrent Laravel service notification chain on disk",
+    "OS crash/power loss/hardware/fsync durability",
+    "MySQL",
+    "existing installation backup/recovery",
+    "real retirement"
+  ],
+  "final_sha": "Published only in draft PR description/final delivery; commit cannot contain its own SHA",
+  "recommendation": "Independent review of ownership gates, process barriers, online backup and driver-specific limits; owner decides integration"
+}
