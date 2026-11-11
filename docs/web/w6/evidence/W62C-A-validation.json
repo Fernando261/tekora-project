@@ -7,17 +7,17 @@
     "assertions": 9026
   },
   "new": {
-    "tests": 18,
-    "assertions": 182
+    "tests": 19,
+    "assertions": 198
   },
   "final": {
     "name": "/workspace/tekora-project/phpunit.xml",
-    "tests": "687",
-    "assertions": "9208",
+    "tests": "688",
+    "assertions": "9224",
     "errors": "0",
     "failures": "0",
     "skipped": "0",
-    "time": "131.477284"
+    "time": "104.786319"
   },
   "w51": {
     "tests": 49,
@@ -60,8 +60,39 @@
     "byte_reads_of_versioned_uploads": 9,
     "cause": "Auxiliary source integrity loop filtered uploads after reading, corrected to filter before reading.",
     "content_viewed_or_interpreted": false,
-    "media_bytes_or_hashes_persisted_in_evidence": false,
-    "real_media_zero_read_compliance": false
+    "real_media_zero_read_compliance": false,
+    "upload_bytes_or_hashes_persisted_in_evidence": false,
+    "public_img_files_read_for_sha256": 10,
+    "public_img_sha256_were_published_in_reviewed_head": true,
+    "public_img_sha256_removed_from_current_evidence": true,
+    "history_preserved": true,
+    "media_read_during_this_review": false
   },
-  "publication": "one draft PR only; no merge/deployment/auto-merge; no real purge"
+  "publication": "one draft PR only; no merge/deployment/auto-merge; no real purge",
+  "review_correction": {
+    "reviewed_head": "298905f5e3009da8404ffd628335740c6e5069e9",
+    "media_provenance_review": "Existing source text and evidence only; no media reads or rehashing",
+    "protected_trigger_gate": "Any new, missing or modified protected-table trigger relative to the fresh historical schema stops before first DROP; no SQL substring parser and no disabling triggers",
+    "source_integrity_entries_retained_from_prior_run": 314,
+    "audits_and_build": "Historical results from original delivery, not rerun for this test/documentation-only correction",
+    "new_and_full_suites_rerun": true,
+    "pint_test": "pass",
+    "git_diff_check": "pass"
+  },
+  "historical_verification_before_review": {
+    "head": "298905f5e3009da8404ffd628335740c6e5069e9",
+    "new": {
+      "tests": 18,
+      "assertions": 182
+    },
+    "final": {
+      "name": "/workspace/tekora-project/phpunit.xml",
+      "tests": "687",
+      "assertions": "9208",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "131.477284"
+    }
+  }
 }

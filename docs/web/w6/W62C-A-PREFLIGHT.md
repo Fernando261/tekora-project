@@ -53,7 +53,7 @@ Conservar datos, claves y restricciones de `users`, `roles`, `role_user`, `provi
 
 Conservar también `migrations`, `password_reset_tokens`, `sessions`, `cache`, `cache_locks`, `jobs`, `job_batches` y `failed_jobs`. La ausencia de rol, edad, género, correo, ID coincidente o falta de actividad no demuestra que una cuenta o fila sea exclusiva del producto anterior. No fusionar Profesionista→ProviderProfile ni convertir Cita→ServiceReservation. El inventario de tokens/sesiones solo debe registrar metadatos mínimos aprobados, nunca valores secretos.
 
-La simulación crea identidades con email coincidente, filas antiguas y nativas, un token móvil y referencias compartidas; compara **todas las filas de las 26 tablas protegidas y sus definiciones antes/después** de retirar las nueve tablas. Después opera mensajes, disponibilidad previamente creada, propuestas/confirmación/completado de reserva, reseña, avisos, catálogo y autenticación API. La suite W62A sin esquema anterior sigue cubriendo registro/login/logout web, ownership negativo y rotación/revocación de tokens. Las fuentes de aplicación permanecen idénticas a la base: [324 hashes](evidence/W62C-A-protected-source-integrity.json).
+La simulación crea identidades con email coincidente, filas antiguas y nativas, un token móvil y referencias compartidas; compara **todas las filas de las 26 tablas protegidas y sus definiciones antes/después** de retirar las nueve tablas. Después opera mensajes, disponibilidad previamente creada, propuestas/confirmación/completado de reserva, reseña, avisos, catálogo y autenticación API. La suite W62A sin esquema anterior sigue cubriendo registro/login/logout web, ownership negativo y rotación/revocación de tokens. Las fuentes de aplicación permanecen idénticas a la base: [314 hashes de fuentes retenidos de la evidencia previa, sin recalcular](evidence/W62C-A-protected-source-integrity.json).
 
 ## Matriz de medios y diez imágenes pendientes
 
@@ -61,10 +61,10 @@ La simulación crea identidades con email coincidente, filas antiguas y nativas,
 | --- | --- | --- |
 | `public/uploads/community/posts` y `community/comments` | Archivos servidos directamente; retirar rutas no despublica URL. Soft delete no garantiza bytes existentes | No enumerar ni leer medios reales. Inventario posterior autorizado, incluyendo referencias externas al dominio antiguo |
 | `storage/app/public` y URLs `/storage/` | users.profile_photo_path frente a posts/comments.media_path y emotions.image_path; URL absoluta, case, query/fragment y prefijos | Preservar toda referencia nativa. Las rutas gestionadas W5.1 son solo avatars/historical válidos y del propietario; no ampliar a un GC general |
-| `public/img/` | Assets versionados pueden estar guardados como rutas/URLs en filas desconocidas | Metadatos Git y referencias de fuentes únicamente; no inferir exclusividad por cero literales |
+| `public/img/` | Assets versionados pueden estar guardados como rutas/URLs en filas desconocidas | Política vigente: metadatos Git y referencias de fuentes, sin releer bytes. Las lecturas históricas para SHA-256 se declaran abajo; no inferir exclusividad por cero literales |
 | Fuentes/OFL, iconos, CSS/JS Tekora | Recursos nativos de varias pantallas | Protegidos; no borrar ni sustituir |
 
-La [clasificación individual](evidence/W62C-A-media-matrix.json) conserva blob Git, tamaño y referencias históricas/actuales para **alex.jpg, emociones.png, esperanza.png, fondo.jpg, foto1.png, logo.png, roque.jpg, salud.jpg, tranquilidad.png y user1.jpg**. Resultado para las diez: **candidata por procedencia; exclusividad en datos no demostrada; CONSERVAR**. Derechos, referencias en filas/URLs y bytes realmente existentes: **PENDIENTE DE AUTORIZACIÓN**. No se abrieron imágenes ni se interpretó su contenido; los hashes son verificación de integridad de recursos versionados. No se enumeraron medios de Storage reales. Se registra abajo una lectura accidental de bytes de medios versionados en uploads durante la verificación auxiliar de integridad.
+La [clasificación individual](evidence/W62C-A-media-matrix.json) conserva blob Git, tamaño y referencias históricas/actuales para **alex.jpg, emociones.png, esperanza.png, fondo.jpg, foto1.png, logo.png, roque.jpg, salud.jpg, tranquilidad.png y user1.jpg**. Resultado para las diez: **candidata por procedencia; exclusividad en datos no demostrada; CONSERVAR**. Derechos, referencias en filas/URLs y bytes realmente existentes: **PENDIENTE DE AUTORIZACIÓN**. No se visualizaron imágenes ni se interpretó su contenido. Sí se leyeron sus bytes para obtener los SHA-256 históricos; no fue una operación basada solo en metadatos Git. No se enumeraron medios de Storage reales. Se registra abajo una lectura accidental de bytes de medios versionados en uploads durante la verificación auxiliar de integridad.
 
 Los fixtures verifican una fotografía usada por dos Users y por posts/comments/emotions en cinco cortes (0, 1, 2, 3 y 9 tablas retiradas). Una actualización válida de foto no borra el archivo compartido. W5.1 y W62A mantienen los casos de error SQL, almacenamiento, metadata y retención conservadora sin modificar esas pruebas ni `LegacyPhotoReferences`.
 
@@ -74,7 +74,9 @@ Los fixtures verifican una fotografía usada por dos Users y por posts/comments/
 
 `tests/Feature/RetirementPreflightTest.php` contiene el simulador privado, sin autoload de producción ni interfaz genérica. Antes de cada DROP verifica testing, driver SQLite, nombre real `:memory:`, DB_URL vacío, `PRAGMA database_list` sin adjuntos y `foreign_keys=ON`. Nunca abre una conexión a un archivo para el ensayo negativo: altera solo la metadata del objeto ya conectado y exige el rechazo antes de operar.
 
-Se comprueban: esquema de las 37 migraciones; nueve tablas pobladas; allowlist y orden hijo→padre; rechazo de dependencia entrante desconocida; columna de medios ausente; trigger antiguo inesperado; FK huérfana; FK desactivadas; conexión adjunta; estado parcial no confirmado; fallo después del tercer paso sin continuación automática; reanudación sintética explícita; rollback transaccional SQLite y restauración lógica a una **segunda base SQLite en memoria**, cotejando checksum de DDL/filas restauradas, objetos, índices/triggers y FK. Los adjuntos usados para provocar rechazo también son `:memory:`. La corrupción deliberada desactiva FK únicamente para crear el fixture negativo; la retirada no las desactiva.
+Se comprueban: esquema de las 37 migraciones; nueve tablas pobladas; allowlist y orden hijo→padre; rechazo de dependencia entrante desconocida; columna de medios ausente; trigger antiguo inesperado; trigger cruzado asociado a users que escribe en posts; FK huérfana; FK desactivadas; conexión adjunta; estado parcial no confirmado; fallo después del tercer paso sin continuación automática; reanudación sintética explícita; rollback transaccional SQLite y restauración lógica a una **segunda base SQLite en memoria**, cotejando checksum de DDL/filas restauradas, objetos, índices/triggers y FK. Los adjuntos usados para provocar rechazo también son `:memory:`. La corrupción deliberada desactiva FK únicamente para crear el fixture negativo; la retirada no las desactiva.
+
+Antes del primer DROP también se compara la lista completa de triggers de tablas protegidas (nombre, tabla y SQL) con la captura de las 37 migraciones al iniciar cada test. Cualquier alta, cambio o ausencia exige parar con `Unreviewed protected trigger: stop before retirement`. La prueba cruzada crea un trigger sobre `users` cuyo cuerpo inserta en `posts`: comprueba cero sentencias DROP, nueve tablas aún presentes, filas protegidas y triggers intactos. Después demuestra que el trigger sigue activo mediante una actualización sintética, sin desactivarlo ni eliminarlo. No se pretende analizar SQL con búsquedas de palabras; se rechaza cualquier cambio no revisado, incluso si pudiera ser inocuo. Esta captura es la baseline sintética conocida, no una aprobación automática de triggers de una instalación real.
 
 Este ensayo no es un validador exhaustivo de instalaciones arbitrarias. El validador real futuro debe comparar esquema completo, tipos/defaults/índices, vistas y cuerpos de todos los triggers, no solo los ejemplos de drift cubiertos aquí. La restauración lógica sintética no sustituye una copia consistente ni el ensayo de recuperación operativo del motor objetivo. SQLite soporta rollback DDL en estos casos; **no se afirma atomicidad DDL ni compatibilidad MySQL**.
 
@@ -104,22 +106,32 @@ Este ensayo no es un validador exhaustivo de instalaciones arbitrarias. El valid
 
 Los resultados completos, conteos y límites se registran en [validación](evidence/W62C-A-validation.json), con logs y JUnit. Baseline Windows proporcionada por el encargo y baseline cloud actual: 669/9.026. W5.1: 49/459; W6.2a: 25/406; W6.2b: 34/586. La diferencia de cinco aserciones respecto al documento W62A original es la comprobación de clases retiradas añadida en W62B; no se alteran esas suites aquí.
 
-Se ejecutan también Composer validate/plataforma, auditorías con/sin dev, npm audit/build, Pint solo sobre el test nuevo y diff check. Si la API de Packagist está bloqueada, se informa como bloqueo, nunca como auditoría aprobada. PHP cloud 8.4.27; requisito Composer ^8.2 y plataforma 8.2.28 intactos. [Validación Windows/Laragon aislada](W62C-A-LARAGON.md), no ejecutada desde cloud.
+La entrega original ejecutó Composer validate/plataforma, auditorías con/sin dev y npm audit/build. Esos resultados se conservan como históricos y no se atribuyen a esta corrección; aquí se repiten las pruebas afectadas, la suite completa, Pint del test y diff check. Si la API de Packagist está bloqueada, se informa como bloqueo, nunca como auditoría aprobada. PHP cloud 8.4.27; requisito Composer ^8.2 y plataforma 8.2.28 intactos. [Validación Windows/Laragon aislada](W62C-A-LARAGON.md), no ejecutada desde cloud.
 
 ### Resultados completados en este entorno
 
 | Verificación | Resultado |
 | --- | --- |
 | Baseline | 669 pruebas / 9.026 aserciones |
-| Preflight nuevo | 18 / 182 |
-| Suite completa final | **687 / 9.208**, cero fallos, errores u omisiones |
+| Preflight tras corrección de revisión | 19 / 198 |
+| Suite completa tras corrección | **688 / 9.224**, cero fallos, errores u omisiones |
 | W5.1 / W6.2a / W6.2b | 49/459 · 25/406 · 34/586 |
 | Composer validate / plataforma | Correctos |
 | Composer audit con/sin dev | Bloqueados por proxy 403; no aprobados |
 | npm audit / build | Cero vulnerabilidades / correcto |
 | Pint del test nuevo / diff check | Correctos |
-| Fuentes protegidas | 324 archivos idénticos; 37 migraciones y 21 operaciones API intactas |
+| Fuentes protegidas | 314 entradas históricas retenidas sin recalcular; se retiran diez SHA-256 de imágenes. Producción, 37 migraciones y 21 operaciones API sin cambios en este PR |
 
-## Incidencia de alcance de lectura
+## Incidencia de alcance de lectura — registro original conservado
 
 Un script auxiliar temporal de integridad filtró las rutas `public/uploads/` después de leer sus bytes, en lugar de hacerlo antes. Así leyó nueve medios ya versionados bajo esa raíz. Esto excedió la restricción de lectura del encargo. No se visualizaron ni interpretaron sus contenidos, no se guardaron bytes ni hashes de esos medios en la evidencia y no se modificaron, copiaron ni borraron archivos. No se abrió ninguna base persistente. Se corrigió el filtro para excluir uploads/Storage/SQLite antes de cualquier lectura y se dejó de usar ese recorrido. Las pruebas y sus simulaciones solo operaron en memoria y Storage::fake. Esta incidencia se declara expresamente; no se presenta la ejecución como cumplimiento absoluto de cero lecturas de medios reales.
+
+### Aclaración de revisión del HEAD 298905f
+
+El campo original `real_media_read: false` era incorrecto: se corrige a **true** para la entrega histórica. Nueve archivos versionados de `public/uploads/` fueron leídos accidentalmente según el registro anterior; sus bytes/hashes no se guardaron en la evidencia. Separadamente, los diez archivos de `public/img/` tuvieron lectura de bytes para SHA-256 y sus hashes **sí se publicaron** en `W62C-A-protected-source-integrity.json` del HEAD revisado. Son grupos distintos: no debe extenderse a las diez imágenes la afirmación de que no se publicaron hashes de los nueve uploads.
+
+Procedencia contrastada con el texto del script auxiliar y el registro de ejecución, sin volver a ejecutarlo: `data = Path(p).read_bytes()` leía el archivo de trabajo; `hashlib.sha256(data).hexdigest()` producía su SHA-256. Además, `git show base:path` leía los bytes del blob para comparar. El SHA-256 no se derivó del identificador de objeto Git. En cambio, `git_blob` y `bytes` de la matriz procedían de `git ls-tree -l`: ID de objeto y tamaño ya registrados en Git, sin recalcular un hash del archivo de trabajo.
+
+Se retiran los diez SHA-256 de imágenes de la evidencia activa por no ser necesarios para esta revisión. Permanecen auditables en el commit histórico `298905f5e3009da8404ffd628335740c6e5069e9`; no se reescribe ese historial. Las otras 314 entradas se conservan desde el informe original, con procedencia explícita; **no se recalcularon**. La matriz distingue ahora lectura de bytes, visualización del contenido y lectura en esta revisión. No se abrieron ni releyeron medios en esta corrección ni se publican nuevos hashes de medios. No se afirma cumplimiento histórico de cero lecturas.
+
+La entrega inicial pasó 18/182 y 687/9.208; los logs activos y JUnit pasan a reflejar 19/198 y 688/9.224 tras la corrección. Los resultados anteriores permanecen en el HEAD revisado y en la validación como antecedente. No se han modificado fuentes de producto, migraciones, configuración, datos, medios ni credenciales.

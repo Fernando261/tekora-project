@@ -10,7 +10,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/emociones.png",
@@ -20,7 +22,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/esperanza.png",
@@ -30,7 +34,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/fondo.jpg",
@@ -40,7 +46,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/foto1.png",
@@ -50,7 +58,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/logo.png",
@@ -66,7 +76,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/roque.jpg",
@@ -78,7 +90,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/salud.jpg",
@@ -88,7 +102,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/tranquilidad.png",
@@ -98,7 +114,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     },
     {
       "file": "public/img/user1.jpg",
@@ -108,7 +126,9 @@
       "current_literal_references": [],
       "classification": "Retired source asset candidate; exclusivity in stored data unproven",
       "decision": "CONSERVAR; PENDIENTE DE AUTORIZACIÓN para inventario real de referencias, derechos y límites",
-      "image_opened": false
+      "content_visually_opened_or_interpreted": false,
+      "historical_bytes_read_for_sha256": true,
+      "media_bytes_read_during_this_review": false
     }
   ],
   "roots": [
@@ -129,6 +149,21 @@
     }
   ],
   "native_resources": "public/fonts/tekora incluidas licencias OFL; CSS/JS/iconos Tekora protegidos; sin cambios",
-  "real_media_read": false,
-  "real_deletion_authorized": false
+  "real_media_read": true,
+  "real_deletion_authorized": false,
+  "media_read_scope": {
+    "historical_versioned_upload_files_read": 9,
+    "historical_public_img_files_read_for_sha256": 10,
+    "no_zero_read_compliance": true,
+    "media_read_during_this_review": false,
+    "content_visually_opened_or_interpreted": false,
+    "historical_upload_bytes_or_hashes_persisted": false,
+    "historical_public_img_sha256_published_in": "298905f5e3009da8404ffd628335740c6e5069e9:docs/web/w6/evidence/W62C-A-protected-source-integrity.json",
+    "public_img_sha256_removed_from_current_evidence": true
+  },
+  "hash_provenance": {
+    "git_blob_and_bytes": "git ls-tree -l at base ce7cf62670a1c559247fa6993bcd26e73a334c80; existing object ID and size metadata, not a newly computed file hash",
+    "historical_image_sha256": "hashlib.sha256(data), where data = Path(p).read_bytes() from the working tree. Historical script also read git show base:path blob contents to compare bytes. These are content reads, not Git metadata-only checks.",
+    "review_method": "Read existing JSON, test code, historical script text and chat execution record only; did not rerun hashing script, git show for media, or open media files."
+  }
 }

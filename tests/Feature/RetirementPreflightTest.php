@@ -28,6 +28,8 @@ class RetirementPreflightTest extends TestCase
     private const TABLES = ['likes', 'comments', 'posts', 'reminders', 'emotions', 'citas',
         'profesionista_bloqueos', 'profesionista_disponibilidades', 'profesionistas'];
 
+    private array $reviewedProtectedTriggers;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -40,6 +42,7 @@ class RetirementPreflightTest extends TestCase
         });
         Storage::fake('public');
         Http::preventStrayRequests();
+        $this->reviewedProtectedTriggers = $this->protectedTriggers();
     }
 
     // Private to PHPUnit: never an application command, migration or general purge utility.
@@ -58,6 +61,15 @@ class RetirementPreflightTest extends TestCase
         if ((int) $c->selectOne('PRAGMA foreign_keys')->foreign_keys !== 1) {
             throw new RuntimeException('Foreign keys must remain enabled');
         }
+    }
+
+    private function protectedTriggers(): array
+    {
+        $this->memoryOnly();
+
+        return collect(DB::select("SELECT name,tbl_name,sql FROM sqlite_master WHERE type = 'trigger' ORDER BY name"))
+            ->reject(fn ($trigger) => in_array($trigger->tbl_name, self::TABLES, true))
+            ->map(fn ($trigger) => (array) $trigger)->all();
     }
 
     private function catalog(): array
@@ -114,6 +126,12 @@ class RetirementPreflightTest extends TestCase
             if (in_array($trigger->tbl_name, self::TABLES, true)) {
                 throw new RuntimeException('Unexpected retired trigger');
             }
+        }
+        // Fail closed for ANY new/changed/missing protected trigger. Do not try to
+        // infer SQL dependencies by substring matching or disable triggers. The
+        // reviewed baseline is the fresh historical schema built in this test.
+        if ($this->protectedTriggers() !== $this->reviewedProtectedTriggers) {
+            throw new RuntimeException('Unreviewed protected trigger: stop before retirement');
         }
         $positions = array_flip($order);
         foreach ($catalog as $child => $definition) {
@@ -224,6 +242,34 @@ class RetirementPreflightTest extends TestCase
         });
         $this->expectExceptionMessage('Unsafe incoming dependency/order');
         $this->simulate();
+    }
+
+    public function test_trigger_on_protected_users_referencing_posts_stops_before_any_retirement(): void
+    {
+        $user = User::factory()->create();
+        $this->seedRetired($user);
+        DB::unprepared("CREATE TRIGGER synthetic_cross_domain AFTER UPDATE OF name ON users BEGIN INSERT INTO posts (user_id, content) VALUES (NEW.id, 'synthetic cross-domain writer'); END");
+        $triggers = $this->protectedTriggers();
+        $before = $this->protectedRows();
+        DB::enableQueryLog();
+        DB::flushQueryLog();
+        try {
+            $this->simulate();
+            $this->fail('Cross-domain trigger accepted');
+        } catch (RuntimeException $e) {
+            $this->assertSame('Unreviewed protected trigger: stop before retirement', $e->getMessage());
+        }
+        $this->assertSame([], array_values(preg_grep('/^\s*drop\b/i', array_column(DB::getQueryLog(), 'query'))));
+        foreach (self::TABLES as $table) {
+            $this->assertTrue(Schema::hasTable($table));
+        }
+        $this->assertSame($before, $this->protectedRows());
+        $this->assertSame($triggers, $this->protectedTriggers());
+        $this->memoryOnly();
+        // The trigger was neither removed nor disabled to obtain a green result.
+        $user->update(['name' => 'Synthetic update after rejected plan']);
+        $this->assertDatabaseCount('posts', 2);
+        $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
     }
 
     public function test_partial_failure_requires_explicit_checkpoint_and_preserves_protected_rows(): void

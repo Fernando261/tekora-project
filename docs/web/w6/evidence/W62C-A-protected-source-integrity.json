@@ -786,46 +786,6 @@
       "sha256": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d"
     },
     {
-      "file": "public/img/alex.jpg",
-      "sha256": "a140b939e19cac95a6b031d023be38dfcf26a51c7204421ffe9ad42b50919f24"
-    },
-    {
-      "file": "public/img/emociones.png",
-      "sha256": "d72686648f5b652b4835d8d391e979c5ddb7eeba3fc17255d4fab9339432c638"
-    },
-    {
-      "file": "public/img/esperanza.png",
-      "sha256": "91b4f2a5fa279ce0151d3e49ddbaac0d31f4f92b863e33d7f985f559fc6bea7d"
-    },
-    {
-      "file": "public/img/fondo.jpg",
-      "sha256": "2b11fca13fa8deb15c68ff1f48235593ad99b168e6412f2d512bf062b030a716"
-    },
-    {
-      "file": "public/img/foto1.png",
-      "sha256": "5432281860a1177cc9bfa77ed6acc143d4a39abb0ffe47d2d824f02480c100ea"
-    },
-    {
-      "file": "public/img/logo.png",
-      "sha256": "9ba18513a047208cfa8b6a858515677e85c245ff6493c58fa0ca7051338a123c"
-    },
-    {
-      "file": "public/img/roque.jpg",
-      "sha256": "8a9f31871c7652a00836c04beb68b03f3e36b32497f9b6bad173fa9aa951cb7a"
-    },
-    {
-      "file": "public/img/salud.jpg",
-      "sha256": "9ed2d28eb76998cbf8b5cf14465f1770bddbaa7e87a5ff7b038ef51ec904624e"
-    },
-    {
-      "file": "public/img/tranquilidad.png",
-      "sha256": "7c83960b0f64d2c5b55a32733e5a79e940e99bf1c38651f8414291d5b052e1b8"
-    },
-    {
-      "file": "public/img/user1.jpg",
-      "sha256": "a140b939e19cac95a6b031d023be38dfcf26a51c7204421ffe9ad42b50919f24"
-    },
-    {
       "file": "public/index.php",
       "sha256": "eba77cba39695b6bd091fe5211d481f7ebb2ce2d8d26230b5a609465d0a4aff9"
     },
@@ -1300,5 +1260,27 @@
   ],
   "migrations": 37,
   "api_operations": 21,
-  "production_changes": false
+  "production_changes": false,
+  "provenance": {
+    "reviewed_head": "298905f5e3009da8404ffd628335740c6e5069e9",
+    "historical_entry_count": 324,
+    "current_entry_count": 314,
+    "retained_hashes": "Previously calculated from working-tree bytes, compared to git show blob bytes. Reused from reviewed evidence; not recomputed during this correction.",
+    "removed_image_sha256_entries": [
+      "public/img/alex.jpg",
+      "public/img/emociones.png",
+      "public/img/esperanza.png",
+      "public/img/fondo.jpg",
+      "public/img/foto1.png",
+      "public/img/logo.png",
+      "public/img/roque.jpg",
+      "public/img/salud.jpg",
+      "public/img/tranquilidad.png",
+      "public/img/user1.jpg"
+    ],
+    "removed_image_sha256_method": "Path(p).read_bytes() followed by hashlib.sha256(data), NOT derived from Git object metadata; git show also read image blob contents for comparison.",
+    "history_retained_in_reviewed_commit": true,
+    "new_media_hashes_generated": false,
+    "media_bytes_read_during_this_review": false
+  }
 }
