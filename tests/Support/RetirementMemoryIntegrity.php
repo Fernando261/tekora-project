@@ -45,7 +45,11 @@ trait RetirementMemoryIntegrity
         }
         $this->guardMemoryPdo($pdo);
         $query = fn (string $sql) => $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        $objects = $query("SELECT type,name,tbl_name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name");
+        // Compare the reserved prefix literally: LIKE 'sqlite_%' also matches
+        // valid application names such as sqliteX_cross because _ is a wildcard.
+        $objects = $query("SELECT type,name,tbl_name,sql FROM sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE ORDER BY type,name");
+        $sequences = $query('SELECT name,typeof(name) AS name_type,seq AS value,typeof(seq) AS storage_type FROM sqlite_sequence');
+        usort($sequences, fn ($a, $b) => strcmp(serialize($a), serialize($b)));
         $tables = [];
         foreach ($objects as $object) {
             if ($object['type'] !== 'table') {
@@ -79,28 +83,74 @@ trait RetirementMemoryIntegrity
                     'storage_types' => array_values(array_slice($row, count($columns)))];
             }
             usort($rows, fn ($a, $b) => strcmp(serialize($a), serialize($b)));
-            $sequence = $pdo->prepare('SELECT seq FROM sqlite_sequence WHERE name = ?');
-            $sequence->execute([$name]);
-            $value = $sequence->fetchColumn();
-            $sequence->closeCursor();
             $tables[$name] = ['sql' => $object['sql'], 'columns' => $columns,
                 'foreign_keys' => $query('PRAGMA foreign_key_list('.$quoted.')'), 'indexes' => $indexes,
                 'triggers' => array_values(array_filter($objects, fn ($o) => $o['type'] === 'trigger' && $o['tbl_name'] === $name)),
-                'rows' => $rows, 'sequence' => $value === false ? null : (int) $value];
+                'rows' => $rows,
+                'sequence' => array_values(array_filter($sequences, fn ($entry) => $entry['name_type'] === 'text' && $entry['name'] === $name))];
         }
         ksort($tables);
 
-        return ['tables' => $tables, 'objects' => $objects,
-            'temp_objects' => $query("SELECT type,name,tbl_name,sql FROM sqlite_temp_master WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name")];
+        return ['tables' => $tables, 'objects' => $objects, 'sequences' => $sequences,
+            'temp_objects' => $query("SELECT type,name,tbl_name,sql FROM sqlite_temp_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE ORDER BY type,name")];
     }
 
     private function schemaPart(array $manifest): array
     {
+        // Data is separated only for schema preflight. Full preservation and
+        // restore comparisons retain raw sequence entries and storage classes.
+        unset($manifest['sequences']);
         foreach ($manifest['tables'] as &$table) {
             unset($table['rows'], $table['sequence']);
         }
 
         return $manifest;
+    }
+
+    private function validateSequences(array $manifest): void
+    {
+        $byTable = array_fill_keys(array_keys($manifest['tables']), []);
+        foreach ($manifest['sequences'] as $entry) {
+            if (! is_array($entry) || array_keys($entry) !== ['name', 'name_type', 'value', 'storage_type']
+                || $entry['name_type'] !== 'text' || ! is_string($entry['name'])
+                || ! array_key_exists($entry['name'], $byTable)
+                || $byTable[$entry['name']] !== []
+                || $entry['storage_type'] !== 'integer' || ! is_int($entry['value']) || $entry['value'] < 0) {
+                throw new RuntimeException('Invalid sqlite_sequence entry: stop before retirement or restore');
+            }
+            $byTable[$entry['name']][] = $entry;
+        }
+        foreach ($manifest['tables'] as $name => $table) {
+            if ($table['sequence'] !== $byTable[$name]) {
+                throw new RuntimeException('Invalid sqlite_sequence snapshot: inconsistent table entries');
+            }
+            // This SQL is the exact trusted 37-migration catalog, checked before
+            // this validator. No arbitrary schema is approved by parsing SQL.
+            $auto = preg_match('/\bAUTOINCREMENT\b/i', $table['sql']) === 1;
+            if (! $auto) {
+                if ($table['sequence'] !== []) {
+                    throw new RuntimeException('Invalid sqlite_sequence entry for a non-autoincrement table');
+                }
+
+                continue;
+            }
+            $primary = array_values(array_filter($table['columns'], fn ($column) => $column['pk'] !== 0));
+            if (count($primary) !== 1 || $primary[0]['type'] !== 'INTEGER') {
+                throw new RuntimeException('Invalid sqlite_sequence primary key');
+            }
+            $max = 0;
+            foreach ($table['rows'] as $record) {
+                $id = $record['values'][$primary[0]['name']];
+                if (! is_int($id)) {
+                    throw new RuntimeException('Invalid sqlite_sequence rowid representation');
+                }
+                $max = max($max, $id);
+            }
+            if (($table['rows'] !== [] && $table['sequence'] === [])
+                || ($table['sequence'] !== [] && $table['sequence'][0]['value'] < $max)) {
+                throw new RuntimeException('Invalid sqlite_sequence high-water mark');
+            }
+        }
     }
 
     private function protectedManifest(array $manifest): array
@@ -132,6 +182,7 @@ trait RetirementMemoryIntegrity
             || $source['tables']['migrations']['rows'] !== $this->reviewedManifest['tables']['migrations']['rows']) {
             throw new RuntimeException('Unreviewed restore schema');
         }
+        $this->validateSequences($source);
         $copy = new PDO('sqlite::memory:', options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         $copy->exec('PRAGMA foreign_keys = ON');
         $this->guardMemoryPdo($copy);
@@ -172,13 +223,17 @@ trait RetirementMemoryIntegrity
                         $statement->execute();
                         $statement->closeCursor();
                     }
-                    if ($table['sequence'] !== null) {
+                    if ($table['sequence'] !== []) {
                         $statement = $copy->prepare('SELECT COUNT(*) FROM sqlite_sequence WHERE name = ?');
                         $statement->execute([$name]);
                         $exists = (int) $statement->fetchColumn();
                         $statement->closeCursor();
                         $sql = $exists ? 'UPDATE sqlite_sequence SET seq = ? WHERE name = ?' : 'INSERT INTO sqlite_sequence(seq,name) VALUES (?,?)';
-                        $copy->prepare($sql)->execute([$table['sequence'], $name]);
+                        $statement = $copy->prepare($sql);
+                        $statement->bindValue(1, $table['sequence'][0]['value'], PDO::PARAM_INT);
+                        $statement->bindValue(2, $name, PDO::PARAM_STR);
+                        $statement->execute();
+                        $statement->closeCursor();
                     }
                     unset($remaining[$name]);
                     $progress = true;
@@ -237,6 +292,7 @@ trait RetirementMemoryIntegrity
 
         return ['scope' => 'synthetic SQLite memory state; no media hashes or raw row values',
             'tables' => $tables, 'objects' => $manifest['objects'], 'temp_objects' => $manifest['temp_objects'],
+            'sequences' => $manifest['sequences'],
             // This sole row export is migration metadata (names/IDs/batches),
             // never user, message, credential or token values.
             'migration_ledger' => array_column($manifest['tables']['migrations']['rows'], 'values')];

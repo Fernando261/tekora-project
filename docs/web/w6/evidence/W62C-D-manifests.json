@@ -1,7 +1,7 @@
 {
   "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
   "status": "PASS",
-  "scope": "synthetic memory state only; no raw domain/credential values or media hashes",
+  "scope": "synthetic SQLite memory state; no raw domain/credential values or media hashes",
   "protected_count": 26,
   "candidate_count": 9,
   "all_26_populated_before_retirement": true,
@@ -9,178 +9,381 @@
     "tables": {
       "activity_notifications": {
         "row_count": 4,
-        "sequence": 4,
-        "synthetic_state_sha256": "57b6365f25935033dd36ea7c049ea46175e41907c1faa39185e080e148e0ab5e"
+        "sequence": [
+          {
+            "name": "activity_notifications",
+            "name_type": "text",
+            "value": 4,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f214c1b5b93053e3fadabf9ceffcfe909605d0844a4a7880912ff8a8dfac83c7"
       },
       "cache": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fef60532aa64c6d4e58118b06edbabce6903d1fbc3d3fc21f9840e2668f0357a"
+        "sequence": [],
+        "synthetic_state_sha256": "029da592c73ed84ef409ea9feb95cd3e6a9c8a2c3b0597157865099da0e352c2"
       },
       "cache_locks": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "ae0a09648922f4eeaec3af8d84a5e1ff405abd7ff872df643e9199690df2a711"
+        "sequence": [],
+        "synthetic_state_sha256": "c6545a4933583f6273997b4ab7b52a1313146f9a55afb8bebb6759c510ffe40a"
       },
       "citas": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "551f516155185a000c78c42daf4ed5d06b1c512d3275d22e3718d9d737d8bed9"
+        "sequence": [
+          {
+            "name": "citas",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "e1c0316c48c1170586b0ee755c0cef02f279b10e527cf610712755c82ce16126"
       },
       "comments": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "75d0b960f42c1cb91e5d8f2af6b5ebd1f728a1f4dd844fd345d5ffbfc8241cde"
+        "sequence": [
+          {
+            "name": "comments",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "4386bdc885c25432894bc09c03d6d8fb8bdb1ec267f8bdf8acfe829e5c04bf74"
       },
       "emotions": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "482767d43700247055c1f763c3d7b029e09fe11a2ab60e1915976a55d2cddd98"
+        "sequence": [
+          {
+            "name": "emotions",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "940f4791b9c307b673ff5ed1706037d4ca5716894b82319f5be08c2342808b38"
       },
       "failed_jobs": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "3777d4ad67f8203ee605000efc2d7182e43e5c199d88d767e71cc17be7f11307"
+        "sequence": [
+          {
+            "name": "failed_jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
       },
       "inquiry_notifications": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "e012a301eb4c0dba3444a0234a8550c6d4e5cd3c50530843512352a20f5c58b0"
+        "sequence": [
+          {
+            "name": "inquiry_notifications",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f71e0f818fd313d8daeb867bfd65379c6eb706622e0f13ee72daaf559aad3cba"
       },
       "job_batches": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "4466ef1ff6f213e366b290442508729aa63e6d118e9ee9e87a798484fb693236"
+        "sequence": [],
+        "synthetic_state_sha256": "77e9589d94d182060040ddf67ff49244e3074881699da773da006c1e4c65b6fa"
       },
       "jobs": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "cc08d57b062c1b7f5584431e765efa60aa12dcd700128a9c9f949d7660ae3323"
+        "sequence": [
+          {
+            "name": "jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0718329d71a19eee81052cc650599926cdebff2007432513a790c8becc71181b"
       },
       "likes": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "d3ad3368dc4806dcaf896256973d63452756d9e4c7c68c80be3ddc0dcb509ed3"
+        "sequence": [
+          {
+            "name": "likes",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "d9d157ecca446a129bc17ccd16ba693e7907726e72a4fec32803b50cf110a326"
       },
       "migrations": {
         "row_count": 37,
-        "sequence": 37,
-        "synthetic_state_sha256": "07b058983f2351674313dd352a5b4c8f1cbb9c2b25839fb4437832177e148e17"
+        "sequence": [
+          {
+            "name": "migrations",
+            "name_type": "text",
+            "value": 37,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "108ec3fdebf7d17049b3cfdec61977ebcf0bd32c1bf00c66b5d60d9dc3ba5cd4"
       },
       "password_reset_tokens": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fe591f7d48673427112329848a8744e8d0a1d5d4fdf9766ea378e7bac518f554"
+        "sequence": [],
+        "synthetic_state_sha256": "bbb3d533c1ffe82a57f1d7ed544e1c34fc9e30f04477eff94670e1ca220e80d8"
       },
       "personal_access_tokens": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "a06837315a5749ec690e5627a21b85eba31aa36b9bef9a071f9e6d8023d60fbf"
+        "sequence": [
+          {
+            "name": "personal_access_tokens",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
       },
       "posts": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "0a7efe3a9c282314eeb6a1b76dc9c3322633ce1b70bd49e3ff1f559b7838c322"
+        "sequence": [
+          {
+            "name": "posts",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1454ad74dbd72f10480a6d5327c2df3aaf72eda2758720dcc7f0ce4bdfa3132c"
       },
       "profesionista_bloqueos": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "31b628c8f51aed8e5d6c7b2dbfff16967eb87a8e67c94ce93c66061be6cd6ebe"
+        "sequence": [
+          {
+            "name": "profesionista_bloqueos",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f3a0df916b29358a23ba9ce2b6d23979ff3a89132fa2af4c0428b59373de6c8b"
       },
       "profesionista_disponibilidades": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "fda27fa0a8199971ea0a079dc8c5b9d1c6eb57b823c489b3364110c9f040f6a7"
+        "sequence": [
+          {
+            "name": "profesionista_disponibilidades",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f24e786c22c48702f1f9905f99453a5715e9078b5214eaf4a277d856cfa9153f"
       },
       "profesionistas": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "c9e204b2bd215dfe6db8c99274f04570bc0fd7864cd3bcb3c0c8035df6502288"
+        "sequence": [
+          {
+            "name": "profesionistas",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "9e2d55947c47d9a69f1abb17d62eff854333b5fff18e84c52499bb3efdfa52cc"
       },
       "provider_availability_settings": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f360c92905f8bebc3fd1ce5feda0f8c8e44c3c87c95377f824d4a2e2cfcb2a71"
+        "sequence": [
+          {
+            "name": "provider_availability_settings",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "14160b625636088a129a39d6ba3e5dd46bdee6919eb951b6a2c939035f96d175"
       },
       "provider_blocked_dates": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "c27efd6ac532c845b7180703745ea82ce1cdddbe85b8b42e5d112107ffb3e449"
+        "sequence": [
+          {
+            "name": "provider_blocked_dates",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0d96d361c9b82b034b65e7965aea1bdac59dd5cc397c68adc31188569350354b"
       },
       "provider_profiles": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "01aa4b08d88018c8d45aa330e43d4f6dedf3eccfaf45ecc29857ab2cbe73f815"
+        "sequence": [
+          {
+            "name": "provider_profiles",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "25597c8675cf43c1b1741f71500c73e0ed0a346c90ec73157cd2a726768d1bb6"
       },
       "provider_weekly_intervals": {
         "row_count": 7,
-        "sequence": 7,
-        "synthetic_state_sha256": "63f5ffabd3125529c65cb3e4532201c38884157fab61ebc94ff775c5bd4b5352"
+        "sequence": [
+          {
+            "name": "provider_weekly_intervals",
+            "name_type": "text",
+            "value": 7,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ffe4ba09a67f403b5fee738527fa80a40256d424b4c05ec6c0628544a93660f5"
       },
       "reminders": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "4198d3156e657a8f9512fdc9e06729a3c723c9d33de6fcbf531ea8aad542dec7"
+        "sequence": [
+          {
+            "name": "reminders",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "5aebb23f375fd1ce5319b77cd8e2ed94dd540cf6c7214a886a47c29f82eb6a12"
       },
       "reservation_events": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "6a83943c98772efe0d42b9ce3bd8a9bd3aa12250ae036365f377ae9fa982107c"
+        "sequence": [
+          {
+            "name": "reservation_events",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "a8da21ec227d0e538eecb0a58e0a26728dcd9dc9321c784167a320220ef5ca5d"
       },
       "role_user": {
         "row_count": 3,
-        "sequence": null,
-        "synthetic_state_sha256": "aa0470a6bf853eb46c0291b6d6aea250d91e39c01952810f2602ba272f40080e"
+        "sequence": [],
+        "synthetic_state_sha256": "18bab99bc77197ffcc2107a459a12774fe9bf248d1a31e18ed7673cfe7404f1b"
       },
       "roles": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "461df3f2e61b15829c5e019defcef72d34828731aa56b0d6f7ff654519181857"
+        "sequence": [
+          {
+            "name": "roles",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1c1f3ab491a649d1f5dee505a1e66ef5c1ee69af2e7b6ef2f6cd9a0edd705ed5"
       },
       "service_categories": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "4d90dcfb69718eed3c33e09870f8ce25f268af9bc685fcb3a8531b3370f66ecf"
+        "sequence": [
+          {
+            "name": "service_categories",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "fa1f4b283004f4e2dcf5c583cb3400ef77d2c6a16832862729d003f53f6a6633"
       },
       "service_inquiries": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "7ea8ee5cb5a14c084b178522bda13e7a0622597bf3d3c178375c03e46ae765b9"
+        "sequence": [
+          {
+            "name": "service_inquiries",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "b2edb17168a75505ea6ae121921c34c0d335ee4bb38514165d3ddae4be264ae4"
       },
       "service_inquiry_messages": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "bd6d441041754f42e39e78f2799337b9e11ad7060f3c4806ca70e5cbb7a428f8"
+        "sequence": [
+          {
+            "name": "service_inquiry_messages",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
       },
       "service_inquiry_reads": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "12133228561853143a24d0fc1647c9f4d15cd20f8575345c4d8830d4eb3bacac"
+        "sequence": [
+          {
+            "name": "service_inquiry_reads",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "da753517053554edce96f2334e1fc78ed0be620fad13c8db6225fd9b14648cd3"
       },
       "service_reservations": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "fa88b2bdda137ee4eabdb8363b1667f425b31278c289657c620531acf0598ab2"
+        "sequence": [
+          {
+            "name": "service_reservations",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
       },
       "service_reviews": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f57e4a164bb4eeda0d5c891d350589e6906a8d7ffd777600b59eb2d242701fa1"
+        "sequence": [
+          {
+            "name": "service_reviews",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "efbe5f0fc159e8d7bda14ea4053ae863ffbf37c5f14076671676f63b01fc826a"
       },
       "services": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "11be34da2d535fca052587f0308f3b5d877218d67ce4283651920547dff2ce5c"
+        "sequence": [
+          {
+            "name": "services",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "d68f8fa8cb10f14da29166213025535bf2913da41aa527b05320a50fba0f4bc8"
       },
       "sessions": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "b45077a0a1adcabd6f04086416968436d21d57fdf6d10cd98e9c72518d39a19c"
+        "sequence": [],
+        "synthetic_state_sha256": "2ecc86390094d97c3427cf8e35f560a97e290e6dc5b2028df88f5cd02b9b6dc5"
       },
       "users": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "26457e285a63c58c0824fa928cf9880ec33143fb61e62764e06392e337229930"
+        "sequence": [
+          {
+            "name": "users",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
       }
     },
     "objects": [
@@ -957,139 +1160,455 @@
         "migration": "2026_02_15_194127_add_deleted_at_to_posts_table",
         "batch": 1
       }
+    ],
+    "sequences": [
+      {
+        "name": "migrations",
+        "name_type": "text",
+        "value": 37,
+        "storage_type": "integer"
+      },
+      {
+        "name": "failed_jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "profesionistas",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reviews",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_profiles",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiries",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "reservation_events",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_categories",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reservations",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "inquiry_notifications",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_reads",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "activity_notifications",
+        "name_type": "text",
+        "value": 4,
+        "storage_type": "integer"
+      },
+      {
+        "name": "personal_access_tokens",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "profesionista_bloqueos",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_blocked_dates",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_messages",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_weekly_intervals",
+        "name_type": "text",
+        "value": 7,
+        "storage_type": "integer"
+      },
+      {
+        "name": "profesionista_disponibilidades",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_availability_settings",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "citas",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "likes",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "posts",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "roles",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "users",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "comments",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "emotions",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "services",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "reminders",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      }
     ]
   },
   "after": {
     "tables": {
       "activity_notifications": {
         "row_count": 4,
-        "sequence": 4,
-        "synthetic_state_sha256": "57b6365f25935033dd36ea7c049ea46175e41907c1faa39185e080e148e0ab5e"
+        "sequence": [
+          {
+            "name": "activity_notifications",
+            "name_type": "text",
+            "value": 4,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f214c1b5b93053e3fadabf9ceffcfe909605d0844a4a7880912ff8a8dfac83c7"
       },
       "cache": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fef60532aa64c6d4e58118b06edbabce6903d1fbc3d3fc21f9840e2668f0357a"
+        "sequence": [],
+        "synthetic_state_sha256": "029da592c73ed84ef409ea9feb95cd3e6a9c8a2c3b0597157865099da0e352c2"
       },
       "cache_locks": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "ae0a09648922f4eeaec3af8d84a5e1ff405abd7ff872df643e9199690df2a711"
+        "sequence": [],
+        "synthetic_state_sha256": "c6545a4933583f6273997b4ab7b52a1313146f9a55afb8bebb6759c510ffe40a"
       },
       "failed_jobs": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "3777d4ad67f8203ee605000efc2d7182e43e5c199d88d767e71cc17be7f11307"
+        "sequence": [
+          {
+            "name": "failed_jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
       },
       "inquiry_notifications": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "e012a301eb4c0dba3444a0234a8550c6d4e5cd3c50530843512352a20f5c58b0"
+        "sequence": [
+          {
+            "name": "inquiry_notifications",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f71e0f818fd313d8daeb867bfd65379c6eb706622e0f13ee72daaf559aad3cba"
       },
       "job_batches": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "4466ef1ff6f213e366b290442508729aa63e6d118e9ee9e87a798484fb693236"
+        "sequence": [],
+        "synthetic_state_sha256": "77e9589d94d182060040ddf67ff49244e3074881699da773da006c1e4c65b6fa"
       },
       "jobs": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "cc08d57b062c1b7f5584431e765efa60aa12dcd700128a9c9f949d7660ae3323"
+        "sequence": [
+          {
+            "name": "jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0718329d71a19eee81052cc650599926cdebff2007432513a790c8becc71181b"
       },
       "migrations": {
         "row_count": 37,
-        "sequence": 37,
-        "synthetic_state_sha256": "07b058983f2351674313dd352a5b4c8f1cbb9c2b25839fb4437832177e148e17"
+        "sequence": [
+          {
+            "name": "migrations",
+            "name_type": "text",
+            "value": 37,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "108ec3fdebf7d17049b3cfdec61977ebcf0bd32c1bf00c66b5d60d9dc3ba5cd4"
       },
       "password_reset_tokens": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fe591f7d48673427112329848a8744e8d0a1d5d4fdf9766ea378e7bac518f554"
+        "sequence": [],
+        "synthetic_state_sha256": "bbb3d533c1ffe82a57f1d7ed544e1c34fc9e30f04477eff94670e1ca220e80d8"
       },
       "personal_access_tokens": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "a06837315a5749ec690e5627a21b85eba31aa36b9bef9a071f9e6d8023d60fbf"
+        "sequence": [
+          {
+            "name": "personal_access_tokens",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
       },
       "provider_availability_settings": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f360c92905f8bebc3fd1ce5feda0f8c8e44c3c87c95377f824d4a2e2cfcb2a71"
+        "sequence": [
+          {
+            "name": "provider_availability_settings",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "14160b625636088a129a39d6ba3e5dd46bdee6919eb951b6a2c939035f96d175"
       },
       "provider_blocked_dates": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "c27efd6ac532c845b7180703745ea82ce1cdddbe85b8b42e5d112107ffb3e449"
+        "sequence": [
+          {
+            "name": "provider_blocked_dates",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0d96d361c9b82b034b65e7965aea1bdac59dd5cc397c68adc31188569350354b"
       },
       "provider_profiles": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "01aa4b08d88018c8d45aa330e43d4f6dedf3eccfaf45ecc29857ab2cbe73f815"
+        "sequence": [
+          {
+            "name": "provider_profiles",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "25597c8675cf43c1b1741f71500c73e0ed0a346c90ec73157cd2a726768d1bb6"
       },
       "provider_weekly_intervals": {
         "row_count": 7,
-        "sequence": 7,
-        "synthetic_state_sha256": "63f5ffabd3125529c65cb3e4532201c38884157fab61ebc94ff775c5bd4b5352"
+        "sequence": [
+          {
+            "name": "provider_weekly_intervals",
+            "name_type": "text",
+            "value": 7,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ffe4ba09a67f403b5fee738527fa80a40256d424b4c05ec6c0628544a93660f5"
       },
       "reservation_events": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "6a83943c98772efe0d42b9ce3bd8a9bd3aa12250ae036365f377ae9fa982107c"
+        "sequence": [
+          {
+            "name": "reservation_events",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "a8da21ec227d0e538eecb0a58e0a26728dcd9dc9321c784167a320220ef5ca5d"
       },
       "role_user": {
         "row_count": 3,
-        "sequence": null,
-        "synthetic_state_sha256": "aa0470a6bf853eb46c0291b6d6aea250d91e39c01952810f2602ba272f40080e"
+        "sequence": [],
+        "synthetic_state_sha256": "18bab99bc77197ffcc2107a459a12774fe9bf248d1a31e18ed7673cfe7404f1b"
       },
       "roles": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "461df3f2e61b15829c5e019defcef72d34828731aa56b0d6f7ff654519181857"
+        "sequence": [
+          {
+            "name": "roles",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1c1f3ab491a649d1f5dee505a1e66ef5c1ee69af2e7b6ef2f6cd9a0edd705ed5"
       },
       "service_categories": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "4d90dcfb69718eed3c33e09870f8ce25f268af9bc685fcb3a8531b3370f66ecf"
+        "sequence": [
+          {
+            "name": "service_categories",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "fa1f4b283004f4e2dcf5c583cb3400ef77d2c6a16832862729d003f53f6a6633"
       },
       "service_inquiries": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "7ea8ee5cb5a14c084b178522bda13e7a0622597bf3d3c178375c03e46ae765b9"
+        "sequence": [
+          {
+            "name": "service_inquiries",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "b2edb17168a75505ea6ae121921c34c0d335ee4bb38514165d3ddae4be264ae4"
       },
       "service_inquiry_messages": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "bd6d441041754f42e39e78f2799337b9e11ad7060f3c4806ca70e5cbb7a428f8"
+        "sequence": [
+          {
+            "name": "service_inquiry_messages",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
       },
       "service_inquiry_reads": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "12133228561853143a24d0fc1647c9f4d15cd20f8575345c4d8830d4eb3bacac"
+        "sequence": [
+          {
+            "name": "service_inquiry_reads",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "da753517053554edce96f2334e1fc78ed0be620fad13c8db6225fd9b14648cd3"
       },
       "service_reservations": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "fa88b2bdda137ee4eabdb8363b1667f425b31278c289657c620531acf0598ab2"
+        "sequence": [
+          {
+            "name": "service_reservations",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
       },
       "service_reviews": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f57e4a164bb4eeda0d5c891d350589e6906a8d7ffd777600b59eb2d242701fa1"
+        "sequence": [
+          {
+            "name": "service_reviews",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "efbe5f0fc159e8d7bda14ea4053ae863ffbf37c5f14076671676f63b01fc826a"
       },
       "services": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "11be34da2d535fca052587f0308f3b5d877218d67ce4283651920547dff2ce5c"
+        "sequence": [
+          {
+            "name": "services",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "d68f8fa8cb10f14da29166213025535bf2913da41aa527b05320a50fba0f4bc8"
       },
       "sessions": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "b45077a0a1adcabd6f04086416968436d21d57fdf6d10cd98e9c72518d39a19c"
+        "sequence": [],
+        "synthetic_state_sha256": "2ecc86390094d97c3427cf8e35f560a97e290e6dc5b2028df88f5cd02b9b6dc5"
       },
       "users": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "26457e285a63c58c0824fa928cf9880ec33143fb61e62764e06392e337229930"
+        "sequence": [
+          {
+            "name": "users",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
       }
     },
     "objects": [
@@ -1775,6 +2294,128 @@
         "id": 9,
         "migration": "2026_02_15_194127_add_deleted_at_to_posts_table",
         "batch": 1
+      }
+    ],
+    "sequences": [
+      {
+        "name": "migrations",
+        "name_type": "text",
+        "value": 37,
+        "storage_type": "integer"
+      },
+      {
+        "name": "failed_jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reviews",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_profiles",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiries",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "reservation_events",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_categories",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reservations",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "inquiry_notifications",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_reads",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "activity_notifications",
+        "name_type": "text",
+        "value": 4,
+        "storage_type": "integer"
+      },
+      {
+        "name": "personal_access_tokens",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_blocked_dates",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_messages",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_weekly_intervals",
+        "name_type": "text",
+        "value": 7,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_availability_settings",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "roles",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "users",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "services",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
       }
     ]
   },
@@ -8577,13 +9218,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 4,
-        "sequence": 4,
-        "synthetic_state_sha256": "57b6365f25935033dd36ea7c049ea46175e41907c1faa39185e080e148e0ab5e"
+        "sequence": [
+          {
+            "name": "activity_notifications",
+            "name_type": "text",
+            "value": 4,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f214c1b5b93053e3fadabf9ceffcfe909605d0844a4a7880912ff8a8dfac83c7"
       },
       "after": {
         "row_count": 4,
-        "sequence": 4,
-        "synthetic_state_sha256": "57b6365f25935033dd36ea7c049ea46175e41907c1faa39185e080e148e0ab5e"
+        "sequence": [
+          {
+            "name": "activity_notifications",
+            "name_type": "text",
+            "value": 4,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f214c1b5b93053e3fadabf9ceffcfe909605d0844a4a7880912ff8a8dfac83c7"
       }
     },
     "cache": {
@@ -8591,13 +9246,13 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fef60532aa64c6d4e58118b06edbabce6903d1fbc3d3fc21f9840e2668f0357a"
+        "sequence": [],
+        "synthetic_state_sha256": "029da592c73ed84ef409ea9feb95cd3e6a9c8a2c3b0597157865099da0e352c2"
       },
       "after": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fef60532aa64c6d4e58118b06edbabce6903d1fbc3d3fc21f9840e2668f0357a"
+        "sequence": [],
+        "synthetic_state_sha256": "029da592c73ed84ef409ea9feb95cd3e6a9c8a2c3b0597157865099da0e352c2"
       }
     },
     "cache_locks": {
@@ -8605,13 +9260,13 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "ae0a09648922f4eeaec3af8d84a5e1ff405abd7ff872df643e9199690df2a711"
+        "sequence": [],
+        "synthetic_state_sha256": "c6545a4933583f6273997b4ab7b52a1313146f9a55afb8bebb6759c510ffe40a"
       },
       "after": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "ae0a09648922f4eeaec3af8d84a5e1ff405abd7ff872df643e9199690df2a711"
+        "sequence": [],
+        "synthetic_state_sha256": "c6545a4933583f6273997b4ab7b52a1313146f9a55afb8bebb6759c510ffe40a"
       }
     },
     "failed_jobs": {
@@ -8619,13 +9274,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "3777d4ad67f8203ee605000efc2d7182e43e5c199d88d767e71cc17be7f11307"
+        "sequence": [
+          {
+            "name": "failed_jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "3777d4ad67f8203ee605000efc2d7182e43e5c199d88d767e71cc17be7f11307"
+        "sequence": [
+          {
+            "name": "failed_jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
       }
     },
     "inquiry_notifications": {
@@ -8633,13 +9302,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "e012a301eb4c0dba3444a0234a8550c6d4e5cd3c50530843512352a20f5c58b0"
+        "sequence": [
+          {
+            "name": "inquiry_notifications",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f71e0f818fd313d8daeb867bfd65379c6eb706622e0f13ee72daaf559aad3cba"
       },
       "after": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "e012a301eb4c0dba3444a0234a8550c6d4e5cd3c50530843512352a20f5c58b0"
+        "sequence": [
+          {
+            "name": "inquiry_notifications",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "f71e0f818fd313d8daeb867bfd65379c6eb706622e0f13ee72daaf559aad3cba"
       }
     },
     "job_batches": {
@@ -8647,13 +9330,13 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "4466ef1ff6f213e366b290442508729aa63e6d118e9ee9e87a798484fb693236"
+        "sequence": [],
+        "synthetic_state_sha256": "77e9589d94d182060040ddf67ff49244e3074881699da773da006c1e4c65b6fa"
       },
       "after": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "4466ef1ff6f213e366b290442508729aa63e6d118e9ee9e87a798484fb693236"
+        "sequence": [],
+        "synthetic_state_sha256": "77e9589d94d182060040ddf67ff49244e3074881699da773da006c1e4c65b6fa"
       }
     },
     "jobs": {
@@ -8661,13 +9344,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "cc08d57b062c1b7f5584431e765efa60aa12dcd700128a9c9f949d7660ae3323"
+        "sequence": [
+          {
+            "name": "jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0718329d71a19eee81052cc650599926cdebff2007432513a790c8becc71181b"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "cc08d57b062c1b7f5584431e765efa60aa12dcd700128a9c9f949d7660ae3323"
+        "sequence": [
+          {
+            "name": "jobs",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0718329d71a19eee81052cc650599926cdebff2007432513a790c8becc71181b"
       }
     },
     "migrations": {
@@ -8675,13 +9372,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 37,
-        "sequence": 37,
-        "synthetic_state_sha256": "07b058983f2351674313dd352a5b4c8f1cbb9c2b25839fb4437832177e148e17"
+        "sequence": [
+          {
+            "name": "migrations",
+            "name_type": "text",
+            "value": 37,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "108ec3fdebf7d17049b3cfdec61977ebcf0bd32c1bf00c66b5d60d9dc3ba5cd4"
       },
       "after": {
         "row_count": 37,
-        "sequence": 37,
-        "synthetic_state_sha256": "07b058983f2351674313dd352a5b4c8f1cbb9c2b25839fb4437832177e148e17"
+        "sequence": [
+          {
+            "name": "migrations",
+            "name_type": "text",
+            "value": 37,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "108ec3fdebf7d17049b3cfdec61977ebcf0bd32c1bf00c66b5d60d9dc3ba5cd4"
       }
     },
     "password_reset_tokens": {
@@ -8689,13 +9400,13 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fe591f7d48673427112329848a8744e8d0a1d5d4fdf9766ea378e7bac518f554"
+        "sequence": [],
+        "synthetic_state_sha256": "bbb3d533c1ffe82a57f1d7ed544e1c34fc9e30f04477eff94670e1ca220e80d8"
       },
       "after": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "fe591f7d48673427112329848a8744e8d0a1d5d4fdf9766ea378e7bac518f554"
+        "sequence": [],
+        "synthetic_state_sha256": "bbb3d533c1ffe82a57f1d7ed544e1c34fc9e30f04477eff94670e1ca220e80d8"
       }
     },
     "personal_access_tokens": {
@@ -8703,13 +9414,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "a06837315a5749ec690e5627a21b85eba31aa36b9bef9a071f9e6d8023d60fbf"
+        "sequence": [
+          {
+            "name": "personal_access_tokens",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "a06837315a5749ec690e5627a21b85eba31aa36b9bef9a071f9e6d8023d60fbf"
+        "sequence": [
+          {
+            "name": "personal_access_tokens",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
       }
     },
     "provider_availability_settings": {
@@ -8717,13 +9442,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f360c92905f8bebc3fd1ce5feda0f8c8e44c3c87c95377f824d4a2e2cfcb2a71"
+        "sequence": [
+          {
+            "name": "provider_availability_settings",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "14160b625636088a129a39d6ba3e5dd46bdee6919eb951b6a2c939035f96d175"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f360c92905f8bebc3fd1ce5feda0f8c8e44c3c87c95377f824d4a2e2cfcb2a71"
+        "sequence": [
+          {
+            "name": "provider_availability_settings",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "14160b625636088a129a39d6ba3e5dd46bdee6919eb951b6a2c939035f96d175"
       }
     },
     "provider_blocked_dates": {
@@ -8731,13 +9470,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "c27efd6ac532c845b7180703745ea82ce1cdddbe85b8b42e5d112107ffb3e449"
+        "sequence": [
+          {
+            "name": "provider_blocked_dates",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0d96d361c9b82b034b65e7965aea1bdac59dd5cc397c68adc31188569350354b"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "c27efd6ac532c845b7180703745ea82ce1cdddbe85b8b42e5d112107ffb3e449"
+        "sequence": [
+          {
+            "name": "provider_blocked_dates",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "0d96d361c9b82b034b65e7965aea1bdac59dd5cc397c68adc31188569350354b"
       }
     },
     "provider_profiles": {
@@ -8745,13 +9498,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "01aa4b08d88018c8d45aa330e43d4f6dedf3eccfaf45ecc29857ab2cbe73f815"
+        "sequence": [
+          {
+            "name": "provider_profiles",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "25597c8675cf43c1b1741f71500c73e0ed0a346c90ec73157cd2a726768d1bb6"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "01aa4b08d88018c8d45aa330e43d4f6dedf3eccfaf45ecc29857ab2cbe73f815"
+        "sequence": [
+          {
+            "name": "provider_profiles",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "25597c8675cf43c1b1741f71500c73e0ed0a346c90ec73157cd2a726768d1bb6"
       }
     },
     "provider_weekly_intervals": {
@@ -8759,13 +9526,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 7,
-        "sequence": 7,
-        "synthetic_state_sha256": "63f5ffabd3125529c65cb3e4532201c38884157fab61ebc94ff775c5bd4b5352"
+        "sequence": [
+          {
+            "name": "provider_weekly_intervals",
+            "name_type": "text",
+            "value": 7,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ffe4ba09a67f403b5fee738527fa80a40256d424b4c05ec6c0628544a93660f5"
       },
       "after": {
         "row_count": 7,
-        "sequence": 7,
-        "synthetic_state_sha256": "63f5ffabd3125529c65cb3e4532201c38884157fab61ebc94ff775c5bd4b5352"
+        "sequence": [
+          {
+            "name": "provider_weekly_intervals",
+            "name_type": "text",
+            "value": 7,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ffe4ba09a67f403b5fee738527fa80a40256d424b4c05ec6c0628544a93660f5"
       }
     },
     "reservation_events": {
@@ -8773,13 +9554,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "6a83943c98772efe0d42b9ce3bd8a9bd3aa12250ae036365f377ae9fa982107c"
+        "sequence": [
+          {
+            "name": "reservation_events",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "a8da21ec227d0e538eecb0a58e0a26728dcd9dc9321c784167a320220ef5ca5d"
       },
       "after": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "6a83943c98772efe0d42b9ce3bd8a9bd3aa12250ae036365f377ae9fa982107c"
+        "sequence": [
+          {
+            "name": "reservation_events",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "a8da21ec227d0e538eecb0a58e0a26728dcd9dc9321c784167a320220ef5ca5d"
       }
     },
     "role_user": {
@@ -8787,13 +9582,13 @@
       "schema_equal": true,
       "before": {
         "row_count": 3,
-        "sequence": null,
-        "synthetic_state_sha256": "aa0470a6bf853eb46c0291b6d6aea250d91e39c01952810f2602ba272f40080e"
+        "sequence": [],
+        "synthetic_state_sha256": "18bab99bc77197ffcc2107a459a12774fe9bf248d1a31e18ed7673cfe7404f1b"
       },
       "after": {
         "row_count": 3,
-        "sequence": null,
-        "synthetic_state_sha256": "aa0470a6bf853eb46c0291b6d6aea250d91e39c01952810f2602ba272f40080e"
+        "sequence": [],
+        "synthetic_state_sha256": "18bab99bc77197ffcc2107a459a12774fe9bf248d1a31e18ed7673cfe7404f1b"
       }
     },
     "roles": {
@@ -8801,13 +9596,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "461df3f2e61b15829c5e019defcef72d34828731aa56b0d6f7ff654519181857"
+        "sequence": [
+          {
+            "name": "roles",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1c1f3ab491a649d1f5dee505a1e66ef5c1ee69af2e7b6ef2f6cd9a0edd705ed5"
       },
       "after": {
         "row_count": 3,
-        "sequence": 3,
-        "synthetic_state_sha256": "461df3f2e61b15829c5e019defcef72d34828731aa56b0d6f7ff654519181857"
+        "sequence": [
+          {
+            "name": "roles",
+            "name_type": "text",
+            "value": 3,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1c1f3ab491a649d1f5dee505a1e66ef5c1ee69af2e7b6ef2f6cd9a0edd705ed5"
       }
     },
     "service_categories": {
@@ -8815,13 +9624,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "4d90dcfb69718eed3c33e09870f8ce25f268af9bc685fcb3a8531b3370f66ecf"
+        "sequence": [
+          {
+            "name": "service_categories",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "fa1f4b283004f4e2dcf5c583cb3400ef77d2c6a16832862729d003f53f6a6633"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "4d90dcfb69718eed3c33e09870f8ce25f268af9bc685fcb3a8531b3370f66ecf"
+        "sequence": [
+          {
+            "name": "service_categories",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "fa1f4b283004f4e2dcf5c583cb3400ef77d2c6a16832862729d003f53f6a6633"
       }
     },
     "service_inquiries": {
@@ -8829,13 +9652,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "7ea8ee5cb5a14c084b178522bda13e7a0622597bf3d3c178375c03e46ae765b9"
+        "sequence": [
+          {
+            "name": "service_inquiries",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "b2edb17168a75505ea6ae121921c34c0d335ee4bb38514165d3ddae4be264ae4"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "7ea8ee5cb5a14c084b178522bda13e7a0622597bf3d3c178375c03e46ae765b9"
+        "sequence": [
+          {
+            "name": "service_inquiries",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "b2edb17168a75505ea6ae121921c34c0d335ee4bb38514165d3ddae4be264ae4"
       }
     },
     "service_inquiry_messages": {
@@ -8843,13 +9680,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "bd6d441041754f42e39e78f2799337b9e11ad7060f3c4806ca70e5cbb7a428f8"
+        "sequence": [
+          {
+            "name": "service_inquiry_messages",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
       },
       "after": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "bd6d441041754f42e39e78f2799337b9e11ad7060f3c4806ca70e5cbb7a428f8"
+        "sequence": [
+          {
+            "name": "service_inquiry_messages",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
       }
     },
     "service_inquiry_reads": {
@@ -8857,13 +9708,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "12133228561853143a24d0fc1647c9f4d15cd20f8575345c4d8830d4eb3bacac"
+        "sequence": [
+          {
+            "name": "service_inquiry_reads",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "da753517053554edce96f2334e1fc78ed0be620fad13c8db6225fd9b14648cd3"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "12133228561853143a24d0fc1647c9f4d15cd20f8575345c4d8830d4eb3bacac"
+        "sequence": [
+          {
+            "name": "service_inquiry_reads",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "da753517053554edce96f2334e1fc78ed0be620fad13c8db6225fd9b14648cd3"
       }
     },
     "service_reservations": {
@@ -8871,13 +9736,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "fa88b2bdda137ee4eabdb8363b1667f425b31278c289657c620531acf0598ab2"
+        "sequence": [
+          {
+            "name": "service_reservations",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "fa88b2bdda137ee4eabdb8363b1667f425b31278c289657c620531acf0598ab2"
+        "sequence": [
+          {
+            "name": "service_reservations",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
       }
     },
     "service_reviews": {
@@ -8885,13 +9764,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f57e4a164bb4eeda0d5c891d350589e6906a8d7ffd777600b59eb2d242701fa1"
+        "sequence": [
+          {
+            "name": "service_reviews",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "efbe5f0fc159e8d7bda14ea4053ae863ffbf37c5f14076671676f63b01fc826a"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "f57e4a164bb4eeda0d5c891d350589e6906a8d7ffd777600b59eb2d242701fa1"
+        "sequence": [
+          {
+            "name": "service_reviews",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "efbe5f0fc159e8d7bda14ea4053ae863ffbf37c5f14076671676f63b01fc826a"
       }
     },
     "services": {
@@ -8899,13 +9792,27 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "11be34da2d535fca052587f0308f3b5d877218d67ce4283651920547dff2ce5c"
+        "sequence": [
+          {
+            "name": "services",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "d68f8fa8cb10f14da29166213025535bf2913da41aa527b05320a50fba0f4bc8"
       },
       "after": {
         "row_count": 1,
-        "sequence": 1,
-        "synthetic_state_sha256": "11be34da2d535fca052587f0308f3b5d877218d67ce4283651920547dff2ce5c"
+        "sequence": [
+          {
+            "name": "services",
+            "name_type": "text",
+            "value": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "d68f8fa8cb10f14da29166213025535bf2913da41aa527b05320a50fba0f4bc8"
       }
     },
     "sessions": {
@@ -8913,13 +9820,13 @@
       "schema_equal": true,
       "before": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "b45077a0a1adcabd6f04086416968436d21d57fdf6d10cd98e9c72518d39a19c"
+        "sequence": [],
+        "synthetic_state_sha256": "2ecc86390094d97c3427cf8e35f560a97e290e6dc5b2028df88f5cd02b9b6dc5"
       },
       "after": {
         "row_count": 1,
-        "sequence": null,
-        "synthetic_state_sha256": "b45077a0a1adcabd6f04086416968436d21d57fdf6d10cd98e9c72518d39a19c"
+        "sequence": [],
+        "synthetic_state_sha256": "2ecc86390094d97c3427cf8e35f560a97e290e6dc5b2028df88f5cd02b9b6dc5"
       }
     },
     "users": {
@@ -8927,15 +9834,31 @@
       "schema_equal": true,
       "before": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "26457e285a63c58c0824fa928cf9880ec33143fb61e62764e06392e337229930"
+        "sequence": [
+          {
+            "name": "users",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
       },
       "after": {
         "row_count": 2,
-        "sequence": 2,
-        "synthetic_state_sha256": "26457e285a63c58c0824fa928cf9880ec33143fb61e62764e06392e337229930"
+        "sequence": [
+          {
+            "name": "users",
+            "name_type": "text",
+            "value": 2,
+            "storage_type": "integer"
+          }
+        ],
+        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
       }
     }
   },
-  "serialization_note": "Schema is serialized once in reviewed_catalog. Before/after summaries and comparisons retain all 26 synthetic state digests, row counts, sequences and ledger; the executed PHPUnit comparison uses complete values/storage types/schema in memory, without exclusions."
+  "serialization_note": "Catalog serialized once; state comparisons retain raw sequence lists (name/type/value/storage class), all synthetic state digests, row counts and ledger. Complete values/storage types/schema are compared in memory.",
+  "manifest_format_version": 2,
+  "sequence_policy": "Capture preserves corrupt/null/missing/duplicate/orphan entries. A separate strict validator stops before DROP/restore. No PHP numeric casts in snapshots."
 }

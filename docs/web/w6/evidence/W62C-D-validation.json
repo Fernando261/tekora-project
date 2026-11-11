@@ -1,20 +1,20 @@
 {
   "task": "TEKORA W6.2c-d",
-  "recorded_at_utc": "2026-11-11T07:03:39+00:00",
   "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
   "branch": "codex/w62c-d-sqlite-retirement-rehearsal",
   "final_sha_publication": "Exact final SHA in the draft PR description and final delivery; a commit cannot contain its own hash. Tested source Git blob IDs below identify the executed files.",
   "tested_source_git_blobs": {
-    "tests/Feature/RetirementPreflightTest.php": "d90ae126a0a5bf21a0f57ea600361170b84112dc",
-    "tests/Support/RetirementMemoryIntegrity.php": "0f200066d1c92f53e99f3b0e5652c6d41865521f"
+    "tests/Feature/RetirementPreflightTest.php": "4388a1f3059ed7db9f6ed4b68fff0a43963aaaae",
+    "tests/Support/RetirementMemoryIntegrity.php": "c09cffce7f963c31e23b098c0e498e6e469682c1"
   },
   "preflight": {
     "status": "PASS",
     "remote_main_and_selected_head": "7c6b99823630fb457d7f53b7e73732da454e7b81",
     "initial_worktree_clean": true,
     "available_space": "44 GiB",
-    "initial_free_inodes": 3908576,
-    "repository_access": "PASS"
+    "initial_free_inodes": 3865965,
+    "repository_access": "PASS",
+    "pr30_head_verified_before_edits": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53"
   },
   "pr28": {
     "state": "open",
@@ -44,24 +44,25 @@
       "failures": 0,
       "skipped": 0,
       "seconds": 89.310765,
-      "status": "PASS"
+      "status": "PASS",
+      "execution_scope": "Historical original delivery, not rerun in this fix"
     },
     "full": {
-      "tests": 739,
-      "assertions": 9652,
+      "tests": 774,
+      "assertions": 10022,
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 119.240421,
+      "seconds": 222.33704,
       "status": "PASS"
     },
     "rehearsal": {
-      "tests": 70,
-      "assertions": 626,
+      "tests": 105,
+      "assertions": 996,
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 9.823503,
+      "seconds": 91.758761,
       "status": "PASS"
     },
     "w51": {
@@ -70,7 +71,7 @@
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 3.969717,
+      "seconds": 4.873556,
       "status": "PASS"
     },
     "w62a": {
@@ -79,7 +80,7 @@
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 3.074464,
+      "seconds": 3.117652,
       "status": "PASS"
     },
     "w62b": {
@@ -88,13 +89,22 @@
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 2.88672,
+      "seconds": 3.004521,
+      "status": "PASS"
+    },
+    "original-probes": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.879734,
       "status": "PASS"
     }
   },
   "increase_from_baseline": {
-    "tests": 51,
-    "assertions": 428
+    "tests": 86,
+    "assertions": 798
   },
   "baseline_w62ca": {
     "tests": 19,
@@ -151,7 +161,11 @@
     "api_operations": 21,
     "protected_triggers": 34,
     "candidate_triggers": 0,
-    "raw_values_storage_types_rows_schema_sequences_equal": true
+    "raw_values_storage_types_rows_schema_sequences_equal": true,
+    "sequence_format_version": 2,
+    "raw_global_and_per_table_sequence_entries": true,
+    "strict_sequence_validation_before_drop_and_restore": true,
+    "unknown_sqlitex_objects_stop_before_first_drop": true
   },
   "isolation": {
     "status": "PASS",
@@ -167,7 +181,8 @@
     "real_or_versioned_media_read_copied_hashed_modified": false,
     "real_database_accessed": false,
     "acceptance_original_checkout_mounted": false,
-    "restore_destination": "new independent PDO sqlite::memory:"
+    "restore_destination": "new independent PDO sqlite::memory:",
+    "original_five_probe_code_unchanged": true
   },
   "controls": {
     "rehearsal": "PASS",
@@ -187,7 +202,9 @@
     "php_8_2_runtime": "NOT RUN",
     "persistent_sqlite_locks_wal_crash": "NOT RUN",
     "mysql": "NOT RUN",
-    "real_retirement": "BLOCKED"
+    "real_retirement": "BLOCKED",
+    "original_five": "PASS",
+    "new_p1_p2_regressions": "PASS"
   },
   "scope": {
     "production_code_changed": false,
@@ -207,7 +224,9 @@
     "docs/web/w6/evidence/W62C-D-scenarios.json",
     "docs/web/w6/evidence/W62C-D-manifests.json",
     "docs/web/w6/evidence/W62C-D-rollback-restore.json",
-    "docs/web/w6/evidence/W62C-D-quality.json"
+    "docs/web/w6/evidence/W62C-D-quality.json",
+    "docs/web/w6/evidence/W62C-D-fix-review.json",
+    "docs/web/w6/evidence/W62C-D-original-review-probes.php.txt"
   ],
   "evidence_policy": "Only synthetic schema, migration metadata, row counts/sequences and state digests. No raw user, message, credential, token or image values. No hashes of existing media.",
   "historical_incidents": "W6.2c-a media-read incidence and W6.2c-b initial env-loader incidence remain in their original documents. No historical zero-read claim. No reread in W6.2c-d.",
@@ -226,18 +245,49 @@
     "Backup not consistently restorable to an isolated target",
     "No separately reviewed implementation, recovery policy, window or authorization"
   ],
-  "publication": "One independent draft PR only; no merge, deployment or auto-merge",
+  "publication": "Update existing draft PR #30 only; no new PR, merge, deployment or auto-merge",
   "documentary_checks": {
     "status": "PASS",
-    "json_files": 5,
-    "relative_links": 14,
+    "json_files": 6,
+    "relative_links": 17,
     "markdown_tables": 4,
-    "raw_email_password_or_token_values": 0,
-    "only_allowed_files": true,
-    "production_and_migration_changes": 0,
-    "api_operations_static": 21,
-    "historical_migration_sources": 37,
-    "remote_main_exact_match_before_commit": "7c6b99823630fb457d7f53b7e73732da454e7b81",
-    "fake_storage_root_separator_normalization": "PASS on Linux; Windows execution NOT RUN"
-  }
+    "sensitive_value_patterns": 0,
+    "prior_cases_and_assertions_retained": 70,
+    "php_probe_fixture_verbatim": true
+  },
+  "recorded_at": "2026-11-11T02:26:22-06:00",
+  "fix_initial_head": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
+  "historical_before_fix": {
+    "head": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
+    "full": {
+      "status": "PASS",
+      "tests": 739,
+      "assertions": 9652
+    },
+    "rehearsal": {
+      "status": "PASS",
+      "tests": 70,
+      "assertions": 626
+    },
+    "independent_acceptance": "CHANGES REQUIRED",
+    "original_five": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 5,
+      "skipped": 0,
+      "seconds": 1.027616,
+      "status": "FAIL"
+    },
+    "original_findings": [
+      "P1 literal-prefix wildcard",
+      "P2 lossy sequence cast"
+    ],
+    "recorded_at_utc": "2026-11-11T07:03:39+00:00"
+  },
+  "increase_from_reviewed_head": {
+    "tests": 35,
+    "assertions": 370
+  },
+  "delivery_status": "Ready for a new independent review; not automatically approved"
 }

@@ -1,0 +1,637 @@
+{
+  "task": "W6.2c-d-fix",
+  "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+  "initial_reviewed_head": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
+  "recorded_at": "2026-11-11T02:26:22-06:00",
+  "delivery_status": "Ready for a new independent review; not automatically approved",
+  "original_findings": [
+    {
+      "id": "P1",
+      "severity": "HIGH",
+      "historical_result": "FAIL — nine synthetic drops, row lost by cascade, views broken, extra restored view accepted",
+      "correction": "Literal reserved prefix comparison in main/temp and complete table listing, unchanged fail-closed reviewed catalog",
+      "current_regressions": "PASS — zero DROP and unknown row/view preserved; restore rejected and rolled back"
+    },
+    {
+      "id": "P2",
+      "severity": "MEDIUM",
+      "historical_result": "FAIL — INTEGER 1 and TEXT 1-corrupt produced equal manifests",
+      "correction": "All sequence entries captured with original value/name/storage classes, strict validation before actions and integer-bound restoration",
+      "current_regressions": "PASS — corrupt representations rejected, valid high-water mark and next ID preserved"
+    }
+  ],
+  "original_probe_fixture": {
+    "path": "docs/web/w6/evidence/W62C-D-original-review-probes.php.txt",
+    "php_code_sha256": "8dd8efc044b61e4ab53a601d21570898db12f62a8bb12273a8ded589fada73e8",
+    "byte_identical_to_independent_review": true,
+    "assertions_or_expectations_changed": false,
+    "not_a_media_hash": true
+  },
+  "original_five_results": {
+    "before": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 5,
+      "skipped": 0,
+      "seconds": 1.027616,
+      "status": "FAIL"
+    },
+    "after": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.879734,
+      "status": "PASS"
+    },
+    "before_cases": [
+      {
+        "name": "test_review_unknown_objects_must_stop_before_any_drop with data set #0",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "FAIL"
+      },
+      {
+        "name": "test_review_unknown_objects_must_stop_before_any_drop with data set #1",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "FAIL"
+      },
+      {
+        "name": "test_review_unknown_objects_must_stop_before_any_drop with data set #2",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "FAIL"
+      },
+      {
+        "name": "test_review_restore_must_reject_an_unknown_sqlite_prefix_view",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "FAIL"
+      },
+      {
+        "name": "test_review_sequence_storage_type_and_value_change_must_be_detected",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "FAIL"
+      }
+    ],
+    "after_cases": [
+      {
+        "name": "test_review_unknown_objects_must_stop_before_any_drop with data set #0",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "PASS"
+      },
+      {
+        "name": "test_review_unknown_objects_must_stop_before_any_drop with data set #1",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "PASS"
+      },
+      {
+        "name": "test_review_unknown_objects_must_stop_before_any_drop with data set #2",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "PASS"
+      },
+      {
+        "name": "test_review_restore_must_reject_an_unknown_sqlite_prefix_view",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "PASS"
+      },
+      {
+        "name": "test_review_sequence_storage_type_and_value_change_must_be_detected",
+        "class": "Tests.Review.ReviewAdversarialProbeTest",
+        "assertions": 2,
+        "status": "PASS"
+      }
+    ]
+  },
+  "original_five_observations": {
+    "probe-hidden-table.json": {
+      "before": {
+        "kind": "table",
+        "exception": null,
+        "executed_drops": [
+          "likes",
+          "comments",
+          "posts",
+          "reminders",
+          "emotions",
+          "citas",
+          "profesionista_bloqueos",
+          "profesionista_disponibilidades",
+          "profesionistas"
+        ],
+        "unknown_table_visible_in_manifest": false,
+        "unknown_object_visible_in_manifest": 0,
+        "actual_app_tables_after": 27,
+        "fk_on": 1,
+        "unknown_rows_after": 0
+      },
+      "after": {
+        "kind": "table",
+        "exception": "Unsafe incoming dependency/order",
+        "executed_drops": [],
+        "unknown_table_visible_in_manifest": true,
+        "unknown_object_visible_in_manifest": 1,
+        "actual_app_tables_after": 36,
+        "fk_on": 1,
+        "unknown_rows_after": 1
+      }
+    },
+    "probe-hidden-view.json": {
+      "before": {
+        "kind": "view",
+        "exception": null,
+        "executed_drops": [
+          "likes",
+          "comments",
+          "posts",
+          "reminders",
+          "emotions",
+          "citas",
+          "profesionista_bloqueos",
+          "profesionista_disponibilidades",
+          "profesionistas"
+        ],
+        "unknown_table_visible_in_manifest": false,
+        "unknown_object_visible_in_manifest": 0,
+        "actual_app_tables_after": 26,
+        "fk_on": 1,
+        "view_broken": true
+      },
+      "after": {
+        "kind": "view",
+        "exception": "Unreviewed schema/object/column: stop before retirement",
+        "executed_drops": [],
+        "unknown_table_visible_in_manifest": false,
+        "unknown_object_visible_in_manifest": 1,
+        "actual_app_tables_after": 35,
+        "fk_on": 1,
+        "view_broken": false
+      }
+    },
+    "probe-hidden-temp-view.json": {
+      "before": {
+        "kind": "temp-view",
+        "exception": null,
+        "executed_drops": [
+          "likes",
+          "comments",
+          "posts",
+          "reminders",
+          "emotions",
+          "citas",
+          "profesionista_bloqueos",
+          "profesionista_disponibilidades",
+          "profesionistas"
+        ],
+        "unknown_table_visible_in_manifest": false,
+        "unknown_object_visible_in_manifest": 0,
+        "actual_app_tables_after": 26,
+        "fk_on": 1,
+        "view_broken": true
+      },
+      "after": {
+        "kind": "temp-view",
+        "exception": "Unreviewed schema/object/column: stop before retirement",
+        "executed_drops": [],
+        "unknown_table_visible_in_manifest": false,
+        "unknown_object_visible_in_manifest": 1,
+        "actual_app_tables_after": 35,
+        "fk_on": 1,
+        "view_broken": false
+      }
+    },
+    "probe-hidden-restore.json": {
+      "before": {
+        "accepted": true,
+        "error": null,
+        "unknown_views": 1
+      },
+      "after": {
+        "accepted": false,
+        "error": "Restored manifest mismatch; destination rejected",
+        "unknown_views": null
+      }
+    },
+    "probe-sequence.json": {
+      "before": {
+        "before": {
+          "seq": 1,
+          "storage_type": "integer"
+        },
+        "after": {
+          "seq": "1-corrupt",
+          "storage_type": "text"
+        },
+        "manifest_equal": true
+      },
+      "after": {
+        "before": {
+          "seq": 1,
+          "storage_type": "integer"
+        },
+        "after": {
+          "seq": "1-corrupt",
+          "storage_type": "text"
+        },
+        "manifest_equal": false
+      }
+    }
+  },
+  "new_regressions": {
+    "fix-p1-restore-main": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "all_destination_objects_rolled_back": true,
+      "source_unchanged": true
+    },
+    "fix-p1-restore-temp": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "all_destination_objects_rolled_back": true,
+      "source_unchanged": true
+    },
+    "fix-p1-stop-foreign-table": {
+      "status": "PASS",
+      "object": "sqliteX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": 1,
+      "view_still_valid": false,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p1-stop-index": {
+      "status": "PASS",
+      "object": "sqliteX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": null,
+      "view_still_valid": false,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p1-stop-legacy-trigger": {
+      "status": "PASS",
+      "object": "sqliteX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": null,
+      "view_still_valid": false,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p1-stop-protected-trigger": {
+      "status": "PASS",
+      "object": "sqliteX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": null,
+      "view_still_valid": false,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p1-stop-temp-table": {
+      "status": "PASS",
+      "object": "sqliteX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": 1,
+      "view_still_valid": false,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p1-stop-temp-view": {
+      "status": "PASS",
+      "object": "sqliteX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": null,
+      "view_still_valid": true,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p1-stop-upper-view": {
+      "status": "PASS",
+      "object": "SQLITEX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": null,
+      "view_still_valid": true,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p1-stop-view": {
+      "status": "PASS",
+      "object": "sqliteX_cross",
+      "visible_in_catalog": true,
+      "drop_statements": 0,
+      "all_nine_candidates_preserved": true,
+      "unknown_rows_preserved": null,
+      "view_still_valid": true,
+      "entire_observed_state_equal": true,
+      "foreign_keys_on": true
+    },
+    "fix-p2-boundary-integer-high-water": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "complete_rollback_observed": true
+    },
+    "fix-p2-boundary-storage-type": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "complete_rollback_observed": true
+    },
+    "fix-p2-integer-high-water": {
+      "status": "PASS",
+      "sequence": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": 100,
+          "storage_type": "integer"
+        }
+      ],
+      "restored_storage_type": "integer",
+      "next_id": 101,
+      "entire_manifest_equal_after_insert_rollback": true
+    },
+    "fix-p2-restore-below-max": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-blob-same": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-duplicate": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-missing": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-name-blob": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-negative": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-null": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-orphan": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-real-same": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-text-same": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-restore-text-suffix": {
+      "status": "PASS",
+      "rejected_before_destination_loading": true,
+      "source_not_silently_repaired": true
+    },
+    "fix-p2-stop-below-max": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": 1,
+          "storage_type": "integer"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-blob-same": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": "2",
+          "storage_type": "blob"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-duplicate": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": 2,
+          "storage_type": "integer"
+        },
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": 2,
+          "storage_type": "integer"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-missing": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-name-blob": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "blob",
+          "value": 2,
+          "storage_type": "integer"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-negative": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": -1,
+          "storage_type": "integer"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-null": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": null,
+          "storage_type": "null"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-orphan": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "synthetic_orphan",
+          "name_type": "text",
+          "value": 2,
+          "storage_type": "integer"
+        },
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": 2,
+          "storage_type": "integer"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-real-same": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": 2,
+          "storage_type": "real"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-text-same": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": "2",
+          "storage_type": "text"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    },
+    "fix-p2-stop-text-suffix": {
+      "status": "PASS",
+      "raw_manifest_changed": true,
+      "raw_sequence_entries": [
+        {
+          "name": "users",
+          "name_type": "text",
+          "value": "2-corrupt",
+          "storage_type": "text"
+        }
+      ],
+      "drop_statements": 0,
+      "state_not_silently_repaired": true,
+      "all_nine_candidates_preserved": true
+    }
+  },
+  "lossy_comparison_review": {
+    "status": "PASS for reviewed test scope",
+    "literal_reserved_prefix_in_main_and_temp": true,
+    "sequence_snapshot_numeric_casts": false,
+    "all_sequence_entries_including_duplicates_orphans_and_nulls_captured": true,
+    "raw_rows_and_sqlite_storage_types_retained": true,
+    "schema_columns_fk_indexes_predicates_triggers_exact": true,
+    "only_nonsemantic_index_enumeration_position_normalized": true,
+    "schema_data_separation_only_for_preflight_not_preservation": true,
+    "remaining_numeric_casts": "SQLite control/COUNT/driver-ID results, not snapshot values"
+  },
+  "execution_commands": {
+    "rehearsal": "php -d memory_limit=512M run-phpunit.php tests/Feature/RetirementPreflightTest.php --log-junit /review/rehearsal.xml",
+    "original_five": "php -d memory_limit=512M run-phpunit.php ReviewAdversarialProbeTest.php --filter test_review_ --log-junit /review/original-probes.xml",
+    "full": "php -d memory_limit=512M run-phpunit.php --log-junit /review/full.xml",
+    "regression_groups": [
+      "--group photo-integrity-w51",
+      "--group legacy-decoupling-w62a",
+      "tests/Feature/RetiredProductTest.php"
+    ],
+    "wrapper": "Only points PHPUnit at the isolated copy autoload; application/test files match tested Git blobs",
+    "container": "--rm --network none; only synthetic source clone and owned /review output mounted; APP_ENV=testing APP_BASE_PATH=/app; new empty .env.testing"
+  },
+  "not_run": [
+    "Windows/Laragon",
+    "actual PHP 8.2 runtime",
+    "persistent SQLite/WAL/multi-writer/crash/physical backup",
+    "MySQL",
+    "real retirement"
+  ],
+  "recommendation": "Repeat independent acceptance on the final PR HEAD before any merge decision. No merge/deploy/auto-merge authorized.",
+  "historical_70_cases_and_assertion_counts_retained": true
+}

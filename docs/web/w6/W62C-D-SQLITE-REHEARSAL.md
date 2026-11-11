@@ -10,6 +10,26 @@ Solo se modifica [RetirementPreflightTest](../../../tests/Feature/RetirementPref
 
 Las 37 migraciones, código productivo, rutas/21 operaciones API, modelos, servicios, dependencias, locks y configuración permanecen intactos. `ProfilePhotoReferences`, `LegacyPhotoReferences`, W5.1 y los demás archivos de regresión se conservan.
 
+## W6.2c-d-fix — Corrección de P1/P2, pendiente de nueva revisión
+
+La revisión independiente del HEAD `d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53` concluyó **CHANGES REQUIRED**. Esta corrección continúa en el mismo PR #30 y su rama; base inalterada. Preflight del fix: HEAD inicial confirmado en GitHub y localmente, checkout limpio, 44 GiB disponibles y 3.865.965 inodos libres. No se modifica `main` ni PR #28.
+
+**P1 histórico — ALTA.** `LIKE 'sqlite_%'` usaba `_` como comodín. Ocultaba la tabla válida `sqliteX_cross` con FK hacia `posts`; se ejecutaban nueve DROP y una fila sintética se perdía por cascada. También se ignoraban vistas main/temp y se aceptaba un restore con una vista adicional. Las cuatro reproducciones correspondientes fallaban, aunque las suites publicadas pasaban.
+
+La exclusión ahora compara literalmente los primeros siete caracteres con `sqlite_` mediante `substr` y `COLLATE NOCASE`, en main, temp y el conteo de rollback. Las listas de tablas del ensayo salen del mismo catálogo completo, sin depender del filtro amplio del framework. No se amplía ninguna allowlist. Ocho regresiones cubren tabla/FK, vistas válidas que quedarían rotas, objetos temporales, triggers, índice y case; dos más prueban rechazo/rollback de vistas main/temp en restore. Se observa cero DROP, la fila extra sigue presente y las vistas siguen consultables tras rechazar el plan.
+
+**P2 histórico — MEDIA.** Convertir `sqlite_sequence.seq` a `(int)` hacía que INTEGER `1` y TEXT `1-corrupt` produjeran el mismo manifiesto. La quinta reproducción original fallaba por esa igualdad incorrecta.
+
+La captura conserva **todas** las entradas de `sqlite_sequence`, con `name`, `typeof(name)`, valor original y `typeof(seq)`, sin conversiones ni deduplicación. Cada tabla conserva la lista de sus entradas; `[]` (ausencia) es distinto de una entrada con valor NULL. La lista global también conserva nombres corruptos, duplicados y huérfanos. Capturar no valida ni repara: por eso un estado corrupto puede compararse y comprobarse como distinto. Antes del primer DROP y entre pasos, así como antes de crear el destino del restore, una validación separada exige nombre TEXT conocido, una entrada por tabla AUTOINCREMENT, valor SQLite INTEGER y PHP int no negativo, PK INTEGER y high-water mark al menos igual a sus IDs existentes. Una tabla AUTOINCREMENT vacía puede no tener entrada; una poblada debe tenerla.
+
+El SQL utilizado para identificar AUTOINCREMENT ya debe coincidir íntegramente con el catálogo histórico revisado; no se aprueba un esquema desconocido por analizar una palabra. Al restaurar, `seq` se enlaza explícitamente como `PDO::PARAM_INT` y el nombre como TEXT. Se prueba un high-water mark válido de 100, el siguiente ID 101 y el rollback exacto de esa inserción. Once estados inválidos se capturan sin pérdida y bloquean retirada/restore: TEXT con sufijo, TEXT visualmente igual, NULL, REAL, BLOB, negativo, entrada ausente, duplicada, huérfana, inferior al máximo y nombre BLOB. Otros dos casos detectan cambios de secuencia entre DROP y observan rollback.
+
+Las [cinco reproducciones originales](evidence/W62C-D-original-review-probes.php.txt) se conservan **byte por byte**, con sus expectativas originales. Se ejecutaron en un clon temporal aislado, antes y después: **FAIL 5/10 → PASS 5/10**. El archivo es evidencia textual, no una entrada de la aplicación ni una suite descubierta automáticamente. Para repetirlo, se copia como `ReviewAdversarialProbeTest.php` exclusivamente al runner aislado; PHPUnit se ejecuta con `--filter test_review_` y un montaje nuevo propio `/review` para sus JSON. No usar una raíz de datos existente. La [evidencia del fix](evidence/W62C-D-fix-review.json) registra el hash del **código PHP**, resultados y observaciones, sin hashes de medios.
+
+La inspección adicional de pérdidas de información no encontró casts en los snapshots de filas, clases SQLite, esquema, FK, índices o triggers. Se conserva la normalización documentada de la posición de enumeración `index_list.seq`, manteniendo el orden de claves en `index_xinfo`; las conversiones de resultados de control (`foreign_keys`, COUNT e IDs del driver) no reemplazan datos de los manifiestos. `schemaPart` separa filas/secuencias solo para comparar catálogo; preservación y restore comparan también los datos completos y las secuencias crudas. Los 70 casos previos continúan; se añaden 35 regresiones.
+
+Esta entrega queda **lista para una nueva revisión independiente**, no automáticamente aprobada. Se conserva la historia del rechazo y no se reescriben resultados originales.
+
 ## Aislamiento efectivo
 
 El host no tiene PHP en PATH. Se reutilizó una imagen de desarrollo local con PHP 8.4.27 y SQLite 3.46.1; cada ejecución de PHPUnit usa un contenedor efímero con red deshabilitada y solo una copia temporal de fuentes como montaje. La copia se construyó desde una selección de rutas/extensiones, **filtrando antes de leer/copiar**: excluye `.env`, bases, Storage existente, imágenes, uploads y fuentes de medios. No se siguieron enlaces hacia medios. Dependencias PHP se copiaron como fuentes/recursos de código; Node usa las dependencias ya instaladas del lock.
@@ -31,7 +51,7 @@ La comparación es exacta para las 26 tablas protegidas, incluidas vacías. El c
 | Índices | Unicidad/origen/parcialidad, SQL con predicado WHERE e `index_xinfo` con orden de claves |
 | Triggers/otros objetos | Nombre, propietario y SQL íntegro; catálogo global y objetos temporales |
 | Filas | Valores completos ordenados de forma determinista y tipos `typeof` de cada valor; NULL y fechas incluidos |
-| Autoincrementos | Secuencia por tabla, incluso por encima de MAX(id); siguiente ID y rollback del ensayo de inserción restaurada |
+| Autoincrementos | Entradas globales y por tabla, valor y clases SQLite sin cast; validación explícita y high-water mark, siguiente ID y rollback de inserción restaurada |
 | Historial | 37 nombres/IDs/batches exactos; ningún skip ni edición de ledger aceptados |
 
 Única normalización de metadata: `PRAGMA index_list.seq` es posición de enumeración, no orden de claves. Se ordenan índices por nombre, conservando `index_xinfo.seqno`, propiedades y SQL. La restauración crea índices en orden canónico y compara todas sus garantías; no se ignoran columnas, tablas, filas, predicados ni restricciones para conseguir coincidencia. `schemaPart` separa datos del catálogo para el preflight; la comparación de preservación vuelve a incluir filas, tipos y secuencias completos.
@@ -83,12 +103,13 @@ Solo se crean/leen bytes sintéticos de `Storage::fake`. W5.1 y LegacyPhotoRefer
 
 Los resultados exactos, versiones y archivos están en [validación](evidence/W62C-D-validation.json); [casos](evidence/W62C-D-scenarios.json), [manifiestos](evidence/W62C-D-manifests.json), [rollback/restore](evidence/W62C-D-rollback-restore.json) y [calidad/auditorías](evidence/W62C-D-quality.json) contienen datos sanitizados. [Guía Windows/Laragon](W62C-D-LARAGON.md), preparada, no ejecutada.
 
-Se volvió a ejecutar el baseline **688/9.224**. El ensayo crece de **19/198 a 70/626**, conservando todos sus métodos históricos. La suite completa final y los grupos se registran a partir de JUnit; el aumento no sustituye las garantías W5.1/W6.2a/W6.2b ni importa pruebas MySQL.
+Baseline original **688/9.224**; entrega antes del fix **739/9.652**, ensayo **70/626**. El fix conserva todos sus métodos/datasets y amplía el ensayo a **105/996**. Los resultados actuales proceden de JUnit; no sustituyen las garantías W5.1/W6.2a/W6.2b ni importan pruebas MySQL.
 
 | Ejecución final | Estado | Pruebas / aserciones |
 | --- | --- | --- |
-| Suite completa | PASS | **739 / 9.652**, cero errores, fallos u omisiones |
-| Ensayo ampliado | PASS | 70 / 626 |
+| Suite completa tras fix | PASS | **774 / 10.022**, cero errores, fallos u omisiones |
+| Ensayo ampliado tras fix | PASS | 105 / 996 |
+| Cinco reproducciones originales | PASS | 5 / 10; mismas expectativas que fallaban en el HEAD revisado |
 | W5.1 | PASS | 49 / 459 |
 | W6.2a | PASS | 25 / 406 |
 | W6.2b | PASS | 34 / 586 |

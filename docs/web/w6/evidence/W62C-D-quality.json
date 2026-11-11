@@ -19,7 +19,7 @@
     "exit_code": 100,
     "with_dev": true,
     "endpoint": "https://packagist.org/api/security-advisories/",
-    "reason": "CONNECT tunnel failed, response 403",
+    "reason": "CONNECT tunnel failed, response 403; no vulnerability result",
     "vulnerability_result": null
   },
   "composer_audit_no_dev": {
@@ -27,7 +27,7 @@
     "exit_code": 100,
     "with_dev": false,
     "endpoint": "https://packagist.org/api/security-advisories/",
-    "reason": "CONNECT tunnel failed, response 403",
+    "reason": "CONNECT tunnel failed, response 403; no vulnerability result",
     "vulnerability_result": null
   },
   "npm_audit": {
@@ -89,5 +89,20 @@
     }
   ],
   "windows": "NOT RUN",
-  "php_8_2_runtime": "NOT RUN"
+  "php_8_2_runtime": "NOT RUN",
+  "reviewed_initial_head": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
+  "current_execution_scope": "W6.2c-d-fix; all listed quality commands rerun in isolated source clone",
+  "sequence_and_prefix_regressions": {
+    "status": "PASS",
+    "original_five": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.879734,
+      "status": "PASS"
+    },
+    "added_cases": 35
+  }
 }

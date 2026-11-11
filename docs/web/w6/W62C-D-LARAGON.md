@@ -83,7 +83,9 @@ npm audit --package-lock-only --json
 git diff --check
 ```
 
-Registrar el exit code de cada comando y versiones efectivas. Referencias cloud: **70/626** para el ensayo, **739/9.652** en total, W5.1 **49/459**, W6.2a **25/406**, W6.2b **34/586**. No atribuir estos resultados a Windows ni a PHP 8.2: cloud ejecutó PHP 8.4.27. El límite CLI de 512 MB solo afecta al proceso de prueba; no modifica configuración del producto.
+Registrar el exit code de cada comando y versiones efectivas. Referencias cloud tras P1/P2: **105/996** para el ensayo, **774/10.022** en total, W5.1 **49/459**, W6.2a **25/406**, W6.2b **34/586**. No atribuir estos resultados a Windows ni a PHP 8.2: cloud ejecutó PHP 8.4.27. El límite CLI de 512 MB solo afecta al proceso de prueba; no modifica configuración del producto.
+
+El ensayo normal incluye las 35 regresiones nuevas. Las cinco reproducciones originales se conservan como texto en `docs/web/w6/evidence/W62C-D-original-review-probes.php.txt`; en cloud pasan **5/10** sin cambiar una línea. Son una ejecución opt-in adicional: copiar ese texto como `ReviewAdversarialProbeTest.php` únicamente dentro del runner aislado, con un directorio temporal nuevo montado como `/review`, y ejecutar `php -d memory_limit=512M run-phpunit.php ReviewAdversarialProbeTest.php --filter test_review_`. Esa ruta de salida fija pertenece al harness Linux original; no ejecutarlo directamente sobre una raíz Windows existente. El resultado Windows de ese harness también es **NOT RUN**. Ver [procedencia y casos del fix](evidence/W62C-D-fix-review.json).
 
 Los JSON opcionales del test aparecen en `storage/framework/testing/w62cd-evidence/`: esquema y resúmenes de datos sintéticos, sin valores de usuarios/tokens/passwords ni hashes de medios. No publicar logs de errores sin sanitizar. Los archivos en Storage falso son creados por los tests; no sustituirlos por medios versionados ni reales. Un fallo de guard debe bloquear la prueba, nunca resolverse desactivando FK/triggers o admitiendo rutas de SQLite.
 

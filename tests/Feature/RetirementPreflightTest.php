@@ -107,7 +107,7 @@ class RetirementPreflightTest extends TestCase
     {
         $this->memoryOnly();
         $result = [];
-        foreach (Schema::getTableListing(schemaQualified: false) as $table) {
+        foreach (array_keys($this->memoryManifest()['tables']) as $table) {
             $result[$table] = ['columns' => Schema::getColumns($table),
                 'foreign_keys' => Schema::getForeignKeys($table), 'indexes' => Schema::getIndexes($table)];
         }
@@ -117,7 +117,7 @@ class RetirementPreflightTest extends TestCase
 
     private function protectedRows(): array
     {
-        $tables = array_values(array_diff(Schema::getTableListing(schemaQualified: false), self::TABLES));
+        $tables = array_values(array_diff(array_keys($this->memoryManifest()['tables']), self::TABLES));
         sort($tables);
 
         return $this->reservationRows($tables);
@@ -170,6 +170,7 @@ class RetirementPreflightTest extends TestCase
         if ($current['tables']['migrations']['rows'] !== $this->reviewedManifest['tables']['migrations']['rows']) {
             throw new RuntimeException('Historical migration ledger mismatch');
         }
+        $this->validateSequences($current);
     }
 
     private function simulate(array $order = self::TABLES, ?array $checkpoint = null, ?int $failAfter = null, ?\Closure $beforeStep = null): void
@@ -472,7 +473,7 @@ class RetirementPreflightTest extends TestCase
         $statement = $copy->prepare('INSERT INTO users ('.implode(',', array_map($this->quoteIdentifier(...), array_keys($nextUser))).') VALUES ('.implode(',', array_fill(0, count($nextUser), '?')).')');
         $statement->execute(array_values($nextUser));
         $statement->closeCursor();
-        $this->assertSame($source['tables']['users']['sequence'] + 1, (int) $copy->lastInsertId());
+        $this->assertSame($source['tables']['users']['sequence'][0]['value'] + 1, (int) $copy->lastInsertId());
         $copy->rollBack();
         $this->assertSame($source, $this->memoryManifest($copy));
         $this->recordRehearsalEvidence('logical-restore', ['status' => 'PASS', 'source' => $this->manifestSummary($source),
@@ -746,7 +747,7 @@ class RetirementPreflightTest extends TestCase
         }
         $this->assertInstanceOf(\PDO::class, $destination);
         $this->guardMemoryPdo($destination);
-        $this->assertSame(0, (int) $destination->query("SELECT COUNT(*) FROM sqlite_master WHERE name NOT LIKE 'sqlite_%'")->fetchColumn());
+        $this->assertSame(0, (int) $destination->query("SELECT COUNT(*) FROM sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE")->fetchColumn());
         $this->assertSame($source, $this->memoryManifest());
         $this->recordRehearsalEvidence('restore-reject-'.$kind, ['status' => 'PASS', 'destination_rejected' => true,
             'destination_ddl_and_rows_rolled_back' => true, 'source_manifest_unchanged' => true, 'foreign_keys_always_on' => true]);
@@ -992,6 +993,228 @@ class RetirementPreflightTest extends TestCase
         $this->recordRehearsalEvidence('photo-'.$kind, ['status' => 'PASS', 'synthetic_bytes_retained' => true,
             'retirement_rejected_for_unknown_morph' => $kind === 'unknown-morph', 'storage_fake' => true,
             'external_requests' => 0, 'real_media_reads' => 0, 'media_hashes_published' => false]);
+    }
+
+    public static function sqlitePrefixObjects(): array
+    {
+        return array_map(fn ($kind) => [$kind], ['foreign-table', 'view', 'temp-view', 'temp-table',
+            'legacy-trigger', 'protected-trigger', 'index', 'upper-view']);
+    }
+
+    #[DataProvider('sqlitePrefixObjects')]
+    public function test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows(string $kind): void
+    {
+        $this->seedRetired(User::factory()->create());
+        $name = $kind === 'upper-view' ? 'SQLITEX_cross' : 'sqliteX_cross';
+        $quoted = $this->quoteIdentifier($name);
+        match ($kind) {
+            'foreign-table' => DB::statement('CREATE TABLE '.$quoted.' (id INTEGER PRIMARY KEY, post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE)'),
+            'view', 'upper-view' => DB::statement('CREATE VIEW '.$quoted.' AS SELECT id FROM posts'),
+            'temp-view' => DB::statement('CREATE TEMP VIEW '.$quoted.' AS SELECT id FROM posts'),
+            'temp-table' => DB::statement('CREATE TEMP TABLE '.$quoted.' (id INTEGER PRIMARY KEY)'),
+            'legacy-trigger' => DB::unprepared('CREATE TRIGGER '.$quoted.' AFTER INSERT ON posts BEGIN SELECT 1; END'),
+            'protected-trigger' => DB::unprepared('CREATE TRIGGER '.$quoted.' AFTER UPDATE ON users BEGIN SELECT 1; END'),
+            'index' => DB::statement('CREATE INDEX '.$quoted.' ON users(name)'),
+        };
+        if ($kind === 'foreign-table') {
+            DB::table($name)->insert(['id' => 1, 'post_id' => 1]);
+        } elseif ($kind === 'temp-table') {
+            DB::table($name)->insert(['id' => 1]);
+        }
+        $before = $this->memoryManifest();
+        $visible = array_filter(array_merge($before['objects'], $before['temp_objects']), fn ($object) => $object['name'] === $name);
+        $this->assertCount(1, $visible);
+        DB::enableQueryLog();
+        DB::flushQueryLog();
+        try {
+            $this->simulate();
+            $this->fail('Unknown sqliteX object accepted');
+        } catch (RuntimeException $exception) {
+            $this->assertMatchesRegularExpression('/Unsafe incoming dependency|Unreviewed/', $exception->getMessage());
+        }
+        $this->assertSame([], $this->operationTrace);
+        $this->assertSame([], array_values(preg_grep('/^\s*drop\b/i', array_column(DB::getQueryLog(), 'query'))));
+        $this->assertSame($before, $this->memoryManifest());
+        foreach (self::TABLES as $table) {
+            $this->assertTrue(Schema::hasTable($table));
+        }
+        if (in_array($kind, ['foreign-table', 'temp-table'], true)) {
+            $this->assertSame(1, DB::table($name)->count());
+        }
+        if (in_array($kind, ['view', 'temp-view', 'upper-view'], true)) {
+            $this->assertSame([1], array_map(fn ($row) => $row->id, DB::select('SELECT id FROM '.$quoted)));
+        }
+        $this->assertSame(1, (int) DB::selectOne('PRAGMA foreign_keys')->foreign_keys);
+        $this->recordRehearsalEvidence('fix-p1-stop-'.$kind, ['status' => 'PASS', 'object' => $name,
+            'visible_in_catalog' => true, 'drop_statements' => 0, 'all_nine_candidates_preserved' => true,
+            'unknown_rows_preserved' => in_array($kind, ['foreign-table', 'temp-table'], true) ? 1 : null,
+            'view_still_valid' => in_array($kind, ['view', 'temp-view', 'upper-view'], true),
+            'entire_observed_state_equal' => true, 'foreign_keys_on' => true]);
+    }
+
+    public static function sqlitePrefixRestoreViews(): array
+    {
+        return [['main'], ['temp']];
+    }
+
+    #[DataProvider('sqlitePrefixRestoreViews')]
+    public function test_restore_rejects_new_sqlitex_views_in_main_and_temp(string $schema): void
+    {
+        $this->seedRetired(User::factory()->create());
+        $source = $this->memoryManifest();
+        $destination = null;
+        try {
+            $this->restoreLogicalMemory($source, function (\PDO $copy) use ($schema, &$destination) {
+                $destination = $copy;
+                $copy->exec($schema === 'temp'
+                    ? 'CREATE TEMP VIEW sqliteX_restore AS SELECT id FROM users'
+                    : 'CREATE VIEW sqliteX_restore AS SELECT id FROM users');
+            });
+            $this->fail('Unknown restored sqliteX view accepted');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('Restored manifest mismatch; destination rejected', $exception->getMessage());
+        }
+        $this->assertInstanceOf(\PDO::class, $destination);
+        $this->guardMemoryPdo($destination);
+        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM sqlite_master')->fetchColumn());
+        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM sqlite_temp_master')->fetchColumn());
+        $this->assertSame($source, $this->memoryManifest());
+        $this->recordRehearsalEvidence('fix-p1-restore-'.$schema, ['status' => 'PASS',
+            'destination_rejected' => true, 'all_destination_objects_rolled_back' => true, 'source_unchanged' => true]);
+    }
+
+    public static function invalidSequenceStates(): array
+    {
+        return array_map(fn ($kind) => [$kind], ['text-suffix', 'text-same', 'null', 'real-same', 'blob-same',
+            'negative', 'missing', 'duplicate', 'orphan', 'below-max', 'name-blob']);
+    }
+
+    private function mutateSyntheticSequence(string $kind): void
+    {
+        $this->memoryOnly();
+        match ($kind) {
+            'text-suffix' => DB::statement("UPDATE sqlite_sequence SET seq='2-corrupt' WHERE name='users'"),
+            'text-same' => DB::statement("UPDATE sqlite_sequence SET seq='2' WHERE name='users'"),
+            'null' => DB::statement("UPDATE sqlite_sequence SET seq=NULL WHERE name='users'"),
+            'real-same' => DB::statement("UPDATE sqlite_sequence SET seq=CAST(2 AS REAL) WHERE name='users'"),
+            'blob-same' => DB::statement("UPDATE sqlite_sequence SET seq=CAST('2' AS BLOB) WHERE name='users'"),
+            'negative' => DB::statement("UPDATE sqlite_sequence SET seq=-1 WHERE name='users'"),
+            'missing' => DB::statement("DELETE FROM sqlite_sequence WHERE name='users'"),
+            'duplicate' => DB::statement("INSERT INTO sqlite_sequence(name,seq) SELECT name,seq FROM sqlite_sequence WHERE name='users'"),
+            'orphan' => DB::statement("INSERT INTO sqlite_sequence(name,seq) VALUES ('synthetic_orphan',2)"),
+            'below-max' => DB::statement("UPDATE sqlite_sequence SET seq=1 WHERE name='users'"),
+            'name-blob' => DB::statement("UPDATE sqlite_sequence SET name=CAST(name AS BLOB) WHERE name='users'"),
+        };
+    }
+
+    #[DataProvider('invalidSequenceStates')]
+    public function test_raw_sequence_mutations_are_detected_and_stop_before_any_drop(string $kind): void
+    {
+        $users = User::factory()->count(2)->create();
+        $this->seedRetired($users[0]);
+        $before = $this->memoryManifest();
+        $this->mutateSyntheticSequence($kind);
+        $corrupt = $this->memoryManifest();
+        $this->assertNotSame($before, $corrupt);
+        DB::enableQueryLog();
+        DB::flushQueryLog();
+        try {
+            $this->simulate();
+            $this->fail('Invalid sequence accepted');
+        } catch (RuntimeException $exception) {
+            $this->assertStringStartsWith('Invalid sqlite_sequence', $exception->getMessage());
+        }
+        $this->assertSame([], $this->operationTrace);
+        $this->assertSame([], array_values(preg_grep('/^\s*drop\b/i', array_column(DB::getQueryLog(), 'query'))));
+        $this->assertSame($corrupt, $this->memoryManifest());
+        foreach (self::TABLES as $table) {
+            $this->assertTrue(Schema::hasTable($table));
+        }
+        $this->recordRehearsalEvidence('fix-p2-stop-'.$kind, ['status' => 'PASS', 'raw_manifest_changed' => true,
+            'raw_sequence_entries' => array_values(array_filter($corrupt['sequences'], fn ($entry) => in_array($entry['name'], ['users', 'synthetic_orphan'], true))),
+            'drop_statements' => 0, 'state_not_silently_repaired' => true, 'all_nine_candidates_preserved' => true]);
+    }
+
+    #[DataProvider('invalidSequenceStates')]
+    public function test_restore_rejects_corrupt_sequence_snapshots_before_loading_a_destination(string $kind): void
+    {
+        $users = User::factory()->count(2)->create();
+        $this->seedRetired($users[0]);
+        $this->mutateSyntheticSequence($kind);
+        $source = $this->memoryManifest();
+        $loaded = false;
+        try {
+            $this->restoreLogicalMemory($source, function () use (&$loaded) {
+                $loaded = true;
+            });
+            $this->fail('Corrupt sequence restored');
+        } catch (RuntimeException $exception) {
+            $this->assertStringStartsWith('Invalid sqlite_sequence', $exception->getMessage());
+        }
+        $this->assertFalse($loaded);
+        $this->assertSame($source, $this->memoryManifest());
+        $this->recordRehearsalEvidence('fix-p2-restore-'.$kind, ['status' => 'PASS',
+            'rejected_before_destination_loading' => true, 'source_not_silently_repaired' => true]);
+    }
+
+    public function test_integer_high_water_mark_is_preserved_with_its_storage_type_and_next_id(): void
+    {
+        $this->seedRetired(User::factory()->create());
+        DB::statement("UPDATE sqlite_sequence SET seq=100 WHERE name='users'");
+        $source = $this->memoryManifest();
+        $expected = [['name' => 'users', 'name_type' => 'text', 'value' => 100, 'storage_type' => 'integer']];
+        $this->assertSame($expected, $source['tables']['users']['sequence']);
+        $this->validateSequences($source);
+        $this->simulate();
+        $this->assertSame($expected, $this->memoryManifest()['tables']['users']['sequence']);
+        $copy = $this->restoreLogicalMemory($source);
+        $this->assertSame($source, $this->memoryManifest($copy));
+        $copy->beginTransaction();
+        $row = $source['tables']['users']['rows'][0]['values'];
+        unset($row['id']);
+        $row['email'] = 'synthetic-sequence@example.test';
+        $statement = $copy->prepare('INSERT INTO users ('.implode(',', array_map($this->quoteIdentifier(...), array_keys($row))).') VALUES ('.implode(',', array_fill(0, count($row), '?')).')');
+        $statement->execute(array_values($row));
+        $statement->closeCursor();
+        $this->assertSame('101', $copy->lastInsertId());
+        $copy->rollBack();
+        $this->assertSame($source, $this->memoryManifest($copy));
+        $this->recordRehearsalEvidence('fix-p2-integer-high-water', ['status' => 'PASS',
+            'sequence' => $expected, 'restored_storage_type' => 'integer', 'next_id' => 101,
+            'entire_manifest_equal_after_insert_rollback' => true]);
+    }
+
+    public static function sequenceBoundaryChanges(): array
+    {
+        return [['integer-high-water'], ['storage-type']];
+    }
+
+    #[DataProvider('sequenceBoundaryChanges')]
+    public function test_sequence_changes_between_drops_stop_and_roll_back(string $kind): void
+    {
+        $this->seedRetired(User::factory()->create());
+        $before = $this->memoryManifest();
+        try {
+            DB::transaction(fn () => $this->simulate(beforeStep: function (int $step) use ($kind) {
+                if ($step === 2) {
+                    DB::statement($kind === 'integer-high-water'
+                        ? "UPDATE sqlite_sequence SET seq=seq+1 WHERE name='users'"
+                        : "UPDATE sqlite_sequence SET seq=CAST(seq AS TEXT) WHERE name='users'");
+                }
+            }));
+            $this->fail('Interleaved sequence mutation accepted');
+        } catch (RuntimeException $exception) {
+            if ($kind === 'storage-type') {
+                $this->assertStringStartsWith('Invalid sqlite_sequence', $exception->getMessage());
+            } else {
+                $this->assertSame('Protected state changed during rehearsal', $exception->getMessage());
+            }
+        }
+        $this->assertSame(['likes'], $this->operationTrace);
+        $this->assertSame($before, $this->memoryManifest());
+        $this->assertSame(0, DB::transactionLevel());
+        $this->recordRehearsalEvidence('fix-p2-boundary-'.$kind, ['status' => 'PASS',
+            'executed_drops' => ['likes'], 'second_drop_rejected' => true, 'complete_rollback_observed' => true]);
     }
 
     public static function checkpoints(): array
