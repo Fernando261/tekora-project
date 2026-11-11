@@ -1,0 +1,98 @@
+{
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "source": "public/css/home.css",
+  "target": "public/css/tekora/account-base.css",
+  "top_level_nodes": 22,
+  "declarations_selectors_and_order_identical": true,
+  "source_lines": [
+    {
+      "key": ":root",
+      "line": 1
+    },
+    {
+      "key": "*",
+      "line": 17
+    },
+    {
+      "key": "body",
+      "line": 20
+    },
+    {
+      "key": "keyframes backgroundAnimation",
+      "line": 27
+    },
+    {
+      "key": "header",
+      "line": 34
+    },
+    {
+      "key": "header h2",
+      "line": 46
+    },
+    {
+      "key": "nav ul",
+      "line": 52
+    },
+    {
+      "key": "nav ul li a",
+      "line": 58
+    },
+    {
+      "key": "nav ul li a:hover",
+      "line": 67
+    },
+    {
+      "key": ".sidebar",
+      "line": 81
+    },
+    {
+      "key": ".menu",
+      "line": 118
+    },
+    {
+      "key": ".menu-item",
+      "line": 125
+    },
+    {
+      "key": ".menu-item:hover",
+      "line": 148
+    },
+    {
+      "key": ".menu-item.active",
+      "line": 154
+    },
+    {
+      "key": ".submenu",
+      "line": 168
+    },
+    {
+      "key": ".submenu.open",
+      "line": 172
+    },
+    {
+      "key": ".submenu-item",
+      "line": 174
+    },
+    {
+      "key": ".submenu-item:hover",
+      "line": 184
+    },
+    {
+      "key": ".main-content",
+      "line": 206
+    },
+    {
+      "key": "section",
+      "line": 242
+    },
+    {
+      "key": "section h2",
+      "line": 248
+    },
+    {
+      "key": "media (max-width: 980px)",
+      "line": 367
+    }
+  ],
+  "target_sha256": "6f781da08e6d4a0160f01a73e45a48dc832a397e9baa3ec992c7485238fbda07"
+}

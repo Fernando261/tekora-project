@@ -1,0 +1,144 @@
+{
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "status": "Plan W6.2c exclusivamente; NO autorizado ni ejecutado",
+  "exclusive_table_candidates": [
+    "likes",
+    "comments",
+    "posts",
+    "reminders",
+    "emotions",
+    "citas",
+    "profesionista_bloqueos",
+    "profesionista_disponibilidades",
+    "profesionistas"
+  ],
+  "protected_native_or_shared_tables": [
+    "users",
+    "roles",
+    "role_user",
+    "provider_profiles",
+    "service_categories",
+    "services",
+    "service_inquiries",
+    "service_inquiry_messages",
+    "service_inquiry_reads",
+    "inquiry_notifications",
+    "provider_availability_settings",
+    "provider_weekly_intervals",
+    "provider_blocked_dates",
+    "service_reservations",
+    "reservation_events",
+    "service_reviews",
+    "activity_notifications",
+    "personal_access_tokens"
+  ],
+  "protected_infrastructure_tables": [
+    "migrations",
+    "password_reset_tokens",
+    "sessions",
+    "cache",
+    "cache_locks",
+    "jobs",
+    "job_batches",
+    "failed_jobs"
+  ],
+  "legacy_foreign_keys": [
+    {
+      "child": "posts",
+      "column": "user_id",
+      "parent": "users",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "comments",
+      "column": "user_id",
+      "parent": "users",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "comments",
+      "column": "post_id",
+      "parent": "posts",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "likes",
+      "column": "user_id",
+      "parent": "users",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "likes",
+      "column": "post_id",
+      "parent": "posts",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "reminders",
+      "column": "user_id",
+      "parent": "users",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "citas",
+      "column": "user_id",
+      "parent": "users",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "citas",
+      "column": "profesionista_id",
+      "parent": "profesionistas",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "profesionista_disponibilidades",
+      "column": "profesionista_id",
+      "parent": "profesionistas",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    },
+    {
+      "child": "profesionista_bloqueos",
+      "column": "profesionista_id",
+      "parent": "profesionistas",
+      "cascade": "delete cascade in historical source; verify actual installed schema only with separate authorization"
+    }
+  ],
+  "polymorphic_references": [
+    "likes.likeable_type/likeable_id: Post y Comment sin FK; representación coexistente post_id nullable"
+  ],
+  "unknown_record_provenance": [
+    "No identificar User exclusivamente antiguo por email, edad, gender, ausencia de rol o ID coincidente",
+    "Ninguna equivalencia Profesionista→ProviderProfile ni Cita→ServiceReservation",
+    "sessions/password_reset_tokens/jobs/cache/notifications pueden mezclar procedencia; no vaciar indiscriminadamente",
+    "No se conocen conteos, huérfanos, duplicados ni referencias reales fuera de código"
+  ],
+  "media_roots": [
+    {
+      "root": "public/uploads/community/posts y community/comments",
+      "contract": "Archivos directos bajo raíz pública; no Storage::disk public; soft delete puede haber perdido bytes antes de borrar fila",
+      "gate": "Verificar referencias y compartidos en inventario autorizado; quitar UI no despublica URL; ningún borrado real W6.2a/b por inferencia"
+    },
+    {
+      "root": "storage/app/public y URL storage",
+      "contract": "Fotos nativas/anteriores y emotions.image_path; W5.1 solo limpia paths avatars/historical válidos de su dueño",
+      "gate": "Conservar todo archivo referenciado por users u otro módulo nativo; bridge mantiene filas antiguas mientras existan; no GC general"
+    },
+    {
+      "root": "public/img y medios versionados",
+      "contract": "Source assets distintos de valores guardados; inventario por metadata, no imágenes abiertas",
+      "gate": "No eliminar por cero literal; resolver SQL/dinámicos y licencias primero"
+    }
+  ],
+  "schema_strategy": "No editar/eliminar las 37 migraciones. Proponer por separado migraciones nuevas hacia adelante con orden de FK y validación de instalaciones nuevas (37 + cambios aprobados) y existentes. SQL/driver/triggers/version instalada son preguntas pendientes, no inspeccionadas. No down destructivo como recuperación.",
+  "prerequisites": [
+    "W6.2b aprobado y sin entrypoints/consumidores antiguos",
+    "Autorización explícita y delimitada para inspeccionar datos/medios y aprobar conjunto exacto de eliminación",
+    "Inventario previo, grafo de referencias, clasificación cierta y límites de filas/bytes; detener ante ambigüedad",
+    "Backup operativo temporal con acceso restringido, checksum y restauración ensayada en copia aislada; no módulo de archivo ni historial de producto",
+    "Simular fallos parciales SQL/storage y puntos de parada; proteger usuarios, tokens y operaciones nativas",
+    "Verificar dependencias transitivas/migraciones/triggers de drivers soportados antes de quitar paquetes",
+    "Eliminar referencias de bridge solo cuando ya no haya tablas/filas/archivos que requieran protección cruzada"
+  ],
+  "recovery": "Antes de cualquier destrucción autorizada, detener escrituras afectadas, registrar manifiesto de alcance y snapshot consistente; probar restauración sintética. Ante fallo, detener lotes, conservar originales y restaurar únicamente el conjunto aprobado con reconciliación. Un revert de código no recupera datos, medios ni eventos remotos. No ejecutar operaciones en W6.2a."
+}

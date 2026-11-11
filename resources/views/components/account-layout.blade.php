@@ -7,7 +7,7 @@
   <title>{{ $title }} · Tekora</title>
     <link rel="preload" href="{{ asset('fonts/tekora/dm-sans-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ asset('fonts/tekora/space-grotesk-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/tekora/account-base.css') }}">
   <link rel="stylesheet" href="{{ asset('css/account.css') }}">
   @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/account-shell.css', 'resources/js/tekora/account-shell.js'])
   @if($dashboard) @vite(['resources/css/tekora/dashboards.css', 'resources/js/tekora/dashboards.js']) @endif

@@ -1,0 +1,6 @@
+{
+  "method": "Temporary development marker in isolated clone; generated build preserved outside public during no-build scenario and restored intact. Real manifest never deleted. Built suite already completed before this scenario.",
+  "before_sha256": "36cfb059963cc44ec219d98b663beb1324c8a9e0579e3b54700cc1b8807d7c63",
+  "after_sha256": "36cfb059963cc44ec219d98b663beb1324c8a9e0579e3b54700cc1b8807d7c63",
+  "exit_code": 2
+}

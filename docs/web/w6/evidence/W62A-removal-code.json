@@ -1,0 +1,2693 @@
+{
+  "base_sha": "2d7e3c05fb3c38857dfe8102e9c5a1c6c70dfe43",
+  "status": "Preparado para revisión W6.2b; ninguna eliminación ejecutada",
+  "files": [
+    {
+      "file": "app/Http/Controllers/ComunidadController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 10,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 157,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 158,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 160,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 161,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/CommentController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 16,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 164,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 165,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/CommentLikeController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 25,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 166,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/CitasController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 20,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 179,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 181,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 185,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/UserCitaController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/identities.php",
+          "line": 7,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/identities.php",
+          "line": 23,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 18,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 188,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 17,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 116,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 119,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 122,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 21,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 109,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 112,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 11,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 64,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 175,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaAuthController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 12,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 48,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 49,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 71,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaGoogleController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 19,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 126,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 129,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 132,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/GoogleCalendarController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/HomeController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/TekoraHomeController.php",
+          "line": 11,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 22,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 43,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 144,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/PdfController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 23,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 146,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/ReminderController.php",
+      "kind": "exclusive-controller",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "Retirar rutas/aliases y superficies dependientes; Calendar: cerrar conexiones/callbacks en vuelo sin OAuth real ni revocación implícita",
+      "tests_to_review": "CitasRegressionTest; RoutesAndGoogleSafetyTest; ComposerDependencyCompatibilityTest según handler; contrato de cierre, guards/CSRF nativos",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/Auth/ConfirmPasswordController.php",
+      "kind": "dormant-auth-scaffold",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Sin Auth::routes/cableado localizado; descartar consumidores dinámicos; conservar AuthController y password reset centrales",
+      "tests_to_review": "AuthenticationTest; WebAccountsTest; TekoraW5Test y reset central",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/Auth/ForgotPasswordController.php",
+      "kind": "dormant-auth-scaffold",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Sin Auth::routes/cableado localizado; descartar consumidores dinámicos; conservar AuthController y password reset centrales",
+      "tests_to_review": "AuthenticationTest; WebAccountsTest; TekoraW5Test y reset central",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/Auth/LoginController.php",
+      "kind": "dormant-auth-scaffold",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Sin Auth::routes/cableado localizado; descartar consumidores dinámicos; conservar AuthController y password reset centrales",
+      "tests_to_review": "AuthenticationTest; WebAccountsTest; TekoraW5Test y reset central",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/Auth/RegisterController.php",
+      "kind": "dormant-auth-scaffold",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Sin Auth::routes/cableado localizado; descartar consumidores dinámicos; conservar AuthController y password reset centrales",
+      "tests_to_review": "AuthenticationTest; WebAccountsTest; TekoraW5Test y reset central",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/Auth/ResetPasswordController.php",
+      "kind": "dormant-auth-scaffold",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Sin Auth::routes/cableado localizado; descartar consumidores dinámicos; conservar AuthController y password reset centrales",
+      "tests_to_review": "AuthenticationTest; WebAccountsTest; TekoraW5Test y reset central",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Http/Controllers/Auth/VerificationController.php",
+      "kind": "dormant-auth-scaffold",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Sin Auth::routes/cableado localizado; descartar consumidores dinámicos; conservar AuthController y password reset centrales",
+      "tests_to_review": "AuthenticationTest; WebAccountsTest; TekoraW5Test y reset central",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/Cita.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 7,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 187,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 205,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 19,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 87,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 181,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/UserCitaController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/UserCitaController.php",
+          "line": 15,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "tests/Feature/ActivityMigrationTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ActivityMigrationTest.php",
+          "line": 39,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityMigrationTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityMigrationTest.php",
+          "line": 46,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 103,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CitasRegressionTest.php",
+          "line": 5,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CitasRegressionTest.php",
+          "line": 32,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CitasRegressionTest.php",
+          "line": 45,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ConversationMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ConversationMigrationTest.php",
+          "line": 45,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 52,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMessagesMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMessagesMigrationTest.php",
+          "line": 46,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 53,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+          "line": 53,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationMigrationTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationMigrationTest.php",
+          "line": 43,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewMigrationTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewMigrationTest.php",
+          "line": 43,
+          "kind": "test"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/Comment.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/CommentController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/CommentController.php",
+          "line": 102,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/CommentLikeController.php",
+          "line": 5,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/Post.php",
+          "line": 37,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/User.php",
+          "line": 115,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 112,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 67,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 61,
+          "kind": "test"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/Emotion.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/HomeController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/HomeController.php",
+          "line": 17,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/PdfController.php",
+          "line": 8,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/PdfController.php",
+          "line": 17,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 7,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "routes/web.php",
+          "line": 74,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "tests/Feature/ComposerDependencyCompatibilityTest.php",
+          "line": 5,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ComposerDependencyCompatibilityTest.php",
+          "line": 183,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InstallationTest.php",
+          "line": 5,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InstallationTest.php",
+          "line": 129,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/RoutesAndGoogleSafetyTest.php",
+          "line": 5,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/RoutesAndGoogleSafetyTest.php",
+          "line": 83,
+          "kind": "test"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/Like.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/Comment.php",
+          "line": 26,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/Post.php",
+          "line": 31,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/User.php",
+          "line": 110,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/Post.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 5,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 16,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 114,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/Comment.php",
+          "line": 20,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/Like.php",
+          "line": 18,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/User.php",
+          "line": 101,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 111,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 66,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 60,
+          "kind": "test"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/Profesionista.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 8,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 181,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 7,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaController.php",
+          "line": 14,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/Cita.php",
+          "line": 31,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/ProfesionistaDisponibilidad.php",
+          "line": 28,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "config/auth.php",
+          "line": 76,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "tests/Feature/ActivityMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ActivityMigrationTest.php",
+          "line": 38,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ActivitySecurityTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ActivitySecurityTest.php",
+          "line": 78,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AuthenticationTest.php",
+          "line": 5,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AuthenticationTest.php",
+          "line": 17,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityCompatibilityTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityCompatibilityTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityCompatibilityTest.php",
+          "line": 25,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityMigrationTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityMigrationTest.php",
+          "line": 44,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 100,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CitasRegressionTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CitasRegressionTest.php",
+          "line": 15,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ClientDashboardTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ClientDashboardTest.php",
+          "line": 32,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ComposerDependencyCompatibilityTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ComposerDependencyCompatibilityTest.php",
+          "line": 58,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ConversationMigrationTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ConversationMigrationTest.php",
+          "line": 43,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ConversationReadTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ConversationReadTest.php",
+          "line": 188,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 47,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityRolesTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityRolesTest.php",
+          "line": 266,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMessagesMigrationTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMessagesMigrationTest.php",
+          "line": 44,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMessagesTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMessagesTest.php",
+          "line": 289,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 11,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 50,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+          "line": 50,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationsTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationsTest.php",
+          "line": 312,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InstallationTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InstallationTest.php",
+          "line": 45,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InstallationTest.php",
+          "line": 92,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ProfilePhotoIntegrityTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ProfilePhotoIntegrityTest.php",
+          "line": 442,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ProviderDashboardAccessTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ProviderDashboardAccessTest.php",
+          "line": 21,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationCsrfCompatibilityTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationCsrfCompatibilityTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationCsrfCompatibilityTest.php",
+          "line": 66,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationMigrationTest.php",
+          "line": 41,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewCsrfCompatibilityTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewCsrfCompatibilityTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewCsrfCompatibilityTest.php",
+          "line": 63,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewMigrationTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewMigrationTest.php",
+          "line": 41,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/RoutesAndGoogleSafetyTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/RoutesAndGoogleSafetyTest.php",
+          "line": 17,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ServiceInquiriesTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ServiceInquiriesTest.php",
+          "line": 331,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ServiceManagementTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ServiceManagementTest.php",
+          "line": 169,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/TekoraW11Test.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/TekoraW11Test.php",
+          "line": 57,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/TekoraW5Test.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/TekoraW5Test.php",
+          "line": 77,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/TekoraW5Test.php",
+          "line": 139,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/TekoraW5Test.php",
+          "line": 237,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/WebAccountsTest.php",
+          "line": 6,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/WebAccountsTest.php",
+          "line": 181,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/WebAccountsTest.php",
+          "line": 196,
+          "kind": "test"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/ProfesionistaDisponibilidad.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 8,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 80,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+          "line": 6,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+          "line": 15,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+          "line": 63,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+          "line": 66,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "tests/Feature/AvailabilityCompatibilityTest.php",
+          "line": 9,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityCompatibilityTest.php",
+          "line": 27,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityMigrationTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/AvailabilityMigrationTest.php",
+          "line": 48,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/CatalogMigrationTest.php",
+          "line": 107,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 58,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/IdentityMigrationTest.php",
+          "line": 103,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 11,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryMigrationTest.php",
+          "line": 57,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+          "line": 10,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+          "line": 57,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationCsrfCompatibilityTest.php",
+          "line": 8,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReservationCsrfCompatibilityTest.php",
+          "line": 68,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewCsrfCompatibilityTest.php",
+          "line": 7,
+          "kind": "test"
+        },
+        {
+          "file": "tests/Feature/ReviewCsrfCompatibilityTest.php",
+          "line": 65,
+          "kind": "test"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "app/Models/Reminder.php",
+      "kind": "exclusive-model",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/ReminderController.php",
+          "line": 16,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "app/Models/User.php",
+          "line": 105,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar controladores/relaciones User; tipos morfos y tablas quedan para plan W6.2c; no migrar identidades ni filas",
+      "tests_to_review": "Retirada explícita de expectativas del módulo, migraciones históricas conservadas; 25 regresiones W6.2a y W5.1",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/HomeController.php",
+          "line": 18,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/ComunidadController.php",
+          "line": 20,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/conferencias.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 150,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/dashboard-profesionista.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 105,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/citas.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/citas/create.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/CitasController.php",
+          "line": 21,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/citas/mis-citas.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/UserCitaController.php",
+          "line": 20,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/profesionistas/index.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaController.php",
+          "line": 15,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/profesionistas/disponibilidad.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+          "line": 22,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+          "line": 27,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/emotion/show.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "routes/web.php",
+          "line": 75,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/pdf/emotions/cards.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/login-profesionista.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/auth/portal.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/auth/registro_profesionista.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/layouts/app.blade.php",
+      "kind": "legacy-view",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Quitar renderers/rutas; las vistas sin renderer literal siguen siendo candidatas hasta resolver consumidores dinámicos",
+      "tests_to_review": "Cierre GET/POST/JSON acordado; marca/navegación W1–W5; no crear historial ni pantallas sustitutas",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "resources/views/components/legacy-account-notice.blade.php",
+      "kind": "exclusive-component",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Bajo",
+      "consumers": [
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "line": 80,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "line": 81,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+          "line": 89,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Retirar sus tres pantallas profesionales consumidoras",
+      "tests_to_review": "RoutesAndGoogleSafetyTest y navegación nativa",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/auth-portal.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/auth/portal.blade.php",
+          "line": 9,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/citas.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/citas2.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/citas/create.blade.php",
+          "line": 11,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/comunidad.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "line": 9,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/conferencias.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/conferencias.blade.php",
+          "line": 8,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/consultas.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/citas.blade.php",
+          "line": 7,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/dashboard-profesionista.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/dashboard-profesionista.blade.php",
+          "line": 7,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "line": 9,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/disponibilidad.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/profesionistas/disponibilidad.blade.php",
+          "line": 10,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/editar.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/home.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/components/account-layout.blade.php",
+          "line": 10,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 8,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/login-unificado.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/login.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/mis-citas.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/citas/mis-citas.blade.php",
+          "line": 9,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/perfil.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/profesionistas.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/profesionistas/index.blade.php",
+          "line": 9,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/provider-dashboard.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/registro-unificado.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/registro.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/login-profesionista.blade.php",
+          "line": 7,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/css/solicitudes.css",
+      "kind": "legacy-or-dormant-css",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [
+        {
+          "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+          "line": 9,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "Desaparecer sus vistas consumidoras; home.css ya no es cargado por account-layout; validar referencias dinámicas antes de borrar",
+      "tests_to_review": "Build, W1–W5, CSP y regresión visual responsive; no borrar account.css ni account-base.css",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/js/account.js",
+      "kind": "dormant-js",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Medio",
+      "consumers": [],
+      "pending": "Cero literal no prueba inactividad; revisar invocadores dinámicos antes del lote de retirada",
+      "tests_to_review": "Build y autenticación/formularios sin JS",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/alex.jpg",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 48,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/emociones.png",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/esperanza.png",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/fondo.jpg",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/foto1.png",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/logo.png",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "resources/views/citas/create.blade.php",
+          "line": 23,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/citas/mis-citas.blade.php",
+          "line": 21,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/comunidad.blade.php",
+          "line": 40,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 16,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "resources/views/profesionistas/index.blade.php",
+          "line": 21,
+          "kind": "runtime-source"
+        },
+        {
+          "file": "tests/Feature/TekoraW1Test.php",
+          "line": 71,
+          "kind": "test"
+        }
+      ],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/roque.jpg",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [
+        {
+          "file": "resources/views/home.blade.php",
+          "line": 53,
+          "kind": "runtime-source"
+        }
+      ],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/salud.jpg",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/tranquilidad.png",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    },
+    {
+      "file": "public/img/user1.jpg",
+      "kind": "source-image-conditional",
+      "decision": "RETIRAR en W6.2b después de resolver consumidores; no eliminado en W6.2a",
+      "risk": "Alto",
+      "consumers": [],
+      "pending": "No abrir imagen; resolver posibles rutas SQL/URLs guardadas y derechos. Si no se puede demostrar exclusividad, aplazar retirada física a W6.2c autorizado",
+      "tests_to_review": "Inventario de referencias aprobado; igualdad de medios nativos preservados; nunca eliminar por cero literal",
+      "data_deletion_authorized": false
+    }
+  ],
+  "shared_files_fragments_only": [
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "symbol_or_fragment": "account-legacy / Preferencias y legado / identity.citas",
+      "action": "Eliminar solo accesos/active legacy; proteger enlaces can/counters/logout nativos",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/views/components/account-layout.blade.php",
+      "symbol_or_fragment": "tk-shell-footer route(home)",
+      "action": "Retirar acceso al producto alternativo; preservar shell y su nueva base CSS",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/views/account/client.blade.php",
+      "symbol_or_fragment": "client-legacy-title",
+      "action": "Eliminar tarjeta anterior; no sustituir por historial",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/views/perfil.blade.php",
+      "symbol_or_fragment": "tk-identity-history",
+      "action": "Eliminar details anterior; conservar datos/foto/nombre W5.1",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/views/login.blade.php",
+      "symbol_or_fragment": "legacy_login / role=prof / profesionistas",
+      "action": "Retirar selector/form profesional cuando cierre guard; conservar login central y throttle/CSRF",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/views/auth/registro.blade.php",
+      "symbol_or_fragment": "login.prof",
+      "action": "Retirar acceso profesional anterior, conservar registro e intent centrales",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/views/account/activate-provider.blade.php",
+      "symbol_or_fragment": "identidad histórica",
+      "action": "Retirar branding explicativo; no alterar activación ni fingir verificación/vinculación",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "app/Models/User.php",
+      "symbol_or_fragment": "posts/reminders/likes/comments",
+      "action": "Eliminar solo las cuatro relaciones antiguas tras quitar consumidores; User y relaciones nativas protegidos",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "config/auth.php",
+      "symbol_or_fragment": "guards.profesionista / providers.profesionistas",
+      "action": "Retirar config profesional cuando rutas/login eliminados; web/users/Sanctum intactos",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "config/services.php",
+      "symbol_or_fragment": "google",
+      "action": "Retirar variables/config Google cuando no queden controladores; no leer valores ni modificar .env",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "bootstrap/app.php",
+      "symbol_or_fragment": "redirectGuestsTo auth:profesionista",
+      "action": "Simplificar exclusivamente rama de guard retirado; conservar redirect central, middleware y API",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "routes/identities.php",
+      "symbol_or_fragment": "identity.citas",
+      "action": "Retirar alias GET /cuenta/citas; conservar permiso client.appointments.view del dashboard",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "public/css/account.css",
+      "symbol_or_fragment": "account-legacy y estilos de accesos antiguos",
+      "action": "Hoja compartida protegida; podar solo reglas sin consumidores, no borrar archivo",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "vite.config.js",
+      "symbol_or_fragment": "app.js / app.scss",
+      "action": "Eliminar entradas de scaffold solo después de comprobar ausencia de consumidor y separar bundle nativo",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/js/app.js",
+      "symbol_or_fragment": "bootstrap import",
+      "action": "Candidato del scaffold; no confundir con imports nativos de animejs",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/js/bootstrap.js",
+      "symbol_or_fragment": "Axios defaults",
+      "action": "Resolver usos antes de retirar axios/bootstrap; FrontendCsrfHeadersTest protegido",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/sass/app.scss",
+      "symbol_or_fragment": "Bootstrap / variables / Bunny",
+      "action": "Candidato del scaffold; licencia local de fuentes y bundles nativos conservados",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    },
+    {
+      "file": "resources/sass/_variables.scss",
+      "symbol_or_fragment": "variables partial",
+      "action": "Retirar únicamente junto al entrypoint Sass sin consumidores",
+      "stage": "W6.2b",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada"
+    }
+  ],
+  "routes_and_names": [
+    {
+      "method": "GET",
+      "uri": "/login-profesionista",
+      "source": "routes/web.php",
+      "line": 48,
+      "name": "profesionista.login",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/login-profesionista",
+      "source": "routes/web.php",
+      "line": 49,
+      "name": "profesionista.login.post",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/registro-profesionista",
+      "source": "routes/web.php",
+      "line": 59,
+      "name": "profesionista.create",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/registro-profesionista",
+      "source": "routes/web.php",
+      "line": 64,
+      "name": "profesionista.store",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/logout-profesionista",
+      "source": "routes/web.php",
+      "line": 71,
+      "name": "profesionista.logout",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/emociones/{slug}",
+      "source": "routes/web.php",
+      "line": 73,
+      "name": null,
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/dashboard-profesionista",
+      "source": "routes/web.php",
+      "line": 104,
+      "name": "profesionista.dashboard",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionista/disponibilidad",
+      "source": "routes/web.php",
+      "line": 109,
+      "name": "prof.dispo",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/profesionista/disponibilidad",
+      "source": "routes/web.php",
+      "line": 112,
+      "name": "prof.dispo.store",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/solicitudes-citas",
+      "source": "routes/web.php",
+      "line": 116,
+      "name": "profesionista.solicitudes",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas/{id}/aceptar",
+      "source": "routes/web.php",
+      "line": 119,
+      "name": "citas.aceptar",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas/{id}/rechazar",
+      "source": "routes/web.php",
+      "line": 122,
+      "name": "citas.rechazar",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/google/connect",
+      "source": "routes/web.php",
+      "line": 126,
+      "name": "google.connect",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/google/callback",
+      "source": "routes/web.php",
+      "line": 129,
+      "name": "google.callback",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/google/disconnect",
+      "source": "routes/web.php",
+      "line": 132,
+      "name": "google.disconnect",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/mindbloom/inicio",
+      "source": "routes/web.php",
+      "line": 144,
+      "name": "home",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/pdf/emociones/tarjetas",
+      "source": "routes/web.php",
+      "line": 146,
+      "name": "pdf.emotions.cards",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/conferencias",
+      "source": "routes/web.php",
+      "line": 149,
+      "name": null,
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/consultas",
+      "source": "routes/web.php",
+      "line": 154,
+      "name": null,
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/comunidad",
+      "source": "routes/web.php",
+      "line": 157,
+      "name": "comunidad",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/comunidad",
+      "source": "routes/web.php",
+      "line": 158,
+      "name": "comunidad.store",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/posts/{post}/like",
+      "source": "routes/web.php",
+      "line": 160,
+      "name": "like",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "DELETE",
+      "uri": "/posts/{post}",
+      "source": "routes/web.php",
+      "line": 161,
+      "name": "eliminar",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/comments",
+      "source": "routes/web.php",
+      "line": 164,
+      "name": "comentario_cre",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "DELETE",
+      "uri": "/comments/{comment}",
+      "source": "routes/web.php",
+      "line": 165,
+      "name": "eliminar_com",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/comments/{comment}/like",
+      "source": "routes/web.php",
+      "line": 166,
+      "name": null,
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Alto",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionistas",
+      "source": "routes/web.php",
+      "line": 175,
+      "name": "profesionistas.index",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/citas/create/{profesionista}",
+      "source": "routes/web.php",
+      "line": 179,
+      "name": "citas.create",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionistas/{profesionista}/availability",
+      "source": "routes/web.php",
+      "line": 181,
+      "name": "profesionistas.availability",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas",
+      "source": "routes/web.php",
+      "line": 185,
+      "name": "citas.store",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/citas",
+      "source": "routes/web.php",
+      "line": 188,
+      "name": "user.citas",
+      "action": "Retirar contrato legado en W6.2b; respuesta de cierre por método aprobada, sin redirigir escrituras ni crear archivo/historial",
+      "risk": "Crítico",
+      "pending": "Cortar links/forms/aliases; resolver callback en vuelo y compromisos externos por autorización separada; no compatibilidad indefinida",
+      "tests": "Probar cierre/404 o 410 acordado y ausencia de nuevas escrituras; preservar auth/CSRF/autorización nativos"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/citas",
+      "source": "routes/identities.php",
+      "line": 23,
+      "name": "identity.citas",
+      "action": "Retirar alias, no crear historial",
+      "risk": "Alto",
+      "pending": "Retirar tarjeta y referencia routeIs; no eliminar permiso del dashboard",
+      "tests": "Dashboard cliente y sus policies, ausencia de enlaces a ruta retirada"
+    }
+  ],
+  "dependency_candidates": [
+    {
+      "ecosystem": "composer",
+      "package": "barryvdh/laravel-dompdf",
+      "current_consumers": "PdfController; ComposerDependencyCompatibilityTest PDF",
+      "gate": "Retirar cuando PDF/emociones no tengan entrypoints; resolver contrato de cierre y tests específicos",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "composer",
+      "package": "google/apiclient",
+      "current_consumers": "CitasController; ProfesionistaCitaController; GoogleCalendarController",
+      "gate": "Retirar tras quitar disponibilidad/aceptación/Calendar antiguos, no crear Calendar nativo",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "composer",
+      "package": "laravel/socialite",
+      "current_consumers": "ProfesionistaGoogleController",
+      "gate": "Retirar tras cierre de conexión/callback y revisión de auto-discovery",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "composer",
+      "package": "socialiteproviders/google",
+      "current_consumers": "composer y auto-discovery/transitivo",
+      "gate": "Verificar ausencia transitiva tras retirar OAuth; no basta búsqueda de símbolos",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "composer",
+      "package": "doctrine/dbal",
+      "current_consumers": "Declaración directa; comentario en migración likes",
+      "gate": "INVESTIGAR: demostrar instalación desde cero con 37 migraciones y upgrade aislado sin paquete; no reescribir migración",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "composer",
+      "package": "laravel/ui",
+      "current_consumers": "Scaffold Auth/*; app.scss/app.js",
+      "gate": "Retirar después de scaffold y prueba de que Auth central no usa traits/generación del paquete",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "bootstrap",
+      "current_consumers": "resources/js/app.js y resources/sass/app.scss",
+      "gate": "Retirar tras entrypoints sin consumidores; conservar estilos nativos sin rediseño",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@popperjs/core",
+      "current_consumers": "Bootstrap/scaffold",
+      "gate": "Resolver consumidores transitivos después de Bootstrap",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "axios",
+      "current_consumers": "resources/js/bootstrap.js; headers X-Requested-With",
+      "gate": "INVESTIGAR imports estáticos/dinámicos; no eliminar cobertura de CSRF para aprobar retirada",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "sass",
+      "current_consumers": "resources/sass/app.scss y variables",
+      "gate": "Retirar solo tras entrada Sass retirada y build sin otro consumidor",
+      "stage": "W6.2b condicionado",
+      "risk": "Alto",
+      "tests": "Resolver con Composer/npm sin edición manual de lock; install/platform/audits/build y suite completa; no aprobar por ausencia literal"
+    }
+  ],
+  "protected_resources": [
+    "public/css/account.css",
+    "public/css/tekora/account-base.css",
+    "public/js/availability.js",
+    "resources/css/tekora/*",
+    "resources/js/tekora/* salvo evidencia contraria",
+    "public/fonts/tekora/* incluidas ambas OFL",
+    "animejs",
+    "vite",
+    "laravel-vite-plugin",
+    "concurrently: composer.json scripts.dev para serve/queue/Vite; no exclusivo antiguo",
+    "framework/Sanctum y dependencias transitivas nativas"
+  ],
+  "uploaded_media_individual_names_published": false
+}
