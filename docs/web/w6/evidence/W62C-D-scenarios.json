@@ -1,0 +1,739 @@
+{
+  "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+  "result": {
+    "tests": 70,
+    "assertions": 626,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 9.382161,
+    "status": "PASS"
+  },
+  "all_original_test_methods_retained": true,
+  "original_data_providers_retained": {
+    "drift_cases": 6,
+    "photo_checkpoints": 5
+  },
+  "cases": [
+    {
+      "name": "test_inventory_comes_from_all_37_migrations_in_memory",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 48,
+      "status": "PASS"
+    },
+    {
+      "name": "test_populated_retirement_preserves_every_protected_row_and_native_workflow",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 58,
+      "status": "PASS"
+    },
+    {
+      "name": "test_parent_first_order_and_protected_target_are_rejected_before_any_drop",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 21,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unknown_inbound_fk_stops_before_any_drop",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "test_trigger_on_protected_users_referencing_posts_stops_before_any_retirement",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 16,
+      "status": "PASS"
+    },
+    {
+      "name": "test_partial_failure_requires_explicit_checkpoint_and_preserves_protected_rows",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_sqlite_transactional_rehearsal_can_restore_synthetic_rows_after_failure",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 43,
+      "status": "PASS"
+    },
+    {
+      "name": "test_inconsistent_schema_or_connection_is_a_stop with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "test_inconsistent_schema_or_connection_is_a_stop with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "test_inconsistent_schema_or_connection_is_a_stop with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 3,
+      "status": "PASS"
+    },
+    {
+      "name": "test_inconsistent_schema_or_connection_is_a_stop with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "test_inconsistent_schema_or_connection_is_a_stop with data set #4",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "test_inconsistent_schema_or_connection_is_a_stop with data set #5",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #4",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #5",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #6",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #7",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #8",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #9",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #10",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #11",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact with data set #12",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 3,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 3,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 3,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #4",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 3,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #5",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 3,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #6",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables with data set #7",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 3,
+      "status": "PASS"
+    },
+    {
+      "name": "test_every_rollback_is_observed_inside_and_after_the_transaction with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 20,
+      "status": "PASS"
+    },
+    {
+      "name": "test_every_rollback_is_observed_inside_and_after_the_transaction with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 20,
+      "status": "PASS"
+    },
+    {
+      "name": "test_every_rollback_is_observed_inside_and_after_the_transaction with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 20,
+      "status": "PASS"
+    },
+    {
+      "name": "test_every_rollback_is_observed_inside_and_after_the_transaction with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 20,
+      "status": "PASS"
+    },
+    {
+      "name": "test_guards_are_rechecked_before_each_drop_not_only_before_the_plan with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_guards_are_rechecked_before_each_drop_not_only_before_the_plan with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_guards_are_rechecked_before_each_drop_not_only_before_the_plan with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_guards_are_rechecked_before_each_drop_not_only_before_the_plan with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_committed_partial_state_rejects_a_forged_or_stale_checkpoint_without_automatic_resume",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 13,
+      "status": "PASS"
+    },
+    {
+      "name": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination with data set #4",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_restore_rejects_unreviewed_source_before_creating_any_destination_object with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_restore_rejects_unreviewed_source_before_creating_any_destination_object with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_restore_rejects_unreviewed_source_before_creating_any_destination_object with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 4,
+      "status": "PASS"
+    },
+    {
+      "name": "test_native_auth_roles_new_inquiries_messages_monotonic_reads_and_api_after_retirement",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 34,
+      "status": "PASS"
+    },
+    {
+      "name": "test_native_availability_reservations_reviews_and_notifications_after_retirement",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 29,
+      "status": "PASS"
+    },
+    {
+      "name": "test_native_notification_failure_rolls_back_reservation_and_event_after_retirement",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 10,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 7,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 6,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #4",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #5",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 7,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #6",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 7,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #7",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 7,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #8",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 8,
+      "status": "PASS"
+    },
+    {
+      "name": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media with data set #9",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 9,
+      "status": "PASS"
+    },
+    {
+      "name": "test_shared_photo_survives_partial_and_complete_schema_retirement with data set #0",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_shared_photo_survives_partial_and_complete_schema_retirement with data set #1",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_shared_photo_survives_partial_and_complete_schema_retirement with data set #2",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_shared_photo_survives_partial_and_complete_schema_retirement with data set #3",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    },
+    {
+      "name": "test_shared_photo_survives_partial_and_complete_schema_retirement with data set #4",
+      "class": "Tests.Feature.RetirementPreflightTest",
+      "assertions": 5,
+      "status": "PASS"
+    }
+  ],
+  "observations": {
+    "boundary-attached": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "transaction_restored": true,
+      "persistent_connection_opened": false
+    },
+    "boundary-connection": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "transaction_restored": true,
+      "persistent_connection_opened": false
+    },
+    "boundary-row": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "transaction_restored": true,
+      "persistent_connection_opened": false
+    },
+    "boundary-trigger": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "transaction_restored": true,
+      "persistent_connection_opened": false
+    },
+    "manifest-batch": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": true,
+      "no_table_or_column_exclusion": true
+    },
+    "manifest-date": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": true,
+      "no_table_or_column_exclusion": true
+    },
+    "manifest-empty-table": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": false,
+      "no_table_or_column_exclusion": true
+    },
+    "manifest-null": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": true,
+      "no_table_or_column_exclusion": true
+    },
+    "manifest-partial-index": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": true,
+      "no_table_or_column_exclusion": true
+    },
+    "manifest-same-count-value": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": true,
+      "no_table_or_column_exclusion": true
+    },
+    "manifest-sequence": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": true,
+      "no_table_or_column_exclusion": true
+    },
+    "manifest-storage-type": {
+      "status": "PASS",
+      "mutation_detected": true,
+      "row_counts_equal": true,
+      "no_table_or_column_exclusion": true
+    },
+    "photo-external-url": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-legacy-absent": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-legacy-only": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-native-only": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-normalized": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-query-error": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-shared": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-soft-deleted": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-storage-error": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": false,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "photo-unknown-morph": {
+      "status": "PASS",
+      "synthetic_bytes_retained": true,
+      "retirement_rejected_for_unknown_morph": true,
+      "storage_fake": true,
+      "external_requests": 0,
+      "real_media_reads": 0,
+      "media_hashes_published": false
+    },
+    "stop-changed-batch": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-cross-view": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-missing-candidate": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-missing-column": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-missing-migration": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-missing-protected": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-missing-trigger": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-modified-trigger": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-new-trigger": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-protected-fk": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-temp-object": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-unknown-index": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "stop-unknown-table": {
+      "status": "PASS",
+      "rejected_before_first_drop": true,
+      "observed_state_unchanged": true,
+      "drop_statements": 0,
+      "foreign_keys_on": true
+    },
+    "workflow-atomic-failure": {
+      "status": "PASS",
+      "after_retirement": true,
+      "reservation_event_notification_rollback_exact": true,
+      "fault_trigger_not_disabled": true
+    },
+    "workflow-auth-conversations-api": {
+      "status": "PASS",
+      "after_retirement": true,
+      "new_inquiry_and_acceptance": true,
+      "authorization_denial_unchanged": true,
+      "message_replay_single_row": true,
+      "stale_read_retains_marker_and_timestamp": true,
+      "api_identity_messages_catalog_contracts": true
+    },
+    "workflow-reservations-reviews-notifications": {
+      "status": "PASS",
+      "after_retirement": true,
+      "availability_revision_and_overlap": true,
+      "reservation_replay": true,
+      "authorization_and_stale_version": true,
+      "versions_and_events": [
+        1,
+        2,
+        3
+      ],
+      "review_publication_and_withdrawal_idempotent": true,
+      "notification_count": 5,
+      "recipients_verified": true,
+      "first_read_timestamp_preserved": true
+    }
+  },
+  "protected_users_trigger_to_posts": "PASS; original test retained, zero DROP and trigger exercised after rejection",
+  "persistent_locks_wal_multiple_writers_crash": "NOT RUN — requiere laboratorio SQLite persistente sintético separado"
+}

@@ -1,0 +1,514 @@
+{
+  "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+  "status": "PASS",
+  "rollbacks": {
+    "rollback-1": {
+      "status": "PASS",
+      "observed_absent_inside_transaction": [
+        "likes"
+      ],
+      "all_nine_rows_and_tables_restored": true,
+      "entire_manifest_restored": true,
+      "automatic_resume": false,
+      "physical_crash_simulation": false
+    },
+    "rollback-3": {
+      "status": "PASS",
+      "observed_absent_inside_transaction": [
+        "likes",
+        "comments",
+        "posts"
+      ],
+      "all_nine_rows_and_tables_restored": true,
+      "entire_manifest_restored": true,
+      "automatic_resume": false,
+      "physical_crash_simulation": false
+    },
+    "rollback-9": {
+      "status": "PASS",
+      "observed_absent_inside_transaction": [
+        "likes",
+        "comments",
+        "posts",
+        "reminders",
+        "emotions",
+        "citas",
+        "profesionista_bloqueos",
+        "profesionista_disponibilidades",
+        "profesionistas"
+      ],
+      "all_nine_rows_and_tables_restored": true,
+      "entire_manifest_restored": true,
+      "automatic_resume": false,
+      "physical_crash_simulation": false
+    },
+    "rollback-9-before-commit": {
+      "status": "PASS",
+      "observed_absent_inside_transaction": [
+        "likes",
+        "comments",
+        "posts",
+        "reminders",
+        "emotions",
+        "citas",
+        "profesionista_bloqueos",
+        "profesionista_disponibilidades",
+        "profesionistas"
+      ],
+      "all_nine_rows_and_tables_restored": true,
+      "entire_manifest_restored": true,
+      "automatic_resume": false,
+      "physical_crash_simulation": false
+    }
+  },
+  "partial_confirmation": {
+    "status": "PASS",
+    "committed_absent": [
+      "likes",
+      "comments",
+      "posts"
+    ],
+    "missing_forged_and_stale_confirmation_rejected": true,
+    "automatic_resume": false
+  },
+  "logical_restore": {
+    "status": "PASS",
+    "destination_manifest_equal": true,
+    "independent_memory_pdo": true,
+    "foreign_keys_always_on": true,
+    "native_relations_verified": true,
+    "synthetic_photo_bytes_equal": true,
+    "physical_backup_certification": false,
+    "all_26_protected_tables_populated": true,
+    "source_table_summaries": {
+      "activity_notifications": {
+        "row_count": 4,
+        "sequence": 4,
+        "synthetic_state_sha256": "57b6365f25935033dd36ea7c049ea46175e41907c1faa39185e080e148e0ab5e"
+      },
+      "cache": {
+        "row_count": 2,
+        "sequence": null,
+        "synthetic_state_sha256": "3df952190e84d7dadce144b7b546afe352a33d919de518e29b6f80f84a08f857"
+      },
+      "cache_locks": {
+        "row_count": 1,
+        "sequence": null,
+        "synthetic_state_sha256": "ae0a09648922f4eeaec3af8d84a5e1ff405abd7ff872df643e9199690df2a711"
+      },
+      "citas": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "551f516155185a000c78c42daf4ed5d06b1c512d3275d22e3718d9d737d8bed9"
+      },
+      "comments": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "75d0b960f42c1cb91e5d8f2af6b5ebd1f728a1f4dd844fd345d5ffbfc8241cde"
+      },
+      "emotions": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "482767d43700247055c1f763c3d7b029e09fe11a2ab60e1915976a55d2cddd98"
+      },
+      "failed_jobs": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "ee4b4c0069c4afcae77f1ce27b3eab3600d61454456183ac08eb342851d45f01"
+      },
+      "inquiry_notifications": {
+        "row_count": 2,
+        "sequence": 2,
+        "synthetic_state_sha256": "e012a301eb4c0dba3444a0234a8550c6d4e5cd3c50530843512352a20f5c58b0"
+      },
+      "job_batches": {
+        "row_count": 1,
+        "sequence": null,
+        "synthetic_state_sha256": "4466ef1ff6f213e366b290442508729aa63e6d118e9ee9e87a798484fb693236"
+      },
+      "jobs": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "cc08d57b062c1b7f5584431e765efa60aa12dcd700128a9c9f949d7660ae3323"
+      },
+      "likes": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "d3ad3368dc4806dcaf896256973d63452756d9e4c7c68c80be3ddc0dcb509ed3"
+      },
+      "migrations": {
+        "row_count": 37,
+        "sequence": 37,
+        "synthetic_state_sha256": "07b058983f2351674313dd352a5b4c8f1cbb9c2b25839fb4437832177e148e17"
+      },
+      "password_reset_tokens": {
+        "row_count": 1,
+        "sequence": null,
+        "synthetic_state_sha256": "fe591f7d48673427112329848a8744e8d0a1d5d4fdf9766ea378e7bac518f554"
+      },
+      "personal_access_tokens": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "f53a1fba2ea96047c9f0a092df2d137af7af4529dec8ff37d289d28601871126"
+      },
+      "posts": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "0a7efe3a9c282314eeb6a1b76dc9c3322633ce1b70bd49e3ff1f559b7838c322"
+      },
+      "profesionista_bloqueos": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "31b628c8f51aed8e5d6c7b2dbfff16967eb87a8e67c94ce93c66061be6cd6ebe"
+      },
+      "profesionista_disponibilidades": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "fda27fa0a8199971ea0a079dc8c5b9d1c6eb57b823c489b3364110c9f040f6a7"
+      },
+      "profesionistas": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "d7751e0da9d4719e27c7347c1285097d36f8ecca15ded1ac90dcdc9c48cb28a5"
+      },
+      "provider_availability_settings": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "f360c92905f8bebc3fd1ce5feda0f8c8e44c3c87c95377f824d4a2e2cfcb2a71"
+      },
+      "provider_blocked_dates": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "c27efd6ac532c845b7180703745ea82ce1cdddbe85b8b42e5d112107ffb3e449"
+      },
+      "provider_profiles": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "01aa4b08d88018c8d45aa330e43d4f6dedf3eccfaf45ecc29857ab2cbe73f815"
+      },
+      "provider_weekly_intervals": {
+        "row_count": 7,
+        "sequence": 7,
+        "synthetic_state_sha256": "63f5ffabd3125529c65cb3e4532201c38884157fab61ebc94ff775c5bd4b5352"
+      },
+      "reminders": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "4198d3156e657a8f9512fdc9e06729a3c723c9d33de6fcbf531ea8aad542dec7"
+      },
+      "reservation_events": {
+        "row_count": 3,
+        "sequence": 3,
+        "synthetic_state_sha256": "6a83943c98772efe0d42b9ce3bd8a9bd3aa12250ae036365f377ae9fa982107c"
+      },
+      "role_user": {
+        "row_count": 3,
+        "sequence": null,
+        "synthetic_state_sha256": "aa0470a6bf853eb46c0291b6d6aea250d91e39c01952810f2602ba272f40080e"
+      },
+      "roles": {
+        "row_count": 3,
+        "sequence": 3,
+        "synthetic_state_sha256": "461df3f2e61b15829c5e019defcef72d34828731aa56b0d6f7ff654519181857"
+      },
+      "service_categories": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "4d90dcfb69718eed3c33e09870f8ce25f268af9bc685fcb3a8531b3370f66ecf"
+      },
+      "service_inquiries": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "7ea8ee5cb5a14c084b178522bda13e7a0622597bf3d3c178375c03e46ae765b9"
+      },
+      "service_inquiry_messages": {
+        "row_count": 2,
+        "sequence": 2,
+        "synthetic_state_sha256": "db5e25a094e863eb055360da54af0f67d8a9f5a31f31f336ac3b1ce8cc277e8b"
+      },
+      "service_inquiry_reads": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "12133228561853143a24d0fc1647c9f4d15cd20f8575345c4d8830d4eb3bacac"
+      },
+      "service_reservations": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "816fcb12445140aa248267519d8b6cca710696e1b0f6096c86daf6723bbca377"
+      },
+      "service_reviews": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "f57e4a164bb4eeda0d5c891d350589e6906a8d7ffd777600b59eb2d242701fa1"
+      },
+      "services": {
+        "row_count": 1,
+        "sequence": 1,
+        "synthetic_state_sha256": "11be34da2d535fca052587f0308f3b5d877218d67ce4283651920547dff2ce5c"
+      },
+      "sessions": {
+        "row_count": 1,
+        "sequence": null,
+        "synthetic_state_sha256": "b45077a0a1adcabd6f04086416968436d21d57fdf6d10cd98e9c72518d39a19c"
+      },
+      "users": {
+        "row_count": 2,
+        "sequence": 3,
+        "synthetic_state_sha256": "610b9f091c45de372edd11a731a74be6cc862ead3967fba20a62c3b6e4139478"
+      }
+    },
+    "source_migration_ledger": [
+      {
+        "id": 10,
+        "migration": "2026_02_15_200848_create_comments_table",
+        "batch": 1
+      },
+      {
+        "id": 11,
+        "migration": "2026_02_16_031349_create_profesionista_bloqueos_table",
+        "batch": 1
+      },
+      {
+        "id": 12,
+        "migration": "2026_02_16_031436_create_citas_table",
+        "batch": 1
+      },
+      {
+        "id": 13,
+        "migration": "2026_02_20_224556_add_google_fields_to_profesionistas_table",
+        "batch": 1
+      },
+      {
+        "id": 14,
+        "migration": "2026_02_21_071030_add_start_end_to_citas_table",
+        "batch": 1
+      },
+      {
+        "id": 15,
+        "migration": "2026_02_21_191448_create_profesionista_disponibilidades_table",
+        "batch": 1
+      },
+      {
+        "id": 16,
+        "migration": "2026_02_23_235730_create_emotions_table",
+        "batch": 1
+      },
+      {
+        "id": 17,
+        "migration": "2026_02_24_033502_add_profile_photo_path_to_users_table",
+        "batch": 1
+      },
+      {
+        "id": 18,
+        "migration": "2026_02_24_041833_add_media_to_posts_table",
+        "batch": 1
+      },
+      {
+        "id": 19,
+        "migration": "2026_02_24_041908_add_media_to_comments_table",
+        "batch": 1
+      },
+      {
+        "id": 1,
+        "migration": "0001_01_01_000000_create_users_table",
+        "batch": 1
+      },
+      {
+        "id": 20,
+        "migration": "2026_02_24_061342_alter_posts_content_nullable",
+        "batch": 1
+      },
+      {
+        "id": 21,
+        "migration": "2026_02_24_071445_add_likeable_to_likes_table",
+        "batch": 1
+      },
+      {
+        "id": 22,
+        "migration": "2026_02_24_072517_add_unique_likeable_to_likes_table",
+        "batch": 1
+      },
+      {
+        "id": 23,
+        "migration": "2026_02_24_072708_make_post_id_nullable_in_likes_table",
+        "batch": 1
+      },
+      {
+        "id": 24,
+        "migration": "2026_02_24_075954_alter_comments_content_nullable",
+        "batch": 1
+      },
+      {
+        "id": 25,
+        "migration": "2026_10_23_000000_create_roles_and_role_user_tables",
+        "batch": 1
+      },
+      {
+        "id": 26,
+        "migration": "2026_10_23_000001_create_provider_profiles_table",
+        "batch": 1
+      },
+      {
+        "id": 27,
+        "migration": "2026_10_28_000000_create_service_categories_table",
+        "batch": 1
+      },
+      {
+        "id": 28,
+        "migration": "2026_10_28_000001_create_services_table",
+        "batch": 1
+      },
+      {
+        "id": 29,
+        "migration": "2026_10_28_000002_create_service_inquiries_table",
+        "batch": 1
+      },
+      {
+        "id": 2,
+        "migration": "0001_01_01_000001_create_cache_table",
+        "batch": 1
+      },
+      {
+        "id": 30,
+        "migration": "2026_10_29_000000_create_inquiry_notifications_table",
+        "batch": 1
+      },
+      {
+        "id": 31,
+        "migration": "2026_10_30_000000_create_service_inquiry_messages_table",
+        "batch": 1
+      },
+      {
+        "id": 32,
+        "migration": "2026_10_30_000001_create_service_inquiry_reads_table",
+        "batch": 1
+      },
+      {
+        "id": 33,
+        "migration": "2026_10_30_000002_create_provider_availability_tables",
+        "batch": 1
+      },
+      {
+        "id": 34,
+        "migration": "2026_11_03_000000_create_service_reservations",
+        "batch": 1
+      },
+      {
+        "id": 35,
+        "migration": "2026_11_03_000001_create_service_reviews",
+        "batch": 1
+      },
+      {
+        "id": 36,
+        "migration": "2026_11_03_000002_create_activity_notifications",
+        "batch": 1
+      },
+      {
+        "id": 37,
+        "migration": "2026_11_04_000000_create_personal_access_tokens_table",
+        "batch": 1
+      },
+      {
+        "id": 3,
+        "migration": "0001_01_01_000002_create_jobs_table",
+        "batch": 1
+      },
+      {
+        "id": 4,
+        "migration": "2025_08_02_085013_create_posts_table",
+        "batch": 1
+      },
+      {
+        "id": 5,
+        "migration": "2025_08_02_092303_create_reminders_table",
+        "batch": 1
+      },
+      {
+        "id": 6,
+        "migration": "2025_08_13_022507_create_profesionistas_table",
+        "batch": 1
+      },
+      {
+        "id": 7,
+        "migration": "2026_02_13_022342_add_remember_token_to_profesionistas_table",
+        "batch": 1
+      },
+      {
+        "id": 8,
+        "migration": "2026_02_15_192040_create_likes_table",
+        "batch": 1
+      },
+      {
+        "id": 9,
+        "migration": "2026_02_15_194127_add_deleted_at_to_posts_table",
+        "batch": 1
+      }
+    ],
+    "schema_reference": "W62C-D-manifests.json reviewed_catalog (same fresh 37-migration catalog)",
+    "unique_parent_indexes_created_before_loading_children": true,
+    "conversation_composite_fk_exercised_with_rows": true,
+    "blob_storage_class_preserved": true,
+    "native_constraints_exercised_after_restore": [
+      "event immutability",
+      "weekly overlap",
+      "one active inquiry",
+      "autoincrement above prior high-water mark"
+    ]
+  },
+  "rejected_destinations": {
+    "restore-reject-index": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "destination_ddl_and_rows_rolled_back": true,
+      "source_manifest_unchanged": true,
+      "foreign_keys_always_on": true
+    },
+    "restore-reject-row": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "destination_ddl_and_rows_rolled_back": true,
+      "source_manifest_unchanged": true,
+      "foreign_keys_always_on": true
+    },
+    "restore-reject-sequence": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "destination_ddl_and_rows_rolled_back": true,
+      "source_manifest_unchanged": true,
+      "foreign_keys_always_on": true
+    },
+    "restore-reject-trigger": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "destination_ddl_and_rows_rolled_back": true,
+      "source_manifest_unchanged": true,
+      "foreign_keys_always_on": true
+    },
+    "restore-reject-unknown-object": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "destination_ddl_and_rows_rolled_back": true,
+      "source_manifest_unchanged": true,
+      "foreign_keys_always_on": true
+    }
+  },
+  "unreviewed_source_rejections": {
+    "restore-source-ddl": {
+      "status": "PASS",
+      "rejected_before_destination_creation": true,
+      "source_connection_unchanged": true
+    },
+    "restore-source-ledger": {
+      "status": "PASS",
+      "rejected_before_destination_creation": true,
+      "source_connection_unchanged": true
+    },
+    "restore-source-object": {
+      "status": "PASS",
+      "rejected_before_destination_creation": true,
+      "source_connection_unchanged": true
+    }
+  },
+  "physical_backup_certification": false,
+  "persistent_sqlite_lab": "NOT RUN — requiere laboratorio SQLite persistente sintético separado"
+}
