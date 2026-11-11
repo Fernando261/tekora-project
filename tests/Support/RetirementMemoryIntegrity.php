@@ -47,8 +47,8 @@ trait RetirementMemoryIntegrity
         $query = fn (string $sql) => $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         // Compare the reserved prefix literally: LIKE 'sqlite_%' also matches
         // valid application names such as sqliteX_cross because _ is a wildcard.
-        $objects = $query("SELECT type,name,tbl_name,sql FROM sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE ORDER BY type,name");
-        $sequences = $query('SELECT name,typeof(name) AS name_type,seq AS value,typeof(seq) AS storage_type FROM sqlite_sequence');
+        $objects = $query("SELECT type,name,tbl_name,sql FROM main.sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE ORDER BY type,name");
+        $sequences = $query('SELECT name,typeof(name) AS name_type,seq AS value,typeof(seq) AS storage_type FROM main.sqlite_sequence');
         usort($sequences, fn ($a, $b) => strcmp(serialize($a), serialize($b)));
         $tables = [];
         foreach ($objects as $object) {
@@ -57,13 +57,13 @@ trait RetirementMemoryIntegrity
             }
             $name = $object['name'];
             $quoted = $this->quoteIdentifier($name);
-            $columns = $query('PRAGMA table_xinfo('.$quoted.')');
+            $columns = $query('PRAGMA main.table_xinfo('.$quoted.')');
             $indexes = [];
-            foreach ($query('PRAGMA index_list('.$quoted.')') as $index) {
+            foreach ($query('PRAGMA main.index_list('.$quoted.')') as $index) {
                 // seq is an enumeration position, not an index property. Key order
                 // remains exact through index_xinfo.seqno; no constraint is omitted.
                 unset($index['seq']);
-                $index['columns'] = $query('PRAGMA index_xinfo('.$this->quoteIdentifier($index['name']).')');
+                $index['columns'] = $query('PRAGMA main.index_xinfo('.$this->quoteIdentifier($index['name']).')');
                 $index['sql'] = null;
                 foreach ($objects as $candidate) {
                     if ($candidate['type'] === 'index' && $candidate['name'] === $index['name']) {
@@ -78,13 +78,13 @@ trait RetirementMemoryIntegrity
                 $types[] = 'typeof('.$this->quoteIdentifier($column['name']).') AS "__storage_type_'.$i.'"';
             }
             $rows = [];
-            foreach ($query('SELECT *,'.implode(',', $types).' FROM '.$quoted) as $row) {
+            foreach ($query('SELECT *,'.implode(',', $types).' FROM main.'.$quoted) as $row) {
                 $rows[] = ['values' => array_slice($row, 0, count($columns), true),
                     'storage_types' => array_values(array_slice($row, count($columns)))];
             }
             usort($rows, fn ($a, $b) => strcmp(serialize($a), serialize($b)));
             $tables[$name] = ['sql' => $object['sql'], 'columns' => $columns,
-                'foreign_keys' => $query('PRAGMA foreign_key_list('.$quoted.')'), 'indexes' => $indexes,
+                'foreign_keys' => $query('PRAGMA main.foreign_key_list('.$quoted.')'), 'indexes' => $indexes,
                 'triggers' => array_values(array_filter($objects, fn ($o) => $o['type'] === 'trigger' && $o['tbl_name'] === $name)),
                 'rows' => $rows,
                 'sequence' => array_values(array_filter($sequences, fn ($entry) => $entry['name_type'] === 'text' && $entry['name'] === $name))];
@@ -92,7 +92,10 @@ trait RetirementMemoryIntegrity
         ksort($tables);
 
         return ['tables' => $tables, 'objects' => $objects, 'sequences' => $sequences,
-            'temp_objects' => $query("SELECT type,name,tbl_name,sql FROM sqlite_temp_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE ORDER BY type,name")];
+            // No temporary object is authorized, including internal objects left
+            // after DROP TEMP TABLE (notably temp.sqlite_sequence). Capture all
+            // of them so schema preflight/restore cannot mistake temp for main.
+            'temp_objects' => $query('SELECT type,name,tbl_name,sql FROM temp.sqlite_master ORDER BY type,name')];
     }
 
     private function schemaPart(array $manifest): array
@@ -215,7 +218,7 @@ trait RetirementMemoryIntegrity
                         $this->guardMemoryPdo($copy);
                         $row = $record['values'];
                         $columns = implode(',', array_map($this->quoteIdentifier(...), array_keys($row)));
-                        $statement = $copy->prepare('INSERT INTO '.$this->quoteIdentifier($name).' ('.$columns.') VALUES ('.implode(',', array_fill(0, count($row), '?')).')');
+                        $statement = $copy->prepare('INSERT INTO main.'.$this->quoteIdentifier($name).' ('.$columns.') VALUES ('.implode(',', array_fill(0, count($row), '?')).')');
                         foreach (array_values($row) as $index => $value) {
                             $type = $record['storage_types'][$index];
                             $statement->bindValue($index + 1, $value, $value === null ? PDO::PARAM_NULL : ($type === 'blob' ? PDO::PARAM_LOB : (is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR)));
@@ -224,11 +227,11 @@ trait RetirementMemoryIntegrity
                         $statement->closeCursor();
                     }
                     if ($table['sequence'] !== []) {
-                        $statement = $copy->prepare('SELECT COUNT(*) FROM sqlite_sequence WHERE name = ?');
+                        $statement = $copy->prepare('SELECT COUNT(*) FROM main.sqlite_sequence WHERE name = ?');
                         $statement->execute([$name]);
                         $exists = (int) $statement->fetchColumn();
                         $statement->closeCursor();
-                        $sql = $exists ? 'UPDATE sqlite_sequence SET seq = ? WHERE name = ?' : 'INSERT INTO sqlite_sequence(seq,name) VALUES (?,?)';
+                        $sql = $exists ? 'UPDATE main.sqlite_sequence SET seq = ? WHERE name = ?' : 'INSERT INTO main.sqlite_sequence(seq,name) VALUES (?,?)';
                         $statement = $copy->prepare($sql);
                         $statement->bindValue(1, $table['sequence'][0]['value'], PDO::PARAM_INT);
                         $statement->bindValue(2, $name, PDO::PARAM_STR);
@@ -252,8 +255,8 @@ trait RetirementMemoryIntegrity
                 $afterLoad($copy);
             }
             $this->guardMemoryPdo($copy);
-            if ($copy->query('PRAGMA foreign_key_check')->fetchAll() !== []
-                || $copy->query('PRAGMA integrity_check')->fetchColumn() !== 'ok'
+            if ($copy->query('PRAGMA main.foreign_key_check')->fetchAll() !== []
+                || $copy->query('PRAGMA main.integrity_check')->fetchColumn() !== 'ok'
                 || $this->memoryManifest($copy) !== $source) {
                 throw new RuntimeException('Restored manifest mismatch; destination rejected');
             }

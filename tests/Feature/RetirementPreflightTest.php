@@ -54,6 +54,9 @@ class RetirementPreflightTest extends TestCase
         Http::preventStrayRequests();
         $this->reviewedProtectedTriggers = $this->protectedTriggers();
         $this->reviewedManifest = $this->memoryManifest();
+        if ($this->reviewedManifest['temp_objects'] !== []) {
+            throw new RuntimeException('Unreviewed temporary catalog in migration baseline');
+        }
     }
 
     protected function tearDown(): void
@@ -98,7 +101,7 @@ class RetirementPreflightTest extends TestCase
     {
         $this->memoryOnly();
 
-        return collect(DB::select("SELECT name,tbl_name,sql FROM sqlite_master WHERE type = 'trigger' ORDER BY name"))
+        return collect(DB::select("SELECT name,tbl_name,sql FROM main.sqlite_master WHERE type = 'trigger' ORDER BY name"))
             ->reject(fn ($trigger) => in_array($trigger->tbl_name, self::TABLES, true))
             ->map(fn ($trigger) => (array) $trigger)->all();
     }
@@ -108,8 +111,8 @@ class RetirementPreflightTest extends TestCase
         $this->memoryOnly();
         $result = [];
         foreach (array_keys($this->memoryManifest()['tables']) as $table) {
-            $result[$table] = ['columns' => Schema::getColumns($table),
-                'foreign_keys' => Schema::getForeignKeys($table), 'indexes' => Schema::getIndexes($table)];
+            $result[$table] = ['columns' => Schema::getColumns('main.'.$table),
+                'foreign_keys' => Schema::getForeignKeys('main.'.$table), 'indexes' => Schema::getIndexes('main.'.$table)];
         }
 
         return $result;
@@ -120,28 +123,34 @@ class RetirementPreflightTest extends TestCase
         $tables = array_values(array_diff(array_keys($this->memoryManifest()['tables']), self::TABLES));
         sort($tables);
 
-        return $this->reservationRows($tables);
+        $snapshot = [];
+        foreach ($tables as $table) {
+            $snapshot[$table] = DB::table('main.'.$table)->get()->map(fn ($row) => (array) $row)
+                ->sortBy(fn ($row) => json_encode($row))->values()->all();
+        }
+
+        return $snapshot;
     }
 
     private function seedRetired(User $user, string $media = 'avatars/shared.png'): void
     {
         $this->memoryOnly();
-        DB::table('profesionistas')->insert(['id' => 1, 'nombre' => 'Synthetic', 'email' => $user->email,
+        DB::table('main.profesionistas')->insert(['id' => 1, 'nombre' => 'Synthetic', 'email' => $user->email,
             'password' => 'synthetic-secret', 'cedula' => 'SYNTHETIC', 'google_access_token' => 'synthetic-token']);
-        DB::table('posts')->insert(['id' => 1, 'user_id' => $user->id, 'media_path' => $media, 'deleted_at' => now()]);
-        DB::table('comments')->insert(['id' => 1, 'user_id' => $user->id, 'post_id' => 1, 'content' => 'Synthetic', 'media_path' => $media]);
-        DB::table('likes')->insert(['user_id' => $user->id, 'post_id' => 1, 'likeable_id' => 1, 'likeable_type' => 'App\\Models\\Post']);
-        DB::table('reminders')->insert(['user_id' => $user->id, 'title' => 'Synthetic', 'remind_at' => '2030-01-01 10:00:00']);
-        DB::table('emotions')->insert(['name' => 'Synthetic', 'slug' => 'synthetic', 'image_path' => $media]);
-        DB::table('citas')->insert(['user_id' => $user->id, 'profesionista_id' => 1,
+        DB::table('main.posts')->insert(['id' => 1, 'user_id' => $user->id, 'media_path' => $media, 'deleted_at' => now()]);
+        DB::table('main.comments')->insert(['id' => 1, 'user_id' => $user->id, 'post_id' => 1, 'content' => 'Synthetic', 'media_path' => $media]);
+        DB::table('main.likes')->insert(['user_id' => $user->id, 'post_id' => 1, 'likeable_id' => 1, 'likeable_type' => 'App\\Models\\Post']);
+        DB::table('main.reminders')->insert(['user_id' => $user->id, 'title' => 'Synthetic', 'remind_at' => '2030-01-01 10:00:00']);
+        DB::table('main.emotions')->insert(['name' => 'Synthetic', 'slug' => 'synthetic', 'image_path' => $media]);
+        DB::table('main.citas')->insert(['user_id' => $user->id, 'profesionista_id' => 1,
             'start_datetime' => '2030-01-01 10:00:00', 'end_datetime' => '2030-01-01 11:00:00']);
-        DB::table('profesionista_disponibilidades')->insert(['profesionista_id' => 1, 'day_of_week' => 1, 'start_time' => '08:00', 'end_time' => '18:00']);
-        DB::table('profesionista_bloqueos')->insert(['profesionista_id' => 1, 'start_datetime' => '2030-01-01 10:00:00', 'end_datetime' => '2030-01-01 11:00:00']);
+        DB::table('main.profesionista_disponibilidades')->insert(['profesionista_id' => 1, 'day_of_week' => 1, 'start_time' => '08:00', 'end_time' => '18:00']);
+        DB::table('main.profesionista_bloqueos')->insert(['profesionista_id' => 1, 'start_datetime' => '2030-01-01 10:00:00', 'end_datetime' => '2030-01-01 11:00:00']);
     }
 
     private function verifyReviewedInventory(array $current, array $absent): void
     {
-        if (DB::select('PRAGMA foreign_key_check')) {
+        if (DB::select('PRAGMA main.foreign_key_check')) {
             throw new RuntimeException('Inconsistent references');
         }
         $positions = array_flip(self::TABLES);
@@ -156,11 +165,14 @@ class RetirementPreflightTest extends TestCase
         if ($this->protectedTriggers() !== $this->reviewedProtectedTriggers) {
             throw new RuntimeException('Unreviewed protected trigger: stop before retirement');
         }
+        if ($current['temp_objects'] !== []) {
+            throw new RuntimeException('Unreviewed temporary catalog: stop before retirement');
+        }
         if ($this->schemaPart($current) !== $this->reviewedSchemaAt($absent)) {
             throw new RuntimeException('Unreviewed schema/object/column: stop before retirement');
         }
         if (isset($current['tables']['likes'])) {
-            $unknown = DB::table('likes')->whereNotNull('likeable_type')
+            $unknown = DB::table('main.likes')->whereNotNull('likeable_type')
                 ->whereNotIn('likeable_type', ['App\\Models\\Post', 'App\\Models\\Comment'])->exists();
             if ($unknown) {
                 throw new RuntimeException('Unknown polymorphic dependency: stop before retirement');
@@ -204,7 +216,7 @@ class RetirementPreflightTest extends TestCase
                 throw new RuntimeException('Protected state changed during rehearsal');
             }
             if (! in_array($table, $absent, true)) {
-                Schema::drop($table);
+                Schema::drop('main.'.$table);
                 $absent[] = $table;
                 $this->operationTrace[] = $table;
                 $this->observedCheckpoint = ['absent' => $absent, 'manifest' => $this->memoryManifest()];
@@ -250,7 +262,7 @@ class RetirementPreflightTest extends TestCase
             file_put_contents(sys_get_temp_dir().'/tekora-w62ca-schema-'.getmypid().'.json', json_encode([
                 'scope' => 'synthetic SQLite :memory: only', 'sqlite_version' => DB::selectOne('select sqlite_version() as version')->version,
                 'tables' => $catalog, 'edges' => $edges,
-                'triggers' => DB::select("SELECT name,tbl_name,sql FROM sqlite_master WHERE type = 'trigger'"),
+                'triggers' => DB::select("SELECT name,tbl_name,sql FROM main.sqlite_master WHERE type = 'trigger'"),
             ], JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)."\n");
         }
     }
@@ -311,7 +323,7 @@ class RetirementPreflightTest extends TestCase
         $token = $this->postJson('/api/v1/auth/login', ['email' => $client->email, 'password' => 'password', 'device_name' => 'Synthetic new phone'])->assertCreated()->json('data.access_token');
         \Illuminate\Support\Facades\Auth::forgetGuards();
         $this->getJson('/api/v1/me', ['Authorization' => 'Bearer '.$token])->assertOk();
-        $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
+        $this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));
     }
 
     private function seedProtectedInfrastructure(User $user): void
@@ -376,7 +388,7 @@ class RetirementPreflightTest extends TestCase
         // The trigger was neither removed nor disabled to obtain a green result.
         $user->update(['name' => 'Synthetic update after rejected plan']);
         $this->assertDatabaseCount('posts', 2);
-        $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
+        $this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));
     }
 
     public function test_partial_failure_requires_explicit_checkpoint_and_preserves_protected_rows(): void
@@ -413,7 +425,7 @@ class RetirementPreflightTest extends TestCase
         }
         $this->assertSame($before, $this->reservationRows(self::TABLES));
         $this->assertSame(0, DB::transactionLevel());
-        $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
+        $this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));
     }
 
     public function test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database(): void
@@ -445,11 +457,11 @@ class RetirementPreflightTest extends TestCase
         $copy = $this->restoreLogicalMemory($source);
         $this->assertNotSame(DB::connection()->getPdo(), $copy);
         $this->assertSame($source, $this->memoryManifest($copy));
-        $this->assertSame([], $copy->query('PRAGMA foreign_key_check')->fetchAll());
+        $this->assertSame([], $copy->query('PRAGMA main.foreign_key_check')->fetchAll());
         $this->assertSame(1, (int) $copy->query('PRAGMA foreign_keys')->fetchColumn());
-        $this->assertSame(37, (int) $copy->query('SELECT COUNT(*) FROM migrations')->fetchColumn());
-        $this->assertSame(1, (int) $copy->query('SELECT COUNT(*) FROM service_reservations r JOIN reservation_events e ON e.service_reservation_id=r.id AND e.version=r.version JOIN service_inquiries i ON i.id=r.service_inquiry_id JOIN services s ON s.id=r.service_id JOIN provider_profiles p ON p.id=r.provider_profile_id WHERE i.client_user_id=r.client_user_id AND s.provider_profile_id=p.id')->fetchColumn());
-        $photo = $copy->query('SELECT profile_photo_path FROM users WHERE id='.(int) $client->id)->fetchColumn();
+        $this->assertSame(37, (int) $copy->query('SELECT COUNT(*) FROM main.migrations')->fetchColumn());
+        $this->assertSame(1, (int) $copy->query('SELECT COUNT(*) FROM main.service_reservations r JOIN main.reservation_events e ON e.service_reservation_id=r.id AND e.version=r.version JOIN main.service_inquiries i ON i.id=r.service_inquiry_id JOIN main.services s ON s.id=r.service_id JOIN main.provider_profiles p ON p.id=r.provider_profile_id WHERE i.client_user_id=r.client_user_id AND s.provider_profile_id=p.id')->fetchColumn());
+        $photo = $copy->query('SELECT profile_photo_path FROM main.users WHERE id='.(int) $client->id)->fetchColumn();
         $this->assertSame('avatars/shared.png', $photo);
         $this->assertSame('synthetic-restore-photo', Storage::disk('public')->get($photo));
         foreach ([
@@ -582,7 +594,7 @@ class RetirementPreflightTest extends TestCase
             'null' => DB::table('users')->where('id', $user->id)->update(['email_verified_at' => null]),
             'date' => DB::table('users')->where('id', $user->id)->update(['created_at' => '2001-01-01 00:00:00']),
             'storage-type' => DB::statement("UPDATE cache SET value=CAST('1' AS BLOB) WHERE key='synthetic-type'"),
-            'sequence' => DB::statement("UPDATE sqlite_sequence SET seq=seq+7 WHERE name='users'"),
+            'sequence' => DB::statement("UPDATE main.sqlite_sequence SET seq=seq+7 WHERE name='users'"),
             'batch' => DB::table('migrations')->where('id', 1)->update(['batch' => 2]),
             'empty-table' => Schema::drop('cache_locks'),
             'partial-index' => DB::statement('DROP INDEX service_inquiries_one_active'),
@@ -644,7 +656,7 @@ class RetirementPreflightTest extends TestCase
         }
         $this->assertSame(0, DB::transactionLevel());
         $this->assertFalse(DB::connection()->getPdo()->inTransaction());
-        $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
+        $this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));
         $this->recordRehearsalEvidence('rollback-'.$step.($beforeCommit ? '-before-commit' : ''), ['status' => 'PASS',
             'observed_absent_inside_transaction' => $observed, 'all_nine_rows_and_tables_restored' => true,
             'entire_manifest_restored' => true, 'automatic_resume' => false, 'physical_crash_simulation' => false]);
@@ -735,7 +747,7 @@ class RetirementPreflightTest extends TestCase
                 $this->guardMemoryPdo($copy);
                 match ($kind) {
                     'row' => $copy->exec("UPDATE users SET name='Synthetic corrupt restore'"),
-                    'sequence' => $copy->exec("UPDATE sqlite_sequence SET seq=seq+5 WHERE name='users'"),
+                    'sequence' => $copy->exec("UPDATE main.sqlite_sequence SET seq=seq+5 WHERE name='users'"),
                     'index' => $copy->exec('DROP INDEX service_inquiries_one_active'),
                     'trigger' => $copy->exec('DROP TRIGGER provider_weekly_no_overlap_insert'),
                     'unknown-object' => $copy->exec('CREATE VIEW synthetic_unknown AS SELECT id FROM users'),
@@ -747,7 +759,7 @@ class RetirementPreflightTest extends TestCase
         }
         $this->assertInstanceOf(\PDO::class, $destination);
         $this->guardMemoryPdo($destination);
-        $this->assertSame(0, (int) $destination->query("SELECT COUNT(*) FROM sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE")->fetchColumn());
+        $this->assertSame(0, (int) $destination->query("SELECT COUNT(*) FROM main.sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE")->fetchColumn());
         $this->assertSame($source, $this->memoryManifest());
         $this->recordRehearsalEvidence('restore-reject-'.$kind, ['status' => 'PASS', 'destination_rejected' => true,
             'destination_ddl_and_rows_rolled_back' => true, 'source_manifest_unchanged' => true, 'foreign_keys_always_on' => true]);
@@ -835,7 +847,7 @@ class RetirementPreflightTest extends TestCase
         $this->getJson('/api/v1/me', $headers)->assertOk()->assertJsonPath('data.id', $client->id)->assertHeader('Cache-Control', 'no-store, private');
         $this->getJson('/api/v1/inquiries/'.$inquiry->id.'/messages', $headers)->assertOk()->assertJsonCount(3, 'data')->assertHeader('X-Content-Type-Options', 'nosniff');
         $this->getJson('/api/v1/services')->assertOk();
-        $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
+        $this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));
         $this->recordRehearsalEvidence('workflow-auth-conversations-api', ['status' => 'PASS', 'after_retirement' => true,
             'new_inquiry_and_acceptance' => true, 'authorization_denial_unchanged' => true, 'message_replay_single_row' => true,
             'stale_read_retains_marker_and_timestamp' => true, 'api_identity_messages_catalog_contracts' => true]);
@@ -894,7 +906,7 @@ class RetirementPreflightTest extends TestCase
         $this->travel(1)->minute();
         $this->post(route('notifications.activity.read', $notice))->assertStatus(303);
         $this->assertSame($firstRead, $notice->fresh()->getAttributes());
-        $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
+        $this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));
         $this->recordRehearsalEvidence('workflow-reservations-reviews-notifications', ['status' => 'PASS', 'after_retirement' => true,
             'availability_revision_and_overlap' => true, 'reservation_replay' => true, 'authorization_and_stale_version' => true,
             'versions_and_events' => [1, 2, 3], 'review_publication_and_withdrawal_idempotent' => true,
@@ -1076,8 +1088,8 @@ class RetirementPreflightTest extends TestCase
         }
         $this->assertInstanceOf(\PDO::class, $destination);
         $this->guardMemoryPdo($destination);
-        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM sqlite_master')->fetchColumn());
-        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM sqlite_temp_master')->fetchColumn());
+        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM main.sqlite_master')->fetchColumn());
+        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM temp.sqlite_master')->fetchColumn());
         $this->assertSame($source, $this->memoryManifest());
         $this->recordRehearsalEvidence('fix-p1-restore-'.$schema, ['status' => 'PASS',
             'destination_rejected' => true, 'all_destination_objects_rolled_back' => true, 'source_unchanged' => true]);
@@ -1093,17 +1105,17 @@ class RetirementPreflightTest extends TestCase
     {
         $this->memoryOnly();
         match ($kind) {
-            'text-suffix' => DB::statement("UPDATE sqlite_sequence SET seq='2-corrupt' WHERE name='users'"),
-            'text-same' => DB::statement("UPDATE sqlite_sequence SET seq='2' WHERE name='users'"),
-            'null' => DB::statement("UPDATE sqlite_sequence SET seq=NULL WHERE name='users'"),
-            'real-same' => DB::statement("UPDATE sqlite_sequence SET seq=CAST(2 AS REAL) WHERE name='users'"),
-            'blob-same' => DB::statement("UPDATE sqlite_sequence SET seq=CAST('2' AS BLOB) WHERE name='users'"),
-            'negative' => DB::statement("UPDATE sqlite_sequence SET seq=-1 WHERE name='users'"),
-            'missing' => DB::statement("DELETE FROM sqlite_sequence WHERE name='users'"),
-            'duplicate' => DB::statement("INSERT INTO sqlite_sequence(name,seq) SELECT name,seq FROM sqlite_sequence WHERE name='users'"),
-            'orphan' => DB::statement("INSERT INTO sqlite_sequence(name,seq) VALUES ('synthetic_orphan',2)"),
-            'below-max' => DB::statement("UPDATE sqlite_sequence SET seq=1 WHERE name='users'"),
-            'name-blob' => DB::statement("UPDATE sqlite_sequence SET name=CAST(name AS BLOB) WHERE name='users'"),
+            'text-suffix' => DB::statement("UPDATE main.sqlite_sequence SET seq='2-corrupt' WHERE name='users'"),
+            'text-same' => DB::statement("UPDATE main.sqlite_sequence SET seq='2' WHERE name='users'"),
+            'null' => DB::statement("UPDATE main.sqlite_sequence SET seq=NULL WHERE name='users'"),
+            'real-same' => DB::statement("UPDATE main.sqlite_sequence SET seq=CAST(2 AS REAL) WHERE name='users'"),
+            'blob-same' => DB::statement("UPDATE main.sqlite_sequence SET seq=CAST('2' AS BLOB) WHERE name='users'"),
+            'negative' => DB::statement("UPDATE main.sqlite_sequence SET seq=-1 WHERE name='users'"),
+            'missing' => DB::statement("DELETE FROM main.sqlite_sequence WHERE name='users'"),
+            'duplicate' => DB::statement("INSERT INTO main.sqlite_sequence(name,seq) SELECT name,seq FROM main.sqlite_sequence WHERE name='users'"),
+            'orphan' => DB::statement("INSERT INTO main.sqlite_sequence(name,seq) VALUES ('synthetic_orphan',2)"),
+            'below-max' => DB::statement("UPDATE main.sqlite_sequence SET seq=1 WHERE name='users'"),
+            'name-blob' => DB::statement("UPDATE main.sqlite_sequence SET name=CAST(name AS BLOB) WHERE name='users'"),
         };
     }
 
@@ -1160,7 +1172,7 @@ class RetirementPreflightTest extends TestCase
     public function test_integer_high_water_mark_is_preserved_with_its_storage_type_and_next_id(): void
     {
         $this->seedRetired(User::factory()->create());
-        DB::statement("UPDATE sqlite_sequence SET seq=100 WHERE name='users'");
+        DB::statement("UPDATE main.sqlite_sequence SET seq=100 WHERE name='users'");
         $source = $this->memoryManifest();
         $expected = [['name' => 'users', 'name_type' => 'text', 'value' => 100, 'storage_type' => 'integer']];
         $this->assertSame($expected, $source['tables']['users']['sequence']);
@@ -1198,8 +1210,8 @@ class RetirementPreflightTest extends TestCase
             DB::transaction(fn () => $this->simulate(beforeStep: function (int $step) use ($kind) {
                 if ($step === 2) {
                     DB::statement($kind === 'integer-high-water'
-                        ? "UPDATE sqlite_sequence SET seq=seq+1 WHERE name='users'"
-                        : "UPDATE sqlite_sequence SET seq=CAST(seq AS TEXT) WHERE name='users'");
+                        ? "UPDATE main.sqlite_sequence SET seq=seq+1 WHERE name='users'"
+                        : "UPDATE main.sqlite_sequence SET seq=CAST(seq AS TEXT) WHERE name='users'");
                 }
             }));
             $this->fail('Interleaved sequence mutation accepted');
@@ -1215,6 +1227,153 @@ class RetirementPreflightTest extends TestCase
         $this->assertSame(0, DB::transactionLevel());
         $this->recordRehearsalEvidence('fix-p2-boundary-'.$kind, ['status' => 'PASS',
             'executed_drops' => ['likes'], 'second_drop_rejected' => true, 'complete_rollback_observed' => true]);
+    }
+
+    public static function temporaryShadows(): array
+    {
+        return array_map(fn ($kind) => [$kind], ['internal-empty', 'internal-mirror', 'protected-table',
+            'protected-view', 'candidate-table', 'ledger-view', 'index', 'trigger', 'row-shadow']);
+    }
+
+    private function createTemporaryShadow(\PDO $pdo, string $kind): void
+    {
+        $this->guardMemoryPdo($pdo);
+        if (in_array($kind, ['internal-empty', 'internal-mirror'], true)) {
+            $pdo->exec('CREATE TEMP TABLE synthetic_auto(id INTEGER PRIMARY KEY AUTOINCREMENT)');
+            $pdo->exec('INSERT INTO temp.synthetic_auto DEFAULT VALUES');
+            $pdo->exec('DROP TABLE temp.synthetic_auto');
+            if ($kind === 'internal-mirror') {
+                $pdo->exec('INSERT INTO temp.sqlite_sequence(name,seq) SELECT name,seq FROM main.sqlite_sequence');
+                $pdo->exec("UPDATE main.sqlite_sequence SET seq='1-corrupt' WHERE name='users'");
+            }
+
+            return;
+        }
+        match ($kind) {
+            'protected-table' => $pdo->exec('CREATE TEMP TABLE users(id INTEGER UNIQUE, hidden TEXT)'),
+            'protected-view' => $pdo->exec('CREATE TEMP VIEW users AS SELECT 999 AS id'),
+            'candidate-table' => $pdo->exec('CREATE TEMP TABLE likes(id INTEGER PRIMARY KEY)'),
+            'ledger-view' => $pdo->exec('CREATE TEMP VIEW migrations AS SELECT 999 AS id'),
+            'index' => $pdo->exec('CREATE TEMP TABLE synthetic_indexed(id INTEGER); CREATE INDEX temp.users_email_unique ON synthetic_indexed(id)'),
+            'trigger' => $pdo->exec('CREATE TEMP TRIGGER provider_weekly_no_overlap_insert AFTER UPDATE ON main.users BEGIN SELECT 1; END'),
+            'row-shadow' => $pdo->exec("CREATE TEMP TABLE users AS SELECT * FROM main.users; UPDATE main.users SET name='Synthetic main change hidden by temp'"),
+        };
+    }
+
+    #[DataProvider('temporaryShadows')]
+    public function test_main_capture_and_preflight_reject_every_temporary_shadow_including_internal_objects(string $kind): void
+    {
+        $this->seedRetired(User::factory()->create());
+        $before = $this->memoryManifest();
+        $rowsBefore = $this->protectedRows();
+        $catalogBefore = $this->catalog();
+        $this->createTemporaryShadow(DB::connection()->getPdo(), $kind);
+        $observed = $this->memoryManifest();
+        $this->assertNotSame($before, $observed);
+        $this->assertNotEmpty($observed['temp_objects']);
+        $this->assertSame($this->schemaPart($before)['tables'], $this->schemaPart($observed)['tables']);
+        $this->assertSame($catalogBefore, $this->catalog(), 'Catalog PRAGMAs must resolve main');
+        if ($kind === 'internal-mirror') {
+            $this->assertSame([['name' => 'users', 'name_type' => 'text', 'value' => '1-corrupt', 'storage_type' => 'text']], $observed['tables']['users']['sequence']);
+        } elseif ($kind === 'row-shadow') {
+            $this->assertNotSame($before['tables']['users']['rows'], $observed['tables']['users']['rows']);
+            $this->assertNotSame($rowsBefore, $this->protectedRows(), 'Protected row helper must resolve main');
+        } else {
+            $this->assertSame($before['tables'], $observed['tables'], 'Temp must never substitute main rows, types or metadata');
+            $this->assertSame($rowsBefore, $this->protectedRows());
+        }
+        DB::enableQueryLog();
+        DB::flushQueryLog();
+        try {
+            $this->simulate();
+            $this->fail('Temporary catalog accepted');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('Unreviewed temporary catalog: stop before retirement', $exception->getMessage());
+        }
+        $this->assertSame([], $this->operationTrace);
+        $this->assertSame([], array_values(preg_grep('/^\s*drop\b/i', array_column(DB::getQueryLog(), 'query'))));
+        $this->assertSame($observed, $this->memoryManifest());
+        foreach (self::TABLES as $table) {
+            $this->assertSame($before['tables'][$table]['rows'], $observed['tables'][$table]['rows']);
+            $this->assertTrue(Schema::hasTable('main.'.$table));
+        }
+        $loaded = false;
+        try {
+            $this->restoreLogicalMemory($observed, function () use (&$loaded) {
+                $loaded = true;
+            });
+            $this->fail('Temporary source accepted for restore');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('Unreviewed restore schema', $exception->getMessage());
+        }
+        $this->assertFalse($loaded);
+        $this->recordRehearsalEvidence('fix2-stop-'.$kind, ['status' => 'PASS', 'main_capture_qualified' => true,
+            'temporary_objects_detected' => array_map(fn ($object) => ['type' => $object['type'], 'name' => $object['name']], $observed['temp_objects']),
+            'drop_statements' => 0, 'all_nine_candidates_and_rows_preserved' => true,
+            'source_restore_rejected_before_loading' => true, 'observed_state_unchanged_after_rejection' => true]);
+    }
+
+    public static function restoreTemporaryShadows(): array
+    {
+        return [['internal-empty'], ['internal-mirror'], ['row-shadow'], ['trigger']];
+    }
+
+    #[DataProvider('restoreTemporaryShadows')]
+    public function test_restore_rejects_and_rolls_back_temporary_shadowing_of_main_state(string $kind): void
+    {
+        $this->seedRetired(User::factory()->create());
+        $source = $this->memoryManifest();
+        $destination = null;
+        try {
+            $this->restoreLogicalMemory($source, function (\PDO $copy) use ($kind, &$destination) {
+                $destination = $copy;
+                $this->createTemporaryShadow($copy, $kind);
+                $captured = $this->memoryManifest($copy);
+                $this->assertNotEmpty($captured['temp_objects']);
+                if ($kind === 'internal-mirror') {
+                    $this->assertSame('text', $captured['tables']['users']['sequence'][0]['storage_type']);
+                    $this->assertSame('1-corrupt', $captured['tables']['users']['sequence'][0]['value']);
+                }
+            });
+            $this->fail('Shadowed destination committed');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('Restored manifest mismatch; destination rejected', $exception->getMessage());
+        }
+        $this->assertInstanceOf(\PDO::class, $destination);
+        $this->guardMemoryPdo($destination);
+        $this->assertFalse($destination->inTransaction());
+        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM main.sqlite_master')->fetchColumn());
+        $this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM temp.sqlite_master')->fetchColumn());
+        $this->assertSame($source, $this->memoryManifest());
+        $this->recordRehearsalEvidence('fix2-restore-'.$kind, ['status' => 'PASS', 'destination_rejected' => true,
+            'main_and_temp_objects_rolled_back' => true, 'source_unchanged' => true, 'committed' => false]);
+    }
+
+    public static function boundaryTemporaryShadows(): array
+    {
+        return [['internal-mirror'], ['protected-table']];
+    }
+
+    #[DataProvider('boundaryTemporaryShadows')]
+    public function test_temporary_shadow_between_steps_rejects_second_drop_and_rolls_back(string $kind): void
+    {
+        $this->seedRetired(User::factory()->create());
+        $before = $this->memoryManifest();
+        try {
+            DB::transaction(fn () => $this->simulate(beforeStep: function (int $step) use ($kind) {
+                if ($step === 2) {
+                    $this->createTemporaryShadow(DB::connection()->getPdo(), $kind);
+                }
+            }));
+            $this->fail('Interleaved temporary shadow accepted');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('Unreviewed temporary catalog: stop before retirement', $exception->getMessage());
+        }
+        $this->assertSame(['likes'], $this->operationTrace);
+        $this->assertSame($before, $this->memoryManifest());
+        $this->assertSame(0, DB::transactionLevel());
+        $this->recordRehearsalEvidence('fix2-boundary-'.$kind, ['status' => 'PASS', 'executed_drops' => ['likes'],
+            'second_drop_rejected' => true, 'main_and_temp_rollback_equal' => true]);
     }
 
     public static function checkpoints(): array

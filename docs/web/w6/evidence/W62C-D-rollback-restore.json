@@ -149,7 +149,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "2c8dd8d906a0e9fbc96d2a72700a590bc751efce2040cda59ca6f71408886b34"
+        "synthetic_state_sha256": "43d00284d1b06158eaa75ef13cb1e1c5ddf3f23d0ae0c7ad1ba9cbd61fd10978"
       },
       "inquiry_notifications": {
         "row_count": 2,
@@ -219,7 +219,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "0323d9ca6462fd088c95ac5dd465c5a346884efbd98bc4ec8847cb074f47f38a"
+        "synthetic_state_sha256": "acc0eb1ba804c459387a42afe27b9230eeae7bf92f3c64b0d7e654f88e0cb95f"
       },
       "posts": {
         "row_count": 1,
@@ -267,7 +267,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "7b3f9bf0665a98ae822ed00924d8c7174b2dd6d176c9f72ab804c3eb68232516"
+        "synthetic_state_sha256": "17bba3a30df214b5b3f25e6da3bdbeac5fe153d6ade8c39d3c9f753fd296d251"
       },
       "provider_availability_settings": {
         "row_count": 1,
@@ -392,7 +392,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "066f765f47e6b1d1f64cd3d9c3329b4c3bb510c1dcd25dc9bc055311b503073f"
+        "synthetic_state_sha256": "7049129ced89ef3d3a6c2bcc90c6a2748aed80f537aabafa03e7d2821c692c85"
       },
       "service_inquiry_reads": {
         "row_count": 1,
@@ -416,7 +416,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "779cc6bfaf05549d58c863297d379cb79cb90c8d48206b92600eec7a30a25069"
+        "synthetic_state_sha256": "0d60b9b5b07640bf71fc781163d9e86a589c3653668d0522e999eb80d449d350"
       },
       "service_reviews": {
         "row_count": 1,
@@ -457,7 +457,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "8650a78d0d2a697849906bc2fb3a719311c64753ed6e3ebfa69cca28a74c3a05"
+        "synthetic_state_sha256": "7c5e1adbd39ca19de4da8b788ba6b42f6a735e0c481b6161d892085161223b67"
       }
     },
     "source_migration_ledger": [
@@ -951,5 +951,54 @@
       "rejected_before_destination_loading": true,
       "source_not_silently_repaired": true
     }
-  }
+  },
+  "fix2_restore_cases": {
+    "fix2-restore-trigger": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    },
+    "fix2-restore-internal-empty": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    },
+    "fix2-restore-internal-mirror": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    },
+    "fix2-restore-row-shadow": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    }
+  },
+  "fix2_boundary_cases": {
+    "fix2-boundary-internal-mirror": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "main_and_temp_rollback_equal": true
+    },
+    "fix2-boundary-protected-table": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "main_and_temp_rollback_equal": true
+    }
+  },
+  "temporary_catalog_policy": "Empty; all temp.sqlite_master entries captured, including sqlite_sequence; restore rejects and rolls back both schemas"
 }

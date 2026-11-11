@@ -12,11 +12,11 @@ Las 37 migraciones, código productivo, rutas/21 operaciones API, modelos, servi
 
 ## W6.2c-d-fix — Corrección de P1/P2, pendiente de nueva revisión
 
-La revisión independiente del HEAD `d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53` concluyó **CHANGES REQUIRED**. Esta corrección continúa en el mismo PR #30 y su rama; base inalterada. Preflight del fix: HEAD inicial confirmado en GitHub y localmente, checkout limpio, 44 GiB disponibles y 3.865.965 inodos libres. No se modifica `main` ni PR #28.
+La revisión independiente del HEAD `d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53` concluyó **CHANGES REQUIRED**. Esta corrección continúa en el mismo PR #30 y su rama; base inalterada. Preflight del primer fix: HEAD inicial confirmado en GitHub y localmente, checkout limpio, 44 GiB disponibles y 3.865.965 inodos libres. No se modifica `main` ni PR #28.
 
 **P1 histórico — ALTA.** `LIKE 'sqlite_%'` usaba `_` como comodín. Ocultaba la tabla válida `sqliteX_cross` con FK hacia `posts`; se ejecutaban nueve DROP y una fila sintética se perdía por cascada. También se ignoraban vistas main/temp y se aceptaba un restore con una vista adicional. Las cuatro reproducciones correspondientes fallaban, aunque las suites publicadas pasaban.
 
-La exclusión ahora compara literalmente los primeros siete caracteres con `sqlite_` mediante `substr` y `COLLATE NOCASE`, en main, temp y el conteo de rollback. Las listas de tablas del ensayo salen del mismo catálogo completo, sin depender del filtro amplio del framework. No se amplía ninguna allowlist. Ocho regresiones cubren tabla/FK, vistas válidas que quedarían rotas, objetos temporales, triggers, índice y case; dos más prueban rechazo/rollback de vistas main/temp en restore. Se observa cero DROP, la fila extra sigue presente y las vistas siguen consultables tras rechazar el plan.
+En el primer fix, la exclusión pasó a comparar literalmente los primeros siete caracteres con `sqlite_` mediante `substr` y `COLLATE NOCASE`, en main, temp y el conteo de rollback. El fix2 posterior conserva ese filtro solo para main y elimina toda exclusión del catálogo temp. Las listas de tablas del ensayo salen del mismo catálogo completo, sin depender del filtro amplio del framework. No se amplía ninguna allowlist. Ocho regresiones cubren tabla/FK, vistas válidas que quedarían rotas, objetos temporales, triggers, índice y case; dos más prueban rechazo/rollback de vistas main/temp en restore. Se observa cero DROP, la fila extra sigue presente y las vistas siguen consultables tras rechazar el plan.
 
 **P2 histórico — MEDIA.** Convertir `sqlite_sequence.seq` a `(int)` hacía que INTEGER `1` y TEXT `1-corrupt` produjeran el mismo manifiesto. La quinta reproducción original fallaba por esa igualdad incorrecta.
 
@@ -29,6 +29,26 @@ Las [cinco reproducciones originales](evidence/W62C-D-original-review-probes.php
 La inspección adicional de pérdidas de información no encontró casts en los snapshots de filas, clases SQLite, esquema, FK, índices o triggers. Se conserva la normalización documentada de la posición de enumeración `index_list.seq`, manteniendo el orden de claves en `index_xinfo`; las conversiones de resultados de control (`foreign_keys`, COUNT e IDs del driver) no reemplazan datos de los manifiestos. `schemaPart` separa filas/secuencias solo para comparar catálogo; preservación y restore comparan también los datos completos y las secuencias crudas. Los 70 casos previos continúan; se añaden 35 regresiones.
 
 Esta entrega queda **lista para una nueva revisión independiente**, no automáticamente aprobada. Se conserva la historia del rechazo y no se reescriben resultados originales.
+
+## W6.2c-d-fix2 — Resolución explícita main/temp, pendiente de revisión
+
+La segunda revisión independiente del HEAD **`cce019cec0ded5caae9836793c6c1f32bd8a7ec3`** concluyó **CHANGES REQUIRED**, aunque pasaban los cinco probes originales y las 774 pruebas publicadas. Antes de modificar código se confirmó ese HEAD en GitHub/local, la misma rama/base, checkout limpio, 43 GiB disponibles y 3.823.144 inodos libres. Primero se reprodujeron **los tres fallos originales, 3/6**, en una copia nueva del HEAD inicial, sin cambiar sus expectativas. No se alteran `main`, PR #28 ni recursos reales.
+
+**P1 histórico nuevo — ALTA.** `FROM sqlite_sequence` resolvía primero `temp.sqlite_sequence`. Crear y retirar una tabla TEMP AUTOINCREMENT deja esa tabla interna; el filtro del catálogo temporal la ocultaba. Una copia temporal de las secuencias válidas hacía invisible TEXT `1-corrupt` en la secuencia principal: el manifiesto seguía idéntico; se ejecutaba un DROP sintético (`likes`) antes de detenerse; y el restore aceptaba y confirmaba un destino corrupto. Son tres manifestaciones del mismo defecto del oráculo de integridad, sin entrada productiva ni pérdida de datos reales observada.
+
+**Corrección:** lecturas y escrituras de secuencias usan `main.sqlite_sequence`. Catálogo, triggers, datos y PRAGMA de tabla/índice/FK usan `main` explícito. Los helpers de filas protegidas y catálogo pasan `main.<tabla>` al framework, el control de morfos lee `main.likes` y el DROP privado apunta a `main.<candidata>`. La restauración inserta en main y ejecuta `PRAGMA main.foreign_key_check` / `main.integrity_check`. Continúan las comprobaciones antes del primer DROP y de cada paso, y el cotejo completo antes de commit.
+
+El catálogo temporal autorizado es **vacío**. `SELECT type,name,tbl_name,sql FROM temp.sqlite_master ORDER BY type,name` no filtra ningún objeto, incluidos `sqlite_sequence` y autoíndices. Capturar permite observar el estado anómalo, sin repararlo; el baseline exige temp vacío, el preflight rechaza cualquier entrada y el restore rechaza fuente/destino con objetos temporales. El destino alterado se revierte en ambos esquemas. El filtro literal reservado de main sigue detectando `sqliteX`; no se amplía ninguna allowlist.
+
+Se auditaron las consultas de ambos archivos, incluido SQL dinámico y metadatos del framework: [inventario y SQL antes/después](evidence/W62C-D-fix2-review.json). `database_list` y `foreign_keys` son controles de conexión, no resuelven tablas. El DDL histórico validado exactamente se aplica solo a un PDO nuevo `sqlite::memory:`, vacío y sin hook hasta terminar la carga; no se reescribe el SQL de migraciones. Las declaraciones TEMP y el SQL de triggers/índices de fixtures conservan la gramática SQLite de su esquema. Las operaciones públicas de workflow ejercen producción intacta después del preflight; no son consultas del verificador.
+
+Se añadieron **15 casos / 322 aserciones**: nueve variantes de catálogo temporal (secuencia interna vacía o espejo, tabla/vista protegida, candidata, ledger, índice/trigger homónimo y fila principal oculta), cuatro restores alterados con rollback main/temp y dos cambios entre pasos con rechazo del segundo DROP y rollback exacto. Los casos prueban que columnas, FK, índices, filas y tipos capturados pertenecen a main incluso frente al homónimo temporal. La secuencia corrupta principal se conserva como TEXT original en el snapshot, pero se rechaza antes de DROP; no se transforma ni repara silenciosamente.
+
+Los [26 probes independientes](evidence/W62C-D-second-review-probes.php.txt) se conservan byte por byte, con idénticas expectativas: los tres fallidos pasan **3/6** y las otras 23 pruebas continúan pasando (**26/168** en conjunto). Incluyen nombres especiales, trigger TEMP activo, tipos/nombres de secuencia inválidos, INTEGER 0 en tabla vacía y máximo INTEGER válido. Los cinco probes originales también pasan **5/10** intactos. Los **105 casos previos conservan sus 996 aserciones**; las 35 regresiones del primer fix permanecen. No hay falsos rechazos observados en los escenarios autorizados; el high-water mark 100, siguiente ID 101 y restore legítimo siguen pasando.
+
+Para reproducir los 26 probes, copiar el TXT como `SecondAcceptanceProbeTest.php` únicamente al runner aislado, con un directorio nuevo propio montado como `/review`, y ejecutar `php -d memory_limit=512M run-phpunit.php SecondAcceptanceProbeTest.php --filter test_second_review_`. Para solo los tres casos originales de sombreado, usar `--filter 'test_second_review_(main_sequence|temp_sequence|restore_cannot)'`. El wrapper solo selecciona el autoload de la copia nueva. No ejecutar el harness sobre instalaciones o raíces existentes. El TXT no es código de producción ni se descubre automáticamente.
+
+Los JSON actuales se regeneraron de **104 observaciones sintéticas**, con blobs Git de las fuentes ejecutadas. Se conserva el historial anterior, incluidos los tres FAIL, en `historical_before_fix2` y la evidencia del fix2. El SHA final se publica en el mismo PR #30 en borrador y en la entrega; los blobs identifican las fuentes sin intentar incluir el hash del commit en sí mismo. Esta corrección queda pendiente de **otra revisión independiente sobre sombreado y resoluciones equivalentes**, no automáticamente aprobada.
 
 ## Aislamiento efectivo
 
@@ -103,13 +123,16 @@ Solo se crean/leen bytes sintéticos de `Storage::fake`. W5.1 y LegacyPhotoRefer
 
 Los resultados exactos, versiones y archivos están en [validación](evidence/W62C-D-validation.json); [casos](evidence/W62C-D-scenarios.json), [manifiestos](evidence/W62C-D-manifests.json), [rollback/restore](evidence/W62C-D-rollback-restore.json) y [calidad/auditorías](evidence/W62C-D-quality.json) contienen datos sanitizados. [Guía Windows/Laragon](W62C-D-LARAGON.md), preparada, no ejecutada.
 
-Baseline original **688/9.224**; entrega antes del fix **739/9.652**, ensayo **70/626**. El fix conserva todos sus métodos/datasets y amplía el ensayo a **105/996**. Los resultados actuales proceden de JUnit; no sustituyen las garantías W5.1/W6.2a/W6.2b ni importan pruebas MySQL.
+Baseline original **688/9.224**; entrega antes del fix **739/9.652**, ensayo **70/626**. El primer fix conservó todos sus métodos/datasets y amplió el ensayo a **105/996**; fix2 conserva esos 105 casos y lo amplía a **120/1.318**, con suite completa **789/10.344**. Los resultados actuales proceden de JUnit; no sustituyen las garantías W5.1/W6.2a/W6.2b ni importan pruebas MySQL.
 
 | Ejecución final | Estado | Pruebas / aserciones |
 | --- | --- | --- |
-| Suite completa tras fix | PASS | **774 / 10.022**, cero errores, fallos u omisiones |
-| Ensayo ampliado tras fix | PASS | 105 / 996 |
+| Suite completa tras fix2 | PASS | **789 / 10.344**, cero errores, fallos u omisiones |
+| Ensayo ampliado tras fix2 | PASS | 120 / 1.318 |
 | Cinco reproducciones originales | PASS | 5 / 10; mismas expectativas que fallaban en el HEAD revisado |
+| Tres reproducciones de sombreado | PASS | 3 / 6; antes FAIL 3/6 |
+| 26 probes de segunda revisión (incluye esos tres) | PASS | 26 / 168 |
+| Nuevas regresiones fix2 | PASS | 15 / 322 |
 | W5.1 | PASS | 49 / 459 |
 | W6.2a | PASS | 25 / 406 |
 | W6.2b | PASS | 34 / 586 |

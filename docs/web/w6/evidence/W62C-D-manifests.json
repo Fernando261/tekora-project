@@ -75,7 +75,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
+        "synthetic_state_sha256": "3cc3cd6adb8b0dec197b16b1121c1c16637bf6f3ee6be35a9f9daf23ef510e0c"
       },
       "inquiry_notifications": {
         "row_count": 2,
@@ -145,7 +145,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
+        "synthetic_state_sha256": "341f92d1348af10238dc0983b848f46e7acdae7e90d61ede634c009612f1e327"
       },
       "posts": {
         "row_count": 1,
@@ -193,7 +193,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "9e2d55947c47d9a69f1abb17d62eff854333b5fff18e84c52499bb3efdfa52cc"
+        "synthetic_state_sha256": "5fa99cb006a4635da9f8211a88eabd35c2b83e7736afff0b8a17e7f981126477"
       },
       "provider_availability_settings": {
         "row_count": 1,
@@ -318,7 +318,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
+        "synthetic_state_sha256": "96c0679a09366efc66d770692e2aa3c571b0fddd9c87dc388a9cd7fd261877be"
       },
       "service_inquiry_reads": {
         "row_count": 1,
@@ -342,7 +342,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
+        "synthetic_state_sha256": "c730f3b366579c3d776ad39b6b1cec17d227e5939fa87d4b5c89ff4fd06becab"
       },
       "service_reviews": {
         "row_count": 1,
@@ -383,7 +383,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
+        "synthetic_state_sha256": "bb561bfb54b92810b3142ead14507a6999969e4755dd68b0cf94496906482494"
       }
     },
     "objects": [
@@ -974,6 +974,182 @@
       }
     ],
     "temp_objects": [],
+    "sequences": [
+      {
+        "name": "migrations",
+        "name_type": "text",
+        "value": 37,
+        "storage_type": "integer"
+      },
+      {
+        "name": "failed_jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "profesionistas",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reviews",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_profiles",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiries",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "reservation_events",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_categories",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reservations",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "inquiry_notifications",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_reads",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "activity_notifications",
+        "name_type": "text",
+        "value": 4,
+        "storage_type": "integer"
+      },
+      {
+        "name": "personal_access_tokens",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "profesionista_bloqueos",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_blocked_dates",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_messages",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_weekly_intervals",
+        "name_type": "text",
+        "value": 7,
+        "storage_type": "integer"
+      },
+      {
+        "name": "profesionista_disponibilidades",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_availability_settings",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "citas",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "likes",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "posts",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "roles",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "users",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "comments",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "emotions",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "services",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "reminders",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      }
+    ],
     "migration_ledger": [
       {
         "id": 10,
@@ -1160,182 +1336,6 @@
         "migration": "2026_02_15_194127_add_deleted_at_to_posts_table",
         "batch": 1
       }
-    ],
-    "sequences": [
-      {
-        "name": "migrations",
-        "name_type": "text",
-        "value": 37,
-        "storage_type": "integer"
-      },
-      {
-        "name": "failed_jobs",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "profesionistas",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_reviews",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_profiles",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_inquiries",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "reservation_events",
-        "name_type": "text",
-        "value": 3,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_categories",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_reservations",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "inquiry_notifications",
-        "name_type": "text",
-        "value": 2,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_inquiry_reads",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "activity_notifications",
-        "name_type": "text",
-        "value": 4,
-        "storage_type": "integer"
-      },
-      {
-        "name": "personal_access_tokens",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "profesionista_bloqueos",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_blocked_dates",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_inquiry_messages",
-        "name_type": "text",
-        "value": 2,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_weekly_intervals",
-        "name_type": "text",
-        "value": 7,
-        "storage_type": "integer"
-      },
-      {
-        "name": "profesionista_disponibilidades",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_availability_settings",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "jobs",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "citas",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "likes",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "posts",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "roles",
-        "name_type": "text",
-        "value": 3,
-        "storage_type": "integer"
-      },
-      {
-        "name": "users",
-        "name_type": "text",
-        "value": 2,
-        "storage_type": "integer"
-      },
-      {
-        "name": "comments",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "emotions",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "services",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "reminders",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      }
     ]
   },
   "after": {
@@ -1372,7 +1372,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
+        "synthetic_state_sha256": "3cc3cd6adb8b0dec197b16b1121c1c16637bf6f3ee6be35a9f9daf23ef510e0c"
       },
       "inquiry_notifications": {
         "row_count": 2,
@@ -1430,7 +1430,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
+        "synthetic_state_sha256": "341f92d1348af10238dc0983b848f46e7acdae7e90d61ede634c009612f1e327"
       },
       "provider_availability_settings": {
         "row_count": 1,
@@ -1543,7 +1543,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
+        "synthetic_state_sha256": "96c0679a09366efc66d770692e2aa3c571b0fddd9c87dc388a9cd7fd261877be"
       },
       "service_inquiry_reads": {
         "row_count": 1,
@@ -1567,7 +1567,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
+        "synthetic_state_sha256": "c730f3b366579c3d776ad39b6b1cec17d227e5939fa87d4b5c89ff4fd06becab"
       },
       "service_reviews": {
         "row_count": 1,
@@ -1608,7 +1608,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
+        "synthetic_state_sha256": "bb561bfb54b92810b3142ead14507a6999969e4755dd68b0cf94496906482494"
       }
     },
     "objects": [
@@ -2109,6 +2109,128 @@
       }
     ],
     "temp_objects": [],
+    "sequences": [
+      {
+        "name": "migrations",
+        "name_type": "text",
+        "value": 37,
+        "storage_type": "integer"
+      },
+      {
+        "name": "failed_jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reviews",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_profiles",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiries",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "reservation_events",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_categories",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_reservations",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "inquiry_notifications",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_reads",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "activity_notifications",
+        "name_type": "text",
+        "value": 4,
+        "storage_type": "integer"
+      },
+      {
+        "name": "personal_access_tokens",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_blocked_dates",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "service_inquiry_messages",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_weekly_intervals",
+        "name_type": "text",
+        "value": 7,
+        "storage_type": "integer"
+      },
+      {
+        "name": "provider_availability_settings",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "jobs",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      },
+      {
+        "name": "roles",
+        "name_type": "text",
+        "value": 3,
+        "storage_type": "integer"
+      },
+      {
+        "name": "users",
+        "name_type": "text",
+        "value": 2,
+        "storage_type": "integer"
+      },
+      {
+        "name": "services",
+        "name_type": "text",
+        "value": 1,
+        "storage_type": "integer"
+      }
+    ],
     "migration_ledger": [
       {
         "id": 10,
@@ -2294,128 +2416,6 @@
         "id": 9,
         "migration": "2026_02_15_194127_add_deleted_at_to_posts_table",
         "batch": 1
-      }
-    ],
-    "sequences": [
-      {
-        "name": "migrations",
-        "name_type": "text",
-        "value": 37,
-        "storage_type": "integer"
-      },
-      {
-        "name": "failed_jobs",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_reviews",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_profiles",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_inquiries",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "reservation_events",
-        "name_type": "text",
-        "value": 3,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_categories",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_reservations",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "inquiry_notifications",
-        "name_type": "text",
-        "value": 2,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_inquiry_reads",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "activity_notifications",
-        "name_type": "text",
-        "value": 4,
-        "storage_type": "integer"
-      },
-      {
-        "name": "personal_access_tokens",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_blocked_dates",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "service_inquiry_messages",
-        "name_type": "text",
-        "value": 2,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_weekly_intervals",
-        "name_type": "text",
-        "value": 7,
-        "storage_type": "integer"
-      },
-      {
-        "name": "provider_availability_settings",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "jobs",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
-      },
-      {
-        "name": "roles",
-        "name_type": "text",
-        "value": 3,
-        "storage_type": "integer"
-      },
-      {
-        "name": "users",
-        "name_type": "text",
-        "value": 2,
-        "storage_type": "integer"
-      },
-      {
-        "name": "services",
-        "name_type": "text",
-        "value": 1,
-        "storage_type": "integer"
       }
     ]
   },
@@ -9282,7 +9282,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
+        "synthetic_state_sha256": "3cc3cd6adb8b0dec197b16b1121c1c16637bf6f3ee6be35a9f9daf23ef510e0c"
       },
       "after": {
         "row_count": 1,
@@ -9294,7 +9294,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "8b8348a6ce36ae984aefff6b2c2c8c9266a648320850f03a72c65307934b59c5"
+        "synthetic_state_sha256": "3cc3cd6adb8b0dec197b16b1121c1c16637bf6f3ee6be35a9f9daf23ef510e0c"
       }
     },
     "inquiry_notifications": {
@@ -9422,7 +9422,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
+        "synthetic_state_sha256": "341f92d1348af10238dc0983b848f46e7acdae7e90d61ede634c009612f1e327"
       },
       "after": {
         "row_count": 1,
@@ -9434,7 +9434,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "4b8b2c5417b536eb2f66ec3aa5841aeafac1d2357e6bc6081afb42d49bf359a5"
+        "synthetic_state_sha256": "341f92d1348af10238dc0983b848f46e7acdae7e90d61ede634c009612f1e327"
       }
     },
     "provider_availability_settings": {
@@ -9688,7 +9688,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
+        "synthetic_state_sha256": "96c0679a09366efc66d770692e2aa3c571b0fddd9c87dc388a9cd7fd261877be"
       },
       "after": {
         "row_count": 2,
@@ -9700,7 +9700,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "1ed559bef6e33eae0d25c3cc14df904c548594d4bb7036cc57d047b0ac4bdf65"
+        "synthetic_state_sha256": "96c0679a09366efc66d770692e2aa3c571b0fddd9c87dc388a9cd7fd261877be"
       }
     },
     "service_inquiry_reads": {
@@ -9744,7 +9744,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
+        "synthetic_state_sha256": "c730f3b366579c3d776ad39b6b1cec17d227e5939fa87d4b5c89ff4fd06becab"
       },
       "after": {
         "row_count": 1,
@@ -9756,7 +9756,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "ba0c9ed791337465bf3e8a323e18bf6e88ccb99cc41950e7bcb2baf83f62c936"
+        "synthetic_state_sha256": "c730f3b366579c3d776ad39b6b1cec17d227e5939fa87d4b5c89ff4fd06becab"
       }
     },
     "service_reviews": {
@@ -9842,7 +9842,7 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
+        "synthetic_state_sha256": "bb561bfb54b92810b3142ead14507a6999969e4755dd68b0cf94496906482494"
       },
       "after": {
         "row_count": 2,
@@ -9854,11 +9854,11 @@
             "storage_type": "integer"
           }
         ],
-        "synthetic_state_sha256": "03087adeb969f7de580536894ab3965f42790e506281bb584fecd2ec8c246be2"
+        "synthetic_state_sha256": "bb561bfb54b92810b3142ead14507a6999969e4755dd68b0cf94496906482494"
       }
     }
   },
   "serialization_note": "Catalog serialized once; state comparisons retain raw sequence lists (name/type/value/storage class), all synthetic state digests, row counts and ledger. Complete values/storage types/schema are compared in memory.",
   "manifest_format_version": 2,
-  "sequence_policy": "Capture preserves corrupt/null/missing/duplicate/orphan entries. A separate strict validator stops before DROP/restore. No PHP numeric casts in snapshots."
+  "sequence_policy": "Capture preserves corrupt/null/missing/duplicate/orphan entries. A separate strict validator stops before DROP/restore. No PHP numeric casts in snapshots. All principal reads/writes explicitly use main.sqlite_sequence; temp catalog must be empty, with no internal-object exclusion."
 }

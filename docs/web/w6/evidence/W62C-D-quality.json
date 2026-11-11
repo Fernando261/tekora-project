@@ -90,8 +90,8 @@
   ],
   "windows": "NOT RUN",
   "php_8_2_runtime": "NOT RUN",
-  "reviewed_initial_head": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
-  "current_execution_scope": "W6.2c-d-fix; all listed quality commands rerun in isolated source clone",
+  "reviewed_initial_head": "cce019cec0ded5caae9836793c6c1f32bd8a7ec3",
+  "current_execution_scope": "W6.2c-d-fix2; quality commands rerun in new isolated source lab",
   "sequence_and_prefix_regressions": {
     "status": "PASS",
     "original_five": {
@@ -100,9 +100,27 @@
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 2.879734,
+      "seconds": 0.806878,
       "status": "PASS"
     },
-    "added_cases": 35
+    "added_cases": 50,
+    "fix2_shadow_probes": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.528143,
+      "status": "PASS"
+    },
+    "all_26_second_independent_probes": {
+      "tests": 26,
+      "assertions": 168,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.866428,
+      "status": "PASS"
+    }
   }
 }
