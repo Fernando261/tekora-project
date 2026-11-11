@@ -1,0 +1,224 @@
+{
+  "task": "TEKORA W6.2c-c — decisión de motor y estrategia de retirada",
+  "recorded_at_utc": "2026-11-11T05:24:38+00:00",
+  "base_sha": "2441debb728982229d3a8a476ca9618c116b6172",
+  "branch": "codex/w62c-c-db-engine-decision",
+  "change_type": "documentation only",
+  "preflight": {
+    "status": "PASS",
+    "initial_worktree_clean": true,
+    "base_head_and_origin_main": "2441debb728982229d3a8a476ca9618c116b6172",
+    "remote_main_exact_match": true,
+    "repository_read_access": "PASS; fetch/ls-remote and GitHub PR metadata",
+    "workspace_available_bytes": 46647287808,
+    "workspace_free_inodes": 3908596
+  },
+  "pr28_reference": {
+    "head_sha": "ae638c358b475d5c6605cf2d0440c03b2225a2d0",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "observed_updated_at": "2026-11-11T04:54:20Z",
+    "modified_by_this_task": false,
+    "tests_imported": false,
+    "evidence_source": "https://github.com/Fernando261/tekora-project/blob/ae638c358b475d5c6605cf2d0440c03b2225a2d0/docs/web/w6/evidence/W62C-B-validation.json"
+  },
+  "decision": {
+    "status": "provisional proposal for review",
+    "supported_engine": "SQLite",
+    "mysql_required_for_sqlite_retirement": false,
+    "mysql_support_or_engine_migration_authorized": false
+  },
+  "source_inspection": {
+    "readme": "README.md",
+    "connection_configuration": "config/database.php (text only; not evaluated)",
+    "migration_count": 37,
+    "migrations": [
+      "database/migrations/0001_01_01_000000_create_users_table.php",
+      "database/migrations/0001_01_01_000001_create_cache_table.php",
+      "database/migrations/0001_01_01_000002_create_jobs_table.php",
+      "database/migrations/2025_08_02_085013_create_posts_table.php",
+      "database/migrations/2025_08_02_092303_create_reminders_table.php",
+      "database/migrations/2025_08_13_022507_create_profesionistas_table.php",
+      "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php",
+      "database/migrations/2026_02_15_192040_create_likes_table.php",
+      "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php",
+      "database/migrations/2026_02_15_200848_create_comments_table.php",
+      "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php",
+      "database/migrations/2026_02_16_031436_create_citas_table.php",
+      "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php",
+      "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php",
+      "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php",
+      "database/migrations/2026_02_23_235730_create_emotions_table.php",
+      "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php",
+      "database/migrations/2026_02_24_041833_add_media_to_posts_table.php",
+      "database/migrations/2026_02_24_041908_add_media_to_comments_table.php",
+      "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php",
+      "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php",
+      "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php",
+      "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+      "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php",
+      "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php",
+      "database/migrations/2026_10_23_000001_create_provider_profiles_table.php",
+      "database/migrations/2026_10_28_000000_create_service_categories_table.php",
+      "database/migrations/2026_10_28_000001_create_services_table.php",
+      "database/migrations/2026_10_28_000002_create_service_inquiries_table.php",
+      "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php",
+      "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php",
+      "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php",
+      "database/migrations/2026_10_30_000002_create_provider_availability_tables.php",
+      "database/migrations/2026_11_03_000000_create_service_reservations.php",
+      "database/migrations/2026_11_03_000001_create_service_reviews.php",
+      "database/migrations/2026_11_03_000002_create_activity_notifications.php",
+      "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php"
+    ],
+    "explicit_sqlite_guards": [
+      "2026_10_28_000002_create_service_inquiries_table.php",
+      "2026_10_30_000002_create_provider_availability_tables.php",
+      "2026_11_03_000000_create_service_reservations.php",
+      "2026_11_03_000001_create_service_reviews.php",
+      "2026_11_03_000002_create_activity_notifications.php"
+    ],
+    "detailed_invariant_rows": 23,
+    "detailed_migration_ordinals": [
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "api_operations_static_source_count": 21
+  },
+  "historical_baseline": {
+    "source": "docs/web/w6/evidence/W62C-A-validation.json",
+    "sqlite_full": {
+      "historical_status": "PASS",
+      "tests": 688,
+      "assertions": 9224,
+      "current_execution": "NOT RUN"
+    },
+    "w51": {
+      "historical_status": "PASS",
+      "tests": 49,
+      "assertions": 459,
+      "current_execution": "NOT RUN"
+    },
+    "w62a": {
+      "historical_status": "PASS",
+      "tests": 25,
+      "assertions": 406,
+      "current_execution": "NOT RUN"
+    },
+    "w62b": {
+      "historical_status": "PASS",
+      "tests": 34,
+      "assertions": 586,
+      "current_execution": "NOT RUN"
+    },
+    "w62ca": {
+      "historical_status": "PASS",
+      "tests": 19,
+      "assertions": 198,
+      "current_execution": "NOT RUN"
+    },
+    "api_operations": 21,
+    "historical_migrations": 37,
+    "synthetic_sqlite_tables": 35,
+    "protected_tables": 26,
+    "candidate_tables": 9,
+    "synthetic_sqlite_triggers": 34,
+    "operational_backup_restore_certified": false
+  },
+  "historical_mysql_pr28": {
+    "engine": "MySQL 8.4.13 / InnoDB",
+    "installation": "BLOCKED",
+    "historical_migrations_applied": 28,
+    "failed_migration": "2026_10_28_000002_create_service_inquiries_table.php",
+    "phpunit_result": "FAIL",
+    "tests": 6,
+    "assertions": 18,
+    "passing_tests": 5,
+    "failures": 1,
+    "protected_present": 14,
+    "protected_missing": 12,
+    "native_workflows": "NOT RUN",
+    "retirement": "NOT RUN",
+    "restore": "NOT RUN",
+    "compatibility_demonstrated": false,
+    "current_execution": "NOT RUN",
+    "gate_scope": "MySQL only; no prerequisite for the separate SQLite synthetic path"
+  },
+  "controls": {
+    "preflight": "PASS",
+    "source_inventory_and_static_api_count": "PASS",
+    "matrix_migrations_29_to_37_and_23_unique_rows": "PASS",
+    "relative_document_links": "PASS",
+    "markdown_table_columns": "PASS",
+    "json_syntax": "PASS",
+    "git_diff_check": "PASS",
+    "only_four_new_documentation_files": "PASS",
+    "production_tests_migrations_dependencies_configuration_unchanged": "PASS",
+    "phpunit_affected": "NOT RUN",
+    "phpunit_full": "NOT RUN",
+    "build_audits_pint": "NOT RUN",
+    "current_mysql_execution": "NOT RUN",
+    "real_retirement": "BLOCKED"
+  },
+  "validation_policy": "Only documentary checks. No test code changed; no PHP/Laravel/Vite/composer/npm/docker execution. PASS documentary controls require the recorded checker to complete before publication; runtime results remain historical.",
+  "scope": {
+    "existing_env_read": false,
+    "application_bootstrap_executed": false,
+    "real_database_accessed": false,
+    "media_read_copied_rehashed_or_modified": false,
+    "new_media_hashes_published": false,
+    "production_code_modified": false,
+    "tests_modified": false,
+    "historical_migrations_modified": false,
+    "dependencies_modified": false,
+    "credentials_or_configuration_modified": false,
+    "destructive_mechanism_created": false,
+    "destructive_operation_executed": false,
+    "merged_deployed_or_auto_merged": false
+  },
+  "historical_incidents_preserved": {
+    "w62ca": "Nine uploads read accidentally and ten public/img files read for SHA-256 in prior delivery; corrected evidence remains intact. No historical zero-read claim. No media reread here.",
+    "w62cb": "Initial normal loaders selected existing .env in prior delivery; isolated repetitions recorded there. PR #28 and its evidence unchanged."
+  },
+  "limitations": [
+    "No runtime re-execution in this documentary PR.",
+    "No MySQL equivalence or successful full installation.",
+    "Shared-memory concurrency is not disk/WAL/crash or load certification.",
+    "No real installation inventory, media classification or operational restore authorization.",
+    "All real retirement gates remain closed; the proposed next SQLite PR is synthetic only.",
+    "PR #28 remains independent and in draft."
+  ],
+  "changed_files": [
+    "docs/architecture/ADR-DB-ENGINE-TEKORA.md",
+    "docs/architecture/TEKORA-DB-INVARIANTS-MATRIX.md",
+    "docs/web/w6/W62C-C-SQLITE-NEXT-PR.md",
+    "docs/web/w6/evidence/W62C-C-documentary-validation.json"
+  ],
+  "documentary_check_method": [
+    "Resolve all relative Markdown file links in the three new Markdown documents without opening target media or databases.",
+    "Check table column counts, required matrix ordinals and unique invariant IDs.",
+    "Parse this JSON; count migration PHP sources and API definitions statically.",
+    "git diff --cached --check; git diff --cached --name-status against the exact base; compare unchanged protected source paths through Git tree metadata.",
+    "Recheck remote main and PR #28 metadata before publishing one independent draft PR."
+  ],
+  "documentary_check_result": {
+    "status": "PASS",
+    "new_documentation_files": 4,
+    "resolved_relative_links": 56,
+    "markdown_tables_checked": 15,
+    "invariant_rows": 23,
+    "migration_sources": 37,
+    "api_operations_static": 21,
+    "tracked_non_documentation_changes": 0,
+    "untracked_files": 0,
+    "git_diff_check": "PASS"
+  }
+}
