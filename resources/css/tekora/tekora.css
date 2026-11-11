@@ -1,4 +1,4 @@
-/* Blue Obsidian · W1. Scoped by tk-page: legacy, marketplace interiors and dashboards keep their assets. */
+/* Blue Obsidian · W1. Scoped by tk-page; marketplace interiors and dashboards keep their assets. */
 @font-face {
     font-family: "DM Sans";
     src: url("/fonts/tekora/dm-sans-latin.woff2") format("woff2");
@@ -985,22 +985,6 @@
     height: 16px;
     flex: 0 0 16px;
     margin: 0;
-}
-.tk-page .tk-legacy {
-    margin-top: 20px;
-    border: 1px solid #90e0ef3b;
-    border-radius: 14px;
-    padding: 16px 20px;
-    background: #0a192c;
-}
-.tk-legacy summary {
-    cursor: pointer;
-    color: var(--tk-ice);
-    font-size: 0.74rem;
-    font-weight: 500;
-}
-.tk-legacy > p {
-    font-size: 0.73rem;
 }
 .tk-page .account-button.secondary {
     background: #142d45;

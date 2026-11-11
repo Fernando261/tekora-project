@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\ActivityNotification;
-use App\Models\Cita;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Cita;
+use Tests\Support\Retired\Profesionista;
 use App\Services\NotificationInbox;
 use App\Services\ReviewWorkflow;
 use Illuminate\Database\QueryException;

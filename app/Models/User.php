@@ -4,18 +4,18 @@ namespace App\Models;
 
 use App\Enums\Permission;
 use App\Enums\RoleName;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, \Laravel\Sanctum\HasApiTokens;
+    use HasFactory, \Laravel\Sanctum\HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,11 +23,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-    'name',
-    'age',
-    'gender',
-    'email',
-    'password',
+        'name',
+        'age',
+        'gender',
+        'email',
+        'password',
     ];
 
     /**
@@ -95,25 +95,4 @@ class User extends Authenticatable
 
         return $this->roles()->whereIn('slug', $roles)->exists();
     }
-
-    public function posts()
-{
-    return $this->hasMany(Post::class);
-}
-
-public function reminders() {
-    return $this->hasMany(Reminder::class);
-}
-
-public function likes()
-{
-    return $this->hasMany(Like::class);
-}
-
-public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
-
-
 }

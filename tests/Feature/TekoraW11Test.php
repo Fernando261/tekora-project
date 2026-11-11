@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\User;
 use DOMDocument;
 use DOMXPath;
@@ -48,15 +48,13 @@ class TekoraW11Test extends TestCase
         $this->assertDatabaseCount('services', 1);
     }
 
-    public function test_historical_mindbloom_pages_and_professional_guard_keep_their_identity(): void
+    public function test_retired_pages_are_absent_and_profile_keeps_native_identity(): void
     {
         $this->actingAs(User::factory()->create(), 'web');
-        foreach ([route('home'), '/perfil', '/comunidad', '/citas', '/conferencias'] as $path) {
-            $this->get($path)->assertOk()->assertDontSee('data-tekora-ambient')->assertDontSee('tekora-interior');
+        foreach (['/mindbloom/inicio', '/comunidad', '/citas', '/conferencias', '/dashboard-profesionista'] as $path) {
+            $this->get($path)->assertNotFound();
         }
-        $professional = Profesionista::create(['nombre' => 'Profesional de prueba', 'email' => 'legacy-w11@example.test',
-            'password' => Hash::make('test-password'), 'cedula' => 'W11-TEST']);
-        $this->actingAs($professional, 'profesionista')->get('/dashboard-profesionista')->assertOk()->assertDontSee('data-tekora-ambient');
+        $this->get('/perfil')->assertOk()->assertDontSee('MindBloom')->assertDontSee('tekora-interior');
     }
 
     public function test_both_switches_are_real_get_links_and_each_back_face_has_no_interactive_form(): void
@@ -87,9 +85,9 @@ class TekoraW11Test extends TestCase
         $this->get('/registro')->assertOk()->assertSee('role="alert"', false)->assertSee('aria-invalid="true"', false)
             ->assertSee('value="invalid-w11"', false)->assertDontSee('value="short"', false)->assertSee('data-auth-content');
         $user = User::factory()->create();
-        $this->withSession(['url.intended' => route('home'), '_token' => 'w11-native-csrf'])->get('/login')->assertOk();
-        $this->post('/login', ['_token' => 'w11-native-csrf', 'email' => $user->email, 'password' => 'password'])->assertRedirect(route('home'));
+        $this->withSession(['url.intended' => route('account.index'), '_token' => 'w11-native-csrf'])->get('/login')->assertOk();
+        $this->post('/login', ['_token' => 'w11-native-csrf', 'email' => $user->email, 'password' => 'password'])->assertRedirect(route('account.index'));
         $this->assertAuthenticatedAs($user, 'web');
-        $this->assertGuest('profesionista');
+        $this->assertNull(config('auth.guards.profesionista'));
     }
 }

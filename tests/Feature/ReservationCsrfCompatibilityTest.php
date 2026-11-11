@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
-use App\Models\Profesionista;
-use App\Models\ProfesionistaDisponibilidad;
+use Tests\Support\Retired\Profesionista;
+use Tests\Support\Retired\ProfesionistaDisponibilidad;
 use App\Models\ServiceReservation;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryReadTracking;
@@ -68,13 +68,14 @@ class ReservationCsrfCompatibilityTest extends TestCase
         ProfesionistaDisponibilidad::create(['profesionista_id' => $legacy->id, 'day_of_week' => 1, 'start_time' => '07:00', 'end_time' => '23:00', 'is_active' => true]);
         DB::table('profesionista_bloqueos')->insert(['profesionista_id' => $legacy->id, 'start_datetime' => '2030-01-07 10:00:00', 'end_datetime' => '2030-01-07 11:00:00']);
         $tables = ['profesionistas', 'profesionista_disponibilidades', 'profesionista_bloqueos', 'citas']; $before = $this->reservationRows($tables);
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'separate-legacy-password'])->assertRedirect('/dashboard-profesionista');
+        $this->actingAs($legacy, 'retired-fixture');
+        $this->post('/login-profesionista')->assertNotFound();
         $this->get(route('reservations.index'))->assertRedirect('/login');
         $this->get(route('reservations.show', $reservation))->assertRedirect('/login');
         $this->patchJson(route('reservations.confirm', $reservation), ['version' => 1])->assertUnauthorized();
         $this->postJson(route('reservations.store', $inquiry), $this->reservationData())->assertUnauthorized();
         app(ReservationWorkflow::class)->decide($provider, $reservation->id, 'confirm', ['version' => 1]);
         $this->assertSame($before, $this->reservationRows($tables)); $this->assertGuest('web');
-        $this->get('/profesionista/disponibilidad')->assertOk();
+        $this->get('/profesionista/disponibilidad')->assertNotFound();
     }
 }

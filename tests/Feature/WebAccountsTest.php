@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -151,12 +151,12 @@ class WebAccountsTest extends TestCase
         }
     }
 
-    public function test_shared_navigation_is_available_from_existing_mindbloom_pages(): void
+    public function test_shared_navigation_contains_only_native_experiences(): void
     {
         $this->actingAs($this->account(RoleName::Client, RoleName::Provider), 'web');
-        foreach ([route('home'), '/perfil', '/citas', '/profesionistas', '/comunidad', '/conferencias', '/perfil/editar-nombre'] as $path) {
+        foreach (['/perfil', '/perfil/editar-nombre', '/cuenta'] as $path) {
             $this->get($path)->assertOk()->assertSee('href="'.route('account.provider').'"', false)
-                ->assertSee('MindBloom anterior')->assertDontSee('href="'.route('identity.roles.index').'"', false);
+                ->assertDontSee('MindBloom')->assertDontSee('href="'.route('identity.roles.index').'"', false);
         }
     }
 
@@ -176,16 +176,14 @@ class WebAccountsTest extends TestCase
         $this->assertSame(['client'], $user->roles()->pluck('slug')->all());
     }
 
-    public function test_legacy_login_is_explicit_and_preserves_existing_credentials_and_guard(): void
+    public function test_retired_login_is_absent_and_existing_records_are_untouched(): void
     {
-        $legacy = Profesionista::create(['nombre' => 'Profesional anterior', 'email' => 'legacy@example.test',
+        $legacy = Profesionista::create(['nombre' => 'Anterior', 'email' => 'legacy@example.test',
             'password' => Hash::make('legacy-password'), 'cedula' => 'LEGACY-001', 'google_access_token' => 'fake-private-token']);
         $before = $legacy->fresh()->getAttributes();
-        $this->get('/login?role=prof')->assertOk()->assertSee('Acceso heredado')->assertSee('solo para cuentas profesionales ya existentes');
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'legacy-password'])
-            ->assertRedirect('/dashboard-profesionista');
-        $this->get('/dashboard-profesionista')->assertOk()->assertSee('Acceso heredado de MindBloom.')->assertDontSee('fake-private-token');
-        $this->assertAuthenticatedAs($legacy, 'profesionista');
+        $this->get('/login?role=prof')->assertOk()->assertDontSee('MindBloom')->assertDontSee('legacy-access');
+        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'legacy-password'])->assertNotFound();
+        $this->get('/dashboard-profesionista')->assertNotFound();
         $this->assertGuest('web');
         $this->assertSame($before, $legacy->fresh()->getAttributes());
         $this->assertDatabaseCount('users', 0);
@@ -197,7 +195,7 @@ class WebAccountsTest extends TestCase
             'password' => Hash::make('old-password'), 'cedula' => 'LEGACY-001']);
         $before = $legacy->fresh()->getAttributes();
         $this->postJson('/registro-profesionista', ['nombre' => 'No crear', 'email' => 'new@example.test', 'password' => 'test-password'])
-            ->assertStatus(410)->assertJsonStructure(['message', 'registration_url']);
+            ->assertNotFound();
         $this->post('/registro', $this->registration('provider'))->assertRedirect('/login');
         $this->assertDatabaseCount('users', 1);
         $this->assertDatabaseCount('profesionistas', 1);
@@ -210,6 +208,6 @@ class WebAccountsTest extends TestCase
         $this->get('/registro?intent=provider')->assertOk()
             ->assertSee('Contratar y ofrecer')->assertSee('name="intent" value="provider" checked', false)
             ->assertSee('action="'.route('registro.store').'"', false)
-            ->assertDontSee('action="'.route('profesionista.store').'"', false);
+            ->assertDontSee('action="'.url('/registro-profesionista').'"', false);
     }
 }

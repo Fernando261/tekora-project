@@ -1,0 +1,713 @@
+{
+  "base_sha": "00798bfab31f6608760ec252ac20e15573f8e5ce",
+  "files": [
+    {
+      "status": "M",
+      "path": "README.md"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/Auth/ConfirmPasswordController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/Auth/ForgotPasswordController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/Auth/LoginController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/Auth/RegisterController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/Auth/ResetPasswordController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/Auth/VerificationController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/CitasController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/CommentController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/CommentLikeController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/ComunidadController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/GoogleCalendarController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/HomeController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/PdfController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/ProfesionistaAuthController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/ProfesionistaCitaController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/ProfesionistaController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/ProfesionistaDisponibilidadController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/ProfesionistaGoogleController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/ReminderController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Http/Controllers/UserCitaController.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/Cita.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/Comment.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/Emotion.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/Like.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/Post.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/Profesionista.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/ProfesionistaDisponibilidad.php"
+    },
+    {
+      "status": "D",
+      "path": "app/Models/Reminder.php"
+    },
+    {
+      "status": "M",
+      "path": "app/Models/User.php"
+    },
+    {
+      "status": "M",
+      "path": "bootstrap/app.php"
+    },
+    {
+      "status": "M",
+      "path": "composer.json"
+    },
+    {
+      "status": "M",
+      "path": "composer.lock"
+    },
+    {
+      "status": "M",
+      "path": "config/auth.php"
+    },
+    {
+      "status": "D",
+      "path": "config/dompdf.php"
+    },
+    {
+      "status": "M",
+      "path": "config/services.php"
+    },
+    {
+      "status": "M",
+      "path": "database/seeders/DatabaseSeeder.php"
+    },
+    {
+      "status": "D",
+      "path": "database/seeders/EmotionSeeder.php"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/W62B-LARAGON.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/W62B.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-baseline.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-browser-results.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-build.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-client-dashboard-375.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-composer-validate.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-css-integrity.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-dependencies.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-files.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-inventory-resolution.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-lock-resolution.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-login-375.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-migrations-native.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-npm-audit.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-packagist-metadata-check.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-photo-csrf.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-phpunit.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-phpunit.xml"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-pint.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-platform.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-preview.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-profile-photo-1440.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-protected-sources.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-provider-dashboard-1440.png"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-retired-contracts.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-test-intents.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/web/w6/evidence/W62B-validation.json"
+    },
+    {
+      "status": "M",
+      "path": "package-lock.json"
+    },
+    {
+      "status": "M",
+      "path": "package.json"
+    },
+    {
+      "status": "M",
+      "path": "public/css/account.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/auth-portal.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/citas.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/citas2.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/comunidad.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/conferencias.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/consultas.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/dashboard-profesionista.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/disponibilidad.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/editar.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/home.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/login-unificado.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/login.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/mis-citas.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/perfil.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/profesionistas.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/provider-dashboard.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/registro-unificado.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/registro.css"
+    },
+    {
+      "status": "D",
+      "path": "public/css/solicitudes.css"
+    },
+    {
+      "status": "D",
+      "path": "public/js/account.js"
+    },
+    {
+      "status": "M",
+      "path": "resources/css/tekora/account-shell.css"
+    },
+    {
+      "status": "M",
+      "path": "resources/css/tekora/dashboards.css"
+    },
+    {
+      "status": "M",
+      "path": "resources/css/tekora/identity.css"
+    },
+    {
+      "status": "M",
+      "path": "resources/css/tekora/tekora.css"
+    },
+    {
+      "status": "D",
+      "path": "resources/js/app.js"
+    },
+    {
+      "status": "D",
+      "path": "resources/js/bootstrap.js"
+    },
+    {
+      "status": "D",
+      "path": "resources/sass/_variables.scss"
+    },
+    {
+      "status": "D",
+      "path": "resources/sass/app.scss"
+    },
+    {
+      "status": "M",
+      "path": "resources/views/account/activate-provider.blade.php"
+    },
+    {
+      "status": "M",
+      "path": "resources/views/account/client.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/auth/portal.blade.php"
+    },
+    {
+      "status": "M",
+      "path": "resources/views/auth/registro.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/auth/registro_profesionista.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/citas.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/citas/create.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/citas/mis-citas.blade.php"
+    },
+    {
+      "status": "M",
+      "path": "resources/views/components/account-layout.blade.php"
+    },
+    {
+      "status": "M",
+      "path": "resources/views/components/account-navigation.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/components/legacy-account-notice.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/comunidad.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/conferencias.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/dashboard-profesionista.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/emotion/show.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/home.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/layouts/app.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/login-profesionista.blade.php"
+    },
+    {
+      "status": "M",
+      "path": "resources/views/login.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/pdf/emotions/cards.blade.php"
+    },
+    {
+      "status": "M",
+      "path": "resources/views/perfil.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/profesionistas/disponibilidad.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/profesionistas/index.blade.php"
+    },
+    {
+      "status": "D",
+      "path": "resources/views/profesionistas/solicitudes-citas.blade.php"
+    },
+    {
+      "status": "M",
+      "path": "routes/identities.php"
+    },
+    {
+      "status": "M",
+      "path": "routes/web.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ActivityMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ActivitySecurityTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/AuthenticationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/AvailabilityCompatibilityTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/AvailabilityMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/CatalogMigrationTest.php"
+    },
+    {
+      "status": "D",
+      "path": "tests/Feature/CitasRegressionTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ClientDashboardTest.php"
+    },
+    {
+      "status": "D",
+      "path": "tests/Feature/ComposerDependencyCompatibilityTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ConversationMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ConversationReadTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ExampleTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/IdentityMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/IdentityRolesTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/InquiryMessagesMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/InquiryMessagesTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/InquiryMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/InquiryNotificationMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/InquiryNotificationsTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/InstallationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/MobileApiAuthTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/NativeLegacyIndependenceTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ProfilePhotoIntegrityTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ProviderDashboardAccessTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ReservationCsrfCompatibilityTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ReservationMigrationTest.php"
+    },
+    {
+      "status": "A",
+      "path": "tests/Feature/RetiredProductTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ReviewCsrfCompatibilityTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ReviewMigrationTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/RoutesAndGoogleSafetyTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ServiceInquiriesTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/ServiceManagementTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/TekoraW11Test.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/TekoraW1Test.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/TekoraW211SidebarTest.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/TekoraW21Test.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/TekoraW3Test.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/TekoraW4Test.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/TekoraW5Test.php"
+    },
+    {
+      "status": "M",
+      "path": "tests/Feature/WebAccountsTest.php"
+    },
+    {
+      "status": "A",
+      "path": "tests/Support/Retired/Cita.php"
+    },
+    {
+      "status": "A",
+      "path": "tests/Support/Retired/Comment.php"
+    },
+    {
+      "status": "A",
+      "path": "tests/Support/Retired/Emotion.php"
+    },
+    {
+      "status": "A",
+      "path": "tests/Support/Retired/Post.php"
+    },
+    {
+      "status": "A",
+      "path": "tests/Support/Retired/Profesionista.php"
+    },
+    {
+      "status": "A",
+      "path": "tests/Support/Retired/ProfesionistaDisponibilidad.php"
+    },
+    {
+      "status": "M",
+      "path": "tools/tekora-w1-preview.php"
+    },
+    {
+      "status": "M",
+      "path": "tools/tekora-w2-browser-checks.py"
+    },
+    {
+      "status": "M",
+      "path": "tools/tekora-w2-preview.php"
+    },
+    {
+      "status": "M",
+      "path": "tools/tekora-w211-browser-checks.py"
+    },
+    {
+      "status": "M",
+      "path": "tools/tekora-w3-preview.php"
+    },
+    {
+      "status": "M",
+      "path": "tools/tekora-w5-performance.py"
+    },
+    {
+      "status": "A",
+      "path": "tools/tekora-w62b-browser-checks.py"
+    },
+    {
+      "status": "M",
+      "path": "vite.config.js"
+    }
+  ]
+}

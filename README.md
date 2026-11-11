@@ -1,11 +1,13 @@
-# MindBloom — base de Tekora
+# Tekora
 
-Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la base existente; la Etapa 2A añade roles múltiples y perfiles centrales; la Etapa 2B habilita su registro, activación y gestión desde la web. Se conservan las pantallas MindBloom y las identidades `users`/`web` y `profesionistas`/`profesionista`, sin fusionar cuentas.
+Marketplace de servicios con Laravel 12, Blade y JavaScript. Una cuenta central `User` permite contratar, ofrecer servicios o ambas cosas mediante roles y permisos.
+
+W6.2b retira la experiencia anterior: pantallas, rutas, acceso profesional separado, Google Calendar, PDF emocional y scaffold exclusivo. No migra identidades ni convierte citas. Las 37 migraciones históricas y las referencias de medios se conservan; no hay purga de datos. Consultar [alcance y validación W6.2b](docs/web/w6/W62B.md).
 
 ## Requisitos
 
 - PHP 8.2 o superior compatible con `composer.lock`; Composer 2.
-- Extensiones PHP: PDO, `pdo_sqlite`, SQLite3, ctype, curl, DOM, fileinfo, filter, hash, mbstring, OpenSSL, session, tokenizer y XML (incluidos XMLReader/XMLWriter). GD se recomienda para imágenes/PDF; ZIP facilita la instalación de dependencias.
+- Extensiones PHP: PDO, `pdo_sqlite`, SQLite3, ctype, curl, DOM, fileinfo, filter, hash, mbstring, OpenSSL, session, tokenizer y XML (incluidos XMLReader/XMLWriter). GD se recomienda para imágenes; ZIP facilita la instalación de dependencias.
 - Node.js 22 o 24 LTS y npm. Se deben respetar `composer.lock` y `package-lock.json`.
 - Git. En Windows, habilitar las extensiones en el `php.ini` que muestra `php --ini`.
 
@@ -14,8 +16,8 @@ Aplicación Laravel 12 con Blade, CSS y JavaScript. La Etapa 1 estabiliza la bas
 Es preferible usar una carpeta nueva para no mezclar cambios locales. Desde su carpeta de proyectos:
 
 ```powershell
-git clone --branch codex/etapa-4a-seguridad-dependencias --single-branch https://github.com/Fernando261/tekora-project.git tekora-etapa4a
-Set-Location .\tekora-etapa4a
+git clone --branch codex/w62b-tekora-only --single-branch https://github.com/Fernando261/tekora-project.git tekora-w62b
+Set-Location .\tekora-w62b
 php --version
 php --ini
 php -m
@@ -29,7 +31,7 @@ if (-not (Test-Path .\.env)) {
 }
 ```
 
-Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-etapa4a/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
+Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-w62b/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
 
 **El siguiente bloque es solo para una instalación nueva, sin datos. Si la base ya existe, seguir el procedimiento de actualización de la guía, sin borrar el archivo.**
 
@@ -49,7 +51,7 @@ php artisan serve
 
 `storage:link` puede requerir el modo de desarrollador de Windows o permisos para enlaces simbólicos. Abrir la dirección que indique `artisan serve`.
 
-El seed es opcional y exclusivamente de desarrollo: `php artisan db:seed`. Crea emociones y una cuenta de demostración cuya contraseña procede de la factory; no ejecutarlo en producción. Las imágenes emocionales indicadas por el seeder no están incluidas: migrar/sembrar no garantiza que esas imágenes se visualicen.
+El seed es opcional y exclusivamente de desarrollo: `php artisan db:seed`. Crea una cuenta de demostración cuya contraseña procede de la factory; no ejecutarlo en producción. Ya no crea contenido emocional ni cambia los registros anteriores.
 
 ## Configuración necesaria
 
@@ -60,9 +62,8 @@ El seed es opcional y exclusivamente de desarrollo: `php artisan db:seed`. Crea 
 | `SESSION_DRIVER`, `CACHE_STORE`, `QUEUE_CONNECTION` | Persistencia de infraestructura; sus tablas están en las migraciones. |
 | `FILESYSTEM_DISK` | Disco predeterminado; los avatares utilizan explícitamente el disco público. |
 | `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME` | Correo. El transporte `log` no envía mensajes y puede registrar enlaces de recuperación: proteger los logs. |
-| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REDIRECT_URI` | OAuth de Calendar. El callback debe coincidir con `/google/callback` en la URL de la aplicación. |
 
-Los valores privados se configuran localmente y no se agregan al repositorio. No se cambió `.env.example` ni `.env` en esta entrega.
+Los valores privados se configuran localmente y no se agregan al repositorio. W6.2b no cambia `.env.example`, `.env` ni credenciales. La aplicación ya no consume configuración Google.
 
 ## Verificación y actualización segura
 
@@ -74,6 +75,10 @@ npm.cmd run build
 ```
 
 Para bases existentes, respaldos, revisión de cambios locales, estrategia de migraciones y limitaciones, consultar [la guía de estabilización](docs/estabilizacion-etapa-1.md). **No aplicar los pasos de instalación nueva sobre una base existente ni regenerar su `APP_KEY`.**
+
+## Procedencia de entregas anteriores
+
+Las secciones siguientes registran el alcance de cada entrega en su momento. Las menciones de accesos anteriores conservados y paquetes retirados quedan sustituidas por W6.2b; no son funcionalidades actuales.
 
 ## Etapa 2A: identidades y roles
 

@@ -107,7 +107,6 @@ final class TekoraW2VisualExport extends \Tests\TestCase
         $routes['/cuenta/prestador/dashboard'] = 'provider-30.html';
         $save('/cuenta', 'account');
         $save('/cuenta/prestador', 'provider-form');
-        $save('/mindbloom/inicio', 'legacy');
         $save('/servicios', 'catalog');
         file_put_contents($target.'/summaries.json', json_encode(['as_of_utc' => $asOf->toIso8601String(), 'client' => app(\App\Services\ClientDashboardSummary::class)->build($actor), 'provider' => app(\App\Services\ProviderDashboardMetrics::class)->build($actor, ['period' => '30'])], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         $emptyClient = $this->account(\App\Enums\RoleName::Client);

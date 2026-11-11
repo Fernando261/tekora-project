@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\Role;
 use DOMDocument;
 use DOMXPath;
@@ -75,7 +75,7 @@ class TekoraW5Test extends TestCase
     {
         if ($actor === 'legacy') {
             $professional = Profesionista::create(['nombre' => 'Identidad anterior', 'email' => 'legacy-w5@example.test', 'password' => Hash::make('legacy-password'), 'cedula' => 'W5-123']);
-            $this->actingAs($professional, 'profesionista');
+            $this->actingAs($professional, 'retired-fixture');
         } elseif ($actor !== 'guest') {
             $roles = match ($actor) {
                 'client' => [RoleName::Client], 'provider' => [RoleName::Provider], 'dual' => [RoleName::Client, RoleName::Provider], 'admin' => [RoleName::Admin], default => []
@@ -104,7 +104,7 @@ class TekoraW5Test extends TestCase
         $this->app->bind(ValidateCsrfToken::class, EnforcedCsrf::class);
         $user = $this->account(RoleName::Client);
         $this->actingAs($user)->withSession(['_token' => 'w5-csrf']);
-        $html = $this->get('/cuenta/activar-prestador')->assertOk()->assertSee('no es una verificación profesional')->assertSee('ni fusiona cuentas', false)->getContent();
+        $html = $this->get('/cuenta/activar-prestador')->assertOk()->assertSee('no es una verificación profesional')->assertDontSee('MindBloom')->getContent();
         $xpath = $this->document($html);
         $this->assertSame('provider', $xpath->query('//main//input[@name="role"]/@value')->item(0)->nodeValue);
         $this->post('/cuenta/roles', ['role' => 'provider'])->assertStatus(419);
@@ -137,7 +137,7 @@ class TekoraW5Test extends TestCase
         $web = $this->account(RoleName::Client);
         $web->update(['name' => 'Nombre web privado', 'age' => 37, 'gender' => 'Dato privado']);
         $legacy = Profesionista::create(['nombre' => 'Nombre histórico privado', 'email' => $web->email, 'password' => Hash::make('legacy-password'), 'cedula' => 'W5-456']);
-        $this->actingAs($legacy, 'profesionista')->actingAs($web, 'web');
+        $this->actingAs($legacy, 'retired-fixture')->actingAs($web, 'web');
         $response = $this->get('/perfil')->assertOk()->assertSee($web->name)->assertSee($web->email)->assertSee('Dato privado')->assertDontSee($legacy->nombre);
         $xpath = $this->document($response->getContent());
         foreach ($xpath->query('//*[@data-identity-scene] | //*[@data-identity-scene]//*') as $node) {
@@ -368,7 +368,7 @@ class TekoraW5Test extends TestCase
         $owner = $this->account(RoleName::Client, RoleName::Provider);
         $this->service($owner);
         $this->actingAs($owner);
-        foreach (['/', '/login', '/cuenta/cliente', '/cuenta/prestador/dashboard', '/servicios', '/prestadores', '/cuenta/servicios', '/cuenta/prestador', '/mindbloom/inicio'] as $uri) {
+        foreach (['/', '/login', '/cuenta/cliente', '/cuenta/prestador/dashboard', '/servicios', '/prestadores', '/cuenta/servicios', '/cuenta/prestador'] as $uri) {
             $html = $this->get($uri)->assertOk()->getContent();
             $this->assertSame(0, $this->document($html)->query('//body[contains(concat(" ",@class," ")," tk-identity ")]')->length);
             $this->assertStringNotContainsString('/assets/identity-', $html);
@@ -379,6 +379,7 @@ class TekoraW5Test extends TestCase
         }$this->assertEquals($before, DB::table('role_user')->get()->toArray());
         $this->assertCount(37, glob(database_path('migrations/*.php')));
         $this->assertCount(21, array_filter(app('router')->getRoutes()->getRoutes(), fn ($r) => str_starts_with($r->uri(), 'api/')));
-        $this->assertContains('auth:profesionista', app('router')->getRoutes()->getByName('profesionista.dashboard')->gatherMiddleware());
+        $this->assertNull(app('router')->getRoutes()->getByName('profesionista.dashboard'));
+        $this->get('/mindbloom/inicio')->assertNotFound();
     }
 }

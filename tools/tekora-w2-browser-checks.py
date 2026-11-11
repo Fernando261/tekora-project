@@ -141,7 +141,7 @@ def main():
                     goto(page, '/preview/provider-empty')
                     goto(page, '/preview/provider-setup')
                 else:
-                    page.locator('.tk-legacy-panel').scroll_into_view_if_needed()
+                    page.locator('.tk-dual-account').scroll_into_view_if_needed()
                     page.wait_for_timeout(700)
                     goto(page, '/preview/client-empty')
                 video = page.video

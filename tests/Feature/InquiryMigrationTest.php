@@ -4,11 +4,11 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryAction;
 use App\Enums\RoleName;
-use App\Models\Cita;
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\Profesionista;
-use App\Models\ProfesionistaDisponibilidad;
+use Tests\Support\Retired\Cita;
+use Tests\Support\Retired\Comment;
+use Tests\Support\Retired\Post;
+use Tests\Support\Retired\Profesionista;
+use Tests\Support\Retired\ProfesionistaDisponibilidad;
 use App\Models\ServiceInquiry;
 use App\Services\InquiryWorkflow;
 use Illuminate\Database\QueryException;
@@ -59,7 +59,7 @@ class InquiryMigrationTest extends TestCase
         DB::table('sessions')->insert(['id' => 'existing-session', 'user_id' => $client->id, 'payload' => 'opaque-fixture', 'last_activity' => 1]);
         $post = Post::create(['user_id' => $client->id, 'content' => 'Publicación anterior']);
         Comment::create(['user_id' => $client->id, 'post_id' => $post->id, 'content' => 'Comentario anterior']);
-        $post->likes()->create(['user_id' => $client->id, 'post_id' => $post->id]);
+        DB::table('likes')->insert(['user_id' => $client->id, 'likeable_type' => 'App\\Models\\Post', 'likeable_id' => $post->id]);
         $tables = array_values(array_filter(array_column(Schema::getTables(), 'name'), fn ($table) => $table !== 'migrations'));
         $before = $this->snapshot($tables);
 
@@ -76,7 +76,7 @@ class InquiryMigrationTest extends TestCase
         $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame($client->id, $inquiry->fresh()->client->id);
         $this->assertSame($provider->id, $inquiry->fresh()->service->providerProfile->user->id);
-        $this->assertSame($legacy->id, $cita->fresh()->profesionista->id);
+        $this->assertSame($legacy->id, $cita->fresh()->profesionista_id);
         $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
         $this->assertDatabaseCount('citas', 1);
 

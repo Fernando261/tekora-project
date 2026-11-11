@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Cita;
-use App\Models\Profesionista;
-use App\Models\ProfesionistaDisponibilidad;
+use Tests\Support\Retired\Cita;
+use Tests\Support\Retired\Profesionista;
+use Tests\Support\Retired\ProfesionistaDisponibilidad;
 use App\Models\ProviderAvailabilitySetting;
 use App\Services\InquiryReadTracking;
 use App\Services\ProviderAvailability;
@@ -60,7 +60,7 @@ class AvailabilityMigrationTest extends TestCase
         $this->assertSame($provider->providerProfile->id, $setting->providerProfile->id);
         $this->assertSame($provider->providerProfile->id, $provider->providerProfile->weeklyIntervals()->firstOrFail()->providerProfile->id);
         $this->assertSame($provider->providerProfile->id, $provider->providerProfile->blockedDates()->firstOrFail()->providerProfile->id);
-        $this->assertSame($legacy->id, $cita->fresh()->profesionista->id);
+        $this->assertSame($legacy->id, $cita->fresh()->profesionista_id);
         $this->assertSame($before, $this->snapshot($tables)); $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
         // Solo memoria: revertir exclusivamente las tablas nuevas de 6A, nunca datos persistentes.
         $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'availability_upgrade', '--step' => 1, '--force' => true]));

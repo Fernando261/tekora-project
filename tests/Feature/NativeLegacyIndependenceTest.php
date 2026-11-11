@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
 use PHPUnit\Framework\Attributes\Group;
 use Tests\Support\ReservationFixtures;
 use Tests\Support\WithoutLegacySchema;
@@ -40,7 +39,8 @@ class NativeLegacyIndependenceTest extends TestCase
         config(['auth.guards.profesionista' => null, 'auth.providers.profesionistas' => null, 'services.google' => null]);
         Auth::forgetGuards();
         Http::preventStrayRequests();
-        Socialite::shouldReceive('driver')->never();
+        $this->assertFalse(class_exists('Laravel\\Socialite\\Facades\\Socialite'));
+        $this->assertFalse(class_exists('Google\\Client'));
         DB::enableQueryLog();
         DB::flushQueryLog();
     }

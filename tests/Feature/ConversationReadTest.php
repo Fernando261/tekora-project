@@ -6,7 +6,7 @@ use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
 use App\Models\InquiryNotification;
 use App\Models\InquiryReadProgress;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Services\InquiryReadTracking;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -187,10 +187,11 @@ class ConversationReadTest extends TestCase
         $this->postJson(route('conversations.read', $inquiry), ['read_token' => $token])->assertUnauthorized();
         $legacy = Profesionista::create(['nombre' => 'Anterior', 'email' => $client->email, 'cedula' => 'LEGACY-5B', 'password' => Hash::make('old-password'), 'google_access_token' => 'fake-preserved']);
         $before = $legacy->fresh()->getAttributes(); session()->forget('url.intended');
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'old-password'])->assertRedirect('/dashboard-profesionista');
+        $this->actingAs($legacy, 'retired-fixture');
+        $this->post('/login-profesionista')->assertNotFound();
         $this->get(route('conversations.index'))->assertRedirect('/login');
         $this->postJson(route('conversations.read', $inquiry), ['read_token' => $token])->assertUnauthorized();
-        $this->get('/solicitudes-citas')->assertOk();
+        $this->get('/solicitudes-citas')->assertNotFound();
         $this->assertSame($before, $legacy->fresh()->getAttributes());
         $this->assertDatabaseCount('service_inquiry_reads', 0); $this->assertDatabaseCount('citas', 0);
     }

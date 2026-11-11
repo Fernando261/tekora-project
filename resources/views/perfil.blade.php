@@ -18,5 +18,4 @@
     </section>
   </div>
   <section class="account-card tk-identity-personal-link"><div><h2>Una cuenta, tus experiencias</h2><p>Consulta los accesos disponibles según tus permisos actuales.</p></div><a class="account-button secondary" href="{{ route('account.index') }}">Ir a Mi cuenta</a></section>
-  <details class="account-card tk-identity-history"><summary>Historial anterior · MindBloom</summary><p>Estos accesos mantienen su origen y funcionamiento. No se han migrado ni fusionado tus registros.</p><nav aria-label="Accesos históricos del perfil"><a href="{{ route('user.citas') }}">Citas anteriores</a><a href="{{ route('comunidad') }}">Comunidad anterior</a><a href="/conferencias">Conferencias anteriores</a></nav></details>
 </x-account-layout>

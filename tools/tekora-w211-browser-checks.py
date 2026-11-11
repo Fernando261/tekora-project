@@ -151,14 +151,12 @@ def main():
                 assert focus_clear(page), control.text_content()
             assert page.locator('.logout-btn').evaluate('e=>e===document.activeElement')
             shot(page,'focus-logout.png');page.keyboard.press('Shift+Tab')
-            legacy=page.locator('.account-legacy > summary')
-            assert legacy.evaluate('e=>e===document.activeElement')
-            page.keyboard.press('Enter');assert page.locator('.account-legacy').evaluate('e=>e.open')
-            for link in page.locator('.account-legacy .submenu a').all():
-                page.keyboard.press('Tab');assert link.evaluate('e=>e===document.activeElement') and focus_clear(page)
+            profile=page.locator('.tk-sidebar-navigation a[href$="/perfil"]')
+            assert profile.evaluate('e=>e===document.activeElement')
+            assert page.locator('.account-legacy').count()==0
             page.keyboard.press('Tab');assert page.locator('.logout-btn').evaluate('e=>e===document.activeElement')
             page.keyboard.press('Tab');assert not page.locator(scroll).evaluate('e=>e.contains(document.activeElement)')
-            result['checks']['all_links_tab_shift_tab_legacy_enter_and_exit']=True
+            result['checks']['all_native_links_tab_shift_tab_and_exit']=True
             position(page,0)
             notifications=page.locator('.tk-sidebar-navigation a').filter(has=page.locator('.tk-nav-label',has_text='Notificaciones'))
             notifications.hover();shot(page,'hover-notifications.png')

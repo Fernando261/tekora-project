@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Enums\InquiryAction;
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceInquiry;
 use App\Services\InquiryWorkflow;
 use Illuminate\Support\Facades\Hash;
@@ -331,11 +331,12 @@ class ServiceInquiriesTest extends TestCase
         $legacy = Profesionista::create(['nombre' => 'Anterior', 'email' => $inquiry->client->email, 'cedula' => 'LEGACY-3B',
             'password' => Hash::make('old-password'), 'google_access_token' => 'fake-old-token']);
         $before = $legacy->fresh()->getAttributes();
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'old-password'])->assertRedirect('/dashboard-profesionista');
+        $this->actingAs($legacy, 'retired-fixture');
+        $this->post('/login-profesionista')->assertNotFound();
         $this->get(route('inquiries.show', $inquiry))->assertRedirect('/login');
         $this->patchJson(route('inquiries.accept', $inquiry))->assertUnauthorized();
-        $this->get('/solicitudes-citas')->assertOk();
-        $this->get('/profesionista/disponibilidad')->assertOk();
+        $this->get('/solicitudes-citas')->assertNotFound();
+        $this->get('/profesionista/disponibilidad')->assertNotFound();
         $this->assertSame($before, $legacy->fresh()->getAttributes());
         $this->assertDatabaseCount('citas', 0);
         $this->assertGuest('web');

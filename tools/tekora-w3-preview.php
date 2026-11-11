@@ -1,6 +1,6 @@
 <?php
 
-// Reuse the guarded W2 export for the approved dashboards, auth and private history.
+// Reuse the guarded W2 export for the Tekora dashboards and central authentication.
 // This first export requires a NEW target, a loopback origin and an absent .env.
 require __DIR__.'/tekora-w2-preview.php';
 require __DIR__.'/tekora-w3-preview-key.php';

@@ -33,14 +33,14 @@ def main():
             context=browser.new_context(viewport={'width':1440,'height':1000});page=context.new_page();session=context.new_cdp_session(page);session.send('Emulation.setCPUThrottlingRate',{'rate':4});page.add_init_script(INIT)
             page.goto(args.base_url+'/preview/w5/'+name,wait_until='networkidle');page.wait_for_timeout(1500);row=page.evaluate('({lcp_ms:opsLCP,cls:opsCLS})');row.update(version='w5',page=name,width=1440,cpu_rate=4);result['runs'].append(row);context.close();args.output.write_text(json.dumps(result,indent=2)+'\n')
         for rate in (1,4):
-            context=browser.new_context(viewport={'width':1440,'height':1000});page=context.new_page();session=context.new_cdp_session(page);session.send('Emulation.setCPUThrottlingRate',{'rate':rate});page.goto(args.base_url+'/preview/w5/profile-photo',wait_until='networkidle')
-            page.evaluate("""()=>{window.opsLatency=[];document.addEventListener('click',e=>{if(e.target.matches('.tk-identity-history > summary')){const at=e.timeStamp;requestAnimationFrame(()=>requestAnimationFrame(()=>opsLatency.push(performance.now()-at)))}})}""")
+            context=browser.new_context(viewport={'width':390,'height':1000});page=context.new_page();session=context.new_cdp_session(page);session.send('Emulation.setCPUThrottlingRate',{'rate':rate});page.goto(args.base_url+'/preview/w5/profile-photo',wait_until='networkidle')
+            page.evaluate("""()=>{window.opsLatency=[];document.addEventListener('click',e=>{if(e.target.matches('[data-account-navigation] > summary')){const at=e.timeStamp;requestAnimationFrame(()=>requestAnimationFrame(()=>opsLatency.push(performance.now()-at)))}})}""")
             for index in range(5):
-                page.locator('.tk-identity-history > summary').click()
+                page.locator('[data-account-navigation] > summary').click()
                 page.wait_for_function('(count)=>opsLatency.length===count',arg=index+1)
             latency=page.evaluate('opsLatency');assert len(latency)==5
             scroll=page.evaluate("""()=>new Promise(resolve=>{let last=performance.now(),start=last,deltas=[];function frame(now){deltas.push(now-last);last=now;scrollBy(0,18);if(now-start<650)requestAnimationFrame(frame);else resolve({frames:deltas.length,mean_frame_ms:deltas.reduce((a,b)=>a+b,0)/deltas.length,max_frame_ms:Math.max(...deltas),no_horizontal:document.documentElement.scrollWidth<=innerWidth+1})}requestAnimationFrame(frame)})""")
-            result['interaction'].append({'cpu_rate':rate,'method':'Actual native history-summary clicks: event timestamp to second rAF; presentation proxy, not INP. Scroll rAF cadence is diagnostic, not GPU FPS.','click_to_second_raf_ms':latency,'scroll':scroll});context.close()
+            result['interaction'].append({'cpu_rate':rate,'method':'Actual native mobile-menu summary clicks: event timestamp to second rAF; presentation proxy, not INP. Scroll rAF cadence is diagnostic, not GPU FPS.','click_to_second_raf_ms':latency,'scroll':scroll});context.close()
         browser.close()
     args.output.write_text(json.dumps(result,indent=2)+'\n');w5=[r for r in result['runs'] if r['version']=='w5'];print(json.dumps({'samples':len(result['runs']),'w5_max_cls':max(r['cls'] for r in w5),'w5_max_lcp_ms':max(r['lcp_ms'] for r in w5)}))
 

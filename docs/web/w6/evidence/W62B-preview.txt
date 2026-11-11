@@ -1,0 +1,4 @@
+W2 export complete. Synthetic fixtures; SQLite :memory: only; no POST backend.
+W3 export complete. Real GET controllers, synthetic SQLite :memory: fixtures, no POST backend.
+W4 export: 52 pages; synthetic SQLite :memory:; no browser POST backend.
+W5 export: 21 pages; memory DB, fake photos and notifications, no browser POST.

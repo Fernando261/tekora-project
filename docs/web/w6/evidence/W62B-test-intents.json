@@ -1,0 +1,935 @@
+[
+  {
+    "file": "tests/Feature/ActivityMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_35_to_36_preserves_all_previous_data_and_does_not_backfill_activity",
+      "test_database_enforces_source_type_foreign_keys_recipient_event_version_and_uniqueness",
+      "test_identity_and_history_are_immutable_and_reading_only_moves_null_to_one_valid_date",
+      "test_valid_direct_business_transition_emits_the_same_notice_without_http_or_observers"
+    ],
+    "current_methods": [
+      "test_upgrade_35_to_36_preserves_all_previous_data_and_does_not_backfill_activity",
+      "test_database_enforces_source_type_foreign_keys_recipient_event_version_and_uniqueness",
+      "test_identity_and_history_are_immutable_and_reading_only_moves_null_to_one_valid_date",
+      "test_valid_direct_business_transition_emits_the_same_notice_without_http_or_observers"
+    ]
+  },
+  {
+    "file": "tests/Feature/ActivitySecurityTest.php",
+    "base_methods": [
+      "test_activity_reads_are_private_and_admin_has_no_implicit_access",
+      "test_real_csrf_protects_both_read_routes_and_native_forms_work_without_scripts",
+      "test_payload_cannot_create_notifications_or_forge_read_identity_and_dates",
+      "test_rate_limit_is_scoped_to_account_and_does_not_affect_the_old_read_route",
+      "test_feed_displays_mexico_city_time_independently_of_application_timezone",
+      "test_legacy_guard_and_matching_email_do_not_access_central_notifications"
+    ],
+    "current_methods": [
+      "test_activity_reads_are_private_and_admin_has_no_implicit_access",
+      "test_real_csrf_protects_both_read_routes_and_native_forms_work_without_scripts",
+      "test_payload_cannot_create_notifications_or_forge_read_identity_and_dates",
+      "test_rate_limit_is_scoped_to_account_and_does_not_affect_the_old_read_route",
+      "test_feed_displays_mexico_city_time_independently_of_application_timezone",
+      "test_legacy_guard_and_matching_email_do_not_access_central_notifications"
+    ]
+  },
+  {
+    "file": "tests/Feature/AuthenticationTest.php",
+    "base_methods": [
+      "test_a_user_can_register_without_authenticating_the_professional_guard",
+      "test_retired_professional_registration_redirects_without_creating_an_identity",
+      "test_retired_registration_does_not_change_an_existing_professional_account",
+      "test_invalid_user_registration_is_not_persisted",
+      "test_each_login_uses_its_own_guard_even_with_the_same_email_in_both_tables",
+      "test_wrong_credentials_do_not_authenticate_either_guard",
+      "test_malformed_login_fields_return_validation_errors_for_both_guards",
+      "test_each_login_is_limited_by_normalized_identity_and_recovers_after_one_minute",
+      "test_the_ip_limit_also_restricts_attempts_against_different_emails",
+      "test_each_identity_can_log_out_using_its_endpoint",
+      "test_the_user_password_reset_notification_and_form_are_connected",
+      "test_a_valid_reset_changes_only_the_target_user_password",
+      "test_an_invalid_reset_does_not_change_the_password"
+    ],
+    "current_methods": [
+      "test_a_user_can_register_without_authenticating_the_professional_guard",
+      "test_retired_professional_registration_redirects_without_creating_an_identity",
+      "test_retired_registration_does_not_change_an_existing_professional_account",
+      "test_invalid_user_registration_is_not_persisted",
+      "test_only_central_credentials_authenticate_even_with_a_matching_retired_email",
+      "test_wrong_credentials_do_not_authenticate_either_guard",
+      "test_malformed_login_fields_return_validation_errors_for_both_guards",
+      "test_each_login_is_limited_by_normalized_identity_and_recovers_after_one_minute",
+      "test_the_ip_limit_also_restricts_attempts_against_different_emails",
+      "test_central_logout_remains_available_and_retired_logout_is_absent",
+      "test_the_user_password_reset_notification_and_form_are_connected",
+      "test_a_valid_reset_changes_only_the_target_user_password",
+      "test_an_invalid_reset_does_not_change_the_password"
+    ]
+  },
+  {
+    "file": "tests/Feature/AvailabilityCompatibilityTest.php",
+    "base_methods": [
+      "test_matching_legacy_account_neither_supplies_nor_can_edit_central_availability",
+      "test_schedule_edits_leave_inquiries_message_idempotency_notices_and_read_progress_unchanged"
+    ],
+    "current_methods": [
+      "test_matching_legacy_account_neither_supplies_nor_can_edit_central_availability",
+      "test_schedule_edits_leave_inquiries_message_idempotency_notices_and_read_progress_unchanged"
+    ]
+  },
+  {
+    "file": "tests/Feature/AvailabilityMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_32_to_33_and_reversal_preserve_every_existing_table_and_legacy_identity",
+      "test_database_enforces_ranges_dates_uniqueness_and_central_foreign_keys"
+    ],
+    "current_methods": [
+      "test_upgrade_32_to_33_and_reversal_preserve_every_existing_table_and_legacy_identity",
+      "test_database_enforces_ranges_dates_uniqueness_and_central_foreign_keys"
+    ]
+  },
+  {
+    "file": "tests/Feature/CatalogMigrationTest.php",
+    "base_methods": [
+      "test_category_seed_is_repeatable_and_preserves_existing_customization_and_inactive_state",
+      "test_category_slugs_are_unique_in_the_database",
+      "test_services_cannot_reference_a_nonexistent_provider_profile",
+      "test_categories_with_services_cannot_be_deleted",
+      "test_profiles_with_services_cannot_be_deleted",
+      "test_database_rejects_unknown_service_states",
+      "test_upgrade_from_26_applied_migrations_and_catalog_only_reversal_preserve_existing_data"
+    ],
+    "current_methods": [
+      "test_category_seed_is_repeatable_and_preserves_existing_customization_and_inactive_state",
+      "test_category_slugs_are_unique_in_the_database",
+      "test_services_cannot_reference_a_nonexistent_provider_profile",
+      "test_categories_with_services_cannot_be_deleted",
+      "test_profiles_with_services_cannot_be_deleted",
+      "test_database_rejects_unknown_service_states",
+      "test_upgrade_from_26_applied_migrations_and_catalog_only_reversal_preserve_existing_data"
+    ]
+  },
+  {
+    "file": "tests/Feature/ClientDashboardTest.php",
+    "base_methods": [
+      "test_guests_legacy_provider_admin_and_unassigned_accounts_do_not_gain_client_access",
+      "test_client_dual_and_client_admin_accounts_have_truthful_empty_states_and_legacy_access",
+      "test_dual_account_only_counts_its_client_side_and_reuses_the_unread_predicate",
+      "test_reservations_distinguish_status_future_boundary_and_utc_conversion",
+      "test_identity_queries_and_unknown_filters_are_rejected_without_selecting_another_account",
+      "test_loaded_roles_cannot_bypass_revocation_and_names_are_escaped",
+      "test_opening_both_dashboards_is_read_only_including_markers_and_notifications",
+      "test_lists_are_limited_ordered_and_queries_constant_without_private_bodies",
+      "test_database_failure_is_safe_and_unavailable_global_counter_is_not_faked_as_zero"
+    ],
+    "current_methods": [
+      "test_guests_legacy_provider_admin_and_unassigned_accounts_do_not_gain_client_access",
+      "test_client_dual_and_client_admin_accounts_have_truthful_empty_states_without_retired_links",
+      "test_dual_account_only_counts_its_client_side_and_reuses_the_unread_predicate",
+      "test_reservations_distinguish_status_future_boundary_and_utc_conversion",
+      "test_identity_queries_and_unknown_filters_are_rejected_without_selecting_another_account",
+      "test_loaded_roles_cannot_bypass_revocation_and_names_are_escaped",
+      "test_opening_both_dashboards_is_read_only_including_markers_and_notifications",
+      "test_lists_are_limited_ordered_and_queries_constant_without_private_bodies",
+      "test_database_failure_is_safe_and_unavailable_global_counter_is_not_faked_as_zero"
+    ]
+  },
+  {
+    "file": "tests/Feature/ConversationMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_31_to_32_and_read_only_reversal_preserve_all_old_messages_idempotency_and_notifications",
+      "test_database_rejects_duplicate_progress_nonexistent_users_and_cross_inquiry_message_markers"
+    ],
+    "current_methods": [
+      "test_upgrade_31_to_32_and_read_only_reversal_preserve_all_old_messages_idempotency_and_notifications",
+      "test_database_rejects_duplicate_progress_nonexistent_users_and_cross_inquiry_message_markers"
+    ]
+  },
+  {
+    "file": "tests/Feature/ConversationReadTest.php",
+    "base_methods": [
+      "test_incoming_counts_and_read_progress_are_individual_and_never_include_own_messages",
+      "test_gets_do_not_write_and_empty_or_outgoing_only_pages_offer_no_read_action",
+      "test_repeated_and_obsolete_tokens_keep_the_most_advanced_marker_and_timestamp",
+      "test_a_page_snapshot_does_not_mark_new_arrivals_even_if_their_dates_are_older",
+      "test_terminal_and_paused_inquiries_allow_reading_without_changing_state_or_messages",
+      "test_fields_ciphertext_and_tokens_cannot_select_other_users_inquiries_or_outgoing_markers",
+      "test_third_parties_and_admins_cannot_mark_or_query_individual_counters",
+      "test_role_revocation_invalidates_prepared_actions_without_deleting_progress",
+      "test_failure_and_outer_rollback_do_not_leave_progress_or_touch_4b_notifications",
+      "test_legacy_matching_email_and_guests_have_no_central_read_access"
+    ],
+    "current_methods": [
+      "test_incoming_counts_and_read_progress_are_individual_and_never_include_own_messages",
+      "test_gets_do_not_write_and_empty_or_outgoing_only_pages_offer_no_read_action",
+      "test_repeated_and_obsolete_tokens_keep_the_most_advanced_marker_and_timestamp",
+      "test_a_page_snapshot_does_not_mark_new_arrivals_even_if_their_dates_are_older",
+      "test_terminal_and_paused_inquiries_allow_reading_without_changing_state_or_messages",
+      "test_fields_ciphertext_and_tokens_cannot_select_other_users_inquiries_or_outgoing_markers",
+      "test_third_parties_and_admins_cannot_mark_or_query_individual_counters",
+      "test_role_revocation_invalidates_prepared_actions_without_deleting_progress",
+      "test_failure_and_outer_rollback_do_not_leave_progress_or_touch_4b_notifications",
+      "test_legacy_matching_email_and_guests_have_no_central_read_access"
+    ]
+  },
+  {
+    "file": "tests/Feature/ExampleTest.php",
+    "base_methods": [
+      "test_the_named_mindbloom_home_page_requires_a_user_session"
+    ],
+    "current_methods": [
+      "test_the_named_mindbloom_home_page_requires_a_user_session"
+    ]
+  },
+  {
+    "file": "tests/Feature/IdentityMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_and_reversal_preserve_all_legacy_rows_columns_and_relationships",
+      "test_role_membership_primary_key_prevents_duplicate_assignments",
+      "test_database_enforces_one_profile_per_user",
+      "test_profiles_cannot_reference_nonexistent_users",
+      "test_profile_mass_assignment_does_not_accept_owner_or_permission_fields"
+    ],
+    "current_methods": [
+      "test_upgrade_and_reversal_preserve_all_legacy_rows_columns_and_relationships",
+      "test_role_membership_primary_key_prevents_duplicate_assignments",
+      "test_database_enforces_one_profile_per_user",
+      "test_profiles_cannot_reference_nonexistent_users",
+      "test_profile_mass_assignment_does_not_accept_owner_or_permission_fields"
+    ]
+  },
+  {
+    "file": "tests/Feature/IdentityRolesTest.php",
+    "base_methods": [
+      "test_role_catalog_assigns_nothing_to_existing_identities",
+      "test_new_registration_gets_only_client_even_when_privileged_fields_are_submitted",
+      "test_one_account_can_explicitly_enroll_in_both_business_roles_idempotently",
+      "test_self_enrollment_rejects_admin_unknown_roles_and_target_identity_injection",
+      "test_internal_enrollment_also_rejects_administrative_roles",
+      "test_client_permission_controls_the_new_appointments_endpoint",
+      "test_legacy_user_flows_remain_available_without_new_roles",
+      "test_provider_can_create_and_update_one_own_profile_without_creating_another_identity",
+      "test_profile_creation_requires_provider_permission_and_valid_data",
+      "test_a_profile_without_a_role_does_not_grant_permission",
+      "test_providers_cannot_read_or_modify_another_accounts_profile",
+      "test_profile_payload_cannot_change_owner_roles_or_link_legacy_accounts",
+      "test_administrator_can_review_but_cannot_edit_someone_elses_profile",
+      "test_business_role_management_requires_admin_and_preserves_the_target_identity",
+      "test_role_management_cannot_add_or_remove_administrative_membership",
+      "test_role_revocation_is_effective_with_preloaded_relations_and_keeps_the_profile",
+      "test_internal_role_management_does_not_bypass_authorization",
+      "test_guests_cannot_access_new_endpoints",
+      "test_legacy_professional_with_matching_id_and_email_cannot_inherit_central_roles"
+    ],
+    "current_methods": [
+      "test_role_catalog_assigns_nothing_to_existing_identities",
+      "test_new_registration_gets_only_client_even_when_privileged_fields_are_submitted",
+      "test_one_account_can_explicitly_enroll_in_both_business_roles_idempotently",
+      "test_self_enrollment_rejects_admin_unknown_roles_and_target_identity_injection",
+      "test_internal_enrollment_also_rejects_administrative_roles",
+      "test_client_permission_still_controls_the_native_dashboard",
+      "test_central_account_and_profile_remain_available_without_business_roles",
+      "test_provider_can_create_and_update_one_own_profile_without_creating_another_identity",
+      "test_profile_creation_requires_provider_permission_and_valid_data",
+      "test_a_profile_without_a_role_does_not_grant_permission",
+      "test_providers_cannot_read_or_modify_another_accounts_profile",
+      "test_profile_payload_cannot_change_owner_roles_or_link_legacy_accounts",
+      "test_administrator_can_review_but_cannot_edit_someone_elses_profile",
+      "test_business_role_management_requires_admin_and_preserves_the_target_identity",
+      "test_role_management_cannot_add_or_remove_administrative_membership",
+      "test_role_revocation_is_effective_with_preloaded_relations_and_keeps_the_profile",
+      "test_internal_role_management_does_not_bypass_authorization",
+      "test_guests_cannot_access_new_endpoints",
+      "test_legacy_professional_with_matching_id_and_email_cannot_inherit_central_roles"
+    ]
+  },
+  {
+    "file": "tests/Feature/InquiryMessagesMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_30_to_31_and_message_only_reversal_preserve_all_previous_rows_and_notifications",
+      "test_database_enforces_both_central_foreign_keys_and_explicit_indexes"
+    ],
+    "current_methods": [
+      "test_upgrade_30_to_31_and_message_only_reversal_preserve_all_previous_rows_and_notifications",
+      "test_database_enforces_both_central_foreign_keys_and_explicit_indexes"
+    ]
+  },
+  {
+    "file": "tests/Feature/InquiryMessagesTest.php",
+    "base_methods": [
+      "test_client_and_provider_converse_in_pending_and_accepted_without_modifying_the_initial_need_or_notifications",
+      "test_all_terminal_states_keep_history_read_only_and_reject_new_messages_from_both_participants",
+      "test_third_parties_and_admins_cannot_read_or_send_even_with_all_business_roles",
+      "test_revoking_the_required_role_blocks_reading_writing_and_replaying_own_messages",
+      "test_payload_cannot_override_author_destination_roles_dates_or_add_attachments",
+      "test_body_validation_rejects_empty_arrays_and_overlong_unicode_and_normalizes_newlines",
+      "test_valid_idempotency_keys_are_required_and_validation_keeps_the_same_key_for_retry",
+      "test_retries_are_idempotent_case_insensitive_and_conflicting_reuse_never_overwrites_text",
+      "test_replaying_a_successful_request_after_closure_returns_only_the_original",
+      "test_paused_and_edited_services_keep_the_conversation_and_accept_messages_for_active_inquiries",
+      "test_html_is_plain_escaped_text_and_never_enters_public_pages_or_notice_payloads",
+      "test_storage_errors_return_a_safe_failure_without_logging_body_and_the_same_request_can_retry",
+      "test_outer_rollback_removes_the_message_and_does_not_consume_its_idempotency_key",
+      "test_nested_database_concurrency_errors_do_not_propagate_private_sql_or_exception_chains",
+      "test_rate_limit_rejects_an_eleventh_message_without_writing_or_notifying",
+      "test_guests_and_matching_email_legacy_professionals_cannot_read_or_send_and_legacy_data_is_unchanged"
+    ],
+    "current_methods": [
+      "test_client_and_provider_converse_in_pending_and_accepted_without_modifying_the_initial_need_or_notifications",
+      "test_all_terminal_states_keep_history_read_only_and_reject_new_messages_from_both_participants",
+      "test_third_parties_and_admins_cannot_read_or_send_even_with_all_business_roles",
+      "test_revoking_the_required_role_blocks_reading_writing_and_replaying_own_messages",
+      "test_payload_cannot_override_author_destination_roles_dates_or_add_attachments",
+      "test_body_validation_rejects_empty_arrays_and_overlong_unicode_and_normalizes_newlines",
+      "test_valid_idempotency_keys_are_required_and_validation_keeps_the_same_key_for_retry",
+      "test_retries_are_idempotent_case_insensitive_and_conflicting_reuse_never_overwrites_text",
+      "test_replaying_a_successful_request_after_closure_returns_only_the_original",
+      "test_paused_and_edited_services_keep_the_conversation_and_accept_messages_for_active_inquiries",
+      "test_html_is_plain_escaped_text_and_never_enters_public_pages_or_notice_payloads",
+      "test_storage_errors_return_a_safe_failure_without_logging_body_and_the_same_request_can_retry",
+      "test_outer_rollback_removes_the_message_and_does_not_consume_its_idempotency_key",
+      "test_nested_database_concurrency_errors_do_not_propagate_private_sql_or_exception_chains",
+      "test_rate_limit_rejects_an_eleventh_message_without_writing_or_notifying",
+      "test_guests_and_matching_email_legacy_professionals_cannot_read_or_send_and_legacy_data_is_unchanged"
+    ]
+  },
+  {
+    "file": "tests/Feature/InquiryMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_from_28_applied_migrations_preserves_all_previous_data_and_only_reverses_the_new_tables",
+      "test_inquiries_cannot_reference_a_nonexistent_client",
+      "test_inquiries_cannot_reference_a_nonexistent_service",
+      "test_a_service_with_inquiry_history_cannot_be_physically_deleted",
+      "test_a_client_with_inquiry_history_cannot_be_physically_deleted",
+      "test_database_status_constraint_rejects_unknown_states"
+    ],
+    "current_methods": [
+      "test_upgrade_from_28_applied_migrations_preserves_all_previous_data_and_only_reverses_the_new_tables",
+      "test_inquiries_cannot_reference_a_nonexistent_client",
+      "test_inquiries_cannot_reference_a_nonexistent_service",
+      "test_a_service_with_inquiry_history_cannot_be_physically_deleted",
+      "test_a_client_with_inquiry_history_cannot_be_physically_deleted",
+      "test_database_status_constraint_rejects_unknown_states"
+    ]
+  },
+  {
+    "file": "tests/Feature/InquiryNotificationMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_from_29_migrations_and_notification_only_reversal_preserve_existing_data_without_backfill",
+      "test_database_rejects_nonexistent_user_or_inquiry_and_unknown_events",
+      "test_notification_history_prevents_accidental_physical_deletion_of_its_inquiry"
+    ],
+    "current_methods": [
+      "test_upgrade_from_29_migrations_and_notification_only_reversal_preserve_existing_data_without_backfill",
+      "test_database_rejects_nonexistent_user_or_inquiry_and_unknown_events",
+      "test_notification_history_prevents_accidental_physical_deletion_of_its_inquiry"
+    ]
+  },
+  {
+    "file": "tests/Feature/InquiryNotificationsTest.php",
+    "base_methods": [
+      "test_creation_notifies_only_the_central_provider_with_minimal_server_defined_data",
+      "test_acceptance_and_completion_notify_the_client_once_each_and_never_the_actor",
+      "test_rejection_notifies_only_the_requesting_client",
+      "test_cancellation_notifies_the_provider_even_after_the_provider_role_is_revoked",
+      "test_authorization_validation_and_conflicts_do_not_add_notifications",
+      "test_resubmission_while_pending_or_accepted_does_not_notify_again_but_a_new_inquiry_after_closure_does",
+      "test_a_notification_write_failure_rolls_back_both_creation_and_transition",
+      "test_an_outer_transaction_rollback_leaves_neither_inquiry_nor_notifications_and_preserves_previous_history",
+      "test_listing_is_private_paginated_and_orders_by_creation_date_then_id_without_marking_as_read",
+      "test_users_and_admin_cannot_mark_foreign_or_missing_notifications",
+      "test_read_is_atomic_idempotent_and_ignores_browser_supplied_identity_event_dates_and_urls",
+      "test_dual_account_receives_both_experiences_in_one_inbox_and_count_is_scoped_to_current_user",
+      "test_revoked_client_role_keeps_notice_but_hides_link_and_cannot_bypass_inquiry_policy",
+      "test_pausing_and_editing_a_service_preserves_notifications_and_authorized_private_links",
+      "test_notification_html_contains_no_private_payload_and_blade_escapes_notification_text",
+      "test_legacy_guard_and_matching_email_do_not_expose_central_notices_or_change_legacy_data",
+      "test_guests_cannot_list_or_mark_notices_and_accounts_without_roles_can_use_their_empty_inbox"
+    ],
+    "current_methods": [
+      "test_creation_notifies_only_the_central_provider_with_minimal_server_defined_data",
+      "test_acceptance_and_completion_notify_the_client_once_each_and_never_the_actor",
+      "test_rejection_notifies_only_the_requesting_client",
+      "test_cancellation_notifies_the_provider_even_after_the_provider_role_is_revoked",
+      "test_authorization_validation_and_conflicts_do_not_add_notifications",
+      "test_resubmission_while_pending_or_accepted_does_not_notify_again_but_a_new_inquiry_after_closure_does",
+      "test_a_notification_write_failure_rolls_back_both_creation_and_transition",
+      "test_an_outer_transaction_rollback_leaves_neither_inquiry_nor_notifications_and_preserves_previous_history",
+      "test_listing_is_private_paginated_and_orders_by_creation_date_then_id_without_marking_as_read",
+      "test_users_and_admin_cannot_mark_foreign_or_missing_notifications",
+      "test_read_is_atomic_idempotent_and_ignores_browser_supplied_identity_event_dates_and_urls",
+      "test_dual_account_receives_both_experiences_in_one_inbox_and_count_is_scoped_to_current_user",
+      "test_revoked_client_role_keeps_notice_but_hides_link_and_cannot_bypass_inquiry_policy",
+      "test_pausing_and_editing_a_service_preserves_notifications_and_authorized_private_links",
+      "test_notification_html_contains_no_private_payload_and_blade_escapes_notification_text",
+      "test_legacy_guard_and_matching_email_do_not_expose_central_notices_or_change_legacy_data",
+      "test_guests_cannot_list_or_mark_notices_and_accounts_without_roles_can_use_their_empty_inbox"
+    ]
+  },
+  {
+    "file": "tests/Feature/InstallationTest.php",
+    "base_methods": [
+      "test_all_migrations_run_on_an_empty_memory_database_and_can_be_checked_again",
+      "test_google_migration_preserves_existing_credentials_in_both_directions",
+      "test_google_migration_adds_only_missing_columns_to_a_partial_legacy_schema",
+      "test_citas_migration_backfills_new_columns_without_changing_legacy_rows_or_existing_aliases",
+      "test_factories_and_repeatable_seeders_match_the_schema_without_overwriting_data",
+      "test_the_development_seeder_can_run_on_a_new_installation"
+    ],
+    "current_methods": [
+      "test_all_migrations_run_on_an_empty_memory_database_and_can_be_checked_again",
+      "test_google_migration_preserves_existing_credentials_in_both_directions",
+      "test_google_migration_adds_only_missing_columns_to_a_partial_legacy_schema",
+      "test_citas_migration_backfills_new_columns_without_changing_legacy_rows_or_existing_aliases",
+      "test_factories_and_repeatable_seeders_match_the_schema_without_overwriting_data",
+      "test_the_development_seeder_can_run_on_a_new_installation"
+    ]
+  },
+  {
+    "file": "tests/Feature/MobileApiAuthTest.php",
+    "base_methods": [
+      "test_login_creates_a_hashed_expiring_client_token_without_starting_web_sessions",
+      "test_wrong_unknown_and_ineligible_accounts_have_the_same_login_error",
+      "test_login_validation_rejects_malformed_fields_and_privilege_injection_as_json",
+      "test_identity_and_ip_login_limits_apply_and_recover",
+      "test_web_session_cannot_replace_a_bearer_token_and_still_works_on_web",
+      "test_dual_account_bearer_does_not_grant_access_to_provider_admin_or_client_web_routes",
+      "test_permissions_are_rechecked_and_token_abilities_alone_are_insufficient",
+      "test_missing_wrong_and_expired_tokens_are_rejected",
+      "test_non_mobile_or_wrong_ability_tokens_are_rejected",
+      "test_logout_revokes_only_current_token_and_preserves_other_users_devices_and_web_session",
+      "test_device_rotation_and_user_limit_preserve_other_token_namespaces",
+      "test_token_insertion_failure_rolls_back_device_rotation_and_returns_safe_json",
+      "test_sanctum_migration_is_additive_and_reversible_in_memory"
+    ],
+    "current_methods": [
+      "test_login_creates_a_hashed_expiring_client_token_without_starting_web_sessions",
+      "test_wrong_unknown_and_ineligible_accounts_have_the_same_login_error",
+      "test_login_validation_rejects_malformed_fields_and_privilege_injection_as_json",
+      "test_identity_and_ip_login_limits_apply_and_recover",
+      "test_web_session_cannot_replace_a_bearer_token_and_still_works_on_web",
+      "test_dual_account_bearer_does_not_grant_access_to_provider_admin_or_client_web_routes",
+      "test_permissions_are_rechecked_and_token_abilities_alone_are_insufficient",
+      "test_missing_wrong_and_expired_tokens_are_rejected",
+      "test_non_mobile_or_wrong_ability_tokens_are_rejected",
+      "test_logout_revokes_only_current_token_and_preserves_other_users_devices_and_web_session",
+      "test_device_rotation_and_user_limit_preserve_other_token_namespaces",
+      "test_token_insertion_failure_rolls_back_device_rotation_and_returns_safe_json",
+      "test_sanctum_migration_is_additive_and_reversible_in_memory"
+    ]
+  },
+  {
+    "file": "tests/Feature/NativeLegacyIndependenceTest.php",
+    "base_methods": [
+      "test_native_workflows_and_account_surfaces_operate_without_the_old_schema_guard_or_calendar",
+      "test_native_authorization_still_denies_nonparticipants_after_decoupling",
+      "test_central_registration_login_profile_and_logout_need_no_professional_identity",
+      "test_mobile_device_rotation_revocation_and_native_reads_need_no_legacy_modules",
+      "test_native_account_layout_loads_its_own_base_and_preserves_native_assets_and_logout"
+    ],
+    "current_methods": [
+      "test_native_workflows_and_account_surfaces_operate_without_the_old_schema_guard_or_calendar",
+      "test_native_authorization_still_denies_nonparticipants_after_decoupling",
+      "test_central_registration_login_profile_and_logout_need_no_professional_identity",
+      "test_mobile_device_rotation_revocation_and_native_reads_need_no_legacy_modules",
+      "test_native_account_layout_loads_its_own_base_and_preserves_native_assets_and_logout"
+    ]
+  },
+  {
+    "file": "tests/Feature/ProfilePhotoIntegrityTest.php",
+    "base_methods": [
+      "test_a_false_write_preserves_the_old_reference_and_file_and_reports_photo_error",
+      "test_first_photo_is_written_verified_and_committed",
+      "test_replacement_keeps_both_files_until_the_new_reference_is_committed",
+      "test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file",
+      "test_readback_failure_is_not_reported_as_a_successful_upload",
+      "test_sql_error_rolls_back_the_reference_and_removes_the_verified_new_file",
+      "test_a_silently_ignored_sql_update_is_not_mistaken_for_persistence",
+      "test_a_model_veto_is_a_failed_persistence_and_cleans_the_candidate",
+      "test_commit_failure_keeps_the_original_reference_and_file",
+      "test_an_exception_after_durable_commit_never_deletes_the_referenced_new_photo",
+      "test_unconfirmed_rollback_retains_both_files_instead_of_deleting_a_possible_reference",
+      "test_old_cleanup_failure_keeps_the_committed_photo_and_records_only_a_safe_phase",
+      "test_failed_compensation_is_reported_and_never_removes_the_old_photo",
+      "test_two_uploads_in_the_same_second_have_independent_names_and_bytes",
+      "test_stale_authenticated_attributes_cannot_overwrite_sql_or_delete_the_winner",
+      "test_a_second_upload_can_commit_while_the_first_waits_to_publish_its_file",
+      "test_delayed_old_cleanup_cannot_delete_a_later_requests_winning_photo",
+      "test_a_winner_committed_before_confirmation_is_preserved_without_claiming_an_unconfirmed_success",
+      "test_guest_upload_is_rejected_before_any_file_write",
+      "test_legacy_professional_session_does_not_authorize_a_web_photo_upload",
+      "test_invalid_csrf_never_reaches_storage_or_changes_the_reference",
+      "test_original_image_validation_keeps_reference_and_bytes",
+      "test_profile_keeps_the_native_photo_form_and_public_storage_url",
+      "test_another_users_current_or_legacy_shared_file_is_never_deleted",
+      "test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted",
+      "test_other_modules_references_prevent_legacy_photo_deletion",
+      "test_an_existing_random_target_is_not_overwritten_or_compensated",
+      "test_local_target_resolving_outside_the_public_root_is_rejected_before_writing",
+      "test_an_outer_transaction_is_not_mistaken_for_a_durable_photo_commit"
+    ],
+    "current_methods": [
+      "test_a_false_write_preserves_the_old_reference_and_file_and_reports_photo_error",
+      "test_first_photo_is_written_verified_and_committed",
+      "test_replacement_keeps_both_files_until_the_new_reference_is_committed",
+      "test_failed_or_incomplete_writes_preserve_old_bytes_and_compensate_only_the_new_file",
+      "test_readback_failure_is_not_reported_as_a_successful_upload",
+      "test_sql_error_rolls_back_the_reference_and_removes_the_verified_new_file",
+      "test_a_silently_ignored_sql_update_is_not_mistaken_for_persistence",
+      "test_a_model_veto_is_a_failed_persistence_and_cleans_the_candidate",
+      "test_commit_failure_keeps_the_original_reference_and_file",
+      "test_an_exception_after_durable_commit_never_deletes_the_referenced_new_photo",
+      "test_unconfirmed_rollback_retains_both_files_instead_of_deleting_a_possible_reference",
+      "test_old_cleanup_failure_keeps_the_committed_photo_and_records_only_a_safe_phase",
+      "test_failed_compensation_is_reported_and_never_removes_the_old_photo",
+      "test_two_uploads_in_the_same_second_have_independent_names_and_bytes",
+      "test_stale_authenticated_attributes_cannot_overwrite_sql_or_delete_the_winner",
+      "test_a_second_upload_can_commit_while_the_first_waits_to_publish_its_file",
+      "test_delayed_old_cleanup_cannot_delete_a_later_requests_winning_photo",
+      "test_a_winner_committed_before_confirmation_is_preserved_without_claiming_an_unconfirmed_success",
+      "test_guest_upload_is_rejected_before_any_file_write",
+      "test_legacy_professional_session_does_not_authorize_a_web_photo_upload",
+      "test_invalid_csrf_never_reaches_storage_or_changes_the_reference",
+      "test_original_image_validation_keeps_reference_and_bytes",
+      "test_profile_keeps_the_native_photo_form_and_public_storage_url",
+      "test_another_users_current_or_legacy_shared_file_is_never_deleted",
+      "test_unmanaged_other_owner_or_manipulated_paths_are_not_deleted",
+      "test_other_modules_references_prevent_legacy_photo_deletion",
+      "test_an_existing_random_target_is_not_overwritten_or_compensated",
+      "test_local_target_resolving_outside_the_public_root_is_rejected_before_writing",
+      "test_an_outer_transaction_is_not_mistaken_for_a_durable_photo_commit"
+    ]
+  },
+  {
+    "file": "tests/Feature/ProviderDashboardAccessTest.php",
+    "base_methods": [
+      "test_guests_and_legacy_professionals_require_central_web_authentication",
+      "test_client_and_admin_do_not_receive_provider_access_implicitly",
+      "test_provider_without_profile_gets_setup_instructions_without_creating_data",
+      "test_provider_without_activity_gets_ten_cards_safe_empty_states_and_all_quick_links",
+      "test_period_validation_rejects_arrays_arbitrary_values_and_identity_overrides_safely",
+      "test_two_providers_only_see_their_own_metrics_and_never_private_or_withdrawn_content",
+      "test_current_role_revocation_overrides_cached_roles_and_provider_admin_sees_only_self",
+      "test_dashboard_get_is_read_only_for_business_history_and_read_markers",
+      "test_profile_names_and_service_titles_are_escaped_in_heading_agenda_and_attention",
+      "test_dashboard_navigation_is_available_without_replacing_professional_profile_settings",
+      "test_temporary_database_failure_is_generic_even_with_debug_enabled"
+    ],
+    "current_methods": [
+      "test_guests_and_legacy_professionals_require_central_web_authentication",
+      "test_client_and_admin_do_not_receive_provider_access_implicitly",
+      "test_provider_without_profile_gets_setup_instructions_without_creating_data",
+      "test_provider_without_activity_gets_ten_cards_safe_empty_states_and_all_quick_links",
+      "test_period_validation_rejects_arrays_arbitrary_values_and_identity_overrides_safely",
+      "test_two_providers_only_see_their_own_metrics_and_never_private_or_withdrawn_content",
+      "test_current_role_revocation_overrides_cached_roles_and_provider_admin_sees_only_self",
+      "test_dashboard_get_is_read_only_for_business_history_and_read_markers",
+      "test_profile_names_and_service_titles_are_escaped_in_heading_agenda_and_attention",
+      "test_dashboard_navigation_is_available_without_replacing_professional_profile_settings",
+      "test_temporary_database_failure_is_generic_even_with_debug_enabled"
+    ]
+  },
+  {
+    "file": "tests/Feature/ReservationCsrfCompatibilityTest.php",
+    "base_methods": [
+      "test_real_csrf_is_required_for_creation_and_every_decision",
+      "test_reservation_writes_and_reading_do_not_change_inquiry_messages_notices_or_read_progress",
+      "test_legacy_guard_and_same_email_never_authorize_or_supply_central_bookings"
+    ],
+    "current_methods": [
+      "test_real_csrf_is_required_for_creation_and_every_decision",
+      "test_reservation_writes_and_reading_do_not_change_inquiry_messages_notices_or_read_progress",
+      "test_legacy_guard_and_same_email_never_authorize_or_supply_central_bookings"
+    ]
+  },
+  {
+    "file": "tests/Feature/ReservationMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_33_to_34_and_memory_only_reversal_preserve_all_previous_columns_and_records",
+      "test_database_enforces_identity_immutable_intervals_transitions_and_append_only_history",
+      "test_database_ranges_uniqueness_and_foreign_keys_reject_invalid_insertions"
+    ],
+    "current_methods": [
+      "test_upgrade_33_to_34_and_memory_only_reversal_preserve_all_previous_columns_and_records",
+      "test_database_enforces_identity_immutable_intervals_transitions_and_append_only_history",
+      "test_database_ranges_uniqueness_and_foreign_keys_reject_invalid_insertions"
+    ]
+  },
+  {
+    "file": "tests/Feature/ReviewCsrfCompatibilityTest.php",
+    "base_methods": [
+      "test_real_csrf_protects_publication_and_withdrawal_and_form_needs_no_javascript",
+      "test_publishing_and_withdrawing_leave_every_previous_workflow_and_counter_unchanged",
+      "test_legacy_identity_with_matching_email_cannot_supply_or_access_verified_reviews"
+    ],
+    "current_methods": [
+      "test_real_csrf_protects_publication_and_withdrawal_and_form_needs_no_javascript",
+      "test_publishing_and_withdrawing_leave_every_previous_workflow_and_counter_unchanged",
+      "test_legacy_identity_with_matching_email_cannot_supply_or_access_verified_reviews"
+    ]
+  },
+  {
+    "file": "tests/Feature/ReviewMigrationTest.php",
+    "base_methods": [
+      "test_upgrade_34_to_35_and_memory_only_reversal_preserve_every_previous_table_and_row",
+      "test_database_rejects_invalid_ratings_comments_dates_and_inconsistent_central_references",
+      "test_identity_content_and_history_cannot_be_edited_deleted_republished_or_replaced"
+    ],
+    "current_methods": [
+      "test_upgrade_34_to_35_and_memory_only_reversal_preserve_every_previous_table_and_row",
+      "test_database_rejects_invalid_ratings_comments_dates_and_inconsistent_central_references",
+      "test_identity_content_and_history_cannot_be_edited_deleted_republished_or_replaced"
+    ]
+  },
+  {
+    "file": "tests/Feature/RoutesAndGoogleSafetyTest.php",
+    "base_methods": [
+      "test_guests_are_directed_to_the_login_for_each_guard",
+      "test_user_authentication_does_not_authorize_professional_routes",
+      "test_professional_authentication_does_not_authorize_user_routes",
+      "test_professional_entry_points_select_the_existing_professional_panel",
+      "test_existing_user_pages_render_without_links_to_unimplemented_modules",
+      "test_professional_pages_use_their_logout_and_do_not_link_to_a_user_profile",
+      "test_emotion_detail_resolves_the_model_and_missing_slugs_return_404",
+      "test_google_tokens_are_excluded_from_array_and_json_serialization",
+      "test_oauth_errors_do_not_log_provider_messages_or_replace_existing_tokens",
+      "test_successful_oauth_preserves_the_previous_refresh_token_when_google_omits_it"
+    ],
+    "current_methods": [
+      "test_native_private_pages_still_require_central_authentication",
+      "test_native_profile_pages_keep_post_logout_and_hide_unimplemented_links",
+      "test_logout_still_requires_csrf_and_invalidates_central_authentication"
+    ]
+  },
+  {
+    "file": "tests/Feature/ServiceInquiriesTest.php",
+    "base_methods": [
+      "test_client_submits_a_pending_inquiry_with_trusted_ownership_and_title_snapshot",
+      "test_guest_entry_preserves_intended_destination_and_does_not_create_inquiries",
+      "test_users_without_client_role_including_admin_cannot_send_or_access_client_panel",
+      "test_all_visibility_failures_block_get_and_post_at_submission_time",
+      "test_a_dual_role_account_cannot_request_its_own_service",
+      "test_message_validation_keeps_input_and_does_not_accept_contact_fields",
+      "test_manipulated_owner_roles_state_and_timestamps_are_rejected_and_mass_assignment_is_guarded",
+      "test_repeated_pending_and_accepted_submissions_return_the_original_without_changing_message",
+      "test_terminal_inquiries_allow_a_new_request_without_overwriting_history",
+      "test_history_and_inbox_are_filtered_paginated_and_scoped_to_the_current_account",
+      "test_unrelated_clients_providers_and_administrators_cannot_read_or_decide",
+      "test_client_and_provider_cannot_perform_each_others_actions",
+      "test_explicit_transition_matrix_and_terminal_states_are_enforced_by_backend",
+      "test_repeated_decisions_do_not_reset_timestamps_or_allow_opposing_decisions",
+      "test_decision_forms_cannot_override_the_fixed_action_or_modify_ownership_content_and_roles",
+      "test_client_keeps_history_and_can_cancel_when_the_provider_role_has_been_revoked",
+      "test_history_survives_hidden_and_edited_services_without_exposing_private_new_content",
+      "test_current_roles_are_required_and_admin_does_not_substitute_for_them",
+      "test_private_messages_are_escaped_and_never_enter_public_catalog_or_provider_pages",
+      "test_dual_role_navigation_separates_sent_and_received_without_creating_identities",
+      "test_submission_rate_limit_returns_a_clear_response_without_creating_a_sixth_inquiry",
+      "test_legacy_guard_and_matching_email_do_not_authorize_inquiries_or_change_credentials"
+    ],
+    "current_methods": [
+      "test_client_submits_a_pending_inquiry_with_trusted_ownership_and_title_snapshot",
+      "test_guest_entry_preserves_intended_destination_and_does_not_create_inquiries",
+      "test_users_without_client_role_including_admin_cannot_send_or_access_client_panel",
+      "test_all_visibility_failures_block_get_and_post_at_submission_time",
+      "test_a_dual_role_account_cannot_request_its_own_service",
+      "test_message_validation_keeps_input_and_does_not_accept_contact_fields",
+      "test_manipulated_owner_roles_state_and_timestamps_are_rejected_and_mass_assignment_is_guarded",
+      "test_repeated_pending_and_accepted_submissions_return_the_original_without_changing_message",
+      "test_terminal_inquiries_allow_a_new_request_without_overwriting_history",
+      "test_history_and_inbox_are_filtered_paginated_and_scoped_to_the_current_account",
+      "test_unrelated_clients_providers_and_administrators_cannot_read_or_decide",
+      "test_client_and_provider_cannot_perform_each_others_actions",
+      "test_explicit_transition_matrix_and_terminal_states_are_enforced_by_backend",
+      "test_repeated_decisions_do_not_reset_timestamps_or_allow_opposing_decisions",
+      "test_decision_forms_cannot_override_the_fixed_action_or_modify_ownership_content_and_roles",
+      "test_client_keeps_history_and_can_cancel_when_the_provider_role_has_been_revoked",
+      "test_history_survives_hidden_and_edited_services_without_exposing_private_new_content",
+      "test_current_roles_are_required_and_admin_does_not_substitute_for_them",
+      "test_private_messages_are_escaped_and_never_enter_public_catalog_or_provider_pages",
+      "test_dual_role_navigation_separates_sent_and_received_without_creating_identities",
+      "test_submission_rate_limit_returns_a_clear_response_without_creating_a_sixth_inquiry",
+      "test_legacy_guard_and_matching_email_do_not_authorize_inquiries_or_change_credentials"
+    ]
+  },
+  {
+    "file": "tests/Feature/ServiceManagementTest.php",
+    "base_methods": [
+      "test_provider_can_create_multiple_services_for_the_same_profile",
+      "test_guests_clients_admins_and_users_without_roles_cannot_manage_services",
+      "test_a_provider_without_a_profile_gets_guidance_and_cannot_create_a_service",
+      "test_service_form_validates_categories_states_and_modalities_and_preserves_input",
+      "test_owner_can_edit_and_other_providers_cannot_read_private_editor_or_mutate_services",
+      "test_owner_can_publish_pause_republish_and_withdraw_to_draft",
+      "test_category_deactivation_blocks_publication_but_allows_pausing_and_drafting",
+      "test_ownership_and_role_payloads_are_rejected_on_every_write",
+      "test_role_revocation_immediately_blocks_service_writes",
+      "test_same_account_can_switch_experiences_and_only_sees_its_own_services",
+      "test_navigation_does_not_offer_service_management_to_clients_or_admin_only_accounts",
+      "test_legacy_professional_authentication_never_owns_central_services"
+    ],
+    "current_methods": [
+      "test_provider_can_create_multiple_services_for_the_same_profile",
+      "test_guests_clients_admins_and_users_without_roles_cannot_manage_services",
+      "test_a_provider_without_a_profile_gets_guidance_and_cannot_create_a_service",
+      "test_service_form_validates_categories_states_and_modalities_and_preserves_input",
+      "test_owner_can_edit_and_other_providers_cannot_read_private_editor_or_mutate_services",
+      "test_owner_can_publish_pause_republish_and_withdraw_to_draft",
+      "test_category_deactivation_blocks_publication_but_allows_pausing_and_drafting",
+      "test_ownership_and_role_payloads_are_rejected_on_every_write",
+      "test_role_revocation_immediately_blocks_service_writes",
+      "test_same_account_can_switch_experiences_and_only_sees_its_own_services",
+      "test_navigation_does_not_offer_service_management_to_clients_or_admin_only_accounts",
+      "test_legacy_professional_authentication_never_owns_central_services"
+    ]
+  },
+  {
+    "file": "tests/Feature/TekoraW11Test.php",
+    "base_methods": [
+      "test_shared_ambient_is_present_once_on_public_catalog_profiles_and_access",
+      "test_all_marketplace_interiors_inherit_ambient_without_changing_authorization_or_data",
+      "test_historical_mindbloom_pages_and_professional_guard_keep_their_identity",
+      "test_both_switches_are_real_get_links_and_each_back_face_has_no_interactive_form",
+      "test_access_gets_preserve_csrf_errors_old_values_and_native_intended_post"
+    ],
+    "current_methods": [
+      "test_shared_ambient_is_present_once_on_public_catalog_profiles_and_access",
+      "test_all_marketplace_interiors_inherit_ambient_without_changing_authorization_or_data",
+      "test_retired_pages_are_absent_and_profile_keeps_native_identity",
+      "test_both_switches_are_real_get_links_and_each_back_face_has_no_interactive_form",
+      "test_access_gets_preserve_csrf_errors_old_values_and_native_intended_post"
+    ]
+  },
+  {
+    "file": "tests/Feature/TekoraW1Test.php",
+    "base_methods": [
+      "test_public_home_is_real_catalog_content_with_empty_states_and_no_dashboard_mocks",
+      "test_home_only_exposes_publicly_authorized_services_and_profiles",
+      "test_blade_escapes_hostile_content_and_home_never_creates_business_records",
+      "test_search_delegates_to_existing_catalog_validation_and_links_are_real",
+      "test_mindbloom_stays_authenticated_and_named_links_and_assets_work",
+      "test_auth_forms_keep_every_field_posts_old_values_and_legacy_guard_access",
+      "test_real_csrf_validation_errors_and_intended_destination_survive_new_access_shell",
+      "test_no_role_or_guard_is_changed_by_visiting_public_pages",
+      "test_new_pages_have_local_assets_csp_and_no_remote_auth_or_scene_scripts"
+    ],
+    "current_methods": [
+      "test_public_home_is_real_catalog_content_with_empty_states_and_no_dashboard_mocks",
+      "test_home_only_exposes_publicly_authorized_services_and_profiles",
+      "test_blade_escapes_hostile_content_and_home_never_creates_business_records",
+      "test_search_delegates_to_existing_catalog_validation_and_links_are_real",
+      "test_retired_product_pages_no_longer_exist",
+      "test_central_auth_forms_keep_fields_posts_and_old_values",
+      "test_real_csrf_validation_errors_and_intended_destination_survive_new_access_shell",
+      "test_no_role_or_guard_is_changed_by_visiting_public_pages",
+      "test_new_pages_have_local_assets_csp_and_no_remote_auth_or_scene_scripts"
+    ]
+  },
+  {
+    "file": "tests/Feature/TekoraW211SidebarTest.php",
+    "base_methods": [
+      "test_grouping_preserves_every_authorized_link_and_excludes_forbidden_links",
+      "test_badges_keep_counts_accessible_labels_and_unavailable_state",
+      "test_real_account_wide_counts_render_29_notifications_and_5_messages_without_writes",
+      "test_horizontal_and_legacy_variants_keep_flat_navigation_and_original_counter_text"
+    ],
+    "current_methods": [
+      "test_grouping_preserves_every_authorized_link_and_excludes_forbidden_links",
+      "test_badges_keep_counts_accessible_labels_and_unavailable_state",
+      "test_real_account_wide_counts_render_29_notifications_and_5_messages_without_writes",
+      "test_horizontal_and_legacy_variants_keep_flat_navigation_and_original_counter_text"
+    ]
+  },
+  {
+    "file": "tests/Feature/TekoraW21Test.php",
+    "base_methods": [
+      "test_server_sections_are_complete_anchor_navigation_without_javascript",
+      "test_all_ten_kpi_and_bars_table_and_line_keep_the_same_period_data",
+      "test_dual_client_compositions_do_not_expose_the_provider_side_or_write_on_get",
+      "test_empty_setup_access_and_errors_do_not_create_fake_tabs_or_metrics",
+      "test_dashboard_assets_csp_and_native_logout_are_preserved",
+      "test_dashboard_assets_without_a_build_use_real_development_tags",
+      "test_historical_mindbloom_keeps_its_layout_outside_the_dashboard",
+      "test_preview_bootstraps_without_reading_a_repository_environment_or_database"
+    ],
+    "current_methods": [
+      "test_server_sections_are_complete_anchor_navigation_without_javascript",
+      "test_all_ten_kpi_and_bars_table_and_line_keep_the_same_period_data",
+      "test_dual_client_compositions_do_not_expose_the_provider_side_or_write_on_get",
+      "test_empty_setup_access_and_errors_do_not_create_fake_tabs_or_metrics",
+      "test_dashboard_assets_csp_and_native_logout_are_preserved",
+      "test_dashboard_assets_without_a_build_use_real_development_tags",
+      "test_native_account_and_profile_keep_their_layout_outside_the_dashboard",
+      "test_preview_bootstraps_without_reading_a_repository_environment_or_database"
+    ]
+  },
+  {
+    "file": "tests/Feature/TekoraW3Test.php",
+    "base_methods": [
+      "test_public_pages_have_tekora_identity_safe_metadata_and_native_navigation",
+      "test_request_cta_keeps_guest_client_provider_dual_and_ownership_rules",
+      "test_real_get_search_pagination_and_filters_survive_the_new_cards",
+      "test_invalid_filters_keep_real_422_errors_and_a_safe_return_link",
+      "test_visibility_counts_and_empty_states_use_only_public_services_and_providers",
+      "test_schedule_and_real_reviews_keep_their_meaning_without_exposing_private_identity",
+      "test_service_and_review_paginators_remain_independent_on_public_profiles",
+      "test_long_public_text_is_escaped_in_head_metadata_cards_and_profile_identity",
+      "test_public_gets_do_not_write_business_data_or_add_private_fields_to_the_api",
+      "test_modern_home_retires_promotional_legacy_links_and_private_history_keeps_its_routes",
+      "test_marketplace_assets_are_referenced_with_and_without_a_vite_build",
+      "test_preview_is_memory_only_and_native_get_query_normalization_does_not_fake_unknown_searches"
+    ],
+    "current_methods": [
+      "test_public_pages_have_tekora_identity_safe_metadata_and_native_navigation",
+      "test_request_cta_keeps_guest_client_provider_dual_and_ownership_rules",
+      "test_real_get_search_pagination_and_filters_survive_the_new_cards",
+      "test_invalid_filters_keep_real_422_errors_and_a_safe_return_link",
+      "test_visibility_counts_and_empty_states_use_only_public_services_and_providers",
+      "test_schedule_and_real_reviews_keep_their_meaning_without_exposing_private_identity",
+      "test_service_and_review_paginators_remain_independent_on_public_profiles",
+      "test_long_public_text_is_escaped_in_head_metadata_cards_and_profile_identity",
+      "test_public_gets_do_not_write_business_data_or_add_private_fields_to_the_api",
+      "test_home_and_account_expose_only_tekora",
+      "test_marketplace_assets_are_referenced_with_and_without_a_vite_build",
+      "test_preview_is_memory_only_and_native_get_query_normalization_does_not_fake_unknown_searches"
+    ]
+  },
+  {
+    "file": "tests/Feature/TekoraW4Test.php",
+    "base_methods": [
+      "test_operational_pages_keep_native_content_security_and_opt_in_assets",
+      "test_operational_bundle_is_absent_from_approved_dashboards_home_and_marketplace",
+      "test_private_request_visibility_and_actions_still_follow_the_real_actor",
+      "test_request_form_keeps_old_text_limits_csrf_and_real_post",
+      "test_filtered_request_pagination_retains_the_status_and_received_scope",
+      "test_conversation_gets_do_not_write_and_read_post_is_bound_to_the_rendered_page",
+      "test_message_hidden_key_real_post_replay_conflict_and_readonly_still_work",
+      "test_reservation_form_keeps_revision_timezone_key_and_versioned_actions",
+      "test_expired_reservation_never_offers_a_confirmation_action",
+      "test_review_uses_five_native_radios_and_withdrawal_is_explicit_and_irreversible",
+      "test_availability_keeps_revision_old_rows_native_fields_and_42_interval_limit",
+      "test_service_states_inactive_categories_old_input_and_http_methods_are_preserved",
+      "test_notification_get_never_marks_either_family_read_and_both_post_targets_remain",
+      "test_rendered_operational_form_requires_csrf_and_does_not_bypass_permissions",
+      "test_failure_views_render_without_any_database_query_or_account_counters",
+      "test_operational_assets_reference_both_real_manifest_files_or_both_hot_entries",
+      "test_all_operational_gets_are_read_only_and_api_history_are_unchanged"
+    ],
+    "current_methods": [
+      "test_operational_pages_keep_native_content_security_and_opt_in_assets",
+      "test_operational_bundle_is_absent_from_approved_dashboards_home_and_marketplace",
+      "test_private_request_visibility_and_actions_still_follow_the_real_actor",
+      "test_request_form_keeps_old_text_limits_csrf_and_real_post",
+      "test_filtered_request_pagination_retains_the_status_and_received_scope",
+      "test_conversation_gets_do_not_write_and_read_post_is_bound_to_the_rendered_page",
+      "test_message_hidden_key_real_post_replay_conflict_and_readonly_still_work",
+      "test_reservation_form_keeps_revision_timezone_key_and_versioned_actions",
+      "test_expired_reservation_never_offers_a_confirmation_action",
+      "test_review_uses_five_native_radios_and_withdrawal_is_explicit_and_irreversible",
+      "test_availability_keeps_revision_old_rows_native_fields_and_42_interval_limit",
+      "test_service_states_inactive_categories_old_input_and_http_methods_are_preserved",
+      "test_notification_get_never_marks_either_family_read_and_both_post_targets_remain",
+      "test_rendered_operational_form_requires_csrf_and_does_not_bypass_permissions",
+      "test_failure_views_render_without_any_database_query_or_account_counters",
+      "test_operational_assets_reference_both_real_manifest_files_or_both_hot_entries",
+      "test_all_operational_gets_are_read_only_and_api_history_are_unchanged"
+    ]
+  },
+  {
+    "file": "tests/Feature/TekoraW5Test.php",
+    "base_methods": [
+      "test_account_center_preserves_each_role_and_never_enrolls_on_get",
+      "test_activation_uses_rendered_csrf_and_is_idempotent_without_creating_a_second_identity",
+      "test_administration_is_read_only_and_does_not_disclose_users_or_add_editor_forms",
+      "test_personal_data_is_private_web_identity_and_never_added_to_decorative_attributes",
+      "test_name_form_keeps_old_escaped_input_label_limit_put_and_csrf",
+      "test_photo_upload_keeps_public_disk_path_redirect_and_only_changes_fake_files",
+      "test_invalid_photo_keeps_the_existing_reference_and_fake_file",
+      "test_existing_photo_reference_is_read_without_moving_deleting_or_uploading_anything",
+      "test_real_recovery_notification_is_faked_and_valid_token_resets_only_the_web_password",
+      "test_invalid_expired_and_unconfirmed_tokens_preserve_hash_and_real_errors",
+      "test_recovery_forms_preserve_old_email_and_never_refill_passwords_or_echo_array_inputs",
+      "test_fallbacks_are_standalone_and_do_not_query_navigation_or_leak_internals",
+      "test_name_photo_and_recovery_reject_missing_csrf_and_preserve_419_semantics",
+      "test_identity_assets_reference_actual_js_and_css_with_a_manifest_or_without_a_build",
+      "test_identity_is_opt_in_and_keeps_the_api_migrations_legacy_and_gets_read_only"
+    ],
+    "current_methods": [
+      "test_account_center_preserves_each_role_and_never_enrolls_on_get",
+      "test_activation_uses_rendered_csrf_and_is_idempotent_without_creating_a_second_identity",
+      "test_administration_is_read_only_and_does_not_disclose_users_or_add_editor_forms",
+      "test_personal_data_is_private_web_identity_and_never_added_to_decorative_attributes",
+      "test_name_form_keeps_old_escaped_input_label_limit_put_and_csrf",
+      "test_photo_upload_keeps_public_disk_path_redirect_and_only_changes_fake_files",
+      "test_invalid_photo_keeps_the_existing_reference_and_fake_file",
+      "test_existing_photo_reference_is_read_without_moving_deleting_or_uploading_anything",
+      "test_real_recovery_notification_is_faked_and_valid_token_resets_only_the_web_password",
+      "test_invalid_expired_and_unconfirmed_tokens_preserve_hash_and_real_errors",
+      "test_recovery_forms_preserve_old_email_and_never_refill_passwords_or_echo_array_inputs",
+      "test_fallbacks_are_standalone_and_do_not_query_navigation_or_leak_internals",
+      "test_name_photo_and_recovery_reject_missing_csrf_and_preserve_419_semantics",
+      "test_identity_assets_reference_actual_js_and_css_with_a_manifest_or_without_a_build",
+      "test_identity_is_opt_in_and_keeps_the_api_migrations_legacy_and_gets_read_only"
+    ]
+  },
+  {
+    "file": "tests/Feature/WebAccountsTest.php",
+    "base_methods": [
+      "test_all_three_registration_choices_use_one_central_identity",
+      "test_invalid_registration_intent_and_password_confirmation_do_not_create_an_account",
+      "test_the_complete_web_flow_preserves_one_account_and_both_roles",
+      "test_provider_login_opens_the_profile_workspace",
+      "test_activation_is_idempotent_and_does_not_remove_client_access",
+      "test_profile_validation_preserves_input_and_prevents_unapproved_fields",
+      "test_profile_duplicate_submission_shows_a_recoverable_message",
+      "test_profile_html_is_private_and_escapes_user_content",
+      "test_navigation_matches_permissions_for_all_role_combinations",
+      "test_shared_navigation_is_available_from_existing_mindbloom_pages",
+      "test_administration_is_read_only_for_authorized_web_users_and_hidden_from_clients",
+      "test_html_role_activation_rejects_admin_or_another_target",
+      "test_legacy_login_is_explicit_and_preserves_existing_credentials_and_guard",
+      "test_legacy_signup_cannot_create_another_account_and_new_signup_does_not_link_matching_emails",
+      "test_registration_page_has_one_central_form_and_no_legacy_signup_action"
+    ],
+    "current_methods": [
+      "test_all_three_registration_choices_use_one_central_identity",
+      "test_invalid_registration_intent_and_password_confirmation_do_not_create_an_account",
+      "test_the_complete_web_flow_preserves_one_account_and_both_roles",
+      "test_provider_login_opens_the_profile_workspace",
+      "test_activation_is_idempotent_and_does_not_remove_client_access",
+      "test_profile_validation_preserves_input_and_prevents_unapproved_fields",
+      "test_profile_duplicate_submission_shows_a_recoverable_message",
+      "test_profile_html_is_private_and_escapes_user_content",
+      "test_navigation_matches_permissions_for_all_role_combinations",
+      "test_shared_navigation_contains_only_native_experiences",
+      "test_administration_is_read_only_for_authorized_web_users_and_hidden_from_clients",
+      "test_html_role_activation_rejects_admin_or_another_target",
+      "test_retired_login_is_absent_and_existing_records_are_untouched",
+      "test_legacy_signup_cannot_create_another_account_and_new_signup_does_not_link_matching_emails",
+      "test_registration_page_has_one_central_form_and_no_legacy_signup_action"
+    ]
+  },
+  {
+    "file": "tests/Feature/CitasRegressionTest.php",
+    "base_methods": [
+      "test_a_request_still_persists_both_legacy_date_and_state_fields_for_its_owner",
+      "test_another_professional_cannot_accept_or_reject_a_request"
+    ],
+    "current_methods": [],
+    "reason": "Exclusive retired contracts/packages; see W62B per-method explanation."
+  },
+  {
+    "file": "tests/Feature/ComposerDependencyCompatibilityTest.php",
+    "base_methods": [
+      "test_google_sdk_refresh_freebusy_and_event_use_the_updated_transport_without_network",
+      "test_real_socialite_provider_rejects_wrong_state_before_any_http_request",
+      "test_real_socialite_callback_preserves_refresh_token_when_provider_omits_it",
+      "test_oauth_transport_error_does_not_log_response_body_or_replace_credentials",
+      "test_phpseclib_and_jwt_verify_rs256_and_reject_a_modified_signature",
+      "test_jwt_rejects_a_valid_signature_when_the_rsa_key_is_below_2048_bits",
+      "test_emotion_pdf_route_still_generates_a_download_with_the_updated_dompdf"
+    ],
+    "current_methods": [],
+    "reason": "Exclusive retired contracts/packages; see W62B per-method explanation."
+  }
+]

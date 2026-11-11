@@ -1,0 +1,110 @@
+{
+  "base_sha": "00798bfab31f6608760ec252ac20e15573f8e5ce",
+  "branch": "codex/w62b-tekora-only",
+  "delivery": "one draft PR; no merge, deployment, auto-merge or W6.2c",
+  "runtime": {
+    "php": "8.4.27",
+    "composer": "2.8.8",
+    "node": "24",
+    "composer_platform_php": "8.2.28",
+    "database": "SQLite :memory: only"
+  },
+  "preflight": {
+    "workspace_available_gib": 60,
+    "workspace_free_inodes": 4194165,
+    "head_origin_main_github_main_match": true,
+    "tracked_and_untracked_changes_before_work": false,
+    "prior_w62b_branch_or_pr_found": false
+  },
+  "baseline": {
+    "tests": 651,
+    "assertions": 8659,
+    "result": "pass",
+    "evidence": "W62B-baseline.txt"
+  },
+  "final_suite": {
+    "tests": 669,
+    "assertions": 9026,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "result": "pass",
+    "evidence": "W62B-phpunit.xml"
+  },
+  "retirement_tests": {
+    "tests": 34,
+    "assertions": 586,
+    "inventoried_contracts": 32,
+    "result": "pass"
+  },
+  "migration_native_role_retirement_tests": {
+    "tests": 96,
+    "assertions": 1365,
+    "result": "pass"
+  },
+  "photo_and_frontend_csrf_tests": {
+    "tests": 71,
+    "assertions": 690,
+    "result": "pass"
+  },
+  "composer_validate_strict": "pass",
+  "composer_platform_requirements": "pass",
+  "composer_install_locked": "pass",
+  "npm_ci_locked": "pass",
+  "npm_build": "pass",
+  "npm_audit_vulnerabilities": 0,
+  "composer_audit_api": {
+    "result": "blocked",
+    "url": "https://packagist.org/api/security-advisories/",
+    "reason": "curl error 56: CONNECT tunnel failed, response 403",
+    "network_policy_modified": false
+  },
+  "independent_packagist_p2_advisory_check": {
+    "packages": 113,
+    "production": 78,
+    "dev": 35,
+    "applicable_advisories": 0,
+    "comparator": "Composer Semver",
+    "evidence": "W62B-packagist-metadata-check.json",
+    "does_not_check": "abandonment or full advisory descriptions"
+  },
+  "browser": {
+    "matrix": 119,
+    "axe_scans": 34,
+    "axe_violations": 0,
+    "errors": [],
+    "checks": {
+      "mobile_keyboard_menu_all_links_logout_and_reverse_tab": true,
+      "native_forms_available_without_javascript": true
+    },
+    "existing_overflow": [
+      {
+        "page": "home",
+        "viewport": 1024,
+        "base_scroll_width": 1051,
+        "current_scroll_width": 1051
+      },
+      {
+        "page": "home",
+        "viewport": 1100,
+        "base_scroll_width": 1131,
+        "current_scroll_width": 1131
+      }
+    ],
+    "evidence": "W62B-browser-results.json"
+  },
+  "css_retained_declaration_lists": "identical, including repeated selectors and at-rule scopes",
+  "php_lint": "pass",
+  "pint_selected_sources": "pass",
+  "git_diff_check": "pass",
+  "historical_migrations_unchanged": 37,
+  "api_operations_unchanged": 21,
+  "native_photo_bridge_unchanged": true,
+  "persistent_database_or_real_media_inspected": false,
+  "credentials_modified": false,
+  "physical_images_deferred_untouched": 10,
+  "windows_laragon_php82": "not executed; independent review pending",
+  "mysql_upgrade": "not certified",
+  "discarded_exploratory_attempts": "Working-tree baseline overlapped edits; initial vendor copy overlapped Composer removal. Reinstalled immutable baseline and reran. Static preview HTML regenerated after final build to eliminate stale asset hashes.",
+  "text_log_normalization": "Trailing spaces and extra blank lines at EOF removed; test results unchanged."
+}

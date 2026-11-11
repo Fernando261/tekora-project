@@ -307,30 +307,6 @@ a.brand {
   margin-top:25px!important
 }
 
-.legacy-access summary {
-  cursor:pointer;
-  font-weight:750;
-  line-height:1.6
-}
-
-.legacy-access[open] summary {
-  margin-bottom:16px
-}
-
-.legacy-access {
-  border-style:dashed
-}
-
-.account-legacy summary {
-  cursor:pointer;
-  list-style:revert
-}
-
-.account-legacy .submenu {
-  margin:4px 0 12px;
-  padding-left:12px
-}
-
 .account-navigation {
   display:flex;
   flex-wrap:wrap;
@@ -377,22 +353,6 @@ a.brand {
   line-height:2
 }
 
-.legacy-account-notice {
-  padding:14px 18px;
-  border:1px solid #b2cbd3;
-  border-radius:12px;
-  background:#f4fbfc;
-  color:#164b58;
-  line-height:1.6;
-  margin:14px 0 20px;
-  font:inherit
-}
-
-.legacy-account-notice a {
-  color:#164b58;
-  text-decoration:underline
-}
-
 .account-content .brand-logo {
   object-fit:contain
 }
@@ -420,10 +380,6 @@ a.brand {
 
   .account-content .profile-summary {
     order:2
-  }
-
-  .sidebar .account-legacy .submenu {
-    display:block
   }
 
   .sidebar .menu {

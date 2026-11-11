@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\Service;
 use Illuminate\Support\Facades\Hash;
 use Tests\Support\CatalogFixtures;
@@ -169,11 +169,12 @@ class ServiceManagementTest extends TestCase
         $legacy = Profesionista::create(['nombre' => 'Cuenta antigua', 'email' => $owner->email, 'cedula' => 'OLD-CATALOG-1',
             'password' => Hash::make('legacy-password'), 'google_access_token' => 'private-old-token']);
         $before = $legacy->fresh()->getAttributes();
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'legacy-password'])->assertRedirect('/dashboard-profesionista');
+        $this->actingAs($legacy, 'retired-fixture');
+        $this->post('/login-profesionista')->assertNotFound();
         $this->get('/cuenta/servicios')->assertRedirect('/login');
         $this->put('/cuenta/servicios/'.$service->id, $this->serviceData())->assertRedirect('/login');
-        $this->get('/dashboard-profesionista')->assertOk();
-        $this->get('/profesionista/disponibilidad')->assertOk();
+        $this->get('/dashboard-profesionista')->assertNotFound();
+        $this->get('/profesionista/disponibilidad')->assertNotFound();
         $this->get('/servicios')->assertOk()->assertDontSee('private-old-token');
         $this->assertSame($before, $legacy->fresh()->getAttributes());
         $this->assertGuest('web');

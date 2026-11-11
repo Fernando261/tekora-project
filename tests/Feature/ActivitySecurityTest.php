@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\RoleName;
 use App\Models\ActivityNotification;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Services\NotificationInbox;
 use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Hash;
@@ -77,7 +77,8 @@ class ActivitySecurityTest extends TestCase
         [$client, $provider] = $this->reviewContext(); $notice = ActivityNotification::where('user_id', $provider->id)->sole();
         $legacy = Profesionista::create(['nombre' => 'Profesional anterior', 'email' => $provider->email, 'cedula' => 'ACTIVITY-LEGACY', 'password' => Hash::make('separate-password'), 'google_access_token' => 'fake-preserved-token']);
         $before = $legacy->fresh()->getAttributes();
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'separate-password'])->assertRedirect('/dashboard-profesionista');
+        $this->actingAs($legacy, 'retired-fixture');
+        $this->post('/login-profesionista')->assertNotFound();
         $this->get(route('notifications.index'))->assertRedirect('/login'); $this->postJson(route('notifications.activity.read', $notice))->assertUnauthorized();
         $this->assertSame($before, $legacy->fresh()->getAttributes()); $this->assertGuest('web'); $this->assertNull($notice->fresh()->read_at);
     }

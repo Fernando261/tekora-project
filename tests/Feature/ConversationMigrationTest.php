@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
-use App\Models\Cita;
+use Tests\Support\Retired\Cita;
 use App\Models\InquiryReadProgress;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Services\InquiryReadTracking;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Artisan;
@@ -57,7 +57,7 @@ class ConversationMigrationTest extends TestCase
         $this->assertSame(1, app(InquiryReadTracking::class)->unreadFor($client, $inquiry));
         $progress = app(InquiryReadTracking::class)->mark($client, $inquiry->id, $this->readToken($client, $inquiry));
         $this->assertSame($received->id, $progress->lastReadMessage->id);
-        $this->assertSame($legacy->id, $cita->fresh()->profesionista->id);
+        $this->assertSame($legacy->id, $cita->fresh()->profesionista_id);
         $this->assertSame($before, $this->snapshot($tables)); $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
         // Solo memoria: down() elimina progreso e índices nuevos, conservando el esquema y datos de 5A.
         $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'read_upgrade', '--step' => 1, '--force' => true]));

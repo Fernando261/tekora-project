@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
-use App\Models\Cita;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Cita;
+use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceInquiryMessage;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Artisan;
@@ -59,7 +59,7 @@ class InquiryMessagesMigrationTest extends TestCase
         $message = $this->message($client, $inquiry);
         $this->assertSame($client->id, $message->author->id);
         $this->assertSame($inquiry->id, $message->inquiry->id);
-        $this->assertSame($legacy->id, $cita->fresh()->profesionista->id);
+        $this->assertSame($legacy->id, $cita->fresh()->profesionista_id);
         $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
         // Solo esta conexión en memoria: down() elimina exclusivamente el historial de mensajes nuevo.

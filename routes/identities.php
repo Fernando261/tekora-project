@@ -1,14 +1,13 @@
 <?php
 
 use App\Enums\Permission;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\ProviderProfileController;
 use App\Http\Controllers\RoleMembershipController;
-use App\Http\Controllers\UserCitaController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountController;
 
-// Nuevas operaciones. Los flujos anteriores mantienen sus guards y permisos.
+// Operaciones de la cuenta única Tekora.
 Route::middleware('auth:web')->group(function () {
     Route::get('/cuenta', [AccountController::class, 'index'])->name('account.index');
     Route::get('/cuenta/cliente', [AccountController::class, 'client'])
@@ -19,9 +18,6 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/cuenta/prestador/dashboard', \App\Http\Controllers\ProviderDashboardController::class)->name('provider.dashboard');
     Route::get('/cuenta/identidad', [IdentityController::class, 'show'])->name('identity.show');
     Route::post('/cuenta/roles', [RoleMembershipController::class, 'store'])->name('identity.roles.store');
-
-    Route::get('/cuenta/citas', [UserCitaController::class, 'index'])
-        ->middleware('can:'.Permission::ViewClientAppointments->value)->name('identity.citas');
 
     Route::post('/perfil-profesional', [ProviderProfileController::class, 'store'])->name('provider-profiles.store');
     Route::get('/perfiles-profesionales/{providerProfile}', [ProviderProfileController::class, 'show'])->name('provider-profiles.show');

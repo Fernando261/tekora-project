@@ -757,21 +757,6 @@
     color: #f1b5a6;
     border-color: #ee927d4d;
 }
-.tk-dashboard .tk-legacy-panel {
-    margin-top: 18px;
-    background: #111b24a8;
-    border-style: dashed;
-}
-.tk-dashboard .tk-legacy-panel h2 {
-    font-size: 16px;
-}
-.tk-dashboard .tk-legacy-panel > .tk-icon {
-    color: #a9bdc9;
-}
-.tk-dashboard .tk-legacy-panel p {
-    color: #a9bdc9;
-    font-size: 13px;
-}
 .tk-dashboard .tk-dual-account {
     margin-top: 18px;
 }

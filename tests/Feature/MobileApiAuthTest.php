@@ -39,7 +39,7 @@ class MobileApiAuthTest extends TestCase
         $this->assertSame(['client:read'], $token->abilities);
         $this->assertEqualsWithDelta(now()->addDays(30)->timestamp, $token->expires_at->timestamp, 2);
         $this->assertGuest('web');
-        $this->assertGuest('profesionista');
+        $this->assertNull(config('auth.guards.profesionista'));
         $this->get('/api/v1/me', $this->bearer($plain))->assertOk()->assertExactJson(['data' => [
             'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'experience' => 'client',
             'permissions' => ['client.appointments.view', 'client.inquiries.manage'],

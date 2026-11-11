@@ -46,7 +46,7 @@
       <x-flash-messages />
       {{ $slot }}
     </main>
-    <footer class="tk-shell-footer"><span>tekora<span aria-hidden="true">.</span></span><p>Conecta con lo que viene.</p><a href="{{ route('home') }}">Acceso a MindBloom anterior <x-tekora-icon name="arrow" /></a></footer>
+    <footer class="tk-shell-footer"><span>tekora<span aria-hidden="true">.</span></span><p>Conecta con lo que viene.</p></footer>
     </div>
   </div>
 </body>

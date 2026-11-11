@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Cita;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Cita;
+use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceReservation;
 use App\Services\InquiryReadTracking;
 use App\Services\ReservationWorkflow;
@@ -55,7 +55,7 @@ class ReservationMigrationTest extends TestCase
         $this->assertSame($inquiry->id, $reservation->inquiry->id); $this->assertSame($inquiry->service_id, $reservation->service->id);
         $this->assertSame($provider->providerProfile->id, $reservation->providerProfile->id); $this->assertSame($client->id, $reservation->client->id);
         $this->assertSame($reservation->id, $reservation->events()->sole()->reservation->id);
-        $this->assertSame($legacy->id, $cita->fresh()->profesionista->id); $this->assertSame($before, $this->snapshot($tables));
+        $this->assertSame($legacy->id, $cita->fresh()->profesionista_id); $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
         // Exclusivamente memoria: comprobar down() sin tocar ninguna base persistente.
         $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'reservation_upgrade', '--step' => 1, '--force' => true]));

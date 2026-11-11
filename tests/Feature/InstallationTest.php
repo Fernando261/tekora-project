@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Emotion;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Emotion;
+use Tests\Support\Retired\Profesionista;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Database\Schema\Blueprint;
@@ -133,7 +133,7 @@ class InstallationTest extends TestCase
 
         $this->assertSame($before, $existingUser->fresh()->getAttributes());
         $this->assertDatabaseCount('users', 1);
-        $this->assertDatabaseCount('emotions', 5);
+        $this->assertDatabaseCount('emotions', 1);
         $this->assertDatabaseHas('emotions', ['slug' => 'calma', 'name' => 'Contenido conservado', 'image_path' => 'existing.png']);
     }
 
@@ -141,6 +141,6 @@ class InstallationTest extends TestCase
     {
         $this->seed(DatabaseSeeder::class);
         $this->assertDatabaseHas('users', ['email' => 'test@example.com', 'gender' => 'Prefiero no decirlo']);
-        $this->assertDatabaseCount('emotions', 5);
+        $this->assertDatabaseCount('emotions', 0);
     }
 }
