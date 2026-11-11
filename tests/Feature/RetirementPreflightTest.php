@@ -78,8 +78,10 @@ class RetirementPreflightTest extends TestCase
             || $c->getDatabaseName() !== ':memory:' || config('database.connections.'.$c->getName().'.url')) {
             throw new RuntimeException('Memory isolation required');
         }
+        $fakeRoot = str_replace('\\', '/', Storage::disk('public')->path(''));
+        $expectedRoot = str_replace('\\', '/', $this->syntheticStorageRoot).'/framework/testing/disks/public/';
         if (is_file(base_path('.env')) || app()->storagePath() !== $this->syntheticStorageRoot
-            || ! str_starts_with(Storage::disk('public')->path(''), $this->syntheticStorageRoot.'/framework/testing/disks/public/')) {
+            || ! str_starts_with($fakeRoot, $expectedRoot)) {
             throw new RuntimeException('Synthetic environment and Storage fake required');
         }
         foreach ($c->select('PRAGMA database_list') as $db) {

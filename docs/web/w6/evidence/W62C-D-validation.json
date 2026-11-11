@@ -1,11 +1,11 @@
 {
   "task": "TEKORA W6.2c-d",
-  "recorded_at_utc": "2026-11-11T06:48:59+00:00",
+  "recorded_at_utc": "2026-11-11T07:03:39+00:00",
   "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
   "branch": "codex/w62c-d-sqlite-retirement-rehearsal",
   "final_sha_publication": "Exact final SHA in the draft PR description and final delivery; a commit cannot contain its own hash. Tested source Git blob IDs below identify the executed files.",
   "tested_source_git_blobs": {
-    "tests/Feature/RetirementPreflightTest.php": "c2454a56b9819ae5e5ccba328fda958b93ce562d",
+    "tests/Feature/RetirementPreflightTest.php": "d90ae126a0a5bf21a0f57ea600361170b84112dc",
     "tests/Support/RetirementMemoryIntegrity.php": "0f200066d1c92f53e99f3b0e5652c6d41865521f"
   },
   "preflight": {
@@ -52,7 +52,7 @@
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 113.84311,
+      "seconds": 119.240421,
       "status": "PASS"
     },
     "rehearsal": {
@@ -61,7 +61,7 @@
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "seconds": 9.382161,
+      "seconds": 9.823503,
       "status": "PASS"
     },
     "w51": {
@@ -237,6 +237,7 @@
     "production_and_migration_changes": 0,
     "api_operations_static": 21,
     "historical_migration_sources": 37,
-    "remote_main_exact_match_before_commit": "7c6b99823630fb457d7f53b7e73732da454e7b81"
+    "remote_main_exact_match_before_commit": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+    "fake_storage_root_separator_normalization": "PASS on Linux; Windows execution NOT RUN"
   }
 }
