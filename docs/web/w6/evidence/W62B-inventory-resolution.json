@@ -1,0 +1,829 @@
+{
+  "base_sha": "00798bfab31f6608760ec252ac20e15573f8e5ce",
+  "stage": "W6.2b code retirement only",
+  "files": [
+    {
+      "file": "app/Http/Controllers/ComunidadController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/CommentController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/CommentLikeController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/CitasController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/UserCitaController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaCitaController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaDisponibilidadController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaAuthController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/ProfesionistaGoogleController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/GoogleCalendarController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/HomeController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/PdfController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/ReminderController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/Auth/ConfirmPasswordController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/Auth/ForgotPasswordController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/Auth/LoginController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/Auth/RegisterController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/Auth/ResetPasswordController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Http/Controllers/Auth/VerificationController.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/Cita.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/Comment.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/Emotion.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/Like.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/Post.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/Profesionista.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/ProfesionistaDisponibilidad.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "app/Models/Reminder.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/home.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/comunidad.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/conferencias.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/dashboard-profesionista.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/citas.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/citas/create.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/citas/mis-citas.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/profesionistas/index.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/profesionistas/disponibilidad.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/profesionistas/solicitudes-citas.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/emotion/show.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/pdf/emotions/cards.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/login-profesionista.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/auth/portal.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/auth/registro_profesionista.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/layouts/app.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "resources/views/components/legacy-account-notice.blade.php",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/auth-portal.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/citas.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/citas2.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/comunidad.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/conferencias.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/consultas.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/dashboard-profesionista.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/disponibilidad.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/editar.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/home.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/login-unificado.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/login.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/mis-citas.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/perfil.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/profesionistas.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/provider-dashboard.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/registro-unificado.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/registro.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/css/solicitudes.css",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/js/account.js",
+      "outcome": "removed",
+      "reason": "Retired consumers and contracts removed; native regression/build verified."
+    },
+    {
+      "file": "public/img/alex.jpg",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/emociones.png",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/esperanza.png",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/fondo.jpg",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/foto1.png",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/logo.png",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/roque.jpg",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/salud.jpg",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/tranquilidad.png",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    },
+    {
+      "file": "public/img/user1.jpg",
+      "outcome": "deferred, untouched",
+      "reason": "Potential stored paths/shared media cannot be excluded statically; no data/media inspection or deletion authorized."
+    }
+  ],
+  "shared_fragments": [
+    {
+      "file": "resources/views/components/account-navigation.blade.php",
+      "symbol_or_fragment": "account-legacy / Preferencias y legado / identity.citas",
+      "action": "Eliminar solo accesos/active legacy; proteger enlaces can/counters/logout nativos",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/views/components/account-layout.blade.php",
+      "symbol_or_fragment": "tk-shell-footer route(home)",
+      "action": "Retirar acceso al producto alternativo; preservar shell y su nueva base CSS",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/views/account/client.blade.php",
+      "symbol_or_fragment": "client-legacy-title",
+      "action": "Eliminar tarjeta anterior; no sustituir por historial",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/views/perfil.blade.php",
+      "symbol_or_fragment": "tk-identity-history",
+      "action": "Eliminar details anterior; conservar datos/foto/nombre W5.1",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/views/login.blade.php",
+      "symbol_or_fragment": "legacy_login / role=prof / profesionistas",
+      "action": "Retirar selector/form profesional cuando cierre guard; conservar login central y throttle/CSRF",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/views/auth/registro.blade.php",
+      "symbol_or_fragment": "login.prof",
+      "action": "Retirar acceso profesional anterior, conservar registro e intent centrales",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/views/account/activate-provider.blade.php",
+      "symbol_or_fragment": "identidad histórica",
+      "action": "Retirar branding explicativo; no alterar activación ni fingir verificación/vinculación",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "app/Models/User.php",
+      "symbol_or_fragment": "posts/reminders/likes/comments",
+      "action": "Eliminar solo las cuatro relaciones antiguas tras quitar consumidores; User y relaciones nativas protegidos",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "config/auth.php",
+      "symbol_or_fragment": "guards.profesionista / providers.profesionistas",
+      "action": "Retirar config profesional cuando rutas/login eliminados; web/users/Sanctum intactos",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "config/services.php",
+      "symbol_or_fragment": "google",
+      "action": "Retirar variables/config Google cuando no queden controladores; no leer valores ni modificar .env",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "bootstrap/app.php",
+      "symbol_or_fragment": "redirectGuestsTo auth:profesionista",
+      "action": "Simplificar exclusivamente rama de guard retirado; conservar redirect central, middleware y API",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "routes/identities.php",
+      "symbol_or_fragment": "identity.citas",
+      "action": "Retirar alias GET /cuenta/citas; conservar permiso client.appointments.view del dashboard",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "public/css/account.css",
+      "symbol_or_fragment": "account-legacy y estilos de accesos antiguos",
+      "action": "Hoja compartida protegida; podar solo reglas sin consumidores, no borrar archivo",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "vite.config.js",
+      "symbol_or_fragment": "app.js / app.scss",
+      "action": "Eliminar entradas de scaffold solo después de comprobar ausencia de consumidor y separar bundle nativo",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/js/app.js",
+      "symbol_or_fragment": "bootstrap import",
+      "action": "Candidato del scaffold; no confundir con imports nativos de animejs",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/js/bootstrap.js",
+      "symbol_or_fragment": "Axios defaults",
+      "action": "Resolver usos antes de retirar axios/bootstrap; FrontendCsrfHeadersTest protegido",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/sass/app.scss",
+      "symbol_or_fragment": "Bootstrap / variables / Bunny",
+      "action": "Candidato del scaffold; licencia local de fuentes y bundles nativos conservados",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    },
+    {
+      "file": "resources/sass/_variables.scss",
+      "symbol_or_fragment": "variables partial",
+      "action": "Retirar únicamente junto al entrypoint Sass sin consumidores",
+      "risk": "Alto",
+      "tests": "Suite nativa, autorización/CSRF, API y build con/sin manifiesto; actualizar solo intención retirada",
+      "outcome": "retired fragment removed; native behavior retained"
+    }
+  ],
+  "routes": [
+    {
+      "method": "GET",
+      "uri": "/login-profesionista",
+      "source": "routes/web.php",
+      "name": "profesionista.login",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/login-profesionista",
+      "source": "routes/web.php",
+      "name": "profesionista.login.post",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/registro-profesionista",
+      "source": "routes/web.php",
+      "name": "profesionista.create",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/registro-profesionista",
+      "source": "routes/web.php",
+      "name": "profesionista.store",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/logout-profesionista",
+      "source": "routes/web.php",
+      "name": "profesionista.logout",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/emociones/{slug}",
+      "source": "routes/web.php",
+      "name": null,
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/dashboard-profesionista",
+      "source": "routes/web.php",
+      "name": "profesionista.dashboard",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionista/disponibilidad",
+      "source": "routes/web.php",
+      "name": "prof.dispo",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/profesionista/disponibilidad",
+      "source": "routes/web.php",
+      "name": "prof.dispo.store",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/solicitudes-citas",
+      "source": "routes/web.php",
+      "name": "profesionista.solicitudes",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas/{id}/aceptar",
+      "source": "routes/web.php",
+      "name": "citas.aceptar",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas/{id}/rechazar",
+      "source": "routes/web.php",
+      "name": "citas.rechazar",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/google/connect",
+      "source": "routes/web.php",
+      "name": "google.connect",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/google/callback",
+      "source": "routes/web.php",
+      "name": "google.callback",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/google/disconnect",
+      "source": "routes/web.php",
+      "name": "google.disconnect",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/mindbloom/inicio",
+      "source": "routes/web.php",
+      "name": "home",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/pdf/emociones/tarjetas",
+      "source": "routes/web.php",
+      "name": "pdf.emotions.cards",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/conferencias",
+      "source": "routes/web.php",
+      "name": null,
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/consultas",
+      "source": "routes/web.php",
+      "name": null,
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/comunidad",
+      "source": "routes/web.php",
+      "name": "comunidad",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/comunidad",
+      "source": "routes/web.php",
+      "name": "comunidad.store",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/posts/{post}/like",
+      "source": "routes/web.php",
+      "name": "like",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "DELETE",
+      "uri": "/posts/{post}",
+      "source": "routes/web.php",
+      "name": "eliminar",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/comments",
+      "source": "routes/web.php",
+      "name": "comentario_cre",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "DELETE",
+      "uri": "/comments/{comment}",
+      "source": "routes/web.php",
+      "name": "eliminar_com",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/comments/{comment}/like",
+      "source": "routes/web.php",
+      "name": null,
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionistas",
+      "source": "routes/web.php",
+      "name": "profesionistas.index",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/citas/create/{profesionista}",
+      "source": "routes/web.php",
+      "name": "citas.create",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/profesionistas/{profesionista}/availability",
+      "source": "routes/web.php",
+      "name": "profesionistas.availability",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "POST",
+      "uri": "/citas",
+      "source": "routes/web.php",
+      "name": "citas.store",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/citas",
+      "source": "routes/web.php",
+      "name": "user.citas",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    },
+    {
+      "method": "GET",
+      "uri": "/cuenta/citas",
+      "source": "routes/identities.php",
+      "name": "identity.citas",
+      "outcome": "removed; 404 for original method, no redirect or replacement"
+    }
+  ],
+  "dependencies": [
+    {
+      "ecosystem": "composer",
+      "package": "barryvdh/laravel-dompdf",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "composer",
+      "package": "google/apiclient",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "composer",
+      "package": "laravel/socialite",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "composer",
+      "package": "socialiteproviders/google",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "composer",
+      "package": "doctrine/dbal",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "composer",
+      "package": "laravel/ui",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "npm",
+      "package": "bootstrap",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "npm",
+      "package": "@popperjs/core",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "npm",
+      "package": "axios",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    },
+    {
+      "ecosystem": "npm",
+      "package": "sass",
+      "outcome": "removed by package manager",
+      "evidence": "Native tests, clean lock install, preserved migration install/upgrade/reversal in memory and build pass; retained package versions unchanged."
+    }
+  ],
+  "additional_removals": [
+    "config/dompdf.php",
+    "database/seeders/EmotionSeeder.php",
+    "resources/js/app.js",
+    "resources/js/bootstrap.js",
+    "resources/sass/app.scss",
+    "resources/sass/_variables.scss"
+  ],
+  "retained_integrity_bridge": [
+    "app/Services/ProfilePhotoReferences.php",
+    "app/Services/LegacyPhotoReferences.php"
+  ],
+  "real_data_media_credentials_modified": false,
+  "w62c_started": false
+}

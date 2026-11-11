@@ -99,7 +99,7 @@ class TekoraW21Test extends TestCase
         $response = $this->actingAs($dual)->get(route('account.client'))->assertOk()->assertSee('W21-MI-SOLICITUD')->assertDontSee('W21-SOLO-PRESTADOR')->assertDontSee('W21-CUERPO-PRIVADO')->assertDontSee('W21-OTRO-CUERPO');
         $this->assertSame(1, $response->viewData('summary')['active']);
         $this->assertSame(1, $response->viewData('summary')['unread']);
-        $response->assertSee('Cuenta completa')->assertSee(route('identity.citas'), false);
+        $response->assertSee('Cuenta completa')->assertDontSee('/cuenta/citas', false);
         $this->get(route('provider.dashboard'))->assertOk()->assertSee('W21-SOLO-PRESTADOR');
         $this->assertSame($before, $this->reservationRows($tables));
     }
@@ -195,10 +195,10 @@ class TekoraW21Test extends TestCase
         $this->assertContains($assets[1], $styles, 'Falta la hoja CSS del dashboard.');
     }
 
-    public function test_historical_mindbloom_keeps_its_layout_outside_the_dashboard(): void
+    public function test_native_account_and_profile_keep_their_layout_outside_the_dashboard(): void
     {
         $this->actingAs($this->account(RoleName::Client));
-        foreach ([route('home'), '/perfil', '/comunidad', '/citas', '/conferencias'] as $path) {
+        foreach ([route('account.index'), '/perfil'] as $path) {
             $this->get($path)->assertOk()->assertDontSee('data-dashboard-navigation')->assertDontSee('tk-dashboard-atmosphere')->assertDontSee('resources/js/tekora/dashboards.js');
         }
     }

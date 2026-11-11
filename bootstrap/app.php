@@ -14,11 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->api(append: [\App\Http\Middleware\ApiHeaders::class]);
-        $middleware->redirectGuestsTo(function (Request $request) {
-            $professionalRoute = in_array('auth:profesionista', $request->route()->gatherMiddleware(), true);
-
-            return route('login', $professionalRoute ? ['role' => 'prof'] : []);
-        });
+        $middleware->redirectGuestsTo(fn (Request $request) => route('login'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->report(function (\PDOException $exception) {

@@ -62,9 +62,6 @@
 .tk-identity .tk-identity-data>div{padding:16px 0;border-top:1px solid #90e0ef25}
 .tk-identity .tk-identity-data dt{color:#adc3d1;font-size:.78rem}
 .tk-identity .tk-identity-data dd{margin:6px 0 0;color:#eaf7fb;overflow-wrap:anywhere}
-.tk-identity .tk-identity-history summary{cursor:pointer;color:#adc3d1;font-size:.9rem}
-.tk-identity .tk-identity-history nav{display:flex;flex-wrap:wrap;gap:14px 24px}
-.tk-identity .tk-identity-history p{font-size:.85rem;color:#adc3d1}
 .tk-identity .tk-identity-scene{position:relative;width:260px;height:230px;max-width:100%;perspective:1000px;justify-self:center;pointer-events:none}
 .tk-identity .tk-identity-object{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--identity-scene-x,7deg)) rotateY(var(--identity-scene-y,-12deg));transition:transform .26s ease}
 .tk-identity .tk-identity-plane{position:absolute;transform-style:preserve-3d;border:1px solid #90e0ef60;border-radius:15px;background:linear-gradient(140deg,#123747,#081623);box-shadow:10px 18px 40px -25px #000b}

@@ -4,10 +4,10 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryAction;
 use App\Enums\RoleName;
-use App\Models\Cita;
+use Tests\Support\Retired\Cita;
 use App\Models\InquiryNotification;
-use App\Models\Profesionista;
-use App\Models\ProfesionistaDisponibilidad;
+use Tests\Support\Retired\Profesionista;
+use Tests\Support\Retired\ProfesionistaDisponibilidad;
 use App\Models\ServiceInquiry;
 use App\Services\InquiryWorkflow;
 use Illuminate\Database\QueryException;
@@ -70,7 +70,7 @@ class InquiryNotificationMigrationTest extends TestCase
         $this->assertDatabaseHas('inquiry_notifications', ['user_id' => $client->id, 'service_inquiry_id' => $id, 'event' => 'accepted']);
         $this->assertSame($client->id, $inquiry->client->id);
         $this->assertSame($provider->id, $inquiry->service->providerProfile->user->id);
-        $this->assertSame($legacy->id, $cita->fresh()->profesionista->id);
+        $this->assertSame($legacy->id, $cita->fresh()->profesionista_id);
         $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
         $afterAction = $this->snapshot($tables);
         // Reversión exclusivamente de la migración nueva, solo en SQLite en memoria.

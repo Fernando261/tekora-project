@@ -1,0 +1,1149 @@
+{
+  "source": "Real GET controllers with synthetic SQLite :memory: fixtures; static GET/HEAD server; no browser POST",
+  "matrix": [
+    {
+      "page": "account-client",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-provider",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-dual",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-admin",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-none",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "activation-pending",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "profile-photo",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "edit-name",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "roles",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "forgot",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "reset",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "client-dashboard",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-form",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "home",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "login",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "registration",
+      "width": 320,
+      "no_horizontal": true,
+      "scroll_width": 320,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-client",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-provider",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-dual",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-admin",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-none",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "activation-pending",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "profile-photo",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "edit-name",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "roles",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "forgot",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "reset",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "client-dashboard",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-form",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "home",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "login",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "registration",
+      "width": 375,
+      "no_horizontal": true,
+      "scroll_width": 375,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-client",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-provider",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-dual",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-admin",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-none",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "activation-pending",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "profile-photo",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "edit-name",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "roles",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "forgot",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "reset",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "client-dashboard",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-form",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "home",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "login",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "registration",
+      "width": 768,
+      "no_horizontal": true,
+      "scroll_width": 768,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-client",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-provider",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-dual",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-admin",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-none",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "activation-pending",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "profile-photo",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "edit-name",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "roles",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "forgot",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "reset",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "client-dashboard",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-form",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "home",
+      "width": 1024,
+      "no_horizontal": false,
+      "scroll_width": 1051,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "login",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "registration",
+      "width": 1024,
+      "no_horizontal": true,
+      "scroll_width": 1024,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-client",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-provider",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-dual",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-admin",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-none",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "activation-pending",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "profile-photo",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "edit-name",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "roles",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "forgot",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "reset",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "client-dashboard",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-form",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "home",
+      "width": 1100,
+      "no_horizontal": false,
+      "scroll_width": 1131,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "login",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "registration",
+      "width": 1100,
+      "no_horizontal": true,
+      "scroll_width": 1100,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-client",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-provider",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-dual",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-admin",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-none",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "activation-pending",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "profile-photo",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "edit-name",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "roles",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "forgot",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "reset",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "client-dashboard",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-form",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "home",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "login",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "registration",
+      "width": 1440,
+      "no_horizontal": true,
+      "scroll_width": 1440,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-client",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-provider",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-dual",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-admin",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "account-none",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "activation-pending",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "profile-photo",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "edit-name",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "roles",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "forgot",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "reset",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "client-dashboard",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-form",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "home",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "login",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    },
+    {
+      "page": "registration",
+      "width": 1920,
+      "no_horizontal": true,
+      "scroll_width": 1920,
+      "h1": 1,
+      "duplicate_ids": 0
+    }
+  ],
+  "axe": [
+    {
+      "page": "account-client",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "account-provider",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "account-dual",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "account-admin",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "account-none",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "activation-pending",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "profile-photo",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "edit-name",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "roles",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "forgot",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "reset",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "client-dashboard",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "provider-form",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "home",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "login",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "registration",
+      "width": 375,
+      "violations": []
+    },
+    {
+      "page": "account-client",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "account-provider",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "account-dual",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "account-admin",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "account-none",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "activation-pending",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "profile-photo",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "edit-name",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "roles",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "forgot",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "reset",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "client-dashboard",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "provider-form",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "provider-dashboard",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "home",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "login",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "registration",
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "checks": {
+    "mobile_keyboard_menu_all_links_logout_and_reverse_tab": true,
+    "native_forms_available_without_javascript": true
+  },
+  "existing_overflow": [
+    {
+      "page": "home",
+      "viewport": 1024,
+      "base_scroll_width": 1051,
+      "current_scroll_width": 1051
+    },
+    {
+      "page": "home",
+      "viewport": 1100,
+      "base_scroll_width": 1131,
+      "current_scroll_width": 1131
+    }
+  ],
+  "browser": "156.0.8078.79"
+}

@@ -7,7 +7,7 @@ use App\Enums\InquiryNotificationEvent;
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
 use App\Models\InquiryNotification;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceInquiry;
 use App\Services\InquiryWorkflow;
 use Illuminate\Support\Facades\DB;
@@ -312,11 +312,12 @@ class InquiryNotificationsTest extends TestCase
         $legacy = Profesionista::create(['nombre' => 'Profesional anterior', 'email' => $provider->email, 'cedula' => 'NOTICE-LEGACY',
             'password' => Hash::make('old-password'), 'google_access_token' => 'fake-preserved-token']);
         $before = $legacy->fresh()->getAttributes();
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'old-password'])->assertRedirect('/dashboard-profesionista');
+        $this->actingAs($legacy, 'retired-fixture');
+        $this->post('/login-profesionista')->assertNotFound();
         $this->get(route('notifications.index'))->assertRedirect('/login');
         $this->postJson(route('notifications.read', InquiryNotification::sole()))->assertUnauthorized();
-        $this->get('/solicitudes-citas')->assertOk()->assertDontSee('/cuenta/notificaciones');
-        $this->get('/profesionista/disponibilidad')->assertOk();
+        $this->get('/solicitudes-citas')->assertNotFound()->assertDontSee('/cuenta/notificaciones');
+        $this->get('/profesionista/disponibilidad')->assertNotFound();
         $this->assertSame($before, $legacy->fresh()->getAttributes());
         $this->assertDatabaseCount('citas', 0);
         $this->assertDatabaseCount('inquiry_notifications', 1);

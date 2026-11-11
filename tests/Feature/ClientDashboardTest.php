@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Services\ClientDashboardSummary;
 use App\Services\InquiryReadTracking;
 use App\Services\NotificationInbox;
@@ -30,16 +30,16 @@ class ClientDashboardTest extends TestCase
         }
         auth('web')->logout();
         $legacy = Profesionista::create(['nombre' => 'Prueba legacy', 'email' => 'legacy-w2@example.test', 'password' => Hash::make('fixture-password'), 'cedula' => 'W2-TEST']);
-        $this->actingAs($legacy, 'profesionista')->get(route('account.client'))->assertRedirect(route('login'));
+        $this->actingAs($legacy, 'retired-fixture')->get(route('account.client'))->assertRedirect(route('login'));
     }
 
-    public function test_client_dual_and_client_admin_accounts_have_truthful_empty_states_and_legacy_access(): void
+    public function test_client_dual_and_client_admin_accounts_have_truthful_empty_states_without_retired_links(): void
     {
         foreach ([[RoleName::Client], [RoleName::Client, RoleName::Provider], [RoleName::Client, RoleName::Admin]] as $roles) {
             $user = $this->account(...$roles);
             $response = $this->actingAs($user, 'web')->get(route('account.client'))->assertOk()->assertSee('Hola, '.$user->name)
                 ->assertSee('Tu primera idea puede empezar hoy.')->assertSee('Tu próxima reserva está por llegar.')
-                ->assertSee('Cuenta completa')->assertSee(route('identity.citas'), false)->assertSee('data-dashboard="client"', false);
+                ->assertSee('Cuenta completa')->assertDontSee('/cuenta/citas', false)->assertSee('data-dashboard="client"', false);
             $summary = $response->viewData('summary');
             foreach (['active', 'confirmed', 'requested', 'unread', 'completed', 'cancelled', 'notifications'] as $key) {
                 $this->assertSame(0, $summary[$key]);

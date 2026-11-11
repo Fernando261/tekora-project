@@ -206,15 +206,11 @@ class TekoraW3Test extends TestCase
         $this->assertCount(21, array_filter(app('router')->getRoutes()->getRoutes(), fn ($route) => str_starts_with($route->uri(), 'api/')));
     }
 
-    public function test_modern_home_retires_promotional_legacy_links_and_private_history_keeps_its_routes(): void
+    public function test_home_and_account_expose_only_tekora(): void
     {
-        $this->get('/')->assertOk()->assertDontSee('MindBloom')->assertDontSee('href="'.route('home').'"', false);
-        $this->get('/mindbloom/inicio')->assertRedirect(route('login'));
-        $this->actingAs($this->account(RoleName::Client))->get('/mindbloom/inicio')->assertOk()->assertSee('Bienvenido a MindBloom')->assertDontSee('tk-marketplace');
-        $this->get('/cuenta')->assertOk()->assertSee('MindBloom anterior')->assertSee('href="'.route('home').'"', false);
-        $professional = app('router')->getRoutes()->getByName('profesionista.dashboard');
-        $this->assertContains('auth:profesionista', $professional->gatherMiddleware());
-        $this->assertSame('pdf/emociones/tarjetas', app('router')->getRoutes()->getByName('pdf.emotions.cards')->uri());
+        $this->get('/')->assertOk()->assertDontSee('MindBloom')->assertDontSee('/mindbloom/inicio');
+        $this->actingAs($this->account(RoleName::Client))->get('/mindbloom/inicio')->assertNotFound();
+        $this->get('/cuenta')->assertOk()->assertDontSee('MindBloom')->assertDontSee('/mindbloom/inicio');
     }
 
     public static function assetModes(): array

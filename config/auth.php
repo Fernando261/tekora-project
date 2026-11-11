@@ -41,11 +41,6 @@ return [
             'provider' => 'users',
         ],
 
-        'profesionista' => [
-            'driver' => 'session',
-            'provider' => 'profesionistas',
-],
-
     ],
 
     /*
@@ -70,12 +65,6 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
-
-        'profesionistas' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Profesionista::class,
-],
-
 
         // 'users' => [
         //     'driver' => 'database',

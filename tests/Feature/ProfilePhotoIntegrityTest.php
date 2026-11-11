@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\ProfileController;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\User;
 use DOMDocument;
 use DOMXPath;
@@ -441,7 +441,7 @@ class ProfilePhotoIntegrityTest extends TestCase
     {
         $professional = Profesionista::create(['nombre' => 'Synthetic legacy', 'email' => 'w51@example.test', 'password' => 'synthetic-password', 'cedula' => 'SYNTHETIC-W51']);
         $before = $professional->fresh()->getAttributes();
-        $this->actingAs($professional, 'profesionista')->post('/perfil/foto', ['photo' => $this->upload()])->assertRedirect(route('login'));
+        $this->actingAs($professional, 'retired-fixture')->post('/perfil/foto', ['photo' => $this->upload()])->assertRedirect(route('login'));
         $this->assertSame($before, $professional->fresh()->getAttributes());
         $this->assertSame([], $this->disk->allFiles());
         $this->assertSame(0, User::count());

@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Services\ReservationWorkflow;
 use App\Services\ReviewWorkflow;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +19,7 @@ class ProviderDashboardAccessTest extends TestCase
     {
         $this->get('/cuenta/prestador/dashboard')->assertRedirect(route('login'));
         $legacy = Profesionista::create(['nombre' => 'Profesional anterior', 'email' => 'anterior@example.test', 'password' => 'clave-anterior', 'cedula' => 'LEGACY-9A']);
-        $this->actingAs($legacy, 'profesionista')->get('/cuenta/prestador/dashboard')->assertRedirect(route('login'));
+        $this->actingAs($legacy, 'retired-fixture')->get('/cuenta/prestador/dashboard')->assertRedirect(route('login'));
         $this->assertDatabaseCount('users', 0); $this->assertDatabaseCount('provider_profiles', 0);
     }
 

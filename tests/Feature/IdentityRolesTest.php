@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\Permission;
 use App\Enums\RoleName;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\ProviderProfile;
 use App\Models\Role;
 use App\Models\User;
@@ -96,24 +96,24 @@ class IdentityRolesTest extends TestCase
         app(RoleMemberships::class)->enroll($user, RoleName::Admin);
     }
 
-    public function test_client_permission_controls_the_new_appointments_endpoint(): void
+    public function test_client_permission_still_controls_the_native_dashboard(): void
     {
         $client = $this->userWithRoles(RoleName::Client);
         $provider = $this->userWithRoles(RoleName::Provider);
         $admin = $this->userWithRoles(RoleName::Admin);
         $unassigned = $this->userWithRoles();
 
-        $this->actingAs($client, 'web')->get('/cuenta/citas')->assertOk();
+        $this->actingAs($client, 'web')->get('/cuenta/cliente')->assertOk();
         foreach ([$provider, $admin, $unassigned] as $user) {
-            $this->actingAs($user, 'web')->get('/cuenta/citas')->assertForbidden();
+            $this->actingAs($user, 'web')->get('/cuenta/cliente')->assertForbidden();
         }
     }
 
-    public function test_legacy_user_flows_remain_available_without_new_roles(): void
+    public function test_central_account_and_profile_remain_available_without_business_roles(): void
     {
         $user = $this->userWithRoles();
-        $this->actingAs($user, 'web')->get(route('home'))->assertOk();
-        $this->get('/citas')->assertOk();
+        $this->actingAs($user, 'web')->get(route('account.index'))->assertOk();
+        $this->get('/citas')->assertNotFound();
         $this->get('/perfil')->assertOk();
         $this->assertDatabaseCount('role_user', 0);
     }
@@ -252,7 +252,7 @@ class IdentityRolesTest extends TestCase
 
     public function test_guests_cannot_access_new_endpoints(): void
     {
-        foreach (['/cuenta/identidad', '/cuenta/citas', '/administracion/roles'] as $path) {
+        foreach (['/cuenta/identidad', '/cuenta/cliente', '/administracion/roles'] as $path) {
             $this->getJson($path)->assertUnauthorized();
         }
         $this->postJson('/cuenta/roles', ['role' => 'provider'])->assertUnauthorized();
@@ -271,10 +271,10 @@ class IdentityRolesTest extends TestCase
 
         $this->assertFalse(Gate::forUser($legacy)->allows(Permission::ManageAccountRoles->value));
         $this->assertFalse(Gate::forUser($legacy)->allows('view', $profile));
-        $this->actingAs($legacy, 'profesionista')->getJson('/cuenta/identidad')->assertUnauthorized();
+        $this->actingAs($legacy, 'retired-fixture')->getJson('/cuenta/identidad')->assertUnauthorized();
         $this->getJson('/administracion/roles')->assertUnauthorized();
         $this->postJson('/cuenta/roles', ['role' => 'provider'])->assertUnauthorized();
-        $this->get('/dashboard-profesionista')->assertOk();
+        $this->get('/dashboard-profesionista')->assertNotFound();
         $this->assertDatabaseCount('users', 1);
     }
 }

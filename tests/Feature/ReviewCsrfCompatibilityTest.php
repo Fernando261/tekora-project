@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Profesionista;
-use App\Models\ProfesionistaDisponibilidad;
+use Tests\Support\Retired\Profesionista;
+use Tests\Support\Retired\ProfesionistaDisponibilidad;
 use App\Models\ServiceReview;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryReadTracking;
@@ -66,13 +66,14 @@ class ReviewCsrfCompatibilityTest extends TestCase
         DB::table('profesionista_bloqueos')->insert(['profesionista_id' => $legacy->id, 'start_datetime' => '2030-01-08 10:00:00', 'end_datetime' => '2030-01-08 11:00:00']);
         $tables = ['profesionistas', 'profesionista_disponibilidades', 'profesionista_bloqueos', 'citas']; $before = $this->reservationRows($tables);
         $this->get(route('catalog.show', $reservation->service_id))->assertOk()->assertSee('Aún no hay reseñas verificadas');
-        $this->post('/login-profesionista', ['email' => $legacy->email, 'password' => 'separate-legacy-password'])->assertRedirect('/dashboard-profesionista');
+        $this->actingAs($legacy, 'retired-fixture');
+        $this->post('/login-profesionista')->assertNotFound();
         $this->postJson(route('reviews.store', $reservation), ['rating' => 5])->assertUnauthorized();
         $this->get(route('reviews.index'))->assertRedirect('/login');
         $review = $this->publishReview($reservation);
         $this->getJson(route('reviews.show', $review))->assertUnauthorized();
         $this->patchJson(route('reviews.withdraw', $review))->assertUnauthorized();
-        $this->get('/profesionista/disponibilidad')->assertOk();
+        $this->get('/profesionista/disponibilidad')->assertNotFound();
         $this->assertSame($before, $this->reservationRows($tables)); $this->assertGuest('web');
     }
 }

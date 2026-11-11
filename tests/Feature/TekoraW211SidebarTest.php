@@ -62,9 +62,8 @@ class TekoraW211SidebarTest extends TestCase
         if ($admin) {
             $expected[] = 'identity.roles.index';
         }
-        array_push($expected, 'perfil', 'home', 'comunidad');
+        $expected[] = 'perfil';
         $expected = array_map(fn ($name) => route($name), $expected);
-        array_push($expected, url('/conferencias'), route('user.citas'), route('profesionistas.index'));
         $actual = array_map(fn ($node) => $node->nodeValue, iterator_to_array($xpath->query('//nav[contains(@class,"tk-sidebar-navigation")]//a/@href')));
         $this->assertSame($expected, $actual);
         $this->assertSame(count($actual), count(array_unique($actual)), 'No duplicate navigation links.');
@@ -76,7 +75,7 @@ class TekoraW211SidebarTest extends TestCase
         if ($admin) {
             $groups[] = 'Administración';
         }
-        array_push($groups, 'Preferencias y legado', 'Salir');
+        array_push($groups, 'Preferencias', 'Salir');
         $this->assertSame($groups, array_map(fn ($node) => $node->nodeValue, iterator_to_array($xpath->query('//*[@class="tk-nav-group"]/@aria-label'))));
         $this->assertSame(0, $xpath->query('//*[@class="tk-nav-group" and not(.//a or .//button)]')->length);
         $ids = array_map(fn ($node) => $node->nodeValue, iterator_to_array($xpath->query('//@id')));
@@ -90,8 +89,8 @@ class TekoraW211SidebarTest extends TestCase
         $this->assertSame(1, $xpath->query('.//input[@name="_token" and string-length(@value)>0]', $form)->length);
         $this->assertSame(1, $xpath->query('//details[@data-account-navigation]/summary')->length);
         $this->assertSame(0, $xpath->query('//details[@data-account-navigation and @open]')->length, 'SSR must not cause a mobile collapse after first paint.');
-        $this->assertSame(1, $xpath->query('//details[contains(@class,"account-legacy")]/summary')->length);
-        $this->assertSame(5, $xpath->query('//details[contains(@class,"account-legacy")]//a')->length);
+        $this->assertSame(0, $xpath->query('//details[contains(@class,"account-legacy")]/summary')->length);
+        $this->assertSame(0, $xpath->query('//details[contains(@class,"account-legacy")]//a')->length);
         $response->assertSee('Los contadores del menú incluyen toda la actividad de tu cuenta.');
         if (! $provider) {
             $this->get(route('provider.dashboard'))->assertForbidden();
@@ -159,7 +158,7 @@ class TekoraW211SidebarTest extends TestCase
             $this->assertSame(str_contains($template, 'horizontal tekora') ? $xpath->query('//a[contains(concat(" ", normalize-space(@class), " "), " menu-item ")]')->length : 0, $xpath->query('//svg')->length);
             $this->assertStringContainsString('(29)', $html);
             $this->assertStringContainsString('(5)', $html);
-            $this->assertSame(5, $xpath->query('//details//a')->length);
+            $this->assertSame(0, $xpath->query('//details//a')->length);
             $this->assertSame(1, $xpath->query('//form[@method="POST"]//input[@name="_token"]')->length);
         }
     }

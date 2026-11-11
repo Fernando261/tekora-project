@@ -23,7 +23,7 @@ class TekoraW1Test extends TestCase
             ->assertDontSee('Vista del panel')->assertDontSee('Google Calendar');
         $this->assertGuest('web');
         $this->assertSame('/', parse_url(route('tekora.home'), PHP_URL_PATH) ?? '/');
-        $this->assertSame('/mindbloom/inicio', parse_url(route('home'), PHP_URL_PATH));
+        $this->assertFalse(\Illuminate\Support\Facades\Route::has('home'));
     }
 
     public function test_home_only_exposes_publicly_authorized_services_and_profiles(): void
@@ -64,19 +64,18 @@ class TekoraW1Test extends TestCase
         $this->get('/servicios?q='.str_repeat('x', 121))->assertStatus(422);
     }
 
-    public function test_mindbloom_stays_authenticated_and_named_links_and_assets_work(): void
+    public function test_retired_product_pages_no_longer_exist(): void
     {
-        $this->get(route('home'))->assertRedirect('/login');
-        $this->actingAs(User::factory()->create(), 'web')->get(route('home'))->assertOk()->assertViewIs('home')
-            ->assertSee(asset('img/logo.png'), false)->assertSee('Bienvenido a MindBloom');
-        $this->get('/comunidad')->assertOk();
-        $this->get('/citas')->assertOk();
+        foreach (['/mindbloom/inicio', '/comunidad', '/citas'] as $path) {
+            $this->get($path)->assertNotFound();
+            $this->actingAs(User::factory()->create(), 'web')->get($path)->assertNotFound();
+        }
     }
 
-    public function test_auth_forms_keep_every_field_posts_old_values_and_legacy_guard_access(): void
+    public function test_central_auth_forms_keep_fields_posts_and_old_values(): void
     {
         $this->get('/login?role=prof')->assertOk()->assertSee('action="'.route('login.post').'"', false)
-            ->assertSee('action="'.route('profesionista.login.post').'"', false)->assertSee('id="legacy-access" open', false)
+            ->assertDontSee('legacy-access')->assertDontSee('MindBloom')
             ->assertSee('autocomplete="current-password"', false)->assertSee(route('password.request'), false);
         $response = $this->get('/registro?intent=provider')->assertOk()->assertSee('value="provider" checked', false);
         foreach (['intent', 'name', 'age', 'gender', 'email', 'password', 'password_confirmation', '_token'] as $name) {
@@ -94,10 +93,10 @@ class TekoraW1Test extends TestCase
         ])->assertSessionHasErrors(['name', 'email', 'password']);
         $this->get('/registro')->assertOk()->assertSee('role="alert"', false)->assertSee('aria-invalid="true"', false)->assertSee('value="not-email"', false)->assertDontSee('value="short"', false);
         $user = User::factory()->create();
-        $this->get(route('home'))->assertRedirect('/login');
-        $this->withSession(['_token' => 'w1-new-csrf'])->post('/login', ['_token' => 'w1-new-csrf', 'email' => $user->email, 'password' => 'password'])->assertRedirect(route('home'));
+        $this->get(route('account.index'))->assertRedirect('/login');
+        $this->withSession(['_token' => 'w1-new-csrf'])->post('/login', ['_token' => 'w1-new-csrf', 'email' => $user->email, 'password' => 'password'])->assertRedirect(route('account.index'));
         $this->assertAuthenticatedAs($user, 'web');
-        $this->assertGuest('profesionista');
+        $this->assertNull(config('auth.guards.profesionista'));
     }
 
     public function test_no_role_or_guard_is_changed_by_visiting_public_pages(): void

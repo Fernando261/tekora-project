@@ -1,0 +1,10 @@
+
+  ......✓.✓✓.✓✓
+
+  ──────────────────────────────────────────────────────────────────── Laravel
+    FIXED   ................................... 13 files, 5 style issues fixed
+  ✓ app/Models/User.php class_attributes_separation, array_indentation, order…
+  ✓ config/auth.php                                       no_extra_blank_lines
+  ✓ database/seeders/DatabaseSeeder.php class_attributes_separation, no_trail…
+  ✓ routes/identities.php                                      ordered_imports
+  ✓ tests/Feature/RetiredProductTest.php                     no_unused_imports

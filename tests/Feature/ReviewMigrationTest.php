@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Cita;
-use App\Models\Profesionista;
+use Tests\Support\Retired\Cita;
+use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceReview;
 use App\Services\InquiryReadTracking;
 use App\Services\ReviewWorkflow;
@@ -58,7 +58,7 @@ class ReviewMigrationTest extends TestCase
         $this->assertSame($provider->providerProfile->id, $review->providerProfile->id); $this->assertSame($review->id, $inquiry->service->reviews()->sole()->id);
         $this->assertSame($review->id, $provider->providerProfile->reviews()->sole()->id);
         app(ReviewWorkflow::class)->withdraw($client, $review->id);
-        $this->assertSame($legacy->id, $cita->fresh()->profesionista->id); $this->assertSame($before, $this->snapshot($tables));
+        $this->assertSame($legacy->id, $cita->fresh()->profesionista_id); $this->assertSame($before, $this->snapshot($tables));
         $this->assertSame([], DB::select('PRAGMA foreign_key_check')); $this->assertSame('ok', DB::select('PRAGMA integrity_check')[0]->integrity_check);
         // Solo memoria: revertir la migración nueva, nunca una instalación persistente.
         $this->assertSame(0, Artisan::call('migrate:rollback', ['--database' => 'review_upgrade', '--step' => 1, '--force' => true]));

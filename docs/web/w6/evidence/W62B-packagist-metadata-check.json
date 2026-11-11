@@ -1,0 +1,1673 @@
+{
+    "checked_at_utc": "2026-11-11T02:21:39.483484+00:00",
+    "packages": [
+        {
+            "package": "brick/math",
+            "version": "0.13.1",
+            "source": "https://repo.packagist.org/p2/brick/math.json",
+            "sha256": "c50047d5bf3b19d4b3054df812db6924bcc853741d65c4f5cac3ec28b342e79b",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "carbonphp/carbon-doctrine-types",
+            "version": "3.2.0",
+            "source": "https://repo.packagist.org/p2/carbonphp/carbon-doctrine-types.json",
+            "sha256": "a41ea1f46d7a61f8e0b6d1e6755f21a2d9b671558c3c62305b795cda0796e531",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "dflydev/dot-access-data",
+            "version": "v3.0.3",
+            "source": "https://repo.packagist.org/p2/dflydev/dot-access-data.json",
+            "sha256": "7156b5f573848598411cb5ede50d3028323944f578b4364f7fa6085a210b70e1",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "doctrine/inflector",
+            "version": "2.0.10",
+            "source": "https://repo.packagist.org/p2/doctrine/inflector.json",
+            "sha256": "2c1d27636ab21aba04e10d4622310374ef679972aaac772ea7c7c7a58ea73bc8",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "doctrine/lexer",
+            "version": "3.0.1",
+            "source": "https://repo.packagist.org/p2/doctrine/lexer.json",
+            "sha256": "d5ca6d6d96c4ff95ed3c28731cf07e06a3ecb4ab23fef4ac2d46f4ef64401da2",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "dragonmantank/cron-expression",
+            "version": "v3.4.0",
+            "source": "https://repo.packagist.org/p2/dragonmantank/cron-expression.json",
+            "sha256": "933f7862badc7daaeaa1905a1b54265c46b9e45bf50af2730fe604443b1c41f0",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "egulias/email-validator",
+            "version": "4.0.4",
+            "source": "https://repo.packagist.org/p2/egulias/email-validator.json",
+            "sha256": "02410c0e3d5470fbcff9152cd780b75972870e041052232d2e576338c21c5701",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "fruitcake/php-cors",
+            "version": "v1.3.0",
+            "source": "https://repo.packagist.org/p2/fruitcake/php-cors.json",
+            "sha256": "08eec3ac35aeb880534f99f47a83b3f520b8b95c17e807f5587b9d99a85a6970",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "graham-campbell/result-type",
+            "version": "v1.1.3",
+            "source": "https://repo.packagist.org/p2/graham-campbell/result-type.json",
+            "sha256": "3810833248b1d1f53e0449985d60d108b9d28f6b504ff9802f518322e08f4b0e",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "guzzlehttp/guzzle",
+            "version": "7.16.1",
+            "source": "https://repo.packagist.org/p2/guzzlehttp/guzzle.json",
+            "sha256": "6700fd4866d7f7684910378fd6352428d789e92b035aea8510ac5ba58ede444b",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 15,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-cnw1-2ytm-cgr8",
+                    "affectedVersions": ">=8.0.0,<8.0.1|<7.15.2"
+                },
+                {
+                    "advisoryId": "PKSA-gcrk-3vtt-1r14",
+                    "affectedVersions": ">=8.0.0,<8.0.1|<7.15.2"
+                },
+                {
+                    "advisoryId": "PKSA-bbs6-q5q9-f3t4",
+                    "affectedVersions": "<7.15.1"
+                },
+                {
+                    "advisoryId": "PKSA-qxvb-2bpp-dnk6",
+                    "affectedVersions": "<7.15.1"
+                },
+                {
+                    "advisoryId": "PKSA-fy2t-3c5f-827y",
+                    "affectedVersions": "<7.15.1"
+                },
+                {
+                    "advisoryId": "PKSA-bcdd-5xc7-gwfb",
+                    "affectedVersions": "<7.12.3"
+                },
+                {
+                    "advisoryId": "PKSA-pwsk-hy21-4gby",
+                    "affectedVersions": "<7.14.2"
+                },
+                {
+                    "advisoryId": "PKSA-93qv-9n9h-6k6p",
+                    "affectedVersions": "<7.12.1"
+                },
+                {
+                    "advisoryId": "PKSA-k22t-f949-t9g6",
+                    "affectedVersions": "<7.12.1"
+                },
+                {
+                    "advisoryId": "PKSA-yfw5-9gnj-n2c7",
+                    "affectedVersions": ">=7,<7.4.5|>=4,<6.5.8"
+                },
+                {
+                    "advisoryId": "PKSA-k1b4-kshy-xgbh",
+                    "affectedVersions": ">=7,<7.4.5|>=4,<6.5.8"
+                },
+                {
+                    "advisoryId": "PKSA-2z36-j4q9-rsfy",
+                    "affectedVersions": ">=7,<7.4.4|>=4,<6.5.7"
+                },
+                {
+                    "advisoryId": "PKSA-fvw5-9t6n-nwvr",
+                    "affectedVersions": ">=7,<7.4.4|>=4,<6.5.7"
+                },
+                {
+                    "advisoryId": "PKSA-6d8m-6kgw-18zr",
+                    "affectedVersions": ">=7,<7.4.3|>=4,<6.5.6"
+                },
+                {
+                    "advisoryId": "PKSA-stmn-hvzq-wph6",
+                    "affectedVersions": ">=6,<6.2.1|>=4.0.0-rc2,<4.2.4|>=5,<5.3.1"
+                }
+            ]
+        },
+        {
+            "package": "guzzlehttp/promises",
+            "version": "2.6.0",
+            "source": "https://repo.packagist.org/p2/guzzlehttp/promises.json",
+            "sha256": "1cf3f016fa9402602b4fcd8bad610aa17cd59f0e1bd0733ecfa2535ed21af10b",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "guzzlehttp/psr7",
+            "version": "2.13.2",
+            "source": "https://repo.packagist.org/p2/guzzlehttp/psr7.json",
+            "sha256": "768d5a4aaf34205e04c1058fb6afbe744b0f256c3a30cb20a022b95a07c23217",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 6,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-vznr-tgp9-fd7d",
+                    "affectedVersions": "<2.12.3"
+                },
+                {
+                    "advisoryId": "PKSA-7qs6-zvnz-h66r",
+                    "affectedVersions": "<2.12.1"
+                },
+                {
+                    "advisoryId": "PKSA-gm5x-j3mz-71n9",
+                    "affectedVersions": "<2.10.2"
+                },
+                {
+                    "advisoryId": "PKSA-jj5t-2zs1-dcfm",
+                    "affectedVersions": "<2.10.2"
+                },
+                {
+                    "advisoryId": "PKSA-hn62-zkx4-1y5q",
+                    "affectedVersions": ">=2,<2.4.5|<1.9.1"
+                },
+                {
+                    "advisoryId": "PKSA-gvzg-s447-b5b5",
+                    "affectedVersions": ">=2,<2.1.1|<1.8.4"
+                }
+            ]
+        },
+        {
+            "package": "guzzlehttp/uri-template",
+            "version": "v1.0.4",
+            "source": "https://repo.packagist.org/p2/guzzlehttp/uri-template.json",
+            "sha256": "5350242ed5b1fa7c57df14d7e5ab993b574b62509946cf7c2aad54c263124973",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "laravel/framework",
+            "version": "v12.71.0",
+            "source": "https://repo.packagist.org/p2/laravel/framework.json",
+            "sha256": "5ade269064d4c3196732ba94ad62263972011b228a2710ab1e1cfde928a23ba6",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 30,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-b41t-wbzk-9q51",
+                    "affectedVersions": "<10.50.4|>=11.0.0,<11.56.1|>=12.0.0,<12.68.0|>=13.0.0,<13.27.0"
+                },
+                {
+                    "advisoryId": "PKSA-4hy6-m98j-dz9f",
+                    "affectedVersions": ">=13.0.0,<13.27.0|>=12.45.0,<12.68.0"
+                },
+                {
+                    "advisoryId": "PKSA-d5tc-s1qs-h781",
+                    "affectedVersions": ">=13.0.0,<13.30.0|<12.69.0"
+                },
+                {
+                    "advisoryId": "PKSA-3r5d-mb8f-1qw9",
+                    "affectedVersions": "<12.60.0|>=13.0.0,<=13.9.0"
+                },
+                {
+                    "advisoryId": "PKSA-m5cs-t1y6-qpcs",
+                    "affectedVersions": "<12.61.1|>=13.0.0,<13.12.0"
+                },
+                {
+                    "advisoryId": "PKSA-mdq4-51ck-6kdq",
+                    "affectedVersions": ">=9.0.0,<10.0.0|>=10.0.0,<11.0.0|>=11.0.0,<12.0.0|>=12.0.0,<12.60.0|>=13.0.0,<13.10.0"
+                },
+                {
+                    "advisoryId": "PKSA-q46n-4fdk-zjr4",
+                    "affectedVersions": ">=11.9.0,<11.36.0"
+                },
+                {
+                    "advisoryId": "PKSA-qzrn-rnz3-85w1",
+                    "affectedVersions": ">=11.9.0,<11.36.0"
+                },
+                {
+                    "advisoryId": "PKSA-8qx3-n5y5-vvnd",
+                    "affectedVersions": "<10.48.29|>=11.0.0,<11.44.1|>=12.0.0,<12.1.1"
+                },
+                {
+                    "advisoryId": "PKSA-w7xr-vk7n-rstm",
+                    "affectedVersions": "<6.20.45|>=7.0.0,<7.30.7|>=8.0.0,<8.83.28|>=9.0.0,<9.52.17|>=10.0.0,<10.48.23|>=11.0.0,<11.31.0"
+                },
+                {
+                    "advisoryId": "PKSA-11c9-dxsr-yqjb",
+                    "affectedVersions": ">=4.0.0,<4.1.29"
+                },
+                {
+                    "advisoryId": "PKSA-6wgv-k7p1-h4fg",
+                    "affectedVersions": ">=4.0.0,<4.1.26"
+                },
+                {
+                    "advisoryId": "PKSA-3qhw-gzjt-j63j",
+                    "affectedVersions": ">=5.6.0,<=5.6.29|<=5.5.40"
+                },
+                {
+                    "advisoryId": "PKSA-dpt9-7cmv-dk65",
+                    "affectedVersions": ">=5.7.0,<6.20.44"
+                },
+                {
+                    "advisoryId": "PKSA-p3rx-dfwp-73ny",
+                    "affectedVersions": ">=8.0.0,<8.71.0"
+                },
+                {
+                    "advisoryId": "PKSA-7ywf-hktb-jkn9",
+                    "affectedVersions": ">=7.0.0,<7.24.0|<6.18.35"
+                },
+                {
+                    "advisoryId": "PKSA-17kp-jm2n-vxzz",
+                    "affectedVersions": "<5.8.17"
+                },
+                {
+                    "advisoryId": "PKSA-njrm-6dtg-m2pc",
+                    "affectedVersions": "<6.20.42|>=7.0.0,<7.30.6|>=8.0.0,<8.75.0"
+                },
+                {
+                    "advisoryId": "PKSA-ckwp-rt7t-c46m",
+                    "affectedVersions": ">=6.0.0,<6.20.26|>=7.0.0,<7.30.5|>=8.0.0,<8.40.0"
+                },
+                {
+                    "advisoryId": "PKSA-4npr-btr6-zhny",
+                    "affectedVersions": ">=6.0.0,<6.20.14|>=7.0.0,<7.30.4|>=8.0.0,<8.24.0"
+                },
+                {
+                    "advisoryId": "PKSA-985r-hryy-555b",
+                    "affectedVersions": ">=6.0.0,<6.20.11|>=7.0.0,<7.30.2|>=8.0.0,<8.22.1"
+                },
+                {
+                    "advisoryId": "PKSA-nrj3-r2wg-yt8b",
+                    "affectedVersions": ">=4.1.0,<=4.1.99999|>=4.2.0,<=4.2.99999|>=5.0.0,<=5.0.99999|>=5.1.0,<=5.1.99999|>=5.2.0,<=5.2.99999|>=5.3.0,<=5.3.99999|>=5.4.0,<=5.4.99999|>=5.5.0,<=5.5.49|>=5.6.0,<=5.6.99999|>=5.7.0,<=5.7.99999|>=5.8.0,<=5.8.99999|>=6.0.0,<6.18.31|>=7.0.0,<7.22.4"
+                },
+                {
+                    "advisoryId": "PKSA-vhvj-tvg4-96jj",
+                    "affectedVersions": ">=5.5.0,<=5.5.49|>=6.0.0,<6.18.34|>=7.0.0,<7.23.2"
+                },
+                {
+                    "advisoryId": "PKSA-rvky-x3cg-y3qd",
+                    "affectedVersions": ">=7.0.0,<7.1.2"
+                },
+                {
+                    "advisoryId": "PKSA-fwj1-r2kg-bmxd",
+                    "affectedVersions": ">=5.3.0,<=5.3.31|>=5.4.0,<5.4.22"
+                },
+                {
+                    "advisoryId": "PKSA-mhj3-vthf-h41n",
+                    "affectedVersions": ">=4.0.0,<=4.0.11|>=4.1.0,<=4.1.31|>=4.2.0,<=4.2.22|>=5.0.0,<=5.0.35|>=5.1.0,<=5.1.46|>=5.2.0,<=5.2.45|>=5.3.0,<=5.3.31|>=5.4.0,<=5.4.36|>=5.5.0,<5.5.42|>=5.6.0,<5.6.30"
+                },
+                {
+                    "advisoryId": "PKSA-gf52-cc16-7thv",
+                    "affectedVersions": ">=4.0.0,<4.0.99|>=4.1.0,<4.1.26"
+                },
+                {
+                    "advisoryId": "PKSA-xf4x-p5c1-z9xq",
+                    "affectedVersions": ">=4.1.26,<=4.1.31|>=4.2.0,<=4.2.22|>=5.0.0,<=5.0.35|>=5.1.0,<=5.1.46|>=5.2.0,<=5.2.45|>=5.3.0,<=5.3.31|>=5.4.0,<=5.4.36|>=5.5.0,<5.5.10"
+                },
+                {
+                    "advisoryId": "PKSA-4d28-pz9s-51zj",
+                    "affectedVersions": ">=4.0.0,<4.0.99|>=4.1.0,<4.1.29"
+                },
+                {
+                    "advisoryId": "PKSA-cn77-7mny-v9zg",
+                    "affectedVersions": ">=4.0.0,<=4.0.11|>=4.1.0,<=4.1.31|>=4.2.0,<=4.2.22|>=5.0.0,<=5.0.35|>=5.1.0,<=5.1.46|>=5.2.0,<=5.2.45|>=5.3.0,<=5.3.31|>=5.4.0,<=5.4.36|>=5.5.0,<5.5.40|>=5.6.0,<5.6.15"
+                }
+            ]
+        },
+        {
+            "package": "laravel/prompts",
+            "version": "v0.3.5",
+            "source": "https://repo.packagist.org/p2/laravel/prompts.json",
+            "sha256": "62896076101a33275fa6f896227d5840e5d28a9b91d5c1467699f1ce5b7c045b",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "laravel/sanctum",
+            "version": "v4.3.3",
+            "source": "https://repo.packagist.org/p2/laravel/sanctum.json",
+            "sha256": "fe5a66ccfe9489317f3fb68b7dd64fb87cd39dc5fe78fd01830b636d340ab23f",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "laravel/serializable-closure",
+            "version": "v2.0.4",
+            "source": "https://repo.packagist.org/p2/laravel/serializable-closure.json",
+            "sha256": "4269abf5c6d5bff39e04d5c0c430ab63137218ad884e69e62f3f8bf50fde521f",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "laravel/tinker",
+            "version": "v2.10.1",
+            "source": "https://repo.packagist.org/p2/laravel/tinker.json",
+            "sha256": "bae59eb7739eb37233148c11f0450cef3601182f6195be00da0a78fd9bc51a1e",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "league/commonmark",
+            "version": "2.10.7",
+            "source": "https://repo.packagist.org/p2/league/commonmark.json",
+            "sha256": "69abd78d34dec884eadceb7a2d2f7d3799534aa9e9400311c406728c9c0415eb",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 18,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-m4t9-vsgq-8khn",
+                    "affectedVersions": ">=2.0.0,<=2.10.1"
+                },
+                {
+                    "advisoryId": "PKSA-m2dq-1fhr-29b1",
+                    "affectedVersions": ">=1.3.0,<=2.10.1"
+                },
+                {
+                    "advisoryId": "PKSA-nv44-1b4d-6gjg",
+                    "affectedVersions": ">=1.5.0,<2.9.1"
+                },
+                {
+                    "advisoryId": "PKSA-zyf5-hrxv-hrd7",
+                    "affectedVersions": ">=1.5.0,<2.10.0"
+                },
+                {
+                    "advisoryId": "PKSA-kr3s-894t-g5w2",
+                    "affectedVersions": ">=2.7.0,<2.9.1"
+                },
+                {
+                    "advisoryId": "PKSA-9q1p-3s19-bp1q",
+                    "affectedVersions": ">=0.6.0,<2.9.1"
+                },
+                {
+                    "advisoryId": "PKSA-cqd6-fg4n-nxpf",
+                    "affectedVersions": ">=2.0.0,<2.9.0"
+                },
+                {
+                    "advisoryId": "PKSA-1q6p-sqkj-8mmj",
+                    "affectedVersions": ">=1.5.0,<2.9.0"
+                },
+                {
+                    "advisoryId": "PKSA-5mzr-szzf-z6cn",
+                    "affectedVersions": ">=2.0.0,<2.9.0"
+                },
+                {
+                    "advisoryId": "PKSA-scnn-p8mm-jbft",
+                    "affectedVersions": ">=1.5.0,<=2.8.3"
+                },
+                {
+                    "advisoryId": "PKSA-t21r-vtr5-3mdz",
+                    "affectedVersions": ">=0.6.0,<2.9.0"
+                },
+                {
+                    "advisoryId": "PKSA-mc58-w91n-f5gv",
+                    "affectedVersions": ">=1.5.0,<2.9.0"
+                },
+                {
+                    "advisoryId": "PKSA-21fb-n1x5-5nf7",
+                    "affectedVersions": ">=2.3.0,<=2.8.1"
+                },
+                {
+                    "advisoryId": "PKSA-2cx9-ynrq-qdk3",
+                    "affectedVersions": ">=2.0.0,<=2.8.0"
+                },
+                {
+                    "advisoryId": "PKSA-rqc2-tcc6-nc79",
+                    "affectedVersions": ">=1.5.0,<2.7.0"
+                },
+                {
+                    "advisoryId": "PKSA-fndg-qryc-dyc9",
+                    "affectedVersions": "<2.6.0"
+                },
+                {
+                    "advisoryId": "PKSA-g6p7-7rfc-zbp2",
+                    "affectedVersions": ">=0.15.6,<0.18.1"
+                },
+                {
+                    "advisoryId": "PKSA-nyyp-2pk1-frkz",
+                    "affectedVersions": "<0.18.3"
+                }
+            ]
+        },
+        {
+            "package": "league/config",
+            "version": "v1.2.0",
+            "source": "https://repo.packagist.org/p2/league/config.json",
+            "sha256": "5d639c563abfdf92762eb3fc837bd2d3bb3a2f62d2ae985c0a00c9367f90d970",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "league/flysystem",
+            "version": "3.36.0",
+            "source": "https://repo.packagist.org/p2/league/flysystem.json",
+            "sha256": "ab116620fbc10553bb78432b25eac9622fca6db5d0216a87af38cc05da494105",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 2,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-w9tt-7782-78jx",
+                    "affectedVersions": "<=3.35.2"
+                },
+                {
+                    "advisoryId": "PKSA-pwh8-d4fr-nywn",
+                    "affectedVersions": "<1.1.4|>=2.0.0,<2.1.1"
+                }
+            ]
+        },
+        {
+            "package": "league/flysystem-local",
+            "version": "3.29.0",
+            "source": "https://repo.packagist.org/p2/league/flysystem-local.json",
+            "sha256": "94021e44524f5d75d942568e8598f4eebb79dd1997f7c38311d42847dc84a210",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "league/mime-type-detection",
+            "version": "1.16.0",
+            "source": "https://repo.packagist.org/p2/league/mime-type-detection.json",
+            "sha256": "9e866a7c7186ca02ee64789bbb70ef303067df952f9605401ede164b70817bf7",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "league/uri",
+            "version": "7.5.1",
+            "source": "https://repo.packagist.org/p2/league/uri.json",
+            "sha256": "6f320372d62c5b4dc88941e07484275f162d5452913cf86d9fa35677bd852a93",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "league/uri-interfaces",
+            "version": "7.5.0",
+            "source": "https://repo.packagist.org/p2/league/uri-interfaces.json",
+            "sha256": "0ba8e86e2c4cee184ea2ff4c8828dd75cb5dbc430acb512942ba0a48df8e9dc9",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "monolog/monolog",
+            "version": "3.10.0",
+            "source": "https://repo.packagist.org/p2/monolog/monolog.json",
+            "sha256": "cd56610dd4a54f6c415c377d362d7007f8b4028cc118d366fd6c8a05d46d2463",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-dmw8-jd8k-q3c6",
+                    "affectedVersions": ">=1.8.0,<1.12.0"
+                }
+            ]
+        },
+        {
+            "package": "nesbot/carbon",
+            "version": "3.10.1",
+            "source": "https://repo.packagist.org/p2/nesbot/carbon.json",
+            "sha256": "40a44e2aae17abd9dfbf78aa0b334999d81314031fdf778590119c83b1f007e0",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-csyb-yc4p-mnbs",
+                    "affectedVersions": "<2.72.6|>=3.0.0,<3.8.4"
+                }
+            ]
+        },
+        {
+            "package": "nette/schema",
+            "version": "v1.3.2",
+            "source": "https://repo.packagist.org/p2/nette/schema.json",
+            "sha256": "417565a332647280a012c12c6cceb14ebb071c28a1cb1e257b66e99685601b31",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "nette/utils",
+            "version": "v4.0.7",
+            "source": "https://repo.packagist.org/p2/nette/utils.json",
+            "sha256": "f3f0e5e1508df7b39f88ecb2b40f1d7a6cf248e186e0bac540aed57d3497eece",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "nikic/php-parser",
+            "version": "v5.9.0",
+            "source": "https://repo.packagist.org/p2/nikic/php-parser.json",
+            "sha256": "b6c522a2cf7a44fc6465b3b68f5acf5628887db5b1ae9ad5027afd67acb0685a",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "nunomaduro/termwind",
+            "version": "v2.3.1",
+            "source": "https://repo.packagist.org/p2/nunomaduro/termwind.json",
+            "sha256": "9fd27f5aeff39c4415bdff13735165891bca45791344c145c08d4f87ab0529a3",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phpoption/phpoption",
+            "version": "1.9.3",
+            "source": "https://repo.packagist.org/p2/phpoption/phpoption.json",
+            "sha256": "8e33fa9d21799aec8a151dd723cdc4f3884ee60e28e9f7ad83fa9c5afbcab6cd",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/clock",
+            "version": "1.0.0",
+            "source": "https://repo.packagist.org/p2/psr/clock.json",
+            "sha256": "37d6c445d097282ce7b15d0bc0f6a095598e00d593c3fcdf5fd9c7c51c1fa76e",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/container",
+            "version": "2.0.2",
+            "source": "https://repo.packagist.org/p2/psr/container.json",
+            "sha256": "e02004ac562a83500e694bb5984558682bf6945f0bae178027c6310809ea7e73",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/event-dispatcher",
+            "version": "1.0.0",
+            "source": "https://repo.packagist.org/p2/psr/event-dispatcher.json",
+            "sha256": "98d26bd858fa1f32f4933754ead60214110b2f866b4517ac071b5b489ba1b211",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/http-client",
+            "version": "1.0.3",
+            "source": "https://repo.packagist.org/p2/psr/http-client.json",
+            "sha256": "43137b4ee4eae8652bc196b7a46bc2bb0e5c54a342a3a54f5d9869b3c97a33bb",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/http-factory",
+            "version": "1.1.0",
+            "source": "https://repo.packagist.org/p2/psr/http-factory.json",
+            "sha256": "4ea443401e67828564b25a02850085d9ef71b7e20f15dadcb2d824cef71f6712",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/http-message",
+            "version": "2.0",
+            "source": "https://repo.packagist.org/p2/psr/http-message.json",
+            "sha256": "2c9daf58eee72092f0654eda6504fc7f6124f3766c32c99146db5ff53e11c5b0",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/log",
+            "version": "3.0.2",
+            "source": "https://repo.packagist.org/p2/psr/log.json",
+            "sha256": "d4e9722b22c2d08fb65e891b5786462fea3df79665cafab308880802be09afa1",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psr/simple-cache",
+            "version": "3.0.0",
+            "source": "https://repo.packagist.org/p2/psr/simple-cache.json",
+            "sha256": "c1c7cc1497b0213362ed23731163bddbb668a31ee8dfa1cdf3af709fb47172bf",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "psy/psysh",
+            "version": "v0.12.24",
+            "source": "https://repo.packagist.org/p2/psy/psysh.json",
+            "sha256": "293bc1c61983fbe5fbe4af70920f7c5f7c0dd261af5a8d66adc43209e231e5d5",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-4s4z-t146-6123",
+                    "affectedVersions": "<=0.11.22|>=0.12.0,<=0.12.18"
+                }
+            ]
+        },
+        {
+            "package": "ralouphie/getallheaders",
+            "version": "3.0.3",
+            "source": "https://repo.packagist.org/p2/ralouphie/getallheaders.json",
+            "sha256": "37bc3088711cc08a677d6b0571cf584eca2d7de7cb8c10f4c3ff0ca7ca2c974a",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "ramsey/collection",
+            "version": "2.1.1",
+            "source": "https://repo.packagist.org/p2/ramsey/collection.json",
+            "sha256": "3db4cd59b42ed25c9ba0440202e8fb0cc48bc03deaf7cd63b43c23ae0571c6d0",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "ramsey/uuid",
+            "version": "4.8.1",
+            "source": "https://repo.packagist.org/p2/ramsey/uuid.json",
+            "sha256": "9c20298a92b3162ea63ad01c26bfbca1617e5883691a064862eca44ba7324a9a",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/clock",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/clock.json",
+            "sha256": "1dcbfe0b70f661bd13209e5dc6d639894223654046e500f8007044179bfb1b45",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/console",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/console.json",
+            "sha256": "7ec152723c6e25ccf40a5b14aa5824120d844366b20f8c64777694f797e2639f",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/css-selector",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/css-selector.json",
+            "sha256": "ca293aa302aea1feb3b6f65886885529d2eb55f1f8ad686908efbd712ceb5c34",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/deprecation-contracts",
+            "version": "v3.6.0",
+            "source": "https://repo.packagist.org/p2/symfony/deprecation-contracts.json",
+            "sha256": "ac42b2a6194425ee54e4bc6bb0a9b9458fa33d8eb2551d8df02c5a22a377846a",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/error-handler",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/error-handler.json",
+            "sha256": "6c0287f4450d456bed8a98609a949e79428c1ce54d6eb7430fc3ab87015e9d8a",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-879x-hms2-k3mp",
+                    "affectedVersions": ">=4.4.0,<4.4.4|>=5.0.0,<5.0.4"
+                }
+            ]
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/event-dispatcher.json",
+            "sha256": "060c5f279b1ae153bd0edcf95c3238c65ca470ad8eddfb7a43c55707b9a4f1dd",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/event-dispatcher-contracts",
+            "version": "v3.6.0",
+            "source": "https://repo.packagist.org/p2/symfony/event-dispatcher-contracts.json",
+            "sha256": "4e26892546d1757396532215b8cd312e5ed6c8a80b4782738c5feca8b2f182f4",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/finder",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/finder.json",
+            "sha256": "58801e94b8c12bb42ee0ead2a6257d21868caabe0c878cc1c1c5a494dc5af3e9",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/http-foundation",
+            "version": "v7.4.23",
+            "source": "https://repo.packagist.org/p2/symfony/http-foundation.json",
+            "sha256": "638c3acf12a56049f3819badc528396ad38440de8a2aefde6323f2e5a4dafbae",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 19,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-24ph-xkrh-y79j",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.56|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.50|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.23|>=8.0.0,<8.1.0|>=8.1.0,<8.1.11"
+                },
+                {
+                    "advisoryId": "PKSA-pr6q-2w5s-kzzf",
+                    "affectedVersions": ">=5.4.50,<5.4.56|>=6.4.29,<6.4.50|>=7.3.7,<7.4.0|>=7.4.0,<7.4.23|>=8.0.0,<8.1.0|>=8.1.0,<8.1.11"
+                },
+                {
+                    "advisoryId": "PKSA-nxjs-s6hn-vb6m",
+                    "affectedVersions": ">=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.23|>=8.0.0,<8.1.0|>=8.1.0,<8.1.11"
+                },
+                {
+                    "advisoryId": "PKSA-b2gg-vk1g-6d5q",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.4.0|>=2.4.0,<2.5.0|>=2.5.0,<2.6.0|>=2.6.0,<2.7.0|>=2.7.0,<2.8.0|>=2.8.0,<3.0.0|>=3.0.0,<3.1.0|>=3.1.0,<3.2.0|>=3.2.0,<3.3.0|>=3.3.0,<3.4.0|>=3.4.0,<4.0.0|>=4.0.0,<4.1.0|>=4.1.0,<4.2.0|>=4.2.0,<4.3.0|>=4.3.0,<4.4.0|>=4.4.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.56|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.50|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.23|>=8.0.0,<8.1.0|>=8.1.0,<8.1.11"
+                },
+                {
+                    "advisoryId": "PKSA-xmwy-rmx5-m7h4",
+                    "affectedVersions": ">=5.4.1,<5.4.54|>=6.0.1,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.46|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.19|>=8.0.0,<8.1.0|>=8.1.0,<8.1.7"
+                },
+                {
+                    "advisoryId": "PKSA-y6py-qpv1-h52p",
+                    "affectedVersions": ">=6.4.0,<6.4.41|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.13|>=8.0.0,<8.0.13"
+                },
+                {
+                    "advisoryId": "PKSA-365x-2zjk-pt47",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.50|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.29|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.3.7"
+                },
+                {
+                    "advisoryId": "PKSA-b35n-565h-rs4q",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.46|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.14|>=7.0.0,<7.1.0|>=7.1.0,<7.1.7"
+                },
+                {
+                    "advisoryId": "PKSA-nqj4-v43p-2gxc",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.4.0|>=2.4.0,<2.5.0|>=2.5.0,<2.6.0|>=2.6.0,<2.7.0|>=2.7.0,<2.7.49|>=2.8.0,<2.8.44|>=3.0.0,<3.1.0|>=3.1.0,<3.2.0|>=3.2.0,<3.3.0|>=3.3.0,<3.3.18|>=3.4.0,<3.4.14|>=4.0.0,<4.0.14|>=4.1.0,<4.1.3"
+                },
+                {
+                    "advisoryId": "PKSA-tf6z-kynr-311v",
+                    "affectedVersions": ">=2.0.0,<2.0.24|>=2.1.0,<2.1.12|>=2.2.0,<2.2.5|>=2.3.0,<2.3.3"
+                },
+                {
+                    "advisoryId": "PKSA-md26-zdw9-222r",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.3.27|>=2.4.0,<2.5.0|>=2.5.0,<2.5.11|>=2.6.0,<2.6.6"
+                },
+                {
+                    "advisoryId": "PKSA-hd3k-4852-jhv2",
+                    "affectedVersions": ">=2.0.0,<2.0.19|>=2.1.0,<2.1.4"
+                },
+                {
+                    "advisoryId": "PKSA-t4rz-hp2g-57t1",
+                    "affectedVersions": ">=4.4.0,<4.4.7|>=5.0.0,<5.0.7"
+                },
+                {
+                    "advisoryId": "PKSA-324d-pqmd-hptz",
+                    "affectedVersions": ">=2.7.0,<2.7.51|>=2.8.0,<2.8.50|>=3.0.0,<3.1.0|>=3.1.0,<3.2.0|>=3.2.0,<3.3.0|>=3.3.0,<3.4.0|>=3.4.0,<3.4.26|>=4.0.0,<4.1.0|>=4.1.0,<4.1.12|>=4.2.0,<4.2.7"
+                },
+                {
+                    "advisoryId": "PKSA-rhzp-d9k8-shyq",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.3.19|>=2.4.0,<2.4.9|>=2.5.0,<2.5.4"
+                },
+                {
+                    "advisoryId": "PKSA-9w98-4rwq-spxr",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.4.0|>=2.4.0,<2.5.0|>=2.5.0,<2.6.0|>=2.6.0,<2.7.0|>=2.7.0,<2.8.0|>=2.8.0,<2.8.52|>=3.0.0,<3.1.0|>=3.1.0,<3.2.0|>=3.2.0,<3.3.0|>=3.3.0,<3.4.0|>=3.4.0,<3.4.35|>=4.0.0,<4.1.0|>=4.1.0,<4.2.0|>=4.2.0,<4.2.12|>=4.3.0,<4.3.8"
+                },
+                {
+                    "advisoryId": "PKSA-f8b8-pbjy-s9k8",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.4.0|>=2.4.0,<2.5.0|>=2.5.0,<2.6.0|>=2.6.0,<2.7.0|>=2.7.0,<2.7.48|>=2.8.0,<2.8.41|>=3.0.0,<3.1.0|>=3.1.0,<3.2.0|>=3.2.0,<3.3.0|>=3.3.0,<3.3.17|>=3.4.0,<3.4.11|>=4.0.0,<4.0.11"
+                },
+                {
+                    "advisoryId": "PKSA-msdq-r83n-tdy4",
+                    "affectedVersions": ">=2.0.0,<2.0.19"
+                },
+                {
+                    "advisoryId": "PKSA-dr6c-z2rf-wh36",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.3.19|>=2.4.0,<2.4.9|>=2.5.0,<2.5.4"
+                }
+            ]
+        },
+        {
+            "package": "symfony/http-kernel",
+            "version": "v7.4.23",
+            "source": "https://repo.packagist.org/p2/symfony/http-kernel.json",
+            "sha256": "0a9e51ea2f8fd55d52ccbd167e4d41b492bec052e335306975c5fcffac79dd0c",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 9,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-3gxv-7xhq-mgmz",
+                    "affectedVersions": ">=2.8.44,<3.0.0|>=3.4.14,<4.0.0|>=4.0.14,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.56|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.50|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.23|>=8.0.0,<8.1.0|>=8.1.0,<8.1.11"
+                },
+                {
+                    "advisoryId": "PKSA-dw7n-x7f5-zf63",
+                    "affectedVersions": ">=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+                },
+                {
+                    "advisoryId": "PKSA-hr4y-jwk2-1yb9",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.4.0|>=2.4.0,<2.5.0|>=2.5.0,<2.6.0|>=2.6.0,<2.7.0|>=2.7.0,<2.8.0|>=2.8.0,<3.0.0|>=3.0.0,<3.1.0|>=3.1.0,<3.2.0|>=3.2.0,<3.3.0|>=3.3.0,<3.4.0|>=3.4.0,<4.0.0|>=4.0.0,<4.1.0|>=4.1.0,<4.2.0|>=4.2.0,<4.3.0|>=4.3.0,<4.4.0|>=4.4.0,<4.4.50|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.20|>=6.0.0,<6.0.20|>=6.1.0,<6.1.12|>=6.2.0,<6.2.6"
+                },
+                {
+                    "advisoryId": "PKSA-ftqt-8gzv-r53t",
+                    "affectedVersions": ">=5.2.0,<5.3.0|>=5.3.0,<5.3.12"
+                },
+                {
+                    "advisoryId": "PKSA-8knv-7jsn-12w8",
+                    "affectedVersions": ">=4.3.0,<4.4.0|>=4.4.0,<4.4.13|>=5.0.0,<5.1.0|>=5.1.0,<5.1.5"
+                },
+                {
+                    "advisoryId": "PKSA-35ts-w5by-rx5d",
+                    "affectedVersions": ">=2.3.19,<2.3.29|>=2.4.9,<2.5.0|>=2.5.4,<2.5.12|>=2.6.0,<2.6.8"
+                },
+                {
+                    "advisoryId": "PKSA-6dsk-crym-v443",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.3.19|>=2.4.0,<2.4.9|>=2.5.0,<2.5.4"
+                },
+                {
+                    "advisoryId": "PKSA-15jn-wzq4-94pw",
+                    "affectedVersions": ">=2.0.0,<2.1.0|>=2.1.0,<2.2.0|>=2.2.0,<2.3.0|>=2.3.0,<2.3.27|>=2.4.0,<2.5.0|>=2.5.0,<2.5.11|>=2.6.0,<2.6.6"
+                },
+                {
+                    "advisoryId": "PKSA-sn9k-4yr8-6s9c",
+                    "affectedVersions": ">=2.2.0,<2.3.0|>=2.3.0,<2.4.0|>=2.4.0,<2.5.0|>=2.5.0,<2.6.0|>=2.6.0,<2.7.0|>=2.7.0,<2.8.0|>=2.8.0,<2.8.52|>=3.0.0,<3.1.0|>=3.1.0,<3.2.0|>=3.2.0,<3.3.0|>=3.3.0,<3.4.0|>=3.4.0,<3.4.35|>=4.0.0,<4.1.0|>=4.1.0,<4.2.0|>=4.2.0,<4.2.12|>=4.3.0,<4.3.8"
+                }
+            ]
+        },
+        {
+            "package": "symfony/mailer",
+            "version": "v7.4.22",
+            "source": "https://repo.packagist.org/p2/symfony/mailer.json",
+            "sha256": "860d8b47bebc2bf8b62826eb84d1357bef7344721631da4b8b8edad5b6d50689",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-28rh-rzzn-djk4",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+                }
+            ]
+        },
+        {
+            "package": "symfony/mime",
+            "version": "v7.4.22",
+            "source": "https://repo.packagist.org/p2/symfony/mime.json",
+            "sha256": "616e122bcfa2d6631fc9f9e6e5e2b4d9643ff79e7698fe3fb64d5bb3dce190d3",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 3,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-wtxr-p26d-nn42",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.55|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.49|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.22|>=8.0.0,<8.1.0|>=8.1.0,<8.1.10"
+                },
+                {
+                    "advisoryId": "PKSA-2n2k-66v2-bwg3",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+                },
+                {
+                    "advisoryId": "PKSA-7y15-t1fp-w94f",
+                    "affectedVersions": ">=4.3.0,<4.3.8"
+                }
+            ]
+        },
+        {
+            "package": "symfony/polyfill-ctype",
+            "version": "v1.32.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-ctype.json",
+            "sha256": "af5b59026983b3c83e231bd4c6bb054fc5dd6b88eb6188744bcf475f80d0189b",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-intl-grapheme",
+            "version": "v1.32.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-intl-grapheme.json",
+            "sha256": "8fa3cc626a97129febd205104dcca61f2513639c6c6090ea66080cb1cd2021d5",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-intl-idn",
+            "version": "v1.43.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-intl-idn.json",
+            "sha256": "c2753ecbafd65f3ee2b99ce697008ae4b93d0d886db4444965962b5c8da53732",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-dwsq-ppd2-mb1x",
+                    "affectedVersions": ">=1.17.1,<1.38.1"
+                }
+            ]
+        },
+        {
+            "package": "symfony/polyfill-intl-normalizer",
+            "version": "v1.33.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-intl-normalizer.json",
+            "sha256": "da98e5ca84a58b58a1490f904da673476db5a030b37e9a086c8b66973305f7b7",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-mbstring",
+            "version": "v1.33.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-mbstring.json",
+            "sha256": "7cccc308458f69cb780fa018f54059d1836b71cb02e1b8173786efe2418c835e",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-php80",
+            "version": "v1.32.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-php80.json",
+            "sha256": "b6680191213110eb99d7da530205eb6acc357952a01af61a816cf0ff5e5b2bbb",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-php83",
+            "version": "v1.43.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-php83.json",
+            "sha256": "b6e3962c63c9eee0ca5d68ffa4e73f9edb0821ebd85d2ef589a9c1a3427d09a7",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-php84",
+            "version": "v1.43.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-php84.json",
+            "sha256": "4f799742e3660b8697f9e624f27167fe92cf82062797ae78843aa0508d22f174",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-php85",
+            "version": "v1.43.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-php85.json",
+            "sha256": "8df569dfb0083294283524a4554bddfa5e3d694d7301ea21b9930f149d222f3a",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/polyfill-uuid",
+            "version": "v1.32.0",
+            "source": "https://repo.packagist.org/p2/symfony/polyfill-uuid.json",
+            "sha256": "53d7a5a1aa0f2bccb51b56786303cc8fa519d1548c2987a031174155763c66f7",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/process",
+            "version": "v7.4.22",
+            "source": "https://repo.packagist.org/p2/symfony/process.json",
+            "sha256": "5f407f4e2b3231aa107c2eaa6282776f8f383ad29240ecb2053d0524054e1d56",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 2,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-rkkf-636k-qjb3",
+                    "affectedVersions": ">=8.0,<8.0.5|>=7.4,<7.4.5|>=7.3,<7.3.11|>=6.4,<6.4.33|<5.4.51"
+                },
+                {
+                    "advisoryId": "PKSA-wws7-mr54-jsny",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.46|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.14|>=7.0.0,<7.1.0|>=7.1.0,<7.1.7"
+                }
+            ]
+        },
+        {
+            "package": "symfony/routing",
+            "version": "v7.4.23",
+            "source": "https://repo.packagist.org/p2/symfony/routing.json",
+            "sha256": "4cd5acd891de0ec4b538aa133f326a1fce7f020e52f1772116c8b5646a302ef7",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 5,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-y8c5-1b7f-r1gj",
+                    "affectedVersions": ">=4.1.0,<4.2.0|>=4.2.0,<4.3.0|>=4.3.0,<4.4.0|>=4.4.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.56|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.50|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.23|>=8.0.0,<8.1.0|>=8.1.0,<8.1.11"
+                },
+                {
+                    "advisoryId": "PKSA-bf7t-jnpz-492k",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.53|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.41|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.13|>=8.0.0,<8.0.13"
+                },
+                {
+                    "advisoryId": "PKSA-yc7t-91v9-99xs",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+                },
+                {
+                    "advisoryId": "PKSA-g1jq-pppn-wyhk",
+                    "affectedVersions": ">=2.0.0,<2.0.17"
+                },
+                {
+                    "advisoryId": "PKSA-p71j-52x5-sfs1",
+                    "affectedVersions": ">=2.0.0,<2.0.19"
+                }
+            ]
+        },
+        {
+            "package": "symfony/service-contracts",
+            "version": "v3.6.0",
+            "source": "https://repo.packagist.org/p2/symfony/service-contracts.json",
+            "sha256": "6c19658bf53bcb18487ab27db63d60e91fdcdca4592505d511b485fe94296c27",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/string",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/string.json",
+            "sha256": "91c7d9b0a9763066fe423cf56116e52508c93cd638ad16968815c9d7f5f19dc4",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/translation",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/translation.json",
+            "sha256": "2e4920cab28d54fe6ed6a23e57b19ed51c442caac1d77b8c51dd2c9a77cfa2ac",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-9dxk-2dxf-2khq",
+                    "affectedVersions": ">=2.0.0,<2.0.17"
+                }
+            ]
+        },
+        {
+            "package": "symfony/translation-contracts",
+            "version": "v3.6.0",
+            "source": "https://repo.packagist.org/p2/symfony/translation-contracts.json",
+            "sha256": "e0dbeb164e38f56d4abf669ae88f1d8769b61703104b4017243fc8253261b826",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/uid",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/uid.json",
+            "sha256": "81189eeba1b007dc2cf276ef24f3a9e209940d1b4923b796de604ba9662d2b21",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/var-dumper",
+            "version": "v7.3.0",
+            "source": "https://repo.packagist.org/p2/symfony/var-dumper.json",
+            "sha256": "5bdce651e7e5ee3e3b600d73e35a87894a5c03169eaaee073c3afea37a8a1f48",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "tijsverkoyen/css-to-inline-styles",
+            "version": "v2.3.0",
+            "source": "https://repo.packagist.org/p2/tijsverkoyen/css-to-inline-styles.json",
+            "sha256": "e9382ecf1c417e7c09d54cb426ae76d2ea08c573cdc1887844607c8ccaeb225c",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "vlucas/phpdotenv",
+            "version": "v5.6.2",
+            "source": "https://repo.packagist.org/p2/vlucas/phpdotenv.json",
+            "sha256": "9db519a9bd97cd9cf80f74dac90b629245edf64f8f50867c0b9e18e3060306c8",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "voku/portable-ascii",
+            "version": "2.0.3",
+            "source": "https://repo.packagist.org/p2/voku/portable-ascii.json",
+            "sha256": "ae886b42e9ca6cf295f5c9852f4cf4bf8cc551d03ccb8b80012b476cc2d5e318",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "webmozart/assert",
+            "version": "1.11.0",
+            "source": "https://repo.packagist.org/p2/webmozart/assert.json",
+            "sha256": "ee43866fec3a9011be6dec3daaeda3f19113013186884a01e24e9fea6fd09afa",
+            "scope": "production",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "fakerphp/faker",
+            "version": "v1.24.1",
+            "source": "https://repo.packagist.org/p2/fakerphp/faker.json",
+            "sha256": "1e889e5394f24490ea9a76408ce1634e15b0eed460bd34511ae8512ba2811738",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "filp/whoops",
+            "version": "2.18.3",
+            "source": "https://repo.packagist.org/p2/filp/whoops.json",
+            "sha256": "319f7e225a428553273bb547742761f4880fe86f85f3dce2b8a97e35a818c3dc",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 1,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-vbfj-ghxh-xgb7",
+                    "affectedVersions": "<2.1.13"
+                }
+            ]
+        },
+        {
+            "package": "hamcrest/hamcrest-php",
+            "version": "v2.1.1",
+            "source": "https://repo.packagist.org/p2/hamcrest/hamcrest-php.json",
+            "sha256": "0935ed6ddaf0cb9b6b8600b81f784a22249c3be24675510b2542e166c78a6e29",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "laravel/pail",
+            "version": "v1.2.3",
+            "source": "https://repo.packagist.org/p2/laravel/pail.json",
+            "sha256": "5589970ee4b463a4ce461f3c30e64df280305bfc98a874b6ee54c6c24fd03019",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "laravel/pint",
+            "version": "v1.22.1",
+            "source": "https://repo.packagist.org/p2/laravel/pint.json",
+            "sha256": "b160a2ef4c2caa9f454e5f001a6723a92cf97e825fb8b1de286e966a24bbca94",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "laravel/sail",
+            "version": "v1.43.1",
+            "source": "https://repo.packagist.org/p2/laravel/sail.json",
+            "sha256": "abc6c2f81be18df65aa828ee89252f9a7d7b6dfdff68b6bbef4c32c8f2ed8171",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "mockery/mockery",
+            "version": "1.6.12",
+            "source": "https://repo.packagist.org/p2/mockery/mockery.json",
+            "sha256": "691de101719ef8e70e07152dc12cec7f09d42f01b3d83659bff4cc15817b648c",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "myclabs/deep-copy",
+            "version": "1.14.0",
+            "source": "https://repo.packagist.org/p2/myclabs/deep-copy.json",
+            "sha256": "6522fb33d0ec06ad74f6afe5d63f230970f3595e66ed7397f3c71d91de00736d",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "nunomaduro/collision",
+            "version": "v8.8.1",
+            "source": "https://repo.packagist.org/p2/nunomaduro/collision.json",
+            "sha256": "0ff82b97196ecec4675ae13fe7d2c08b1459ce679674dda27b0be47892ba308f",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phar-io/manifest",
+            "version": "2.0.4",
+            "source": "https://repo.packagist.org/p2/phar-io/manifest.json",
+            "sha256": "c7716fba31d8cae1d67b312b962631155600cd166ff81b4e2f1a3ae40af76fad",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phar-io/version",
+            "version": "3.2.1",
+            "source": "https://repo.packagist.org/p2/phar-io/version.json",
+            "sha256": "f78cd5c812673ea6ba565ec227ac2575bc92a9f1ee001b35ed608d733fea5b22",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phpunit/php-code-coverage",
+            "version": "11.0.12",
+            "source": "https://repo.packagist.org/p2/phpunit/php-code-coverage.json",
+            "sha256": "317b8ffa2e99a771bb6979b10d04b4efb8444643e241c3c364466f5699060ac4",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phpunit/php-file-iterator",
+            "version": "5.1.1",
+            "source": "https://repo.packagist.org/p2/phpunit/php-file-iterator.json",
+            "sha256": "50c19f1afac68eeca5c7949d9ab8a3e223d028afe07f4c9b558eecb5838c10d8",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phpunit/php-invoker",
+            "version": "5.0.1",
+            "source": "https://repo.packagist.org/p2/phpunit/php-invoker.json",
+            "sha256": "db0d07020cfbe0e689a8bfe978c12db5f3590f9b440c0dc679c9c3cfa5250d0d",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phpunit/php-text-template",
+            "version": "4.0.1",
+            "source": "https://repo.packagist.org/p2/phpunit/php-text-template.json",
+            "sha256": "1a8d0a046d3d6ae7543a1cc7fd74ec7600476bb74f2254512c90fa9d53ccf63c",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phpunit/php-timer",
+            "version": "7.0.1",
+            "source": "https://repo.packagist.org/p2/phpunit/php-timer.json",
+            "sha256": "86a8c1bc58a265555de2c451bd5aa86c4bd99ba557446e6f8abb91d9131fe218",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "phpunit/phpunit",
+            "version": "11.5.57",
+            "source": "https://repo.packagist.org/p2/phpunit/phpunit.json",
+            "sha256": "62a7f8e756ba0831c80d784fe6993cf41276662c7d349ffcccc3d71d873f0332",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 5,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-qhjm-rpqc-qkn6",
+                    "affectedVersions": ">=13.4.0,<13.4.4"
+                },
+                {
+                    "advisoryId": "PKSA-qccq-2pht-gg3w",
+                    "affectedVersions": ">=13.1.5,<13.1.6|>=12.5.21,<12.5.22"
+                },
+                {
+                    "advisoryId": "PKSA-5jz8-6tcw-pbk4",
+                    "affectedVersions": ">=12.5.21,<12.5.22|>=13.1.5,<13.1.6"
+                },
+                {
+                    "advisoryId": "PKSA-z3gr-8qht-p93v",
+                    "affectedVersions": ">=0,<8.5.52|>=9.0.0,<9.6.33|>=10.0.0,<10.5.62|>=11.0.0,<11.5.50|>=12.0.0,<12.5.8"
+                },
+                {
+                    "advisoryId": "PKSA-w57n-mhp6-c9sd",
+                    "affectedVersions": ">=5.0.10,<5.6.3|>=4.8.19,<4.8.28"
+                }
+            ]
+        },
+        {
+            "package": "sebastian/cli-parser",
+            "version": "3.0.2",
+            "source": "https://repo.packagist.org/p2/sebastian/cli-parser.json",
+            "sha256": "e070cd7064cd8aa05ea67d502d350672b0d701952fb616f82658ae82144ee13e",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/code-unit",
+            "version": "3.0.3",
+            "source": "https://repo.packagist.org/p2/sebastian/code-unit.json",
+            "sha256": "39d8eec8ec7fb47d80fb249554c379e6b0b315e7dd5929019c37de35863290c9",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/code-unit-reverse-lookup",
+            "version": "4.0.1",
+            "source": "https://repo.packagist.org/p2/sebastian/code-unit-reverse-lookup.json",
+            "sha256": "700d1d086f9c2827cf7548b073a9d7014d7a273985582a7085209399f584b0ff",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/comparator",
+            "version": "6.3.3",
+            "source": "https://repo.packagist.org/p2/sebastian/comparator.json",
+            "sha256": "a4c265b39f1e2083034e302d2332b46924595e0e2310c8782d89e143c3297348",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/complexity",
+            "version": "4.0.1",
+            "source": "https://repo.packagist.org/p2/sebastian/complexity.json",
+            "sha256": "ed54275eb0c67f8a3ebdd8a390548d50ea63c4597ae42e0a561640c89dc48b10",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/diff",
+            "version": "6.0.2",
+            "source": "https://repo.packagist.org/p2/sebastian/diff.json",
+            "sha256": "ce0e3c6094f7a11e9a8a30faf107eb51e95f71799f8b5839829f74006bea3fc9",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/environment",
+            "version": "7.2.1",
+            "source": "https://repo.packagist.org/p2/sebastian/environment.json",
+            "sha256": "1fd6c43703b6bfa3dcdc91bbd3c7d6bf2fb85461b758df1b8dd33906237a1daa",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/exporter",
+            "version": "6.3.2",
+            "source": "https://repo.packagist.org/p2/sebastian/exporter.json",
+            "sha256": "63da858ce3cdf4b80045819188185d2a0dcd0b02c63e97378380368d3a3207d1",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/global-state",
+            "version": "7.0.2",
+            "source": "https://repo.packagist.org/p2/sebastian/global-state.json",
+            "sha256": "4876412071eb2ca9320033cffe4c009bd19df61ba8cce3a88cf24745aa8583fc",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/lines-of-code",
+            "version": "3.0.1",
+            "source": "https://repo.packagist.org/p2/sebastian/lines-of-code.json",
+            "sha256": "596b7567e62aa1b60b816fce678b1cb5b9a31990dc68378268ce533dac5d4f06",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/object-enumerator",
+            "version": "6.0.1",
+            "source": "https://repo.packagist.org/p2/sebastian/object-enumerator.json",
+            "sha256": "d02cba82ff01a3cd045d49fd6bccecb17b795c0bb5f15fdd20374575031113fa",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/object-reflector",
+            "version": "4.0.1",
+            "source": "https://repo.packagist.org/p2/sebastian/object-reflector.json",
+            "sha256": "ce6a250a0f1d4cce7f87f1a9f5db906acbd9f9cdfc3966ad5418cffcc9e8bc4a",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/recursion-context",
+            "version": "6.0.3",
+            "source": "https://repo.packagist.org/p2/sebastian/recursion-context.json",
+            "sha256": "fccab194dd8b203b65c10bcfaf6c1bfe957a0e3048c794231a1734354d8f23eb",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/type",
+            "version": "5.1.3",
+            "source": "https://repo.packagist.org/p2/sebastian/type.json",
+            "sha256": "3889eab8c8bbd0e300a4d25f515481f60b4c60d83b2ee9bf6896f52d7a1d0d39",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "sebastian/version",
+            "version": "5.0.2",
+            "source": "https://repo.packagist.org/p2/sebastian/version.json",
+            "sha256": "bf01390dc1c117b365d8b7ae29956af81d241b6a6abc4840a2dadc01bd5ecd7e",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "staabm/side-effects-detector",
+            "version": "1.0.5",
+            "source": "https://repo.packagist.org/p2/staabm/side-effects-detector.json",
+            "sha256": "efc7bc9e778e932d8a88910dd3930513f1580d86c194e2bc291f565a4b32f7c8",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        },
+        {
+            "package": "symfony/yaml",
+            "version": "v7.4.23",
+            "source": "https://repo.packagist.org/p2/symfony/yaml.json",
+            "sha256": "015bd46dbdf6a234bfcbf0a2325c9c29d331d25447cdab61187367726ee4e611",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 7,
+            "published_advisories": [
+                {
+                    "advisoryId": "PKSA-nktx-f1n1-b4yd",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.56|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.50|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.23|>=8.0.0,<8.1.0|>=8.1.0,<8.1.11"
+                },
+                {
+                    "advisoryId": "PKSA-xz3r-9gp4-4m1z",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.54|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.45|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.18|>=8.0.0,<8.1.0|>=8.1.0,<8.1.6"
+                },
+                {
+                    "advisoryId": "PKSA-v5yj-8nmz-sk2q",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+                },
+                {
+                    "advisoryId": "PKSA-ft77-7h5f-p3r6",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+                },
+                {
+                    "advisoryId": "PKSA-b14r-zh1d-vdrc",
+                    "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+                },
+                {
+                    "advisoryId": "PKSA-4y51-dgkc-x4zc",
+                    "affectedVersions": ">=2.0.0,<2.0.22"
+                },
+                {
+                    "advisoryId": "PKSA-xxgb-wq2d-7gpg",
+                    "affectedVersions": ">=2.0.0,<2.0.22|>=2.1.0,<2.1.7"
+                }
+            ]
+        },
+        {
+            "package": "theseer/tokenizer",
+            "version": "1.3.1",
+            "source": "https://repo.packagist.org/p2/theseer/tokenizer.json",
+            "sha256": "09c3645f480106778e7c2e6a09b21351cf84f9132736da2d7efe68834d959bf1",
+            "scope": "dev",
+            "applicable_advisories": [],
+            "published_advisory_count": 0,
+            "published_advisories": []
+        }
+    ],
+    "method": "Official Packagist p2 security-advisories metadata; match affectedVersions with Composer Semver. Not a successful composer audit API call; does not check abandonment.",
+    "applicable_total": 0
+}

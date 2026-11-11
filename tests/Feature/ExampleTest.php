@@ -12,7 +12,7 @@ class ExampleTest extends TestCase
      */
     public function test_the_named_mindbloom_home_page_requires_a_user_session(): void
     {
-        $response = $this->get(route('home'));
+        $response = $this->get(route('account.index'));
 
         $response->assertRedirect('/login');
     }

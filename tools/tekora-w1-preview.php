@@ -60,7 +60,6 @@ try {
     $save('/registro', 'register.html');
     $save('/registro?intent=provider', 'register-provider.html');
     $save('/registro?intent=both', 'register-both.html');
-    $save('/login?role=prof', 'legacy.html');
     $save('/servicios', 'catalog.html');
     $save('/prestadores', 'providers.html');
     $save(route('catalog.show', $service->id, false), 'service.html');

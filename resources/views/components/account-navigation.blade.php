@@ -34,7 +34,7 @@
   </x-account-navigation-group>
   <x-account-navigation-group label="Cliente" :enabled="$cinematic">
     @can(\App\Enums\Permission::ViewClientAppointments->value)
-      <x-account-navigation-link :tekora="$tekora" icon="user" :href="route('account.client')" :active="request()->routeIs('account.client', 'identity.citas')">Cliente</x-account-navigation-link>
+      <x-account-navigation-link :tekora="$tekora" icon="user" :href="route('account.client')" :active="request()->routeIs('account.client')">Cliente</x-account-navigation-link>
     @endcan
     @can(\App\Enums\Permission::ManageOwnInquiries->value)
       <x-account-navigation-link :tekora="$tekora" icon="briefcase" :href="route('inquiries.index')" :active="request()->routeIs('inquiries.index')">Mis solicitudes</x-account-navigation-link>
@@ -60,18 +60,8 @@
       <x-account-navigation-link :tekora="$tekora" icon="shield" :href="route('identity.roles.index')" :active="$cinematic && request()->routeIs('identity.roles.*')">Administración · Roles</x-account-navigation-link>
     @endcan
   </x-account-navigation-group>
-  <x-account-navigation-group label="Preferencias y legado" :enabled="$cinematic">
+  <x-account-navigation-group label="Preferencias" :enabled="$cinematic">
     <x-account-navigation-link :tekora="$tekora" icon="user" :href="route('perfil')" :active="$cinematic && request()->routeIs('perfil')">Datos de mi cuenta</x-account-navigation-link>
-    <details class="account-legacy">
-      <summary class="menu-item">@if($cinematic)<x-tekora-icon name="grid" /><span class="tk-nav-label">MindBloom anterior</span><span class="tk-nav-chevron" aria-hidden="true">⌄</span>@else MindBloom anterior @endif</summary>
-      <div class="submenu open">
-        <a class="submenu-item" href="{{ route('home') }}">Inicio MindBloom</a>
-        <a class="submenu-item" href="{{ route('comunidad') }}">Comunidad</a>
-        <a class="submenu-item" href="{{ url('/conferencias') }}">Conferencias</a>
-        <a class="submenu-item" href="{{ route('user.citas') }}">Citas MindBloom</a>
-        <a class="submenu-item" href="{{ route('profesionistas.index') }}">Directorio MindBloom</a>
-      </div>
-    </details>
   </x-account-navigation-group>
   <x-account-navigation-group label="Salir" :enabled="$cinematic">
     <form method="POST" action="{{ route('logout') }}" class="logout-form">

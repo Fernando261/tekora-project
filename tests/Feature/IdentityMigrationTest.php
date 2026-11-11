@@ -3,11 +3,11 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use App\Models\Cita;
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\Profesionista;
-use App\Models\ProfesionistaDisponibilidad;
+use Tests\Support\Retired\Cita;
+use Tests\Support\Retired\Comment;
+use Tests\Support\Retired\Post;
+use Tests\Support\Retired\Profesionista;
+use Tests\Support\Retired\ProfesionistaDisponibilidad;
 use App\Models\ProviderProfile;
 use App\Models\Role;
 use App\Models\User;
@@ -65,7 +65,7 @@ class IdentityMigrationTest extends TestCase
         ]);
         $post = Post::create(['user_id' => $user->id, 'content' => 'Publicación anterior']);
         Comment::create(['user_id' => $user->id, 'post_id' => $post->id, 'content' => 'Comentario anterior']);
-        $post->likes()->create(['user_id' => $user->id, 'post_id' => $post->id]);
+        DB::table('likes')->insert(['user_id' => $user->id, 'likeable_type' => 'App\\Models\\Post', 'likeable_id' => $post->id]);
         DB::table('reminders')->insert(['user_id' => $user->id, 'title' => 'Anterior', 'remind_at' => '2030-01-07 09:00:00']);
         DB::table('sessions')->insert(['id' => 'legacy-session', 'user_id' => $user->id, 'payload' => 'opaque-fixture', 'last_activity' => 1]);
 
@@ -98,13 +98,13 @@ class IdentityMigrationTest extends TestCase
         $this->assertDatabaseCount('roles', 3);
         $this->assertDatabaseCount('role_user', 0);
         $this->assertDatabaseCount('provider_profiles', 0);
-        $this->assertSame($user->id, $cita->fresh()->user->id);
-        $this->assertSame($professional->id, $cita->fresh()->profesionista->id);
-        $this->assertSame($professional->id, ProfesionistaDisponibilidad::firstOrFail()->profesionista->id);
-        $this->assertCount(1, $user->posts);
-        $this->assertCount(1, $user->comments);
-        $this->assertCount(1, $user->likes);
-        $this->assertCount(1, $user->reminders);
+        $this->assertSame($user->id, $cita->fresh()->user_id);
+        $this->assertSame($professional->id, $cita->fresh()->profesionista_id);
+        $this->assertSame($professional->id, ProfesionistaDisponibilidad::firstOrFail()->profesionista_id);
+        $this->assertSame(1, DB::table('posts')->where('user_id', $user->id)->count());
+        $this->assertSame(1, DB::table('comments')->where('user_id', $user->id)->count());
+        $this->assertSame(1, DB::table('likes')->where('user_id', $user->id)->count());
+        $this->assertSame(1, DB::table('reminders')->where('user_id', $user->id)->count());
         $this->assertSame([], DB::select('PRAGMA foreign_key_check'));
 
         app(RoleMemberships::class)->enroll($user, RoleName::Provider);

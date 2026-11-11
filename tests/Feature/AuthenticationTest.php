@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Profesionista;
+use Tests\Support\Retired\Profesionista;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +32,7 @@ class AuthenticationTest extends TestCase
         $user = User::where('email', 'client@example.test')->firstOrFail();
         $this->assertTrue(Hash::check('test-password', $user->password));
         $this->assertGuest('web');
-        $this->assertGuest('profesionista');
+        $this->assertNull(config('auth.guards.profesionista'));
         $this->assertDatabaseCount('profesionistas', 0);
     }
 
@@ -42,11 +42,11 @@ class AuthenticationTest extends TestCase
             'nombre' => 'Profesional de prueba', 'email' => 'professional@example.test',
             'password' => 'test-password', 'password_confirmation' => 'test-password',
             'cedula' => 'TEST-001',
-        ])->assertRedirect('/registro?intent=provider')->assertSessionHas('info');
+        ])->assertNotFound();
 
         $this->assertDatabaseCount('profesionistas', 0);
         $this->assertDatabaseCount('users', 0);
-        $this->assertGuest('profesionista');
+        $this->assertNull(config('auth.guards.profesionista'));
     }
 
     public function test_retired_registration_does_not_change_an_existing_professional_account(): void
@@ -57,7 +57,7 @@ class AuthenticationTest extends TestCase
             'nombre' => 'Otro nombre', 'email' => $professional->email,
             'password' => 'another-password', 'password_confirmation' => 'another-password',
             'cedula' => $professional->cedula,
-        ])->assertRedirect('/registro?intent=provider')->assertSessionHas('info');
+        ])->assertNotFound();
 
         $this->assertSame($professional->getAttributes(), $professional->fresh()->getAttributes());
         $this->assertDatabaseCount('profesionistas', 1);
@@ -72,22 +72,19 @@ class AuthenticationTest extends TestCase
         $this->assertDatabaseCount('users', 0);
     }
 
-    public function test_each_login_uses_its_own_guard_even_with_the_same_email_in_both_tables(): void
+    public function test_only_central_credentials_authenticate_even_with_a_matching_retired_email(): void
     {
         $professional = $this->professional();
+        $before = $professional->fresh()->getAttributes();
         $user = User::factory()->create(['email' => $professional->email, 'password' => 'user-password']);
-
+        $this->post('/login', ['email' => $user->email, 'password' => 'test-password'])->assertSessionHasErrors('email');
+        $this->assertGuest('web');
         $this->post('/login', ['email' => $user->email, 'password' => 'user-password'])->assertRedirect('/');
         $this->assertAuthenticatedAs($user, 'web');
-        $this->assertGuest('profesionista');
-
         $this->post('/logout')->assertRedirect('/login');
-        $this->post('/login-profesionista', [
-            'email' => $professional->email, 'password' => 'test-password',
-        ])->assertRedirect('/dashboard-profesionista');
-
-        $this->assertAuthenticatedAs($professional, 'profesionista');
+        $this->post('/login-profesionista', ['email' => $professional->email, 'password' => 'test-password'])->assertNotFound();
         $this->assertGuest('web');
+        $this->assertSame($before, $professional->fresh()->getAttributes());
     }
 
     public function test_wrong_credentials_do_not_authenticate_either_guard(): void
@@ -95,18 +92,18 @@ class AuthenticationTest extends TestCase
         $professional = $this->professional();
         User::factory()->create(['email' => $professional->email]);
 
-        foreach (['/login', '/login-profesionista'] as $path) {
+        foreach (['/login'] as $path) {
             $this->post($path, ['email' => $professional->email, 'password' => 'wrong-password'])
                 ->assertSessionHasErrors('email');
         }
 
         $this->assertGuest('web');
-        $this->assertGuest('profesionista');
+        $this->assertNull(config('auth.guards.profesionista'));
     }
 
     public function test_malformed_login_fields_return_validation_errors_for_both_guards(): void
     {
-        foreach (['/login', '/login-profesionista'] as $path) {
+        foreach (['/login'] as $path) {
             $this->post($path, ['email' => ['invalid'], 'password' => ['invalid']])
                 ->assertSessionHasErrors(['email', 'password']);
         }
@@ -114,7 +111,7 @@ class AuthenticationTest extends TestCase
 
     public function test_each_login_is_limited_by_normalized_identity_and_recovers_after_one_minute(): void
     {
-        foreach (['/login', '/login-profesionista'] as $path) {
+        foreach (['/login'] as $path) {
             for ($attempt = 0; $attempt < 5; $attempt++) {
                 $email = $attempt % 2 ? 'LIMIT@example.test' : 'limit@example.test';
                 $this->post($path, ['email' => $email, 'password' => 'incorrect'])
@@ -140,17 +137,12 @@ class AuthenticationTest extends TestCase
         $this->post('/login', ['email' => 'another@example.test', 'password' => 'incorrect'])->assertStatus(429);
     }
 
-    public function test_each_identity_can_log_out_using_its_endpoint(): void
+    public function test_central_logout_remains_available_and_retired_logout_is_absent(): void
     {
         $user = User::factory()->create();
-        $professional = $this->professional();
-
         $this->actingAs($user, 'web')->post('/logout')->assertRedirect('/login');
         $this->assertGuest('web');
-
-        $this->actingAs($professional, 'profesionista')->post('/logout-profesionista')
-            ->assertRedirect('/login-profesionista');
-        $this->assertGuest('profesionista');
+        $this->post('/logout-profesionista')->assertNotFound();
     }
 
     public function test_the_user_password_reset_notification_and_form_are_connected(): void

@@ -38,6 +38,5 @@
       <button class="account-button" type="submit">Crear mi cuenta única</button>
     </form>
     <p class="access-footer">¿Ya tienes cuenta? <a href="{{ route('login') }}" data-auth-switch>Iniciar sesión</a></p>
-    <p class="account-help">¿Tenías una cuenta profesional de MindBloom? <a href="{{ route('profesionista.login') }}">Utiliza el acceso heredado</a>; no se fusionará con esta cuenta.</p>
   </x-tekora-auth-card>
 </x-access-layout>

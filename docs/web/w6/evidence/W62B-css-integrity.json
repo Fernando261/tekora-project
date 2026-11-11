@@ -1,0 +1,64 @@
+[
+  {
+    "file": "public/css/account.css",
+    "comparison": "all ordered declaration lists per selector and at-rule scope, including repeated selectors",
+    "retained_rules_identical": true,
+    "removed_selectors": [
+      "|.legacy-access summary",
+      "|.legacy-access[open] summary",
+      "|.legacy-access",
+      "|.account-legacy summary",
+      "|.account-legacy .submenu",
+      "|.legacy-account-notice",
+      "|.legacy-account-notice a",
+      "@media (max-width:980px)|.sidebar .account-legacy .submenu"
+    ]
+  },
+  {
+    "file": "resources/css/tekora/account-shell.css",
+    "comparison": "all ordered declaration lists per selector and at-rule scope, including repeated selectors",
+    "retained_rules_identical": true,
+    "removed_selectors": [
+      "|.tk-sidebar-navigation .submenu-item:focus-visible",
+      "|.tk-sidebar-navigation .account-legacy",
+      "|.tk-sidebar-navigation .account-legacy summary",
+      "|.tk-sidebar-navigation .account-legacy summary::-webkit-details-marker",
+      "|.tk-nav-chevron",
+      "|.tk-sidebar-navigation .account-legacy[open] .tk-nav-chevron",
+      "|.tk-sidebar-navigation .account-legacy .submenu",
+      "|.tk-sidebar-navigation .submenu-item",
+      "|.tk-sidebar-navigation .submenu-item:hover"
+    ]
+  },
+  {
+    "file": "resources/css/tekora/dashboards.css",
+    "comparison": "all ordered declaration lists per selector and at-rule scope, including repeated selectors",
+    "retained_rules_identical": true,
+    "removed_selectors": [
+      "|.tk-dashboard .tk-legacy-panel",
+      "|.tk-dashboard .tk-legacy-panel h2",
+      "|.tk-dashboard .tk-legacy-panel > .tk-icon",
+      "|.tk-dashboard .tk-legacy-panel p"
+    ]
+  },
+  {
+    "file": "resources/css/tekora/identity.css",
+    "comparison": "all ordered declaration lists per selector and at-rule scope, including repeated selectors",
+    "retained_rules_identical": true,
+    "removed_selectors": [
+      "|.tk-identity .tk-identity-history summary",
+      "|.tk-identity .tk-identity-history nav",
+      "|.tk-identity .tk-identity-history p"
+    ]
+  },
+  {
+    "file": "resources/css/tekora/tekora.css",
+    "comparison": "all ordered declaration lists per selector and at-rule scope, including repeated selectors",
+    "retained_rules_identical": true,
+    "removed_selectors": [
+      "|.tk-page .tk-legacy",
+      "|.tk-legacy summary",
+      "|.tk-legacy > p"
+    ]
+  }
+]
