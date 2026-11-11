@@ -1,0 +1,83 @@
+<?php
+namespace Tests\Review;
+
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Feature\RetirementPreflightTest;
+
+final class ReviewAdversarialProbeTest extends RetirementPreflightTest
+{
+    private function callPrivate(string $name, mixed ...$arguments): mixed
+    {
+        return (new \ReflectionMethod(RetirementPreflightTest::class, $name))->invoke($this, ...$arguments);
+    }
+
+    public static function hiddenObjects(): array
+    {
+        return [['table'], ['view'], ['temp-view']];
+    }
+
+    #[DataProvider('hiddenObjects')]
+    public function test_review_unknown_objects_must_stop_before_any_drop(string $kind): void
+    {
+        $this->callPrivate('seedRetired', User::factory()->create());
+        if ($kind === 'table') {
+            DB::statement('CREATE TABLE sqliteX_cross (id INTEGER PRIMARY KEY, post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE)');
+            DB::table('sqliteX_cross')->insert(['id' => 1, 'post_id' => 1]);
+        } elseif ($kind === 'view') {
+            DB::statement('CREATE VIEW sqliteX_cross AS SELECT id FROM posts');
+        } else {
+            DB::statement('CREATE TEMP VIEW sqliteX_cross AS SELECT id FROM posts');
+        }
+        $before = $this->callPrivate('memoryManifest');
+        $exception = null;
+        try {
+            $this->callPrivate('simulate');
+        } catch (\Throwable $caught) {
+            $exception = $caught->getMessage();
+        }
+        $trace = (new \ReflectionProperty(RetirementPreflightTest::class, 'operationTrace'))->getValue($this);
+        $result = ['kind' => $kind, 'exception' => $exception, 'executed_drops' => $trace,
+            'unknown_table_visible_in_manifest' => isset($before['tables']['sqliteX_cross']),
+            'unknown_object_visible_in_manifest' => count(array_filter(array_merge($before['objects'], $before['temp_objects']), fn ($o) => $o['name'] === 'sqliteX_cross')),
+            'actual_app_tables_after' => (int) DB::selectOne("SELECT COUNT(*) AS n FROM sqlite_master WHERE type='table' AND name NOT GLOB 'sqlite_*'")->n,
+            'fk_on' => (int) DB::selectOne('PRAGMA foreign_keys')->foreign_keys];
+        if ($kind === 'table') {
+            $result['unknown_rows_after'] = DB::table('sqliteX_cross')->count();
+        } else {
+            try { DB::select('SELECT * FROM sqliteX_cross'); $result['view_broken'] = false; }
+            catch (\Throwable $ignored) { $result['view_broken'] = true; }
+        }
+        file_put_contents('/review/probe-hidden-'.$kind.'.json', json_encode($result, JSON_PRETTY_PRINT)."\n");
+        $this->assertSame([], $trace, 'Unknown schema object must stop before first DROP');
+    }
+
+    public function test_review_restore_must_reject_an_unknown_sqlite_prefix_view(): void
+    {
+        $this->callPrivate('seedRetired', User::factory()->create());
+        $source = $this->callPrivate('memoryManifest');
+        $accepted = false; $error = null; $count = null;
+        try {
+            $copy = $this->callPrivate('restoreLogicalMemory', $source, function (\PDO $pdo) {
+                $pdo->exec('CREATE VIEW sqliteX_restore AS SELECT id FROM users');
+            });
+            $accepted = true;
+            $count = (int) $copy->query("SELECT COUNT(*) FROM sqlite_master WHERE name='sqliteX_restore'")->fetchColumn();
+        } catch (\Throwable $caught) { $error = $caught->getMessage(); }
+        file_put_contents('/review/probe-hidden-restore.json', json_encode(['accepted' => $accepted, 'error' => $error, 'unknown_views' => $count], JSON_PRETTY_PRINT)."\n");
+        $this->assertFalse($accepted, 'Unknown restored object must reject destination');
+    }
+
+    public function test_review_sequence_storage_type_and_value_change_must_be_detected(): void
+    {
+        User::factory()->create();
+        $before = $this->callPrivate('memoryManifest');
+        $rawBefore = (array) DB::selectOne("SELECT seq,typeof(seq) AS storage_type FROM sqlite_sequence WHERE name='users'");
+        DB::statement("UPDATE sqlite_sequence SET seq='1-corrupt' WHERE name='users'");
+        $after = $this->callPrivate('memoryManifest');
+        $rawAfter = (array) DB::selectOne("SELECT seq,typeof(seq) AS storage_type FROM sqlite_sequence WHERE name='users'");
+        file_put_contents('/review/probe-sequence.json', json_encode(['before' => $rawBefore, 'after' => $rawAfter, 'manifest_equal' => $before === $after], JSON_PRETTY_PRINT)."\n");
+        $this->assertNotSame($before, $after, 'Changed sequence value/storage class must change manifest');
+    }
+}

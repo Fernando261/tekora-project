@@ -1,0 +1,195 @@
+<?php
+namespace Tests\Review;
+
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Feature\RetirementPreflightTest;
+
+/** Review-only probes; outside the tracked checkout and ordinary discovery. */
+final class SecondAcceptanceProbeTest extends RetirementPreflightTest
+{
+    private function callPrivate(string $method, mixed ...$arguments): mixed
+    {
+        return (new \ReflectionMethod(RetirementPreflightTest::class, $method))->invoke($this, ...$arguments);
+    }
+
+    private function trace(): array
+    {
+        return (new \ReflectionProperty(RetirementPreflightTest::class, 'operationTrace'))->getValue($this);
+    }
+
+    private function record(string $case, array $data): void
+    {
+        file_put_contents('/review/additional-'.$case.'.json', json_encode($data, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)."\n");
+    }
+
+    private static function mirrorSequence(\PDO $pdo): void
+    {
+        $pdo->exec('CREATE TEMP TABLE review_auto(id INTEGER PRIMARY KEY AUTOINCREMENT)');
+        $pdo->exec('INSERT INTO review_auto DEFAULT VALUES');
+        $pdo->exec('DROP TABLE review_auto');
+        $pdo->exec('INSERT INTO temp.sqlite_sequence(name,seq) SELECT name,seq FROM main.sqlite_sequence');
+    }
+
+    private static function rawSequence(\PDO $pdo, string $schema): array
+    {
+        return $pdo->query("SELECT name,seq,typeof(seq) AS storage_type FROM ".$schema.".sqlite_sequence WHERE name='users'")->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function test_second_review_main_sequence_corruption_cannot_be_hidden_by_temp_internal_table(): void
+    {
+        User::factory()->create();
+        $before = $this->callPrivate('memoryManifest');
+        $pdo = DB::connection()->getPdo();
+        self::mirrorSequence($pdo);
+        $pdo->exec("UPDATE main.sqlite_sequence SET seq='1-corrupt' WHERE name='users'");
+        $after = $this->callPrivate('memoryManifest');
+        $this->record('temp-sequence-capture', ['manifest_equal' => $before === $after,
+            'main' => self::rawSequence($pdo, 'main'), 'temp' => self::rawSequence($pdo, 'temp'),
+            'visible_temp_objects' => $after['temp_objects']]);
+        $this->assertNotSame($before, $after, 'Main sequence corruption must change the captured manifest');
+    }
+
+    public function test_second_review_temp_sequence_mirror_must_stop_before_first_retirement_drop(): void
+    {
+        User::factory()->create();
+        $pdo = DB::connection()->getPdo();
+        self::mirrorSequence($pdo);
+        $pdo->exec("UPDATE main.sqlite_sequence SET seq='1-corrupt' WHERE name='users'");
+        $error = null;
+        try { $this->callPrivate('simulate'); } catch (\Throwable $e) { $error = $e->getMessage(); }
+        $this->record('temp-sequence-retirement', ['error' => $error, 'executed_drops' => $this->trace(),
+            'main' => self::rawSequence($pdo, 'main'), 'temp' => self::rawSequence($pdo, 'temp'),
+            'main_application_table_count' => (int) $pdo->query("SELECT COUNT(*) FROM main.sqlite_master WHERE type='table' AND substr(name,1,7)<>'sqlite_' COLLATE NOCASE")->fetchColumn(),
+            'foreign_keys' => (int) $pdo->query('PRAGMA foreign_keys')->fetchColumn()]);
+        $this->assertSame([], $this->trace(), 'Corrupt main sequence must reject before first DROP');
+    }
+
+    public function test_second_review_restore_cannot_commit_corrupt_main_sequence_hidden_by_temp(): void
+    {
+        User::factory()->create();
+        $source = $this->callPrivate('memoryManifest');
+        $accepted = false; $error = null; $raw = null; $copy = null;
+        try {
+            $copy = $this->callPrivate('restoreLogicalMemory', $source, function (\PDO $pdo): void {
+                self::mirrorSequence($pdo);
+                $pdo->exec("UPDATE main.sqlite_sequence SET seq='1-corrupt' WHERE name='users'");
+            });
+            $accepted = true;
+            $raw = ['main' => self::rawSequence($copy, 'main'), 'temp' => self::rawSequence($copy, 'temp'),
+                'manifest_equal' => $this->callPrivate('memoryManifest', $copy) === $source,
+                'transaction_open' => $copy->inTransaction(),
+                'integrity_check' => $copy->query('PRAGMA integrity_check')->fetchColumn()];
+        } catch (\Throwable $e) { $error = $e->getMessage(); }
+        $this->record('temp-sequence-restore', ['accepted' => $accepted, 'error' => $error, 'destination' => $raw]);
+        $this->assertFalse($accepted, 'Corrupt restored main sequence must reject destination');
+    }
+
+    public static function unusualNames(): array
+    {
+        return array_map(fn ($name) => [$name], ['sqliteX%_cross', 'sqliteΩcross', ' sqliteX_cross', 'sqliteX"cross', 'sqliteX.cross', 'sQlItEx_cross']);
+    }
+
+    #[DataProvider('unusualNames')]
+    public function test_second_review_unusual_unknown_fk_names_preserve_rows(string $name): void
+    {
+        $this->callPrivate('seedRetired', User::factory()->create());
+        $q = '"'.str_replace('"', '""', $name).'"';
+        DB::statement('CREATE TABLE '.$q.'(id INTEGER PRIMARY KEY, post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE)');
+        DB::statement('INSERT INTO '.$q.' VALUES (1,1)');
+        $before = $this->callPrivate('memoryManifest');
+        $error = null;
+        try { $this->callPrivate('simulate'); } catch (\Throwable $e) { $error = $e->getMessage(); }
+        $rowCount = (int) DB::connection()->getPdo()->query('SELECT COUNT(*) FROM '.$q)->fetchColumn();
+        $this->record('name-'.hash('sha256', $name), ['name' => $name, 'error' => $error, 'executed_drops' => $this->trace(), 'rows' => $rowCount]);
+        $this->assertNotNull($error);
+        $this->assertSame([], $this->trace());
+        $this->assertSame(1, $rowCount);
+        $this->assertSame($before, $this->callPrivate('memoryManifest'));
+    }
+
+    public function test_second_review_temp_trigger_dependency_is_rejected_and_trigger_remains_enabled(): void
+    {
+        $user = User::factory()->create();
+        $this->callPrivate('seedRetired', $user);
+        DB::unprepared('CREATE TEMP TRIGGER sqliteX_temp_trigger AFTER UPDATE OF name ON main.users BEGIN INSERT INTO posts(user_id) VALUES (NEW.id); END');
+        $error = null;
+        try { $this->callPrivate('simulate'); } catch (\Throwable $e) { $error = $e->getMessage(); }
+        DB::table('users')->where('id', $user->id)->update(['name' => 'Synthetic temp trigger']);
+        $this->assertNotNull($error);
+        $this->assertSame([], $this->trace());
+        $this->assertSame(2, DB::table('posts')->count(), 'Temp trigger remains operational');
+        $this->record('temp-trigger', ['error' => $error, 'executed_drops' => $this->trace(), 'post_rows' => 2]);
+    }
+
+    public function test_second_review_temp_view_shadowing_protected_table_is_rejected(): void
+    {
+        User::factory()->create();
+        DB::statement('CREATE TEMP VIEW users AS SELECT * FROM main.users');
+        $error = null;
+        try { $this->callPrivate('simulate'); } catch (\Throwable $e) { $error = $e->getMessage(); }
+        $this->assertNotNull($error);
+        $this->assertSame([], $this->trace());
+        $this->record('temp-shadow-view', ['error' => $error, 'executed_drops' => $this->trace()]);
+    }
+
+    public static function moreInvalidSequences(): array
+    {
+        return [
+            'name-null' => ['name=NULL'], 'name-integer' => ['name=1'], 'name-real' => ['name=1.0'],
+            'name-space' => ["name='users '"], 'text-leading-zero' => ["seq='01'"],
+            'text-plus' => ["seq='+1'"], 'text-space' => ["seq=' 1 '"], 'text-exponent' => ["seq='1e0'"],
+            'text-nonnumeric' => ["seq='wrong'"], 'text-invalid-utf8' => ["seq=CAST(x'FF' AS TEXT)"],
+            'blob-empty' => ["seq=x''"], 'real-infinity' => ['seq=1e999'],
+            'real-near-max' => ['seq=CAST(9223372036854775807 AS REAL)'],
+        ];
+    }
+
+    #[DataProvider('moreInvalidSequences')]
+    public function test_second_review_additional_raw_sequence_states_reject_retirement_and_restore(string $assignment): void
+    {
+        User::factory()->create();
+        $before = $this->callPrivate('memoryManifest');
+        DB::statement('UPDATE main.sqlite_sequence SET '.$assignment." WHERE name='users'");
+        $corrupt = $this->callPrivate('memoryManifest');
+        $stopError = null; $restoreError = null; $loaded = false;
+        try { $this->callPrivate('simulate'); } catch (\Throwable $e) { $stopError = $e->getMessage(); }
+        try { $this->callPrivate('restoreLogicalMemory', $corrupt, function () use (&$loaded) { $loaded = true; }); }
+        catch (\Throwable $e) { $restoreError = $e->getMessage(); }
+        $this->assertNotSame($before, $corrupt);
+        $this->assertNotNull($stopError);
+        $this->assertStringStartsWith('Invalid sqlite_sequence', $stopError);
+        $this->assertSame([], $this->trace());
+        $this->assertNotNull($restoreError);
+        $this->assertStringStartsWith('Invalid sqlite_sequence', $restoreError);
+        $this->assertFalse($loaded);
+        $this->assertSame($corrupt, $this->callPrivate('memoryManifest'));
+        $this->record('sequence-'.hash('sha256', $assignment), ['assignment' => $assignment,
+            'manifest_changed' => $before !== $corrupt, 'retirement_error' => $stopError, 'restore_error' => $restoreError,
+            'executed_drops' => $this->trace(), 'destination_loaded' => $loaded]);
+    }
+
+    public static function validBoundarySequences(): array
+    {
+        return ['empty-zero' => [0, false], 'maximum-rowid' => [PHP_INT_MAX, true]];
+    }
+
+    #[DataProvider('validBoundarySequences')]
+    public function test_second_review_valid_integer_boundary_sequences_are_preserved(int $value, bool $withUser): void
+    {
+        if ($withUser) { User::factory()->create(); }
+        $pdo = DB::connection()->getPdo();
+        $pdo->exec("DELETE FROM main.sqlite_sequence WHERE name='users'");
+        $statement = $pdo->prepare("INSERT INTO main.sqlite_sequence(name,seq) VALUES ('users',?)");
+        $statement->bindValue(1, $value, \PDO::PARAM_INT); $statement->execute(); $statement->closeCursor();
+        $source = $this->callPrivate('memoryManifest');
+        $copy = $this->callPrivate('restoreLogicalMemory', $source);
+        $this->assertSame($source, $this->callPrivate('memoryManifest', $copy));
+        $this->callPrivate('simulate');
+        $sequence = $this->callPrivate('memoryManifest')['tables']['users']['sequence'][0];
+        $this->assertSame($value, $sequence['value']);
+        $this->assertSame('integer', $sequence['storage_type']);
+        $this->record('boundary-'.$value, ['value' => $value, 'storage_type' => 'integer', 'restore_equal' => true]);
+    }
+}

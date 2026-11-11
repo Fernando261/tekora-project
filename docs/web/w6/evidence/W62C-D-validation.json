@@ -1,0 +1,436 @@
+{
+  "task": "TEKORA W6.2c-d",
+  "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+  "branch": "codex/w62c-d-sqlite-retirement-rehearsal",
+  "final_sha_publication": "Exact final SHA in the draft PR description and final delivery; a commit cannot contain its own hash. Tested source Git blob IDs below identify the executed files.",
+  "tested_source_git_blobs": {
+    "tests/Feature/RetirementPreflightTest.php": "fad012d2ebf9f49b4c9c28cef2fccada61214efc",
+    "tests/Support/RetirementMemoryIntegrity.php": "492d693448015cd31fe44ac930b6cc79b126c602"
+  },
+  "preflight": {
+    "status": "PASS",
+    "remote_main_and_selected_head": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+    "initial_worktree_clean": true,
+    "available_space": "44 GiB",
+    "initial_free_inodes": 3865965,
+    "repository_access": "PASS",
+    "pr30_head_verified_before_edits": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
+    "fix2": {
+      "head_confirmed_before_edits": "cce019cec0ded5caae9836793c6c1f32bd8a7ec3",
+      "worktree_clean": true,
+      "available_space": "43 GiB",
+      "free_inodes": 3823144,
+      "pr30_draft": true,
+      "base": "7c6b99823630fb457d7f53b7e73732da454e7b81"
+    }
+  },
+  "pr28": {
+    "state": "open",
+    "draft": true,
+    "head": "ae638c358b475d5c6605cf2d0440c03b2225a2d0",
+    "updated_at": "2026-11-11T04:54:20Z",
+    "modified": false,
+    "tests_imported": false
+  },
+  "versions": {
+    "php": "8.4.27",
+    "sqlite": "3.46.1",
+    "laravel": "12.71.0",
+    "phpunit": "11.5.57",
+    "pint": "1.22.1",
+    "node": "24.22.1",
+    "npm": "11.9.0",
+    "vite": "6.4.5",
+    "composer": "2.11.2",
+    "runner_image_id": "sha256:3e801756fb2e158f6539312f4ac4223f033c4c58834cf40f9eff309233f179c5"
+  },
+  "executed": {
+    "baseline": {
+      "tests": 688,
+      "assertions": 9224,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 89.310765,
+      "status": "PASS",
+      "execution_scope": "Historical original delivery, not rerun in this fix"
+    },
+    "full": {
+      "tests": 789,
+      "assertions": 10344,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 115.648712,
+      "status": "PASS"
+    },
+    "rehearsal": {
+      "tests": 120,
+      "assertions": 1318,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 15.091857,
+      "status": "PASS"
+    },
+    "w51": {
+      "tests": 49,
+      "assertions": 459,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 4.574657,
+      "status": "PASS"
+    },
+    "w62a": {
+      "tests": 25,
+      "assertions": 406,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 3.317268,
+      "status": "PASS"
+    },
+    "w62b": {
+      "tests": 34,
+      "assertions": 586,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 4.166973,
+      "status": "PASS"
+    },
+    "original-probes": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.806878,
+      "status": "PASS"
+    },
+    "second-independent-probes": {
+      "tests": 26,
+      "assertions": 168,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.866428,
+      "status": "PASS"
+    },
+    "shadow-probes": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.528143,
+      "status": "PASS"
+    },
+    "fix2-regressions": {
+      "tests": 15,
+      "assertions": 322,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 3.500079,
+      "status": "PASS"
+    }
+  },
+  "increase_from_baseline": {
+    "tests": 101,
+    "assertions": 1120
+  },
+  "baseline_w62ca": {
+    "tests": 19,
+    "assertions": 198,
+    "current_file_expanded": true,
+    "original_methods_and_datasets_retained": true
+  },
+  "preservation": {
+    "status": "PASS",
+    "protected_tables": [
+      "activity_notifications",
+      "cache",
+      "cache_locks",
+      "failed_jobs",
+      "inquiry_notifications",
+      "job_batches",
+      "jobs",
+      "migrations",
+      "password_reset_tokens",
+      "personal_access_tokens",
+      "provider_availability_settings",
+      "provider_blocked_dates",
+      "provider_profiles",
+      "provider_weekly_intervals",
+      "reservation_events",
+      "role_user",
+      "roles",
+      "service_categories",
+      "service_inquiries",
+      "service_inquiry_messages",
+      "service_inquiry_reads",
+      "service_reservations",
+      "service_reviews",
+      "services",
+      "sessions",
+      "users"
+    ],
+    "all_26_populated": true,
+    "candidate_order": [
+      "likes",
+      "comments",
+      "posts",
+      "reminders",
+      "emotions",
+      "citas",
+      "profesionista_bloqueos",
+      "profesionista_disponibilidades",
+      "profesionistas"
+    ],
+    "before_tables": 35,
+    "after_tables": 26,
+    "historical_migrations": 37,
+    "migration_ledger_identical": true,
+    "api_operations": 21,
+    "protected_triggers": 34,
+    "candidate_triggers": 0,
+    "raw_values_storage_types_rows_schema_sequences_equal": true,
+    "sequence_format_version": 2,
+    "raw_global_and_per_table_sequence_entries": true,
+    "strict_sequence_validation_before_drop_and_restore": true,
+    "unknown_sqlitex_objects_stop_before_first_drop": true,
+    "main_schema_explicit": true,
+    "temporary_catalog_authorized": [],
+    "all_temp_objects_including_internal_captured": true
+  },
+  "isolation": {
+    "status": "PASS",
+    "database": ":memory:",
+    "effective_pdo_and_database_list_verified": true,
+    "fk_always_enabled_during_simulation_and_restore": true,
+    "guards_before_every_drop": true,
+    "storage_fake": true,
+    "external_application_http_forbidden": true,
+    "acceptance_containers_network": "none",
+    "existing_env_loaded_or_copied": false,
+    "only_new_empty_env_testing": true,
+    "real_or_versioned_media_read_copied_hashed_modified": false,
+    "real_database_accessed": false,
+    "acceptance_original_checkout_mounted": false,
+    "restore_destination": "new independent PDO sqlite::memory:",
+    "original_five_probe_code_unchanged": true
+  },
+  "controls": {
+    "rehearsal": "PASS",
+    "full_suite": "PASS",
+    "w51": "PASS",
+    "w62a": "PASS",
+    "w62b": "PASS",
+    "pint": "PASS",
+    "composer_validate": "PASS",
+    "platform": "PASS",
+    "npm_audit": "PASS",
+    "build": "PASS",
+    "git_diff_check": "PASS",
+    "composer_audit": "BLOCKED",
+    "composer_audit_no_dev": "BLOCKED",
+    "windows": "NOT RUN",
+    "php_8_2_runtime": "NOT RUN",
+    "persistent_sqlite_locks_wal_crash": "NOT RUN",
+    "mysql": "NOT RUN",
+    "real_retirement": "BLOCKED",
+    "original_five": "PASS",
+    "new_p1_p2_regressions": "PASS",
+    "three_shadow_probes": "PASS",
+    "all_26_second_independent_probes": "PASS",
+    "fix2_regressions": "PASS"
+  },
+  "scope": {
+    "production_code_changed": false,
+    "historical_migrations_changed": false,
+    "dependencies_locks_configuration_changed": false,
+    "w51_and_legacy_photo_references_changed": false,
+    "purge_command_endpoint_job_service_or_destructive_migration_created": false,
+    "real_data_or_media_used": false,
+    "merged_deployed_auto_merged": false
+  },
+  "changed_files": [
+    "tests/Feature/RetirementPreflightTest.php",
+    "tests/Support/RetirementMemoryIntegrity.php",
+    "docs/web/w6/W62C-D-SQLITE-REHEARSAL.md",
+    "docs/web/w6/W62C-D-LARAGON.md",
+    "docs/web/w6/evidence/W62C-D-validation.json",
+    "docs/web/w6/evidence/W62C-D-scenarios.json",
+    "docs/web/w6/evidence/W62C-D-manifests.json",
+    "docs/web/w6/evidence/W62C-D-rollback-restore.json",
+    "docs/web/w6/evidence/W62C-D-quality.json",
+    "docs/web/w6/evidence/W62C-D-fix-review.json",
+    "docs/web/w6/evidence/W62C-D-original-review-probes.php.txt",
+    "docs/web/w6/evidence/W62C-D-fix2-review.json",
+    "docs/web/w6/evidence/W62C-D-second-review-probes.php.txt"
+  ],
+  "evidence_policy": "Only synthetic schema, migration metadata, row counts/sequences and state digests. No raw user, message, credential, token or image values. No hashes of existing media.",
+  "historical_incidents": "W6.2c-a media-read incidence and W6.2c-b initial env-loader incidence remain in their original documents. No historical zero-read claim. No reread in W6.2c-d.",
+  "limitations": [
+    "Logical restore only, no physical backup certification.",
+    "Independent memory PDO restore is not a disk or multi-writer concurrency test.",
+    "No real installation inventory or media classification.",
+    "No MySQL support/migration in scope.",
+    "Composer audits blocked by network, not passed.",
+    "Windows and actual PHP 8.2 runtime not executed."
+  ],
+  "real_cut_stops": [
+    "Unapproved or unidentified target installation/version/engine",
+    "Unknown dependency, schema drift, active writer or unclassified reference",
+    "No approved bounded manifest or exclusive ownership classification",
+    "Backup not consistently restorable to an isolated target",
+    "No separately reviewed implementation, recovery policy, window or authorization"
+  ],
+  "publication": "Update existing draft PR #30 only; no new PR, merge, deployment or auto-merge",
+  "documentary_checks": {
+    "status": "PASS",
+    "json_files": 7,
+    "relative_links": 20,
+    "markdown_tables": 4,
+    "sensitive_value_patterns": 0,
+    "prior_cases_and_assertions_retained": 105,
+    "php_probe_fixture_verbatim": true,
+    "second_probe_fixture_verbatim": true
+  },
+  "recorded_at": "2026-11-11T18:38:57.202520+00:00",
+  "fix_initial_head": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
+  "historical_before_fix": {
+    "head": "d5d0b18ea4bfc41de8599b1dbd0b7e79d30b9c53",
+    "full": {
+      "status": "PASS",
+      "tests": 739,
+      "assertions": 9652
+    },
+    "rehearsal": {
+      "status": "PASS",
+      "tests": 70,
+      "assertions": 626
+    },
+    "independent_acceptance": "CHANGES REQUIRED",
+    "original_five": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 5,
+      "skipped": 0,
+      "seconds": 1.027616,
+      "status": "FAIL"
+    },
+    "original_findings": [
+      "P1 literal-prefix wildcard",
+      "P2 lossy sequence cast"
+    ],
+    "recorded_at_utc": "2026-11-11T07:03:39+00:00"
+  },
+  "increase_from_reviewed_head": {
+    "tests": 50,
+    "assertions": 692
+  },
+  "delivery_status": "Ready for another independent review; not approved automatically",
+  "historical_before_fix2": {
+    "recorded_at": "2026-11-11T02:26:22-06:00",
+    "tested_source_git_blobs": {
+      "tests/Feature/RetirementPreflightTest.php": "4388a1f3059ed7db9f6ed4b68fff0a43963aaaae",
+      "tests/Support/RetirementMemoryIntegrity.php": "c09cffce7f963c31e23b098c0e498e6e469682c1"
+    },
+    "executed": {
+      "baseline": {
+        "tests": 688,
+        "assertions": 9224,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "seconds": 89.310765,
+        "status": "PASS",
+        "execution_scope": "Historical original delivery, not rerun in this fix"
+      },
+      "full": {
+        "tests": 774,
+        "assertions": 10022,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "seconds": 222.33704,
+        "status": "PASS"
+      },
+      "rehearsal": {
+        "tests": 105,
+        "assertions": 996,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "seconds": 91.758761,
+        "status": "PASS"
+      },
+      "w51": {
+        "tests": 49,
+        "assertions": 459,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "seconds": 4.873556,
+        "status": "PASS"
+      },
+      "w62a": {
+        "tests": 25,
+        "assertions": 406,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "seconds": 3.117652,
+        "status": "PASS"
+      },
+      "w62b": {
+        "tests": 34,
+        "assertions": 586,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "seconds": 3.004521,
+        "status": "PASS"
+      },
+      "original-probes": {
+        "tests": 5,
+        "assertions": 10,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "seconds": 2.879734,
+        "status": "PASS"
+      }
+    },
+    "delivery_status": "Ready for a new independent review; not automatically approved",
+    "head": "cce019cec0ded5caae9836793c6c1f32bd8a7ec3",
+    "independent_review": "CHANGES REQUIRED",
+    "three_shadow_probes": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 3,
+      "skipped": 0,
+      "seconds": 0.462429,
+      "status": "FAIL"
+    }
+  },
+  "fix2_initial_head": "cce019cec0ded5caae9836793c6c1f32bd8a7ec3",
+  "current_execution_scope": "W6.2c-d-fix2, source-only isolated lab; historical runs explicitly nested",
+  "increase_from_fix1": {
+    "tests": 15,
+    "assertions": 322
+  },
+  "first_fix_increase_from_baseline": {
+    "tests": 86,
+    "assertions": 798
+  },
+  "first_fix_increase_from_reviewed_head": {
+    "tests": 35,
+    "assertions": 370
+  }
+}

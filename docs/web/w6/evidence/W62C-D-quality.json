@@ -1,0 +1,126 @@
+{
+  "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+  "composer_version": "2.11.2",
+  "composer_validate": {
+    "status": "PASS",
+    "exit_code": 0,
+    "arguments": "--no-plugins --no-scripts validate --strict"
+  },
+  "platform": {
+    "status": "PASS",
+    "exit_code": 0,
+    "php_runtime": "8.4.27",
+    "declared_php_minimum": "^8.2",
+    "composer_platform": "8.2.28",
+    "all_installed_requirements_satisfied": true
+  },
+  "composer_audit": {
+    "status": "BLOCKED",
+    "exit_code": 100,
+    "with_dev": true,
+    "endpoint": "https://packagist.org/api/security-advisories/",
+    "reason": "CONNECT tunnel failed, response 403; no vulnerability result",
+    "vulnerability_result": null
+  },
+  "composer_audit_no_dev": {
+    "status": "BLOCKED",
+    "exit_code": 100,
+    "with_dev": false,
+    "endpoint": "https://packagist.org/api/security-advisories/",
+    "reason": "CONNECT tunnel failed, response 403; no vulnerability result",
+    "vulnerability_result": null
+  },
+  "npm_audit": {
+    "status": "PASS",
+    "exit_code": 0,
+    "metadata": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 2,
+        "dev": 94,
+        "optional": 52,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 95
+      }
+    }
+  },
+  "build": {
+    "status": "PASS",
+    "exit_code": 0,
+    "vite": "6.4.5",
+    "existing_environment_loaded": false,
+    "public_media_read": false,
+    "warnings": [
+      "Two public font URLs unresolved because fonts were excluded from the source-only lab; no media copied to resolve them."
+    ]
+  },
+  "pint": {
+    "status": "PASS",
+    "exit_code": 0,
+    "version": "1.22.1",
+    "files": [
+      "tests/Feature/RetirementPreflightTest.php",
+      "tests/Support/RetirementMemoryIntegrity.php"
+    ]
+  },
+  "git_diff_check": {
+    "status": "PASS"
+  },
+  "historical_preparation_failures_resolved": [
+    {
+      "status": "FAIL",
+      "phase": "source-only dependency replica",
+      "reason": "Missing dependency resources caused exception rendering failures; initial full run exhausted 128 MiB. Not used for acceptance.",
+      "resolution": "Completed source/code resources, release snapshot properties after tearDown, acceptance runner memory_limit=512M; full suite rerun."
+    },
+    {
+      "status": "BLOCKED",
+      "phase": "Composer 2.9.1 audit transport",
+      "reason": "HTTP/3 incompatible with proxy",
+      "resolution": "Official Composer 2.11.2 release verified; final audit attempts reveal CONNECT 403, recorded BLOCKED."
+    }
+  ],
+  "windows": "NOT RUN",
+  "php_8_2_runtime": "NOT RUN",
+  "reviewed_initial_head": "cce019cec0ded5caae9836793c6c1f32bd8a7ec3",
+  "current_execution_scope": "W6.2c-d-fix2; quality commands rerun in new isolated source lab",
+  "sequence_and_prefix_regressions": {
+    "status": "PASS",
+    "original_five": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.806878,
+      "status": "PASS"
+    },
+    "added_cases": 50,
+    "fix2_shadow_probes": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.528143,
+      "status": "PASS"
+    },
+    "all_26_second_independent_probes": {
+      "tests": 26,
+      "assertions": 168,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.866428,
+      "status": "PASS"
+    }
+  }
+}

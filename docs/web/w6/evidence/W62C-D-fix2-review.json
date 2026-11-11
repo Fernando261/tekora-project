@@ -1,0 +1,1885 @@
+{
+  "task": "W6.2c-d-fix2",
+  "base_sha": "7c6b99823630fb457d7f53b7e73732da454e7b81",
+  "initial_reviewed_head": "cce019cec0ded5caae9836793c6c1f32bd8a7ec3",
+  "recorded_at": "2026-11-11T18:38:57.202520+00:00",
+  "delivery_status": "Ready for another independent review; not approved automatically",
+  "tested_source_git_blobs": {
+    "tests/Feature/RetirementPreflightTest.php": "fad012d2ebf9f49b4c9c28cef2fccada61214efc",
+    "tests/Support/RetirementMemoryIntegrity.php": "492d693448015cd31fe44ac930b6cc79b126c602"
+  },
+  "root_cause": "An unqualified sqlite_sequence read resolves temp first. Dropping a TEMP AUTOINCREMENT table leaves internal temp.sqlite_sequence, excluded from the old temp catalog filter. A mirrored valid temp sequence hid corrupt main values.",
+  "original_observations": {
+    "additional-temp-sequence-capture": {
+      "manifest_equal": true,
+      "main": [
+        {
+          "name": "users",
+          "seq": "1-corrupt",
+          "storage_type": "text"
+        }
+      ],
+      "temp": [
+        {
+          "name": "users",
+          "seq": 1,
+          "storage_type": "integer"
+        }
+      ],
+      "visible_temp_objects": []
+    },
+    "additional-temp-sequence-restore": {
+      "accepted": true,
+      "error": null,
+      "destination": {
+        "main": [
+          {
+            "name": "users",
+            "seq": "1-corrupt",
+            "storage_type": "text"
+          }
+        ],
+        "temp": [
+          {
+            "name": "users",
+            "seq": 1,
+            "storage_type": "integer"
+          }
+        ],
+        "manifest_equal": true,
+        "transaction_open": false,
+        "integrity_check": "ok"
+      }
+    },
+    "additional-temp-sequence-retirement": {
+      "error": "Invalid sqlite_sequence entry: stop before retirement or restore",
+      "executed_drops": [
+        "likes"
+      ],
+      "main": [
+        {
+          "name": "users",
+          "seq": "1-corrupt",
+          "storage_type": "text"
+        }
+      ],
+      "temp": [
+        {
+          "name": "users",
+          "seq": 1,
+          "storage_type": "integer"
+        }
+      ],
+      "main_application_table_count": 34,
+      "foreign_keys": 1
+    }
+  },
+  "after_observations": {
+    "additional-temp-sequence-capture": {
+      "manifest_equal": false,
+      "main": [
+        {
+          "name": "users",
+          "seq": "1-corrupt",
+          "storage_type": "text"
+        }
+      ],
+      "temp": [
+        {
+          "name": "users",
+          "seq": 1,
+          "storage_type": "integer"
+        }
+      ],
+      "visible_temp_objects": [
+        {
+          "type": "table",
+          "name": "sqlite_sequence",
+          "tbl_name": "sqlite_sequence",
+          "sql": "CREATE TABLE sqlite_sequence(name,seq)"
+        }
+      ]
+    },
+    "additional-temp-sequence-restore": {
+      "accepted": false,
+      "error": "Restored manifest mismatch; destination rejected",
+      "destination": null
+    },
+    "additional-temp-sequence-retirement": {
+      "error": "Unreviewed temporary catalog: stop before retirement",
+      "executed_drops": [],
+      "main": [
+        {
+          "name": "users",
+          "seq": "1-corrupt",
+          "storage_type": "text"
+        }
+      ],
+      "temp": [
+        {
+          "name": "users",
+          "seq": 1,
+          "storage_type": "integer"
+        }
+      ],
+      "main_application_table_count": 35,
+      "foreign_keys": 1
+    }
+  },
+  "three_probes": {
+    "before": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 3,
+      "skipped": 0,
+      "seconds": 0.462429,
+      "status": "FAIL"
+    },
+    "after": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.528143,
+      "status": "PASS"
+    },
+    "expectations_changed": false
+  },
+  "all_26_independent_probes": {
+    "tests": 26,
+    "assertions": 168,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 2.866428,
+    "status": "PASS"
+  },
+  "other_23_independent_probes": "PASS, same byte-identical source and assertions; included in all_26 result",
+  "independent_probe_fixture": {
+    "path": "docs/web/w6/evidence/W62C-D-second-review-probes.php.txt",
+    "code_sha256": "4f48d530f9ff2575129767e5c9db30992fd20a681899b3b0cd3ca792b8ace722",
+    "verbatim": true,
+    "not_automatically_discovered": true,
+    "not_a_media_hash": true
+  },
+  "original_five_probes": {
+    "tests": 5,
+    "assertions": 10,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 0.806878,
+    "status": "PASS"
+  },
+  "previous_105_cases_and_996_assertions_retained": true,
+  "new_regression_result": {
+    "tests": 15,
+    "assertions": 322,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 3.500079,
+    "status": "PASS"
+  },
+  "new_regression_observations": {
+    "fix2-boundary-internal-mirror": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "main_and_temp_rollback_equal": true
+    },
+    "fix2-stop-candidate-table": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "table",
+          "name": "likes"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-stop-row-shadow": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "table",
+          "name": "users"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-stop-ledger-view": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "view",
+          "name": "migrations"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-stop-trigger": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "trigger",
+          "name": "provider_weekly_no_overlap_insert"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-stop-internal-mirror": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "table",
+          "name": "sqlite_sequence"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-restore-trigger": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    },
+    "fix2-restore-internal-empty": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    },
+    "fix2-restore-internal-mirror": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    },
+    "fix2-boundary-protected-table": {
+      "status": "PASS",
+      "executed_drops": [
+        "likes"
+      ],
+      "second_drop_rejected": true,
+      "main_and_temp_rollback_equal": true
+    },
+    "fix2-stop-internal-empty": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "table",
+          "name": "sqlite_sequence"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-restore-row-shadow": {
+      "status": "PASS",
+      "destination_rejected": true,
+      "main_and_temp_objects_rolled_back": true,
+      "source_unchanged": true,
+      "committed": false
+    },
+    "fix2-stop-protected-table": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "index",
+          "name": "sqlite_autoindex_users_1"
+        },
+        {
+          "type": "table",
+          "name": "users"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-stop-index": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "index",
+          "name": "users_email_unique"
+        },
+        {
+          "type": "table",
+          "name": "synthetic_indexed"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    },
+    "fix2-stop-protected-view": {
+      "status": "PASS",
+      "main_capture_qualified": true,
+      "temporary_objects_detected": [
+        {
+          "type": "view",
+          "name": "users"
+        }
+      ],
+      "drop_statements": 0,
+      "all_nine_candidates_and_rows_preserved": true,
+      "source_restore_rejected_before_loading": true,
+      "observed_state_unchanged_after_rejection": true
+    }
+  },
+  "query_audit": {
+    "main_catalog": {
+      "original": "FROM sqlite_master",
+      "corrected": "FROM main.sqlite_master",
+      "policy": "Literal reserved-prefix filter remains only on main; no sqliteX exclusion"
+    },
+    "sequences": {
+      "original": "FROM sqlite_sequence; UPDATE/INSERT sqlite_sequence",
+      "corrected": "FROM main.sqlite_sequence; UPDATE/INSERT main.sqlite_sequence",
+      "policy": "Raw name/value and typeof(name)/typeof(seq), no numeric cast"
+    },
+    "temporary_catalog": {
+      "original": "FROM sqlite_temp_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE",
+      "corrected": "FROM temp.sqlite_master ORDER BY type,name",
+      "policy": "Capture every temporary object, including sqlite_sequence and sqlite_autoindex; authorized catalog is empty"
+    },
+    "table_pragmas": {
+      "original": "PRAGMA table_xinfo/index_list/index_xinfo/foreign_key_list(identifier)",
+      "corrected": "PRAGMA main.table_xinfo/index_list/index_xinfo/foreign_key_list(quoted identifier)"
+    },
+    "raw_rows": {
+      "original": "SELECT ... FROM quoted_identifier",
+      "corrected": "SELECT ... FROM main.quoted_identifier"
+    },
+    "protected_rows_and_catalog": {
+      "corrected": "DB::table('main.'.$table); Schema::getColumns/getForeignKeys/getIndexes('main.'.$table)",
+      "policy": "Shared ReservationFixtures is not modified; private helper preserves its output shape but targets main"
+    },
+    "protected_triggers_and_morphs": {
+      "corrected": "main.sqlite_master; DB::table('main.likes')"
+    },
+    "destructive_simulation": {
+      "original": "Schema::drop($table)",
+      "corrected": "Schema::drop('main.'.$table)",
+      "policy": "Only fixed allowlist prefixes; empty temp catalog and full inventory checks before first/every DROP"
+    },
+    "restore": {
+      "corrected": "INSERT INTO main.quoted_identifier; main.sqlite_sequence; PRAGMA main.foreign_key_check; PRAGMA main.integrity_check",
+      "policy": "Exact trusted source DDL executes only on a new literal sqlite::memory: PDO; no hook until loading is complete. Final full manifest includes every temp object, causing rejection and rollback before commit."
+    },
+    "connection_pragmas": {
+      "unchanged": [
+        "PRAGMA database_list",
+        "PRAGMA foreign_keys",
+        "PRAGMA foreign_keys = ON"
+      ],
+      "reason": "Connection-wide controls, no table-name lookup; never disable FK"
+    },
+    "trusted_ddl_and_fixtures": {
+      "reason": "Historical CREATE TABLE/INDEX/TRIGGER SQL is validated exactly before constructing the empty destination. Fixture TEMP declarations and schema-bound CREATE INDEX/trigger syntax intentionally use SQLite grammar; unqualified fixture trigger-body DML is not a verifier query. Public workflow tests intentionally exercise unchanged production ORM, only after a clean/reviewed preflight."
+    },
+    "lossy_comparisons": {
+      "sequence_casts": false,
+      "raw_values_and_storage_classes": true,
+      "only_metadata_normalization": "index_list.seq enumeration ordinal; key ordering in index_xinfo.seqno retained",
+      "control_casts": "FK flag, COUNT and driver IDs only; not original manifest values"
+    }
+  },
+  "query_inventory": [
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 90,
+      "method": "memoryOnly",
+      "visibility": "private",
+      "source": "foreach ($c->select('PRAGMA database_list') as $db) {",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 95,
+      "method": "memoryOnly",
+      "visibility": "private",
+      "source": "if ((int) $c->selectOne('PRAGMA foreign_keys')->foreign_keys !== 1) {",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 104,
+      "method": "protectedTriggers",
+      "visibility": "private",
+      "source": "return collect(DB::select(\"SELECT name,tbl_name,sql FROM main.sqlite_master WHERE type = 'trigger' ORDER BY name\"))",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 114,
+      "method": "catalog",
+      "visibility": "private",
+      "source": "$result[$table] = ['columns' => Schema::getColumns('main.'.$table),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 115,
+      "method": "catalog",
+      "visibility": "private",
+      "source": "'foreign_keys' => Schema::getForeignKeys('main.'.$table), 'indexes' => Schema::getIndexes('main.'.$table)];",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 128,
+      "method": "protectedRows",
+      "visibility": "private",
+      "source": "$snapshot[$table] = DB::table('main.'.$table)->get()->map(fn ($row) => (array) $row)",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 138,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.profesionistas')->insert(['id' => 1, 'nombre' => 'Synthetic', 'email' => $user->email,",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 140,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.posts')->insert(['id' => 1, 'user_id' => $user->id, 'media_path' => $media, 'deleted_at' => now()]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 141,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.comments')->insert(['id' => 1, 'user_id' => $user->id, 'post_id' => 1, 'content' => 'Synthetic', 'media_path' => $media]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 142,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.likes')->insert(['user_id' => $user->id, 'post_id' => 1, 'likeable_id' => 1, 'likeable_type' => 'App\\\\Models\\\\Post']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 143,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.reminders')->insert(['user_id' => $user->id, 'title' => 'Synthetic', 'remind_at' => '2030-01-01 10:00:00']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 144,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.emotions')->insert(['name' => 'Synthetic', 'slug' => 'synthetic', 'image_path' => $media]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 145,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.citas')->insert(['user_id' => $user->id, 'profesionista_id' => 1,",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 147,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.profesionista_disponibilidades')->insert(['profesionista_id' => 1, 'day_of_week' => 1, 'start_time' => '08:00', 'end_time' => '18:00']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 148,
+      "method": "seedRetired",
+      "visibility": "private",
+      "source": "DB::table('main.profesionista_bloqueos')->insert(['profesionista_id' => 1, 'start_datetime' => '2030-01-01 10:00:00', 'end_datetime' => '2030-01-01 11:00:00']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 153,
+      "method": "verifyReviewedInventory",
+      "visibility": "private",
+      "source": "if (DB::select('PRAGMA main.foreign_key_check')) {",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 175,
+      "method": "verifyReviewedInventory",
+      "visibility": "private",
+      "source": "$unknown = DB::table('main.likes')->whereNotNull('likeable_type')",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 219,
+      "method": "simulate",
+      "visibility": "private",
+      "source": "Schema::drop('main.'.$table);",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 265,
+      "method": "test_inventory_comes_from_all_37_migrations_in_memory",
+      "visibility": "public",
+      "source": "'triggers' => DB::select(\"SELECT name,tbl_name,sql FROM main.sqlite_master WHERE type = 'trigger'\"),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 285,
+      "method": "test_populated_retirement_preserves_every_protected_row_and_native_workflow",
+      "visibility": "public",
+      "source": "DB::table('provider_blocked_dates')->insert(['provider_profile_id' => $provider->providerProfile->id, 'blocked_date' => '2030-12-25']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 305,
+      "method": "test_populated_retirement_preserves_every_protected_row_and_native_workflow",
+      "visibility": "public",
+      "source": "$this->assertFalse(Schema::hasTable($table));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 326,
+      "method": "test_populated_retirement_preserves_every_protected_row_and_native_workflow",
+      "visibility": "public",
+      "source": "$this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 331,
+      "method": "seedProtectedInfrastructure",
+      "visibility": "private",
+      "source": "DB::table('password_reset_tokens')->insert(['email' => 'synthetic-reset@example.test', 'token' => 'synthetic-not-a-real-credential', 'created_at' => now()]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 332,
+      "method": "seedProtectedInfrastructure",
+      "visibility": "private",
+      "source": "DB::table('sessions')->insert(['id' => 'synthetic-session', 'user_id' => $user->id, 'ip_address' => '192.0.2.1', 'user_agent' => 'Synthetic', 'payload' => base64_encode('synthetic'), 'last_activity' => now()->timestamp]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 333,
+      "method": "seedProtectedInfrastructure",
+      "visibility": "private",
+      "source": "DB::table('cache')->insert(['key' => 'synthetic-cache', 'value' => serialize('synthetic'), 'expiration' => now()->addHour()->timestamp]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 334,
+      "method": "seedProtectedInfrastructure",
+      "visibility": "private",
+      "source": "DB::table('cache_locks')->insert(['key' => 'synthetic-lock', 'owner' => 'synthetic-owner', 'expiration' => now()->addHour()->timestamp]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 335,
+      "method": "seedProtectedInfrastructure",
+      "visibility": "private",
+      "source": "DB::table('jobs')->insert(['queue' => 'synthetic', 'payload' => '{\"synthetic\":true}', 'attempts' => 0, 'reserved_at' => null, 'available_at' => now()->timestamp, 'created_at' => now()->timestamp]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 336,
+      "method": "seedProtectedInfrastructure",
+      "visibility": "private",
+      "source": "DB::table('job_batches')->insert(['id' => 'synthetic-batch', 'name' => 'Synthetic', 'total_jobs' => 1, 'pending_jobs' => 1, 'failed_jobs' => 0, 'failed_job_ids' => '[]', 'options' => null, 'cancelled_at' => null, 'created_at' => now()->timestamp, 'finished_at' => null]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 337,
+      "method": "seedProtectedInfrastructure",
+      "visibility": "private",
+      "source": "DB::table('failed_jobs')->insert(['uuid' => (string) \\Illuminate\\Support\\Str::uuid(), 'connection' => 'synthetic', 'queue' => 'synthetic', 'payload' => '{}', 'exception' => 'Synthetic failure', 'failed_at' => now()]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 351,
+      "method": "test_parent_first_order_and_protected_target_are_rejected_before_any_drop",
+      "visibility": "public",
+      "source": "$this->assertTrue(Schema::hasTable($table));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 358,
+      "method": "test_unknown_inbound_fk_stops_before_any_drop",
+      "visibility": "public",
+      "source": "Schema::create('synthetic_dependency', function (Blueprint $table) {",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 370,
+      "method": "test_trigger_on_protected_users_referencing_posts_stops_before_any_retirement",
+      "visibility": "public",
+      "source": "DB::unprepared(\"CREATE TRIGGER synthetic_cross_domain AFTER UPDATE OF name ON users BEGIN INSERT INTO posts (user_id, content) VALUES (NEW.id, 'synthetic cross-domain writer'); END\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 383,
+      "method": "test_trigger_on_protected_users_referencing_posts_stops_before_any_retirement",
+      "visibility": "public",
+      "source": "$this->assertTrue(Schema::hasTable($table));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 391,
+      "method": "test_trigger_on_protected_users_referencing_posts_stops_before_any_retirement",
+      "visibility": "public",
+      "source": "$this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 428,
+      "method": "test_sqlite_transactional_rehearsal_can_restore_synthetic_rows_after_failure",
+      "visibility": "public",
+      "source": "$this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 444,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "DB::table('provider_blocked_dates')->insert(['provider_profile_id' => $provider->providerProfile->id, 'blocked_date' => '2030-12-25']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 451,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "DB::statement(\"INSERT INTO cache(key,value,expiration) VALUES ('synthetic-restored-blob',CAST('synthetic binary value' AS BLOB),123)\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 460,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "$this->assertSame([], $copy->query('PRAGMA main.foreign_key_check')->fetchAll());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 461,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "$this->assertSame(1, (int) $copy->query('PRAGMA foreign_keys')->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 462,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "$this->assertSame(37, (int) $copy->query('SELECT COUNT(*) FROM main.migrations')->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 463,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "$this->assertSame(1, (int) $copy->query('SELECT COUNT(*) FROM main.service_reservations r JOIN main.reservation_events e ON e.service_reservation_id=r.id AND e.version=r.version JOIN main.service_inquiries i ON i.id=r.service_inquiry_id JOIN main.services s ON s.id=r.service_id JOIN main.provider_profiles p ON p.id=r.provider_profile_id WHERE i.client_user_id=r.client_user_id AND s.provider_profile_id=p.id')->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 464,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "$photo = $copy->query('SELECT profile_photo_path FROM main.users WHERE id='.(int) $client->id)->fetchColumn();",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 468,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "'UPDATE reservation_events SET version=99',",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 469,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "'INSERT INTO provider_weekly_intervals(provider_profile_id,day_of_week,start_minute,end_minute) VALUES ('.(int) $provider->providerProfile->id.',1,540,600)',",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 470,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "\"INSERT INTO service_inquiries(service_id,client_user_id,service_title,message,status) SELECT service_id,client_user_id,'Synthetic','Synthetic','pending' FROM service_inquiries LIMIT 1\",",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 474,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "$copy->exec($invalidSql);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 485,
+      "method": "test_logical_backup_restores_synthetic_schema_rows_and_triggers_to_a_separate_memory_database",
+      "visibility": "public",
+      "source": "$statement = $copy->prepare('INSERT INTO users ('.implode(',', array_map($this->quoteIdentifier(...), array_keys($nextUser))).') VALUES ('.implode(',', array_fill(0, count($nextUser), '?')).')');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 505,
+      "method": "test_inconsistent_schema_or_connection_is_a_stop",
+      "visibility": "public",
+      "source": "Schema::table('posts', fn (Blueprint $table) => $table->dropColumn('media_path'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 507,
+      "method": "test_inconsistent_schema_or_connection_is_a_stop",
+      "visibility": "public",
+      "source": "DB::unprepared('CREATE TRIGGER synthetic_old_writer AFTER INSERT ON posts BEGIN SELECT 1; END');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 510,
+      "method": "test_inconsistent_schema_or_connection_is_a_stop",
+      "visibility": "public",
+      "source": "DB::statement('PRAGMA defer_foreign_keys = ON');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 511,
+      "method": "test_inconsistent_schema_or_connection_is_a_stop",
+      "visibility": "public",
+      "source": "DB::table('posts')->insert(['user_id' => 99999]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 512,
+      "method": "test_inconsistent_schema_or_connection_is_a_stop",
+      "visibility": "public",
+      "source": "$this->assertSame(1, (int) DB::selectOne('PRAGMA foreign_keys')->foreign_keys);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 518,
+      "method": "test_inconsistent_schema_or_connection_is_a_stop",
+      "visibility": "public",
+      "source": "DB::statement(\"ATTACH DATABASE ':memory:' AS synthetic_other\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 546,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'new-trigger' => DB::unprepared('CREATE TRIGGER synthetic_new AFTER INSERT ON users BEGIN SELECT 1; END'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 547,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'modified-trigger', 'missing-trigger' => DB::unprepared('DROP TRIGGER provider_weekly_no_overlap_insert'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 548,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'cross-view' => DB::unprepared('CREATE VIEW synthetic_cross AS SELECT users.id FROM users JOIN posts ON users.id=posts.user_id'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 549,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'temp-object' => DB::unprepared('CREATE TEMP VIEW synthetic_temp AS SELECT id FROM posts'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 550,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'protected-fk' => DB::statement('ALTER TABLE users ADD COLUMN synthetic_post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 551,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'missing-candidate' => Schema::drop('emotions'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 552,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'missing-protected' => Schema::drop('cache_locks'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 553,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'missing-column' => DB::statement('ALTER TABLE users DROP COLUMN profile_photo_path'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 554,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'unknown-index' => DB::statement('CREATE INDEX synthetic_unknown ON users(name)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 555,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'unknown-table' => DB::statement('CREATE TABLE synthetic_unknown (id INTEGER PRIMARY KEY)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 556,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'missing-migration' => DB::table('migrations')->where('id', 1)->delete(),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 557,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "'changed-batch' => DB::table('migrations')->where('id', 1)->update(['batch' => 99]),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 560,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "DB::unprepared('CREATE TRIGGER provider_weekly_no_overlap_insert BEFORE INSERT ON provider_weekly_intervals BEGIN SELECT 1; END');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 574,
+      "method": "test_unreviewed_dependencies_stop_before_the_first_drop_and_leave_the_observed_state_intact",
+      "visibility": "public",
+      "source": "$this->assertSame(1, (int) DB::selectOne('PRAGMA foreign_keys')->foreign_keys);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 589,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "DB::table('cache')->insert(['key' => 'synthetic-type', 'value' => '1', 'expiration' => 123]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 594,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "'null' => DB::table('users')->where('id', $user->id)->update(['email_verified_at' => null]),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 595,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "'date' => DB::table('users')->where('id', $user->id)->update(['created_at' => '2001-01-01 00:00:00']),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 596,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "'storage-type' => DB::statement(\"UPDATE cache SET value=CAST('1' AS BLOB) WHERE key='synthetic-type'\"),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 597,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "'sequence' => DB::statement(\"UPDATE main.sqlite_sequence SET seq=seq+7 WHERE name='users'\"),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 598,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "'batch' => DB::table('migrations')->where('id', 1)->update(['batch' => 2]),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 599,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "'empty-table' => Schema::drop('cache_locks'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 600,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "'partial-index' => DB::statement('DROP INDEX service_inquiries_one_active'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 603,
+      "method": "test_manifest_detects_changes_beyond_row_counts_including_storage_types_and_empty_tables",
+      "visibility": "public",
+      "source": "DB::statement(\"CREATE UNIQUE INDEX service_inquiries_one_active ON service_inquiries(service_id,client_user_id) WHERE status='pending'\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 659,
+      "method": "test_every_rollback_is_observed_inside_and_after_the_transaction",
+      "visibility": "public",
+      "source": "$this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 683,
+      "method": "test_guards_are_rechecked_before_each_drop_not_only_before_the_plan",
+      "visibility": "public",
+      "source": "'trigger' => DB::unprepared('CREATE TRIGGER synthetic_boundary AFTER UPDATE ON users BEGIN SELECT 1; END'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 685,
+      "method": "test_guards_are_rechecked_before_each_drop_not_only_before_the_plan",
+      "visibility": "public",
+      "source": "'attached' => DB::statement(\"ATTACH DATABASE ':memory:' AS synthetic_boundary\"),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 696,
+      "method": "test_guards_are_rechecked_before_each_drop_not_only_before_the_plan",
+      "visibility": "public",
+      "source": "DB::statement('DETACH DATABASE synthetic_boundary');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 749,
+      "method": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination",
+      "visibility": "public",
+      "source": "'row' => $copy->exec(\"UPDATE users SET name='Synthetic corrupt restore'\"),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 750,
+      "method": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination",
+      "visibility": "public",
+      "source": "'sequence' => $copy->exec(\"UPDATE main.sqlite_sequence SET seq=seq+5 WHERE name='users'\"),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 751,
+      "method": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination",
+      "visibility": "public",
+      "source": "'index' => $copy->exec('DROP INDEX service_inquiries_one_active'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 752,
+      "method": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination",
+      "visibility": "public",
+      "source": "'trigger' => $copy->exec('DROP TRIGGER provider_weekly_no_overlap_insert'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 753,
+      "method": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination",
+      "visibility": "public",
+      "source": "'unknown-object' => $copy->exec('CREATE VIEW synthetic_unknown AS SELECT id FROM users'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 762,
+      "method": "test_logical_restore_rejects_drift_and_rolls_back_the_new_memory_destination",
+      "visibility": "public",
+      "source": "$this->assertSame(0, (int) $destination->query(\"SELECT COUNT(*) FROM main.sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE\")->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 779,
+      "method": "test_restore_rejects_unreviewed_source_before_creating_any_destination_object",
+      "visibility": "public",
+      "source": "$source['objects'][] = ['type' => 'view', 'name' => 'synthetic_unknown', 'tbl_name' => 'synthetic_unknown', 'sql' => 'CREATE VIEW synthetic_unknown AS SELECT id FROM users'];",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 781,
+      "method": "test_restore_rejects_unreviewed_source_before_creating_any_destination_object",
+      "visibility": "public",
+      "source": "$source['tables']['users']['sql'] = 'CREATE TABLE synthetic_unreviewed(id INTEGER PRIMARY KEY)';",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 850,
+      "method": "test_native_auth_roles_new_inquiries_messages_monotonic_reads_and_api_after_retirement",
+      "visibility": "public",
+      "source": "$this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 880,
+      "method": "test_native_availability_reservations_reviews_and_notifications_after_retirement",
+      "visibility": "public",
+      "source": "DB::table('provider_weekly_intervals')->insert(['provider_profile_id' => $provider->providerProfile->id, 'day_of_week' => 1, 'start_minute' => 540, 'end_minute' => 600]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 901,
+      "method": "test_native_availability_reservations_reviews_and_notifications_after_retirement",
+      "visibility": "public",
+      "source": "$this->assertSame(['reservation_requested', 'reservation_confirmed', 'reservation_completed', 'review_published', 'review_withdrawn'], DB::table('activity_notifications')->orderBy('id')->pluck('event')->all());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 902,
+      "method": "test_native_availability_reservations_reviews_and_notifications_after_retirement",
+      "visibility": "public",
+      "source": "$this->assertSame([$provider->id, $client->id, $client->id, $provider->id, $provider->id], DB::table('activity_notifications')->orderBy('id')->pluck('user_id')->all());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 909,
+      "method": "test_native_availability_reservations_reviews_and_notifications_after_retirement",
+      "visibility": "public",
+      "source": "$this->assertSame([], DB::select('PRAGMA main.foreign_key_check'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 920,
+      "method": "test_native_notification_failure_rolls_back_reservation_and_event_after_retirement",
+      "visibility": "public",
+      "source": "DB::unprepared(\"CREATE TRIGGER synthetic_notice_failure BEFORE INSERT ON activity_notifications WHEN NEW.event='reservation_confirmed' BEGIN SELECT RAISE(ABORT, 'Synthetic notification failure'); END\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 958,
+      "method": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media",
+      "visibility": "public",
+      "source": "DB::table('posts')->update(['media_path' => 'public/'.strtoupper($path)]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 959,
+      "method": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media",
+      "visibility": "public",
+      "source": "DB::table('comments')->update(['media_path' => null]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 960,
+      "method": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media",
+      "visibility": "public",
+      "source": "DB::table('emotions')->update(['image_path' => 'unrelated-synthetic.png']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 963,
+      "method": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media",
+      "visibility": "public",
+      "source": "$this->assertNotNull(DB::table('posts')->value('deleted_at'));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 964,
+      "method": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media",
+      "visibility": "public",
+      "source": "DB::table('comments')->update(['deleted_at' => now()]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 968,
+      "method": "test_synthetic_photo_references_and_uncertainty_never_touch_real_media",
+      "visibility": "public",
+      "source": "DB::table('likes')->update(['likeable_type' => 'App\\\\Models\\\\UnknownSynthetic']);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1023,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "'foreign-table' => DB::statement('CREATE TABLE '.$quoted.' (id INTEGER PRIMARY KEY, post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1024,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "'view', 'upper-view' => DB::statement('CREATE VIEW '.$quoted.' AS SELECT id FROM posts'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1025,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "'temp-view' => DB::statement('CREATE TEMP VIEW '.$quoted.' AS SELECT id FROM posts'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1026,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "'temp-table' => DB::statement('CREATE TEMP TABLE '.$quoted.' (id INTEGER PRIMARY KEY)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1027,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "'legacy-trigger' => DB::unprepared('CREATE TRIGGER '.$quoted.' AFTER INSERT ON posts BEGIN SELECT 1; END'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1028,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "'protected-trigger' => DB::unprepared('CREATE TRIGGER '.$quoted.' AFTER UPDATE ON users BEGIN SELECT 1; END'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1029,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "'index' => DB::statement('CREATE INDEX '.$quoted.' ON users(name)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1032,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "DB::table($name)->insert(['id' => 1, 'post_id' => 1]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1034,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "DB::table($name)->insert(['id' => 1]);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1051,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "$this->assertTrue(Schema::hasTable($table));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1054,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "$this->assertSame(1, DB::table($name)->count());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1057,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "$this->assertSame([1], array_map(fn ($row) => $row->id, DB::select('SELECT id FROM '.$quoted)));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1059,
+      "method": "test_sqlitex_objects_are_visible_and_stop_before_any_drop_without_losing_rows",
+      "visibility": "public",
+      "source": "$this->assertSame(1, (int) DB::selectOne('PRAGMA foreign_keys')->foreign_keys);",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1081,
+      "method": "test_restore_rejects_new_sqlitex_views_in_main_and_temp",
+      "visibility": "public",
+      "source": "$copy->exec($schema === 'temp'",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1082,
+      "method": "test_restore_rejects_new_sqlitex_views_in_main_and_temp",
+      "visibility": "public",
+      "source": "? 'CREATE TEMP VIEW sqliteX_restore AS SELECT id FROM users'",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1083,
+      "method": "test_restore_rejects_new_sqlitex_views_in_main_and_temp",
+      "visibility": "public",
+      "source": ": 'CREATE VIEW sqliteX_restore AS SELECT id FROM users');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1091,
+      "method": "test_restore_rejects_new_sqlitex_views_in_main_and_temp",
+      "visibility": "public",
+      "source": "$this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM main.sqlite_master')->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1092,
+      "method": "test_restore_rejects_new_sqlitex_views_in_main_and_temp",
+      "visibility": "public",
+      "source": "$this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM temp.sqlite_master')->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1108,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'text-suffix' => DB::statement(\"UPDATE main.sqlite_sequence SET seq='2-corrupt' WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1109,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'text-same' => DB::statement(\"UPDATE main.sqlite_sequence SET seq='2' WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1110,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'null' => DB::statement(\"UPDATE main.sqlite_sequence SET seq=NULL WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1111,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'real-same' => DB::statement(\"UPDATE main.sqlite_sequence SET seq=CAST(2 AS REAL) WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1112,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'blob-same' => DB::statement(\"UPDATE main.sqlite_sequence SET seq=CAST('2' AS BLOB) WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1113,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'negative' => DB::statement(\"UPDATE main.sqlite_sequence SET seq=-1 WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1114,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'missing' => DB::statement(\"DELETE FROM main.sqlite_sequence WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1115,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'duplicate' => DB::statement(\"INSERT INTO main.sqlite_sequence(name,seq) SELECT name,seq FROM main.sqlite_sequence WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1116,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'orphan' => DB::statement(\"INSERT INTO main.sqlite_sequence(name,seq) VALUES ('synthetic_orphan',2)\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1117,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'below-max' => DB::statement(\"UPDATE main.sqlite_sequence SET seq=1 WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1118,
+      "method": "mutateSyntheticSequence",
+      "visibility": "private",
+      "source": "'name-blob' => DB::statement(\"UPDATE main.sqlite_sequence SET name=CAST(name AS BLOB) WHERE name='users'\"),",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1143,
+      "method": "test_raw_sequence_mutations_are_detected_and_stop_before_any_drop",
+      "visibility": "public",
+      "source": "$this->assertTrue(Schema::hasTable($table));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1175,
+      "method": "test_integer_high_water_mark_is_preserved_with_its_storage_type_and_next_id",
+      "visibility": "public",
+      "source": "DB::statement(\"UPDATE main.sqlite_sequence SET seq=100 WHERE name='users'\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1188,
+      "method": "test_integer_high_water_mark_is_preserved_with_its_storage_type_and_next_id",
+      "visibility": "public",
+      "source": "$statement = $copy->prepare('INSERT INTO users ('.implode(',', array_map($this->quoteIdentifier(...), array_keys($row))).') VALUES ('.implode(',', array_fill(0, count($row), '?')).')');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1213,
+      "method": "test_sequence_changes_between_drops_stop_and_roll_back",
+      "visibility": "public",
+      "source": "? \"UPDATE main.sqlite_sequence SET seq=seq+1 WHERE name='users'\"",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1214,
+      "method": "test_sequence_changes_between_drops_stop_and_roll_back",
+      "visibility": "public",
+      "source": ": \"UPDATE main.sqlite_sequence SET seq=CAST(seq AS TEXT) WHERE name='users'\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1242,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "$pdo->exec('CREATE TEMP TABLE synthetic_auto(id INTEGER PRIMARY KEY AUTOINCREMENT)');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1243,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "$pdo->exec('INSERT INTO temp.synthetic_auto DEFAULT VALUES');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1244,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "$pdo->exec('DROP TABLE temp.synthetic_auto');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1246,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "$pdo->exec('INSERT INTO temp.sqlite_sequence(name,seq) SELECT name,seq FROM main.sqlite_sequence');",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1247,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "$pdo->exec(\"UPDATE main.sqlite_sequence SET seq='1-corrupt' WHERE name='users'\");",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1253,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "'protected-table' => $pdo->exec('CREATE TEMP TABLE users(id INTEGER UNIQUE, hidden TEXT)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1254,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "'protected-view' => $pdo->exec('CREATE TEMP VIEW users AS SELECT 999 AS id'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1255,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "'candidate-table' => $pdo->exec('CREATE TEMP TABLE likes(id INTEGER PRIMARY KEY)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1256,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "'ledger-view' => $pdo->exec('CREATE TEMP VIEW migrations AS SELECT 999 AS id'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1257,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "'index' => $pdo->exec('CREATE TEMP TABLE synthetic_indexed(id INTEGER); CREATE INDEX temp.users_email_unique ON synthetic_indexed(id)'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1258,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "'trigger' => $pdo->exec('CREATE TEMP TRIGGER provider_weekly_no_overlap_insert AFTER UPDATE ON main.users BEGIN SELECT 1; END'),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1259,
+      "method": "createTemporaryShadow",
+      "visibility": "private",
+      "source": "'row-shadow' => $pdo->exec(\"CREATE TEMP TABLE users AS SELECT * FROM main.users; UPDATE main.users SET name='Synthetic main change hidden by temp'\"),",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1298,
+      "method": "test_main_capture_and_preflight_reject_every_temporary_shadow_including_internal_objects",
+      "visibility": "public",
+      "source": "$this->assertTrue(Schema::hasTable('main.'.$table));",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1345,
+      "method": "test_restore_rejects_and_rolls_back_temporary_shadowing_of_main_state",
+      "visibility": "public",
+      "source": "$this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM main.sqlite_master')->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Feature/RetirementPreflightTest.php",
+      "line": 1346,
+      "method": "test_restore_rejects_and_rolls_back_temporary_shadowing_of_main_state",
+      "visibility": "public",
+      "source": "$this->assertSame(0, (int) $destination->query('SELECT COUNT(*) FROM temp.sqlite_master')->fetchColumn());",
+      "role": "test/fixture"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 25,
+      "method": "guardMemoryPdo",
+      "visibility": "private",
+      "source": "foreach ($pdo->query('PRAGMA database_list')->fetchAll(PDO::FETCH_ASSOC) as $database) {",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 30,
+      "method": "guardMemoryPdo",
+      "visibility": "private",
+      "source": "if ((int) $pdo->query('PRAGMA foreign_keys')->fetchColumn() !== 1) {",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 50,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "$objects = $query(\"SELECT type,name,tbl_name,sql FROM main.sqlite_master WHERE substr(name,1,7) <> 'sqlite_' COLLATE NOCASE ORDER BY type,name\");",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 51,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "$sequences = $query('SELECT name,typeof(name) AS name_type,seq AS value,typeof(seq) AS storage_type FROM main.sqlite_sequence');",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 60,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "$columns = $query('PRAGMA main.table_xinfo('.$quoted.')');",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 62,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "foreach ($query('PRAGMA main.index_list('.$quoted.')') as $index) {",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 66,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "$index['columns'] = $query('PRAGMA main.index_xinfo('.$this->quoteIdentifier($index['name']).')');",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 81,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "foreach ($query('SELECT *,'.implode(',', $types).' FROM main.'.$quoted) as $row) {",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 87,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "'foreign_keys' => $query('PRAGMA main.foreign_key_list('.$quoted.')'), 'indexes' => $indexes,",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 98,
+      "method": "memoryManifest",
+      "visibility": "private",
+      "source": "'temp_objects' => $query('SELECT type,name,tbl_name,sql FROM temp.sqlite_master ORDER BY type,name')];",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 190,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$copy->exec('PRAGMA foreign_keys = ON');",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 196,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$copy->exec($table['sql']);",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 204,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$copy->exec($object['sql']);",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 221,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$statement = $copy->prepare('INSERT INTO main.'.$this->quoteIdentifier($name).' ('.$columns.') VALUES ('.implode(',', array_fill(0, count($row), '?')).')');",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 230,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$statement = $copy->prepare('SELECT COUNT(*) FROM main.sqlite_sequence WHERE name = ?');",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 234,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$sql = $exists ? 'UPDATE main.sqlite_sequence SET seq = ? WHERE name = ?' : 'INSERT INTO main.sqlite_sequence(seq,name) VALUES (?,?)';",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 235,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$statement = $copy->prepare($sql);",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 251,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "$copy->exec($object['sql']);",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 258,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "if ($copy->query('PRAGMA main.foreign_key_check')->fetchAll() !== []",
+      "role": "private verifier/restore"
+    },
+    {
+      "file": "tests/Support/RetirementMemoryIntegrity.php",
+      "line": 259,
+      "method": "restoreLogicalMemory",
+      "visibility": "private",
+      "source": "|| $copy->query('PRAGMA main.integrity_check')->fetchColumn() !== 'ok'",
+      "role": "private verifier/restore"
+    }
+  ],
+  "executed": {
+    "full": {
+      "tests": 789,
+      "assertions": 10344,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 115.648712,
+      "status": "PASS"
+    },
+    "rehearsal": {
+      "tests": 120,
+      "assertions": 1318,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 15.091857,
+      "status": "PASS"
+    },
+    "w51": {
+      "tests": 49,
+      "assertions": 459,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 4.574657,
+      "status": "PASS"
+    },
+    "w62a": {
+      "tests": 25,
+      "assertions": 406,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 3.317268,
+      "status": "PASS"
+    },
+    "w62b": {
+      "tests": 34,
+      "assertions": 586,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 4.166973,
+      "status": "PASS"
+    },
+    "originals": {
+      "tests": 5,
+      "assertions": 10,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.806878,
+      "status": "PASS"
+    },
+    "shadow": {
+      "tests": 3,
+      "assertions": 6,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 0.528143,
+      "status": "PASS"
+    },
+    "independent": {
+      "tests": 26,
+      "assertions": 168,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 2.866428,
+      "status": "PASS"
+    },
+    "new-regressions": {
+      "tests": 15,
+      "assertions": 322,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 3.500079,
+      "status": "PASS"
+    }
+  },
+  "versions": {
+    "php": "8.4.27",
+    "sqlite": "3.46.1",
+    "laravel": "12.71.0",
+    "phpunit": "11.5.57",
+    "pint": "1.22.1",
+    "node": "24.22.1",
+    "npm": "11.9.0",
+    "vite": "6.4.5",
+    "composer": "2.11.2",
+    "runner_image_id": "sha256:3e801756fb2e158f6539312f4ac4223f033c4c58834cf40f9eff309233f179c5"
+  },
+  "commands": {
+    "baseline": "php -d memory_limit=512M run-phpunit.php SecondAcceptanceProbeTest.php --filter test_second_review_(main_sequence|temp_sequence|restore_cannot)",
+    "independent_all": "php -d memory_limit=512M run-phpunit.php SecondAcceptanceProbeTest.php --filter test_second_review_",
+    "isolation": "--rm --network none; only new source lab and owned /review mount; new empty .env.testing, no original checkout/data/media"
+  },
+  "limitations": [
+    "Composer audits BLOCKED if proxy returns CONNECT 403; not passed",
+    "Windows/Laragon and actual PHP8.2 NOT RUN",
+    "MySQL and physical SQLite recovery/WAL/multiple writers NOT RUN, separate phases",
+    "No real retirement, production access, merge, deployment or auto-merge"
+  ],
+  "final_sha_publication": "Exact final commit SHA in the existing draft PR description and final delivery; source blobs above identify executed code. A commit cannot contain its own SHA."
+}
