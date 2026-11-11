@@ -1,0 +1,145 @@
+{
+  "overall": "BLOCKED",
+  "cases": [
+    {
+      "scenario": "A. Instalación histórica completa",
+      "status": "BLOCKED",
+      "worker_test_status": "FAIL",
+      "seconds": 0.719,
+      "applied_migrations": 28,
+      "expected": 37,
+      "first_failure": "2026_10_28_000002_create_service_inquiries_table.php",
+      "reason": "Las solicitudes requieren SQLite y su índice único parcial. Revisar la estrategia antes de usar otro motor."
+    },
+    {
+      "scenario": "B. Fixtures nativos/exclusivos completos",
+      "status": "NOT RUN",
+      "reason": "A no instala tablas nativas necesarias; no se crea un esquema aproximado",
+      "seconds": null
+    },
+    {
+      "scenario": "C. Retirada y comparación de 26 tablas",
+      "status": "NOT RUN",
+      "reason": "A bloqueado; ningún DROP de retirada ejecutado",
+      "protected_tables_present_at_stop": [
+        "cache",
+        "cache_locks",
+        "failed_jobs",
+        "job_batches",
+        "jobs",
+        "migrations",
+        "password_reset_tokens",
+        "provider_profiles",
+        "role_user",
+        "roles",
+        "service_categories",
+        "services",
+        "sessions",
+        "users"
+      ],
+      "protected_tables_missing_at_stop": [
+        "activity_notifications",
+        "inquiry_notifications",
+        "personal_access_tokens",
+        "provider_availability_settings",
+        "provider_blocked_dates",
+        "provider_weekly_intervals",
+        "reservation_events",
+        "service_inquiries",
+        "service_inquiry_messages",
+        "service_inquiry_reads",
+        "service_reservations",
+        "service_reviews"
+      ],
+      "seconds": null
+    },
+    {
+      "scenario": "D. Fallos después de 1/3/9 y checkpoints",
+      "status": "NOT RUN",
+      "reason": "No se autoriza omitir A ni usar rollback ficticio",
+      "seconds": null
+    },
+    {
+      "scenario": "E. Backup/restauración MySQL sintéticos",
+      "status": "NOT RUN",
+      "reason": "A bloqueado; no se certifica recuperación",
+      "seconds": null
+    },
+    {
+      "scenario": "F. Identidades erróneas",
+      "status": "PASS",
+      "cases": [
+        {
+          "name": "test_wrong_identity_stops_before_ddl with data set #0",
+          "seconds": 0.152264,
+          "status": "PASS"
+        },
+        {
+          "name": "test_wrong_identity_stops_before_ddl with data set #1",
+          "seconds": 0.012433,
+          "status": "PASS"
+        },
+        {
+          "name": "test_wrong_identity_stops_before_ddl with data set #2",
+          "seconds": 0.010925,
+          "status": "PASS"
+        },
+        {
+          "name": "test_wrong_identity_stops_before_ddl with data set #3",
+          "seconds": 0.010717,
+          "status": "PASS"
+        },
+        {
+          "name": "test_wrong_identity_stops_before_ddl with data set #4",
+          "seconds": 0.011793,
+          "status": "PASS"
+        }
+      ],
+      "seconds": 0.198132
+    },
+    {
+      "scenario": "F. FK/triggers/vistas/rutinas, columnas, privilegios, FK desactivadas, manifiesto, orden/allowlist/checkpoint",
+      "status": "NOT RUN",
+      "reason": "Gates del esquema completo no implementados/ejecutados tras fallo de A",
+      "seconds": null
+    },
+    {
+      "scenario": "Workflows Tekora y fotos bajo MySQL",
+      "status": "NOT RUN",
+      "reason": "Esquema nativo incompleto; pruebas SQLite no sustituyen MySQL",
+      "seconds": null
+    }
+  ],
+  "phpunit_cases": [
+    {
+      "name": "test_wrong_identity_stops_before_ddl with data set #0",
+      "seconds": 0.152264,
+      "status": "PASS"
+    },
+    {
+      "name": "test_wrong_identity_stops_before_ddl with data set #1",
+      "seconds": 0.012433,
+      "status": "PASS"
+    },
+    {
+      "name": "test_wrong_identity_stops_before_ddl with data set #2",
+      "seconds": 0.010925,
+      "status": "PASS"
+    },
+    {
+      "name": "test_wrong_identity_stops_before_ddl with data set #3",
+      "seconds": 0.010717,
+      "status": "PASS"
+    },
+    {
+      "name": "test_wrong_identity_stops_before_ddl with data set #4",
+      "seconds": 0.011793,
+      "status": "PASS"
+    },
+    {
+      "name": "test_all_37_historical_migrations_must_install_without_edits_or_skips",
+      "seconds": 0.815536,
+      "status": "FAIL"
+    }
+  ]
+}

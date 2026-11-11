@@ -1,0 +1,24 @@
+PHPUnit 11.5.57 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.4.27
+Configuration: /app/tests/Integration/mysql-phpunit.xml
+
+.....F                                                              6 / 6 (100%)
+
+Time: 00:01.020, Memory: 32.00 MB
+
+There was 1 failure:
+
+1) Tests\Integration\MySqlRetirementLabTest::test_all_37_historical_migrations_must_install_without_edits_or_skips
+BLOCKED: historical MySQL install; see sanitized lab evidence. No retirement, fixtures or restore may proceed.
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'PASS'
++'BLOCKED'
+
+/app/tests/Integration/MySqlRetirementLabTest.php:166
+
+FAILURES!
+Tests: 6, Assertions: 18, Failures: 1.

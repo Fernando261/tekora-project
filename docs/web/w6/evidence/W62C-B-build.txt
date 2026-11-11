@@ -1,0 +1,33 @@
+> build
+> vite build --config /tmp/tekora-w62cb-vite.config.mjs
+
+vite v6.4.5 building for production...
+transforming...
+
+/fonts/tekora/dm-sans-latin.woff2 referenced in /fonts/tekora/dm-sans-latin.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/fonts/tekora/space-grotesk-latin.woff2 referenced in /fonts/tekora/space-grotesk-latin.woff2 didn't resolve at build time, it will remain unchanged to be resolved at runtime
+✓ 67 modules transformed.
+rendering chunks...
+computing gzip size...
+public/build/manifest.json                       2.59 kB │ gzip:  0.52 kB
+public/build/assets/ambient-CymvvgaS.css         1.69 kB │ gzip:  0.67 kB
+public/build/assets/account-shell-DchkS9Y2.css  11.29 kB │ gzip:  3.08 kB
+public/build/assets/identity-DLzO8Cdm.css       14.78 kB │ gzip:  3.64 kB
+public/build/assets/dashboards-CN48-gh3.css     19.92 kB │ gzip:  4.42 kB
+public/build/assets/operations-DYhB3mcC.css     22.43 kB │ gzip:  5.29 kB
+public/build/assets/tekora-CyyA-bvX.css         23.65 kB │ gzip:  6.23 kB
+public/build/assets/marketplace-CtKInQcc.css    24.55 kB │ gzip:  5.66 kB
+public/build/assets/account-shell-CmQFvWJ9.js    1.18 kB │ gzip:  0.59 kB
+public/build/assets/identity-CXARY9Ex.js         1.75 kB │ gzip:  0.82 kB
+public/build/assets/operations-DVr2slB9.js       2.04 kB │ gzip:  0.93 kB
+public/build/assets/marketplace-qM7nyvDY.js      2.56 kB │ gzip:  1.07 kB
+public/build/assets/dashboards-D5p1_W1R.js       6.78 kB │ gzip:  2.86 kB
+public/build/assets/tekora-Baf5kkIu.js           8.16 kB │ gzip:  3.05 kB
+public/build/assets/index-eGWjRRuE.js           39.99 kB │ gzip: 15.49 kB
+✓ built in 1.49s
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
