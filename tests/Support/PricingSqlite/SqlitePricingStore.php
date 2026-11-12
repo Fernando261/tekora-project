@@ -76,6 +76,14 @@ final class SqlitePricingStore implements PricingStore
 
                 return;
             } catch (PDOException $error) {
+                // PHP 8.2 PDO does not report SQL-started transactions via inTransaction().
+                // A failed BEGIN has acquired nothing: never roll back the caller's transaction.
+                if ($phase === 'begin'
+                    && ($error->errorInfo[0] ?? null) === 'HY000'
+                    && ($error->errorInfo[1] ?? null) === 1
+                    && ($error->errorInfo[2] ?? null) === 'cannot start a transaction within a transaction') {
+                    throw new LogicException('An external transaction is already active; the caller retains ownership.', previous: $error);
+                }
                 if (self::code($error) !== 5) {
                     throw $error;
                 }

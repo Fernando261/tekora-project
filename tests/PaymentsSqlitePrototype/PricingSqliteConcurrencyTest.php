@@ -219,15 +219,29 @@ final class PricingSqliteConcurrencyTest extends TestCase
 
     public function test_manual_transaction_is_not_adopted_or_rolled_back_by_the_store(): void
     {
+        $observer = $this->lab->store();
+        $price = $this->price();
+        $calls = 0;
         $this->pdo->exec('BEGIN IMMEDIATE');
         try {
-            $this->store->atomic(fn () => null);
-            $this->fail('The caller owns the manual transaction.');
-        } catch (LogicException) {
-            $this->assertTrue($this->pdo->inTransaction());
+            $this->rawInsert('b221_price_versions', PricingValues::price($price));
+            try {
+                $this->store->atomic(function () use (&$calls) {
+                    $calls++;
+                });
+                $this->fail('The caller owns the manual transaction.');
+            } catch (LogicException) {
+                $this->assertSame(0, $calls);
+                $this->assertEquals($price, $this->store->latestPrice(1001));
+                $this->assertNull($observer->latestPrice(1001));
+            }
         } finally {
             $this->pdo->exec('ROLLBACK');
         }
+        $this->assertNull($this->store->latestPrice(1001));
+        $this->assertNull($observer->latestPrice(1001));
+        $this->store->atomic(fn () => $this->store->appendPrice($price));
+        $this->assertEquals($price, $observer->latestPrice(1001));
     }
 
     public function test_lost_transaction_context_requires_reconnection_before_any_read(): void

@@ -1,0 +1,524 @@
+{
+  "recommendation": "READY FOR INDEPENDENT REVIEW",
+  "scope": "B2.2.1-fix2 only; isolated synthetic prototype; no production compatibility certification",
+  "base": "7775938dda5440c03964009847d4a8d9d63b0805",
+  "branch": "codex/payments-b221-php82-fix",
+  "corrective_commit": "Reported separately after local commit; omitted here to avoid self-reference",
+  "root_cause": "PHP 8.2 PDO_SQLITE inTransaction() is false for SQL-started transactions; SQLite still rejects nested BEGIN. PHP 8.4 reports those transactions.",
+  "fix": "At the owned BEGIN boundary only, exact HY000/native integer 1/canonical already-active diagnostic becomes LogicException with original PDOException as previous, before active ownership/callback/COMMIT/ROLLBACK. Other errors propagate unchanged.",
+  "original_expectation_preserved": "Reject external transaction; portable assertions prove caller writes remain local, callback stays unexecuted and caller rollback succeeds. Original test name retained.",
+  "profile": {
+    "platform": "Linux x64",
+    "php82": "8.2.35",
+    "php84": "8.4.27",
+    "sqlite": "3.40.1, identical source_id in probes",
+    "phpunit": "11.5.57",
+    "composer_packages_locked": 113,
+    "dependencies_readonly": true,
+    "test_container_network": "none",
+    "existing_env_db_media_storage": "not copied or opened",
+    "runtime_trees": "separate candidate82 and candidate84",
+    "package_and_service_caches": "new /tmp files per container"
+  },
+  "results": {
+    "php82": {
+      "original_b221": {
+        "status": "FAIL",
+        "tests": 135,
+        "assertions": 620,
+        "errors": 1,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php82-locked-original.xml",
+        "output": "php82-locked-original.log",
+        "command": "php82-locked-original.command.json"
+      },
+      "fix2_b221": {
+        "status": "PASS",
+        "tests": 145,
+        "assertions": 714,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php82-locked-fix2.xml",
+        "output": "php82-locked-fix2.log",
+        "command": "php82-locked-fix2.command.json"
+      },
+      "original_b1": {
+        "status": "PASS",
+        "tests": 82,
+        "assertions": 4353,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php82-clean-b1.xml",
+        "output": "php82-clean-b1.log",
+        "command": "php82-clean-b1.command.json"
+      },
+      "historical": {
+        "status": "PASS",
+        "tests": 789,
+        "assertions": 10344,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php82-final-historical.xml",
+        "output": "php82-final-historical.log",
+        "command": "php82-final-historical.command.json"
+      },
+      "new_tests_included": {
+        "status": "PASS",
+        "tests": 10,
+        "assertions": 88,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "pdo_probe": {
+        "php": "8.2.35",
+        "pdo_sqlite": "8.2.35",
+        "sqlite": "3.40.1",
+        "source_id": "2022-12-28 14:03:47 df5c253c0b3dd24916e4ec7cf77d3db5294cc9fd45ae7b9c5e82ad8197f3alt1",
+        "rows": [
+          {
+            "sql": "BEGIN",
+            "inTransaction": false,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "BEGIN IMMEDIATE",
+            "inTransaction": false,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "BEGIN EXCLUSIVE",
+            "inTransaction": false,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "SAVEPOINT caller",
+            "inTransaction": false,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "PDO::beginTransaction()",
+            "inTransaction": true
+          }
+        ]
+      },
+      "post_run_integrity": {
+        "php": "8.2.35",
+        "results": {
+          "php82-locked-fix2": {
+            "databases": 124,
+            "integrity_check": "ok",
+            "foreign_key_check": [],
+            "mode": "ro"
+          },
+          "php84-locked-fix2": {
+            "databases": 124,
+            "integrity_check": "ok",
+            "foreign_key_check": [],
+            "mode": "ro"
+          }
+        }
+      }
+    },
+    "php84": {
+      "original_b221": {
+        "status": "PASS",
+        "tests": 135,
+        "assertions": 621,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php84-locked-original.xml",
+        "output": "php84-locked-original.log",
+        "command": "php84-locked-original.command.json"
+      },
+      "fix2_b221": {
+        "status": "PASS",
+        "tests": 145,
+        "assertions": 714,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php84-locked-fix2.xml",
+        "output": "php84-locked-fix2.log",
+        "command": "php84-locked-fix2.command.json"
+      },
+      "original_b1": {
+        "status": "PASS",
+        "tests": 82,
+        "assertions": 4353,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php84-clean-b1.xml",
+        "output": "php84-clean-b1.log",
+        "command": "php84-clean-b1.command.json"
+      },
+      "historical": {
+        "status": "PASS",
+        "tests": 789,
+        "assertions": 10344,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "junit": "php84-final-historical.xml",
+        "output": "php84-final-historical.log",
+        "command": "php84-final-historical.command.json"
+      },
+      "new_tests_included": {
+        "status": "PASS",
+        "tests": 10,
+        "assertions": 88,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "pdo_probe": {
+        "php": "8.4.27",
+        "pdo_sqlite": "8.4.27",
+        "sqlite": "3.40.1",
+        "source_id": "2022-12-28 14:03:47 df5c253c0b3dd24916e4ec7cf77d3db5294cc9fd45ae7b9c5e82ad8197f3alt1",
+        "rows": [
+          {
+            "sql": "BEGIN",
+            "inTransaction": true,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "BEGIN IMMEDIATE",
+            "inTransaction": true,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "BEGIN EXCLUSIVE",
+            "inTransaction": true,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "SAVEPOINT caller",
+            "inTransaction": true,
+            "second_begin": [
+              "HY000",
+              1,
+              "cannot start a transaction within a transaction"
+            ]
+          },
+          {
+            "sql": "PDO::beginTransaction()",
+            "inTransaction": true
+          }
+        ]
+      },
+      "post_run_integrity": {
+        "php": "8.4.27",
+        "results": {
+          "php82-locked-fix2": {
+            "databases": 124,
+            "integrity_check": "ok",
+            "foreign_key_check": [],
+            "mode": "ro"
+          },
+          "php84-locked-fix2": {
+            "databases": 124,
+            "integrity_check": "ok",
+            "foreign_key_check": [],
+            "mode": "ro"
+          }
+        }
+      }
+    }
+  },
+  "new_tests_against_old_adapter_php82": {
+    "status": "FAIL",
+    "tests": 10,
+    "assertions": 65,
+    "errors": 3,
+    "failures": 0,
+    "skipped": 0,
+    "junit": "php82-new-tests-before.xml",
+    "output": "php82-new-tests-before.log",
+    "command": "php82-new-tests-before.command.json"
+  },
+  "pint": {
+    "status": "PASS",
+    "files": 12,
+    "output": "pint-locked.log",
+    "exit_code": 0
+  },
+  "build": {
+    "status": "PASS with two existing runtime woff2 resolution warnings",
+    "vite": "6.4.5",
+    "modules": 67,
+    "output": "locked-build-ready.log",
+    "exit_code": 0
+  },
+  "source_correspondence": {
+    "candidate": {
+      "unchanged_original_files": 1460,
+      "corrective_sources_match_checkout": 3
+    },
+    "candidate82": {
+      "unchanged_original_files": 1460,
+      "corrective_sources_match_checkout": 3
+    },
+    "candidate84": {
+      "unchanged_original_files": 1460,
+      "corrective_sources_match_checkout": 3
+    }
+  },
+  "corrective_source_sha256": {
+    "tests/Support/PricingSqlite/SqlitePricingStore.php": "18104626cf89dd9d05ce0ca5c0c23e105411cc627d5436c317a8a36e99d4ba54",
+    "tests/PaymentsSqlitePrototype/PricingSqliteConcurrencyTest.php": "921bc26b9d53031b54c3672399779a4512de4d3e4a755e99319881ffa5255314",
+    "tests/PaymentsSqlitePrototype/PricingSqlitePhp82Test.php": "7d429f7f488395238e4b84b577c7d266ab8008c928961b2e621602223f477eb8"
+  },
+  "b1_reference": {
+    "commit": "a7efd0e353435c46c633f02120d131507bdc7516",
+    "files_verified": 12,
+    "manifest_sha256": "91dbf7fb98ef39dc9b8fa1e3cdca19854275cb537cd0c1d8d4224b5272509bbc"
+  },
+  "protected": {
+    "tracked_base_files": 1463,
+    "historical_files_unchanged_except_two_authorized_test_adapter_files": 1461,
+    "migrations_unchanged": 37,
+    "schema_factory_manifests_lockfiles_bootstraps_historical_tests": "unchanged",
+    "check": "git diff allowlist plus byte comparison of execution copies to the base"
+  },
+  "preparation_attempts_retained": [
+    {
+      "label": "locked-build",
+      "status": "FAIL",
+      "exit_code": 1,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php82-b1",
+      "status": "FAIL",
+      "exit_code": 255,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php82-clean-historical",
+      "status": "BLOCKED",
+      "exit_code": 137,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php82-historical",
+      "status": "FAIL",
+      "exit_code": 255,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php82-locked-b1",
+      "status": "FAIL",
+      "exit_code": 2,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php82-locked-historical",
+      "status": "FAIL",
+      "exit_code": 2,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php84-b1",
+      "status": "FAIL",
+      "exit_code": 255,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php84-clean-historical",
+      "status": "BLOCKED",
+      "exit_code": 137,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php84-historical",
+      "status": "FAIL",
+      "exit_code": 255,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php84-locked-b1",
+      "status": "FAIL",
+      "exit_code": 2,
+      "resolved_in_final_validation": true
+    },
+    {
+      "label": "php84-locked-historical",
+      "status": "FAIL",
+      "exit_code": 2,
+      "resolved_in_final_validation": true
+    }
+  ],
+  "preparation_notes": [
+    "Initial installed vendor did not match lockfile and lacked Sanctum; original/fix2 prototype reproduction was also repeated with locked PHPUnit 11.5.57.",
+    "Earlier vendor generated DomPDF package/service caches; final runs use new cache paths and exact locked dependencies.",
+    "Historical attempts without Vite assets were stopped (exit 137); they are incomplete, not final suite results.",
+    "Initial readonly node_modules build could not create .vite-temp; final build uses a writable cache mount and readonly packages."
+  ],
+  "final_status": {
+    "PASS": [
+      "B221 fix2 both runtimes",
+      "new regressions both runtimes",
+      "B1 original both runtimes",
+      "historical both runtimes",
+      "SQLite integrity and foreign keys from fresh readonly connections, both runtimes",
+      "Pint",
+      "offline build",
+      "diff and source integrity"
+    ],
+    "FAIL": [],
+    "BLOCKED": [],
+    "NOT_RUN": [
+      "other PHP versions",
+      "Windows/NTFS",
+      "minimum SQLite 3.38",
+      "WAL/BUSY_SNAPSHOT",
+      "independent-process concurrency",
+      "physical recovery and real driver/OS COMMIT loss",
+      "Composer/npm audit (prior Composer audit HTTP 403 not resolved)",
+      "production workflows, authorization, API and payment integration",
+      "independent technical review"
+    ]
+  },
+  "limitations": [
+    "Canonical SQLite diagnostic matching is intentionally exact; a changed driver diagnostic propagates PDOException and does not authorize adopting or rolling back an external transaction.",
+    "Only tested PHP 8.2.35/8.4.27 and SQLite 3.40.1 on Linux; not full Tekora PHP 8.2 compatibility.",
+    "No synthetic I/O guarantee is a production certification."
+  ],
+  "restrictions_respected": [
+    "no push or new PR",
+    "no changes to main or existing PRs",
+    "no historical migrations, schema, ReservationWorkflow or API changes",
+    "no real database connections",
+    "no production payments",
+    "no B2.3.2"
+  ],
+  "raw_evidence_root": "/workspace/tekora-b221-fix2-cbam31uy",
+  "artifact_sha256": {
+    "logs/composer-locked-install.log": "52832493b1bd3dfae41d78c8618db18299b6cbce5111ea2ef1fa5ed68dbb4748",
+    "logs/integrity-php82.json": "9f40b8bc5ccb5c37e1d5eed928dcae79311184e2be3a112e87254d21d57f12dd",
+    "logs/integrity-php84.json": "42c27edab7fd233f54fd7a9f58c3ec996e06cb910332dddc79d894af1f31994c",
+    "logs/locked-build-ready.command.json": "bbf4f3d4471312a8e09dcd39ec9c894ce54e0086d741e7fa428ea33a1f4cc6ff",
+    "logs/locked-build-ready.log": "21a36ddc85d419ecbd2dfccefe8a9da21a628cbdd848f51973fe4728cdc004f0",
+    "logs/locked-build.command.json": "24bc27d3fc2ca1646f2b41fde4b0a3a46ade192485cbbe266431b092c9076cce",
+    "logs/locked-build.log": "9da6d59d6c390496231294d4c915166794fc872f2b0758eeb0f138eac2a9d23b",
+    "logs/npm-locked-install.log": "df314561aa1400ac5777cd9a84dad78e07afe958fdbd5ba2ef4e1a3fd11ea158",
+    "logs/php82-b1.command.json": "b4ee3c05ad62dd0bea5abc5767e48ce781e36ba026bdaa0fb5d2f28c23c55c65",
+    "logs/php82-b1.log": "e67c6ff769b0192debb1f3263b3ed1557f65268d173a73203aa0fbd8de83db09",
+    "logs/php82-b1.xml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/php82-clean-b1.command.json": "88b8ec35c760c0ce64d2513b0378ac3852190f1841d3ec1e864bb64a50bb1c69",
+    "logs/php82-clean-b1.log": "4c78ef86869008cf56225a02dcebbd2512c5918cd60824c4a6ecad2c936911cf",
+    "logs/php82-clean-b1.xml": "15f7511eb55ddc53d09b9752333c39e76a3f6b4640d4bb07921fe360ae08df73",
+    "logs/php82-clean-historical.command.json": "03297abe842667d3c81a491b4ccef472fddc72bfdc9c76f2206fc1f2a5da5e5c",
+    "logs/php82-clean-historical.log": "23b1e72c316328e67e6177704988e07ef2926e21c225da7aae55b53997bdf45b",
+    "logs/php82-clean-historical.xml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/php82-final-historical.command.json": "db2e062c97aaf5e71af4a026280f4949a855645757c60e6f976b1abdc3847dfd",
+    "logs/php82-final-historical.log": "d9c1b904fd0930790f138bf9cff15b2fcdb62d21f10c1d11359f9a18ad6bd1b3",
+    "logs/php82-final-historical.xml": "7e5ac9e1027d011387c891bdc7135a7fe130b2aa9ecf1f5b500aaf77125e18a7",
+    "logs/php82-fix2.command.json": "a36375898242e79e9f565581bec36ed18792d9e9cb6fce1ba797af1506da98b9",
+    "logs/php82-fix2.log": "1cf4b5232172b75a48ed4a60e3896d313ec2e81d057cd9f804dbda37b6a734e9",
+    "logs/php82-fix2.xml": "6d03c7b4d8e3d9c4f42a8d8ede39c94059d7dd18f874511bf00732d3885ce05a",
+    "logs/php82-historical.command.json": "16da4fdca17413c2797cedb092ebc68653d9a1d7d2ff6d1d4f968565afbc5f65",
+    "logs/php82-historical.log": "6952bc8e0497f1bb90e2055e9e6238ecc01ee0790552c3765d9d091e8b51b835",
+    "logs/php82-historical.xml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/php82-locked-b1.command.json": "59dffc203b1bbfbbdb968315ae1c2717ef149038b3f57b6752971dcfb13a19b5",
+    "logs/php82-locked-b1.log": "a150d36d25d9d43f277be78f7ef736cbdf7b5c05408d1a776973fd8cfc463d6f",
+    "logs/php82-locked-b1.xml": "e8b083be364786f6116b6e94823e1d85cf2ff2cf32c49cbde4eb761ef7373ffb",
+    "logs/php82-locked-fix2.command.json": "f36d209a868699a15010d7847ba6404506dbb4f6f647c4e75afe6834f39a360d",
+    "logs/php82-locked-fix2.log": "45543731462456cdbaae22300ba6890813947a1e5bf47a388d7516350668af8e",
+    "logs/php82-locked-fix2.xml": "ecd10735387772bc0a8d334e6b93b1cd34131b7174ac16fc519158b6f0cfb950",
+    "logs/php82-locked-historical.command.json": "b4966d5018d1fc55472bd581143a5ca07c7b36558267693c733afe3566ec4180",
+    "logs/php82-locked-historical.log": "931b4d4e3670c2a2c08751119852a8518ad805b5b2f7c63970f76a1413a94451",
+    "logs/php82-locked-historical.xml": "fa7c4ea6729d09184ffc6ae370cfdcb30099f38be7cad84ac1b276eda6c95af1",
+    "logs/php82-locked-original.command.json": "41d7458842f81dc362bd2ba72302591cfdd6c1f05ef2ca88b009a9b5a029eaae",
+    "logs/php82-locked-original.log": "3c33b9da3513102b77aa8c7d32f60738e9c1d99e9e560e8ec4d7c771e9e213c0",
+    "logs/php82-locked-original.xml": "282059c7a29dcb8321bbd1515457f1f2e98fe5856d66e4a20336757605c0b042",
+    "logs/php82-new-tests-before.command.json": "9b01d4edd477812cc6aa072dba259346d1b64c59b0f84175291b140a60552c09",
+    "logs/php82-new-tests-before.log": "0fa60020612c62b29005ced2321ba5db193b8dea3ff2750fe4d60482361e90e6",
+    "logs/php82-new-tests-before.xml": "28045c4e1649b9b298d1bac3d16c08af981259e29afd85a026edbbd726149592",
+    "logs/php82-original.command.json": "e6089fe5152dc43aca536909d7f19bfb89d26260e7614fbffa6dd8586e150407",
+    "logs/php82-original.log": "f0c98badefd169c114ff0fbd4bea7cd1b15553d12784c3c0e64d9eec3acefeea",
+    "logs/php82-original.xml": "38f3e4242c702d5c2e823bd7f8b0bd3c01bb9f65f849cf68d9221e9f63180581",
+    "logs/php82-pdo-probe.command.json": "c23bbb54981db27865346752afc6a645e4a1db67bfed85db65f94a4c96a5be4b",
+    "logs/php82-pdo-probe.log": "9cb4755edd54996c530f61141538bd31bb9d7881aa50ea7104a7f848e452c122",
+    "logs/php84-b1.command.json": "d90d3bdf1d8fa87cacb217ba430f71082dcb6f663285e2ffcaf40c909e86f69a",
+    "logs/php84-b1.log": "cd0a9699d2ef235d8f02c0a6e42323106d4a8834c3d4a25834734fabb31c1d59",
+    "logs/php84-b1.xml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/php84-clean-b1.command.json": "07fb28b5ce70587dd4762ea9aa0cb61a0f64964597c987b62b92c67c4a7d3bc5",
+    "logs/php84-clean-b1.log": "f0b205f15fdd0f0c4565d16534edaa7e4e61ab4fc7d7725e65891b846bc8a775",
+    "logs/php84-clean-b1.xml": "c0c6839f28d8c6899962058e86c9ee10166920e8e9854cc25d3757bf33027533",
+    "logs/php84-clean-historical.command.json": "b5bb873b1fb470d0ff9fdbc13b406e021cb4beb65cbe254a752c0dab9e6f0ed2",
+    "logs/php84-clean-historical.log": "8467450a51d0ec8ea841596345a13ed21f492d63209fe3a88ca7ef0829b49f7a",
+    "logs/php84-clean-historical.xml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/php84-final-historical.command.json": "b6a1fcf53e265ffa0ef3bb3c4cf1ae78a87a7eadc8f2f0deb26417e6fa315226",
+    "logs/php84-final-historical.log": "7167c8c0ca5b66a0d61db7c4089e1a84e93162dc5ba01b9f2c5299fa53935920",
+    "logs/php84-final-historical.xml": "2a077e721f29d67ca94ff3ca139cd0b3cc58386646e591369d0f2d11c80987a8",
+    "logs/php84-fix2.command.json": "f7798b891e1fb4f1f0c3acb1f525c1c48b346ed28f6c85cf58bb189e4c3cdf6d",
+    "logs/php84-fix2.log": "77f32ff6908857d958d31bdbd14fbd03e83da10e910c6fb51362765a9e1940d5",
+    "logs/php84-fix2.xml": "8d0ef00925ebf9d81d7fd062d14ee0c9ecfd41913e3fbdc908638b2167932f78",
+    "logs/php84-historical.command.json": "aa318bdcb73a328f46e79f17e8f68d00188152fc43ef07a9fc727bcf5324baa9",
+    "logs/php84-historical.log": "486e08ab7616b2ad135775a670be1dc4d62ad15d00abffa43b00d420aff38354",
+    "logs/php84-historical.xml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/php84-locked-b1.command.json": "36eae92dd27077ac650e7a58bd491d775de73da1630a527f6fc8b229714cc6d0",
+    "logs/php84-locked-b1.log": "73be71f79ad5c1c763441859e263573eedb4947071d0a836d68b5e4073ae61f1",
+    "logs/php84-locked-b1.xml": "986e685b09c1e62528fb89f3c492579ad6c55859660b0f31887c481d23c550a2",
+    "logs/php84-locked-fix2.command.json": "096491be6657238a33ad8cb752513c89b9ecd1348e072cfcedb11bbc2a236382",
+    "logs/php84-locked-fix2.log": "dae4cc23db0690a23e8a345b58a7d216a5d0740076caa1a256d9d03d52095be0",
+    "logs/php84-locked-fix2.xml": "19fecbc73fc115c8ce02acf533223bcf64e8f3ff9237edb348ed25dec8505429",
+    "logs/php84-locked-historical.command.json": "39f48192417e26919a37304ac5758b0b3cea17ac9667b2661a673cc1197dc990",
+    "logs/php84-locked-historical.log": "7809b5a701924dade4974d6f5cf807cb6490d1ab08aa40f36af5f31743de653d",
+    "logs/php84-locked-historical.xml": "cb34245f99b11218bbec1db9045c5a89c25113510dc7198899402b01c57961b9",
+    "logs/php84-locked-original.command.json": "1cd61fb9f0acd828131698cc4de8d86b0cc740d28b1dd26108b2caf86ef55db7",
+    "logs/php84-locked-original.log": "7f944228f6111be4b1222b882a5a1f650af9b142fcab4b11045b90f40b3c079b",
+    "logs/php84-locked-original.xml": "cf2ab9a321dd5276ea3b8aeaa4c934451feab2537553f876fc1d7e02467b7c66",
+    "logs/php84-original.command.json": "6bd044616a142ae350db07619d43a8732897c685468993dce6dd1deba2c81fad",
+    "logs/php84-original.log": "dcf3a98f7929ebe04d33d133d3c5ee0148da302e14fec084ca3d38e7c7ea2048",
+    "logs/php84-original.xml": "0be5f70d31195144ba4db575ba111833fb7ce673804a5ee3f10f58d61a2a64dc",
+    "logs/php84-pdo-probe.command.json": "e7ba0b4124ac5b04cf52937480962b8e613b97dbdf5147a109f2eae842280532",
+    "logs/php84-pdo-probe.log": "d7b3ef744d17706f5fd56821b408bc8c68abc38a68edabd2b57a86bdb58454c2",
+    "logs/pint-fix2.command.json": "be48a3977af4671285c648ad06e4c1c2d81a7a2b51a9798d7cfd4c5719b84294",
+    "logs/pint-fix2.log": "331322ec72871af3d2e53bc00dcb595ab1dad4dc12df065f679c4c580f2ca634",
+    "logs/pint-locked.command.json": "04de463d156af16c0467663f038adc6ce96b52c7acbb041101e651236f9f1bf3",
+    "logs/pint-locked.log": "331322ec72871af3d2e53bc00dcb595ab1dad4dc12df065f679c4c580f2ca634",
+    "logs/protected-remote-refs-after.txt": "de6fc8238d34734fd3fa174bb2ae4ba732415d7af4ac995c92ad81ee3e92250c",
+    "logs/protected-remote-refs-before.txt": "de6fc8238d34734fd3fa174bb2ae4ba732415d7af4ac995c92ad81ee3e92250c",
+    "run.py": "3506a30d8ab148e84893fd307e68088842fbdb9c190ed620048361400757a78b",
+    "probe.php": "7ed2c7800ee0838540a7097ddbd0a31463147ba0cd1b48c52d567f6fd690863a",
+    "integrity.php": "d39b4dc4dfedfe78ea81dcfc980c6b747484a9c5ffef82753c29f1d7565ff528",
+    "summarize.py": "68f6c9bdc152f27f10c8f4a65c9917b0356f9052742756c386b41fb5e85125ff"
+  }
+}
