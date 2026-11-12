@@ -1,0 +1,90 @@
+{
+  "pr32": {
+    "commit": "a7efd0e353435c46c633f02120d131507bdc7516",
+    "files": {
+      "app/Payments/CommercialAmount.php": "345ba97e04ee24ac6df71a1a2d5afc225ec35bae2de3554c73853f34340e08f1",
+      "app/Payments/PriceVersion.php": "4d2dc09871832276662cba06d66131d51b6979c18144c1b6ada046bc1bc8e2e2",
+      "app/Payments/PricingConflict.php": "36647e2685a66565142ba736cf58fac17d29f67c74ab80029c68138dd280f189",
+      "app/Payments/PricingInput.php": "220d51a5799b15b008fd9cee6050c53de1155ce0f3abbdf3a8f736e59c09269e",
+      "app/Payments/PricingStore.php": "3bf2da30d287c2e99c05e6a4a747b3ee620f0631c7bbac233f34acb5cf5cc202",
+      "app/Payments/QuoteAcceptance.php": "8efe3503da53354ff768166f47b68508413143f1ab1f9914ec840d8f54bc650e",
+      "app/Payments/ServicePricing.php": "3daf6328f2635cdf69df8ff1ccbdfe8fcb96d9f061208905fa422bb88c8cdbe5",
+      "app/Payments/SyntheticQuote.php": "c20fe43702847e989940dec3d2ddfee29aef04a5d36d704d0e44bc4c5252c5db",
+      "app/Payments/SyntheticQuotes.php": "219b6b4383054f971fb0a567caab983bd32179ca57121a20cad4c092d4a60b80",
+      "tests/Feature/PaymentsPricingQuotesTest.php": "6ab4a45d047a4bc3e81bd46870ce1b6d1399d9b10f2d0a32a963df7f04f39498",
+      "tests/Support/InMemoryPricingStore.php": "1c273402e6e818898299634339b2577035622579afa0b20c5684e84e15ed366c",
+      "tests/Unit/CommercialAmountTest.php": "754b6341f633f9b91c3bf50e00814e1f000a32369accec5f732810a26e7e60ca"
+    }
+  },
+  "pr33": {
+    "commit": "815879d448e17ef8955354c6a275201ba6f350fe",
+    "files": {
+      "app/Scheduling/Holds/AcceptedQuoteReference.php": "4ceac934e9a4505895052a752f1d8e235cfd08a4e0887dc0765dd85b3d5aca52",
+      "app/Scheduling/Holds/HoldActor.php": "8316725f063b33f0fee3093bc179d64cfe6f30fc8f08de8b07969b69e9aea9db",
+      "app/Scheduling/Holds/HoldClock.php": "cf4d16d1609abd7c5c12674fc454b557fa9df958d8891ecf2e35fc1d89e05cd7",
+      "app/Scheduling/Holds/HoldEvent.php": "fa494ac7888e26da79698f0fa775ca6513a3fa31b3dfb7bf882ae63c86273a2f",
+      "app/Scheduling/Holds/HoldReceipt.php": "0f23e3364fe49e40ec9952eb206f1d1dcb51da54f5f99ab0f5141eacae009793",
+      "app/Scheduling/Holds/HoldState.php": "9b9a65a84c85e64d1e9213090fe2a0685b4c6c6d8ab3c3efc6dd0fedef0cff90",
+      "app/Scheduling/Holds/HoldStore.php": "6dec835f7b0e6e066f9d10ae6bd9f45ed705b19134c8cab1243f0a94fea25866",
+      "app/Scheduling/Holds/HoldTime.php": "0bda019e2936437f6ab8c6ec6d153eff2eae29579c18e0c86b672946b549b972",
+      "app/Scheduling/Holds/HoldViolation.php": "0ffb71b7f629546a1063dea4b03329dbea8ecdf987fb30327aae61ec1b45318b",
+      "app/Scheduling/Holds/ReservationProposal.php": "9e1ccbb32c18aa10bc02cd5a1f295bb737ff9dfd3679a86b149a25f51ea1fc6b",
+      "app/Scheduling/Holds/SlotHold.php": "ab48d5d1f8414950a1ae03754ccfd809bc768faf61dd101f914028d4053e0013",
+      "app/Scheduling/Holds/SyntheticHoldEngine.php": "62bde7a85ef5b4de9020aa9272431787f8dbc8c825dbd375ce696cd4b8013556",
+      "app/Scheduling/Holds/SystemHoldClock.php": "4923266c8578c1c14ee5ea3c5be7630420e68ab94453a146c61a66b762134413",
+      "app/Scheduling/Holds/UtcInterval.php": "f8de18ba6f128ce86d9e48309db7ff2d15f7e1f3202f87a3637221e29f88339b",
+      "tests/Feature/SyntheticHoldIsolationTest.php": "836cc6d8e65b0e2baaed36135d18a595d1a24c49a3829e4092ef89ad563215ab",
+      "tests/Support/InMemorySlotHoldStore.php": "8bf129434c68857d098a6d2beafbece2b159bc43ea660ae7dff7448f9a4951b6",
+      "tests/Support/MutableSlotHoldClock.php": "3d3c3cefb2cbe236a998ee3fd6be555eab4839bca153d3c0a9cd858d0d5c470b",
+      "tests/Unit/SlotHoldReconstitutionTest.php": "2954fad98e7c242608f4c85fa1843d6eb318096f230d880a40d8983ad7606dae",
+      "tests/Unit/SyntheticSlotHoldEngineTest.php": "8ac2157d5fa0fda3bf594cdba1e0d3ae828888db2dc859cda55bb1269b338649",
+      "tests/Unit/UtcServiceIntervalTest.php": "aba7ddce703454615684880d53cea4f7fef2750ef2109e5a2a6cd50c6a86cf3d"
+    }
+  },
+  "pr34": {
+    "commit": "7775938dda5440c03964009847d4a8d9d63b0805",
+    "files": {
+      "tests/PaymentsSqlitePrototype/PricingSqliteConcurrencyTest.php": "99bf2d6882b178aa23e1c3cfb04c6794110854d20ba411c68131a191e9966ce1",
+      "tests/PaymentsSqlitePrototype/PricingSqliteFix1Test.php": "368ec6c29435734dffe39ace3b27e39c4be745d82d4289d886be5ddd35d23ca4",
+      "tests/PaymentsSqlitePrototype/PricingSqlitePrototypeTest.php": "7fdd2a997f3d3705df4b9fb0bc8f23631b71d3a03a43eca5d4961ef62b8e7c71",
+      "tests/PaymentsSqlitePrototype/PricingValuesTest.php": "8353769331175a2de1079d5703b9e1db12f46b68fcb742533cd6629192b5c608",
+      "tests/Support/PricingSqlite/B1Reference.php": "4b8ac93437280a4bddaa7474ed977406872adee01a46e5d00d62ba3af57b424e",
+      "tests/Support/PricingSqlite/PricingFixture.php": "580be75692e80db82791f5f97366db95412d46d27829a45a44be6900438c759b",
+      "tests/Support/PricingSqlite/PricingValues.php": "080b0ebcf6a22362a186b37e89d3727a6e3de645db21f237aa7084995210dac8",
+      "tests/Support/PricingSqlite/SqlitePricingBusy.php": "35c3a0fba80f2b7a8f4fdbb0ed82fa78bde3918cd3fa03a28a7945d9b32bf47f",
+      "tests/Support/PricingSqlite/SqlitePricingStore.php": "71ca3144ec37a19c3fc2141339dee30d49ebbbf6084b627aea5c824be421dcb2",
+      "tests/Support/PricingSqlite/SyntheticPricingDatabase.php": "da03fdf65a4a4990d0cb3cf9b88d995b91f1e034ebb5ba1c4636f773835003a6",
+      "tests/Support/PricingSqlite/b1-reference.json": "91dbf7fb98ef39dc9b8fa1e3cdca19854275cb537cd0c1d8d4224b5272509bbc",
+      "tests/Support/PricingSqlite/schema.sql": "dc72777e0a4faf151c379ca59f77ea59480cb0a73343a84cf6f1f16df2eea510",
+      "tests/payments-b221-bootstrap.php": "19d6b4fac7e41c80ad68ee82e53d19ca938ff0b35533c7f5b99f635c760291ae",
+      "tools/payments-b221/export_b1_reference.py": "9a547979b02064fc6249fc2505388b7af3ce7112a66833fff7f9eba024055993"
+    }
+  },
+  "pr35": {
+    "commit": "c3a3943c96d702bff3e1a9afbb13f57be789e137",
+    "files": {
+      "tests/HoldsSqlitePrototype/HoldValuesTest.php": "bf66869b147fd81126af27d70017df980d8cae8df8fb6223ea587990257548cf",
+      "tests/HoldsSqlitePrototype/SqliteHoldAdmissionProcessTest.php": "fd9da0d9b144b101b6688693daedd68d743542a027c1fc15cb6ba89453201693",
+      "tests/HoldsSqlitePrototype/SqliteHoldAdmissionTest.php": "3735653f12cfef9383be65f60b8c6d87073b44aa830efcebb9c8b7eae7271168",
+      "tests/HoldsSqlitePrototype/SqliteHoldConcurrencyTest.php": "0e4d473ef805af6244cbd507a5800f90d0feb17d49aa6ea9fdd086e21b073369",
+      "tests/HoldsSqlitePrototype/SqliteHoldConstraintsTest.php": "050575f94e9dd63a88056db7bbd3bd7dd898d3d1453d99186f6e5c6826c8d219",
+      "tests/HoldsSqlitePrototype/SqliteHoldLifecycleTest.php": "0906c455df67bc72bdc5523f98e2b2f2bf1ba28edba48c669cdc1750dd5419cf",
+      "tests/HoldsSqlitePrototype/SqliteHoldProcessTest.php": "2a1f412f3239e45fe6c456000e84f938d4a3b52a9d8496043352a974d6666ad3",
+      "tests/Support/HoldsSqlite/AdmissionWorker.php": "7ec878a4cc6e6b893612f6c2633f072b84cfb8881fe80a04364f4d845932c5d5",
+      "tests/Support/HoldsSqlite/B21Reference.php": "192b014b3a325c0fb5cd4b8eba95ebc1f8faba4ffcdf487761d9a0fa4cafa1dd",
+      "tests/Support/HoldsSqlite/HoldCommitUncertain.php": "25ee51c202287240dfda4da8e315a3d813110ee27fc883d28ae8c65aace1e364",
+      "tests/Support/HoldsSqlite/HoldFixture.php": "576f0ea467805c4277036a18c1bc6cd64e0ea8671a483642311c5ad0b7874769",
+      "tests/Support/HoldsSqlite/HoldValues.php": "14492576eb7226f78a8fa72ff5c69a3963cfe622b9137ec15ec91dac8568c0ad",
+      "tests/Support/HoldsSqlite/HoldWorker.php": "ced9f3acdb1b7262d4df4daa93f25fdf7a7256a230b54d5d3e43281850fdc3af",
+      "tests/Support/HoldsSqlite/ProcessPeer.php": "5672d7b2f29b659b75e6927ea6206571d1f65ce958d4ba42fb7f1ff113ec480a",
+      "tests/Support/HoldsSqlite/SqliteHoldBusy.php": "5ac954cd5bb53822544fa20fde06119e9bc8beca5c5b3f0e6f24d6b2ad438026",
+      "tests/Support/HoldsSqlite/SqliteHoldContention.php": "bfb9c646116c8fc1d5169396b36f49ce653f0858dcdb17b4e99f82ab13380229",
+      "tests/Support/HoldsSqlite/SqliteHoldStore.php": "8a8f0c0d93746037bdf650b26c5a9d9af7c25a2dd39f997695242533517facc4",
+      "tests/Support/HoldsSqlite/SyntheticHoldDatabase.php": "bbba094b965d1f2cda33cd3ed906299f50077eb124cea6ce559663fcbdfa7ce0",
+      "tests/Support/HoldsSqlite/b21-reference.json": "a61266bee19cbed25d8511f1ed6fbbd75f18f032b423fd2228873681e22ee28b",
+      "tests/Support/HoldsSqlite/schema.sql": "f925d80aeaaba7d17bf072c66655c9db9573792e7f74b0819076065f072fe9bd",
+      "tests/payments-b222-bootstrap.php": "92c14380213e4094a280b2debe7ddfe5cb570e716962614ed18c303316918b06",
+      "tools/payments-b222/export_b21_reference.py": "bcca79c3acecac52fc5f239acd02fc9887d1d06429def2ad7909f28fbe3abac8"
+    }
+  }
+}

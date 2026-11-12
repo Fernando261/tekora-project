@@ -1,0 +1,2155 @@
+{
+  "recommendation": "READY FOR INDEPENDENT REVIEW",
+  "scope": "B2.3.1 synthetic integration laboratory only; no publication or production authorization",
+  "branch": "codex/payments-b231-sqlite-integration-lab",
+  "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+  "implementation_commit": "See delivery / git rev-parse HEAD; source SHA-256 below avoids self-referential commit hash",
+  "references": {
+    "pr32": "a7efd0e353435c46c633f02120d131507bdc7516",
+    "pr33": "815879d448e17ef8955354c6a275201ba6f350fe",
+    "pr34": "7775938dda5440c03964009847d4a8d9d63b0805",
+    "pr35": "c3a3943c96d702bff3e1a9afbb13f57be789e137"
+  },
+  "source_correspondence": {
+    "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+    "migration_count": 37,
+    "api_operations": {
+      "docs/api/openapi.json": 21
+    },
+    "protected": {
+      "database/migrations/0001_01_01_000000_create_users_table.php": "116d943de3cfa774f955fb309867f9c35099bae4c9f156e940200c08c045f1fd",
+      "database/migrations/0001_01_01_000001_create_cache_table.php": "20f769d3c11748c1cc42c41cd3789b0b9b2cd0db44ee22d378addac3ff8aed4f",
+      "database/migrations/0001_01_01_000002_create_jobs_table.php": "7c9c712adf4091c87bf2612f4d0dccdfa1df4501553e4ac068b83d7bd5462fa5",
+      "database/migrations/2025_08_02_085013_create_posts_table.php": "10ae453bb7d6898572fc067258fb70ae34177867da857cb002e148eb0b680669",
+      "database/migrations/2025_08_02_092303_create_reminders_table.php": "21dd7ff15a00216489147d58659600d123e02c062e592bc5ab8481a875e213c1",
+      "database/migrations/2025_08_13_022507_create_profesionistas_table.php": "801bdb43588f15c086978de665676dae2cbe1fae8164a98a1bbc861e08225daf",
+      "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php": "8297e7a16edeaf0cfa6c6b782529edba6b53842097a606839e201bcab8042216",
+      "database/migrations/2026_02_15_192040_create_likes_table.php": "2f0e5479eec39fdfb8994ac96ddbc8228537b31739e7c04e1f39097c089da4e7",
+      "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php": "103b5d9938e3551ce4698209350f0164b47e55c41d931927860a70150a483454",
+      "database/migrations/2026_02_15_200848_create_comments_table.php": "d2f7e8dfc7fed6dcf6632732f831802e9ba5811a8de829e38b901bc5a8c48162",
+      "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php": "53ae789fe749e10800a75dffcb4ec7032d4138369f68f6f63444ac9d8b9f523f",
+      "database/migrations/2026_02_16_031436_create_citas_table.php": "45bc07fbb7df8029b935d838d11b9661770c9493500df628c7e084007c152d41",
+      "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php": "e0636f0b5344270d3ef4903b7f9899b7ff19d5c00ec58ec0aa606a6635b9ebd6",
+      "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php": "10d42907cd47cf9b5d309d8f1755d7e780b2c36b35f7e64cd37d02b284397fc8",
+      "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php": "f9362f4e19867852dbf581fca198227800f5967bd2645a87e242f4fc1d42672c",
+      "database/migrations/2026_02_23_235730_create_emotions_table.php": "33693b3e6558fdb16fe1df52a4134292c20ee2184a539e275cf184959257589a",
+      "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php": "f586bb403a7ccda46e4201b0714f1f826735200322821afc4e2e55538c220f3f",
+      "database/migrations/2026_02_24_041833_add_media_to_posts_table.php": "a9c09ab56cae94eee830d07204fb2ada634077f879911586627817f4295aa6da",
+      "database/migrations/2026_02_24_041908_add_media_to_comments_table.php": "677cead791277c33487fa02e0a4a74b6466c0693ad1658087ba51f8c101869eb",
+      "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php": "13e13652d4ab690ee72282faeefc0fa668f947c0cb0e9ac0531b6e9462a7f008",
+      "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php": "b7e17c701414b0faa9a4a42327fb88811f9ef52f47038ac61ac01298ff594aba",
+      "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php": "81ede4a83f328602329d2a561b0ac67cab0c6ea06fc7f6b7d9bca4615f72c876",
+      "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php": "838eaa921f476d78050f17a0eca77b1af8c71ee10b6473a5d8a88ae1caf3d58a",
+      "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php": "fbdeab59c720f5abdc88f408bf3cd496dfc70abefd5118a088a707f364a389b2",
+      "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php": "a7e26defffaf5176b84a15f0bac265c01469a948d59ce5ed99e0f33829cc3395",
+      "database/migrations/2026_10_23_000001_create_provider_profiles_table.php": "859bc5f00a4f0e4f7e7649a287e5d060aa4b4681c1390aaf2b28a7d41f4868b5",
+      "database/migrations/2026_10_28_000000_create_service_categories_table.php": "7c436ef233df60dc33ec77b75892fa54e2afed000526c5f4d84fd7274ebd87f7",
+      "database/migrations/2026_10_28_000001_create_services_table.php": "9402e17acb1f803a1db7e0a9aebf02316a5aeefb34c83ae8f51f4932994a2b19",
+      "database/migrations/2026_10_28_000002_create_service_inquiries_table.php": "bc0ded238e6d42de488263454ca863f8589874d72acf4ff26b73990364a3715d",
+      "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php": "49ae7b0e1ee5d20098df8fcd2b93e85db242026c3000eb377a56e43c6f11f0b7",
+      "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php": "c8c464e419a1c63ca1b63b26e0b22b340210844c4f7a980800353f72ab85b28b",
+      "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php": "3fe86c122ac04efa7378d9c41c4f36a32a504bb4240bdca36ba1beac15fffa4e",
+      "database/migrations/2026_10_30_000002_create_provider_availability_tables.php": "026c92dbf6c808f8f9378379395dc36e8536df2d43c3fdb1ed74faad499badfb",
+      "database/migrations/2026_11_03_000000_create_service_reservations.php": "21031ec1dddd8ba0eac718e7d12a505a527964d97f30d2266d84e711dc2c3c58",
+      "database/migrations/2026_11_03_000001_create_service_reviews.php": "49d5140e9b4b7455f313e4f0123ba424aef48358ca24a76fec1276c502a86a98",
+      "database/migrations/2026_11_03_000002_create_activity_notifications.php": "0e6d333fb8fc7c769d91bd3d2c939b642c75ebe3248e503ff214e8df9a545b8b",
+      "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php": "c81ecde85ea5072188c468dcaf79776728b6eb8f684d63fc0d88a4908484ca75",
+      "docs/api/openapi.json": "11e94f81dc140341ca2e8cfbb94f2d5ef33f944f7c06a7e5060a9c168a4baa02",
+      "app/Services/ReservationWorkflow.php": "34cfde281447bc3964cecda32d0a444dfed01acad3e243858645b321c225d3e9",
+      "routes/api.php": "722e9494ff6073637c592c499c59160e146ae156bdc4b8e25d50bd3b29ec1b71",
+      "routes/web.php": "021dd970cd98f9346703f6be653ee6aaa67e53802edfbc0b565b39425dbe9de2",
+      "composer.json": "74fad1305694c0598cd576f06988d99d06ae83ff5f8e8332494d94ef21352dfe",
+      "composer.lock": "62b9f864b4b255b08d5271406f30a6c0393fd0c8dc838a71a5e8914b22f7cdfd",
+      "package.json": "549d710adb4f9c916edc8f952cc4f4262bdcf074fade55bafe299f045a2a167a",
+      "package-lock.json": "1b5b3f59b9c6e50a1698d491fd382aad1b792cd1541c570520cdc0995c8d7314"
+    },
+    "new_executable_sources": {
+      "tests/PaymentsIntegrationPrototype/ContentionTest.php": "01be02e611ca94a4edec2e24adec891d9a2be993f71b5f031c9fe1ed27332608",
+      "tests/PaymentsIntegrationPrototype/JointRollbackTest.php": "8fd329d399cce49991f8b0fd62295e8c396b336e902ecdd13a547c0143bcba4c",
+      "tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php": "7f0ee8cf69d63068e7da326a2b18c0157396947ae961828832eae62f91015921",
+      "tests/PaymentsIntegrationPrototype/QuoteBindingTest.php": "440c48bbd462eb296cc886ff7f6da7d002af8136b32bada239381182467f565e",
+      "tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php": "9ff64d1494dd884c3e955069ff3061d27921046d57eeb475ac0c48e1c4de7158",
+      "tests/PaymentsIntegrationPrototype/SharedSessionTest.php": "7a68d662744ab3f267c72cd09c28500c3a8bf03e2a7a72cf49efbd0f6a7607a2",
+      "tests/Support/PaymentsIntegration/CommandEnvelope.php": "6cc10fc79b44a881c72620d18a180a30368c38c7ca88eb71171c9f0725371c3b",
+      "tests/Support/PaymentsIntegration/FixtureClock.php": "e075fa8867143f40788208ca6c5d8d3b24f2e174ddfaa89be7b176997f2ac323",
+      "tests/Support/PaymentsIntegration/IntegrationBusy.php": "e076e56bf403cbb987590da009678db96156e49a89c3ecf061a3fd6f2e8aebb0",
+      "tests/Support/PaymentsIntegration/IntegrationTestCase.php": "a666d2b437796c944a654046dd568efd036759612826329cc20690904965cd20",
+      "tests/Support/PaymentsIntegration/IntegrationUncertain.php": "f7dafb3307768f5be217b7ffde3abd1af30f1d8f2ba9dc0d5cab3d422bf23a55",
+      "tests/Support/PaymentsIntegration/IntegrationWorker.php": "1debfb0df9d5bd6e43235d715fb6fb675c4557ee782506b875a29db3565cb966",
+      "tests/Support/PaymentsIntegration/OwnedIntegrationLab.php": "e0437117bb51f49eee270d93afc585097d8ee0430c0c048717fd3e1e0bbae9fb",
+      "tests/Support/PaymentsIntegration/ProcessPeer.php": "6af14542cad47cad5db4388710aab98754cc1611b1da5b28d63f25b0dce216cb",
+      "tests/Support/PaymentsIntegration/ReferenceLoader.php": "16f68fb91ff3a61c180cdeacdbdbb677518fd7727777111925297fcb7de2076e",
+      "tests/Support/PaymentsIntegration/ScenarioFixture.php": "e6d520c52681c18182417ef12e43d35b8a9e59fbd11e94212aa04cef9b1e36b9",
+      "tests/Support/PaymentsIntegration/SessionLease.php": "bcd4e501242c333438b62492b4a64a334c91237d82853948c8c836cb188c6ae1",
+      "tests/Support/PaymentsIntegration/SessionSqlExecutor.php": "33033f24d4a2d0c7b183c364752e337355cc05ecd094927f79363a56437af32f",
+      "tests/Support/PaymentsIntegration/SharedCommandRepository.php": "f87a089591adb84a2742bcae876b9d24172bb9d6e321dc735f4452e109c8a72e",
+      "tests/Support/PaymentsIntegration/SharedHoldHistoryRepository.php": "910ffae554cb78147b37b59ccf65a53843c075bf895d05f6dcf52583cccf6294",
+      "tests/Support/PaymentsIntegration/SharedOccupancyRepository.php": "d4f4874d6e67aab9e966c040f7017f5f8e0276ac01ee26e341e9fea82fbc1bbb",
+      "tests/Support/PaymentsIntegration/SharedPricingRepository.php": "080e049705b7bf06f87f6a47914fb3b2ae450c176cba4d45089ef04cd6a232fd",
+      "tests/Support/PaymentsIntegration/SharedProposalBindingRepository.php": "8dfcd484efe72f5f6179551043ad39d1c26984747fa743a4d3ff6be984506cb1",
+      "tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php": "e2f291d879c372242e1ee70a27f9e3e2050d0ec5985098c060c6bad8c59d78be",
+      "tests/Support/PaymentsIntegration/SqliteOutcomePolicy.php": "d4bc8f6ba62e3ecc6877636a267e4ed0ed29f303c5c14ff168203ffd290546d4",
+      "tests/Support/PaymentsIntegration/TransactionOutcome.php": "d2040b6839fef00d4d0ac64f8c62fcab9423c36b2535c793f18b2659fe916976",
+      "tests/Support/PaymentsIntegration/WriteSession.php": "0a5accbe79c933583037a7ce4ad7fce96f202e95de066b725a8a961d6e71630c",
+      "tests/Support/PaymentsIntegration/fixture-schema.sql": "b2d5b28c0508bd79ed51589e6ae69d12203c1c68453d8e63869264b6a13ef401",
+      "tests/Support/PaymentsIntegration/references.json": "6a1a16ef862bb50d5461088eaf62fde80d28318cab7b81dc82440d377c8c2fa4",
+      "tests/payments-b231-bootstrap.php": "b804583ff8f972128652910f6708d248e3f8e8e78c25b2d69c37bf155110481c",
+      "tools/payments-b231/export_references.py": "29e5f5b8b8a15beb15ec165740a92836600f370d11cd72693c3d89c02054cd1c"
+    },
+    "unmodified_historical_files": true
+  },
+  "exact_reference_files": [
+    {
+      "reference": "pr32",
+      "path": "app/Payments/CommercialAmount.php",
+      "sha256": "345ba97e04ee24ac6df71a1a2d5afc225ec35bae2de3554c73853f34340e08f1"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/PriceVersion.php",
+      "sha256": "4d2dc09871832276662cba06d66131d51b6979c18144c1b6ada046bc1bc8e2e2"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/PricingConflict.php",
+      "sha256": "36647e2685a66565142ba736cf58fac17d29f67c74ab80029c68138dd280f189"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/PricingInput.php",
+      "sha256": "220d51a5799b15b008fd9cee6050c53de1155ce0f3abbdf3a8f736e59c09269e"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/PricingStore.php",
+      "sha256": "3bf2da30d287c2e99c05e6a4a747b3ee620f0631c7bbac233f34acb5cf5cc202"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/QuoteAcceptance.php",
+      "sha256": "8efe3503da53354ff768166f47b68508413143f1ab1f9914ec840d8f54bc650e"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/ServicePricing.php",
+      "sha256": "3daf6328f2635cdf69df8ff1ccbdfe8fcb96d9f061208905fa422bb88c8cdbe5"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/SyntheticQuote.php",
+      "sha256": "c20fe43702847e989940dec3d2ddfee29aef04a5d36d704d0e44bc4c5252c5db"
+    },
+    {
+      "reference": "pr32",
+      "path": "app/Payments/SyntheticQuotes.php",
+      "sha256": "219b6b4383054f971fb0a567caab983bd32179ca57121a20cad4c092d4a60b80"
+    },
+    {
+      "reference": "pr32",
+      "path": "tests/Feature/PaymentsPricingQuotesTest.php",
+      "sha256": "6ab4a45d047a4bc3e81bd46870ce1b6d1399d9b10f2d0a32a963df7f04f39498"
+    },
+    {
+      "reference": "pr32",
+      "path": "tests/Support/InMemoryPricingStore.php",
+      "sha256": "1c273402e6e818898299634339b2577035622579afa0b20c5684e84e15ed366c"
+    },
+    {
+      "reference": "pr32",
+      "path": "tests/Unit/CommercialAmountTest.php",
+      "sha256": "754b6341f633f9b91c3bf50e00814e1f000a32369accec5f732810a26e7e60ca"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/AcceptedQuoteReference.php",
+      "sha256": "4ceac934e9a4505895052a752f1d8e235cfd08a4e0887dc0765dd85b3d5aca52"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldActor.php",
+      "sha256": "8316725f063b33f0fee3093bc179d64cfe6f30fc8f08de8b07969b69e9aea9db"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldClock.php",
+      "sha256": "cf4d16d1609abd7c5c12674fc454b557fa9df958d8891ecf2e35fc1d89e05cd7"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldEvent.php",
+      "sha256": "fa494ac7888e26da79698f0fa775ca6513a3fa31b3dfb7bf882ae63c86273a2f"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldReceipt.php",
+      "sha256": "0f23e3364fe49e40ec9952eb206f1d1dcb51da54f5f99ab0f5141eacae009793"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldState.php",
+      "sha256": "9b9a65a84c85e64d1e9213090fe2a0685b4c6c6d8ab3c3efc6dd0fedef0cff90"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldStore.php",
+      "sha256": "6dec835f7b0e6e066f9d10ae6bd9f45ed705b19134c8cab1243f0a94fea25866"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldTime.php",
+      "sha256": "0bda019e2936437f6ab8c6ec6d153eff2eae29579c18e0c86b672946b549b972"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/HoldViolation.php",
+      "sha256": "0ffb71b7f629546a1063dea4b03329dbea8ecdf987fb30327aae61ec1b45318b"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/ReservationProposal.php",
+      "sha256": "9e1ccbb32c18aa10bc02cd5a1f295bb737ff9dfd3679a86b149a25f51ea1fc6b"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/SlotHold.php",
+      "sha256": "ab48d5d1f8414950a1ae03754ccfd809bc768faf61dd101f914028d4053e0013"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/SyntheticHoldEngine.php",
+      "sha256": "62bde7a85ef5b4de9020aa9272431787f8dbc8c825dbd375ce696cd4b8013556"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/SystemHoldClock.php",
+      "sha256": "4923266c8578c1c14ee5ea3c5be7630420e68ab94453a146c61a66b762134413"
+    },
+    {
+      "reference": "pr33",
+      "path": "app/Scheduling/Holds/UtcInterval.php",
+      "sha256": "f8de18ba6f128ce86d9e48309db7ff2d15f7e1f3202f87a3637221e29f88339b"
+    },
+    {
+      "reference": "pr33",
+      "path": "tests/Feature/SyntheticHoldIsolationTest.php",
+      "sha256": "836cc6d8e65b0e2baaed36135d18a595d1a24c49a3829e4092ef89ad563215ab"
+    },
+    {
+      "reference": "pr33",
+      "path": "tests/Support/InMemorySlotHoldStore.php",
+      "sha256": "8bf129434c68857d098a6d2beafbece2b159bc43ea660ae7dff7448f9a4951b6"
+    },
+    {
+      "reference": "pr33",
+      "path": "tests/Support/MutableSlotHoldClock.php",
+      "sha256": "3d3c3cefb2cbe236a998ee3fd6be555eab4839bca153d3c0a9cd858d0d5c470b"
+    },
+    {
+      "reference": "pr33",
+      "path": "tests/Unit/SlotHoldReconstitutionTest.php",
+      "sha256": "2954fad98e7c242608f4c85fa1843d6eb318096f230d880a40d8983ad7606dae"
+    },
+    {
+      "reference": "pr33",
+      "path": "tests/Unit/SyntheticSlotHoldEngineTest.php",
+      "sha256": "8ac2157d5fa0fda3bf594cdba1e0d3ae828888db2dc859cda55bb1269b338649"
+    },
+    {
+      "reference": "pr33",
+      "path": "tests/Unit/UtcServiceIntervalTest.php",
+      "sha256": "aba7ddce703454615684880d53cea4f7fef2750ef2109e5a2a6cd50c6a86cf3d"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/PaymentsSqlitePrototype/PricingSqliteConcurrencyTest.php",
+      "sha256": "99bf2d6882b178aa23e1c3cfb04c6794110854d20ba411c68131a191e9966ce1"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/PaymentsSqlitePrototype/PricingSqliteFix1Test.php",
+      "sha256": "368ec6c29435734dffe39ace3b27e39c4be745d82d4289d886be5ddd35d23ca4"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/PaymentsSqlitePrototype/PricingSqlitePrototypeTest.php",
+      "sha256": "7fdd2a997f3d3705df4b9fb0bc8f23631b71d3a03a43eca5d4961ef62b8e7c71"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/PaymentsSqlitePrototype/PricingValuesTest.php",
+      "sha256": "8353769331175a2de1079d5703b9e1db12f46b68fcb742533cd6629192b5c608"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/B1Reference.php",
+      "sha256": "4b8ac93437280a4bddaa7474ed977406872adee01a46e5d00d62ba3af57b424e"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/PricingFixture.php",
+      "sha256": "580be75692e80db82791f5f97366db95412d46d27829a45a44be6900438c759b"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/PricingValues.php",
+      "sha256": "080b0ebcf6a22362a186b37e89d3727a6e3de645db21f237aa7084995210dac8"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/SqlitePricingBusy.php",
+      "sha256": "35c3a0fba80f2b7a8f4fdbb0ed82fa78bde3918cd3fa03a28a7945d9b32bf47f"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/SqlitePricingStore.php",
+      "sha256": "71ca3144ec37a19c3fc2141339dee30d49ebbbf6084b627aea5c824be421dcb2"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/SyntheticPricingDatabase.php",
+      "sha256": "da03fdf65a4a4990d0cb3cf9b88d995b91f1e034ebb5ba1c4636f773835003a6"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/b1-reference.json",
+      "sha256": "91dbf7fb98ef39dc9b8fa1e3cdca19854275cb537cd0c1d8d4224b5272509bbc"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/Support/PricingSqlite/schema.sql",
+      "sha256": "dc72777e0a4faf151c379ca59f77ea59480cb0a73343a84cf6f1f16df2eea510"
+    },
+    {
+      "reference": "pr34",
+      "path": "tests/payments-b221-bootstrap.php",
+      "sha256": "19d6b4fac7e41c80ad68ee82e53d19ca938ff0b35533c7f5b99f635c760291ae"
+    },
+    {
+      "reference": "pr34",
+      "path": "tools/payments-b221/export_b1_reference.py",
+      "sha256": "9a547979b02064fc6249fc2505388b7af3ce7112a66833fff7f9eba024055993"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/HoldsSqlitePrototype/HoldValuesTest.php",
+      "sha256": "bf66869b147fd81126af27d70017df980d8cae8df8fb6223ea587990257548cf"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/HoldsSqlitePrototype/SqliteHoldAdmissionProcessTest.php",
+      "sha256": "fd9da0d9b144b101b6688693daedd68d743542a027c1fc15cb6ba89453201693"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/HoldsSqlitePrototype/SqliteHoldAdmissionTest.php",
+      "sha256": "3735653f12cfef9383be65f60b8c6d87073b44aa830efcebb9c8b7eae7271168"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/HoldsSqlitePrototype/SqliteHoldConcurrencyTest.php",
+      "sha256": "0e4d473ef805af6244cbd507a5800f90d0feb17d49aa6ea9fdd086e21b073369"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/HoldsSqlitePrototype/SqliteHoldConstraintsTest.php",
+      "sha256": "050575f94e9dd63a88056db7bbd3bd7dd898d3d1453d99186f6e5c6826c8d219"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/HoldsSqlitePrototype/SqliteHoldLifecycleTest.php",
+      "sha256": "0906c455df67bc72bdc5523f98e2b2f2bf1ba28edba48c669cdc1750dd5419cf"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/HoldsSqlitePrototype/SqliteHoldProcessTest.php",
+      "sha256": "2a1f412f3239e45fe6c456000e84f938d4a3b52a9d8496043352a974d6666ad3"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/AdmissionWorker.php",
+      "sha256": "7ec878a4cc6e6b893612f6c2633f072b84cfb8881fe80a04364f4d845932c5d5"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/B21Reference.php",
+      "sha256": "192b014b3a325c0fb5cd4b8eba95ebc1f8faba4ffcdf487761d9a0fa4cafa1dd"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/HoldCommitUncertain.php",
+      "sha256": "25ee51c202287240dfda4da8e315a3d813110ee27fc883d28ae8c65aace1e364"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/HoldFixture.php",
+      "sha256": "576f0ea467805c4277036a18c1bc6cd64e0ea8671a483642311c5ad0b7874769"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/HoldValues.php",
+      "sha256": "14492576eb7226f78a8fa72ff5c69a3963cfe622b9137ec15ec91dac8568c0ad"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/HoldWorker.php",
+      "sha256": "ced9f3acdb1b7262d4df4daa93f25fdf7a7256a230b54d5d3e43281850fdc3af"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/ProcessPeer.php",
+      "sha256": "5672d7b2f29b659b75e6927ea6206571d1f65ce958d4ba42fb7f1ff113ec480a"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/SqliteHoldBusy.php",
+      "sha256": "5ac954cd5bb53822544fa20fde06119e9bc8beca5c5b3f0e6f24d6b2ad438026"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/SqliteHoldContention.php",
+      "sha256": "bfb9c646116c8fc1d5169396b36f49ce653f0858dcdb17b4e99f82ab13380229"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/SqliteHoldStore.php",
+      "sha256": "8a8f0c0d93746037bdf650b26c5a9d9af7c25a2dd39f997695242533517facc4"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/SyntheticHoldDatabase.php",
+      "sha256": "bbba094b965d1f2cda33cd3ed906299f50077eb124cea6ce559663fcbdfa7ce0"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/b21-reference.json",
+      "sha256": "a61266bee19cbed25d8511f1ed6fbbd75f18f032b423fd2228873681e22ee28b"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/Support/HoldsSqlite/schema.sql",
+      "sha256": "f925d80aeaaba7d17bf072c66655c9db9573792e7f74b0819076065f072fe9bd"
+    },
+    {
+      "reference": "pr35",
+      "path": "tests/payments-b222-bootstrap.php",
+      "sha256": "92c14380213e4094a280b2debe7ddfe5cb570e716962614ed18c303316918b06"
+    },
+    {
+      "reference": "pr35",
+      "path": "tools/payments-b222/export_b21_reference.py",
+      "sha256": "bcca79c3acecac52fc5f239acd02fc9887d1d06429def2ad7909f28fbe3abac8"
+    }
+  ],
+  "environment": {
+    "php": "8.4.27",
+    "php_int_size": 8,
+    "sqlite": "3.46.1",
+    "pdo_driver": "sqlite",
+    "profile": {
+      "user_version": 231,
+      "journal_mode": "delete",
+      "synchronous": 2,
+      "foreign_keys": 1,
+      "ignore_check_constraints": 0,
+      "recursive_triggers": 0,
+      "busy_timeout": 0,
+      "encoding": "UTF-8"
+    },
+    "schema_counts": {
+      "table": 21,
+      "trigger": 112,
+      "index": 4
+    },
+    "schema_sha256": "b2d5b28c0508bd79ed51589e6ae69d12203c1c68453d8e63869264b6a13ef401",
+    "integrity_check": "ok",
+    "foreign_key_check": [],
+    "diagnostics": [
+      {
+        "connection": 12,
+        "epoch": 1,
+        "pid": 1,
+        "operation": "SELECT"
+      },
+      {
+        "connection": 12,
+        "epoch": 1,
+        "pid": 1,
+        "operation": "SELECT"
+      },
+      {
+        "connection": 12,
+        "epoch": 1,
+        "pid": 1,
+        "operation": "SELECT"
+      },
+      {
+        "connection": 12,
+        "epoch": 1,
+        "pid": 1,
+        "operation": "INSERT"
+      },
+      {
+        "connection": 12,
+        "epoch": 1,
+        "pid": 1,
+        "operation": "INSERT"
+      }
+    ],
+    "pcntl_fork_available": false,
+    "phpunit": "11.5.57",
+    "node": "v24.22.1",
+    "npm": "11.9.0",
+    "vite": "6.4.5"
+  },
+  "results": {
+    "b231-final.xml": {
+      "tests": 78,
+      "assertions": 584,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 1,
+      "seconds": 34.890334
+    },
+    "main-01.xml": {
+      "tests": 789,
+      "assertions": 10344,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 121.873299
+    },
+    "b1-01.xml": {
+      "tests": 82,
+      "assertions": 4353,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 8.719242
+    },
+    "b21-01.xml": {
+      "tests": 80,
+      "assertions": 323,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 1.775039
+    },
+    "b221-01.xml": {
+      "tests": 135,
+      "assertions": 621,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 10.483118
+    },
+    "b222-01.xml": {
+      "tests": 125,
+      "assertions": 765,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 11.543087
+    }
+  },
+  "new_groups": [
+    {
+      "name": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "tests": "17",
+      "assertions": "105",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "15.374776"
+    },
+    {
+      "name": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "tests": "12",
+      "assertions": "115",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "3.474133"
+    },
+    {
+      "name": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "tests": "14",
+      "assertions": "105",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "4.849964"
+    },
+    {
+      "name": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "tests": "19",
+      "assertions": "144",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "5.400546"
+    },
+    {
+      "name": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+      "file": "/app/tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php",
+      "tests": "6",
+      "assertions": "52",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "time": "2.156243"
+    },
+    {
+      "name": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "tests": "10",
+      "assertions": "63",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "1",
+      "time": "3.634673"
+    }
+  ],
+  "all_78_cases": [
+    {
+      "name": "test_t28_connect_contention_is_bounded_and_recorded_even_without_pdo",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "23",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "6",
+      "time": "0.311976",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t28_admission_contention_preserves_zero_callback_count",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "34",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "6",
+      "time": "0.256350",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t29_begin_can_succeed_after_lock_release_without_replaying_work",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "49",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "6",
+      "time": "0.286786",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t29_begin_exhaustion_never_invokes_callback",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "71",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "6",
+      "time": "0.462340",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t30_active_busy_rolls_back_without_retrying_callback",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "86",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "7",
+      "time": "3.772635",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t31_commit_retries_only_commit_behind_real_reader with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "110",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "6",
+      "time": "2.605709",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t31_commit_retries_only_commit_behind_real_reader with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "110",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "7",
+      "time": "0.900970",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t32_nonordinary_codes_are_not_retried with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "147",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "7",
+      "time": "0.294602",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t32_nonordinary_codes_are_not_retried with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "147",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "7",
+      "time": "0.391163",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t32_nonordinary_codes_are_not_retried with data set #2",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "147",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "7",
+      "time": "0.570764",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t32_nonordinary_codes_are_not_retried with data set #3",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "147",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "7",
+      "time": "0.503080",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t32_nonordinary_codes_are_not_retried with data set #4",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "147",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "7",
+      "time": "0.953413",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t32_observer_failure_preserves_error_and_rolls_back",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "161",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "6",
+      "time": "2.727651",
+      "status": "PASS"
+    },
+    {
+      "name": "test_commit_busy_crossing_deadline_aborts_without_renewal",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "177",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "5",
+      "time": "0.314127",
+      "status": "PASS"
+    },
+    {
+      "name": "test_success_returning_after_deadline_does_not_advertise_active_hold",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "194",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "6",
+      "time": "0.334950",
+      "status": "PASS"
+    },
+    {
+      "name": "test_clock_is_read_only_after_successful_begin",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "212",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "4",
+      "time": "0.341606",
+      "status": "PASS"
+    },
+    {
+      "name": "test_clock_regressing_inside_command_aborts_all_effects",
+      "file": "/app/tests/PaymentsIntegrationPrototype/ContentionTest.php",
+      "line": "229",
+      "class": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.ContentionTest",
+      "assertions": "5",
+      "time": "0.346654",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "19",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "5",
+      "time": "0.297624",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "19",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "6",
+      "time": "0.325867",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #2",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "19",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "8",
+      "time": "0.243740",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #3",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "19",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "8",
+      "time": "0.243243",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t25_provider_command_has_no_partial_effects with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "50",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "17",
+      "time": "0.276273",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t25_provider_command_has_no_partial_effects with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "50",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "17",
+      "time": "0.277306",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t25_provider_command_has_no_partial_effects with data set #2",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "50",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "17",
+      "time": "0.291001",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t25_provider_command_has_no_partial_effects with data set #3",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "50",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "17",
+      "time": "0.318784",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t27_partial_commit_without_receipt_is_rejected_by_deferred_fk",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "5",
+      "time": "0.203219",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t27_projection_cannot_confirm_without_claim",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "78",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "4",
+      "time": "0.341635",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t27_hold_cannot_change_without_reciprocal_claim_and_head",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "87",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "5",
+      "time": "0.333527",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t25_failure_after_receipt_rolls_back_complete_command",
+      "file": "/app/tests/PaymentsIntegrationPrototype/JointRollbackTest.php",
+      "line": "104",
+      "class": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.JointRollbackTest",
+      "assertions": "6",
+      "time": "0.321913",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "21",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "5",
+      "time": "0.346870",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "21",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "5",
+      "time": "0.362211",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #2",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "21",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "5",
+      "time": "0.325556",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #3",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "21",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "5",
+      "time": "0.426181",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #4",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "21",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "5",
+      "time": "0.368272",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t21_hold_boundary_and_late_synthetic_result with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "36",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "8",
+      "time": "0.317958",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t21_hold_boundary_and_late_synthetic_result with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "36",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "8",
+      "time": "0.345614",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t23_replay_never_renews_and_late_replay_returns_current_expired_state",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "48",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "12",
+      "time": "0.368551",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t26_expiry_is_conserved_when_late_conversion_is_rejected",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "71",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "9",
+      "time": "0.450297",
+      "status": "PASS"
+    },
+    {
+      "name": "test_release_permissions_versions_and_terminal_no_reactivation",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "86",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "9",
+      "time": "0.356088",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t35_cancel_closes_claim_but_preserves_committed_hold",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "99",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "10",
+      "time": "0.263996",
+      "status": "PASS"
+    },
+    {
+      "name": "test_basic_completion_and_cancel_after_start_scope_is_synthetic_only",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "116",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "6",
+      "time": "0.251748",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t38_append_only_cas_events_and_replace_guards",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "128",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "10",
+      "time": "0.221743",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t37_new_legacy_fixture_uses_same_occupancy_authority",
+      "file": "/app/tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php",
+      "line": "138",
+      "class": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.OccupancyHistoryTest",
+      "assertions": "8",
+      "time": "0.444878",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t09_t10_actors_and_financial_binding_are_server_resolved",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "16",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "11",
+      "time": "0.242231",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t11_exact_amounts_and_invalid_prices",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "38",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "35",
+      "time": "0.298882",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.307475",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.237792",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #2",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.241949",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #3",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.244076",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #4",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.243024",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #5",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.236354",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #6",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.217248",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #7",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.211599",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #8",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.321369",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t12_sql_rejects_noncanonical_full_values with data set #9",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "66",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "5",
+      "time": "0.300111",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t13_price_change_does_not_change_accepted_snapshot",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "91",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "8",
+      "time": "0.325491",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t14_quote_and_proposal_binding_cannot_be_reused",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "108",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "7",
+      "time": "0.317545",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t15_expired_quote_requires_new_consent_and_proposal",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "117",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "10",
+      "time": "0.347652",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t16_quote_expiry_boundary_and_freeze with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "139",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "6",
+      "time": "0.315488",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t16_quote_expiry_boundary_and_freeze with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "139",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "4",
+      "time": "0.340406",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t22_offsets_microseconds_and_clock_regression",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "153",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "7",
+      "time": "0.339525",
+      "status": "PASS"
+    },
+    {
+      "name": "test_requested_proposal_cannot_be_duplicated_for_same_inquiry",
+      "file": "/app/tests/PaymentsIntegrationPrototype/QuoteBindingTest.php",
+      "line": "165",
+      "class": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.QuoteBindingTest",
+      "assertions": "6",
+      "time": "0.312330",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t20_independent_processes_serialize_one_winner_with_third_connection",
+      "file": "/app/tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php",
+      "line": "25",
+      "class": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.RecoveryProcessesTest",
+      "assertions": "15",
+      "time": "0.468925",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t34_same_intent_recovers_from_new_pid_after_acknowledgement_loss",
+      "file": "/app/tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php",
+      "line": "60",
+      "class": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.RecoveryProcessesTest",
+      "assertions": "9",
+      "time": "0.448241",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t34_resolution_waits_for_existing_writer_and_proves_absent_receipt",
+      "file": "/app/tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php",
+      "line": "91",
+      "class": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.RecoveryProcessesTest",
+      "assertions": "7",
+      "time": "0.398445",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t33_uncertainty_revokes_session_and_recovery_never_executes_work with data set #0",
+      "file": "/app/tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php",
+      "line": "119",
+      "class": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.RecoveryProcessesTest",
+      "assertions": "7",
+      "time": "0.348511",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t33_uncertainty_revokes_session_and_recovery_never_executes_work with data set #1",
+      "file": "/app/tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php",
+      "line": "119",
+      "class": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.RecoveryProcessesTest",
+      "assertions": "7",
+      "time": "0.258824",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t33_uncertainty_revokes_session_and_recovery_never_executes_work with data set #2",
+      "file": "/app/tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php",
+      "line": "119",
+      "class": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.RecoveryProcessesTest",
+      "assertions": "7",
+      "time": "0.233297",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t01_exact_classes_and_absent_reference_fail_closed",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "18",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "6",
+      "time": "0.240849",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t02_new_files_and_inodes_are_not_adopted",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "26",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "6",
+      "time": "0.288923",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t02_file_substitution_stops_without_cleanup",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "35",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "2",
+      "time": "0.309988",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t03_t08_all_participants_use_same_pdo_and_epoch_with_visibility",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "49",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "12",
+      "time": "0.414827",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t04_t05_foreign_session_and_reentry_are_rejected",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "71",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "6",
+      "time": "0.570221",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t06_lease_revoked_after_commit_and_rollback",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "85",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "7",
+      "time": "0.333032",
+      "status": "PASS"
+    },
+    {
+      "name": "test_t07_fork_cannot_use_inherited_session",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "106",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "3",
+      "time": "0.426653",
+      "status": "BLOCKED (pcntl unavailable)"
+    },
+    {
+      "name": "test_unknown_temp_objects_and_attached_databases_are_rejected",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "129",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "5",
+      "time": "0.397059",
+      "status": "PASS"
+    },
+    {
+      "name": "test_session_tokens_cannot_be_serialized_or_used_by_a_different_owner",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "139",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "10",
+      "time": "0.366543",
+      "status": "PASS"
+    },
+    {
+      "name": "test_close_during_active_work_rolls_back_and_revokes_ports",
+      "file": "/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+      "line": "148",
+      "class": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+      "classname": "Tests.PaymentsIntegrationPrototype.SharedSessionTest",
+      "assertions": "6",
+      "time": "0.286577",
+      "status": "PASS"
+    }
+  ],
+  "planned_45_cases": [
+    {
+      "ID": "T01",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t01_exact_classes_and_absent_reference_fail_closed",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T02",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t02_new_files_and_inodes_are_not_adopted; Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t02_file_substitution_stops_without_cleanup",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T03",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t03_t08_all_participants_use_same_pdo_and_epoch_with_visibility; SharedSessionTest::test_t03_t08_all_participants_use_same_pdo_and_epoch_with_visibility",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T04",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t04_t05_foreign_session_and_reentry_are_rejected",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T05",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t04_t05_foreign_session_and_reentry_are_rejected",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T06",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t06_lease_revoked_after_commit_and_rollback",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T07",
+      "Estado ejecutado": "BLOCKED",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t07_fork_cannot_use_inherited_session",
+      "Límite de aceptación": "Subcaso fork heredado omitido: pcntl_fork ausente. Serialización rechazada y nuevos PIDs/permits sí probados por separado."
+    },
+    {
+      "ID": "T08",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t03_t08_all_participants_use_same_pdo_and_epoch_with_visibility; SharedSessionTest::test_t03_t08_all_participants_use_same_pdo_and_epoch_with_visibility",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T09",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t09_t10_actors_and_financial_binding_are_server_resolved",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T10",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t09_t10_actors_and_financial_binding_are_server_resolved",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T11",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t11_exact_amounts_and_invalid_prices",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T12",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #0; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #1; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #2; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #3; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #4; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #5; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #6; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #7; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #8; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t12_sql_rejects_noncanonical_full_values with data set #9",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T13",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t13_price_change_does_not_change_accepted_snapshot",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T14",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t14_quote_and_proposal_binding_cannot_be_reused",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T15",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t15_expired_quote_requires_new_consent_and_proposal",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T16",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t16_quote_expiry_boundary_and_freeze with data set #0; Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t16_quote_expiry_boundary_and_freeze with data set #1",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T17",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #0; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #1; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #2; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #3; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #4",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T18",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #0; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #1; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #2; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #3; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #4",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T19",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #0; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #1; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #2; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #3; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t17_t18_t19_provider_exclusivity_with_consecutive_intervals with data set #4",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T20",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest::test_t20_independent_processes_serialize_one_winner_with_third_connection; RecoveryProcessesTest::test_t20_independent_processes_serialize_one_winner_with_third_connection",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T21",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t21_hold_boundary_and_late_synthetic_result with data set #0; Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t21_hold_boundary_and_late_synthetic_result with data set #1",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T22",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest::test_t22_offsets_microseconds_and_clock_regression",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T23",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t23_replay_never_renews_and_late_replay_returns_current_expired_state",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T24",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #0; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #1; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #2; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t24_each_legitimate_command_rolls_back_its_own_effects with data set #3",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T25",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t25_provider_command_has_no_partial_effects with data set #0; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t25_provider_command_has_no_partial_effects with data set #1; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t25_provider_command_has_no_partial_effects with data set #2; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t25_provider_command_has_no_partial_effects with data set #3; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t25_failure_after_receipt_rolls_back_complete_command",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T26",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t26_expiry_is_conserved_when_late_conversion_is_rejected",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T27",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t27_partial_commit_without_receipt_is_rejected_by_deferred_fk; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t27_projection_cannot_confirm_without_claim; Tests\\PaymentsIntegrationPrototype\\JointRollbackTest::test_t27_hold_cannot_change_without_reciprocal_claim_and_head",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T28",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t28_connect_contention_is_bounded_and_recorded_even_without_pdo; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t28_admission_contention_preserves_zero_callback_count",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T29",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t29_begin_can_succeed_after_lock_release_without_replaying_work; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t29_begin_exhaustion_never_invokes_callback",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T30",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t30_active_busy_rolls_back_without_retrying_callback",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T31",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t31_commit_retries_only_commit_behind_real_reader with data set #0; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t31_commit_retries_only_commit_behind_real_reader with data set #1",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T32",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t32_nonordinary_codes_are_not_retried with data set #0; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t32_nonordinary_codes_are_not_retried with data set #1; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t32_nonordinary_codes_are_not_retried with data set #2; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t32_nonordinary_codes_are_not_retried with data set #3; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t32_nonordinary_codes_are_not_retried with data set #4; Tests\\PaymentsIntegrationPrototype\\ContentionTest::test_t32_observer_failure_preserves_error_and_rolls_back",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T33",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest::test_t33_uncertainty_revokes_session_and_recovery_never_executes_work with data set #0; Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest::test_t33_uncertainty_revokes_session_and_recovery_never_executes_work with data set #1; Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest::test_t33_uncertainty_revokes_session_and_recovery_never_executes_work with data set #2",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T34",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest::test_t34_same_intent_recovers_from_new_pid_after_acknowledgement_loss; Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest::test_t34_resolution_waits_for_existing_writer_and_proves_absent_receipt",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T35",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t35_cancel_closes_claim_but_preserves_committed_hold",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T36",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "OccupancyHistoryTest::test_basic_completion_and_cancel_after_start_scope_is_synthetic_only",
+      "Límite de aceptación": "Solo cierre básico after-end/cancel-at-start, autorizado en el laboratorio; estrés y políticas reales posteriores pendientes."
+    },
+    {
+      "ID": "T37",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t37_new_legacy_fixture_uses_same_occupancy_authority",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T38",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest::test_t38_append_only_cas_events_and_replace_guards; IntegrationTestCase::integrity (teardown de todos los escenarios ordinarios)",
+      "Límite de aceptación": "Garantía sintética del caso; no certifica producción."
+    },
+    {
+      "ID": "T39",
+      "Estado ejecutado": "PASS",
+      "Pruebas/evidencia": "QuoteBindingTest::test_t15_expired_quote_requires_new_consent_and_proposal",
+      "Límite de aceptación": "Nueva quote/aceptación/propuesta; recorrido web/API posterior NOT RUN."
+    },
+    {
+      "ID": "T40",
+      "Estado ejecutado": "NOT RUN",
+      "Pruebas/evidencia": "",
+      "Límite de aceptación": "Fuera del laboratorio autorizado; no se infiere de Linux/PDO/fixtures."
+    },
+    {
+      "ID": "T41",
+      "Estado ejecutado": "NOT RUN",
+      "Pruebas/evidencia": "",
+      "Límite de aceptación": "Fuera del laboratorio autorizado; no se infiere de Linux/PDO/fixtures."
+    },
+    {
+      "ID": "T42",
+      "Estado ejecutado": "NOT RUN",
+      "Pruebas/evidencia": "",
+      "Límite de aceptación": "Fuera del laboratorio autorizado; no se infiere de Linux/PDO/fixtures."
+    },
+    {
+      "ID": "T43",
+      "Estado ejecutado": "NOT RUN",
+      "Pruebas/evidencia": "",
+      "Límite de aceptación": "Fuera del laboratorio autorizado; no se infiere de Linux/PDO/fixtures."
+    },
+    {
+      "ID": "T44",
+      "Estado ejecutado": "NOT RUN",
+      "Pruebas/evidencia": "",
+      "Límite de aceptación": "Fuera del laboratorio autorizado; no se infiere de Linux/PDO/fixtures."
+    },
+    {
+      "ID": "T45",
+      "Estado ejecutado": "PASS / NOT RUN",
+      "Pruebas/evidencia": "b231-final.xml; main-01.xml; b1-01.xml; b21-01.xml; b221-01.xml; b222-01.xml",
+      "Límite de aceptación": "PASS: cinco suites originales separadas; NOT RUN: auditorías Composer/npm, antecedente 403 pendiente."
+    }
+  ],
+  "risk_statuses": [
+    {
+      "ID": "I1",
+      "Prioridad": "P1",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Puertos de sesión/WeakMap/PID/epoch, PDO único, BEGIN/COMMIT único, rollback y revocación",
+      "Evidencia ejecutada": "T03-T08,T24-T27",
+      "Limitación actual": "Fork heredado BLOCKED; gestor Illuminate/Gate real no integrado.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / OPEN PRODUCT"
+    },
+    {
+      "ID": "I2",
+      "Prioridad": "P1",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Claims comunes, FK recíprocas y solapes SQL; fixture legacy cerrado",
+      "Evidencia ejecutada": "T17-T20,T27,T37",
+      "Limitación actual": "Carrera mínima entre dos PHP; no estrés ni protección de rutas actuales.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / OPEN PRODUCT"
+    },
+    {
+      "ID": "I3",
+      "Prioridad": "P1",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Proyección/claim/historia de fixture; guards diferibles contra commit parcial",
+      "Evidencia ejecutada": "T27,T35,T38",
+      "Limitación actual": "No se modifican enums, triggers ni avisos reales; migración NOT RUN.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / OPEN PRODUCT"
+    },
+    {
+      "ID": "I4",
+      "Prioridad": "P1",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Binding inmutable, FK compuestas, derivación de identidades y codecs exactos",
+      "Evidencia ejecutada": "T09-T13,T16",
+      "Limitación actual": "Actores/identidades de fixture; Gate/scopes/ownership reales pendientes.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / OPEN PRODUCT"
+    },
+    {
+      "ID": "I5",
+      "Prioridad": "P1",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Claim cerrable separado del hold committed v2; readquisición nueva",
+      "Evidencia ejecutada": "T35,T36",
+      "Limitación actual": "Cancelaciones/finanzas reales y variantes extensas posteriores pendientes.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / OPEN PRODUCT"
+    },
+    {
+      "ID": "I6",
+      "Prioridad": "P2",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "UNIQUE permanentes, snapshots append-only, nueva quote/consent/propuesta",
+      "Evidencia ejecutada": "T14,T23,T39",
+      "Limitación actual": "UX, reprogramación y cohortes históricas sin implementar.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / OPEN PRODUCT"
+    },
+    {
+      "ID": "I7",
+      "Prioridad": "P2",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "S0 y freeze provisionales; límites exactos 1800/900, no renovación",
+      "Evidencia ejecutada": "T15-T16,T21-T23,T34",
+      "Limitación actual": "Aprobación comercial, margen al inicio y tiempo físico del driver pendientes.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / COMMERCIAL OPEN"
+    },
+    {
+      "ID": "I8",
+      "Prioridad": "P2",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Política por fase, cuerpo una vez, retries finitos, rollback e invalidación/resolve",
+      "Evidencia ejecutada": "T28-T34",
+      "Limitación actual": "DELETE y fallos inyectados; WAL, driver/OS real y gestor Illuminate NOT RUN.",
+      "Estado final de esta entrega": "MITIGATED IN LAB / OPEN PRODUCT"
+    },
+    {
+      "ID": "I9",
+      "Prioridad": "P2",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Sin rutas ni estados añadidos a API v1; contrato interno separado",
+      "Evidencia ejecutada": "T40-T41 NOT RUN",
+      "Limitación actual": "API v2, actores reales, avisos y convivencia requieren autorización.",
+      "Estado final de esta entrega": "OPEN"
+    },
+    {
+      "ID": "I10",
+      "Prioridad": "P2",
+      "Estado inicial": "OPEN — diseño no probado",
+      "Mitigación implementada": "Conversiones enteras/us, bytes/NUL, esquema STRICT y guards POSIX",
+      "Evidencia ejecutada": "T12,T22,T43-T45",
+      "Limitación actual": "Windows/PHP8.2, mínimo SQLite, WAL, físico y auditorías NOT RUN.",
+      "Estado final de esta entrega": "PARTIAL / OPEN"
+    }
+  ],
+  "commands": [
+    "python tools/payments-b231/export_references.py <repo> <NEW_REFERENCE_DIRECTORY>",
+    "php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b231-bootstrap.php tests/PaymentsIntegrationPrototype --log-junit /evidence/b231-final.xml",
+    "php -d memory_limit=1G vendor/bin/phpunit --log-junit /evidence/main-01.xml",
+    "TEKORA_B221_B1_REFERENCE=/refs/pr32 php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b221-bootstrap.php tests/PaymentsSqlitePrototype --log-junit /evidence/b221-01.xml",
+    "TEKORA_B221_B1_REFERENCE=/refs/pr32 php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b221-bootstrap.php /refs/pr32/tests/Unit/CommercialAmountTest.php /refs/pr32/tests/Feature/PaymentsPricingQuotesTest.php --log-junit /evidence/b1-01.xml",
+    "TEKORA_B222_B21_REFERENCE=/refs/pr33 php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php /refs/pr33/tests/Unit /refs/pr33/tests/Feature --log-junit /evidence/b21-01.xml",
+    "TEKORA_B222_B21_REFERENCE=/refs/pr33 TEKORA_B222_LAB_PARENT=/lab TEKORA_B222_RUN_TOKEN=<fresh-private-run-token> php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php tests/HoldsSqlitePrototype --log-junit /evidence/b222-01.xml",
+    "php vendor/bin/pint --test tests/Support/PaymentsIntegration tests/PaymentsIntegrationPrototype tests/payments-b231-bootstrap.php",
+    "npm --offline run build",
+    "PRAGMA integrity_check; PRAGMA foreign_key_check; (nueva SQLite sintética en PDO)"
+  ],
+  "isolation": {
+    "container_image": "tekora-w62cb-php:local (test runtime only)",
+    "network": "none",
+    "uid": 1000,
+    "vendor": "read-only",
+    "references": "read-only exact Git source exports",
+    "sqlite": "only NEW own synthetic files; historical/B1 Laravel tests :memory:",
+    "real_env_media_DB_credentials": "not accessed",
+    "automatic_cleanup": false,
+    "old_18_W62e_roots": "untouched",
+    "destructive_production_operation": false,
+    "historical_sources_modified": false,
+    "push_PR_merge_deploy": false
+  },
+  "process_traces": [
+    {
+      "artifact": "race-dd68f34afaccb942.json",
+      "events": [
+        {
+          "phase": "ready",
+          "pid": 8
+        },
+        {
+          "phase": "ready",
+          "pid": 9
+        },
+        {
+          "phase": "result",
+          "pid": 8,
+          "calls": 1,
+          "kind": "committed",
+          "historical": {
+            "code": "held",
+            "hold_id": "68fb96e8-a9e6-4694-abb8-afd9d6553b15",
+            "claim_id": "a56a4cd9-acfe-4adf-a88a-2fae5007cf1c",
+            "proposal_id": 1,
+            "guard_until_us": 1794478500000000
+          },
+          "current": {
+            "hold_id": "68fb96e8-a9e6-4694-abb8-afd9d6553b15",
+            "state": "held",
+            "version": 1,
+            "accepted_at_us": 1794477600000000,
+            "expires_at_us": 1794478500000000,
+            "phase": "held",
+            "claim_version": 1,
+            "proposal_state": "awaiting_payment"
+          },
+          "busy": []
+        },
+        {
+          "phase": "result",
+          "pid": 9,
+          "calls": 1,
+          "kind": "rejected",
+          "historical": {
+            "code": "slot_conflict",
+            "outcome": "rejected"
+          },
+          "current": null,
+          "busy": [
+            {
+              "phase": "begin",
+              "attempt": 1,
+              "code": 5
+            },
+            {
+              "phase": "begin",
+              "attempt": 2,
+              "code": 5
+            },
+            {
+              "phase": "begin",
+              "attempt": 3,
+              "code": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "artifact": "race-fcdb920ecd8518e5.json",
+      "events": [
+        {
+          "phase": "ready",
+          "pid": 9
+        },
+        {
+          "phase": "ready",
+          "pid": 10
+        },
+        {
+          "phase": "result",
+          "pid": 9,
+          "calls": 1,
+          "kind": "committed",
+          "historical": {
+            "code": "held",
+            "hold_id": "d68ffb3c-f883-4beb-88f2-f05d2dab243c",
+            "claim_id": "1d2de601-0baa-4076-a2ef-7f5799c06806",
+            "proposal_id": 1,
+            "guard_until_us": 1794478500000000
+          },
+          "current": {
+            "hold_id": "d68ffb3c-f883-4beb-88f2-f05d2dab243c",
+            "state": "held",
+            "version": 1,
+            "accepted_at_us": 1794477600000000,
+            "expires_at_us": 1794478500000000,
+            "phase": "held",
+            "claim_version": 1,
+            "proposal_state": "awaiting_payment"
+          },
+          "busy": []
+        },
+        {
+          "phase": "result",
+          "pid": 10,
+          "calls": 1,
+          "kind": "rejected",
+          "historical": {
+            "code": "slot_conflict",
+            "outcome": "rejected"
+          },
+          "current": null,
+          "busy": [
+            {
+              "phase": "begin",
+              "attempt": 1,
+              "code": 5
+            },
+            {
+              "phase": "begin",
+              "attempt": 2,
+              "code": 5
+            },
+            {
+              "phase": "begin",
+              "attempt": 3,
+              "code": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "artifact": "recovery-c1653232f239d301.json",
+      "events": [
+        {
+          "phase": "ready",
+          "pid": 13
+        },
+        {
+          "phase": "uncertain",
+          "pid": 13,
+          "calls": 1
+        },
+        {
+          "phase": "ready",
+          "pid": 15
+        },
+        {
+          "phase": "result",
+          "pid": 15,
+          "calls": 0,
+          "kind": "replayed",
+          "historical": {
+            "code": "held",
+            "hold_id": "b35dae47-ec0a-49c2-9ef2-da64f490c7bc",
+            "claim_id": "76d13176-ae3e-4ef1-a7ce-2e1d3f1254d3",
+            "proposal_id": 1,
+            "guard_until_us": 1794478500000000
+          },
+          "current": {
+            "hold_id": "b35dae47-ec0a-49c2-9ef2-da64f490c7bc",
+            "state": "expired",
+            "version": 2,
+            "accepted_at_us": 1794477600000000,
+            "expires_at_us": 1794478500000000,
+            "phase": "closed",
+            "claim_version": 2,
+            "proposal_state": "expired"
+          },
+          "busy": []
+        }
+      ]
+    },
+    {
+      "artifact": "recovery-d5040ffb9d557e9d.json",
+      "events": [
+        {
+          "phase": "ready",
+          "pid": 12
+        },
+        {
+          "phase": "uncertain",
+          "pid": 12,
+          "calls": 1
+        },
+        {
+          "phase": "ready",
+          "pid": 14
+        },
+        {
+          "phase": "result",
+          "pid": 14,
+          "calls": 0,
+          "kind": "replayed",
+          "historical": {
+            "code": "held",
+            "hold_id": "cbeb991f-ffbe-40f6-a7fb-9bd37113d6f8",
+            "claim_id": "86bd2c9d-5bbc-4d4e-a125-39f658152352",
+            "proposal_id": 1,
+            "guard_until_us": 1794478500000000
+          },
+          "current": {
+            "hold_id": "cbeb991f-ffbe-40f6-a7fb-9bd37113d6f8",
+            "state": "expired",
+            "version": 2,
+            "accepted_at_us": 1794477600000000,
+            "expires_at_us": 1794478500000000,
+            "phase": "closed",
+            "claim_version": 2,
+            "proposal_state": "expired"
+          },
+          "busy": []
+        }
+      ]
+    }
+  ],
+  "process_trace_note": "Two recorded trace kinds across intermediate/final runs; not additional tests. Actual subprocess cases are T20 and two T34 cases.",
+  "final_remote_refs": [
+    {
+      "ref": "main",
+      "sha": "ac999cea8f592ce7b94481ee30f602b67d9f5bea"
+    },
+    {
+      "ref": "pr32",
+      "head": "a7efd0e353435c46c633f02120d131507bdc7516",
+      "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+      "draft": true,
+      "state": "open",
+      "merged": false
+    },
+    {
+      "ref": "pr33",
+      "head": "815879d448e17ef8955354c6a275201ba6f350fe",
+      "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+      "draft": true,
+      "state": "open",
+      "merged": false
+    },
+    {
+      "ref": "pr34",
+      "head": "7775938dda5440c03964009847d4a8d9d63b0805",
+      "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+      "draft": true,
+      "state": "open",
+      "merged": false
+    },
+    {
+      "ref": "pr35",
+      "head": "c3a3943c96d702bff3e1a9afbb13f57be789e137",
+      "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+      "draft": true,
+      "state": "open",
+      "merged": false
+    }
+  ],
+  "raw_evidence_root": "/workspace/tekora-b231-validation-pqd8s6pu/logs",
+  "raw_artifact_sha256": {
+    "github-final.json": "b404f33a847cf617fa3a2f874f4c1b7582fd4c83c4d2accfbd67c85b0337b158",
+    "b231-01.log": "724fdf15c3095ab67e13010698c398eb4ad262dc6111f5d2505dad884949b138",
+    "b231-05.xml": "1f35e70984e2c32540df5cb525d6798f0986e38712f0002ddd2d58e36caacec2",
+    "recovery-d5040ffb9d557e9d.json": "76cb76b45ba971d1c589b0e59d028c44c98bdcfa0d3f07997597a979da778903",
+    "b231-01.xml": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metadata-01.json": "77db1182118af0767d73efb81b8ce9b360638dae3d90c7fe597e0d2dbbdf57eb",
+    "metadata-01.stderr": "b999dd87bc6756539c1eb88453dacfa6b61c66afe56dd34a41d0a769afebcde0",
+    "b21-01.log": "14bc28c76fb764b7cdbec7048ba7aac0edef403b4f1e5361e94b21d97b547e0e",
+    "b231-06.log": "9f8b66e96f54596c90ecf53d90c9e8239c7de54aa5373577e7647b8dd6ddf4c9",
+    "race-dd68f34afaccb942.json": "305b89fbabc48ae7b26351c8c032b1bc237e7f6a9594fc46f23da4f5f948c9e3",
+    "b222-01.log": "38257367a1d331c7c4e55ee18309416cc7068f490874657831dd9c9939dad649",
+    "recovery-c1653232f239d301.json": "24f01aee2d13fe3a78032a9b151e417123896cc7847434bbee84a1f2db303aee",
+    "b1-01.log": "5486d0ea376c4377b853db40b175c01a60576eabd6b4ce8438b34fc8823f37b8",
+    "b222-01.xml": "5e4f40d1fa2f5ccdaf44d04b37340b540cba1032dae83b2a2eb375df54647616",
+    "b231-02.log": "7f79892e6f7abbe63dd7bbf5693602c0b9b74c765758415b74e41b742e71565c",
+    "pint-fix-01.log": "c67be4bb12f56a8632068a57a29afb1e8b9224dfaf8056b74059947e4778151c",
+    "pint-fix-03.log": "d483e86d2cec385870d1096faac7f4c4fe00aeb2f2a52ab1f6d0bec3ea13c8da",
+    "b231-04.xml": "b6518403781ce80f3f3e2972fef666118e9cac63eac8d7c9b17feee544dfce37",
+    "b231-03.xml": "ea24a628b672843be2d3518cdea615716a9bdd77e22245aae7fde9657a12d939",
+    "race-fcdb920ecd8518e5.json": "80fa67d326be570c0f5b85f11fb042efa97e1be0de96165d99dbf92479aee738",
+    "b1-01.xml": "a7beb9c1eab6a56d39d2a5d0938c0319134f141eba8a6a607c8a8868505e0c01",
+    "b231-final.log": "e36b90c7aa98a0c9349e475813a1035c0723748db27e953751ea0c0ca88f41bd",
+    "smoke-01.log": "38d7a66a651680e62683d5a75f72bc9d1048e0b0580ae545cbee380c5f0259aa",
+    "b231-06.xml": "b631f3c246eccd6901545fffd77be054c09143228c72b517f7efa373c0bb9b4e",
+    "b21-01.xml": "07077c37bf59eff055c97d8349f2f1502fef617e239b47a740b750754fd1df11",
+    "b231-05.log": "a02c1d63c70f29de198758a9e6f5313c5a07992960c61720157238eb19392288",
+    "b221-01.xml": "95dce4dba237798455ab7ee37d4a4fc5db8fdf56d95b8286f07fbd68f89bfeeb",
+    "b231-02.xml": "c1f5b2dfe3d38578472c101a1a23c62d8a10aca81040d37f5f1fa17f440688dd",
+    "b221-01.log": "b0fa8f3320c0bd5c39a60a985e6a9a4dee3b5869edcfcafc77ad29e4858662a2",
+    "pint-final.log": "d483e86d2cec385870d1096faac7f4c4fe00aeb2f2a52ab1f6d0bec3ea13c8da",
+    "b231-03.log": "2e5bccc8a569a306b85cf8d750946db56c4a2037a3868927c25fd7ae5a074352",
+    "build-01.log": "87a4da3d9004866d8ca6691cc9e340bd134cda32cd88cbedbd3b6e963835055e",
+    "b231-final.xml": "08b82792348015686c6f0066909c1b4366e8a6d2642f0e4580951d580a74e9b8",
+    "b231-07.xml": "cd3e3b91af637400f0fcbc2d2ec2f621716b9a04bed389baae7baa6c54a31dc8",
+    "b231-04.log": "dfbfb904d5edabddb8bb24e33f55640b4d20749b9097132fb27d42621bbd436e",
+    "source-integrity.json": "efc54f955b5af385f172688442f723fa7b82463c13bd71a1102ac4d8e019f79f",
+    "pint-test-01.log": "0ec225134ef9bb9056289725deb144ba206092f5b84c54b4795861724d1911f5",
+    "main-01.log": "23a1d8c5910b2f3ffed0a0eee8125fdb0c001a9e9f3c4875b7370d4cb4674001",
+    "main-01.xml": "d379432fac53c4f9c45c42760fe8fb58ce3affbffcf7ae07d7b56e9a37d729c4",
+    "b231-07.log": "08289fdb5a770ee7dade57b0cd22c18581df0b05ec8957f0c8b8aaadaa3b5fcb",
+    "pint-fix-02.log": "7a635dca849f8c82c841fae07f2de1c91e252d0c79c87f1127a93e2be7c40965"
+  },
+  "history": [
+    {
+      "run": "b231-01",
+      "status": "FAIL",
+      "reason": "Harness helper count collided with PHPUnit final method; empty JUnit retained."
+    },
+    {
+      "run": "b231-02",
+      "status": "FAIL",
+      "reason": "Four ambiguous hold_id errors in post-COMMIT state query; uncertain outcome correctly stopped replay."
+    },
+    {
+      "run": "b231-03/04",
+      "status": "FAIL",
+      "reason": "Counter captured by arrow-function value; uninitialized worker pipes property; corrected harness without weakening assertions."
+    },
+    {
+      "run": "b231-05",
+      "status": "PASS_WITH_BLOCKED",
+      "result": {
+        "tests": 72,
+        "assertions": 546,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 1,
+        "seconds": 42.06886
+      }
+    },
+    {
+      "run": "b231-06",
+      "status": "FAIL",
+      "reason": "Active-inquiry guard correctly blocked legacy fixture using same inquiry; changed new synthetic proposal to different inquiry to test occupancy."
+    },
+    {
+      "run": "b231-07",
+      "status": "FAIL",
+      "reason": "Saved-session test capture was by value; corrected test observation. Warning and failed JUnit retained."
+    },
+    {
+      "run": "pint-test-01",
+      "status": "FAIL",
+      "reason": "Missing blank line between new test methods; corrected formatting."
+    },
+    {
+      "run": "b231-final",
+      "status": "PASS_WITH_BLOCKED",
+      "result": {
+        "tests": 78,
+        "assertions": 584,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 1,
+        "seconds": 34.890334
+      }
+    }
+  ],
+  "limits_not_run": [
+    "Inherited pcntl_fork subcase BLOCKED; independent PHP processes executed",
+    "Windows/PHP 8.2",
+    "Minimum SQLite 3.38",
+    "WAL/BUSY_SNAPSHOT",
+    "Physical/power-loss recovery",
+    "Real driver failure during COMMIT",
+    "Composer/npm audits; Composer HTTP403 antecedent unresolved",
+    "Real Laravel transaction manager/auth/routes/API/historical-reservation integration",
+    "Productive migration/persistence/payments/retentions",
+    "Legal/fiscal/commercial/provider approval"
+  ]
+}
