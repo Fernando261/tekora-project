@@ -1,6 +1,8 @@
 # TEKORA B2.2.2 — Validación del HoldStore SQLite aislado
 
-Estado: **READY FOR INDEPENDENT REVIEW**, solo para el prototipo sintético. No es aprobación de publicación, migración productiva, fusión o integración de reservas.
+**Registro histórico del commit original `426f6f47e456cab84fa84afd8b4da4a3574e282f`.** La revisión independiente posterior concluyó **CHANGES REQUIRED** por un P2 de BUSY en validación previa. Sus 42 casos adicionales dieron 40 PASS, un error y un fallo de la misma causa; no se reclasifican retrospectivamente como PASS. La corrección local y nuevas ejecuciones se documentan en [B222-FIX1-VALIDATION.md](B222-FIX1-VALIDATION.md). La evidencia JSON original se conserva intacta.
+
+Estado de entrega original: **READY FOR INDEPENDENT REVIEW**, solo para el prototipo sintético. No era aprobación de publicación, migración productiva, fusión o integración de reservas.
 
 Rama: `codex/payments-b222-sqlite-slot-holds`.
 Base: `ac999cea8f592ce7b94481ee30f602b67d9f5bea`.

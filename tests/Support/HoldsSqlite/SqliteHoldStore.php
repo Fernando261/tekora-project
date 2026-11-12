@@ -26,9 +26,12 @@ final class SqliteHoldStore implements HoldStore
 
     private bool $poisoned = false;
 
-    private array $busy = [];
+    private readonly SqliteHoldContention $contention;
 
-    private function __construct(private readonly SyntheticHoldDatabase $database, private readonly PDO $pdo, private readonly int $attempts, private readonly ?Closure $onBusy, private readonly ?Closure $afterCommit, private readonly ?Closure $beforeCommit) {}
+    private function __construct(private readonly SyntheticHoldDatabase $database, private readonly PDO $pdo, int $attempts, ?Closure $onBusy, private readonly ?Closure $afterCommit, private readonly ?Closure $beforeCommit)
+    {
+        $this->contention = new SqliteHoldContention($attempts, $onBusy, $database->connectionBusyEvents($pdo));
+    }
 
     public static function owned(SyntheticHoldDatabase $database, PDO $pdo, int $attempts = 3, ?Closure $onBusy = null, ?Closure $afterCommit = null, ?Closure $beforeCommit = null): self
     {
@@ -44,7 +47,19 @@ final class SqliteHoldStore implements HoldStore
         if ($this->poisoned) {
             throw new LogicException('Reconnect and resolve the same intention.');
         }
-        $this->database->check($this->pdo);
+        if (! $this->database->owns($this->pdo)) {
+            throw new LogicException('Foreign or invalidated connection.');
+        }
+        if ($this->active || $this->reading) {
+            // An active transaction must take the rollback path, not replay admission.
+            $this->database->check($this->pdo);
+
+            return;
+        }
+        if ($this->pdo->inTransaction()) {
+            throw new LogicException('Unknown transaction context.');
+        }
+        $this->contention->run('admission', fn () => $this->database->check($this->pdo));
     }
 
     public function atomic(callable $operation): mixed
@@ -79,7 +94,8 @@ final class SqliteHoldStore implements HoldStore
                 $this->invalidate();
                 throw new HoldCommitUncertain('Rollback not established; reconnect and resolve the same intention.', previous: $rollback);
             }
-            if ($error instanceof PDOException && self::code($error) === 5) {
+            if ($error instanceof PDOException && SqliteHoldContention::primary($error) === 5) {
+                $this->contention->record('body', 1, $error);
                 throw new SqliteHoldBusy('body', 1);
             }
             throw $error;
@@ -94,39 +110,14 @@ final class SqliteHoldStore implements HoldStore
         $this->database->invalidate($this->pdo);
     }
 
-    private static function code(PDOException $error): int
-    {
-        $code = $error->errorInfo[1] ?? 0;
-
-        return is_int($code) ? $code & 255 : 0;
-    }
-
     private function control(string $sql, string $phase): void
     {
-        for ($attempt = 1; $attempt <= $this->attempts; $attempt++) {
-            try {
-                $this->pdo->exec($sql);
-
-                return;
-            } catch (PDOException $error) {
-                if (self::code($error) !== 5) {
-                    throw $error;
-                }
-                $this->busy[] = ['phase' => $phase, 'attempt' => $attempt, 'code' => $error->errorInfo[1]];
-                if ($attempt === $this->attempts) {
-                    throw new SqliteHoldBusy($phase, $attempt);
-                }
-                if ($this->onBusy !== null) {
-                    ($this->onBusy)($phase, $attempt);
-                }
-                usleep(1000 * $attempt);
-            }
-        }
+        $this->contention->run($phase, fn () => $this->pdo->exec($sql));
     }
 
     public function busyEvents(): array
     {
-        return $this->busy;
+        return $this->contention->events();
     }
 
     private function snapshot(callable $read): mixed
@@ -138,7 +129,7 @@ final class SqliteHoldStore implements HoldStore
         if ($this->pdo->inTransaction()) {
             throw new LogicException('Unknown read transaction.');
         }
-        $this->pdo->exec('BEGIN');
+        $this->control('BEGIN', 'read_begin');
         $this->reading = true;
         try {
             $result = $read();
@@ -151,6 +142,10 @@ final class SqliteHoldStore implements HoldStore
             } catch (Throwable $rollback) {
                 $this->invalidate();
                 throw new LogicException('Uncertain read context; reconnect.', previous: $rollback);
+            }
+            if ($error instanceof PDOException && SqliteHoldContention::primary($error) === 5) {
+                $this->contention->record('read', 1, $error);
+                throw new SqliteHoldBusy('read', 1);
             }
             throw $error;
         } finally {
@@ -345,7 +340,7 @@ final class SqliteHoldStore implements HoldStore
 
             return $statement->rowCount();
         } catch (PDOException $error) {
-            if (self::code($error) === 19) {
+            if (SqliteHoldContention::primary($error) === 19) {
                 foreach (['slot_conflict', 'provider_identity_conflict', 'invalid_insert', 'invalid_transition', 'immutable_binding', 'invalid_clock', 'invalid_history', 'invalid_receipt', 'clock_regressed'] as $reason) {
                     if (str_contains($error->getMessage(), $reason)) {
                         throw new HoldViolation($reason);

@@ -1,0 +1,2960 @@
+{
+  "scope": "TEKORA B2.2.2-fix1 isolated SQLite admission contention only",
+  "status": "READY FOR INDEPENDENT REVIEW",
+  "branch": "codex/payments-b222-sqlite-slot-holds",
+  "original_commit": "426f6f47e456cab84fa84afd8b4da4a3574e282f",
+  "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+  "corrective_commit": "the local commit containing this file; direct parent must equal original_commit",
+  "historical_finding": {
+    "id": "F1",
+    "priority": "P2",
+    "cause": "BUSY from pre-BEGIN metadata admission escaped bounded classification",
+    "original_review": "CHANGES REQUIRED",
+    "original_external_results": {
+      "independent-core.xml": {
+        "tests": 20,
+        "assertions": 212,
+        "errors": 1,
+        "failures": 0,
+        "skipped": 0
+      },
+      "independent-processes.xml": {
+        "tests": 6,
+        "assertions": 92,
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0
+      },
+      "independent-boundaries.xml": {
+        "tests": 16,
+        "assertions": 36,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      }
+    },
+    "original_evidence_sha256": "00fc14cffc179dcb7621490baccb35265d2a671337f39380cfe7633de1470dad",
+    "historical_artifact_sha256": {
+      "REVIEW-B222.md": "85fab97c040e7939342855062cfbd40f7a61ffd9e285115c486352970d7e13a2",
+      "independent-core.xml": "c66b701096234907f30f0d5da4bf572c95fb779e76b509ec87b157d4844f29a1",
+      "independent-processes.xml": "f6e6bac27d64e7cccfd9f505f7a3c1526bfcaa617cd92e9cbfc11a15c7563d83",
+      "independent-boundaries.xml": "7ce9f58a3b05a749e0adee19bc82f8e3d35e3254a0e432121f84795aa2ec5403"
+    },
+    "current_state": "implemented and regression-tested; independent closure pending"
+  },
+  "contention_protocol": {
+    "primary_code": 5,
+    "attempts_total_per_phase_invocation": "1..3",
+    "sleep_between_attempts_us": [
+      1000,
+      2000
+    ],
+    "global_command_deadline": false,
+    "retry_phases": [
+      "connect",
+      "admission",
+      "begin",
+      "read_begin",
+      "commit"
+    ],
+    "active_body_replayed": false,
+    "schema_replayed": false,
+    "uncertain_commit_replayed": false,
+    "failed_preparation_PDO_registered": false,
+    "connection_events_retained_without_PDO": true,
+    "successful_preparation_events_inherited_by_store": true,
+    "record_fields": [
+      "phase",
+      "attempt",
+      "extended SQLite code"
+    ],
+    "structural_errors_preserved": true
+  },
+  "checks": {
+    "final-b222": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 13.64,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--log-junit",
+        "/app/review/final-b222.xml"
+      ],
+      "tests": 125,
+      "assertions": 765,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-fix1": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 6.146,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--group",
+        "b222-fix1",
+        "--log-junit",
+        "/app/review/final-fix1.xml"
+      ],
+      "tests": 22,
+      "assertions": 260,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-connections": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 7.129,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--group",
+        "b222-sqlite-two-connections",
+        "--log-junit",
+        "/app/review/final-connections.xml"
+      ],
+      "tests": 9,
+      "assertions": 51,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-processes": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 6.701,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--group",
+        "b222-sqlite-processes",
+        "--group",
+        "b222-fix1-processes",
+        "--log-junit",
+        "/app/review/final-processes.xml"
+      ],
+      "tests": 14,
+      "assertions": 262,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-external-core": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 7.608,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "review/IndependentHoldReviewTest.php",
+        "--log-junit",
+        "/app/review/final-external-core.xml"
+      ],
+      "tests": 20,
+      "assertions": 215,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-external-processes": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 7.056,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "review/IndependentProcessReviewTest.php",
+        "--log-junit",
+        "/app/review/final-external-processes.xml"
+      ],
+      "tests": 6,
+      "assertions": 94,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-external-boundaries": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 5.725,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "review/IndependentBoundaryReviewTest.php",
+        "--log-junit",
+        "/app/review/final-external-boundaries.xml"
+      ],
+      "tests": 16,
+      "assertions": 36,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-b21": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 9.743,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "/b21/tests",
+        "--log-junit",
+        "/app/review/final-b21.xml"
+      ],
+      "tests": 80,
+      "assertions": 323,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-build": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 1.868,
+      "command": [
+        "npm",
+        "--offline",
+        "run",
+        "build"
+      ]
+    },
+    "final-main": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 111.851,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--log-junit",
+        "/app/review/final-main.xml"
+      ],
+      "tests": 789,
+      "assertions": 10344,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-pint": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 7.521,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-fix1-o1rtruh6-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "vendor/bin/pint",
+        "--test",
+        "tests/Support/HoldsSqlite",
+        "tests/HoldsSqlitePrototype",
+        "tests/payments-b222-bootstrap.php"
+      ]
+    }
+  },
+  "full_suite_class_counts": [
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\HoldValuesTest",
+      "tests": "19",
+      "assertions": "23",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldAdmissionProcessTest",
+      "tests": "4",
+      "assertions": "114",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldAdmissionTest",
+      "tests": "18",
+      "assertions": "146",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldConcurrencyTest",
+      "tests": "9",
+      "assertions": "51",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldConstraintsTest",
+      "tests": "42",
+      "assertions": "157",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldLifecycleTest",
+      "tests": "23",
+      "assertions": "126",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldProcessTest",
+      "tests": "10",
+      "assertions": "148",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0"
+    }
+  ],
+  "test_counts_not_additive": true,
+  "external_original_sources_sha256": {
+    "IndependentHoldReviewTest.php": "32c37772c2dc4d76d9ad6d0e1cb3295561137a5eab05451011996e8ed122035c",
+    "IndependentProcessReviewTest.php": "5898c570c6717978be612a5228132d3a2415b1095ede8aae924ed082a1225c7a",
+    "IndependentBoundaryReviewTest.php": "55bcfc936356b57f4de8cdcbd113b8d67c0b9541aa6863964576134a2ff1fba6",
+    "IndependentWorker.php": "9fb3a05eda45a79b6a672be47911c0ed6b61d5dae1437084b24847998d8d97d6",
+    "busy-witness.php": "0945bcec41798285c6585e70d547ad08646b208d2403a21c244da4674f7e00bc",
+    "pending-commit-witness.php": "a3ca2a1cdd7850493ddde9f71ed749148be2e7963f268b143581ef21d1d6a37d"
+  },
+  "external_tests_in_commit": false,
+  "external_after": {
+    "status": "PASS",
+    "tests": 42,
+    "assertions": 345,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "sources_and_expectations_unchanged": true,
+    "assertion_delta_reason": "Previously failing paths now complete remaining unchanged assertions."
+  },
+  "witnesses": {
+    "exclusive_and_reserved": [
+      {
+        "lock": "BEGIN IMMEDIATE",
+        "error": {
+          "class": "Tests\\Support\\HoldsSqlite\\SqliteHoldBusy",
+          "sqlite_primary": null,
+          "phase": "begin",
+          "message": "Synthetic SQLite contention: begin"
+        },
+        "callback_calls_before_release": 0,
+        "busy_observer_calls": 2,
+        "busy_events": [
+          {
+            "phase": "begin",
+            "attempt": 1,
+            "code": 5
+          },
+          {
+            "phase": "begin",
+            "attempt": 2,
+            "code": 5
+          },
+          {
+            "phase": "begin",
+            "attempt": 3,
+            "code": 5
+          }
+        ],
+        "persisted_row_counts": {
+          "b222_provider_identities": 0,
+          "b222_clock": 0,
+          "b222_holds": 0,
+          "b222_hold_events": 0,
+          "b222_hold_receipts": 0
+        },
+        "retry": "same store recovered after lock release",
+        "integrity": "ok",
+        "foreign_keys": []
+      },
+      {
+        "lock": "BEGIN EXCLUSIVE",
+        "error": {
+          "class": "Tests\\Support\\HoldsSqlite\\SqliteHoldBusy",
+          "sqlite_primary": null,
+          "phase": "admission",
+          "message": "Synthetic SQLite contention: admission"
+        },
+        "callback_calls_before_release": 0,
+        "busy_observer_calls": 2,
+        "busy_events": [
+          {
+            "phase": "admission",
+            "attempt": 1,
+            "code": 5
+          },
+          {
+            "phase": "admission",
+            "attempt": 2,
+            "code": 5
+          },
+          {
+            "phase": "admission",
+            "attempt": 3,
+            "code": 5
+          }
+        ],
+        "persisted_row_counts": {
+          "b222_provider_identities": 0,
+          "b222_clock": 0,
+          "b222_holds": 0,
+          "b222_hold_events": 0,
+          "b222_hold_receipts": 0
+        },
+        "retry": "same store recovered after lock release",
+        "integrity": "ok",
+        "foreign_keys": []
+      }
+    ],
+    "pending_normal_commit": {
+      "writer_phase": "commit",
+      "writer_attempt": 1,
+      "competing_error": {
+        "class": "Tests\\Support\\HoldsSqlite\\SqliteHoldBusy",
+        "primary": null,
+        "phase": "admission",
+        "message": "Synthetic SQLite contention: admission"
+      },
+      "competing_busy_events": [
+        {
+          "phase": "admission",
+          "attempt": 1,
+          "code": 5
+        }
+      ],
+      "competing_body_calls": 0,
+      "writer_committed_clock": "2032-02-29 06:00:00.654321",
+      "writer_busy_events": [
+        {
+          "phase": "commit",
+          "attempt": 1,
+          "code": 5
+        }
+      ],
+      "integrity": "ok"
+    },
+    "counted_as_phpunit_tests": false
+  },
+  "runtime": {
+    "php": "8.4.27",
+    "php_binary": "/usr/local/bin/php",
+    "php_int_size": 8,
+    "os": "Linux",
+    "pdo_driver": "sqlite",
+    "sqlite": "3.46.1",
+    "encoding": "UTF-8",
+    "journal_mode": "delete",
+    "synchronous": 2,
+    "foreign_keys": 1,
+    "ignore_check_constraints": 0,
+    "recursive_triggers": 0,
+    "busy_timeout": 0,
+    "user_version": 222,
+    "tables": [
+      {
+        "name": "b222_clock",
+        "wr": 1,
+        "strict": 1
+      },
+      {
+        "name": "b222_hold_events",
+        "wr": 0,
+        "strict": 1
+      },
+      {
+        "name": "b222_hold_receipts",
+        "wr": 0,
+        "strict": 1
+      },
+      {
+        "name": "b222_holds",
+        "wr": 0,
+        "strict": 1
+      },
+      {
+        "name": "b222_provider_identities",
+        "wr": 1,
+        "strict": 1
+      }
+    ],
+    "objects": [
+      {
+        "type": "index",
+        "name": "b222_due",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE INDEX b222_due ON b222_holds(expires_at_us,hold_id) WHERE state='held'"
+      },
+      {
+        "type": "index",
+        "name": "b222_provider_blocks",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE INDEX b222_provider_blocks ON b222_holds(provider_profile_id,starts_at_us,ends_at_us) WHERE state IN ('held','committed')"
+      },
+      {
+        "type": "index",
+        "name": "b222_receipt_hold",
+        "tbl_name": "b222_hold_receipts",
+        "sql": "CREATE INDEX b222_receipt_hold ON b222_hold_receipts(hold_id,event_version)"
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_hold_events_1",
+        "tbl_name": "b222_hold_events",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_hold_events_2",
+        "tbl_name": "b222_hold_events",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_hold_receipts_1",
+        "tbl_name": "b222_hold_receipts",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_hold_receipts_2",
+        "tbl_name": "b222_hold_receipts",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_holds_1",
+        "tbl_name": "b222_holds",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_holds_2",
+        "tbl_name": "b222_holds",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_holds_3",
+        "tbl_name": "b222_holds",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_provider_identities_1",
+        "tbl_name": "b222_provider_identities",
+        "sql": null
+      },
+      {
+        "type": "index",
+        "name": "sqlite_autoindex_b222_provider_identities_2",
+        "tbl_name": "b222_provider_identities",
+        "sql": null
+      },
+      {
+        "type": "table",
+        "name": "b222_clock",
+        "tbl_name": "b222_clock",
+        "sql": "CREATE TABLE b222_clock (\n singleton INTEGER NOT NULL PRIMARY KEY CHECK(singleton=1),\n last_observed_at_us INTEGER NOT NULL CHECK(typeof(last_observed_at_us)='integer' AND last_observed_at_us BETWEEN 946684800000000 AND 4133980799999999)\n) STRICT, WITHOUT ROWID"
+      },
+      {
+        "type": "table",
+        "name": "b222_hold_events",
+        "tbl_name": "b222_hold_events",
+        "sql": "CREATE TABLE b222_hold_events (\n hold_id TEXT COLLATE BINARY NOT NULL CHECK(typeof(hold_id)='text' AND instr(hold_id,char(0))=0 AND length(CAST(hold_id AS BLOB))=36 AND length(hold_id)=36 AND substr(hold_id,9,1)='-' AND substr(hold_id,14,1)='-' AND substr(hold_id,19,1)='-' AND substr(hold_id,24,1)='-' AND length(replace(hold_id,'-',''))=32 AND replace(hold_id,'-','') NOT GLOB '*[^0-9a-f]*'),\n version INTEGER NOT NULL CHECK(typeof(version)='integer' AND version IN (1,2)),\n from_state TEXT CHECK(from_state IS NULL OR from_state='held'),\n to_state TEXT NOT NULL CHECK(to_state IN ('held','committed','released','expired')),\n actor_kind TEXT NOT NULL CHECK(actor_kind IN ('provider','client','system')),\n actor_user_id INTEGER CHECK((actor_kind='system' AND actor_user_id IS NULL) OR (actor_kind!='system' AND typeof(actor_user_id)='integer' AND actor_user_id>0)),\n actor_scope TEXT COLLATE BINARY NOT NULL CHECK(actor_scope=CASE WHEN actor_kind='system' THEN 'system:system' ELSE actor_kind||':'||CAST(actor_user_id AS TEXT) END),\n occurred_at_us INTEGER NOT NULL CHECK(typeof(occurred_at_us)='integer' AND occurred_at_us BETWEEN 946684800000000 AND 4133980799999999),\n PRIMARY KEY(hold_id,version),\n UNIQUE(hold_id,version,actor_scope,occurred_at_us),\n CHECK((version=1 AND from_state IS NULL AND to_state='held') OR (version=2 AND from_state='held' AND to_state!='held')),\n FOREIGN KEY(hold_id) REFERENCES b222_holds(hold_id) ON DELETE RESTRICT ON UPDATE RESTRICT\n) STRICT"
+      },
+      {
+        "type": "table",
+        "name": "b222_hold_receipts",
+        "tbl_name": "b222_hold_receipts",
+        "sql": "CREATE TABLE b222_hold_receipts (\n scope_key TEXT COLLATE BINARY NOT NULL PRIMARY KEY CHECK(instr(scope_key,char(0))=0 AND scope_key=actor_scope||':'||intention_uuid),\n actor_scope TEXT COLLATE BINARY NOT NULL,\n intention_uuid TEXT COLLATE BINARY NOT NULL CHECK(typeof(intention_uuid)='text' AND instr(intention_uuid,char(0))=0 AND length(CAST(intention_uuid AS BLOB))=36 AND length(intention_uuid)=36 AND substr(intention_uuid,9,1)='-' AND substr(intention_uuid,14,1)='-' AND substr(intention_uuid,19,1)='-' AND substr(intention_uuid,24,1)='-' AND length(replace(intention_uuid,'-',''))=32 AND replace(intention_uuid,'-','') NOT GLOB '*[^0-9a-f]*'),\n fingerprint TEXT COLLATE BINARY NOT NULL CHECK(typeof(fingerprint)='text' AND instr(fingerprint,char(0))=0 AND length(CAST(fingerprint AS BLOB))=64 AND length(fingerprint)=64 AND fingerprint NOT GLOB '*[^0-9a-f]*'),\n hold_id TEXT COLLATE BINARY NOT NULL CHECK(typeof(hold_id)='text' AND instr(hold_id,char(0))=0 AND length(CAST(hold_id AS BLOB))=36 AND length(hold_id)=36 AND substr(hold_id,9,1)='-' AND substr(hold_id,14,1)='-' AND substr(hold_id,19,1)='-' AND substr(hold_id,24,1)='-' AND length(replace(hold_id,'-',''))=32 AND replace(hold_id,'-','') NOT GLOB '*[^0-9a-f]*'),\n event_version INTEGER NOT NULL CHECK(typeof(event_version)='integer' AND event_version IN (1,2)),\n recorded_at_us INTEGER NOT NULL CHECK(typeof(recorded_at_us)='integer' AND recorded_at_us BETWEEN 946684800000000 AND 4133980799999999),\n UNIQUE(actor_scope,intention_uuid),\n FOREIGN KEY(hold_id,event_version,actor_scope,recorded_at_us) REFERENCES b222_hold_events(hold_id,version,actor_scope,occurred_at_us) ON DELETE RESTRICT ON UPDATE RESTRICT\n) STRICT"
+      },
+      {
+        "type": "table",
+        "name": "b222_holds",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TABLE b222_holds (\n hold_id TEXT COLLATE BINARY NOT NULL PRIMARY KEY CHECK(typeof(hold_id)='text' AND instr(hold_id,char(0))=0 AND length(CAST(hold_id AS BLOB))=36 AND length(hold_id)=36 AND substr(hold_id,9,1)='-' AND substr(hold_id,14,1)='-' AND substr(hold_id,19,1)='-' AND substr(hold_id,24,1)='-' AND length(replace(hold_id,'-',''))=32 AND replace(hold_id,'-','') NOT GLOB '*[^0-9a-f]*'),\n reservation_id INTEGER NOT NULL UNIQUE CHECK(typeof(reservation_id)='integer' AND reservation_id BETWEEN 1 AND 9223372036854775807),\n proposal_version INTEGER NOT NULL CHECK(typeof(proposal_version)='integer' AND proposal_version BETWEEN 1 AND 9223372036854775807),\n quote_ref TEXT COLLATE BINARY NOT NULL UNIQUE CHECK(typeof(quote_ref)='text' AND instr(quote_ref,char(0))=0 AND length(CAST(quote_ref AS BLOB)) BETWEEN 1 AND 128 AND length(CAST(quote_ref AS BLOB))=length(quote_ref) AND quote_ref NOT GLOB '*[^a-zA-Z0-9_-]*'),\n inquiry_id INTEGER NOT NULL CHECK(typeof(inquiry_id)='integer' AND inquiry_id BETWEEN 1 AND 9223372036854775807),\n service_id INTEGER NOT NULL CHECK(typeof(service_id)='integer' AND service_id BETWEEN 1 AND 9223372036854775807),\n provider_profile_id INTEGER NOT NULL CHECK(typeof(provider_profile_id)='integer' AND provider_profile_id BETWEEN 1 AND 9223372036854775807),\n provider_user_id INTEGER NOT NULL CHECK(typeof(provider_user_id)='integer' AND provider_user_id BETWEEN 1 AND 9223372036854775807),\n client_user_id INTEGER NOT NULL CHECK(typeof(client_user_id)='integer' AND client_user_id BETWEEN 1 AND 9223372036854775807 AND client_user_id!=provider_user_id),\n starts_at_us INTEGER NOT NULL CHECK(typeof(starts_at_us)='integer' AND starts_at_us BETWEEN 946684800000000 AND 4133980799999999),\n ends_at_us INTEGER NOT NULL CHECK(typeof(ends_at_us)='integer' AND ends_at_us BETWEEN 946684800000000 AND 4133980799999999 AND ends_at_us=starts_at_us+3600000000),\n state TEXT NOT NULL CHECK(state IN ('held','committed','released','expired')),\n version INTEGER NOT NULL CHECK(typeof(version)='integer' AND version=CASE WHEN state='held' THEN 1 ELSE 2 END),\n accepted_at_us INTEGER NOT NULL CHECK(typeof(accepted_at_us)='integer' AND accepted_at_us BETWEEN 946684800000000 AND 4133980799999999),\n expires_at_us INTEGER NOT NULL CHECK(typeof(expires_at_us)='integer' AND expires_at_us BETWEEN 946684800000000 AND 4133980799999999 AND expires_at_us=accepted_at_us+900000000),\n updated_at_us INTEGER NOT NULL CHECK(typeof(updated_at_us)='integer' AND updated_at_us BETWEEN 946684800000000 AND 4133980799999999 AND updated_at_us>=accepted_at_us AND\n   ((state='held' AND updated_at_us=accepted_at_us) OR (state IN ('committed','released') AND updated_at_us<expires_at_us) OR (state='expired' AND updated_at_us>=expires_at_us))),\n actor_kind TEXT NOT NULL CHECK(actor_kind IN ('provider','client','system')),\n actor_user_id INTEGER CHECK((actor_kind='system' AND actor_user_id IS NULL) OR (actor_kind!='system' AND typeof(actor_user_id)='integer' AND actor_user_id>0)),\n CHECK((state='held' AND actor_kind='provider' AND actor_user_id=provider_user_id) OR\n       (state='released' AND ((actor_kind='provider' AND actor_user_id=provider_user_id) OR (actor_kind='client' AND actor_user_id=client_user_id))) OR\n       (state IN ('committed','expired') AND actor_kind='system' AND actor_user_id IS NULL)),\n FOREIGN KEY(provider_profile_id,provider_user_id) REFERENCES b222_provider_identities(provider_profile_id,provider_user_id) ON DELETE RESTRICT ON UPDATE RESTRICT\n) STRICT"
+      },
+      {
+        "type": "table",
+        "name": "b222_provider_identities",
+        "tbl_name": "b222_provider_identities",
+        "sql": "CREATE TABLE b222_provider_identities (\n provider_profile_id INTEGER NOT NULL PRIMARY KEY CHECK(typeof(provider_profile_id)='integer' AND provider_profile_id BETWEEN 1 AND 9223372036854775807),\n provider_user_id INTEGER NOT NULL UNIQUE CHECK(typeof(provider_user_id)='integer' AND provider_user_id BETWEEN 1 AND 9223372036854775807),\n UNIQUE(provider_profile_id,provider_user_id)\n) STRICT, WITHOUT ROWID"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_clock_insert",
+        "tbl_name": "b222_clock",
+        "sql": "CREATE TRIGGER b222_clock_insert BEFORE INSERT ON b222_clock\n WHEN EXISTS(SELECT 1 FROM main.b222_clock WHERE singleton=NEW.singleton)\n BEGIN SELECT RAISE(ABORT,'clock_replace'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_clock_no_delete",
+        "tbl_name": "b222_clock",
+        "sql": "CREATE TRIGGER b222_clock_no_delete BEFORE DELETE ON b222_clock BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_clock_update",
+        "tbl_name": "b222_clock",
+        "sql": "CREATE TRIGGER b222_clock_update BEFORE UPDATE ON b222_clock\n WHEN NEW.singleton IS NOT OLD.singleton OR NEW.last_observed_at_us<OLD.last_observed_at_us\n BEGIN SELECT RAISE(ABORT,'clock_regressed'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_event_consistent",
+        "tbl_name": "b222_hold_events",
+        "sql": "CREATE TRIGGER b222_event_consistent BEFORE INSERT ON b222_hold_events\n WHEN EXISTS(SELECT 1 FROM main.b222_hold_events WHERE hold_id=NEW.hold_id AND version=NEW.version)\n OR NOT EXISTS(SELECT 1 FROM main.b222_holds h WHERE h.hold_id=NEW.hold_id AND h.version=NEW.version AND h.state=NEW.to_state AND h.updated_at_us=NEW.occurred_at_us AND h.actor_kind=NEW.actor_kind AND h.actor_user_id IS NEW.actor_user_id)\n OR (NEW.version=1 AND EXISTS(SELECT 1 FROM main.b222_hold_events WHERE hold_id=NEW.hold_id))\n OR (NEW.version=2 AND (SELECT COUNT(*) FROM main.b222_hold_events WHERE hold_id=NEW.hold_id AND version=1 AND to_state='held')!=1)\n BEGIN SELECT RAISE(ABORT,'invalid_history'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_history_insert",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_history_insert AFTER INSERT ON b222_holds\n BEGIN INSERT INTO b222_hold_events VALUES(NEW.hold_id,NEW.version,NULL,NEW.state,NEW.actor_kind,NEW.actor_user_id,CASE WHEN NEW.actor_kind='system' THEN 'system:system' ELSE NEW.actor_kind||':'||CAST(NEW.actor_user_id AS TEXT) END,NEW.updated_at_us); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_history_update",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_history_update AFTER UPDATE ON b222_holds\n BEGIN INSERT INTO b222_hold_events VALUES(NEW.hold_id,NEW.version,OLD.state,NEW.state,NEW.actor_kind,NEW.actor_user_id,CASE WHEN NEW.actor_kind='system' THEN 'system:system' ELSE NEW.actor_kind||':'||CAST(NEW.actor_user_id AS TEXT) END,NEW.updated_at_us); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_clock_insert",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_hold_clock_insert BEFORE INSERT ON b222_holds\n WHEN NEW.updated_at_us IS NOT (SELECT last_observed_at_us FROM main.b222_clock WHERE singleton=1)\n BEGIN SELECT RAISE(ABORT,'invalid_clock'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_clock_update",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_hold_clock_update BEFORE UPDATE ON b222_holds\n WHEN NEW.updated_at_us IS NOT (SELECT last_observed_at_us FROM main.b222_clock WHERE singleton=1)\n BEGIN SELECT RAISE(ABORT,'invalid_clock'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_events_no_delete",
+        "tbl_name": "b222_hold_events",
+        "sql": "CREATE TRIGGER b222_hold_events_no_delete BEFORE DELETE ON b222_hold_events BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_events_no_update",
+        "tbl_name": "b222_hold_events",
+        "sql": "CREATE TRIGGER b222_hold_events_no_update BEFORE UPDATE ON b222_hold_events BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_immutable",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_hold_immutable BEFORE UPDATE ON b222_holds\n WHEN NEW.hold_id IS NOT OLD.hold_id OR NEW.reservation_id IS NOT OLD.reservation_id OR NEW.proposal_version IS NOT OLD.proposal_version OR NEW.quote_ref IS NOT OLD.quote_ref OR NEW.inquiry_id IS NOT OLD.inquiry_id OR NEW.service_id IS NOT OLD.service_id OR NEW.provider_profile_id IS NOT OLD.provider_profile_id OR NEW.provider_user_id IS NOT OLD.provider_user_id OR NEW.client_user_id IS NOT OLD.client_user_id OR NEW.starts_at_us IS NOT OLD.starts_at_us OR NEW.ends_at_us IS NOT OLD.ends_at_us OR NEW.accepted_at_us IS NOT OLD.accepted_at_us OR NEW.expires_at_us IS NOT OLD.expires_at_us\n BEGIN SELECT RAISE(ABORT,'immutable_binding'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_insert",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_hold_insert BEFORE INSERT ON b222_holds\n WHEN NEW.state!='held' OR NEW.version!=1 OR EXISTS(SELECT 1 FROM main.b222_holds WHERE hold_id=NEW.hold_id OR reservation_id=NEW.reservation_id OR quote_ref=NEW.quote_ref)\n BEGIN SELECT RAISE(ABORT,'invalid_insert'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_overlap_insert",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_hold_overlap_insert BEFORE INSERT ON b222_holds\n WHEN NEW.state IN ('held','committed') AND EXISTS(SELECT 1 FROM main.b222_holds h WHERE h.provider_profile_id=NEW.provider_profile_id AND h.state IN ('held','committed') AND h.starts_at_us<NEW.ends_at_us AND h.ends_at_us>NEW.starts_at_us)\n BEGIN SELECT RAISE(ABORT,'slot_conflict'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_overlap_update",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_hold_overlap_update BEFORE UPDATE ON b222_holds\n WHEN NEW.state IN ('held','committed') AND EXISTS(SELECT 1 FROM main.b222_holds h WHERE h.provider_profile_id=NEW.provider_profile_id AND h.state IN ('held','committed') AND h.starts_at_us<NEW.ends_at_us AND h.ends_at_us>NEW.starts_at_us AND h.hold_id!=OLD.hold_id)\n BEGIN SELECT RAISE(ABORT,'slot_conflict'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_receipts_no_delete",
+        "tbl_name": "b222_hold_receipts",
+        "sql": "CREATE TRIGGER b222_hold_receipts_no_delete BEFORE DELETE ON b222_hold_receipts BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_receipts_no_update",
+        "tbl_name": "b222_hold_receipts",
+        "sql": "CREATE TRIGGER b222_hold_receipts_no_update BEFORE UPDATE ON b222_hold_receipts BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_hold_transition",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_hold_transition BEFORE UPDATE ON b222_holds\n WHEN OLD.state!='held' OR OLD.version!=1 OR NEW.version!=2 OR NEW.state='held' OR NEW.updated_at_us<OLD.updated_at_us\n BEGIN SELECT RAISE(ABORT,'invalid_transition'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_holds_no_delete",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE TRIGGER b222_holds_no_delete BEFORE DELETE ON b222_holds BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_identity_insert",
+        "tbl_name": "b222_provider_identities",
+        "sql": "CREATE TRIGGER b222_identity_insert BEFORE INSERT ON b222_provider_identities\n WHEN EXISTS(SELECT 1 FROM main.b222_provider_identities WHERE provider_profile_id=NEW.provider_profile_id OR provider_user_id=NEW.provider_user_id)\n BEGIN SELECT RAISE(ABORT,'provider_identity_conflict'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_provider_identities_no_delete",
+        "tbl_name": "b222_provider_identities",
+        "sql": "CREATE TRIGGER b222_provider_identities_no_delete BEFORE DELETE ON b222_provider_identities BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_provider_identities_no_update",
+        "tbl_name": "b222_provider_identities",
+        "sql": "CREATE TRIGGER b222_provider_identities_no_update BEFORE UPDATE ON b222_provider_identities BEGIN SELECT RAISE(ABORT,'history_immutable'); END"
+      },
+      {
+        "type": "trigger",
+        "name": "b222_receipt_insert",
+        "tbl_name": "b222_hold_receipts",
+        "sql": "CREATE TRIGGER b222_receipt_insert BEFORE INSERT ON b222_hold_receipts\n WHEN EXISTS(SELECT 1 FROM main.b222_hold_receipts WHERE scope_key=NEW.scope_key OR (actor_scope=NEW.actor_scope AND intention_uuid=NEW.intention_uuid))\n OR NOT EXISTS(SELECT 1 FROM main.b222_hold_events WHERE hold_id=NEW.hold_id AND version=NEW.event_version AND to_state IN ('held','released','committed'))\n BEGIN SELECT RAISE(ABORT,'invalid_receipt'); END"
+      }
+    ],
+    "integrity_check": "ok",
+    "foreign_key_check": []
+  },
+  "phpunit": "11.5.57",
+  "node": "24.22.1",
+  "npm": "11.9.0",
+  "vite": "6.4.5",
+  "schema_sha256_unchanged": "f925d80aeaaba7d17bf072c66655c9db9573792e7f74b0819076065f072fe9bd",
+  "triggers_unchanged": 22,
+  "source_sha256": {
+    "tests/Support/HoldsSqlite/AdmissionWorker.php": "7ec878a4cc6e6b893612f6c2633f072b84cfb8881fe80a04364f4d845932c5d5",
+    "tests/Support/HoldsSqlite/B21Reference.php": "192b014b3a325c0fb5cd4b8eba95ebc1f8faba4ffcdf487761d9a0fa4cafa1dd",
+    "tests/Support/HoldsSqlite/HoldCommitUncertain.php": "25ee51c202287240dfda4da8e315a3d813110ee27fc883d28ae8c65aace1e364",
+    "tests/Support/HoldsSqlite/HoldFixture.php": "576f0ea467805c4277036a18c1bc6cd64e0ea8671a483642311c5ad0b7874769",
+    "tests/Support/HoldsSqlite/HoldValues.php": "14492576eb7226f78a8fa72ff5c69a3963cfe622b9137ec15ec91dac8568c0ad",
+    "tests/Support/HoldsSqlite/HoldWorker.php": "ced9f3acdb1b7262d4df4daa93f25fdf7a7256a230b54d5d3e43281850fdc3af",
+    "tests/Support/HoldsSqlite/ProcessPeer.php": "5672d7b2f29b659b75e6927ea6206571d1f65ce958d4ba42fb7f1ff113ec480a",
+    "tests/Support/HoldsSqlite/SqliteHoldBusy.php": "5ac954cd5bb53822544fa20fde06119e9bc8beca5c5b3f0e6f24d6b2ad438026",
+    "tests/Support/HoldsSqlite/SqliteHoldContention.php": "bfb9c646116c8fc1d5169396b36f49ce653f0858dcdb17b4e99f82ab13380229",
+    "tests/Support/HoldsSqlite/SqliteHoldStore.php": "8a8f0c0d93746037bdf650b26c5a9d9af7c25a2dd39f997695242533517facc4",
+    "tests/Support/HoldsSqlite/SyntheticHoldDatabase.php": "bbba094b965d1f2cda33cd3ed906299f50077eb124cea6ce559663fcbdfa7ce0",
+    "tests/Support/HoldsSqlite/b21-reference.json": "a61266bee19cbed25d8511f1ed6fbbd75f18f032b423fd2228873681e22ee28b",
+    "tests/Support/HoldsSqlite/schema.sql": "f925d80aeaaba7d17bf072c66655c9db9573792e7f74b0819076065f072fe9bd",
+    "tests/HoldsSqlitePrototype/HoldValuesTest.php": "bf66869b147fd81126af27d70017df980d8cae8df8fb6223ea587990257548cf",
+    "tests/HoldsSqlitePrototype/SqliteHoldAdmissionProcessTest.php": "fd9da0d9b144b101b6688693daedd68d743542a027c1fc15cb6ba89453201693",
+    "tests/HoldsSqlitePrototype/SqliteHoldAdmissionTest.php": "3735653f12cfef9383be65f60b8c6d87073b44aa830efcebb9c8b7eae7271168",
+    "tests/HoldsSqlitePrototype/SqliteHoldConcurrencyTest.php": "0e4d473ef805af6244cbd507a5800f90d0feb17d49aa6ea9fdd086e21b073369",
+    "tests/HoldsSqlitePrototype/SqliteHoldConstraintsTest.php": "050575f94e9dd63a88056db7bbd3bd7dd898d3d1453d99186f6e5c6826c8d219",
+    "tests/HoldsSqlitePrototype/SqliteHoldLifecycleTest.php": "0906c455df67bc72bdc5523f98e2b2f2bf1ba28edba48c669cdc1750dd5419cf",
+    "tests/HoldsSqlitePrototype/SqliteHoldProcessTest.php": "2a1f412f3239e45fe6c456000e84f938d4a3b52a9d8496043352a974d6666ad3",
+    "tools/payments-b222/export_b21_reference.py": "bcca79c3acecac52fc5f239acd02fc9887d1d06429def2ad7909f28fbe3abac8",
+    "tests/payments-b222-bootstrap.php": "92c14380213e4094a280b2debe7ddfe5cb570e716962614ed18c303316918b06"
+  },
+  "original_code_preserved_sha256": {
+    "tests/Support/HoldsSqlite/B21Reference.php": "192b014b3a325c0fb5cd4b8eba95ebc1f8faba4ffcdf487761d9a0fa4cafa1dd",
+    "tests/Support/HoldsSqlite/HoldCommitUncertain.php": "25ee51c202287240dfda4da8e315a3d813110ee27fc883d28ae8c65aace1e364",
+    "tests/Support/HoldsSqlite/HoldFixture.php": "576f0ea467805c4277036a18c1bc6cd64e0ea8671a483642311c5ad0b7874769",
+    "tests/Support/HoldsSqlite/HoldValues.php": "14492576eb7226f78a8fa72ff5c69a3963cfe622b9137ec15ec91dac8568c0ad",
+    "tests/Support/HoldsSqlite/HoldWorker.php": "ced9f3acdb1b7262d4df4daa93f25fdf7a7256a230b54d5d3e43281850fdc3af",
+    "tests/Support/HoldsSqlite/ProcessPeer.php": "5672d7b2f29b659b75e6927ea6206571d1f65ce958d4ba42fb7f1ff113ec480a",
+    "tests/Support/HoldsSqlite/SqliteHoldBusy.php": "5ac954cd5bb53822544fa20fde06119e9bc8beca5c5b3f0e6f24d6b2ad438026",
+    "tests/Support/HoldsSqlite/b21-reference.json": "a61266bee19cbed25d8511f1ed6fbbd75f18f032b423fd2228873681e22ee28b",
+    "tests/Support/HoldsSqlite/schema.sql": "f925d80aeaaba7d17bf072c66655c9db9573792e7f74b0819076065f072fe9bd",
+    "tests/HoldsSqlitePrototype/HoldValuesTest.php": "bf66869b147fd81126af27d70017df980d8cae8df8fb6223ea587990257548cf",
+    "tests/HoldsSqlitePrototype/SqliteHoldConcurrencyTest.php": "0e4d473ef805af6244cbd507a5800f90d0feb17d49aa6ea9fdd086e21b073369",
+    "tests/HoldsSqlitePrototype/SqliteHoldConstraintsTest.php": "050575f94e9dd63a88056db7bbd3bd7dd898d3d1453d99186f6e5c6826c8d219",
+    "tests/HoldsSqlitePrototype/SqliteHoldLifecycleTest.php": "0906c455df67bc72bdc5523f98e2b2f2bf1ba28edba48c669cdc1750dd5419cf",
+    "tests/HoldsSqlitePrototype/SqliteHoldProcessTest.php": "2a1f412f3239e45fe6c456000e84f938d4a3b52a9d8496043352a974d6666ad3",
+    "tools/payments-b222/export_b21_reference.py": "bcca79c3acecac52fc5f239acd02fc9887d1d06429def2ad7909f28fbe3abac8",
+    "tests/payments-b222-bootstrap.php": "92c14380213e4094a280b2debe7ddfe5cb570e716962614ed18c303316918b06"
+  },
+  "B21_external_sources_verified": {
+    "app/Scheduling/Holds/AcceptedQuoteReference.php": "4ceac934e9a4505895052a752f1d8e235cfd08a4e0887dc0765dd85b3d5aca52",
+    "app/Scheduling/Holds/HoldActor.php": "8316725f063b33f0fee3093bc179d64cfe6f30fc8f08de8b07969b69e9aea9db",
+    "app/Scheduling/Holds/HoldClock.php": "cf4d16d1609abd7c5c12674fc454b557fa9df958d8891ecf2e35fc1d89e05cd7",
+    "app/Scheduling/Holds/HoldEvent.php": "fa494ac7888e26da79698f0fa775ca6513a3fa31b3dfb7bf882ae63c86273a2f",
+    "app/Scheduling/Holds/HoldReceipt.php": "0f23e3364fe49e40ec9952eb206f1d1dcb51da54f5f99ab0f5141eacae009793",
+    "app/Scheduling/Holds/HoldState.php": "9b9a65a84c85e64d1e9213090fe2a0685b4c6c6d8ab3c3efc6dd0fedef0cff90",
+    "app/Scheduling/Holds/HoldStore.php": "6dec835f7b0e6e066f9d10ae6bd9f45ed705b19134c8cab1243f0a94fea25866",
+    "app/Scheduling/Holds/HoldTime.php": "0bda019e2936437f6ab8c6ec6d153eff2eae29579c18e0c86b672946b549b972",
+    "app/Scheduling/Holds/HoldViolation.php": "0ffb71b7f629546a1063dea4b03329dbea8ecdf987fb30327aae61ec1b45318b",
+    "app/Scheduling/Holds/ReservationProposal.php": "9e1ccbb32c18aa10bc02cd5a1f295bb737ff9dfd3679a86b149a25f51ea1fc6b",
+    "app/Scheduling/Holds/SlotHold.php": "ab48d5d1f8414950a1ae03754ccfd809bc768faf61dd101f914028d4053e0013",
+    "app/Scheduling/Holds/SyntheticHoldEngine.php": "62bde7a85ef5b4de9020aa9272431787f8dbc8c825dbd375ce696cd4b8013556",
+    "app/Scheduling/Holds/SystemHoldClock.php": "4923266c8578c1c14ee5ea3c5be7630420e68ab94453a146c61a66b762134413",
+    "app/Scheduling/Holds/UtcInterval.php": "f8de18ba6f128ce86d9e48309db7ff2d15f7e1f3202f87a3637221e29f88339b",
+    "tests/Feature/SyntheticHoldIsolationTest.php": "836cc6d8e65b0e2baaed36135d18a595d1a24c49a3829e4092ef89ad563215ab",
+    "tests/Support/InMemorySlotHoldStore.php": "8bf129434c68857d098a6d2beafbece2b159bc43ea660ae7dff7448f9a4951b6",
+    "tests/Support/MutableSlotHoldClock.php": "3d3c3cefb2cbe236a998ee3fd6be555eab4839bca153d3c0a9cd858d0d5c470b",
+    "tests/Unit/SlotHoldReconstitutionTest.php": "2954fad98e7c242608f4c85fa1843d6eb318096f230d880a40d8983ad7606dae",
+    "tests/Unit/SyntheticSlotHoldEngineTest.php": "8ac2157d5fa0fda3bf594cdba1e0d3ae828888db2dc859cda55bb1269b338649",
+    "tests/Unit/UtcServiceIntervalTest.php": "aba7ddce703454615684880d53cea4f7fef2750ef2109e5a2a6cd50c6a86cf3d"
+  },
+  "protected_source_sha256": {
+    "database/migrations/0001_01_01_000000_create_users_table.php": "116d943de3cfa774f955fb309867f9c35099bae4c9f156e940200c08c045f1fd",
+    "database/migrations/0001_01_01_000001_create_cache_table.php": "20f769d3c11748c1cc42c41cd3789b0b9b2cd0db44ee22d378addac3ff8aed4f",
+    "database/migrations/0001_01_01_000002_create_jobs_table.php": "7c9c712adf4091c87bf2612f4d0dccdfa1df4501553e4ac068b83d7bd5462fa5",
+    "database/migrations/2025_08_02_085013_create_posts_table.php": "10ae453bb7d6898572fc067258fb70ae34177867da857cb002e148eb0b680669",
+    "database/migrations/2025_08_02_092303_create_reminders_table.php": "21dd7ff15a00216489147d58659600d123e02c062e592bc5ab8481a875e213c1",
+    "database/migrations/2025_08_13_022507_create_profesionistas_table.php": "801bdb43588f15c086978de665676dae2cbe1fae8164a98a1bbc861e08225daf",
+    "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php": "8297e7a16edeaf0cfa6c6b782529edba6b53842097a606839e201bcab8042216",
+    "database/migrations/2026_02_15_192040_create_likes_table.php": "2f0e5479eec39fdfb8994ac96ddbc8228537b31739e7c04e1f39097c089da4e7",
+    "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php": "103b5d9938e3551ce4698209350f0164b47e55c41d931927860a70150a483454",
+    "database/migrations/2026_02_15_200848_create_comments_table.php": "d2f7e8dfc7fed6dcf6632732f831802e9ba5811a8de829e38b901bc5a8c48162",
+    "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php": "53ae789fe749e10800a75dffcb4ec7032d4138369f68f6f63444ac9d8b9f523f",
+    "database/migrations/2026_02_16_031436_create_citas_table.php": "45bc07fbb7df8029b935d838d11b9661770c9493500df628c7e084007c152d41",
+    "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php": "e0636f0b5344270d3ef4903b7f9899b7ff19d5c00ec58ec0aa606a6635b9ebd6",
+    "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php": "10d42907cd47cf9b5d309d8f1755d7e780b2c36b35f7e64cd37d02b284397fc8",
+    "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php": "f9362f4e19867852dbf581fca198227800f5967bd2645a87e242f4fc1d42672c",
+    "database/migrations/2026_02_23_235730_create_emotions_table.php": "33693b3e6558fdb16fe1df52a4134292c20ee2184a539e275cf184959257589a",
+    "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php": "f586bb403a7ccda46e4201b0714f1f826735200322821afc4e2e55538c220f3f",
+    "database/migrations/2026_02_24_041833_add_media_to_posts_table.php": "a9c09ab56cae94eee830d07204fb2ada634077f879911586627817f4295aa6da",
+    "database/migrations/2026_02_24_041908_add_media_to_comments_table.php": "677cead791277c33487fa02e0a4a74b6466c0693ad1658087ba51f8c101869eb",
+    "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php": "13e13652d4ab690ee72282faeefc0fa668f947c0cb0e9ac0531b6e9462a7f008",
+    "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php": "b7e17c701414b0faa9a4a42327fb88811f9ef52f47038ac61ac01298ff594aba",
+    "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php": "81ede4a83f328602329d2a561b0ac67cab0c6ea06fc7f6b7d9bca4615f72c876",
+    "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php": "838eaa921f476d78050f17a0eca77b1af8c71ee10b6473a5d8a88ae1caf3d58a",
+    "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php": "fbdeab59c720f5abdc88f408bf3cd496dfc70abefd5118a088a707f364a389b2",
+    "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php": "a7e26defffaf5176b84a15f0bac265c01469a948d59ce5ed99e0f33829cc3395",
+    "database/migrations/2026_10_23_000001_create_provider_profiles_table.php": "859bc5f00a4f0e4f7e7649a287e5d060aa4b4681c1390aaf2b28a7d41f4868b5",
+    "database/migrations/2026_10_28_000000_create_service_categories_table.php": "7c436ef233df60dc33ec77b75892fa54e2afed000526c5f4d84fd7274ebd87f7",
+    "database/migrations/2026_10_28_000001_create_services_table.php": "9402e17acb1f803a1db7e0a9aebf02316a5aeefb34c83ae8f51f4932994a2b19",
+    "database/migrations/2026_10_28_000002_create_service_inquiries_table.php": "bc0ded238e6d42de488263454ca863f8589874d72acf4ff26b73990364a3715d",
+    "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php": "49ae7b0e1ee5d20098df8fcd2b93e85db242026c3000eb377a56e43c6f11f0b7",
+    "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php": "c8c464e419a1c63ca1b63b26e0b22b340210844c4f7a980800353f72ab85b28b",
+    "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php": "3fe86c122ac04efa7378d9c41c4f36a32a504bb4240bdca36ba1beac15fffa4e",
+    "database/migrations/2026_10_30_000002_create_provider_availability_tables.php": "026c92dbf6c808f8f9378379395dc36e8536df2d43c3fdb1ed74faad499badfb",
+    "database/migrations/2026_11_03_000000_create_service_reservations.php": "21031ec1dddd8ba0eac718e7d12a505a527964d97f30d2266d84e711dc2c3c58",
+    "database/migrations/2026_11_03_000001_create_service_reviews.php": "49d5140e9b4b7455f313e4f0123ba424aef48358ca24a76fec1276c502a86a98",
+    "database/migrations/2026_11_03_000002_create_activity_notifications.php": "0e6d333fb8fc7c769d91bd3d2c939b642c75ebe3248e503ff214e8df9a545b8b",
+    "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php": "c81ecde85ea5072188c468dcaf79776728b6eb8f684d63fc0d88a4908484ca75",
+    "routes/web.php": "021dd970cd98f9346703f6be653ee6aaa67e53802edfbc0b565b39425dbe9de2",
+    "routes/api.php": "722e9494ff6073637c592c499c59160e146ae156bdc4b8e25d50bd3b29ec1b71",
+    "routes/reservations.php": "ee468c8ae3b9b07e0246ae0426bb20dc2fdf9fb88a4349e0962e8515c896703e",
+    "app/Services/ReservationWorkflow.php": "34cfde281447bc3964cecda32d0a444dfed01acad3e243858645b321c225d3e9",
+    "app/Services/InquiryWorkflow.php": "1cff5e6a4e07f0186dcd1e6a0989376de8b31ef6f44ef2ad221de6e14975470b",
+    "docs/api/openapi.json": "11e94f81dc140341ca2e8cfbb94f2d5ef33f944f7c06a7e5060a9c168a4baa02",
+    "composer.json": "74fad1305694c0598cd576f06988d99d06ae83ff5f8e8332494d94ef21352dfe",
+    "composer.lock": "62b9f864b4b255b08d5271406f30a6c0393fd0c8dc838a71a5e8914b22f7cdfd",
+    "package.json": "549d710adb4f9c916edc8f952cc4f4262bdcf074fade55bafe299f045a2a167a",
+    "package-lock.json": "1b5b3f59b9c6e50a1698d491fd382aad1b792cd1541c570520cdc0995c8d7314"
+  },
+  "migrations_unchanged": 37,
+  "api_operations_unchanged": 21,
+  "api_version": "1.1.0",
+  "process_runs": {
+    "final-fix1": [
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #0",
+        "path": "review/labs/tekora-b222-201ea0980705a094eb9d57b08384ef6e/fix1-process-ce78abd935966974.json",
+        "sha256": "36e8845c106ea7bb1ecd0c81f3aa5a4fd22542cc928e51c1e8f0022c13055d33",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 8,
+            "protocol": [
+              {
+                "pid": 8,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 8,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 8,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 9,
+            "protocol": [
+              {
+                "pid": 9,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 9,
+                "event": "BUSY",
+                "phase": "admission",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 9,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "73df1b44-393b-47cd-a86c-2b389892e719",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [
+                  {
+                    "phase": "admission",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ],
+                "connection_busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #1",
+        "path": "review/labs/tekora-b222-2f3aad95a107ed5aaf6f652eef857bcb/fix1-process-269134f54a4dc0e0.json",
+        "sha256": "2d28e9d3094cdf6937906460065176e4db25980cd10657db3ad1101fd5f27fa3",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 12,
+            "protocol": [
+              {
+                "pid": 12,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 12,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 12,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 13,
+            "protocol": [
+              {
+                "pid": 13,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 13,
+                "event": "BUSY",
+                "phase": "admission",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 13,
+                "event": "BUSY",
+                "phase": "admission",
+                "attempt": 2,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 13,
+                "event": "EXHAUSTED",
+                "phase": "admission",
+                "attempts": 3,
+                "body_calls": 0,
+                "busy": [
+                  {
+                    "phase": "admission",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ]
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 13,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "49175f3c-185d-4aed-ba0d-e916c246354d",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [
+                  {
+                    "phase": "admission",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ],
+                "connection_busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #3",
+        "path": "review/labs/tekora-b222-47155c305586d31f0bbf4a65a7523a86/fix1-process-b7c33217001d5c7f.json",
+        "sha256": "9bd900c1e19a697804563c2a31b0cdc725c1d68748c9725257957bf3a097bdd4",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 20,
+            "protocol": [
+              {
+                "pid": 20,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 20,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 20,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 21,
+            "protocol": [
+              {
+                "pid": 21,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 21,
+                "event": "BUSY",
+                "phase": "connect",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 21,
+                "event": "BUSY",
+                "phase": "connect",
+                "attempt": 2,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 21,
+                "event": "EXHAUSTED",
+                "phase": "connect",
+                "attempts": 3,
+                "body_calls": 0,
+                "busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ]
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 21,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "c81895fb-3fec-4d28-ac87-f41c8166f753",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [],
+                "connection_busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #2",
+        "path": "review/labs/tekora-b222-80623a211f16722375a2195d4daedd25/fix1-process-bf236a3b3a31ded9.json",
+        "sha256": "96eef438c70f4bf74691a065b51f80331bbb3e74daa28d1ab45f28a0367d2c4e",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 16,
+            "protocol": [
+              {
+                "pid": 16,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 16,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 16,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 17,
+            "protocol": [
+              {
+                "pid": 17,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 17,
+                "event": "BUSY",
+                "phase": "connect",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 17,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "00c47413-463c-430a-86c0-ef3b1edd463d",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ],
+                "connection_busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      }
+    ],
+    "final-processes": [
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #1",
+        "path": "review/labs/tekora-b222-435e8e22dce7b4ec995d22fd616a8a7d/fix1-process-68825963456f27e8.json",
+        "sha256": "eb2edc57f2e43060cb3b4ce09ce528bfd045ec9bcef7548fb068fe732fdb1d74",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 12,
+            "protocol": [
+              {
+                "pid": 12,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 12,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 12,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 13,
+            "protocol": [
+              {
+                "pid": 13,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 13,
+                "event": "BUSY",
+                "phase": "admission",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 13,
+                "event": "BUSY",
+                "phase": "admission",
+                "attempt": 2,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 13,
+                "event": "EXHAUSTED",
+                "phase": "admission",
+                "attempts": 3,
+                "body_calls": 0,
+                "busy": [
+                  {
+                    "phase": "admission",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ]
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 13,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "240affac-b415-4671-b660-b9267c4da5a1",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [
+                  {
+                    "phase": "admission",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "admission",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ],
+                "connection_busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"adjacent\"",
+        "path": "review/labs/tekora-b222-45e170b0809cdb96f53d33dd75743ac7/process-c8d6be992f518f64.json",
+        "sha256": "cb17bdaa2d97640f7faddbefad959eeebcf013f795c11c471530b6ff68db64da",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 32,
+            "protocol": [
+              {
+                "pid": 32,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 32,
+                "phase": "LOCK_ACQUIRED"
+              },
+              {
+                "sent": "CONTINUE"
+              },
+              {
+                "pid": 32,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "9cfa7a2f-7466-4875-b6e6-0d082f1bd1ec",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 33,
+            "protocol": [
+              {
+                "pid": 33,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 33,
+                "phase": "BUSY",
+                "sqlite_phase": "begin",
+                "attempts": 1
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 33,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "498d8713-a5d0-4eb9-b186-408603aa2b67",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": [
+                  {
+                    "phase": "begin",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_process_restart_recovers_committed_intention_or_rolls_back_uncommitted_state with data set #1",
+        "path": "review/labs/tekora-b222-474f83b42576f7b1dbb63d6ba588d35e/process-78fe19905939d026.json",
+        "sha256": "425274f617bb0cd18e8cc839cb85b8a39c12fe31674a3e0d5234a9286848dcb4",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 56,
+            "protocol": [
+              {
+                "pid": 56,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 56,
+                "phase": "COMMITTED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 58,
+            "protocol": [
+              {
+                "pid": 58,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 58,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "69063cd9-8a80-44b9-ab42-3e08eee2be6c",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_release_replay_across_processes_preserves_one_terminal_event",
+        "path": "review/labs/tekora-b222-51588ca6c7d4fd717baa336eb6383a95/process-048fba25d397af42.json",
+        "sha256": "49f9df942d2cecf6e5f547780dce48e18b1b50af68fdde4ffeeb89018474b361",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 60,
+            "protocol": [
+              {
+                "pid": 60,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 60,
+                "phase": "RESULT",
+                "outcome": "released",
+                "hold_id": "fab62e5c-e9f5-4210-896d-7e104751cf11",
+                "version": 2,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 61,
+            "protocol": [
+              {
+                "pid": 61,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 61,
+                "phase": "RESULT",
+                "outcome": "released",
+                "hold_id": "fab62e5c-e9f5-4210-896d-7e104751cf11",
+                "version": 2,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"same-intention\"",
+        "path": "review/labs/tekora-b222-6b23cbe4e62b889647ef852fef38839c/process-036545f177d01408.json",
+        "sha256": "2afdf5031013b6b82604cfd92cad12fad0e6c582f536fd1aa029729b4ea0f9c3",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 40,
+            "protocol": [
+              {
+                "pid": 40,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 40,
+                "phase": "LOCK_ACQUIRED"
+              },
+              {
+                "sent": "CONTINUE"
+              },
+              {
+                "pid": 40,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "23e85e05-bdce-4ba1-803a-de777b73214f",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 41,
+            "protocol": [
+              {
+                "pid": 41,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 41,
+                "phase": "BUSY",
+                "sqlite_phase": "begin",
+                "attempts": 1
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 41,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "23e85e05-bdce-4ba1-803a-de777b73214f",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": [
+                  {
+                    "phase": "begin",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_commit_expiry_and_new_acquisition_are_serialized_at_exact_deadline with data set #1",
+        "path": "review/labs/tekora-b222-6df4d32eb83c8ec5a5c9b433a5d208dc/process-1646ecbb612ae3f2.json",
+        "sha256": "add6a7c89c1e5fbe4af41729b6f2286025b7a46db715215fefa0c509b9492be1",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 48,
+            "protocol": [
+              {
+                "pid": 48,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 48,
+                "phase": "LOCK_ACQUIRED"
+              },
+              {
+                "sent": "CONTINUE"
+              },
+              {
+                "pid": 48,
+                "phase": "RESULT",
+                "outcome": "invalid_state",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 49,
+            "protocol": [
+              {
+                "pid": 49,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 49,
+                "phase": "BUSY",
+                "sqlite_phase": "begin",
+                "attempts": 1
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 49,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "b7b94340-64cd-4680-b20b-fcfb36f582b0",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:15:00.123456Z",
+                "expires_at": "2030-01-01T08:30:00.123456Z",
+                "busy": [
+                  {
+                    "phase": "begin",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_process_restart_recovers_committed_intention_or_rolls_back_uncommitted_state with data set #0",
+        "path": "review/labs/tekora-b222-88eed315562e0829d30c18fe4918326b/process-c27997cd79a364f6.json",
+        "sha256": "a070412091d50f235f242526daa3e3b6ecda8ee93d598d66dcbe5a9081978ebd",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 52,
+            "protocol": [
+              {
+                "pid": 52,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 52,
+                "phase": "BEFORE_COMMIT"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 54,
+            "protocol": [
+              {
+                "pid": 54,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 54,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "5af5ceb8-9daa-4366-a3cb-76643c958395",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #3",
+        "path": "review/labs/tekora-b222-978ef4b4f5f98edc5d152d9c0a13193d/fix1-process-c90946a836e85807.json",
+        "sha256": "ea6a80cd74fb30ad2519bb963cb5a63d9654f9271c7b0ebb4fdc322fa62f4c25",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 20,
+            "protocol": [
+              {
+                "pid": 20,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 20,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 20,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 21,
+            "protocol": [
+              {
+                "pid": 21,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 21,
+                "event": "BUSY",
+                "phase": "connect",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 21,
+                "event": "BUSY",
+                "phase": "connect",
+                "attempt": 2,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 21,
+                "event": "EXHAUSTED",
+                "phase": "connect",
+                "attempts": 3,
+                "body_calls": 0,
+                "busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ]
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 21,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "3fa541dd-121c-4ed8-a3db-4c49749d1562",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [],
+                "connection_busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 2,
+                    "code": 5
+                  },
+                  {
+                    "phase": "connect",
+                    "attempt": 3,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_commit_expiry_and_new_acquisition_are_serialized_at_exact_deadline with data set #0",
+        "path": "review/labs/tekora-b222-c80c1717f0b7578b0f85ab5a72515083/process-2066794d2e364297.json",
+        "sha256": "9c5b25a2a733715cfa7274b60a729bb34a2fa062bbc063ddb796baadc99dbe48",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 44,
+            "protocol": [
+              {
+                "pid": 44,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 44,
+                "phase": "LOCK_ACQUIRED"
+              },
+              {
+                "sent": "CONTINUE"
+              },
+              {
+                "pid": 44,
+                "phase": "RESULT",
+                "outcome": "committed",
+                "hold_id": "b5ade653-338b-4a39-b792-a33b66c8ffee",
+                "version": 2,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 45,
+            "protocol": [
+              {
+                "pid": 45,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 45,
+                "phase": "BUSY",
+                "sqlite_phase": "begin",
+                "attempts": 1
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 45,
+                "phase": "RESULT",
+                "outcome": "slot_conflict",
+                "busy": [
+                  {
+                    "phase": "begin",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #0",
+        "path": "review/labs/tekora-b222-c90eaa3c54ee89f70a0d4caff40d1afd/fix1-process-48c0dab2e8894ee4.json",
+        "sha256": "b38d04bee0fa05ada1096f2f21c7e9edcc51ad8a80f3b08a8c42f85a5aedff98",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 8,
+            "protocol": [
+              {
+                "pid": 8,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 8,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 8,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 9,
+            "protocol": [
+              {
+                "pid": 9,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 9,
+                "event": "BUSY",
+                "phase": "admission",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 9,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "f70a06d0-5bd3-43b0-99d1-71ee434d3238",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [
+                  {
+                    "phase": "admission",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ],
+                "connection_busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"partial-overlap\"",
+        "path": "review/labs/tekora-b222-dddcb111ddcc0b34b49f3935c95ee2d5/process-6554c77e6c5088d7.json",
+        "sha256": "08a79b1bc97c71bb4abaa49cfcc312c34310617cc0755dbba6a355fddc7e11a8",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 28,
+            "protocol": [
+              {
+                "pid": 28,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 28,
+                "phase": "LOCK_ACQUIRED"
+              },
+              {
+                "sent": "CONTINUE"
+              },
+              {
+                "pid": 28,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "0650aa54-2e37-4648-a615-7500529191fc",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 29,
+            "protocol": [
+              {
+                "pid": 29,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 29,
+                "phase": "BUSY",
+                "sqlite_phase": "begin",
+                "attempts": 1
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 29,
+                "phase": "RESULT",
+                "outcome": "slot_conflict",
+                "busy": [
+                  {
+                    "phase": "begin",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"other-provider\"",
+        "path": "review/labs/tekora-b222-e45436463add459a381d663ebf8ac225/process-9f6389b0f5330f22.json",
+        "sha256": "1d0c7a841f8a8b891778ec85de3b0bb0d5992ad3a082a78e4551217f2ee9b1b2",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 36,
+            "protocol": [
+              {
+                "pid": 36,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 36,
+                "phase": "LOCK_ACQUIRED"
+              },
+              {
+                "sent": "CONTINUE"
+              },
+              {
+                "pid": 36,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "fa7a1692-e482-4cde-a819-f2c73f72f029",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 37,
+            "protocol": [
+              {
+                "pid": 37,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 37,
+                "phase": "BUSY",
+                "sqlite_phase": "begin",
+                "attempts": 1
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 37,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "0f283144-e70d-48d5-b56f-266dbf2fe46a",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": [
+                  {
+                    "phase": "begin",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_preparation_contention_is_controlled_across_independent_processes with data set #2",
+        "path": "review/labs/tekora-b222-e5dc85084ae5de0c3ae3b1c3d76f0b65/fix1-process-1f05627bee601be1.json",
+        "sha256": "107419b2692b7f11db36b1b4fa1cecd6181dc33cb564d198d901ce9d354857de",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 16,
+            "protocol": [
+              {
+                "pid": 16,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 16,
+                "event": "LOCKED"
+              },
+              {
+                "sent": "RELEASE"
+              },
+              {
+                "pid": 16,
+                "event": "RELEASED"
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 17,
+            "protocol": [
+              {
+                "pid": 17,
+                "event": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 17,
+                "event": "BUSY",
+                "phase": "connect",
+                "attempt": 1,
+                "body_calls": 0
+              },
+              {
+                "sent": "NEXT"
+              },
+              {
+                "pid": 17,
+                "event": "RESULT",
+                "body_calls": 1,
+                "hold_id": "8b258a7d-c1d8-4d93-92bc-abb6f7613fb0",
+                "accepted": "1893484800.123456",
+                "expires": "1893485700.123456",
+                "busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ],
+                "connection_busy": [
+                  {
+                    "phase": "connect",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      },
+      {
+        "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"same-slot\"",
+        "path": "review/labs/tekora-b222-f32363ede4936e4c7c9a1e76d2f42864/process-e146a50e78fe0459.json",
+        "sha256": "0e588aeaa05476a91c12fc28b4b9a4c358dc2882285565a233f1a66192c37469",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 24,
+            "protocol": [
+              {
+                "pid": 24,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 24,
+                "phase": "LOCK_ACQUIRED"
+              },
+              {
+                "sent": "CONTINUE"
+              },
+              {
+                "pid": 24,
+                "phase": "RESULT",
+                "outcome": "held",
+                "hold_id": "9c5cde41-9a66-4102-aab2-56ede637be00",
+                "version": 1,
+                "accepted_at": "2030-01-01T08:00:00.123456Z",
+                "expires_at": "2030-01-01T08:15:00.123456Z",
+                "busy": []
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          },
+          {
+            "pid": 25,
+            "protocol": [
+              {
+                "pid": 25,
+                "phase": "READY"
+              },
+              {
+                "sent": "RUN"
+              },
+              {
+                "pid": 25,
+                "phase": "BUSY",
+                "sqlite_phase": "begin",
+                "attempts": 1
+              },
+              {
+                "sent": "RETRY"
+              },
+              {
+                "pid": 25,
+                "phase": "RESULT",
+                "outcome": "slot_conflict",
+                "busy": [
+                  {
+                    "phase": "begin",
+                    "attempt": 1,
+                    "code": 5
+                  }
+                ]
+              }
+            ],
+            "stderr": "Warning: proc_open(): posix_spawn() failed: No such file or directory in /app/vendor/sebastian/version/src/Version.php on line 85\n"
+          }
+        ]
+      }
+    ],
+    "final-external-processes": [
+      {
+        "scenario": "test_version_and_terminal_races_use_fresh_persistent_state with data set #2",
+        "path": "review/labs/tekora-b222-3806767edba68d6dac180e694e6718e6/independent-912e272c0bb9a049.json",
+        "sha256": "9432d01525c15d20afc919ca4970b807eee09748d7f9ba1a1c3c077c5e943033",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 16,
+            "protocol": [
+              {
+                "pid": 16,
+                "event": "ready"
+              },
+              {
+                "pid": 16,
+                "event": "locked"
+              },
+              {
+                "pid": 16,
+                "event": "result",
+                "outcome": "swept",
+                "count": 1
+              }
+            ],
+            "stderr": "retained by external harness"
+          },
+          {
+            "pid": 17,
+            "protocol": [
+              {
+                "pid": 17,
+                "event": "ready"
+              },
+              {
+                "pid": 17,
+                "event": "busy",
+                "phase": "begin"
+              },
+              {
+                "pid": 17,
+                "event": "result",
+                "outcome": "invalid_state"
+              }
+            ],
+            "stderr": "retained by external harness"
+          }
+        ]
+      },
+      {
+        "scenario": "test_version_and_terminal_races_use_fresh_persistent_state with data set #0",
+        "path": "review/labs/tekora-b222-90f415225f8e850717b9e45dcf6afa13/independent-3f56bf2f775a9761.json",
+        "sha256": "f11cc40a5ff681cd706d9d4753ce76a8518c5d5e73918d0ec7b1f8b0751a61d0",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 8,
+            "protocol": [
+              {
+                "pid": 8,
+                "event": "ready"
+              },
+              {
+                "pid": 8,
+                "event": "locked"
+              },
+              {
+                "pid": 8,
+                "event": "result",
+                "outcome": "released",
+                "id": "c3e7bccb-e679-4f35-951f-00d625f219cf",
+                "version": 2,
+                "accepted": "1961647200.654321",
+                "expires": "1961648100.654321"
+              }
+            ],
+            "stderr": "retained by external harness"
+          },
+          {
+            "pid": 9,
+            "protocol": [
+              {
+                "pid": 9,
+                "event": "ready"
+              },
+              {
+                "pid": 9,
+                "event": "busy",
+                "phase": "begin"
+              },
+              {
+                "pid": 9,
+                "event": "result",
+                "outcome": "invalid_state"
+              }
+            ],
+            "stderr": "retained by external harness"
+          }
+        ]
+      },
+      {
+        "scenario": "test_exclusive_writer_reports_retryable_busy_to_an_independent_competitor",
+        "path": "review/labs/tekora-b222-9464cfebd69826cff71db114d8850714/independent-ca2590c2c8f14d7d.json",
+        "sha256": "9df937fa9eccaaf73db74963504c0cc651e1befbc06f0aec2f943642908795e7",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 28,
+            "protocol": [
+              {
+                "pid": 28,
+                "event": "ready"
+              },
+              {
+                "pid": 28,
+                "event": "locked"
+              },
+              {
+                "pid": 28,
+                "event": "result",
+                "outcome": "lock_released"
+              }
+            ],
+            "stderr": "retained by external harness"
+          },
+          {
+            "pid": 29,
+            "protocol": [
+              {
+                "pid": 29,
+                "event": "ready"
+              },
+              {
+                "pid": 29,
+                "event": "busy",
+                "phase": "admission"
+              },
+              {
+                "pid": 29,
+                "event": "result",
+                "outcome": "held",
+                "id": "2dfcc83b-5d00-4470-a255-875c4b8a74d8",
+                "version": 1,
+                "accepted": "1961647200.654321",
+                "expires": "1961648100.654321"
+              }
+            ],
+            "stderr": "retained by external harness"
+          }
+        ]
+      },
+      {
+        "scenario": "test_changed_payload_same_intention_does_not_create_a_second_hold",
+        "path": "review/labs/tekora-b222-99ed19440aea006f98888897daff9dfd/independent-07a04dd3b1328585.json",
+        "sha256": "91b368fa2f310412e0c2a0b6384b1889d698bd864e47f458d8d58ab679c2b056",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 20,
+            "protocol": [
+              {
+                "pid": 20,
+                "event": "ready"
+              },
+              {
+                "pid": 20,
+                "event": "locked"
+              },
+              {
+                "pid": 20,
+                "event": "result",
+                "outcome": "held",
+                "id": "fade1e14-e682-489a-8553-f75b115ced3b",
+                "version": 1,
+                "accepted": "1961647200.654321",
+                "expires": "1961648100.654321"
+              }
+            ],
+            "stderr": "retained by external harness"
+          },
+          {
+            "pid": 21,
+            "protocol": [
+              {
+                "pid": 21,
+                "event": "ready"
+              },
+              {
+                "pid": 21,
+                "event": "busy",
+                "phase": "begin"
+              },
+              {
+                "pid": 21,
+                "event": "result",
+                "outcome": "idempotency_conflict"
+              }
+            ],
+            "stderr": "retained by external harness"
+          }
+        ]
+      },
+      {
+        "scenario": "test_historical_acceptance_replay_cannot_displace_new_occupant",
+        "path": "review/labs/tekora-b222-cfffc654b86966fe9ca38f01dbdde335/independent-2b34b6be65d01d4b.json",
+        "sha256": "523387dcf55b91b6828a15a7b706c7f807e17df9ab035274a9108793bd5f2653",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 24,
+            "protocol": [
+              {
+                "pid": 24,
+                "event": "ready"
+              },
+              {
+                "pid": 24,
+                "event": "locked"
+              },
+              {
+                "pid": 24,
+                "event": "result",
+                "outcome": "held",
+                "id": "415e6b17-18c2-41ec-9a35-f76acf0eefb6",
+                "version": 1,
+                "accepted": "1961648100.654321",
+                "expires": "1961649000.654321"
+              }
+            ],
+            "stderr": "retained by external harness"
+          },
+          {
+            "pid": 25,
+            "protocol": [
+              {
+                "pid": 25,
+                "event": "ready"
+              },
+              {
+                "pid": 25,
+                "event": "busy",
+                "phase": "begin"
+              },
+              {
+                "pid": 25,
+                "event": "result",
+                "outcome": "expired",
+                "id": "f6e64b14-275a-4b6f-8771-f73c3a8d8408",
+                "version": 2,
+                "accepted": "1961647200.654321",
+                "expires": "1961648100.654321"
+              }
+            ],
+            "stderr": "retained by external harness"
+          }
+        ]
+      },
+      {
+        "scenario": "test_version_and_terminal_races_use_fresh_persistent_state with data set #1",
+        "path": "review/labs/tekora-b222-d9ff257a5e4d1d9a5d023dd8590c9772/independent-e0212c4e3023a597.json",
+        "sha256": "c91654dc373d1dd5a35c978cbee200fb9235a85adb2af01ceca9c128c291e10e",
+        "coordinator_pid": 1,
+        "workers": [
+          {
+            "pid": 12,
+            "protocol": [
+              {
+                "pid": 12,
+                "event": "ready"
+              },
+              {
+                "pid": 12,
+                "event": "locked"
+              },
+              {
+                "pid": 12,
+                "event": "result",
+                "outcome": "committed",
+                "id": "7a4deb7d-e0cb-41e1-9f0d-9b2c98213f58",
+                "version": 2,
+                "accepted": "1961647200.654321",
+                "expires": "1961648100.654321"
+              }
+            ],
+            "stderr": "retained by external harness"
+          },
+          {
+            "pid": 13,
+            "protocol": [
+              {
+                "pid": 13,
+                "event": "ready"
+              },
+              {
+                "pid": 13,
+                "event": "busy",
+                "phase": "begin"
+              },
+              {
+                "pid": 13,
+                "event": "result",
+                "outcome": "invalid_state"
+              }
+            ],
+            "stderr": "retained by external harness"
+          }
+        ]
+      }
+    ]
+  },
+  "process_run_counts_not_additive": true,
+  "no_incompatible_active_pairs_observed": true,
+  "evidence_sha256": {
+    "busy-witness.json": "c928392bfe1e4aff3278742a6bd882dd257526487bb6be61269839c2fb8c7ebb",
+    "busy-witness.log": "c5ab8703775e331a2d2b099d73b89951ed18e5bee8078adde786d5badb2e842d",
+    "final-b21.log": "e2e28deca476125b6160cd31063685125f4c5c012e0cb0f538d01de5ba7f7d75",
+    "final-b21.xml": "f8afce6e3410974620118c1b9539e6b8fffe84938683da81cc7a3e7672a16ad0",
+    "final-b222-before-format.log": "f834b79e0250b15ccec13f471ed35b12343afa4aa713f33dcdbea582fdd67304",
+    "final-b222-before-format.xml": "1f9e5c3508ec88d6e1a3560e2ead4310c56d99de79f94412d66e2beb979a2ef1",
+    "final-b222.log": "591c11c762210bd608932d28a43cc8ef28f6f65af9a2623818581ab0af415650",
+    "final-b222.xml": "76e198a1b99f88fb204fc7d4439149e6f2423cf344a0399ebff9a240aa6c996f",
+    "final-build.log": "c29d460222b5afec0afeb4179e1740e49cc69f9de1f3df1ffbfac2ae68670b16",
+    "final-connections.log": "e99e061071e37b5e541e08565ba143ea82acb1b912bac352ba4280ea0cac7fec",
+    "final-connections.xml": "0f892a8d2cd9509e8f4305eeaa6b6be354c74fb6fc0ee1c380435dbf118fa45d",
+    "final-external-boundaries.log": "d58f41d6d37b576f7417bfbab8c686aaa2f41bb3566e166e6e0c17c8e2e68c63",
+    "final-external-boundaries.xml": "bc50dcc96b08c2586380aaa8b10c457b3e4cfd5c59d27a0cdf8f0976076bf1f4",
+    "final-external-core.log": "36e266f9bb82ff141f29307381e77d31c2ea5b91e76f186937ef49fd0bec8eff",
+    "final-external-core.xml": "5e77b992d57adab03d1fd48955bc5dc56474df4c999edc3df91bbc4c6ea0ce71",
+    "final-external-processes.log": "e01953ae32aead379d4e84d394da49907f1cd1432c4ce095d1565581698872c3",
+    "final-external-processes.xml": "42d5ef3d0a6ddf3fc4c8a874639abc1f28a1fb3bd45220ad649cf0e38e1c7945",
+    "final-fix1-before-format.log": "33286dcc08107e8040a5da041c7788ae5c6650da96843d546d126ac9fdf9bea3",
+    "final-fix1-before-format.xml": "31f68628a436fca96d532bcc3fbcdc989798c894fb8ed5e7a7c3b367e3b9588c",
+    "final-fix1.log": "3bf57413abfcd12bae4286a945b8aab69cb15fd27b75031e1b63f7baf83331a9",
+    "final-fix1.xml": "39b6dedb424484e98829591d1b54fbb46af2f7b91bbed30b43204f1a2f95fdb6",
+    "final-main.log": "ed10935de0a949a5e4fbbeae1c378f680d144f83add5feac8aca39823c8b99b3",
+    "final-main.xml": "8ea7e95b875fbabb506a7c02c4ca875290518ac3c317c5f049f9be2aebaa2964",
+    "final-pint-before-format.log": "249dd14ff1642fa256ffc02d621ad3af14257e2271d2a87e93ef0ea13111dbf0",
+    "final-pint.log": "e8b0fba43180ba17211897c2743338f2e67857fab21a7e5c4f2916779bab5ffc",
+    "final-processes.log": "726c11b5ddc22059beddaf272332a851a2cda0d8167ccb0128d7dff343b9448a",
+    "final-processes.xml": "38a2394fb16ec47f58fa271526dad05644e395a5a40f7b88390e9f176a0204ac",
+    "format-fix1.log": "61faa504f3ed672d12402092bd45bd1b6c7bf28122c326518adc9bd009b55018",
+    "group-syntax-warning.log": "2bd810f7c676854ead4069e12fdc4013d15c044eb7f4a90fd9d9326054ac0b66",
+    "group-syntax-warning.xml": "e6324265abaa5cb3a4dd10f69cc0b001605bab57ac6bc934566817328af72ecb",
+    "pending-commit-witness.json": "557727a76b97ad6e2ab087fa11cc6400504eb6ee4d3d52ea751ffc816d4b7bef",
+    "pending-commit-witness.log": "99184c1681a70a70424558a8f22c6fc80309b47b866c019fde2c781017203664",
+    "preliminary.xml": "21cd2c90af4a8eae65e9b6b895b000790e86555c0606aa6d3bf0aa3594ffee98",
+    "runtime.json": "ad2494bdcc0f745a1d4438d43aada964c00824e55671e527f7b9d8726fcb5c9c",
+    "runtime.log": "ec4f3955d8dd11d348bb8bda02a1d9d3aba9af6c88ea820e86abe2aa22f1f3df"
+  },
+  "validation_root": "/workspace/tekora-b222-fix1-o1rtruh6",
+  "reference_root": "/workspace/tekora-b222-fix1-o1rtruh6-b21",
+  "iterations": [
+    {
+      "name": "group-syntax-warning",
+      "status": "FAIL",
+      "reason": "14 tests/262 assertions completed but deprecated comma-separated CLI group caused warning/exit 1; corrected command uses two --group flags, no expectations changed."
+    },
+    {
+      "name": "final-pint-before-format",
+      "status": "FAIL",
+      "reason": "Two new tests needed method argument spaces; formatting only, then full B222/fix1/Pint repeated successfully."
+    }
+  ],
+  "warnings": [
+    "sebastian/version helper Git proc_open/posix_spawn diagnostic retained; independent PHP worker PIDs/results observed",
+    "Vite keeps two woff2 references for runtime; visual font loading not certified"
+  ],
+  "isolation": {
+    "new_databases_only": true,
+    "no_previous_database_opened": true,
+    "existing_env_read": false,
+    "real_media_read": false,
+    "real_user_data_access": false,
+    "production_binding": false,
+    "network": "none for PHP/Pint; npm --offline",
+    "vendor": "read-only",
+    "resources_deleted": false,
+    "W62e_or_historical_roots_touched": false,
+    "B1_B21_code_merged_or_copied_into_commit": false,
+    "constraints_or_triggers_disabled": false,
+    "WAL_used": false,
+    "main_or_existing_PR_modified": false,
+    "push_or_new_PR": false
+  },
+  "not_run": [
+    "New independent acceptance review of fix1",
+    "WAL/BUSY_SNAPSHOT",
+    "Physical/power-loss recovery",
+    "Actual driver/OS connection failure during COMMIT",
+    "Windows/PHP 8.2 (POSIX checks required)",
+    "Minimum SQLite 3.38",
+    "Composer/npm audits; prior Composer 403 not declared resolved",
+    "Remote CI",
+    "Legacy reservation occupancy or productive authorization/integration",
+    "Joint financial transaction/B1 fixture integration",
+    "Providers or real payments",
+    "Legal/fiscal/commercial/provider acceptance"
+  ],
+  "blocked_required_linux_checks": [],
+  "final_failures": [],
+  "additional_confirmed_findings": [],
+  "pending_approvals": [
+    "Independent review",
+    "Publication authorization",
+    "Legal",
+    "Fiscal",
+    "Commercial",
+    "Financial provider"
+  ]
+}

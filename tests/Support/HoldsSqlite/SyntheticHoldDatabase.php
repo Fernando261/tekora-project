@@ -15,6 +15,8 @@ final class SyntheticHoldDatabase
 {
     private WeakMap $connections;
 
+    private array $busy = [];
+
     private function __construct(private readonly array $ticket)
     {
         $this->connections = new WeakMap;
@@ -134,29 +136,43 @@ final class SyntheticHoldDatabase
         }
     }
 
-    private function connection(bool $initializing = false): PDO
+    private function connection(bool $initializing = false, int $attempts = 3, ?Closure $onBusy = null): PDO
     {
-        $this->verify();
-        if (PHP_INT_SIZE !== 8) {
-            throw new LogicException('64-bit PHP is required.');
-        }
-        $pdo = new PDO('sqlite:'.$this->ticket['path'], options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_STRINGIFY_FETCHES => false, PDO::ATTR_PERSISTENT => false]);
-        $this->verify();
-        $pdo->exec('PRAGMA foreign_keys=ON');
-        $pdo->exec('PRAGMA busy_timeout=0');
-        $pdo->exec('PRAGMA synchronous=FULL');
-        if (version_compare($pdo->query('SELECT sqlite_version()')->fetchColumn(), '3.38.0', '<')) {
-            throw new LogicException('SQLite >=3.38 required.');
-        }
-        $this->connections[$pdo] = true;
-        $this->check($pdo, $initializing);
+        $contention = new SqliteHoldContention($attempts, $onBusy);
+        try {
+            $pdo = $contention->run('connect', function () use ($initializing) {
+                // No business transaction or schema write has started. A failed attempt owns
+                // only this local PDO, which is discarded before opening another one.
+                $this->verify();
+                if (PHP_INT_SIZE !== 8) {
+                    throw new LogicException('64-bit PHP is required.');
+                }
+                $pdo = new PDO('sqlite:'.$this->ticket['path'], options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_STRINGIFY_FETCHES => false, PDO::ATTR_PERSISTENT => false]);
+                $this->verify();
+                // Connection-local, idempotent settings. Never replay schema or application DML.
+                $pdo->exec('PRAGMA foreign_keys=ON');
+                $pdo->exec('PRAGMA busy_timeout=0');
+                $pdo->exec('PRAGMA synchronous=FULL');
+                if (version_compare($pdo->query('SELECT sqlite_version()')->fetchColumn(), '3.38.0', '<')) {
+                    throw new LogicException('SQLite >=3.38 required.');
+                }
+                $this->validate($pdo, $initializing);
 
-        return $pdo;
+                return $pdo;
+            });
+            // An unsuccessfully prepared PDO never acquires a registered capability.
+            $this->connections[$pdo] = $contention->events();
+
+            return $pdo;
+        } finally {
+            // Preserve evidence even when connect exhausts its budget and returns no PDO.
+            $this->busy = array_merge($this->busy, $contention->events());
+        }
     }
 
-    public function connect(): PDO
+    public function connect(int $attempts = 3, ?Closure $onBusy = null): PDO
     {
-        return $this->connection();
+        return $this->connection(false, $attempts, $onBusy);
     }
 
     public function check(PDO $pdo, bool $initializing = false): void
@@ -164,6 +180,12 @@ final class SyntheticHoldDatabase
         if (! $this->owns($pdo)) {
             throw new LogicException('Foreign or invalidated connection.');
         }
+        // Context-specific retry/rollback belongs to the caller, not to active transactions.
+        $this->validate($pdo, $initializing);
+    }
+
+    private function validate(PDO $pdo, bool $initializing): void
+    {
         $this->verify();
         foreach (['foreign_keys' => 1, 'ignore_check_constraints' => 0, 'recursive_triggers' => 0, 'synchronous' => 2, 'busy_timeout' => 0] as $pragma => $expected) {
             if ($pdo->query('PRAGMA '.$pragma)->fetchColumn() !== $expected) {
@@ -193,8 +215,22 @@ final class SyntheticHoldDatabase
         unset($this->connections[$pdo]);
     }
 
+    public function busyEvents(): array
+    {
+        return $this->busy;
+    }
+
+    public function connectionBusyEvents(PDO $pdo): array
+    {
+        if (! $this->owns($pdo)) {
+            throw new LogicException('Foreign or invalidated connection.');
+        }
+
+        return $this->connections[$pdo];
+    }
+
     public function store(?PDO $pdo = null, int $attempts = 3, ?Closure $onBusy = null, ?Closure $afterCommit = null, ?Closure $beforeCommit = null): SqliteHoldStore
     {
-        return SqliteHoldStore::owned($this, $pdo ?? $this->connect(), $attempts, $onBusy, $afterCommit, $beforeCommit);
+        return SqliteHoldStore::owned($this, $pdo ?? $this->connect($attempts, $onBusy), $attempts, $onBusy, $afterCommit, $beforeCommit);
     }
 }

@@ -1,6 +1,6 @@
 # TEKORA B2.2.2 — HoldStore SQLite sintético aislado
 
-**READY FOR INDEPENDENT REVIEW.** Prototipo de pruebas, sin binding Laravel, endpoints, integración financiera ni reservas operativas. La publicación y cualquier integración requieren autorización posterior.
+**B2.2.2-fix1: READY FOR INDEPENDENT REVIEW.** La revisión del commit original detectó un P2 de contención previa a BEGIN; la corrección y sus resultados están en [B222-FIX1-VALIDATION.md](B222-FIX1-VALIDATION.md). Prototipo de pruebas, sin binding Laravel, endpoints, integración financiera ni reservas operativas. La publicación y cualquier integración requieren autorización posterior.
 
 Base: `ac999cea8f592ce7b94481ee30f602b67d9f5bea`.
 Rama local: `codex/payments-b222-sqlite-slot-holds`.
@@ -26,7 +26,9 @@ Main no contiene `App\Scheduling\Holds`. El adaptador implementa el **HoldStore 
 | SqliteHoldStore | Implementación completa del puerto original, transacciones IMMEDIATE, consultas coherentes, append/CAS y recuperación de recibos. |
 | HoldValues | UTC-us enteros, representación canónica, reconstrucción de propuesta/hold/eventos y validación semántica de recibos. |
 | SqliteHoldBusy / HoldCommitUncertain | Diferenciar contención acotada y resultado que exige reconexión/recuperación de la misma intención. |
+| SqliteHoldContention | Política compartida para pasos SQL auditados, con clasificación exclusiva de BUSY, presupuesto por fase y registro. Nunca recibe el callback de negocio. |
 | HoldWorker / ProcessPeer | PHP CLI independiente, barreras por pipes, deadline del protocolo, registro de PID/resultados/diagnósticos. No es un comando Artisan ni un servicio. |
+| AdmissionWorker | Worker adicional de fix1 para contención de admisión/apertura, agotamiento, liberación y verificación con otro proceso/conexión. |
 | HoldFixture | Solo identidades y propuestas inventadas; integridad y FK al terminar cada fixture con base. |
 
 Todo el PHP nuevo vive en tests/. No hay import desde app/routes/providers hacia el prototipo, modificación de composer.json, registro de store o modificación de ReservationWorkflow.
@@ -71,7 +73,11 @@ Se conserva la semántica original del motor: un HoldViolation **devuelto como v
 
 El motor usa su reloj inyectado después del bloqueo y vuelve a leer al registrar. `observeClock` persiste la marca compartida entre conexiones/procesos. Un retroceso observado falla cerrado. Espera por BEGIN no crea el instante de aceptación; un replay devuelve ID/T/deadline originales y no los renueva. T es el registro lógico persistido atómicamente, no la hora de llegada HTTP ni el instante físico de fsync.
 
-BUSY en BEGIN/COMMIT: hasta tres intentos y pausas 1/2 ms. En BEGIN el callback aún no corre; en COMMIT se repite **el mismo COMMIT**, no el cuerpo. Agotamiento en COMMIT produce rollback conocido. BUSY de cuerpo no repite una función arbitraria automáticamente. LOCKED/otros códigos no se reinterpretan ciegamente como contención transitoria.
+BUSY también puede producirse en los PRAGMA de validación previos a BEGIN. Fix1 cubre las fases `connect` (apertura/configuración local/validación), `admission` (lecturas de controles fuera de transacción), `begin`, `read_begin` y `commit`. Solo reconoce el código primario SQLite 5, conservando el código extendido en los eventos. Errores estructurales, LOCKED y otros códigos se propagan sin reclasificarlos o reintentarlos.
+
+Cada unidad auditada tiene un presupuesto configurable de uno a tres intentos y pausas 1/2 ms, con busy_timeout=0. Es un límite por llamada/fase, no un SLA o presupuesto global de todo un comando. Las verificaciones de capability/rutas/identidad se conservan en cada intento. Las preparaciones fallidas de conexión no registran un PDO autorizado; sus eventos quedan en la fábrica y, al obtener una conexión válida, el store conserva su historial de preparación. `store()` propaga presupuesto/observador también a la apertura inicial.
+
+Solo se repiten lecturas de admisión, apertura de un PDO local sin transacción de negocio, asignaciones idempotentes de configuración de conexión, BEGIN que devolvió BUSY o **el mismo COMMIT** tras BUSY. No se repite el inicializador de esquema ni el callback de negocio. En BEGIN el callback aún no corre; el agotamiento de COMMIT produce rollback conocido. Dentro de una transacción activa no se reintenta admission: un BUSY de cuerpo/lectura sigue su rollback, se registra y devuelve contención controlada sin repetir el cuerpo. Después de un COMMIT confirmado, incluso un error con código 5 en el seam de respuesta sigue siendo HoldCommitUncertain, no un pretexto para reejecutar la escritura.
 
 Si no puede establecerse rollback o se pierde la confirmación después de COMMIT, se invalida la conexión para sus adaptadores y se emite HoldCommitUncertain. Reconectar y repetir **la misma intención** mediante el motor abre BEGIN IMMEDIATE antes de decidir: recupera recibo/huella/hold ya confirmados, o solo adquiere si se demuestra ausencia tras serializar con el escritor anterior. Fallo de lectura no equivale a ausencia; no inventar otra clave o plazo. Se probaron pérdida simulada de respuesta y salida controlada de proceso antes/después de COMMIT; no se afirma pérdida física de energía ni fallo real del driver.
 
@@ -100,6 +106,8 @@ php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootst
 php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php tests/HoldsSqlitePrototype --group b222-sqlite-single
 php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php tests/HoldsSqlitePrototype --group b222-sqlite-two-connections
 php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php tests/HoldsSqlitePrototype --group b222-sqlite-processes
+php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php tests/HoldsSqlitePrototype --group b222-fix1
+php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php tests/HoldsSqlitePrototype --group b222-fix1-processes
 php -d memory_limit=1G vendor/bin/phpunit --bootstrap tests/payments-b222-bootstrap.php "$TEKORA_B222_B21_REFERENCE/tests"
 ```
 
@@ -121,4 +129,4 @@ Casos: mismo intervalo/solape parcial y servicios distintos; consecutivos; otro 
 - WAL/BUSY_SNAPSHOT, recuperación física/pérdida de energía, fallo real de conexión durante COMMIT, Windows/PHP 8.2, mínimo SQLite 3.38, auditorías e integración productiva no están acreditados.
 - Cotización B1 de 1.800 s independiente de hold 900 s. Vencimiento aplicable de quote al crear hold, antelación al servicio, revocaciones, cancelaciones, legal/fiscal/comercial/proveedor siguen pendientes. No se inventan reglas de pago ni se activa un proveedor.
 
-Resultados verificables y fallos de desarrollo conservados en [B222-VALIDATION.md](B222-VALIDATION.md) y [evidence/B222-validation.json](evidence/B222-validation.json). Se recomienda una revisión independiente del código/SQL y las evidencias antes de considerar publicación.
+Resultados actuales en [B222-FIX1-VALIDATION.md](B222-FIX1-VALIDATION.md) y [evidence/B222-fix1-validation.json](evidence/B222-fix1-validation.json). Los resultados originales y fallos de desarrollo se conservan como historia en [B222-VALIDATION.md](B222-VALIDATION.md) y [evidence/B222-validation.json](evidence/B222-validation.json), este último sin cambios. Se recomienda otra revisión independiente del commit correctivo antes de considerar publicación.
