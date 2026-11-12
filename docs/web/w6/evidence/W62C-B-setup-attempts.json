@@ -1,0 +1,106 @@
+[
+  {
+    "attempt": "first",
+    "status": "NOT RUN for migration installation",
+    "setup_problem": "Entrypoint PHPUnit omitido",
+    "mysql_observed": {
+      "hostname": "w62cb-mysql-6294799413330aaa",
+      "uuid": "a72b074d-dd88-11f1-a07f-26ddf7e47ccf",
+      "version": "8.4.13",
+      "engine": "InnoDB"
+    },
+    "cleanup": [
+      {
+        "container_id": "35608050c9779bc2c4490e7c33c61a9d0222c8d96ab516bcef1b69bfeb9784d1",
+        "removed": true
+      },
+      {
+        "container_id": "2480a125b06c48cdac6f829bd29a105d9fcba2a28496329b186292021ea4d55c",
+        "removed": true
+      },
+      {
+        "network": "w62cb-net-6294799413330aaa",
+        "removed": true
+      }
+    ],
+    "migration_success_claimed": false
+  },
+  {
+    "attempt": "second",
+    "status": "NOT RUN for migration installation",
+    "setup_problem": "Docker cp hacia tmpfs /app no visible al proceso",
+    "mysql_observed": {
+      "hostname": "w62cb-mysql-5a9efae9c0a80d46",
+      "uuid": "eba413f1-dd88-11f1-881a-06a558550c55",
+      "version": "8.4.13",
+      "engine": "InnoDB"
+    },
+    "cleanup": [
+      {
+        "container_id": "5bf8245d19d3f14f9f124131ec26fdb98c89f8bf3a319cfb2f1895b297d8e584",
+        "removed": true
+      },
+      {
+        "container_id": "6f8c72e2a61b7e44437faf6fb7f1026f5a68dfadb40b5f8fa6b98cc7e713e06d",
+        "removed": true
+      },
+      {
+        "network": "w62cb-net-5a9efae9c0a80d46",
+        "removed": true
+      }
+    ],
+    "migration_success_claimed": false
+  },
+  {
+    "attempt": "third",
+    "status": "NOT RUN for migration installation",
+    "setup_problem": "XSD PHPUnit omitidos",
+    "mysql_observed": {
+      "hostname": "w62cb-mysql-26a742d5e703858b",
+      "uuid": "568f855e-dd89-11f1-bf9d-92eeac53883d",
+      "version": "8.4.13",
+      "engine": "InnoDB"
+    },
+    "cleanup": [
+      {
+        "container_id": "180ba75563ce19eabf99d5810ccd0038010f744ab457deb710cc669a2ca089d8",
+        "removed": true
+      },
+      {
+        "container_id": "80fc71c870de3b8b5d9852d15f026f5e150aa75a901dde918abbfbcd299be4e0",
+        "removed": true
+      },
+      {
+        "network": "w62cb-net-26a742d5e703858b",
+        "removed": true
+      }
+    ],
+    "migration_success_claimed": false
+  },
+  {
+    "attempt": "fourth",
+    "status": "NOT RUN for migration installation",
+    "setup_problem": "Rutas PHP necesarias para bootstrap omitidas",
+    "mysql_observed": {
+      "hostname": "w62cb-mysql-c2739a9b5afc2c44",
+      "uuid": "910a9786-dd89-11f1-a9e8-2e23aa7f2c74",
+      "version": "8.4.13",
+      "engine": "InnoDB"
+    },
+    "cleanup": [
+      {
+        "container_id": "7ccadb6902c6250f400f8314d8812be6214d41bf041f1df12986789f9ba9c0be",
+        "removed": true
+      },
+      {
+        "container_id": "09d6c0bab3761c143cc463cfd87b8347790c8f411980f06a6fc97119d8f13c53",
+        "removed": true
+      },
+      {
+        "network": "w62cb-net-c2739a9b5afc2c44",
+        "removed": true
+      }
+    ],
+    "migration_success_claimed": false
+  }
+]
