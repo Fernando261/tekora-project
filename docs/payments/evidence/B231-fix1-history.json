@@ -1,0 +1,279 @@
+{
+  "scope": "Immutable historical evidence of original 6121f35; not a fix1 validation",
+  "original_commit": "6121f35b2f567f15482530bf7564e8722e8fb25c",
+  "original_tree": "d0cbbc5dff0bcfa3bf8e26385c2d2eed99debc92",
+  "original_recommendation": "CHANGES REQUIRED",
+  "audit_artifact_sha256": {
+    "INFORME.md": "cc8e35b8b8615166a135f19ca6dced3a4e8b2564bdbbe6f79c30e0b7b4f5733a",
+    "matriz-45.csv": "4d0925fa85377a1537759fc7c362768b0ccdeba2b7104837d73394357f2e0165",
+    "riesgos-10.csv": "729eefd0f166a290030e707b1fd07afb12e7da9e4ba38fc6ed288432dfe8ecbf",
+    "b231-exact-deps.log": "85df4f04b5ebbbc1d5ddffabcbaecb4025a073f7c98824834a1a32657e1e550c",
+    "b231-exact-deps.xml": "9e33b6a7b321edb294cda9406a498ec2d084bc0f141a6648c77d828a527df570",
+    "fork-repro.json": "66bc1f196db5a0eec85ea632a3a46f822f195658634fea039a70495d965f294c",
+    "pr34-exact.log": "01e3e36b6927bca8ae13bffe0bcb7eafd496c6b2f702d7245e1db4502f96ab55"
+  },
+  "original_t07_source": "<?php\n\ndeclare(strict_types=1);\n\nnamespace Tests\\PaymentsIntegrationPrototype;\n\nuse App\\Scheduling\\Holds\\HoldActor;\nuse Tests\\Support\\PaymentsIntegration\\IntegrationTestCase;\nuse Tests\\Support\\PaymentsIntegration\\OwnedIntegrationLab;\nuse Tests\\Support\\PaymentsIntegration\\ReferenceLoader;\nuse Tests\\Support\\PaymentsIntegration\\ScenarioFixture;\nuse Tests\\Support\\PaymentsIntegration\\SharedSqliteUnitOfWork;\nuse Tests\\Support\\PaymentsIntegration\\WriteSession;\n\n#[\\PHPUnit\\Framework\\Attributes\\Group('b231-A-contracts')]\nfinal class SharedSessionTest extends IntegrationTestCase\n{\n    public function test_t01_exact_classes_and_absent_reference_fail_closed(): void\n    {\n        $path = (new \\ReflectionClass(\\App\\Payments\\CommercialAmount::class))->getFileName();\n        self::assertStringContainsString('/pr32/', $path);\n        self::assertStringContainsString('/pr33/', (new \\ReflectionClass(\\App\\Scheduling\\Holds\\SlotHold::class))->getFileName());\n        $this->rejects(fn () => ReferenceLoader::register('/definitely-absent'), \\Throwable::class);\n    }\n\n    public function test_t02_new_files_and_inodes_are_not_adopted(): void\n    {\n        [$permit,$token] = $this->lab->capability();\n        $this->rejects(fn () => OwnedIntegrationLab::resume($permit, str_repeat('0', 64)));\n        $resumed = OwnedIntegrationLab::resume($permit, $token);\n        self::assertSame(231, $resumed->connect()->query('PRAGMA user_version')->fetchColumn());\n        $this->rejects(fn () => OwnedIntegrationLab::resume(dirname($permit).'/missing', $token));\n    }\n\n    public function test_t02_file_substitution_stops_without_cleanup(): void\n    {\n        $this->checkIntegrity = false;\n        [$p] = $this->lab->capability();\n        $db = dirname($p).'/fixture.sqlite';\n        $this->unit->close();\n        rename($db, $db.'.retained');\n        $handle = fopen($db, 'xb');\n        fclose($handle);\n        chmod($db, 0600);\n        $this->rejects(fn () => $this->lab->connect());\n        self::assertFileExists($db.'.retained');\n    }\n\n    public function test_t03_t08_all_participants_use_same_pdo_and_epoch_with_visibility(): void\n    {\n        $this->proposal();\n        $seen = null;\n        $f = new \\Tests\\Support\\PaymentsIntegration\\ScenarioFixture($this->unit, function ($stage) use (&$seen): void {\n            if ($stage === 'head') {\n                $seen = $this->rowCount('holds');\n                self::assertSame(0, $seen);\n                self::assertSame(0, $this->rowCount('claims'));\n            }\n        });\n        $result = $f->accept(101, 1, 1, $this->key());\n        self::assertSame('held', $result->historical['code']);\n        self::assertSame(0, $seen);\n        self::assertSame(1, $this->rowCount('holds'));\n        self::assertSame(1, $this->rowCount('claims'));\n        self::assertSame(1, $this->rowCount('activations'));\n        self::assertCount(1, array_unique(array_column($this->unit->diagnostics, 'connection')));\n        $epoch = max(array_column($this->unit->diagnostics, 'epoch'));\n        self::assertGreaterThan(8, count(array_filter($this->unit->diagnostics, fn ($d) => $d['epoch'] === $epoch)));\n    }\n\n    public function test_t04_t05_foreign_session_and_reentry_are_rejected(): void\n    {\n        $other = new SharedSqliteUnitOfWork(OwnedIntegrationLab::create(), fn () => $this->clock->now());\n        $c = ScenarioFixture::intent('quote', HoldActor::client(201), $this->key(), [11]);\n        $this->unit->run($c, function (WriteSession $s) use ($other, $c): array {\n            $this->rejects(fn () => $other->assertSession($s));\n            $this->rejects(fn () => $other->run($c, fn () => ['code' => 'bad']));\n            $this->rejects(fn () => $this->unit->run($c, fn () => ['code' => 'bad']));\n\n            return ['code' => 'rejected', 'outcome' => 'rejected'];\n        });\n        $other->close();\n    }\n\n    public function test_t06_lease_revoked_after_commit_and_rollback(): void\n    {\n        $saved = null;\n        $this->proposal();\n        $c = ScenarioFixture::intent('probe', HoldActor::system(), $this->key(), []);\n        $this->unit->run($c, function ($s) use (&$saved): array {\n            $saved = $s;\n\n            return ['code' => 'observed'];\n        });\n        $this->rejects(fn () => $saved->pricing->latestPrice(1));\n        $box = (object) ['session' => null];\n        $this->rejects(fn () => $this->unit->run(ScenarioFixture::intent('probe', HoldActor::system(), $this->key(), []), function ($s) use ($box): array {\n            $box->session = $s;\n            throw new \\RuntimeException('rollback');\n        }), \\RuntimeException::class);\n        $this->rejects(fn () => $box->session->proposals->context(1));\n        $this->unit->close();\n        $this->rejects(fn () => $saved->holds->due());\n    }\n\n    public function test_t07_fork_cannot_use_inherited_session(): void\n    {\n        if (! function_exists('pcntl_fork')) {\n            self::markTestSkipped('pcntl unavailable');\n        }\n        $c = ScenarioFixture::intent('probe', HoldActor::system(), $this->key(), []);\n        $this->unit->run($c, function ($s): array {\n            $pid = pcntl_fork();\n            if ($pid === 0) {\n                try {\n                    $s->pricing->latestPrice(1);\n                    exit(4);\n                } catch (\\LogicException) {\n                    exit(0);\n                }\n            }\n            pcntl_waitpid($pid, $status);\n            self::assertSame(0, pcntl_wexitstatus($status));\n\n            return ['code' => 'pid_guard'];\n        });\n    }\n\n    public function test_unknown_temp_objects_and_attached_databases_are_rejected(): void\n    {\n        $p = $this->lab->connect();\n        $p->exec('CREATE TEMP TABLE sqliteX_probe(a)');\n        $this->rejects(fn () => $this->lab->admit($p));\n        $p = $this->lab->connect();\n        $p->exec(\"ATTACH ':memory:' AS alien\");\n        $this->rejects(fn () => $this->lab->admit($p));\n    }\n\n    public function test_session_tokens_cannot_be_serialized_or_used_by_a_different_owner(): void\n    {\n        $this->rejects(fn () => serialize(new \\Tests\\Support\\PaymentsIntegration\\SessionLease(getmypid(), 1)));\n        $methodNames = array_map(fn ($m) => $m->getName(), (new \\ReflectionClass(WriteSession::class))->getMethods(\\ReflectionMethod::IS_PUBLIC));\n        foreach (['exec', 'begin', 'commit', 'rollback', 'atomic', 'pdo'] as $name) {\n            self::assertNotContains($name, $methodNames);\n        }\n    }\n\n    public function test_close_during_active_work_rolls_back_and_revokes_ports(): void\n    {\n        $box = (object) ['session' => null];\n        $intent = ScenarioFixture::intent('probe', HoldActor::system(), $this->key(), []);\n        $this->rejects(fn () => $this->unit->run($intent, function ($s) use ($box): array {\n            $box->session = $s;\n            $this->unit->close();\n\n            return ['code' => 'closed'];\n        }));\n        $this->rejects(fn () => $box->session->pricing->latestPrice(1));\n        self::assertSame(0, $this->rowCount('commands'));\n    }\n}\n",
+  "original_t07_failure_log": "PHPUnit 11.5.57 by Sebastian Bergmann and contributors.\n\nRuntime:       PHP 8.2.35\n\n................................................................. 65 / 78 ( 83%)\n.........E...                                                     78 / 78 (100%)\n\nTime: 00:03.227, Memory: 12.00 MB\n\nThere was 1 error:\n\n1) Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t07_fork_cannot_use_inherited_session\nTests\\Support\\PaymentsIntegration\\IntegrationUncertain: Unrecognized COMMIT result\n\n/app/tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php:258\n/app/tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php:166\n/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php:112\n\nCaused by\nPDOException: SQLSTATE[HY000]: General error: 10 disk I/O error\n\n/app/tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php:241\n/app/tests/Support/PaymentsIntegration/SqliteOutcomePolicy.php:40\n/app/tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php:236\n/app/tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php:166\n/app/tests/PaymentsIntegrationPrototype/SharedSessionTest.php:112\n\nERRORS!\nTests: 78, Assertions: 585, Errors: 1.\n",
+  "original_fork_reproduction": {
+    "parent_pid": 1,
+    "before": {
+      "commands": [
+        {
+          "id": "8cafab64-670d-4319-ad13-6a7d62cbd444",
+          "namespace": "proposal",
+          "scope": "client:201",
+          "intent_key": "d7397bd1-f4af-4145-a103-4ff586660952",
+          "fingerprint": "5840da90528f4f068b62ed9076d1efe0fbb6d69a46a0cca9914b4bd2f563d7df",
+          "action": "propose",
+          "outcome": "success",
+          "result_json": "{\"code\":\"proposed\",\"proposal_id\":1,\"binding_id\":\"3a0bee64-3889-408c-affc-eba505a04730\"}",
+          "at_us": 1794477600000000,
+          "actor_kind": "client",
+          "actor_user_id": 201
+        },
+        {
+          "id": "cfb56b88-d058-4d72-a1c1-e26c878a7f72",
+          "namespace": "quote",
+          "scope": "client:201",
+          "intent_key": "e140db7c-aee1-47b3-a55e-f9ff49b95970",
+          "fingerprint": "bda95595e9f355a2e3ae42078074990a2f95ff890c1433ff14c41f6665ce24eb",
+          "action": "quote",
+          "outcome": "success",
+          "result_json": "{\"code\":\"quoted\",\"quote_id\":\"2541a3c4-159b-4631-a465-4aa982cd1853\"}",
+          "at_us": 1794477600000000,
+          "actor_kind": "client",
+          "actor_user_id": 201
+        },
+        {
+          "id": "f082e618-5c1f-4585-adeb-e426d8c409ed",
+          "namespace": "price",
+          "scope": "service:1",
+          "intent_key": "047f9b34-fa78-4ad0-aa3d-3b069836181c",
+          "fingerprint": "617ca4094a13521fa2219300afc68966c93ddac345746e65611777ae2106d5a7",
+          "action": "publish",
+          "outcome": "success",
+          "result_json": "{\"code\":\"published\",\"price_id\":\"aa7d72d6-f3d5-46e6-a65e-75745e9ae5bb\"}",
+          "at_us": 1794477600000000,
+          "actor_kind": "provider",
+          "actor_user_id": 101
+        }
+      ],
+      "holds": [],
+      "claims": [],
+      "activations": [],
+      "hold_events": [],
+      "claim_events": [],
+      "heads": [
+        {
+          "id": 1,
+          "state": "requested",
+          "version": 1,
+          "claim_id": null,
+          "claim_phase": null,
+          "at_us": 1794477600000000,
+          "command_id": "8cafab64-670d-4319-ad13-6a7d62cbd444"
+        }
+      ],
+      "proposal_events": [
+        {
+          "aggregate_id": 1,
+          "version": 1,
+          "from_state": null,
+          "to_state": "requested",
+          "at_us": 1794477600000000,
+          "command_id": "8cafab64-670d-4319-ad13-6a7d62cbd444"
+        }
+      ]
+    },
+    "journal_before_child": true,
+    "child_pid": 9,
+    "child_exit": 0,
+    "journal_after_child": false,
+    "error": "Tests\\Support\\PaymentsIntegration\\IntegrationUncertain",
+    "previous": "SQLSTATE[HY000]: General error: 10 disk I/O error",
+    "callback_calls": 1,
+    "after": {
+      "commands": [
+        {
+          "id": "8cafab64-670d-4319-ad13-6a7d62cbd444",
+          "namespace": "proposal",
+          "scope": "client:201",
+          "intent_key": "d7397bd1-f4af-4145-a103-4ff586660952",
+          "fingerprint": "5840da90528f4f068b62ed9076d1efe0fbb6d69a46a0cca9914b4bd2f563d7df",
+          "action": "propose",
+          "outcome": "success",
+          "result_json": "{\"code\":\"proposed\",\"proposal_id\":1,\"binding_id\":\"3a0bee64-3889-408c-affc-eba505a04730\"}",
+          "at_us": 1794477600000000,
+          "actor_kind": "client",
+          "actor_user_id": 201
+        },
+        {
+          "id": "cfb56b88-d058-4d72-a1c1-e26c878a7f72",
+          "namespace": "quote",
+          "scope": "client:201",
+          "intent_key": "e140db7c-aee1-47b3-a55e-f9ff49b95970",
+          "fingerprint": "bda95595e9f355a2e3ae42078074990a2f95ff890c1433ff14c41f6665ce24eb",
+          "action": "quote",
+          "outcome": "success",
+          "result_json": "{\"code\":\"quoted\",\"quote_id\":\"2541a3c4-159b-4631-a465-4aa982cd1853\"}",
+          "at_us": 1794477600000000,
+          "actor_kind": "client",
+          "actor_user_id": 201
+        },
+        {
+          "id": "e5102025-f63d-4da0-a4c3-2199cb1291fe",
+          "namespace": "hold",
+          "scope": "provider:101",
+          "intent_key": "ebb221ac-da82-4f22-a6c8-fc325784a737",
+          "fingerprint": "44bf9c2e084833c88525e2e7c5ff1f00848a874825f81b7839c72dca689a6bdb",
+          "action": "accept",
+          "outcome": "success",
+          "result_json": "{\"code\":\"held\",\"hold_id\":\"67e5f197-e53d-46a7-a1e3-d25b678c69fa\",\"claim_id\":\"e0ccb2c2-9bce-41a2-a6c7-7c41bc269cd6\",\"proposal_id\":1,\"guard_until_us\":1794478500000000}",
+          "at_us": 1794477600000000,
+          "actor_kind": "provider",
+          "actor_user_id": 101
+        },
+        {
+          "id": "f082e618-5c1f-4585-adeb-e426d8c409ed",
+          "namespace": "price",
+          "scope": "service:1",
+          "intent_key": "047f9b34-fa78-4ad0-aa3d-3b069836181c",
+          "fingerprint": "617ca4094a13521fa2219300afc68966c93ddac345746e65611777ae2106d5a7",
+          "action": "publish",
+          "outcome": "success",
+          "result_json": "{\"code\":\"published\",\"price_id\":\"aa7d72d6-f3d5-46e6-a65e-75745e9ae5bb\"}",
+          "at_us": 1794477600000000,
+          "actor_kind": "provider",
+          "actor_user_id": 101
+        }
+      ],
+      "holds": [
+        {
+          "hold_id": "67e5f197-e53d-46a7-a1e3-d25b678c69fa",
+          "reservation_id": 1,
+          "proposal_version": 1,
+          "quote_ref": "2541a3c4-159b-4631-a465-4aa982cd1853",
+          "inquiry_id": 11,
+          "service_id": 1,
+          "provider_profile_id": 11,
+          "provider_user_id": 101,
+          "client_user_id": 201,
+          "starts_at_us": 1794564000000000,
+          "ends_at_us": 1794567600000000,
+          "state": "held",
+          "version": 1,
+          "accepted_at_us": 1794477600000000,
+          "expires_at_us": 1794478500000000,
+          "updated_at_us": 1794477600000000,
+          "actor_kind": "provider",
+          "actor_user_id": 101,
+          "binding_id": "3a0bee64-3889-408c-affc-eba505a04730",
+          "activation_id": "7b738eae-dc29-4ff0-a2f6-9017276b7046",
+          "claim_id": "e0ccb2c2-9bce-41a2-a6c7-7c41bc269cd6",
+          "command_id": "e5102025-f63d-4da0-a4c3-2199cb1291fe"
+        }
+      ],
+      "claims": [
+        {
+          "id": "e0ccb2c2-9bce-41a2-a6c7-7c41bc269cd6",
+          "proposal_id": 1,
+          "inquiry_id": 11,
+          "service_id": 1,
+          "provider_id": 11,
+          "provider_user_id": 101,
+          "client_id": 201,
+          "starts_at_us": 1794564000000000,
+          "ends_at_us": 1794567600000000,
+          "origin": "payment",
+          "hold_id": "67e5f197-e53d-46a7-a1e3-d25b678c69fa",
+          "binding_id": "3a0bee64-3889-408c-affc-eba505a04730",
+          "phase": "held",
+          "expected_hold": "held",
+          "reason": "accepted",
+          "version": 1,
+          "at_us": 1794477600000000,
+          "command_id": "e5102025-f63d-4da0-a4c3-2199cb1291fe"
+        }
+      ],
+      "activations": [
+        {
+          "id": "7b738eae-dc29-4ff0-a2f6-9017276b7046",
+          "binding_id": "3a0bee64-3889-408c-affc-eba505a04730",
+          "hold_id": "67e5f197-e53d-46a7-a1e3-d25b678c69fa",
+          "claim_id": "e0ccb2c2-9bce-41a2-a6c7-7c41bc269cd6",
+          "at_us": 1794477600000000,
+          "provider_user_id": 101,
+          "command_id": "e5102025-f63d-4da0-a4c3-2199cb1291fe"
+        }
+      ],
+      "hold_events": [
+        {
+          "aggregate_id": "67e5f197-e53d-46a7-a1e3-d25b678c69fa",
+          "version": 1,
+          "from_state": null,
+          "to_state": "held",
+          "at_us": 1794477600000000,
+          "command_id": "e5102025-f63d-4da0-a4c3-2199cb1291fe"
+        }
+      ],
+      "claim_events": [
+        {
+          "aggregate_id": "e0ccb2c2-9bce-41a2-a6c7-7c41bc269cd6",
+          "version": 1,
+          "from_state": null,
+          "to_state": "held",
+          "at_us": 1794477600000000,
+          "command_id": "e5102025-f63d-4da0-a4c3-2199cb1291fe"
+        }
+      ],
+      "heads": [
+        {
+          "id": 1,
+          "state": "awaiting_payment",
+          "version": 2,
+          "claim_id": "e0ccb2c2-9bce-41a2-a6c7-7c41bc269cd6",
+          "claim_phase": "held",
+          "at_us": 1794477600000000,
+          "command_id": "e5102025-f63d-4da0-a4c3-2199cb1291fe"
+        }
+      ],
+      "proposal_events": [
+        {
+          "aggregate_id": 1,
+          "version": 1,
+          "from_state": null,
+          "to_state": "requested",
+          "at_us": 1794477600000000,
+          "command_id": "8cafab64-670d-4319-ad13-6a7d62cbd444"
+        },
+        {
+          "aggregate_id": 1,
+          "version": 2,
+          "from_state": "requested",
+          "to_state": "awaiting_payment",
+          "at_us": 1794477600000000,
+          "command_id": "e5102025-f63d-4da0-a4c3-2199cb1291fe"
+        }
+      ]
+    },
+    "integrity": [
+      {
+        "integrity_check": "ok"
+      }
+    ],
+    "fk": [],
+    "resolution": "replayed"
+  },
+  "php82_reference_failure": "PHPUnit 11.5.57 by Sebastian Bergmann and contributors.\n\nRuntime:       PHP 8.2.35\nConfiguration: /app/phpunit.xml\n\n............E..................................................  63 / 135 ( 46%)\n............................................................... 126 / 135 ( 93%)\n.........                                                       135 / 135 (100%)\n\nTime: 00:02.088, Memory: 12.00 MB\n\nThere was 1 error:\n\n1) Tests\\PaymentsSqlitePrototype\\PricingSqliteConcurrencyTest::test_manual_transaction_is_not_adopted_or_rolled_back_by_the_store\nPDOException: SQLSTATE[HY000]: General error: 1 cannot start a transaction within a transaction\n\n/app/tests/Support/PricingSqlite/SqlitePricingStore.php:75\n/app/tests/Support/PricingSqlite/SqlitePricingStore.php:46\n/app/tests/PaymentsSqlitePrototype/PricingSqliteConcurrencyTest.php:224\n\nERRORS!\nTests: 135, Assertions: 620, Errors: 1.\n",
+  "original_planned_t07": {
+    "ID": "T07",
+    "Requisito original": "Transferir sesión al hijo o cambiar PID",
+    "Evidencia exigida original": "Rechazo; nuevo proceso necesita propia conexión/lease",
+    "Estado reportado en commit": "BLOCKED",
+    "Estado independiente": "FAIL",
+    "Garantía comprobada": "Guard PID deniega la sesión; salida normal del hijo altera journal y COMMIT del padre",
+    "Evidencia independiente": "SharedSessionTest::test_t07_fork_cannot_use_inherited_session; fork-repro.json; F1",
+    "Limitación": "Alternativa con SIGKILL pasa solo el guard; no equivale a seguridad del ciclo de vida fork.",
+    "Trazabilidad original": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest::test_t07_fork_cannot_use_inherited_session"
+  }
+}

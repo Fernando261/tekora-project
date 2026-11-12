@@ -7,6 +7,7 @@ namespace Tests\PaymentsIntegrationPrototype;
 use App\Scheduling\Holds\HoldActor;
 use Tests\Support\PaymentsIntegration\IntegrationTestCase;
 use Tests\Support\PaymentsIntegration\OwnedIntegrationLab;
+use Tests\Support\PaymentsIntegration\ProcessPeer;
 use Tests\Support\PaymentsIntegration\ReferenceLoader;
 use Tests\Support\PaymentsIntegration\ScenarioFixture;
 use Tests\Support\PaymentsIntegration\SharedSqliteUnitOfWork;
@@ -103,27 +104,51 @@ final class SharedSessionTest extends IntegrationTestCase
         $this->rejects(fn () => $saved->holds->due());
     }
 
-    public function test_t07_fork_cannot_use_inherited_session(): void
+    public function test_t07_fresh_worker_rejects_foreign_lease_without_inheriting_sqlite(): void
     {
-        if (! function_exists('pcntl_fork')) {
-            self::markTestSkipped('pcntl unavailable');
-        }
+        // Original unsafe fork evidence is retained in B231-fix1-history.json.
+        // SQLite explicitly forbids carrying an open connection across raw fork.
+        [$permit, $token] = $this->lab->capability();
+        $journal = dirname($permit).'/fixture.sqlite-journal';
+        $evidence = [];
         $c = ScenarioFixture::intent('probe', HoldActor::system(), $this->key(), []);
-        $this->unit->run($c, function ($s): array {
-            $pid = pcntl_fork();
-            if ($pid === 0) {
-                try {
-                    $s->pricing->latestPrice(1);
-                    exit(4);
-                } catch (\LogicException) {
-                    exit(0);
-                }
+        $outcome = $this->unit->run($c, function ($s) use ($permit, $token, $journal, &$evidence): array {
+            $this->unit->assertSession($s);
+            self::assertFileExists($journal);
+            $before = [lstat($journal)['ino'], filesize($journal), hash_file('sha256', $journal)];
+            $peer = new ProcessPeer(['permit' => $permit, 'token' => $token, 'time' => $this->clock->us, 'operation' => 'identity', 'epoch' => 1]);
+            try {
+                self::assertSame(0, $peer->startup['sqlite_descriptors']);
+                $ready = $peer->read();
+                self::assertSame('ready', $ready['phase']);
+                self::assertGreaterThan(0, $ready['sqlite_descriptors']);
+                $peer->send('go');
+                $result = $peer->read();
+                self::assertTrue($result['foreign_lease_denied']);
+                self::assertTrue($result['foreign_session_denied']);
+                self::assertTrue($result['own_process_valid']);
+                $this->rejects(fn () => (new \Tests\Support\PaymentsIntegration\SessionLease($peer->pid, 1))->assertProcess());
+            } finally {
+                $peer->close();
             }
-            pcntl_waitpid($pid, $status);
-            self::assertSame(0, pcntl_wexitstatus($status));
+            self::assertSame(0, $peer->exitCode);
+            self::assertTrue($peer->completion['clean']);
+            self::assertSame(0, $peer->completion['sqlite_descriptors']);
+            clearstatcache(true, $journal);
+            self::assertSame($before, [lstat($journal)['ino'], filesize($journal), hash_file('sha256', $journal)]);
+            $evidence = ['parent_pid' => getmypid(), 'startup' => $peer->startup, 'result' => $result, 'closed' => $peer->completion, 'exit_code' => $peer->exitCode, 'journal_before' => $before, 'journal_after' => [lstat($journal)['ino'], filesize($journal), hash_file('sha256', $journal)]];
+            // Parent lease still operates; its real COMMIT follows normal worker exit.
+            self::assertNull($s->pricing->latestPrice(1));
 
             return ['code' => 'pid_guard'];
         });
+        self::assertSame(1, $this->rowCount('commands'));
+        self::assertFileDoesNotExist($journal);
+        if ($root = getenv('TEKORA_B231_TRACE_ROOT')) {
+            $file = fopen($root.'/t07-'.bin2hex(random_bytes(8)).'.json', 'xb');
+            fwrite($file, json_encode($evidence + ['parent_outcome' => $outcome->kind], JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT));
+            fclose($file);
+        }
     }
 
     public function test_unknown_temp_objects_and_attached_databases_are_rejected(): void

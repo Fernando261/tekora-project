@@ -10,7 +10,12 @@ use PDO;
 /** New resources only. Permits stay private; no automatic deletion or adoption. */
 final class OwnedIntegrationLab
 {
-    private function __construct(private array $permit) {}
+    private readonly int $pid;
+
+    private function __construct(private array $permit)
+    {
+        $this->pid = getmypid();
+    }
 
     public static function create(?int $legacyStart = null): self
     {
@@ -115,11 +120,21 @@ final class OwnedIntegrationLab
 
     public function capability(): array
     {
+        $this->assertProcess();
+
         return [$this->permit['root'].'/permit.json', $this->permit['token']];
+    }
+
+    private function assertProcess(): void
+    {
+        if ($this->pid !== getmypid()) {
+            throw new LogicException('Lab belongs to another process; resume the permit in a fresh worker');
+        }
     }
 
     public function verifyFile(): void
     {
+        $this->assertProcess();
         foreach ([$this->permit['root'] => ['dir_dev', 'dir_ino', 0700], $this->permit['path'] => ['dev', 'ino', 0600]] as $path => $keys) {
             clearstatcache(true, $path);
             $s = lstat($path);

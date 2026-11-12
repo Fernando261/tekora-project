@@ -1,5 +1,7 @@
 # B2.3.1 — Validación de implementación
 
+> **fix1:** el contenido original conserva la validación histórica de `6121f35`. La corrección de procesos, T07 y el diagnóstico separado PHP 8.2 se documentan en [B231-FIX1.md](B231-FIX1.md), con evidencia nueva por runtime. No se ejecuta nuevamente el fork inseguro.
+
 **READY FOR INDEPENDENT REVIEW**, exclusivamente para el laboratorio sintético. Esta es la validación de implementación y no sustituye una nueva revisión independiente, autorización de publicación, integración o activación productiva.
 
 Rama local: `codex/payments-b231-sqlite-integration-lab`. Base exacta: `ac999cea8f592ce7b94481ee30f602b67d9f5bea`. El SHA local final se entrega por separado para evitar incluir un hash autorreferencial en su propio commit. Las huellas de las fuentes efectivamente ejecutadas están en [B231-validation.json](evidence/B231-validation.json).

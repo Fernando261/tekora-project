@@ -1,5 +1,7 @@
 # B2.3.1 — Inventario final
 
+> **fix1:** el contenido original conserva la validación histórica de `6121f35`. La corrección de procesos, T07 y el diagnóstico separado PHP 8.2 se documentan en [B231-FIX1.md](B231-FIX1.md), con evidencia nueva por runtime. No se ejecuta nuevamente el fork inseguro.
+
 37 archivos nuevos; cero modificaciones históricas y cero eliminaciones. Base `ac999cea8f592ce7b94481ee30f602b67d9f5bea`.
 
 El presupuesto de diseño era 30 rutas orientativas. Se entregan 37: se añaden clases de errores, reloj/arnés y peer de procesos explícitos y matrices/inventario de evidencia para revisión; no se amplía a componentes productivos.

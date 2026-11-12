@@ -61,6 +61,7 @@ final class SharedSqliteUnitOfWork
 
     private function assertLease(SessionLease $l): void
     {
+        $l->assertProcess();
         if ($this->pid !== getmypid() || $this->closed || ! $this->active || ! isset($this->leases[$l]) || $l->epoch !== $this->epoch || self::$current?->get() !== $this) {
             throw new LogicException('Revoked or foreign session');
         }

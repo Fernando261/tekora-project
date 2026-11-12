@@ -1,5 +1,7 @@
 # B2.3.1 — Laboratorio conjunto SQLite
 
+> **fix1:** el contenido original conserva la validación histórica de `6121f35`. La corrección de procesos, T07 y el diagnóstico separado PHP 8.2 se documentan en [B231-FIX1.md](B231-FIX1.md), con evidencia nueva por runtime. No se ejecuta nuevamente el fork inseguro.
+
 Implementación exclusivamente sintética, para revisión independiente. No hay bindings Laravel, migraciones de aplicación, endpoints, pagos ni retenciones operativas. La decisión de publicación/integración sigue siendo del propietario. B2.3.2 no se inicia.
 
 ## Entradas y dependencias exactas
