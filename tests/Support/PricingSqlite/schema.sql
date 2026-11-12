@@ -1,6 +1,8 @@
 -- B2.2.1 TEST PROTOTYPE ONLY. Applied exclusively by SyntheticPricingDatabase::create().
 -- No application migration, operational table, existing path or IF NOT EXISTS.
 -- SQLite >= 3.38, PHP x64, foreign_keys=ON; caller owns BEGIN IMMEDIATE/COMMIT.
+-- UUID/UTC CHECKs cover the complete canonical ASCII/UTF-8 value, including NUL.
+-- Keep PHP validation and every existing financial/relational constraint.
 CREATE TABLE main.b221_fixture_users (
     id INTEGER NOT NULL PRIMARY KEY CHECK(id>0)
 ) STRICT;
@@ -22,7 +24,7 @@ CREATE TABLE main.b221_fixture_inquiries (
 ) STRICT;
 
 CREATE TABLE main.b221_price_versions (
-    id TEXT COLLATE BINARY NOT NULL CHECK(length(id)=36 AND substr(id,9,1)='-' AND substr(id,14,1)='-' AND substr(id,19,1)='-' AND substr(id,24,1)='-' AND length(replace(id,'-',''))=32 AND replace(id,'-','') NOT GLOB '*[^0-9a-f]*'),
+    id TEXT COLLATE BINARY NOT NULL CHECK(typeof(id)='text' AND instr(id,char(0))=0 AND length(CAST(id AS BLOB))=36 AND length(id)=36 AND substr(id,9,1)='-' AND substr(id,14,1)='-' AND substr(id,19,1)='-' AND substr(id,24,1)='-' AND length(replace(id,'-',''))=32 AND replace(id,'-','') NOT GLOB '*[^0-9a-f]*'),
     service_id INTEGER NOT NULL CHECK(typeof(service_id)='integer' AND service_id BETWEEN 1 AND 9223372036854775807),
     provider_profile_id INTEGER NOT NULL CHECK(typeof(provider_profile_id)='integer' AND provider_profile_id BETWEEN 1 AND 9223372036854775807),
     version INTEGER NOT NULL CHECK(typeof(version)='integer' AND version BETWEEN 1 AND 1000000000),
@@ -30,8 +32,8 @@ CREATE TABLE main.b221_price_versions (
     currency TEXT NOT NULL CHECK(currency='MXN'),
     duration_minutes INTEGER NOT NULL CHECK(typeof(duration_minutes)='integer' AND duration_minutes=60),
     created_by INTEGER NOT NULL CHECK(typeof(created_by)='integer' AND created_by BETWEEN 1 AND 9223372036854775807),
-    idempotency_key TEXT COLLATE BINARY NOT NULL CHECK(length(idempotency_key)=36 AND substr(idempotency_key,9,1)='-' AND substr(idempotency_key,14,1)='-' AND substr(idempotency_key,19,1)='-' AND substr(idempotency_key,24,1)='-' AND length(replace(idempotency_key,'-',''))=32 AND replace(idempotency_key,'-','') NOT GLOB '*[^0-9a-f]*'),
-    created_at_utc TEXT COLLATE BINARY NOT NULL CHECK(length(created_at_utc)=26 AND substr(created_at_utc,20,1)='.' AND substr(created_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(created_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(created_at_utc,1,19),'+0 seconds')=substr(created_at_utc,1,19) AND created_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
+    idempotency_key TEXT COLLATE BINARY NOT NULL CHECK(typeof(idempotency_key)='text' AND instr(idempotency_key,char(0))=0 AND length(CAST(idempotency_key AS BLOB))=36 AND length(idempotency_key)=36 AND substr(idempotency_key,9,1)='-' AND substr(idempotency_key,14,1)='-' AND substr(idempotency_key,19,1)='-' AND substr(idempotency_key,24,1)='-' AND length(replace(idempotency_key,'-',''))=32 AND replace(idempotency_key,'-','') NOT GLOB '*[^0-9a-f]*'),
+    created_at_utc TEXT COLLATE BINARY NOT NULL CHECK(typeof(created_at_utc)='text' AND instr(created_at_utc,char(0))=0 AND length(CAST(created_at_utc AS BLOB))=26 AND length(created_at_utc)=26 AND substr(created_at_utc,20,1)='.' AND substr(created_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(created_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(created_at_utc,1,19),'+0 seconds')=substr(created_at_utc,1,19) AND created_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
     PRIMARY KEY(id),
     UNIQUE(service_id,version),
     UNIQUE(service_id,idempotency_key),
@@ -41,12 +43,12 @@ CREATE TABLE main.b221_price_versions (
 ) STRICT;
 
 CREATE TABLE main.b221_quotes (
-    id TEXT COLLATE BINARY NOT NULL CHECK(length(id)=36 AND substr(id,9,1)='-' AND substr(id,14,1)='-' AND substr(id,19,1)='-' AND substr(id,24,1)='-' AND length(replace(id,'-',''))=32 AND replace(id,'-','') NOT GLOB '*[^0-9a-f]*'),
+    id TEXT COLLATE BINARY NOT NULL CHECK(typeof(id)='text' AND instr(id,char(0))=0 AND length(CAST(id AS BLOB))=36 AND length(id)=36 AND substr(id,9,1)='-' AND substr(id,14,1)='-' AND substr(id,19,1)='-' AND substr(id,24,1)='-' AND length(replace(id,'-',''))=32 AND replace(id,'-','') NOT GLOB '*[^0-9a-f]*'),
     service_inquiry_id INTEGER NOT NULL CHECK(typeof(service_inquiry_id)='integer' AND service_inquiry_id BETWEEN 1 AND 9223372036854775807),
     service_id INTEGER NOT NULL CHECK(typeof(service_id)='integer' AND service_id BETWEEN 1 AND 9223372036854775807),
     provider_profile_id INTEGER NOT NULL CHECK(typeof(provider_profile_id)='integer' AND provider_profile_id BETWEEN 1 AND 9223372036854775807),
     client_user_id INTEGER NOT NULL CHECK(typeof(client_user_id)='integer' AND client_user_id BETWEEN 1 AND 9223372036854775807),
-    price_version_id TEXT COLLATE BINARY NOT NULL CHECK(length(price_version_id)=36 AND substr(price_version_id,9,1)='-' AND substr(price_version_id,14,1)='-' AND substr(price_version_id,19,1)='-' AND substr(price_version_id,24,1)='-' AND length(replace(price_version_id,'-',''))=32 AND replace(price_version_id,'-','') NOT GLOB '*[^0-9a-f]*'),
+    price_version_id TEXT COLLATE BINARY NOT NULL CHECK(typeof(price_version_id)='text' AND instr(price_version_id,char(0))=0 AND length(CAST(price_version_id AS BLOB))=36 AND length(price_version_id)=36 AND substr(price_version_id,9,1)='-' AND substr(price_version_id,14,1)='-' AND substr(price_version_id,19,1)='-' AND substr(price_version_id,24,1)='-' AND length(replace(price_version_id,'-',''))=32 AND replace(price_version_id,'-','') NOT GLOB '*[^0-9a-f]*'),
     price_version INTEGER NOT NULL CHECK(typeof(price_version)='integer' AND price_version BETWEEN 1 AND 1000000000),
     amount_cents INTEGER NOT NULL CHECK(typeof(amount_cents)='integer' AND amount_cents BETWEEN 1 AND 1000000000),
     commission_cents INTEGER NOT NULL CHECK(typeof(commission_cents)='integer' AND commission_cents BETWEEN 0 AND 1000000000),
@@ -57,9 +59,9 @@ CREATE TABLE main.b221_quotes (
     provider_bps INTEGER NOT NULL CHECK(typeof(provider_bps)='integer' AND provider_bps=8500),
     policy_version TEXT NOT NULL CHECK(policy_version='synthetic-commercial-v1-15pct-half-up'),
     synthetic INTEGER NOT NULL CHECK(typeof(synthetic)='integer' AND synthetic=1),
-    idempotency_key TEXT COLLATE BINARY NOT NULL CHECK(length(idempotency_key)=36 AND substr(idempotency_key,9,1)='-' AND substr(idempotency_key,14,1)='-' AND substr(idempotency_key,19,1)='-' AND substr(idempotency_key,24,1)='-' AND length(replace(idempotency_key,'-',''))=32 AND replace(idempotency_key,'-','') NOT GLOB '*[^0-9a-f]*'),
-    issued_at_utc TEXT COLLATE BINARY NOT NULL CHECK(length(issued_at_utc)=26 AND substr(issued_at_utc,20,1)='.' AND substr(issued_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(issued_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(issued_at_utc,1,19),'+0 seconds')=substr(issued_at_utc,1,19) AND issued_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
-    expires_at_utc TEXT COLLATE BINARY NOT NULL CHECK(length(expires_at_utc)=26 AND substr(expires_at_utc,20,1)='.' AND substr(expires_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(expires_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(expires_at_utc,1,19),'+0 seconds')=substr(expires_at_utc,1,19) AND expires_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
+    idempotency_key TEXT COLLATE BINARY NOT NULL CHECK(typeof(idempotency_key)='text' AND instr(idempotency_key,char(0))=0 AND length(CAST(idempotency_key AS BLOB))=36 AND length(idempotency_key)=36 AND substr(idempotency_key,9,1)='-' AND substr(idempotency_key,14,1)='-' AND substr(idempotency_key,19,1)='-' AND substr(idempotency_key,24,1)='-' AND length(replace(idempotency_key,'-',''))=32 AND replace(idempotency_key,'-','') NOT GLOB '*[^0-9a-f]*'),
+    issued_at_utc TEXT COLLATE BINARY NOT NULL CHECK(typeof(issued_at_utc)='text' AND instr(issued_at_utc,char(0))=0 AND length(CAST(issued_at_utc AS BLOB))=26 AND length(issued_at_utc)=26 AND substr(issued_at_utc,20,1)='.' AND substr(issued_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(issued_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(issued_at_utc,1,19),'+0 seconds')=substr(issued_at_utc,1,19) AND issued_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
+    expires_at_utc TEXT COLLATE BINARY NOT NULL CHECK(typeof(expires_at_utc)='text' AND instr(expires_at_utc,char(0))=0 AND length(CAST(expires_at_utc AS BLOB))=26 AND length(expires_at_utc)=26 AND substr(expires_at_utc,20,1)='.' AND substr(expires_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(expires_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(expires_at_utc,1,19),'+0 seconds')=substr(expires_at_utc,1,19) AND expires_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
     PRIMARY KEY(id),
     UNIQUE(client_user_id,idempotency_key),
     UNIQUE(id,client_user_id),
@@ -71,9 +73,9 @@ CREATE TABLE main.b221_quotes (
 ) STRICT;
 
 CREATE TABLE main.b221_acceptances (
-    quote_id TEXT COLLATE BINARY NOT NULL CHECK(length(quote_id)=36 AND substr(quote_id,9,1)='-' AND substr(quote_id,14,1)='-' AND substr(quote_id,19,1)='-' AND substr(quote_id,24,1)='-' AND length(replace(quote_id,'-',''))=32 AND replace(quote_id,'-','') NOT GLOB '*[^0-9a-f]*'),
+    quote_id TEXT COLLATE BINARY NOT NULL CHECK(typeof(quote_id)='text' AND instr(quote_id,char(0))=0 AND length(CAST(quote_id AS BLOB))=36 AND length(quote_id)=36 AND substr(quote_id,9,1)='-' AND substr(quote_id,14,1)='-' AND substr(quote_id,19,1)='-' AND substr(quote_id,24,1)='-' AND length(replace(quote_id,'-',''))=32 AND replace(quote_id,'-','') NOT GLOB '*[^0-9a-f]*'),
     client_user_id INTEGER NOT NULL CHECK(typeof(client_user_id)='integer' AND client_user_id BETWEEN 1 AND 9223372036854775807),
-    accepted_at_utc TEXT COLLATE BINARY NOT NULL CHECK(length(accepted_at_utc)=26 AND substr(accepted_at_utc,20,1)='.' AND substr(accepted_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(accepted_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(accepted_at_utc,1,19),'+0 seconds')=substr(accepted_at_utc,1,19) AND accepted_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
+    accepted_at_utc TEXT COLLATE BINARY NOT NULL CHECK(typeof(accepted_at_utc)='text' AND instr(accepted_at_utc,char(0))=0 AND length(CAST(accepted_at_utc AS BLOB))=26 AND length(accepted_at_utc)=26 AND substr(accepted_at_utc,20,1)='.' AND substr(accepted_at_utc,21,6) NOT GLOB '*[^0-9]*' AND strftime('%Y-%m-%d %H:%M:%S',substr(accepted_at_utc,1,19),'+0 seconds') IS NOT NULL AND strftime('%Y-%m-%d %H:%M:%S',substr(accepted_at_utc,1,19),'+0 seconds')=substr(accepted_at_utc,1,19) AND accepted_at_utc BETWEEN '2000-01-01 00:00:00.000000' AND '2100-12-31 23:59:59.999999'),
     PRIMARY KEY(quote_id),
     FOREIGN KEY(quote_id,client_user_id) REFERENCES b221_quotes(id,client_user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) STRICT;
@@ -130,7 +132,7 @@ CREATE TRIGGER main.b221_fixture_providers_no_delete BEFORE DELETE ON b221_fixtu
 BEGIN SELECT RAISE(ABORT,'b221_history_immutable'); END;
 
 CREATE TRIGGER main.b221_fixture_providers_no_replace BEFORE INSERT ON b221_fixture_providers
-WHEN EXISTS(SELECT 1 FROM main.b221_fixture_providers WHERE id=NEW.id)
+WHEN EXISTS(SELECT 1 FROM main.b221_fixture_providers WHERE id=NEW.id OR user_id=NEW.user_id)
 BEGIN SELECT RAISE(ABORT,'b221_fixture_immutable'); END;
 
 CREATE TRIGGER main.b221_fixture_services_no_update BEFORE UPDATE ON b221_fixture_services

@@ -1,6 +1,8 @@
 # TEKORA B2.2.1 — Validación y entrega local
 
-Estado: **READY FOR REVIEW**, limitado al prototipo SQLite sintético B1.
+Registro **histórico del commit original `417fbbeea08e1222eedd362dc6af09b1b47c5b8b`**. Su estado inicial fue READY FOR REVIEW; la revisión independiente posterior concluyó **CHANGES REQUIRED** por P2 (representación NUL) y P3 (REPLACE por user_id). Este registro y su JSON original se conservan; no describen la aceptación de fix1.
+
+Corrección y validaciones actuales: [B221-FIX1-VALIDATION.md](B221-FIX1-VALIDATION.md).
 Rama: `codex/payments-b221-sqlite-pricing-prototype`.
 Base: `ac999cea8f592ce7b94481ee30f602b67d9f5bea`.
 No se ha publicado la rama ni creado un PR.

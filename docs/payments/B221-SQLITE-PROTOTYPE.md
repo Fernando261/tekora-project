@@ -1,6 +1,8 @@
 # TEKORA B2.2.1 — Persistencia SQLite B1 sintética
 
-Prototipo aislado, sin binding de aplicación. Base de rama: `ac999cea8f592ce7b94481ee30f602b67d9f5bea`.
+Prototipo aislado, sin binding de aplicación. Corrección local **B2.2.1-fix1**, pendiente de nueva revisión independiente; resultados en [B221-FIX1-VALIDATION.md](B221-FIX1-VALIDATION.md).
+
+Base de rama: `ac999cea8f592ce7b94481ee30f602b67d9f5bea`.
 Referencias verificadas: PR #32 `a7efd0e353435c46c633f02120d131507bdc7516`; PR #33 `815879d448e17ef8955354c6a275201ba6f350fe`. Ambos seguían abiertos/en borrador y no fusionados al preparar el trabajo.
 
 Se consultó `/workspace/tekora-b22-design-6gqtanqr/TEKORA-B22-DESIGN.md`. Esta entrega implementa solo persistencia de precios, quotes y aceptaciones B1, conforme a la autorización limitada posterior. No implementa las ocho entidades ocupacionales del diseño, HoldStore, claims, coordinador, evolución de reservas o API v2.
@@ -44,14 +46,14 @@ Siete tablas **STRICT** en main:
 
 Las cuatro primeras son exclusivamente referencias sintéticas, no tablas de la aplicación ni una copia de sus migraciones. Su identidad también es append-only, para no reinterpretar después los snapshots.
 
-- IDs UUID/keys en TEXT COLLATE BINARY, canónicos minúsculos; PK declaradas NOT NULL y UNIQUE de servicio/versión, servicio/intención y cliente/intención.
+- IDs UUID/keys en TEXT COLLATE BINARY, canónicos minúsculos. Los seis campos UUID exigen tipo TEXT, ausencia de NUL y exactamente 36 bytes además del formato previo. PK declaradas NOT NULL y UNIQUE de servicio/versión, servicio/intención y cliente/intención.
 - FK RESTRICT entre fixtures, precio, quote y aceptación, incluidas claves compuestas de precio/importe/servicio/prestador y de inquiry/servicio/cliente.
 - Propietario del precio coincide con usuario del prestador sintético. Cliente no puede ser prestador de su propia quote.
 - MXN, duración 60, synthetic=1, política B1 fija, 1.500/8.500 bps y límite monetario técnico B1. Ese límite no se aplica a los IDs históricos.
 - Comisión entera: `(total / 100) * 15 + (((total % 100) * 15 + 50) / 100)` con operandos INTEGER acotados; prestador es residual. CHECK conserva total y redondeo half-up. No impuestos/costos inventados como cero.
-- UTC de 26 caracteres `YYYY-MM-DD HH:MM:SS.ffffff`, rango técnico 2000..2100, calendario y seis microsegundos validados; el adaptador normaliza offsets a UTC conservando el instante.
+- UTC de 26 caracteres ASCII `YYYY-MM-DD HH:MM:SS.ffffff`, rango técnico 2000..2100, calendario y seis microsegundos validados. Los cuatro campos exigen tipo TEXT, ausencia de NUL y 26 bytes completos. El adaptador normaliza offsets a UTC conservando el instante; ese formato aprobado no se amplía.
 - Quote emitida no antes del precio; vigencia entre 1 y 86.400 segundos conforme al constructor B1. Fixture ordinario: 1.800 s. Aceptación cumple `issued <= accepted < expires`.
-- Guard de precio exige exactamente MAX(version)+1. Guards de inserción rechazan sustituciones por ID/intención; los de UPDATE/DELETE impiden modificar o borrar historia. REPLACE/upsert no pueden eludir esa protección.
+- Guard de precio exige exactamente MAX(version)+1. Guards de inserción rechazan sustituciones por ID/intención; el de prestadores sintéticos cubre tanto id como user_id. Los de UPDATE/DELETE impiden modificar o borrar historia. El rechazo de REPLACE no depende de activar recursive_triggers; se auditaron las claves únicas alternativas.
 - Nueve índices explícitos de consulta/FK, además de los índices automáticos de PK/UNIQUE. Ningún trigger se crea sobre tablas históricas.
 
 STRICT/typeof valida el valor persistido; la afinidad de SQLite no certifica el tipo original de entrada. PricingValues valida además los DTO y tipos reconstituidos. No se presenta la fábrica de fixtures como autoridad de autenticación real.
@@ -107,4 +109,4 @@ php vendor/bin/pint --test tests/Support/PricingSqlite tests/PaymentsSqliteProto
 
 **La suite estándar de main no descubre el directorio PaymentsSqlitePrototype.** Es intencional para mantener este laboratorio fuera del arranque operativo: el primer comando es obligatorio para validar B2.2.1. El segundo prueba B1 original sin adaptar su store. El tercero reproduce las regresiones históricas compatibles; no se declara que los tres sean una ejecución combinada de integración.
 
-Resultados, incidencias y límites en [B221-VALIDATION.md](B221-VALIDATION.md). Las bases de pruebas no son archivos versionados ni se incluyen en el commit.
+Resultados históricos originales en [B221-VALIDATION.md](B221-VALIDATION.md); correcciones P2/P3, regresiones y resultados fix1 en [B221-FIX1-VALIDATION.md](B221-FIX1-VALIDATION.md). Las bases de pruebas no son archivos versionados ni se incluyen en el commit.
