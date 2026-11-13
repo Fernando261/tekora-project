@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+         bootstrap="bootstrap.php" cacheResult="false" colors="false"
+         failOnWarning="true" failOnRisky="true" failOnSkipped="true" failOnIncomplete="true">
+    <testsuites>
+        <testsuite name="Isolated T1 ownership laboratory">
+            <file>FixtureProfileTest.php</file>
+            <file>OwnershipLifecycleTest.php</file>
+            <file>BusyConcurrencyTest.php</file>
+            <file>OutcomeBoundaryTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
