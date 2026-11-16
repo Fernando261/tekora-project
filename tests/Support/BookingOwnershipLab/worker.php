@@ -50,6 +50,11 @@ try {
         $output['result'] = $factory->coordinator()->run($invocation, OwnershipCoordinator::program(...))->jsonSerialize();
         $output['release'] = $factory->auditRelease();
         if ($argv[5] === 'left' && $output['result']['native_outcome'] === 'COMMITTED' && $output['release']['status'] === 'RELEASED') {
+            // The contender is still waiting for committed-left: this is a pre-retry baseline.
+            $output['baseline'] = $fixture->observe('S');
+            if ($output['baseline']['status'] !== 'PASS' || ! $output['baseline']['read_complete']) {
+                throw new LabFailure('ObservationUnavailable', 'COMMITTED_BASELINE', $fixture->observationError());
+            }
             FaultPlan::signal($fixture, 'committed-left');
         }
     }

@@ -356,7 +356,7 @@ final class OwnershipLifecycleTest extends LabTestCase
             self::assertSame(NativeOutcome::COMMITTED, $result->nativeOutcome);
             $this->failure(fn () => $factory->coordinator(), 'ConnectionInvalidated');
             self::assertSame('RELEASED', $factory->auditRelease()['status']);
-            $this->assertSnapshot($fixture->observe('S'), 1);
+            $this->assertCommittedSnapshot($fixture->observe('S'), 1);
         }
     }
 
@@ -480,7 +480,11 @@ final class OwnershipLifecycleTest extends LabTestCase
             self::assertTrue(PrivateConnectionFactory::admissionClosed());
             $fixture->record('release', ['expected_evidence_failure' => $caught->jsonSerialize(), 'preserved_result' => $result]);
         }
-        $this->assertSnapshot($fixture->observe('S'), $variant === 'rollback' ? 0 : 1);
+        if ($variant === 'rollback') {
+            $this->assertSnapshot($fixture->observe('S'), 0);
+        } else {
+            $this->assertCommittedSnapshot($fixture->observe('S'), 1);
+        }
         self::assertSame('RELEASED', $factory->auditRelease()['status']);
     }
 }

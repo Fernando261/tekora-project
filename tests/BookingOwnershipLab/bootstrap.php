@@ -77,12 +77,37 @@ abstract class LabTestCase extends TestCase
         }
     }
 
+    /** Unchanged state (including aborts), independently of the number of retained rows. */
     protected function assertSnapshot(array $snapshot, int $count, ?array $baseline = null): void
     {
-        if ($count === 0 && $snapshot['phase'] !== 'P') {
+        if ($snapshot['phase'] !== 'P') {
             $baseline ??= $this->snapshotBaselines[$snapshot['manifest_hash']] ?? null;
             self::assertNotNull($baseline, 'An abort snapshot requires a baseline captured before the operation.');
         }
+        $this->assertSnapshotData($snapshot, $count);
+        if ($baseline !== null) {
+            self::assertSame('PASS', $baseline['status']);
+            self::assertTrue($baseline['read_complete']);
+            self::assertNotSame($baseline['snapshot_id'], $snapshot['snapshot_id'], 'A final snapshot cannot be its own baseline.');
+            self::assertLessThan($snapshot['time_ns'], $baseline['time_ns'], 'The baseline must precede the observed result.');
+            self::assertSame($baseline['manifest_hash'], $snapshot['manifest_hash']);
+            self::assertSame($baseline['epoch'], $snapshot['epoch']);
+            self::assertSame($baseline['tables'], $snapshot['tables']);
+        }
+        if ($snapshot['phase'] === 'P') {
+            $this->snapshotBaselines[$snapshot['manifest_hash']] ??= $snapshot;
+        }
+    }
+
+    /** A legitimate COMMIT changes state; callers assert its native outcome separately. */
+    protected function assertCommittedSnapshot(array $snapshot, int $count): void
+    {
+        self::assertSame('S', $snapshot['phase']);
+        $this->assertSnapshotData($snapshot, $count);
+    }
+
+    private function assertSnapshotData(array $snapshot, int $count): void
+    {
         self::assertSame('PASS', $snapshot['status'], json_encode($snapshot));
         self::assertTrue($snapshot['read_complete']);
         self::assertTrue($snapshot['data_read_complete']);
@@ -102,14 +127,6 @@ abstract class LabTestCase extends TestCase
                 self::assertCount(1, $matching);
                 self::assertSame($receipt['invocation_id'], $matching[0]['invocation_id']);
             }
-        }
-        if ($baseline !== null) {
-            self::assertSame($baseline['manifest_hash'], $snapshot['manifest_hash']);
-            self::assertSame($baseline['epoch'], $snapshot['epoch']);
-            self::assertSame($baseline['tables'], $snapshot['tables']);
-        }
-        if ($snapshot['phase'] === 'P') {
-            $this->snapshotBaselines[$snapshot['manifest_hash']] ??= $snapshot;
         }
     }
 

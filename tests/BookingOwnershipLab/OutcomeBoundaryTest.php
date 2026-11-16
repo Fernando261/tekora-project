@@ -134,7 +134,7 @@ final class OutcomeBoundaryTest extends LabTestCase
             self::assertNotSame($firstSpec->id, $newSpec->id);
             self::assertNotSame($first->trace[0]['connection_epoch'], $second->trace[0]['connection_epoch']);
             $snapshot = $fixture->observe('S');
-            $this->assertSnapshot($snapshot, 1);
+            $this->assertCommittedSnapshot($snapshot, 1);
             self::assertSame($newSpec->id, $snapshot['tables']['probe_receipt'][0]['invocation_id']);
             self::assertSame('RELEASED', $newFactory->auditRelease()['status']);
         }

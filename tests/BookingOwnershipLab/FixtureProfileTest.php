@@ -113,7 +113,7 @@ final class FixtureProfileTest extends LabTestCase
         self::assertNotSame($ownerId, $during['pdo_id']);
         $this->assertSnapshot($during, 0);
         $post = $fixture->observe('S');
-        $this->assertSnapshot($post, 1);
+        $this->assertCommittedSnapshot($post, 1);
         self::assertSame($spec->id, $post['tables']['probe_receipt'][0]['invocation_id']);
         self::assertSame(1, (int) $post['tables']['coordination'][0]['admission_version']);
         self::assertSame('RELEASED', $factory->auditRelease()['status']);
@@ -218,7 +218,7 @@ final class FixtureProfileTest extends LabTestCase
             self::assertSame(NativeOutcome::COMMITTED, $result->nativeOutcome);
             self::assertSame('RELEASED', $factory->auditRelease()['status']);
             $baseline = $fixture->observe('S');
-            $snapshot = $baseline;
+            $snapshot = $fixture->observe('S');
             // Alter only the diagnostic snapshot: keep SQLite's immutable probes intact.
             $snapshot['tables'][$table][0][$column] = $value;
             $count = 1;
@@ -267,7 +267,7 @@ final class FixtureProfileTest extends LabTestCase
         self::assertSame(NativeOutcome::COMMITTED, $committed->nativeOutcome);
         self::assertSame('RELEASED', $newFactory->auditRelease()['status']);
         $after = $fixture->observe('S');
-        $this->assertSnapshot($after, $existing ? 2 : 1);
+        $this->assertCommittedSnapshot($after, $existing ? 2 : 1);
         self::assertSame((int) $baseline['tables']['coordination'][0]['admission_version'] + 1, (int) $after['tables']['coordination'][0]['admission_version']);
         self::assertNotSame($baseline['tables']['coordination'][0]['owner_nonce'], $after['tables']['coordination'][0]['owner_nonce']);
         self::assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $after['tables']['coordination'][0]['owner_nonce']);

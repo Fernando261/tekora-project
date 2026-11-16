@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\BookingOwnershipLab;
 
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -57,7 +58,11 @@ final class BusyConcurrencyTest extends LabTestCase
             self::assertSame($success ? NativeOutcome::COMMITTED : NativeOutcome::ROLLED_BACK, $result->nativeOutcome);
             self::assertSame($success ? 1 : 0, $result->callbackCount);
             self::assertSame($success ? 2 : 3, count($this->events($result, 'BEGIN_ATTEMPT')));
-            $this->assertSnapshot($fixture->observe('S'), $success ? 1 : 0);
+            if ($success) {
+                $this->assertCommittedSnapshot($fixture->observe('S'), 1);
+            } else {
+                $this->assertSnapshot($fixture->observe('S'), 0);
+            }
             self::assertSame('RELEASED', $factory->auditRelease()['status']);
         }
         foreach ($this->events($result, 'RETRY_SCHEDULED') as $event) {
@@ -80,7 +85,7 @@ final class BusyConcurrencyTest extends LabTestCase
         self::assertCount(1, $this->events($result, 'COMMIT_BUSY_ACTIVE'));
         self::assertCount(1, array_unique(array_column($this->events($result, 'COMMIT_REQUESTED'), 'generation')));
         self::assertSame([], $this->events($result, 'ROLLBACK_REQUESTED'));
-        $this->assertSnapshot($fixture->observe('S'), 1);
+        $this->assertCommittedSnapshot($fixture->observe('S'), 1);
         self::assertSame('RELEASED', $factory->auditRelease()['status']);
     }
 
@@ -179,10 +184,79 @@ final class BusyConcurrencyTest extends LabTestCase
         self::assertGreaterThanOrEqual(2, count($begin));
         $confirmed = json_decode(file_get_contents($fixture->directory.'/committed-left.signal'), true, flags: JSON_THROW_ON_ERROR);
         self::assertSame($a['pid'], $confirmed['pid']);
+        $baseline = $a['baseline'];
+        $this->assertCommittedSnapshot($baseline, 1);
+        self::assertSame($a['pid'], $baseline['pid']);
+        self::assertSame($a['result']['invocation_id'], $baseline['tables']['probe_receipt'][0]['invocation_id']);
+        self::assertSame(1, (int) $baseline['tables']['coordination'][0]['admission_version']);
+        self::assertLessThan($confirmed['time_ns'], $baseline['time_ns']);
         self::assertGreaterThan($confirmed['time_ns'], array_values($begin)[1]['time_ns']);
+        $leftCommit = array_values(array_filter($a['result']['trace'], fn ($row) => $row['event'] === 'COMMIT_REQUESTED'))[0];
+        $rightRollback = array_values(array_filter($b['result']['trace'], fn ($row) => $row['event'] === 'ROLLBACK_CONFIRMED'))[0];
+        self::assertLessThan($leftCommit['time_ns'], array_values($begin)[0]['time_ns']);
+        self::assertLessThan($leftCommit['time_ns'], $rightRollback['time_ns']);
         $observer = $this->finishWorker($this->startWorker($fixture, 'observe'));
-        $this->assertSnapshot($observer['snapshot'], $sameKey ? 1 : 2);
+        if ($sameKey) {
+            $this->assertSnapshot($observer['snapshot'], 1, $baseline);
+        } else {
+            $this->assertCommittedSnapshot($observer['snapshot'], 2);
+        }
         FaultPlan::assertNoInheritedHandles();
+    }
+
+    public static function fix2CoordinationChanges(): array
+    {
+        return ['version' => ['admission_version'], 'nonce' => ['owner_nonce']];
+    }
+
+    #[DataProvider('fix2CoordinationChanges')]
+    public function test_fix2_nonempty_abort_requires_baseline_and_rejects_coordination_changes(string $column): void
+    {
+        $fixture = $this->fixture('T1-30-fix2-negative');
+        [$committed, $firstFactory] = $this->execute($fixture, key: 'prior-commit');
+        self::assertSame(NativeOutcome::COMMITTED, $committed->nativeOutcome);
+        self::assertSame('RELEASED', $firstFactory->auditRelease()['status']);
+        $baseline = $fixture->observe('S');
+        $this->assertCommittedSnapshot($baseline, 1);
+        [$aborted, $factory] = $this->execute($fixture, new FaultPlan([FaultPoint::AFTER_A->value => 'throw']), key: 'later-abort');
+        self::assertSame(NativeOutcome::ROLLED_BACK, $aborted->nativeOutcome);
+        self::assertSame('RELEASED', $factory->auditRelease()['status']);
+        $snapshot = $fixture->observe('S');
+        $this->assertSnapshot($snapshot, 1, $baseline);
+        $missingRejected = false;
+        try {
+            $this->assertSnapshot($snapshot, 1);
+        } catch (AssertionFailedError) {
+            $missingRejected = true;
+        }
+        self::assertTrue($missingRejected, 'The initial empty baseline cannot certify this later abort.');
+        // Diagnostic-snapshot negative control; do not bypass SQLite's guards.
+        $changed = $snapshot;
+        $changed['tables']['coordination'][0][$column] = $column === 'admission_version'
+            ? (int) $changed['tables']['coordination'][0][$column] + 1
+            : hash('sha256', 'synthetic-altered-nonce');
+        $mutationRejected = false;
+        try {
+            $this->assertSnapshot($changed, 1, $baseline);
+        } catch (AssertionFailedError) {
+            $mutationRejected = true;
+        }
+        self::assertTrue($mutationRejected, 'A nonempty abort must preserve '.$column.'.');
+        $fixture->record('release', ['baseline' => $baseline, 'actual_abort' => $snapshot, 'negative_snapshot' => $changed,
+            'changed_column' => $column, 'missing_baseline_rejected' => $missingRejected, 'mutation_rejected' => $mutationRejected]);
+    }
+
+    public function test_fix2_final_snapshot_cannot_be_its_own_abort_baseline(): void
+    {
+        $fixture = $this->fixture('T1-30-fix2-self-baseline');
+        [$committed, $factory] = $this->execute($fixture);
+        self::assertSame(NativeOutcome::COMMITTED, $committed->nativeOutcome);
+        self::assertSame('RELEASED', $factory->auditRelease()['status']);
+        $snapshot = $fixture->observe('S');
+        $this->assertCommittedSnapshot($snapshot, 1);
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('A final snapshot cannot be its own baseline.');
+        $this->assertSnapshot($snapshot, 1, $snapshot);
     }
 
     public function test_t1_31_fd_preflight_and_fresh_exec_are_enforced(): void
