@@ -210,11 +210,12 @@ final class LabFixture
 
     public function observe(string $phase, bool $known = true, ?string $fault = null): array
     {
-        if (! in_array($phase, ['P', 'S', 'U', 'DURING'], true) || ! in_array($fault, [null, 'busy', 'open', 'close_false', 'begin_uncertain'], true)) {
+        if (! in_array($phase, ['P', 'S', 'U', 'DURING'], true) || ! in_array($fault, [null, 'busy', 'open', 'close_false', 'begin_uncertain', 'read_incomplete', 'read_incomplete_close_false'], true)) {
             throw new LabFailure('UnsupportedFaultPoint', 'OBSERVE');
         }
         $result = ['snapshot_id' => bin2hex(random_bytes(16)), 'phase' => $phase, 'pid' => getmypid(), 'epoch' => $this->epoch(),
-            'manifest_hash' => $this->hash(), 'php' => PHP_VERSION, 'trace_arguments_ignored' => ini_get('zend.exception_ignore_args') === '1', 'time_ns' => hrtime(true), 'injected' => $fault !== null, 'read_complete' => false];
+            'manifest_hash' => $this->hash(), 'php' => PHP_VERSION, 'trace_arguments_ignored' => ini_get('zend.exception_ignore_args') === '1', 'time_ns' => hrtime(true), 'injected' => $fault !== null,
+            'read_complete' => false, 'data_read_complete' => false, 'cleanup_complete' => false, 'structural_status' => 'UNKNOWN', 'functional_status' => 'UNKNOWN'];
         $pdo = null;
         $readerRequested = false;
         $readerStarted = false;
@@ -232,6 +233,9 @@ final class LabFixture
             $pdo = $this->connect(true);
             $result['pdo_id'] = spl_object_id($pdo);
             $result['foreign_keys'] = $pdo->query('PRAGMA foreign_keys')->fetchAll(PDO::FETCH_NUM);
+            if (count($result['foreign_keys']) !== 1 || count($result['foreign_keys'][0]) !== 1 || (int) $result['foreign_keys'][0][0] !== 1) {
+                $result['structural_status'] = 'FAIL';
+            }
             $readerRequested = true;
             if ($pdo->beginTransaction() !== true) {
                 throw new LabFailure('ObservationBeginUnknown', 'OBSERVE');
@@ -241,7 +245,18 @@ final class LabFixture
             }
             $readerStarted = true;
             $result['integrity_check'] = $pdo->query('PRAGMA integrity_check')->fetchAll(PDO::FETCH_NUM);
+            if ($result['integrity_check'] !== [['ok']]) {
+                $result['structural_status'] = 'FAIL';
+            }
+            if (in_array($fault, ['read_incomplete', 'read_incomplete_close_false'], true)) {
+                throw FaultPlan::diagnostic('HY000', 10, 'Injected incomplete observation');
+            }
             $result['foreign_key_check'] = $pdo->query('PRAGMA foreign_key_check')->fetchAll(PDO::FETCH_NUM);
+            if ($result['foreign_key_check'] !== []) {
+                $result['structural_status'] = 'FAIL';
+            } elseif ($result['structural_status'] !== 'FAIL') {
+                $result['structural_status'] = 'PASS';
+            }
             $result['tables'] = [];
             foreach (['coordination', 'probe_a', 'probe_b', 'probe_outbox', 'probe_receipt'] as $table) {
                 $rows = $pdo->query('SELECT * FROM '.$table.' ORDER BY 1')->fetchAll(PDO::FETCH_ASSOC);
@@ -253,6 +268,9 @@ final class LabFixture
                 }
                 $result['tables'][$table] = $rows;
             }
+            $result['data_read_complete'] = true;
+            $result['functional_status'] = self::validGraph($result['tables']) && count($result['tables']['coordination']) === 1
+                && $result['tables']['coordination'][0]['epoch'] === $this->epoch() ? 'PASS' : 'FAIL';
             $readerCloseRequested = true;
             $result['reader_close_calls']++;
             if ($fault === 'close_false' || $pdo->rollBack() !== true) {
@@ -260,28 +278,27 @@ final class LabFixture
             }
             $readerClosed = true;
             $result['read_complete'] = true;
-            $structural = count($result['foreign_keys']) === 1 && count($result['foreign_keys'][0]) === 1
-                && (int) $result['foreign_keys'][0][0] === 1 && $result['integrity_check'] === [['ok']] && $result['foreign_key_check'] === [];
-            $functional = self::validGraph($result['tables']) && count($result['tables']['coordination']) === 1
-                && $result['tables']['coordination'][0]['epoch'] === $this->epoch();
-            $result['structural_status'] = $structural ? 'PASS' : 'FAIL';
-            $result['functional_status'] = $functional ? 'PASS' : 'FAIL';
-            $result['status'] = ! $structural || ! $functional ? 'FAIL' : ($known ? 'PASS' : 'UNKNOWN');
+            $result['status'] = $result['structural_status'] === 'FAIL' || $result['functional_status'] === 'FAIL' ? 'FAIL' : ($known ? 'PASS' : 'UNKNOWN');
         } catch (Throwable $error) {
             $this->observationError = $error;
-            $result['status'] = 'BLOCKED';
+            $result['status'] = $result['structural_status'] === 'FAIL' || $result['functional_status'] === 'FAIL' ? 'FAIL' : 'BLOCKED';
             $result['error'] = LabFailure::from($error, 'OBSERVE', 'ObservationUnavailable')->jsonSerialize();
             if ($pdo !== null && $readerStarted && ! $readerClosed && ! $readerCloseRequested) {
                 try {
                     // Positive return of this reader's BEGIN, never merely a boolean diagnostic.
                     $readerCloseRequested = true;
                     $result['reader_close_calls']++;
-                    $readerClosed = $pdo->rollBack() === true;
+                    $readerClosed = $fault !== 'read_incomplete_close_false' && $pdo->rollBack() === true;
+                    if (! $readerClosed) {
+                        $result['secondary_error'] = (new LabFailure('ObservationCloseUnknown', 'OBSERVE'))->jsonSerialize();
+                    }
                 } catch (Throwable $closeError) {
                     $result['secondary_error'] = LabFailure::from($closeError, 'OBSERVE', 'ObservationCloseUnknown')->jsonSerialize();
                 }
             }
         } finally {
+            $result['cleanup_complete'] = $readerClosed;
+            $result['reader_cleanup_status'] = $readerClosed ? 'CLOSED' : ($readerRequested ? 'UNKNOWN' : 'NOT_STARTED');
             if ($pdo !== null && $readerRequested && ! $readerClosed) {
                 self::$retainedReaders[$result['snapshot_id']] = $pdo;
                 PrivateConnectionFactory::blockWorker();

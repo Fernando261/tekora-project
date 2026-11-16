@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\BookingOwnershipLab;
 
+use PDOException;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tests\Support\BookingOwnershipLab\FakePortA;
 use Tests\Support\BookingOwnershipLab\FakePortB;
 use Tests\Support\BookingOwnershipLab\FaultPlan;
+use Tests\Support\BookingOwnershipLab\FaultPoint;
+use Tests\Support\BookingOwnershipLab\LabFailure;
 use Tests\Support\BookingOwnershipLab\LabFixture;
 use Tests\Support\BookingOwnershipLab\NativeOutcome;
+use Tests\Support\BookingOwnershipLab\PrivateConnectionFactory;
 use Tests\Support\BookingOwnershipLab\ProbeOutbox;
 use Tests\Support\BookingOwnershipLab\ProbeReceipt;
 use Tests\Support\BookingOwnershipLab\SessionLease;
@@ -112,5 +117,159 @@ final class FixtureProfileTest extends LabTestCase
         self::assertSame($spec->id, $post['tables']['probe_receipt'][0]['invocation_id']);
         self::assertSame(1, (int) $post['tables']['coordination'][0]['admission_version']);
         self::assertSame('RELEASED', $factory->auditRelease()['status']);
+    }
+
+    public static function fix1ObservationFailures(): array
+    {
+        return [
+            'fk-and-close' => [true, 'close_false', 'FAIL', 'FAIL', true, false],
+            'fk-only' => [true, null, 'FAIL', 'FAIL', true, true],
+            'healthy-close' => [false, 'close_false', 'UNKNOWN', 'PASS', true, false],
+            'incomplete-read' => [false, 'read_incomplete', 'BLOCKED', 'UNKNOWN', false, true],
+            'incomplete-read-and-close' => [false, 'read_incomplete_close_false', 'UNKNOWN', 'UNKNOWN', false, false],
+            'healthy' => [false, null, 'PASS', 'PASS', true, true],
+        ];
+    }
+
+    #[DataProvider('fix1ObservationFailures')]
+    public function test_fix1_observation_preserves_facts_and_separates_cleanup(bool $orphan, ?string $fault, string $status, string $structural, bool $dataComplete, bool $cleanupComplete): void
+    {
+        $fixture = $this->fixture('T1-01-fix1-observer');
+        if ($orphan) {
+            // Deliberately invalid synthetic fixture, solely to test the diagnostic oracle.
+            $writer = $fixture->connect(false);
+            $writer->exec('PRAGMA foreign_keys=OFF');
+            $writer->exec("INSERT INTO probe_a VALUES ('fix1-orphan',11,'fix1-invocation')");
+            $writer = null;
+        }
+        $snapshot = $fixture->observe('S', true, $fault);
+        self::assertSame($status, $snapshot['status']);
+        self::assertSame($structural, $snapshot['structural_status']);
+        self::assertSame($dataComplete, $snapshot['data_read_complete']);
+        self::assertSame($cleanupComplete, $snapshot['cleanup_complete']);
+        self::assertSame($dataComplete && $cleanupComplete, $snapshot['read_complete']);
+        self::assertSame([[1]], $snapshot['foreign_keys']);
+        self::assertSame([['ok']], $snapshot['integrity_check']);
+        if ($orphan) {
+            self::assertNotEmpty($snapshot['foreign_key_check']);
+            self::assertSame('FAIL', $snapshot['functional_status']);
+        } elseif ($dataComplete) {
+            self::assertSame([], $snapshot['foreign_key_check']);
+            self::assertSame('PASS', $snapshot['functional_status']);
+        } else {
+            self::assertArrayNotHasKey('foreign_key_check', $snapshot);
+            self::assertSame('UNKNOWN', $snapshot['functional_status']);
+            self::assertInstanceOf(PDOException::class, $fixture->observationError());
+            self::assertSame(10, LabFailure::sqliteCode($fixture->observationError()));
+            self::assertSame(10, $snapshot['error']['sqlite_code']);
+        }
+        self::assertSame(1, $snapshot['reader_close_calls']);
+        if (! $cleanupComplete) {
+            self::assertSame('UNKNOWN', $snapshot['reader_cleanup_status']);
+            self::assertSame('retained_reader_quarantine', $snapshot['cleanup_state']);
+            self::assertTrue(PrivateConnectionFactory::admissionClosed());
+            $weak = LabFixture::weakRetainedReader($snapshot['snapshot_id']);
+            gc_collect_cycles();
+            self::assertNotNull($weak->get());
+            $this->failure(fn () => new PrivateConnectionFactory($fixture), 'ConnectionInvalidated');
+            $error = $fault === 'read_incomplete_close_false' ? $snapshot['secondary_error'] : $snapshot['error'];
+            self::assertSame('ObservationCloseUnknown', $error['reason']);
+        } else {
+            self::assertSame('CLOSED', $snapshot['reader_cleanup_status']);
+            self::assertNull(LabFixture::weakRetainedReader($snapshot['snapshot_id']));
+            self::assertFalse(PrivateConnectionFactory::admissionClosed());
+        }
+        $lines = file($fixture->directory.'/observations.jsonl', FILE_IGNORE_NEW_LINES);
+        self::assertSame($snapshot, json_decode($lines[array_key_last($lines)], true, flags: JSON_THROW_ON_ERROR));
+    }
+
+    public static function fix1SnapshotChanges(): array
+    {
+        return [
+            'coordination-version' => ['coordination', 'admission_version', 9],
+            'coordination-nonce' => ['coordination', 'owner_nonce', null],
+            'probe-a' => ['probe_a', 'a_value', 12],
+            'probe-b' => ['probe_b', 'b_value', 23],
+            'outbox' => ['probe_outbox', 'event_key', 'changed-event'],
+            'receipt' => ['probe_receipt', 'event_key', 'changed-event'],
+        ];
+    }
+
+    #[DataProvider('fix1SnapshotChanges')]
+    public function test_fix1_abort_snapshot_rejects_changes_in_each_table(string $table, string $column, mixed $value): void
+    {
+        $fixture = $this->fixture('T1-01-fix1-snapshot');
+        $baseline = null;
+        if ($table === 'coordination') {
+            $nonce = bin2hex(random_bytes(16));
+            $writer = $fixture->connect(false);
+            $statement = $writer->prepare('UPDATE coordination SET '.$column.'=? WHERE id=1');
+            $statement->execute([$column === 'owner_nonce' ? $nonce : $value]);
+            $statement = null;
+            $writer = null;
+            $snapshot = $fixture->observe('S');
+            $count = 0;
+            if ($column === 'owner_nonce') {
+                self::assertSame(hash('sha256', $nonce), $snapshot['tables']['coordination'][0]['owner_nonce']);
+                self::assertStringNotContainsString($nonce, json_encode($snapshot));
+            }
+        } else {
+            [$result, $factory] = $this->execute($fixture);
+            self::assertSame(NativeOutcome::COMMITTED, $result->nativeOutcome);
+            self::assertSame('RELEASED', $factory->auditRelease()['status']);
+            $baseline = $fixture->observe('S');
+            $snapshot = $baseline;
+            // Alter only the diagnostic snapshot: keep SQLite's immutable probes intact.
+            $snapshot['tables'][$table][0][$column] = $value;
+            $count = 1;
+        }
+        $rejected = false;
+        try {
+            $this->assertSnapshot($snapshot, $count, $baseline);
+        } catch (AssertionFailedError) {
+            $rejected = true;
+        }
+        self::assertTrue($rejected, 'A changed '.$table.' snapshot must be rejected.');
+        $fixture->record('release', ['negative_snapshot' => $snapshot, 'baseline' => $baseline, 'expected_rejection' => $rejected, 'changed_table' => $table]);
+    }
+
+    public function test_fix1_abort_snapshot_without_prior_baseline_is_rejected(): void
+    {
+        $fixture = LabFixture::fresh('T1-01-fix1-no-baseline');
+        $snapshot = $fixture->observe('S');
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('An abort snapshot requires a baseline captured before the operation.');
+        $this->assertSnapshot($snapshot, 0);
+    }
+
+    public static function fix1AbortBaselines(): array
+    {
+        return ['empty' => [false], 'existing-graph' => [true]];
+    }
+
+    #[DataProvider('fix1AbortBaselines')]
+    public function test_fix1_abort_preserves_all_tables_and_success_can_change_coordination(bool $existing): void
+    {
+        $fixture = $this->fixture('T1-01-fix1-baseline');
+        if ($existing) {
+            [$committed, $firstFactory] = $this->execute($fixture);
+            self::assertSame(NativeOutcome::COMMITTED, $committed->nativeOutcome);
+            self::assertSame('RELEASED', $firstFactory->auditRelease()['status']);
+        }
+        $baseline = $fixture->observe($existing ? 'S' : 'P');
+        [$aborted, $factory] = $this->execute($fixture, new FaultPlan([FaultPoint::AFTER_A->value => 'throw']), key: 'fix1-abort');
+        self::assertSame(NativeOutcome::ROLLED_BACK, $aborted->nativeOutcome);
+        self::assertSame('RELEASED', $factory->auditRelease()['status']);
+        $snapshot = $fixture->observe('S');
+        $this->assertSnapshot($snapshot, $existing ? 1 : 0, $existing ? $baseline : null);
+        self::assertSame($baseline['tables'], $snapshot['tables']);
+        [$committed, $newFactory] = $this->execute($fixture, key: 'fix1-success');
+        self::assertSame(NativeOutcome::COMMITTED, $committed->nativeOutcome);
+        self::assertSame('RELEASED', $newFactory->auditRelease()['status']);
+        $after = $fixture->observe('S');
+        $this->assertSnapshot($after, $existing ? 2 : 1);
+        self::assertSame((int) $baseline['tables']['coordination'][0]['admission_version'] + 1, (int) $after['tables']['coordination'][0]['admission_version']);
+        self::assertNotSame($baseline['tables']['coordination'][0]['owner_nonce'], $after['tables']['coordination'][0]['owner_nonce']);
+        self::assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $after['tables']['coordination'][0]['owner_nonce']);
     }
 }

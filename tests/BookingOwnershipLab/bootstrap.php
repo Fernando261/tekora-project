@@ -43,6 +43,9 @@ FaultPlan::assertNoInheritedHandles();
 /** Pure PHPUnit harness; never boots the Laravel application. */
 abstract class LabTestCase extends TestCase
 {
+    /** First validated pre-operation snapshot for each immutable fixture manifest. */
+    private array $snapshotBaselines = [];
+
     protected function fixture(string $case, string $variant = 'normal'): LabFixture
     {
         $fixture = LabFixture::fresh($case, $variant);
@@ -76,8 +79,14 @@ abstract class LabTestCase extends TestCase
 
     protected function assertSnapshot(array $snapshot, int $count, ?array $baseline = null): void
     {
+        if ($count === 0 && $snapshot['phase'] !== 'P') {
+            $baseline ??= $this->snapshotBaselines[$snapshot['manifest_hash']] ?? null;
+            self::assertNotNull($baseline, 'An abort snapshot requires a baseline captured before the operation.');
+        }
         self::assertSame('PASS', $snapshot['status'], json_encode($snapshot));
         self::assertTrue($snapshot['read_complete']);
+        self::assertTrue($snapshot['data_read_complete']);
+        self::assertTrue($snapshot['cleanup_complete']);
         self::assertSame([['ok']], $snapshot['integrity_check']);
         self::assertSame([], $snapshot['foreign_key_check']);
         self::assertCount(1, $snapshot['foreign_keys']);
@@ -95,7 +104,12 @@ abstract class LabTestCase extends TestCase
             }
         }
         if ($baseline !== null) {
+            self::assertSame($baseline['manifest_hash'], $snapshot['manifest_hash']);
+            self::assertSame($baseline['epoch'], $snapshot['epoch']);
             self::assertSame($baseline['tables'], $snapshot['tables']);
+        }
+        if ($snapshot['phase'] === 'P') {
+            $this->snapshotBaselines[$snapshot['manifest_hash']] ??= $snapshot;
         }
     }
 
@@ -164,6 +178,7 @@ abstract class LabTestCase extends TestCase
         $result = $this->finishWorker($this->startWorker($fixture, 'init'));
         $fixture->refresh();
         self::assertSame($fixture->hash(), $result['manifest_hash']);
+        $this->assertSnapshot($result['snapshot'], 0);
 
         return $fixture;
     }
