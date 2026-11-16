@@ -1,0 +1,243 @@
+name: T1 isolated laboratory
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  t1:
+    name: T1 / PHP ${{ matrix.php }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.2.35'
+            image: php:8.2.35-cli-bookworm@sha256:ce09ca1d4b532edf9b0347b44a1968a80d9175addb581c450ba0c9a43fa0c5ea
+          - php: '8.4.27'
+            image: php:8.4.27-cli-bookworm@sha256:b3e907a1108629c562c4bb313ce3449e34d49991f6bb2487913f6146f47200fe
+    env:
+      T1_CI_ROOT: /tmp/tekora-t1-${{ matrix.php }}-${{ github.run_id }}-${{ github.run_attempt }}
+      EXPECTED_PHP: ${{ matrix.php }}
+      PHP_IMAGE: ${{ matrix.image }}
+      PR_HEAD: ${{ github.event.pull_request.head.sha }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Prepare immutable sources and synthetic directories
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -m 700 "$T1_CI_ROOT"
+          mkdir -m 700 "$T1_CI_ROOT"/{source,vendor,lab,evidence,tools}
+          mkdir -m 700 "$T1_CI_ROOT/lab/fixtures"
+          exec > >(tee "$T1_CI_ROOT/evidence/preparation.log") 2>&1
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, re, subprocess
+          root = pathlib.Path(os.environ['T1_CI_ROOT'])
+          source = pathlib.Path.cwd()
+          base = 'ac999cea8f592ce7b94481ee30f602b67d9f5bea'
+          approved = '4a1692b7181c2fa3fe3f767ff754fadb1fe4e5b8'
+          workflow = '.github/workflows/t1-isolated.yml'
+          def git(*args):
+              return subprocess.check_output(['git', *args])
+          head = git('rev-parse', 'HEAD').decode().strip()
+          assert re.fullmatch('[0-9a-f]{40}', os.environ['PR_HEAD'])
+          assert head == os.environ['PR_HEAD'], 'Checkout differs from PR head'
+          assert not git('status', '--porcelain'), 'Checkout must be clean'
+          subprocess.run(['git', 'merge-base', '--is-ancestor', approved, head], check=True)
+          changed = git('diff', '--name-only', approved, head).decode().splitlines()
+          assert changed == [workflow], 'Only the CI workflow may change after approved T1'
+          paths = git('ls-tree', '-rz', '--name-only', head).decode().split('\0')[:-1]
+          assert workflow in paths
+          paths.remove(workflow)
+          assert len(paths) == 1464, 'T1 source inventory changed'
+          historical = git('ls-tree', '-rz', '--name-only', base).decode().split('\0')[:-1]
+          assert len(historical) == 1444
+          manifest, baseline = {}, {}
+          for path in paths:
+              data = (source / path).read_bytes()
+              assert data == git('show', head + ':' + path), path
+              destination = root / 'source' / path
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              destination.write_bytes(data)
+              manifest[path] = hashlib.sha256(data).hexdigest()
+          for path in historical:
+              baseline[path] = hashlib.sha256(git('show', base + ':' + path)).hexdigest()
+              assert baseline[path] == manifest[path], 'Historical source changed: ' + path
+          (root / 'source/vendor').mkdir()
+          assert not (root / 'source/.env').exists()
+          assert root.resolve() == root and not root.is_symlink()
+          assert (root / 'lab/fixtures').stat().st_mode & 0o777 == 0o700
+          evidence = root / 'evidence'
+          (evidence / 'before.json').write_text(json.dumps({'base': base, 'tracked': baseline}, indent=2))
+          (evidence / 'source-manifest.json').write_text(json.dumps(manifest, indent=2))
+          (evidence / 'provenance.json').write_text(json.dumps({
+              'head': head, 'base': base, 'approved_t1': approved,
+              'source_files': len(manifest), 'historical_files': len(baseline),
+              'workflow_sha256': hashlib.sha256((source / workflow).read_bytes()).hexdigest(),
+              'php_image': os.environ['PHP_IMAGE']}, indent=2))
+          print('Verified exact HEAD, 1464 source files and 1444 unchanged historical files.')
+          PY
+
+      - name: Build pinned PHP and SQLite runtime
+        run: |
+          set -euo pipefail
+          exec > >(tee "$T1_CI_ROOT/evidence/runtime-build.log") 2>&1
+          curl --fail --location --retry 3 --proto '=https' --tlsv1.2 \
+            https://getcomposer.org/download/2.8.12/composer.phar \
+            -o "$T1_CI_ROOT/tools/composer.phar"
+          echo "f446ea719708bb85fcbf4ef18def5d0515f1f9b4d703f6d820c9c1656e10a2f2  $T1_CI_ROOT/tools/composer.phar" | sha256sum --check
+          cat > "$T1_CI_ROOT/tools/Dockerfile" <<'DOCKER'
+          ARG PHP_IMAGE=php:8.2.35-cli-bookworm@sha256:ce09ca1d4b532edf9b0347b44a1968a80d9175addb581c450ba0c9a43fa0c5ea
+          FROM ${PHP_IMAGE}
+          # Frozen Debian package indexes; SQLite must still pass the runtime preflight.
+          RUN --mount=type=secret,id=system_ca,required=true,mode=0444 \
+              rm -f /etc/apt/sources.list.d/* && \
+              printf '%s\n' \
+                'deb [check-valid-until=no] https://snapshot.debian.org/archive/debian/20261112T000000Z bookworm main' \
+                'deb [check-valid-until=no] https://snapshot.debian.org/archive/debian/20261112T000000Z bookworm-updates main' \
+                'deb [check-valid-until=no] https://snapshot.debian.org/archive/debian-security/20261112T000000Z bookworm-security main' \
+                > /etc/apt/sources.list && \
+              apt-get -o Acquire::https::CaInfo=/run/secrets/system_ca update && \
+              apt-get -o Acquire::https::CaInfo=/run/secrets/system_ca install -y --no-install-recommends \
+                libpng-dev libjpeg62-turbo-dev libfreetype6-dev libzip-dev libicu-dev unzip && \
+              docker-php-ext-configure gd --with-jpeg --with-freetype && \
+              docker-php-ext-install -j2 gd intl zip && \
+              rm -rf /var/lib/apt/lists/*
+          COPY --chmod=0444 composer.phar /usr/local/bin/composer
+          DOCKER
+          docker build --platform linux/amd64 --progress plain \
+            --secret id=system_ca,src=/etc/ssl/certs/ca-certificates.crt \
+            --build-arg "PHP_IMAGE=$PHP_IMAGE" --tag "tekora-t1:php-$EXPECTED_PHP" "$T1_CI_ROOT/tools"
+          docker image inspect "tekora-t1:php-$EXPECTED_PHP" > "$T1_CI_ROOT/evidence/image.json"
+
+      - name: Install locked dependencies without application scripts
+        run: |
+          set -euo pipefail
+          exec > >(tee "$T1_CI_ROOT/evidence/composer.log") 2>&1
+          docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
+            --user "$(id -u):$(id -g)" --workdir /app \
+            --mount "type=bind,src=$T1_CI_ROOT/source,dst=/app,readonly" \
+            --mount "type=bind,src=$T1_CI_ROOT/vendor,dst=/app/vendor" \
+            --mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/system-ca.pem,readonly \
+            --tmpfs "/tmp:uid=$(id -u),gid=$(id -g),mode=1777" \
+            --env HOME=/tmp --env COMPOSER_HOME=/tmp/composer \
+            --env COMPOSER_CAFILE=/run/system-ca.pem \
+            "tekora-t1:php-$EXPECTED_PHP" php /usr/local/bin/composer install --no-scripts --no-plugins --prefer-dist \
+              --no-interaction --no-progress --optimize-autoloader
+
+      - name: Verify versions and execute private T1 suite and Pint
+        run: |
+          set -euo pipefail
+          exec > >(tee "$T1_CI_ROOT/evidence/execution.log") 2>&1
+          cat > "$T1_CI_ROOT/tools/preflight.php" <<'PHP'
+          <?php
+          require '/app/vendor/autoload.php';
+          function requireExact(bool $ok, string $message): void {
+              if (!$ok) { throw new RuntimeException($message); }
+          }
+          requireExact(PHP_VERSION === getenv('EXPECTED_PHP'), 'PHP version mismatch');
+          requireExact(PHP_OS_FAMILY === 'Linux', 'Linux required');
+          requireExact(\PHPUnit\Runner\Version::id() === '11.5.57', 'PHPUnit version mismatch');
+          requireExact(\Composer\InstalledVersions::getPrettyVersion('laravel/framework') === 'v12.71.0', 'Laravel version mismatch');
+          $pdo = new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+          $sqlite = $pdo->query('SELECT sqlite_version()')->fetchColumn();
+          requireExact($sqlite === '3.40.1', 'SQLite version mismatch');
+          $lock = json_decode(file_get_contents('/app/composer.lock'), true, flags: JSON_THROW_ON_ERROR);
+          $packages = [...$lock['packages'], ...$lock['packages-dev']];
+          foreach ($packages as $package) {
+              requireExact(\Composer\InstalledVersions::getReference($package['name']) === ($package['source']['reference'] ?? $package['dist']['reference']), 'Dependency mismatch: '.$package['name']);
+          }
+          requireExact(count($packages) === 113, 'Dependency inventory mismatch');
+          requireExact(!file_exists('/app/.env'), 'Application environment is prohibited');
+          requireExact(realpath(getenv('T1_RUN_ROOT')) === getenv('T1_RUN_ROOT'), 'Noncanonical run root');
+          requireExact((fileperms(getenv('T1_RUN_ROOT')) & 0777) === 0700, 'Run root must be 0700');
+          echo json_encode(['php' => PHP_VERSION, 'phpunit' => \PHPUnit\Runner\Version::id(),
+              'laravel' => \Composer\InstalledVersions::getPrettyVersion('laravel/framework'),
+              'sqlite' => $sqlite, 'sqlite_source_id' => $pdo->query('SELECT sqlite_source_id()')->fetchColumn(),
+              'locked_packages' => count($packages)], JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR), "\n";
+          PHP
+          cat > "$T1_CI_ROOT/tools/run.sh" <<'SH'
+          set -euo pipefail
+          php /tools/preflight.php | tee /lab/versions.json
+          php /usr/local/bin/composer --no-plugins check-platform-reqs --format=json > /lab/platform.json
+          set +e
+          # Children may inherit pipes, not an extra regular-file log descriptor.
+          php -d memory_limit=1G vendor/bin/phpunit --configuration tests/BookingOwnershipLab/phpunit.xml --log-junit /lab/junit.xml --colors=never 2>&1 | tee /lab/phpunit.log
+          statuses=("${PIPESTATUS[@]}")
+          tests=${statuses[0]}
+          if [ "$tests" -eq 0 ] && [ "${statuses[1]}" -ne 0 ]; then tests=${statuses[1]}; fi
+          echo "$tests" > /lab/phpunit-exit-code.txt
+          php vendor/bin/pint --test tests/Support/BookingOwnershipLab tests/BookingOwnershipLab > /lab/pint.log 2>&1
+          pint=$?
+          cat /lab/pint.log
+          echo "$pint" > /lab/pint-exit-code.txt
+          if [ "$tests" -ne 0 ]; then exit "$tests"; fi
+          exit "$pint"
+          SH
+          docker run --rm --network none --read-only --cap-drop ALL \
+            --security-opt no-new-privileges --memory 1536m --pids-limit 128 \
+            --user "$(id -u):$(id -g)" --workdir /app \
+            --mount "type=bind,src=$T1_CI_ROOT/source,dst=/app,readonly" \
+            --mount "type=bind,src=$T1_CI_ROOT/vendor,dst=/app/vendor,readonly" \
+            --mount "type=bind,src=$T1_CI_ROOT/lab,dst=/lab" \
+            --mount "type=bind,src=$T1_CI_ROOT/evidence,dst=/evidence,readonly" \
+            --mount "type=bind,src=$T1_CI_ROOT/tools,dst=/tools,readonly" \
+            --tmpfs "/tmp:uid=$(id -u),gid=$(id -g),mode=1777" \
+            "tekora-t1:php-$EXPECTED_PHP" env -i PATH=/usr/local/bin:/usr/bin:/bin HOME=/tmp TZ=UTC LANG=C \
+            COMPOSER_HOME=/tmp/composer "EXPECTED_PHP=$EXPECTED_PHP" \
+            T1_ISOLATED=1 T1_RUN_ROOT=/lab/fixtures T1_SOURCE_MANIFEST=/evidence/source-manifest.json \
+            bash /tools/run.sh
+
+      - name: Verify complete JUnit and unchanged sources
+        if: always()
+        run: |
+          set -euo pipefail
+          exec > >(tee "$T1_CI_ROOT/evidence/verification.log") 2>&1
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess, xml.etree.ElementTree as ET
+          root = pathlib.Path(os.environ['T1_CI_ROOT'])
+          junit = ET.parse(root / 'lab/junit.xml')
+          cases = junit.findall('.//testcase')
+          assert len(cases) == 112, 'Expected all 112 T1 variants'
+          assert not junit.findall('.//failure') and not junit.findall('.//error') and not junit.findall('.//skipped'), 'Failures or omissions in JUnit'
+          assertions = sum(int(c.attrib['assertions']) for c in cases)
+          expected = {'8.2.35': 10655, '8.4.27': 10593}[os.environ['EXPECTED_PHP']]
+          assert assertions == expected, 'Unexpected assertion count'
+          assert (root / 'lab/phpunit-exit-code.txt').read_text().strip() == '0'
+          assert (root / 'lab/pint-exit-code.txt').read_text().strip() == '0'
+          manifest = json.loads((root / 'evidence/source-manifest.json').read_text())
+          for path, expected_hash in manifest.items():
+              assert hashlib.sha256((root / 'source' / path).read_bytes()).hexdigest() == expected_hash, path
+              assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest() == expected_hash, path
+          assert not subprocess.check_output(['git', 'status', '--porcelain']), 'Validations modified checkout'
+          result = {'tests': len(cases), 'assertions': assertions, 'skipped': 0, 'unchanged_source_files': len(manifest), 'phpunit_exit': 0, 'pint_exit': 0}
+          (root / 'evidence/verified-result.json').write_text(json.dumps(result, indent=2))
+          print(json.dumps(result, indent=2))
+          PY
+
+      - name: Preserve logs, JUnit and synthetic evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: t1-php-${{ matrix.php }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ env.T1_CI_ROOT }}/evidence/
+            ${{ env.T1_CI_ROOT }}/lab/
+            ${{ env.T1_CI_ROOT }}/tools/
+            !${{ env.T1_CI_ROOT }}/lab/**/*.sqlite*
+          if-no-files-found: error
+          retention-days: 14
