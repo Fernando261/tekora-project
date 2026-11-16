@@ -10,8 +10,8 @@ class AvailabilityInput
 {
     public static function normalize(array $input): array
     {
-        if (isset($input['blocked_dates']) && is_string($input['blocked_dates'])) {
-            $input['blocked_dates'] = array_values(array_filter(array_map('trim', preg_split('/\R/', $input['blocked_dates'])), fn ($date) => $date !== ''));
+        if (array_key_exists('blocked_dates', $input) && ($input['blocked_dates'] === null || is_string($input['blocked_dates']))) {
+            $input['blocked_dates'] = array_values(array_filter(array_map('trim', preg_split('/\R/', $input['blocked_dates'] ?? '')), fn ($date) => $date !== ''));
         }
 
         return $input;
@@ -45,21 +45,30 @@ class AvailabilityInput
 
     public static function checkIntervals($validator): void
     {
-        if ($validator->errors()->isNotEmpty()) return;
+        if ($validator->errors()->isNotEmpty()) {
+            return;
+        }
         $days = [];
         foreach ($validator->getData()['intervals'] ?? [] as $index => $row) {
-            $start = $row['start'] ?? null; $end = $row['end'] ?? null;
-            if (($start === null || $start === '') && ($end === null || $end === '')) continue;
+            $start = $row['start'] ?? null;
+            $end = $row['end'] ?? null;
+            if (($start === null || $start === '') && ($end === null || $end === '')) {
+                continue;
+            }
             if (! $start || ! $end || self::minute($start) >= self::minute($end)) {
                 $validator->errors()->add('intervals.'.$index.'.end', 'Completa inicio y fin, con inicio anterior al fin y sin cruzar medianoche.');
+
                 continue;
             }
             $days[(int) $row['day_of_week']][] = ['start' => self::minute($start), 'end' => self::minute($end), 'index' => $index];
         }
         foreach ($days as $rows) {
-            usort($rows, fn ($a, $b) => $a['start'] <=> $b['start']); $previous = null;
+            usort($rows, fn ($a, $b) => $a['start'] <=> $b['start']);
+            $previous = null;
             foreach ($rows as $row) {
-                if ($previous && $row['start'] < $previous['end']) $validator->errors()->add('intervals.'.$row['index'].'.start', 'Los intervalos de un mismo día no pueden superponerse.');
+                if ($previous && $row['start'] < $previous['end']) {
+                    $validator->errors()->add('intervals.'.$row['index'].'.start', 'Los intervalos de un mismo día no pueden superponerse.');
+                }
                 $previous = $row;
             }
         }
