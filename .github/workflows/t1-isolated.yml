@@ -29,6 +29,15 @@ jobs:
       run:
         shell: bash
     steps:
+      - name: Initialize isolated evidence
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -m 700 "$T1_CI_ROOT"
+          mkdir -m 700 "$T1_CI_ROOT"/{source,t1-source,vendor,lab,evidence,tools}
+          mkdir -m 700 "$T1_CI_ROOT/lab/fixtures"
+          printf '%s\n' '{"status":"BLOCKED","phpunit_invoked":false,"reason":"preparation_not_completed"}' > "$T1_CI_ROOT/evidence/job-status.json"
+
       - name: Checkout exact PR head
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -36,60 +45,107 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Prepare immutable sources and synthetic directories
+      - name: Prepare verified PR inventory and approved T1 fixture
         run: |
           set -euo pipefail
-          umask 077
-          mkdir -m 700 "$T1_CI_ROOT"
-          mkdir -m 700 "$T1_CI_ROOT"/{source,vendor,lab,evidence,tools}
-          mkdir -m 700 "$T1_CI_ROOT/lab/fixtures"
           exec > >(tee "$T1_CI_ROOT/evidence/preparation.log") 2>&1
           python3 - <<'PY'
-          import hashlib, json, os, pathlib, re, subprocess
+          import hashlib, json, os, pathlib, re, subprocess, sys
           root = pathlib.Path(os.environ['T1_CI_ROOT'])
           source = pathlib.Path.cwd()
-          base = 'ac999cea8f592ce7b94481ee30f602b67d9f5bea'
+          evidence = root / 'evidence'
           approved = '4a1692b7181c2fa3fe3f767ff754fadb1fe4e5b8'
-          workflow = '.github/workflows/t1-isolated.yml'
+          fixture_ref = 'ac999cea8f592ce7b94481ee30f602b67d9f5bea'
+          lab_roots = ('tests/BookingOwnershipLab/', 'tests/Support/BookingOwnershipLab/')
+          protected_dependencies = ('composer.json', 'composer.lock')
+          def require(condition, message):
+              if not condition:
+                  raise RuntimeError(message)
           def git(*args):
               return subprocess.check_output(['git', *args])
-          head = git('rev-parse', 'HEAD').decode().strip()
-          assert re.fullmatch('[0-9a-f]{40}', os.environ['PR_HEAD'])
-          assert head == os.environ['PR_HEAD'], 'Checkout differs from PR head'
-          assert not git('status', '--porcelain'), 'Checkout must be clean'
-          subprocess.run(['git', 'merge-base', '--is-ancestor', approved, head], check=True)
-          changed = git('diff', '--name-only', approved, head).decode().splitlines()
-          assert changed == [workflow], 'Only the CI workflow may change after approved T1'
-          paths = git('ls-tree', '-rz', '--name-only', head).decode().split('\0')[:-1]
-          assert workflow in paths
-          paths.remove(workflow)
-          assert len(paths) == 1464, 'T1 source inventory changed'
-          historical = git('ls-tree', '-rz', '--name-only', base).decode().split('\0')[:-1]
-          assert len(historical) == 1444
-          manifest, baseline = {}, {}
-          for path in paths:
-              data = (source / path).read_bytes()
-              assert data == git('show', head + ':' + path), path
-              destination = root / 'source' / path
-              destination.parent.mkdir(parents=True, exist_ok=True)
-              destination.write_bytes(data)
-              manifest[path] = hashlib.sha256(data).hexdigest()
-          for path in historical:
-              baseline[path] = hashlib.sha256(git('show', base + ':' + path)).hexdigest()
-              assert baseline[path] == manifest[path], 'Historical source changed: ' + path
-          (root / 'source/vendor').mkdir()
-          assert not (root / 'source/.env').exists()
-          assert root.resolve() == root and not root.is_symlink()
-          assert (root / 'lab/fixtures').stat().st_mode & 0o777 == 0o700
-          evidence = root / 'evidence'
-          (evidence / 'before.json').write_text(json.dumps({'base': base, 'tracked': baseline}, indent=2))
-          (evidence / 'source-manifest.json').write_text(json.dumps(manifest, indent=2))
-          (evidence / 'provenance.json').write_text(json.dumps({
-              'head': head, 'base': base, 'approved_t1': approved,
-              'source_files': len(manifest), 'historical_files': len(baseline),
-              'workflow_sha256': hashlib.sha256((source / workflow).read_bytes()).hexdigest(),
-              'php_image': os.environ['PHP_IMAGE']}, indent=2))
-          print('Verified exact HEAD, 1464 source files and 1444 unchanged historical files.')
+          def tree(ref):
+              entries = {}
+              for record in git('ls-tree', '-rz', ref).split(b'\0'):
+                  if not record:
+                      continue
+                  metadata, path = record.split(b'\t', 1)
+                  mode, kind, blob = metadata.decode().split()
+                  path = path.decode()
+                  require(not pathlib.PurePosixPath(path).is_absolute() and '..' not in pathlib.PurePosixPath(path).parts, 'Unsafe source path')
+                  require(mode in ('100644', '100755') and kind == 'blob', 'Unsupported source type: ' + path)
+                  entries[path] = {'mode': mode, 'blob': blob}
+              return entries
+          def export(destination, path, data, mode):
+              target = destination / path
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_bytes(data)
+              target.chmod(int(mode, 8) & 0o777)
+          try:
+              require(root.resolve() == root and not root.is_symlink(), 'Noncanonical CI root')
+              require((root / 'lab/fixtures').stat().st_mode & 0o777 == 0o700, 'Synthetic root must be 0700')
+              head = git('rev-parse', 'HEAD').decode().strip()
+              require(re.fullmatch('[0-9a-f]{40}', os.environ['PR_HEAD']), 'Invalid PR SHA')
+              require(head == os.environ['PR_HEAD'], 'Checkout differs from PR head')
+              require(not git('status', '--porcelain'), 'Checkout must be clean')
+              require(not (source / '.env').exists(), 'Application environment is prohibited')
+              subprocess.run(['git', 'merge-base', '--is-ancestor', approved, head], check=True)
+              current, accepted, historical = tree(head), tree(approved), tree(fixture_ref)
+              current_lab = {p: v for p, v in current.items() if p.startswith(lab_roots)}
+              accepted_lab = {p: v for p, v in accepted.items() if p.startswith(lab_roots)}
+              require(current_lab == accepted_lab, 'Unauthorized T1 laboratory change')
+              for path in protected_dependencies:
+                  require(current.get(path) == accepted[path], 'Protected dependency changed: ' + path)
+                  require(historical.get(path) == accepted[path], 'Fixture dependency baseline differs: ' + path)
+              # Complete PR inventory: all tracked files at the exact HEAD, including this YAML
+              # and new/changed application files. No comparison with historical application bytes.
+              manifest, permissions = {}, {}
+              for path, entry in current.items():
+                  require(not (source / path).is_symlink(), 'Symlink source rejected: ' + path)
+                  data = (source / path).read_bytes()
+                  require(data == git('show', head + ':' + path), 'Checkout bytes differ from HEAD: ' + path)
+                  export(root / 'source', path, data, entry['mode'])
+                  manifest[path] = hashlib.sha256(data).hexdigest()
+                  permissions[path] = (source / path).stat().st_mode & 0o777
+              # T1-32 has immutable golden-fixture counts/hashes. Retain that truthful fixture
+              # separately from the PR inventory. T1 never boots/imports application code.
+              # Executed T1 files come from HEAD and must equal the approved laboratory exactly.
+              baseline, fixture_manifest, origins = {}, {}, {}
+              for path, entry in historical.items():
+                  data = git('show', fixture_ref + ':' + path)
+                  export(root / 't1-source', path, data, entry['mode'])
+                  baseline[path] = hashlib.sha256(data).hexdigest()
+                  fixture_manifest[path] = baseline[path]
+                  origins[path] = fixture_ref
+              for path, entry in current_lab.items():
+                  data = (source / path).read_bytes()
+                  export(root / 't1-source', path, data, entry['mode'])
+                  fixture_manifest[path] = hashlib.sha256(data).hexdigest()
+                  origins[path] = head
+              for name in ('source', 't1-source'):
+                  (root / name / 'vendor').mkdir()
+                  require(not (root / name / '.env').exists(), 'Application environment is prohibited')
+              (evidence / 'source-manifest.json').write_text(json.dumps(manifest, indent=2))
+              (evidence / 'pr-git-inventory.json').write_text(json.dumps(current, indent=2))
+              (evidence / 'pr-permissions.json').write_text(json.dumps(permissions, indent=2))
+              (evidence / 't1-source-manifest.json').write_text(json.dumps(fixture_manifest, indent=2))
+              (evidence / 't1-fixture-origins.json').write_text(json.dumps(origins, indent=2))
+              (evidence / 'before.json').write_text(json.dumps({'base': fixture_ref, 'tracked': baseline,
+                  'purpose': 'immutable historical fixture only; not the PR application baseline'}, indent=2))
+              (evidence / 'provenance.json').write_text(json.dumps({
+                  'head': head, 'approved_t1': approved, 'historical_fixture_ref': fixture_ref,
+                  'pr_source_files': len(manifest), 't1_fixture_files': len(fixture_manifest),
+                  'protected_t1_files': current_lab, 'protected_dependencies': protected_dependencies,
+                  't1_code_origin': 'PR HEAD; byte-identical to approved T1',
+                  'application_code_executed_by_t1': False,
+                  'php_image': os.environ['PHP_IMAGE']}, indent=2))
+              (evidence / 'preparation.json').write_text(json.dumps({'status': 'PASS', 'head': head}, indent=2))
+              print(f'PASS: HEAD {head}; complete PR inventory {len(manifest)} files; approved T1 {len(current_lab)} files; separate golden fixture {len(fixture_manifest)} files.')
+          except Exception as error:
+              result = {'status': 'BLOCKED', 'phpunit_invoked': False, 'reason': str(error)}
+              (evidence / 'preparation.json').write_text(json.dumps(result, indent=2))
+              (evidence / 'job-status.json').write_text(json.dumps(result, indent=2))
+              print('BLOCKED: ' + str(error), file=sys.stderr)
+              sys.exit(1)
           PY
 
       - name: Build pinned PHP and SQLite runtime
@@ -130,7 +186,7 @@ jobs:
           exec > >(tee "$T1_CI_ROOT/evidence/composer.log") 2>&1
           docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
             --user "$(id -u):$(id -g)" --workdir /app \
-            --mount "type=bind,src=$T1_CI_ROOT/source,dst=/app,readonly" \
+            --mount "type=bind,src=$T1_CI_ROOT/t1-source,dst=/app,readonly" \
             --mount "type=bind,src=$T1_CI_ROOT/vendor,dst=/app/vendor" \
             --mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/system-ca.pem,readonly \
             --tmpfs "/tmp:uid=$(id -u),gid=$(id -g),mode=1777" \
@@ -175,6 +231,7 @@ jobs:
           php /tools/preflight.php | tee /lab/versions.json
           php /usr/local/bin/composer --no-plugins check-platform-reqs --format=json > /lab/platform.json
           set +e
+          printf '%s\n' '{"phpunit_invoked":true}' > /lab/phpunit-invoked.json
           # Children may inherit pipes, not an extra regular-file log descriptor.
           php -d memory_limit=1G vendor/bin/phpunit --configuration tests/BookingOwnershipLab/phpunit.xml --log-junit /lab/junit.xml --colors=never 2>&1 | tee /lab/phpunit.log
           statuses=("${PIPESTATUS[@]}")
@@ -191,7 +248,7 @@ jobs:
           docker run --rm --network none --read-only --cap-drop ALL \
             --security-opt no-new-privileges --memory 1536m --pids-limit 128 \
             --user "$(id -u):$(id -g)" --workdir /app \
-            --mount "type=bind,src=$T1_CI_ROOT/source,dst=/app,readonly" \
+            --mount "type=bind,src=$T1_CI_ROOT/t1-source,dst=/app,readonly" \
             --mount "type=bind,src=$T1_CI_ROOT/vendor,dst=/app/vendor,readonly" \
             --mount "type=bind,src=$T1_CI_ROOT/lab,dst=/lab" \
             --mount "type=bind,src=$T1_CI_ROOT/evidence,dst=/evidence,readonly" \
@@ -199,33 +256,72 @@ jobs:
             --tmpfs "/tmp:uid=$(id -u),gid=$(id -g),mode=1777" \
             "tekora-t1:php-$EXPECTED_PHP" env -i PATH=/usr/local/bin:/usr/bin:/bin HOME=/tmp TZ=UTC LANG=C \
             COMPOSER_HOME=/tmp/composer "EXPECTED_PHP=$EXPECTED_PHP" \
-            T1_ISOLATED=1 T1_RUN_ROOT=/lab/fixtures T1_SOURCE_MANIFEST=/evidence/source-manifest.json \
+            T1_ISOLATED=1 T1_RUN_ROOT=/lab/fixtures T1_SOURCE_MANIFEST=/evidence/t1-source-manifest.json \
             bash /tools/run.sh
 
-      - name: Verify complete JUnit and unchanged sources
+      - name: Verify complete JUnit and unchanged PR and fixture sources
         if: always()
         run: |
           set -euo pipefail
           exec > >(tee "$T1_CI_ROOT/evidence/verification.log") 2>&1
           python3 - <<'PY'
-          import hashlib, json, os, pathlib, subprocess, xml.etree.ElementTree as ET
+          import hashlib, json, os, pathlib, subprocess, sys, xml.etree.ElementTree as ET
           root = pathlib.Path(os.environ['T1_CI_ROOT'])
-          junit = ET.parse(root / 'lab/junit.xml')
-          cases = junit.findall('.//testcase')
-          assert len(cases) == 112, 'Expected all 112 T1 variants'
-          assert not junit.findall('.//failure') and not junit.findall('.//error') and not junit.findall('.//skipped'), 'Failures or omissions in JUnit'
-          assertions = sum(int(c.attrib['assertions']) for c in cases)
-          expected = {'8.2.35': 10655, '8.4.27': 10593}[os.environ['EXPECTED_PHP']]
-          assert assertions == expected, 'Unexpected assertion count'
-          assert (root / 'lab/phpunit-exit-code.txt').read_text().strip() == '0'
-          assert (root / 'lab/pint-exit-code.txt').read_text().strip() == '0'
-          manifest = json.loads((root / 'evidence/source-manifest.json').read_text())
-          for path, expected_hash in manifest.items():
-              assert hashlib.sha256((root / 'source' / path).read_bytes()).hexdigest() == expected_hash, path
-              assert hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest() == expected_hash, path
-          assert not subprocess.check_output(['git', 'status', '--porcelain']), 'Validations modified checkout'
-          result = {'tests': len(cases), 'assertions': assertions, 'skipped': 0, 'unchanged_source_files': len(manifest), 'phpunit_exit': 0, 'pint_exit': 0}
-          (root / 'evidence/verified-result.json').write_text(json.dumps(result, indent=2))
+          evidence = root / 'evidence'
+          invoked = (root / 'lab/phpunit-invoked.json').exists()
+          result = {'status': 'BLOCKED', 'phpunit_invoked': invoked}
+          def require(condition, message):
+              if not condition:
+                  raise RuntimeError(message)
+          try:
+              prepared = evidence / 'preparation.json'
+              require(prepared.exists() and json.loads(prepared.read_text())['status'] == 'PASS', 'Preparation did not pass; PHPUnit not invoked')
+              provenance = json.loads((evidence / 'provenance.json').read_text())
+              head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+              require(head == provenance['head'] == os.environ['PR_HEAD'], 'HEAD changed during validation')
+              inventory = json.loads((evidence / 'pr-git-inventory.json').read_text())
+              actual = {}
+              for record in subprocess.check_output(['git', 'ls-tree', '-rz', head]).split(b'\0'):
+                  if record:
+                      metadata, path = record.split(b'\t', 1)
+                      mode, kind, blob = metadata.decode().split()
+                      require(kind == 'blob', 'Unsupported source type')
+                      actual[path.decode()] = {'mode': mode, 'blob': blob}
+              require(actual == inventory, 'PR inventory changed')
+              manifest = json.loads((evidence / 'source-manifest.json').read_text())
+              permissions = json.loads((evidence / 'pr-permissions.json').read_text())
+              require(set(manifest) == set(inventory), 'Incomplete PR manifest')
+              for path, expected_hash in manifest.items():
+                  for origin in (root / 'source', pathlib.Path.cwd()):
+                      target = origin / path
+                      require(not target.is_symlink() and hashlib.sha256(target.read_bytes()).hexdigest() == expected_hash, 'PR source changed: ' + path)
+                      mode = permissions[path] if origin == pathlib.Path.cwd() else int(inventory[path]['mode'], 8) & 0o777
+                      require(target.stat().st_mode & 0o777 == mode, 'PR source mode changed: ' + path)
+              fixture = json.loads((evidence / 't1-source-manifest.json').read_text())
+              for path, expected_hash in fixture.items():
+                  require(hashlib.sha256((root / 't1-source' / path).read_bytes()).hexdigest() == expected_hash, 'T1 fixture source changed: ' + path)
+              require(not subprocess.check_output(['git', 'status', '--porcelain']), 'Validations modified checkout')
+              require(invoked, 'Runtime/preflight did not reach PHPUnit; no tests certified')
+              result['status'] = 'FAIL'
+              junit = ET.parse(root / 'lab/junit.xml')
+              cases = junit.findall('.//testcase')
+              require(len(cases) == 112, 'Expected all 112 T1 variants')
+              require(not any(junit.findall('.//' + tag) for tag in ('failure', 'error', 'skipped')), 'Failures or omissions in JUnit')
+              assertions = sum(int(c.attrib['assertions']) for c in cases)
+              expected = {'8.2.35': 10655, '8.4.27': 10593}[os.environ['EXPECTED_PHP']]
+              require(assertions == expected, 'Unexpected assertion count')
+              require((root / 'lab/phpunit-exit-code.txt').read_text().strip() == '0', 'PHPUnit failed')
+              require((root / 'lab/pint-exit-code.txt').read_text().strip() == '0', 'Pint failed')
+              result.update(status='PASS', tests=len(cases), assertions=assertions, skipped=0,
+                  unchanged_pr_files=len(manifest), unchanged_t1_fixture_files=len(fixture),
+                  phpunit_exit=0, pint_exit=0)
+              (evidence / 'verified-result.json').write_text(json.dumps(result, indent=2))
+          except Exception as error:
+              result['reason'] = str(error)
+              (evidence / 'job-status.json').write_text(json.dumps(result, indent=2))
+              print(json.dumps(result, indent=2), file=sys.stderr)
+              sys.exit(1)
+          (evidence / 'job-status.json').write_text(json.dumps(result, indent=2))
           print(json.dumps(result, indent=2))
           PY
 
