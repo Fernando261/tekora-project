@@ -35,3 +35,5 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/perfil/editar-nombre', [PerfilController::class, 'editNombre'])->name('perfil.editNombre');
     Route::put('/perfil/actualizar-nombre', [PerfilController::class, 'updateNombre'])->name('perfil.updateNombre');
 });
+
+require __DIR__.'/quotes.php';

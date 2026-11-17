@@ -395,7 +395,7 @@ class TekoraW4Test extends TestCase
             $this->get($url)->assertOk();
         }
         $this->assertSame($before, $this->reservationRows($tables));
-        $this->assertCount(37, glob(database_path('migrations/*.php')));
+        $this->assertCount(38, glob(database_path('migrations/*.php')));
         $this->assertCount(21, array_filter(app('router')->getRoutes()->getRoutes(), fn ($route) => str_starts_with($route->uri(), 'api/')));
         $this->get('/mindbloom/inicio')->assertNotFound();
         $this->assertNull(app('router')->getRoutes()->getByName('profesionista.dashboard'));

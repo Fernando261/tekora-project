@@ -36,7 +36,11 @@ class ServiceRequest extends FormRequest
 
     public function rules(): array
     {
-        return self::detailRules() + ['status' => ['required', Rule::enum(ServiceStatus::class)]] + self::protectedFields();
+        $pricing = $this->route('service') instanceof Service
+            ? ['price_mxn' => ['prohibited'], 'creation_key' => ['prohibited']]
+            : ['price_mxn' => ['nullable', 'string'], 'creation_key' => ['required_with:price_mxn', 'nullable', 'uuid']];
+
+        return self::detailRules() + ['status' => ['required', Rule::enum(ServiceStatus::class)]] + self::protectedFields() + $pricing;
     }
 
     public function messages(): array

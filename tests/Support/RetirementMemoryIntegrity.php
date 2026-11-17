@@ -9,12 +9,14 @@ use RuntimeException;
 trait RetirementMemoryIntegrity
 {
     private const PROTECTED = [
-        'activity_notifications', 'cache', 'cache_locks', 'failed_jobs', 'inquiry_notifications',
-        'job_batches', 'jobs', 'migrations', 'password_reset_tokens', 'personal_access_tokens',
-        'provider_availability_settings', 'provider_blocked_dates', 'provider_profiles',
-        'provider_weekly_intervals', 'reservation_events', 'role_user', 'roles',
-        'service_categories', 'service_inquiries', 'service_inquiry_messages', 'service_inquiry_reads',
-        'service_reservations', 'service_reviews', 'services', 'sessions', 'users',
+        'activity_notifications', 'cache', 'cache_locks', 'failed_jobs',
+        'inquiry_notifications', 'job_batches', 'jobs', 'migrations',
+        'password_reset_tokens', 'personal_access_tokens', 'pricing_write_lock', 'provider_availability_settings',
+        'provider_blocked_dates', 'provider_profiles', 'provider_weekly_intervals', 'quote_acceptances',
+        'reservation_events', 'role_user', 'roles', 'service_categories',
+        'service_inquiries', 'service_inquiry_messages', 'service_inquiry_reads', 'service_price_versions',
+        'service_pricing_creations', 'service_quotes', 'service_reservations', 'service_reviews',
+        'services', 'sessions', 'users',
     ];
 
     private function guardMemoryPdo(PDO $pdo): void
@@ -127,7 +129,7 @@ trait RetirementMemoryIntegrity
             if ($table['sequence'] !== $byTable[$name]) {
                 throw new RuntimeException('Invalid sqlite_sequence snapshot: inconsistent table entries');
             }
-            // This SQL is the exact trusted 37-migration catalog, checked before
+            // This SQL is the exact trusted 38-migration catalog, checked before
             // this validator. No arbitrary schema is approved by parsing SQL.
             $auto = preg_match('/\bAUTOINCREMENT\b/i', $table['sql']) === 1;
             if (! $auto) {
@@ -161,7 +163,7 @@ trait RetirementMemoryIntegrity
         $names = array_keys($manifest['tables']);
         $protected = array_values(array_diff($names, self::TABLES));
         if ($protected !== self::PROTECTED) {
-            throw new RuntimeException('Exact 26 protected tables required, including empty tables');
+            throw new RuntimeException('Exact 31 protected tables required, including empty tables');
         }
 
         return array_intersect_key($manifest['tables'], array_flip(self::PROTECTED));

@@ -377,7 +377,7 @@ class TekoraW5Test extends TestCase
         foreach (['/cuenta', '/cuenta/activar-prestador', '/perfil', '/perfil/editar-nombre'] as $uri) {
             $this->get($uri)->assertOk();
         }$this->assertEquals($before, DB::table('role_user')->get()->toArray());
-        $this->assertCount(37, glob(database_path('migrations/*.php')));
+        $this->assertCount(38, glob(database_path('migrations/*.php')));
         $this->assertCount(21, array_filter(app('router')->getRoutes()->getRoutes(), fn ($r) => str_starts_with($r->uri(), 'api/')));
         $this->assertNull(app('router')->getRoutes()->getByName('profesionista.dashboard'));
         $this->get('/mindbloom/inicio')->assertNotFound();

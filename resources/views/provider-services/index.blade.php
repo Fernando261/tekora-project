@@ -10,6 +10,7 @@
     @forelse($services as $service)
       <article data-ops-card class="account-card service-card">
         <span class="service-status status-{{ $service->status->value }}">{{ $service->status->label() }}</span><h2>{{ $service->title }}</h2><p>{{ $service->category->name }} · {{ $service->modality->label() }}</p>
+        <x-published-price :cents="$service->published_price_cents" />
         @if(!$service->category->is_active)<p class="account-note">Categoría inactiva: este servicio no se muestra públicamente. Elige otra categoría al editarlo.</p>@endif
         <a class="account-button secondary" href="{{ route('provider-services.edit', $service) }}">Editar servicio<span class="sr-only">: {{ $service->title }}</span></a>
         @if($service->status === \App\Enums\ServiceStatus::Published && $service->category->is_active)<a href="{{ route('catalog.show', $service) }}">Ver publicación</a>@endif

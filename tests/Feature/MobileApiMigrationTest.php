@@ -40,7 +40,7 @@ class MobileApiMigrationTest extends TestCase
             return $result;
         };
         $before = $snapshot();
-        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'mobile_upgrade', '--force' => true]));
+        $this->assertSame(0, Artisan::call('migrate', ['--database' => 'mobile_upgrade', '--path' => database_path('migrations/2026_11_04_000000_create_personal_access_tokens_table.php'), '--realpath' => true, '--force' => true]));
         $this->assertDatabaseCount('migrations', 37);
         $this->assertEquals($before, $snapshot());
         $this->assertDatabaseCount('personal_access_tokens', 0);

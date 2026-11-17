@@ -39,6 +39,13 @@ class Service extends Model
         return $this->hasMany(ServiceReview::class);
     }
 
+    public function scopeWithPublishedPrice(Builder $query): void
+    {
+        // Correlated projection avoids N+1 reads and leaves mobile API contracts intact.
+        $query->addSelect(['published_price_cents' => \Illuminate\Support\Facades\DB::table('service_price_versions')
+            ->select('total_cents')->whereColumn('service_id', 'services.id')->orderByDesc('version')->limit(1)]);
+    }
+
     // Una sola regla para catálogo, detalle y fichas públicas. No carga datos de User.
     public function scopePubliclyVisible(Builder $query): void
     {

@@ -22,11 +22,13 @@ class PublicProviderController extends Controller
     {
         $profile = ProviderProfile::select(['id', 'display_name', 'headline', 'bio'])
             ->whereHas('services', fn (Builder $services) => $services->publiclyVisible())->findOrFail($providerProfile);
-        $services = $profile->services()->publiclyVisible()->with(['category:id,name', 'providerProfile:id,display_name'])
+        $services = $profile->services()->publiclyVisible()->withPublishedPrice()->with(['category:id,name', 'providerProfile:id,display_name'])
             ->orderByDesc('id')->paginate(12);
         $reviewPage = \App\Support\ReviewInput::page($request, 'reviews_page');
         $reviews = app(\App\Services\PublicReviews::class)->forProvider($profile->id, $reviewPage);
-        if ($reviews) $reviews['reviews']->appends(['page' => $services->currentPage()]);
+        if ($reviews) {
+            $reviews['reviews']->appends(['page' => $services->currentPage()]);
+        }
         $services->appends(['reviews_page' => $reviewPage]);
 
         return view('public-providers.show', compact('profile', 'services', 'reviews'));

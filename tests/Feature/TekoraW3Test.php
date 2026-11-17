@@ -202,7 +202,7 @@ class TekoraW3Test extends TestCase
         $detail = $this->get('/api/v1/services/'.$service->id)->assertOk()->json('data');
         $this->assertSame(['id', 'title', 'description', 'modality', 'category', 'provider'], array_keys($detail));
         $this->assertSame(['id', 'display_name', 'headline', 'bio'], array_keys($detail['provider']));
-        $this->assertCount(37, glob(database_path('migrations/*.php')));
+        $this->assertCount(38, glob(database_path('migrations/*.php')));
         $this->assertCount(21, array_filter(app('router')->getRoutes()->getRoutes(), fn ($route) => str_starts_with($route->uri(), 'api/')));
     }
 
