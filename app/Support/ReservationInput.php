@@ -10,6 +10,7 @@ class ReservationInput
     public static function proposal(array $input): array
     {
         return self::validated($input, [
+            'quote_id' => ['sometimes', 'nullable', 'string', 'uuid'],
             'date' => ['required', 'string', 'date_format:Y-m-d', 'after_or_equal:2000-01-01', 'before_or_equal:2100-12-31'],
             'time' => ['required', 'string', 'regex:/^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/D'],
             'availability_revision' => ['required', 'integer', 'min:1', 'max:2147483647'],
@@ -19,13 +20,15 @@ class ReservationInput
 
     public static function decision(array $input): array
     {
-        return self::validated($input, ['version' => ['required', 'integer', 'min:1', 'max:2147483647']]);
+        return self::validated($input, ['version' => ['required', 'integer', 'min:1', 'max:2147483647'], 'idempotency_key' => ['sometimes', 'string', 'uuid']]);
     }
 
     private static function validated(array $input, array $rules): array
     {
         $extra = array_diff(array_keys($input), array_keys($rules));
-        if ($extra) throw ValidationException::withMessages(['form' => 'El formulario contiene campos no permitidos. Abre de nuevo la reserva.']);
+        if ($extra) {
+            throw ValidationException::withMessages(['form' => 'El formulario contiene campos no permitidos. Abre de nuevo la reserva.']);
+        }
 
         return Validator::make($input, $rules, [
             'required' => 'Completa este campo.', 'string' => 'Introduce un valor de texto válido.',

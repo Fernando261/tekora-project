@@ -72,6 +72,11 @@ class ServiceInquiryController extends Controller
     public function show(InquiryConversationRequest $request, ServiceInquiry $inquiry)
     {
         Gate::forUser($request->user('web'))->authorize('view', $inquiry);
+        try {
+            app(\App\Services\ReservationWorkflow::class)->refreshExpirations();
+        } catch (\App\Exceptions\ReservationFailure $error) {
+            return response()->view('reservations.error', ['message' => $error->getMessage()], $error->status);
+        }
         $inquiry->load(['client:id,name', 'service:id,provider_profile_id', 'service.providerProfile:id,display_name']);
         $publicService = Service::publiclyVisible()->whereKey($inquiry->service_id)->exists();
         $messages = $inquiry->messages()->with('author:id,name')->orderByDesc('created_at')->orderByDesc('id')

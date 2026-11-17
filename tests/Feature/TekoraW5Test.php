@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use Tests\Support\Retired\Profesionista;
 use App\Models\Role;
 use DOMDocument;
 use DOMXPath;
@@ -20,6 +19,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use Tests\Support\CatalogFixtures;
 use Tests\Support\EnforcedCsrf;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 #[Group('web-w5')]
@@ -377,8 +377,8 @@ class TekoraW5Test extends TestCase
         foreach (['/cuenta', '/cuenta/activar-prestador', '/perfil', '/perfil/editar-nombre'] as $uri) {
             $this->get($uri)->assertOk();
         }$this->assertEquals($before, DB::table('role_user')->get()->toArray());
-        $this->assertCount(38, glob(database_path('migrations/*.php')));
-        $this->assertCount(21, array_filter(app('router')->getRoutes()->getRoutes(), fn ($r) => str_starts_with($r->uri(), 'api/')));
+        $this->assertCount(39, glob(database_path('migrations/*.php')));
+        $this->assertCount(22, array_filter(app('router')->getRoutes()->getRoutes(), fn ($r) => str_starts_with($r->uri(), 'api/')));
         $this->assertNull(app('router')->getRoutes()->getByName('profesionista.dashboard'));
         $this->get('/mindbloom/inicio')->assertNotFound();
     }

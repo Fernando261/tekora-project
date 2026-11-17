@@ -34,9 +34,25 @@ class ServiceReservationPolicy
             && $reservation->providerProfile()->where('user_id', $actor->id)->exists();
     }
 
-    public function reject(Authenticatable $actor, ServiceReservation $reservation): bool { return $this->confirm($actor, $reservation); }
-    public function complete(Authenticatable $actor, ServiceReservation $reservation): bool { return $this->confirm($actor, $reservation); }
-    public function cancel(Authenticatable $actor, ServiceReservation $reservation): bool { return $this->view($actor, $reservation); }
+    public function commit(Authenticatable $actor, ServiceReservation $reservation): bool
+    {
+        return $this->client($actor, $reservation);
+    }
+
+    public function reject(Authenticatable $actor, ServiceReservation $reservation): bool
+    {
+        return $this->confirm($actor, $reservation);
+    }
+
+    public function complete(Authenticatable $actor, ServiceReservation $reservation): bool
+    {
+        return $this->confirm($actor, $reservation);
+    }
+
+    public function cancel(Authenticatable $actor, ServiceReservation $reservation): bool
+    {
+        return $this->view($actor, $reservation);
+    }
 
     private function client(Authenticatable $actor, ServiceReservation $reservation): bool
     {

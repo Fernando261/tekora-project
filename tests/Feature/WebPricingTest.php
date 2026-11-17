@@ -26,7 +26,7 @@ class WebPricingTest extends TestCase
         foreach ($expected as $file => $hash) {
             $this->assertSame($hash, hash_file('sha256', base_path($file)), $file);
         }
-        $this->assertCount(38, glob(database_path('migrations/*.php')));
+        $this->assertCount(39, glob(database_path('migrations/*.php')));
     }
 
     private function price($provider, int $serviceId, array $overrides = [])

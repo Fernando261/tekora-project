@@ -30,9 +30,18 @@ final class ClientDashboardSummary
         $reservations = ServiceReservation::where('service_reservations.client_user_id', $user->id);
         $active = (clone $inquiries)->active()->count();
         $totals = (clone $reservations)->selectRaw("COUNT(CASE WHEN status = 'confirmed' AND starts_at_utc > ? THEN 1 END) AS confirmed,
-            COUNT(CASE WHEN status = 'requested' AND starts_at_utc > ? THEN 1 END) AS requested,
+            COUNT(CASE WHEN status = 'requested' AND NOT EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id) AND starts_at_utc > ? THEN 1 END) AS requested,
             COUNT(CASE WHEN status = 'completed' THEN 1 END) AS completed,
-            COUNT(CASE WHEN status = 'cancelled' THEN 1 END) AS cancelled", [$instant, $instant])->first();
+            COUNT(CASE WHEN status = 'cancelled' THEN 1 END) AS cancelled, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us>max(CAST(tekora_booking_now_us() AS INTEGER),(SELECT high_water_us FROM reservation_hold_clock WHERE id=1))) THEN 1 END) AS held, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us<=max(CAST(tekora_booking_now_us() AS INTEGER),(SELECT high_water_us FROM reservation_hold_clock WHERE id=1))) THEN 1 END) AS expired_holds", [$instant, $instant])->first();
+        if ((int) $totals->expired_holds > 0) {
+            try {
+                app(ReservationWorkflow::class)->refreshExpirations();
+            } catch (\App\Exceptions\ReservationFailure $error) {
+                throw new \App\Exceptions\ClientDashboardFailure('No se pudo comprobar el vencimiento de las retenciones.', 503);
+            }
+
+            return $this->build($user, $filters);
+        }
         $unreadQuery = app(InquiryReadTracking::class)->withUnreadCount((clone $inquiries)->select('service_inquiries.id'), $user);
         $unread = (int) DB::query()->fromSub($unreadQuery->toBase(), 'client_conversations')->sum('unread_messages_count');
         $agenda = (clone $reservations)->where('service_reservations.status', 'confirmed')->where('starts_at_utc', '>', $instant)
@@ -49,7 +58,9 @@ final class ClientDashboardSummary
                 'url' => route('inquiries.show', $row->id), 'iso' => CarbonImmutable::parse($row->getRawOriginal('created_at'), 'UTC')->toIso8601String(),
                 'date' => CarbonImmutable::parse($row->getRawOriginal('created_at'), 'UTC')->setTimezone(self::TIMEZONE)->format('d/m/Y H:i')])->all();
 
-        return ['active' => $active, 'confirmed' => (int) $totals->confirmed, 'requested' => (int) $totals->requested,
+        $held = (int) $totals->held;
+
+        return ($held > 0 ? ['held' => $held] : []) + ['active' => $active, 'confirmed' => (int) $totals->confirmed, 'requested' => (int) $totals->requested,
             'completed' => (int) $totals->completed, 'cancelled' => (int) $totals->cancelled, 'unread' => $unread,
             // This counter intentionally describes the whole account, never just the client role.
             'notifications' => app(NotificationInbox::class)->unreadCount($user),

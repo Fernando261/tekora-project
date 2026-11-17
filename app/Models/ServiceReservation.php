@@ -21,16 +21,67 @@ class ServiceReservation extends Model
             'availability_revision' => 'integer', 'version' => 'integer', 'last_actor_user_id' => 'integer'];
     }
 
-    public function inquiry(): BelongsTo { return $this->belongsTo(ServiceInquiry::class, 'service_inquiry_id'); }
-    public function service(): BelongsTo { return $this->belongsTo(Service::class); }
-    public function providerProfile(): BelongsTo { return $this->belongsTo(ProviderProfile::class); }
-    public function client(): BelongsTo { return $this->belongsTo(User::class, 'client_user_id'); }
-    public function events(): HasMany { return $this->hasMany(ReservationEvent::class); }
-    public function review(): HasOne { return $this->hasOne(ServiceReview::class); }
+    public function inquiry(): BelongsTo
+    {
+        return $this->belongsTo(ServiceInquiry::class, 'service_inquiry_id');
+    }
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function providerProfile(): BelongsTo
+    {
+        return $this->belongsTo(ProviderProfile::class);
+    }
+
+    public function client(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'client_user_id');
+    }
+
+    public function events(): HasMany
+    {
+        return $this->hasMany(ReservationEvent::class);
+    }
+
+    public function review(): HasOne
+    {
+        return $this->hasOne(ServiceReview::class);
+    }
+
+    public function hold(): HasOne
+    {
+        return $this->hasOne(ReservationHold::class, 'service_reservation_id');
+    }
+
+    public function effectiveStatus(): ReservationStatus
+    {
+        if (! $this->quote_id || ! $this->hold) {
+            return $this->status;
+        }
+        if ($this->hold->state === 'expired') {
+            return ReservationStatus::HoldExpired;
+        }
+        if ($this->hold->state === 'released') {
+            return ReservationStatus::HoldReleased;
+        }
+        if ($this->status !== ReservationStatus::Requested) {
+            return $this->status;
+        }
+
+        return match ($this->hold->state) {
+            'held' => $this->hold->remainingSeconds() > 0 ? ReservationStatus::Held : ReservationStatus::HoldExpired,
+            'expired' => ReservationStatus::HoldExpired,
+            'released' => ReservationStatus::HoldReleased,
+            default => $this->status,
+        };
+    }
 
     public function scopeActive(Builder $query): void
     {
-        $query->whereIn('status', ['requested', 'confirmed']);
+        $query->whereIn('service_reservations.id', \Illuminate\Support\Facades\DB::table('reservation_active_bookings')->select('reservation_id'));
     }
 
     public function localTime(): string

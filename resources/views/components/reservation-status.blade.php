@@ -1,2 +1,3 @@
 @props(['reservation'])
-<span class="reservation-status reservation-{{ $reservation->status->value }}">{{ $reservation->expired() ? 'Propuesta expirada' : $reservation->status->label() }}</span>
+@php($effective = $reservation->effectiveStatus())
+<span class="reservation-status reservation-{{ $effective->value }}">{{ $effective === \App\Enums\ReservationStatus::Requested && $reservation->expired() ? 'Propuesta expirada' : $effective->label() }}</span>

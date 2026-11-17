@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tekora API móvil",
-    "version": "1.1.0",
-    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow.",
+    "version": "1.2.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención.",
     "license": {
       "name": "MIT",
       "identifier": "MIT"
@@ -1658,7 +1658,7 @@
             }
           }
         },
-        "description": "Fecha/hora civiles y revisión del GET privado. 201 nueva; reintento del mismo UUID y date/time/revision devuelve 200. Reutilizar UUID con otros datos, revisión obsoleta, estado inválido, fecha bloqueada, horario pasado/solapado o reserva activa: 409. Hora civil inválida/ambigua por DST o fuera de horizonte: 422. No enviar timezone, IDs de participantes, status o version. 10/minuto por usuario, 40/IP, compartidos con cancelaciones."
+        "description": "Fecha/hora civiles y revisión del GET privado. 201 nueva; reintento del mismo UUID y date/time/revision devuelve 200. Reutilizar UUID con otros datos, revisión obsoleta, estado inválido, fecha bloqueada, horario pasado/solapado o reserva activa: 409. Hora civil inválida/ambigua por DST o fuera de horizonte: 422. No enviar timezone, IDs de participantes, status o version. 10/minuto por usuario, 40/IP, compartidos con cancelaciones. Con precio exige quote_id de commercial.accepted_quotes; sin ella 422, sin crear una reserva incompletable. La clave también incluye quote_id en su intención. El cliente acepta la cotización en la web indicada por quotes_web_url. Nunca se elige una cotización automáticamente."
       }
     },
     "/reservations": {
@@ -1940,7 +1940,105 @@
             }
           }
         },
-        "description": "Permite requested, o confirmed antes del inicio. Versión obsoleta o transición no permitida devuelve 409; obtener de nuevo el detalle antes de decidir. No hay rutas móviles para confirmar, rechazar o completar como prestador."
+        "description": "Permite requested, o confirmed antes del inicio. Versión obsoleta o transición no permitida devuelve 409; obtener de nuevo el detalle antes de decidir. No hay rutas móviles para confirmar, rechazar o completar como prestador. En quoted-slot-hold-v1 requiere idempotency_key. Cancelar un held libera el horario y conserva su historial; una retención vencida no se reactiva."
+      }
+    },
+    "/reservations/{reservation}/commit": {
+      "patch": {
+        "operationId": "commitMyHeldReservation",
+        "summary": "Confirmar definitivamente una retención vigente como cliente",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta, modificación o reintento idempotente reconocido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Reservation"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "id": 51,
+                    "inquiry_id": 31,
+                    "service_id": 21,
+                    "status": "confirmed",
+                    "version": 2,
+                    "timezone": "America/Mexico_City",
+                    "date": "2030-01-07",
+                    "time": "09:00",
+                    "end_time": "10:00",
+                    "starts_at": "2030-01-07T15:00:00Z",
+                    "ends_at": "2030-01-07T16:00:00Z",
+                    "created_at": "2030-01-01T12:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommitReservationInput"
+              },
+              "example": {
+                "version": 1,
+                "idempotency_key": "66fd633b-ec50-4b1a-b61f-29af184ae25b"
+              }
+            }
+          }
+        },
+        "description": "Solo propietario cliente con rol vigente. Requiere retención held iniciada por el prestador, misma cotización aceptada e inicio aún futuro. A los 900 segundos exactos devuelve 409. Transición atómica; no libera el horario ni procesa pagos. Clave repetida devuelve el resultado actual sin reactivar estados terminales. Se pueden cancelar reservas/retenciones con el endpoint cancel. No hay operaciones móviles de prestador."
       }
     }
   },
@@ -2568,7 +2666,10 @@
               "confirmed",
               "rejected",
               "cancelled",
-              "completed"
+              "completed",
+              "held",
+              "hold_expired",
+              "hold_released"
             ]
           },
           "version": {
@@ -2601,6 +2702,23 @@
           "created_at": {
             "type": "string",
             "format": "date-time"
+          },
+          "quote_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "commercial_protocol": {
+            "const": "quoted-slot-hold-v1"
+          },
+          "hold": {
+            "$ref": "#/components/schemas/ReservationHold"
+          },
+          "confirmation_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "idempotency_key_required": {
+            "const": true
           }
         }
       },
@@ -2704,6 +2822,68 @@
           "guaranteed": {
             "type": "boolean",
             "const": false
+          },
+          "commercial": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "requires_accepted_quote",
+              "hold_seconds",
+              "accepted_quotes",
+              "quotes_web_url"
+            ],
+            "properties": {
+              "requires_accepted_quote": {
+                "const": true
+              },
+              "hold_seconds": {
+                "type": "integer",
+                "const": 900
+              },
+              "quotes_web_url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "accepted_quotes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "total_cents",
+                    "currency",
+                    "duration_minutes",
+                    "price_version",
+                    "accepted_at_utc"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "total_cents": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "currency": {
+                      "const": "MXN"
+                    },
+                    "duration_minutes": {
+                      "const": 60
+                    },
+                    "price_version": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "accepted_at_utc": {
+                      "type": "string",
+                      "description": "UTC YYYY-MM-DD HH:mm:ss.uuuuuu"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -2779,6 +2959,14 @@
           "idempotency_key": {
             "type": "string",
             "format": "uuid"
+          },
+          "quote_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid",
+            "description": "Obligatoria para nuevas propuestas con precio. Debe ser una cotización ya aceptada de la misma solicitud/cliente/servicio/prestador; la caducidad de emisión no invalida una aceptación anterior."
           }
         }
       },
@@ -2793,6 +2981,78 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 2147483647
+          },
+          "idempotency_key": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Obligatoria para reservas de quoted-slot-hold-v1; la misma clave con distinto contenido devuelve 409."
+          }
+        }
+      },
+      "ReservationHold": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "version",
+          "accepted_at",
+          "expires_at",
+          "remaining_seconds",
+          "server_now"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "held",
+              "committed",
+              "released",
+              "expired"
+            ]
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "accepted_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "remaining_seconds": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 900
+          },
+          "server_now": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CommitReservationInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "idempotency_key"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "idempotency_key": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Obligatoria para reservas de quoted-slot-hold-v1; la misma clave con distinto contenido devuelve 409."
           }
         }
       }
