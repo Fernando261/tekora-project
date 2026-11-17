@@ -1,11 +1,12 @@
 <x-account-layout :operations="true" :title="$received ? 'Solicitudes recibidas' : 'Mis solicitudes'">
   @push('styles')<link rel="stylesheet" href="{{ asset('css/catalog.css') }}"><link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">@endpush
+  <div class="inquiry-page">
   <x-ops-heading variant="connect"><span class="account-eyebrow">Experiencia de {{ $received ? 'prestador' : 'cliente' }}</span><h1>{{ $received ? 'Solicitudes recibidas' : 'Mis solicitudes' }}</h1><p>{{ $received ? 'Revisa las necesidades enviadas a tus servicios y decide cómo continuar.' : 'Consulta las solicitudes que has enviado y su seguimiento.' }}</p></x-ops-heading>
   <form class="account-card inquiry-filters" method="GET" action="{{ route($received ? 'inquiries.received' : 'inquiries.index') }}">
     <div><label for="status">Estado</label><select id="status" name="status"><option value="">Todos los estados</option>@foreach(\App\Enums\InquiryStatus::cases() as $status)<option value="{{ $status->value }}" @selected(($filters['status'] ?? '') === $status->value)>{{ $status->label() }}</option>@endforeach</select></div>
     <button class="account-button" type="submit">Filtrar</button><a href="{{ route($received ? 'inquiries.received' : 'inquiries.index') }}">Limpiar filtros</a>
   </form>
-  <p class="account-help">{{ $inquiries->total() }} solicitudes. Fechas en horario de Ciudad de México.</p>
+  <p class="account-help inquiry-result-count">{{ $inquiries->total() }} solicitudes. Fechas en horario de Ciudad de México.</p>
   <div class="inquiry-list">
     @forelse($inquiries as $inquiry)
       <article data-ops-card class="account-card inquiry-card">
@@ -21,4 +22,5 @@
     @endforelse
   </div>
   <x-catalog-pagination :paginator="$inquiries" />
+  </div>
 </x-account-layout>

@@ -7,13 +7,13 @@ use App\Enums\InquiryNotificationEvent;
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
 use App\Models\InquiryNotification;
-use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceInquiry;
 use App\Services\InquiryWorkflow;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Tests\Support\InquiryFixtures;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 class InquiryNotificationsTest extends TestCase
@@ -50,6 +50,9 @@ class InquiryNotificationsTest extends TestCase
         $provider = $this->account(RoleName::Provider);
         $inquiry = $this->inquiry($client, $provider);
         foreach (['accept' => InquiryNotificationEvent::Accepted, 'complete' => InquiryNotificationEvent::Completed] as $action => $event) {
+            if ($action === 'complete') {
+                $this->performInquiryReservation($inquiry);
+            }
             $this->actingAs($provider, 'web')->patch(route('inquiries.'.$action, $inquiry))->assertStatus(303);
             $this->assertDatabaseHas('inquiry_notifications', ['user_id' => $client->id, 'service_inquiry_id' => $inquiry->id, 'event' => $event->value, 'read_at' => null]);
             $this->patchJson(route('inquiries.'.$action, $inquiry))->assertStatus(409);
@@ -110,8 +113,11 @@ class InquiryNotificationsTest extends TestCase
             $before = InquiryNotification::count();
             $this->actingAs($client, 'web')->post(route('inquiries.store', $inquiry->service_id), ['message' => 'Reenvío sin cambiar el mensaje.'])->assertStatus(303);
             $this->assertDatabaseCount('inquiry_notifications', $before);
-            if ($status === InquiryStatus::Pending) app(InquiryWorkflow::class)->decide($provider, $inquiry->id, InquiryAction::Accept);
+            if ($status === InquiryStatus::Pending) {
+                app(InquiryWorkflow::class)->decide($provider, $inquiry->id, InquiryAction::Accept);
+            }
         }
+        $this->performInquiryReservation($inquiry);
         app(InquiryWorkflow::class)->decide($provider, $inquiry->id, InquiryAction::Complete);
         $new = app(InquiryWorkflow::class)->open($client, $inquiry->service_id, 'Una nueva necesidad después del cierre.')['inquiry'];
         $this->assertNotSame($inquiry->id, $new->id);
@@ -178,7 +184,9 @@ class InquiryNotificationsTest extends TestCase
     public function test_listing_is_private_paginated_and_orders_by_creation_date_then_id_without_marking_as_read(): void
     {
         $provider = $this->account(RoleName::Provider);
-        for ($i = 0; $i < 13; $i++) $this->inquiry(null, $provider);
+        for ($i = 0; $i < 13; $i++) {
+            $this->inquiry(null, $provider);
+        }
         $foreign = $this->inquiry();
         $oldestId = $provider->inquiryNotifications()->min('id');
         DB::table('inquiry_notifications')->where('id', $oldestId)->update(['created_at' => now()->addDay()]);
@@ -190,7 +198,9 @@ class InquiryNotificationsTest extends TestCase
         $this->assertSame(array_slice($expected, 12), $this->get(route('notifications.index', ['page' => 2]))->viewData('notifications')->pluck('id')->all());
         $this->assertSame(13, $provider->inquiryNotifications()->unread()->count());
         $this->assertNotContains($foreign->id, $list->pluck('service_inquiry_id')->all());
-        foreach (['page=-1', 'page[]=1', 'page=abc'] as $query) $this->getJson('/cuenta/notificaciones?'.$query)->assertUnprocessable();
+        foreach (['page=-1', 'page[]=1', 'page=abc'] as $query) {
+            $this->getJson('/cuenta/notificaciones?'.$query)->assertUnprocessable();
+        }
     }
 
     public function test_users_and_admin_cannot_mark_foreign_or_missing_notifications(): void
@@ -222,7 +232,11 @@ class InquiryNotificationsTest extends TestCase
         $readAt = $notice->fresh()->getRawOriginal('read_at');
         $this->assertNotNull($readAt);
         $this->assertNotSame('1990-01-01', $readAt);
-        foreach ($before as $key => $value) if ($key !== 'read_at') $this->assertSame($value, $notice->getRawOriginal($key));
+        foreach ($before as $key => $value) {
+            if ($key !== 'read_at') {
+                $this->assertSame($value, $notice->getRawOriginal($key));
+            }
+        }
         $this->travel(10)->minutes();
         $this->post(route('notifications.read', $notice))->assertStatus(303);
         $this->assertSame($readAt, $notice->fresh()->getRawOriginal('read_at'));
@@ -293,9 +307,17 @@ class InquiryNotificationsTest extends TestCase
         $fake = (object) ['id' => $notice->id, 'service_inquiry_id' => $inquiry->id, 'inquiry' => $inquiry,
             'created_at' => now(), 'read_at' => now(), 'category' => 'Solicitudes',
             'detail_url' => route('inquiries.show', $inquiry), 'detail_label' => 'Ver solicitud', 'unavailable_message' => '',
-            'read_url' => route('notifications.read', $notice), 'event' => new class {
-                public function label() { return '<script>BAD-EVENT()</script>'; }
-                public function title() { return '<img src=x onerror=BAD-TITLE()>'; }
+            'read_url' => route('notifications.read', $notice), 'event' => new class
+            {
+                public function label()
+                {
+                    return '<script>BAD-EVENT()</script>';
+                }
+
+                public function title()
+                {
+                    return '<img src=x onerror=BAD-TITLE()>';
+                }
             }];
         $paginator = new \Illuminate\Pagination\LengthAwarePaginator([$fake], 1, 12);
         $html = view('notifications.index', ['notifications' => $paginator])->render();
