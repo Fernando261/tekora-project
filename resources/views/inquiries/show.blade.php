@@ -23,6 +23,7 @@
       @endif
     </section>
   </div>
+  <x-inquiry-quotes :inquiry="$inquiry" :published-price="$publishedPrice" :quote-rows="$quoteRows" :public-service="$publicService" />
   <x-inquiry-reservations :inquiry="$inquiry" />
   <x-inquiry-conversation :inquiry="$inquiry" :messages="$messages" :read-marker="$readMarker" :unread-messages-count="$unreadMessagesCount" :message-read-token="$messageReadToken" />
   <nav class="inquiry-actions" aria-label="Volver a mis paneles">@can(\App\Enums\Permission::ManageOwnInquiries->value)<a href="{{ route('inquiries.index') }}">Mis solicitudes</a>@endcan @can(\App\Enums\Permission::ManageReceivedInquiries->value)<a href="{{ route('inquiries.received') }}">Solicitudes recibidas</a>@endcan</nav>

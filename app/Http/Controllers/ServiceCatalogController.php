@@ -14,7 +14,7 @@ class ServiceCatalogController extends Controller
     {
         $filters = $request->validated();
         $query = Service::publiclyVisible()->with(['category:id,name,slug', 'providerProfile:id,display_name'])
-            ->select(['id', 'title', 'description', 'modality', 'provider_profile_id', 'service_category_id']);
+            ->select(['id', 'title', 'description', 'modality', 'provider_profile_id', 'service_category_id'])->withPublishedPrice();
 
         if (isset($filters['q']) && $filters['q'] !== '') {
             // Parámetro enlazado; %, _ y ! se buscan literalmente en vez de ampliar el LIKE.
@@ -35,7 +35,7 @@ class ServiceCatalogController extends Controller
 
     public function show(\Illuminate\Http\Request $request, int $service)
     {
-        $service = Service::publiclyVisible()->with(['category:id,name', 'providerProfile:id,display_name,headline,bio'])
+        $service = Service::publiclyVisible()->withPublishedPrice()->with(['category:id,name', 'providerProfile:id,display_name,headline,bio'])
             ->findOrFail($service);
 
         $reviewPage = \App\Support\ReviewInput::page($request, 'reviews_page');

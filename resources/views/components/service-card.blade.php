@@ -5,6 +5,7 @@
   <span class="mp-card-category">{{ $service->category->name }}</span>
   <h2><a href="{{ route('catalog.show', $service) }}">{{ $service->title }}</a></h2>
   <p class="service-excerpt">{{ \Illuminate\Support\Str::limit($service->description, 180) }}</p>
+  <x-published-price :cents="$service->published_price_cents" />
   <a class="service-provider" href="{{ route('public-providers.show', $service->providerProfile) }}"><x-marketplace-avatar :name="$service->providerProfile->display_name" /><span>{{ $service->providerProfile->display_name }}</span></a>
   <a class="mp-card-action" href="{{ route('catalog.show', $service) }}">Ver servicio<span class="sr-only">: {{ $service->title }}</span><x-tekora-icon name="arrow" /></a>
 </article>

@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->trimStrings(except: ['price_mxn']);
         $middleware->api(append: [\App\Http\Middleware\ApiHeaders::class]);
         $middleware->redirectGuestsTo(fn (Request $request) => route('login'));
     })
@@ -25,10 +26,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 return false;
             }
         });
-        $exceptions->shouldRenderJsonWhen(fn (Request $request, \Throwable $exception) =>
-            $request->is('api/v1', 'api/v1/*') || $request->expectsJson());
+        $exceptions->shouldRenderJsonWhen(fn (Request $request, \Throwable $exception) => $request->is('api/v1', 'api/v1/*') || $request->expectsJson());
         $exceptions->render(function (\Throwable $exception, Request $request) {
-            if ($request->is('api/v1', 'api/v1/*')) return \App\Support\Api\ApiError::from($exception);
+            if ($request->is('api/v1', 'api/v1/*')) {
+                return \App\Support\Api\ApiError::from($exception);
+            }
         });
         $exceptions->respond(function ($response) {
             if (request()->is('api/v1', 'api/v1/*')) {

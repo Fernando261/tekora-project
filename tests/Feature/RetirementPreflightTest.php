@@ -231,14 +231,14 @@ class RetirementPreflightTest extends TestCase
         }
     }
 
-    public function test_inventory_comes_from_all_37_migrations_in_memory(): void
+    public function test_inventory_comes_from_all_38_migrations_in_memory(): void
     {
-        $this->assertDatabaseCount('migrations', 37);
+        $this->assertDatabaseCount('migrations', 38);
         $manifest = $this->memoryManifest();
-        $this->assertCount(35, $manifest['tables']);
-        $this->assertCount(26, $this->protectedManifest($manifest));
+        $this->assertCount(40, $manifest['tables']);
+        $this->assertCount(31, $this->protectedManifest($manifest));
         $triggers = array_values(array_filter($manifest['objects'], fn ($o) => $o['type'] === 'trigger'));
-        $this->assertCount(34, $triggers);
+        $this->assertCount(49, $triggers);
         $retiredTriggers = array_values(array_filter($triggers, fn ($o) => in_array($o['tbl_name'], self::TABLES, true)));
         $this->assertSame([], $retiredTriggers);
         $catalog = $this->catalog();
@@ -254,7 +254,7 @@ class RetirementPreflightTest extends TestCase
                 }
             }
         }
-        $this->recordRehearsalEvidence('inventory', ['status' => 'PASS', 'migrations' => 37,
+        $this->recordRehearsalEvidence('inventory', ['status' => 'PASS', 'migrations' => 38,
             'candidate_order' => self::TABLES, 'protected_tables' => self::PROTECTED,
             'foreign_key_edges' => $edges, 'all_triggers' => $triggers, 'candidate_triggers' => $retiredTriggers,
             'unknown_schema_objects' => [], 'sqlite_version' => DB::selectOne('select sqlite_version() as version')->version]);
@@ -299,7 +299,7 @@ class RetirementPreflightTest extends TestCase
         $this->recordRehearsalEvidence('complete-preservation', ['status' => 'PASS',
             'before' => $this->manifestSummary($manifestBefore), 'after' => $this->manifestSummary($manifestAfter),
             'protected_tables_exactly_equal' => self::PROTECTED, 'operations' => $this->operationTrace,
-            'all_26_protected_tables_populated' => true,
+            'all_31_protected_tables_populated' => true,
             'workflows_started_only_after_preservation_comparison' => true]);
         foreach (self::TABLES as $table) {
             $this->assertFalse(Schema::hasTable($table));
@@ -335,6 +335,15 @@ class RetirementPreflightTest extends TestCase
         DB::table('jobs')->insert(['queue' => 'synthetic', 'payload' => '{"synthetic":true}', 'attempts' => 0, 'reserved_at' => null, 'available_at' => now()->timestamp, 'created_at' => now()->timestamp]);
         DB::table('job_batches')->insert(['id' => 'synthetic-batch', 'name' => 'Synthetic', 'total_jobs' => 1, 'pending_jobs' => 1, 'failed_jobs' => 0, 'failed_job_ids' => '[]', 'options' => null, 'cancelled_at' => null, 'created_at' => now()->timestamp, 'finished_at' => null]);
         DB::table('failed_jobs')->insert(['uuid' => (string) \Illuminate\Support\Str::uuid(), 'connection' => 'synthetic', 'queue' => 'synthetic', 'payload' => '{}', 'exception' => 'Synthetic failure', 'failed_at' => now()]);
+        // Populate and preserve the additive pricing tables too; never weaken the allowlist.
+        $provider = $this->account(\App\Enums\RoleName::Provider);
+        $this->service($provider);
+        $service = app(\App\Payments\CreatePricedService::class)->create($provider, $this->serviceData(), 100000, (string) \Illuminate\Support\Str::uuid());
+        $inquiry = app(\App\Services\InquiryWorkflow::class)->open($user, $service->id, 'Solicitud sintética con precio para preservar.')['inquiry'];
+        app(\App\Services\InquiryWorkflow::class)->decide($provider, $inquiry->id, \App\Enums\InquiryAction::Accept);
+        $quote = app(\App\Payments\SyntheticQuotes::class)->issue($user, $inquiry->id, ['idempotency_key' => (string) \Illuminate\Support\Str::uuid()]);
+        app(\App\Payments\SyntheticQuotes::class)->accept($user, $quote->id);
+
     }
 
     public function test_parent_first_order_and_protected_target_are_rejected_before_any_drop(): void
@@ -459,7 +468,7 @@ class RetirementPreflightTest extends TestCase
         $this->assertSame($source, $this->memoryManifest($copy));
         $this->assertSame([], $copy->query('PRAGMA main.foreign_key_check')->fetchAll());
         $this->assertSame(1, (int) $copy->query('PRAGMA foreign_keys')->fetchColumn());
-        $this->assertSame(37, (int) $copy->query('SELECT COUNT(*) FROM main.migrations')->fetchColumn());
+        $this->assertSame(38, (int) $copy->query('SELECT COUNT(*) FROM main.migrations')->fetchColumn());
         $this->assertSame(1, (int) $copy->query('SELECT COUNT(*) FROM main.service_reservations r JOIN main.reservation_events e ON e.service_reservation_id=r.id AND e.version=r.version JOIN main.service_inquiries i ON i.id=r.service_inquiry_id JOIN main.services s ON s.id=r.service_id JOIN main.provider_profiles p ON p.id=r.provider_profile_id WHERE i.client_user_id=r.client_user_id AND s.provider_profile_id=p.id')->fetchColumn());
         $photo = $copy->query('SELECT profile_photo_path FROM main.users WHERE id='.(int) $client->id)->fetchColumn();
         $this->assertSame('avatars/shared.png', $photo);
@@ -566,7 +575,7 @@ class RetirementPreflightTest extends TestCase
             $this->simulate();
             $this->fail('Unreviewed state accepted');
         } catch (RuntimeException $exception) {
-            $this->assertMatchesRegularExpression('/Unreviewed|Unsafe|Unconfirmed|ledger|Exact 26/', $exception->getMessage());
+            $this->assertMatchesRegularExpression('/Unreviewed|Unsafe|Unconfirmed|ledger|Exact 31/', $exception->getMessage());
         }
         $this->assertSame([], $this->operationTrace);
         $this->assertSame([], array_values(preg_grep('/^\s*drop\b/i', array_column(DB::getQueryLog(), 'query'))));

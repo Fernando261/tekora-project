@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Enums\InquiryAction;
 use App\Exceptions\InquiryConflict;
 use App\Http\Requests\DecideInquiryRequest;
-use App\Http\Requests\InquiryIndexRequest;
 use App\Http\Requests\InquiryConversationRequest;
+use App\Http\Requests\InquiryIndexRequest;
 use App\Http\Requests\StoreInquiryRequest;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
-use App\Services\InquiryWorkflow;
 use App\Services\InquiryReadTracking;
+use App\Services\InquiryWorkflow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -37,7 +37,9 @@ class ServiceInquiryController extends Controller
             $query->where('client_user_id', $user->id);
         }
         $filters = $request->validated();
-        if (! empty($filters['status'])) $query->where('status', $filters['status']);
+        if (! empty($filters['status'])) {
+            $query->where('status', $filters['status']);
+        }
         $inquiries = $query->orderByDesc('id')->paginate(12)->appends($filters);
 
         return view('inquiries.index', compact('inquiries', 'received', 'filters'));
@@ -48,7 +50,9 @@ class ServiceInquiryController extends Controller
         Gate::forUser($request->user('web'))->authorize('create', [ServiceInquiry::class, $service]);
         $service = Service::publiclyVisible()->with('providerProfile:id,display_name')->findOrFail($service->id);
         $existing = $request->user('web')->serviceInquiries()->where('service_id', $service->id)->active()->first();
-        if ($existing) return redirect()->route('inquiries.show', $existing)->with('info', 'Ya tienes una solicitud pendiente o aceptada para este servicio.');
+        if ($existing) {
+            return redirect()->route('inquiries.show', $existing)->with('info', 'Ya tienes una solicitud pendiente o aceptada para este servicio.');
+        }
 
         return view('inquiries.create', compact('service'));
     }
@@ -77,7 +81,12 @@ class ServiceInquiryController extends Controller
         $unreadMessagesCount = $tracking->unreadFor($request->user('web'), $inquiry);
         $messageReadToken = $tracking->tokenFor($request->user('web'), $inquiry, $messages->getCollection());
 
-        return view('inquiries.show', compact('inquiry', 'publicService', 'messages', 'readMarker', 'unreadMessagesCount', 'messageReadToken'));
+        $publishedPrice = app(\App\Payments\PricingStore::class)->latestPrice($inquiry->service_id);
+        $quoteRows = \Illuminate\Support\Facades\DB::table('service_quotes as q')->leftJoin('quote_acceptances as a', 'a.quote_id', '=', 'q.id')
+            ->where('q.service_inquiry_id', $inquiry->id)->orderByDesc('q.issued_at_utc')->orderByDesc('q.id')
+            ->paginate(10, ['q.*', 'a.accepted_at_utc'], 'quotes_page')->fragment('cotizaciones');
+
+        return view('inquiries.show', compact('publishedPrice', 'quoteRows', 'inquiry', 'publicService', 'messages', 'readMarker', 'unreadMessagesCount', 'messageReadToken'));
     }
 
     public function decide(DecideInquiryRequest $request, ServiceInquiry $inquiry, InquiryWorkflow $workflow)
@@ -96,7 +105,9 @@ class ServiceInquiryController extends Controller
     private function conflict(Request $request, InquiryConflict $conflict)
     {
         $detailUrl = $conflict->inquiryId ? route('inquiries.show', $conflict->inquiryId) : route('inquiries.index');
-        if ($request->expectsJson()) return response()->json(['message' => $conflict->getMessage(), 'inquiry_url' => $detailUrl], 409);
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $conflict->getMessage(), 'inquiry_url' => $detailUrl], 409);
+        }
 
         return response()->view('inquiries.conflict', ['message' => $conflict->getMessage(), 'detailUrl' => $detailUrl], 409);
     }

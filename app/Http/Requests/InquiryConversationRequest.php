@@ -17,7 +17,7 @@ class InquiryConversationRequest extends FormRequest
 
     public function rules(): array
     {
-        return ['messages_cursor' => ['nullable', 'string', 'max:1024', function ($attribute, $value, $fail) {
+        return ['quotes_page' => ['sometimes', 'integer', 'min:1', 'max:100000'], 'messages_cursor' => ['nullable', 'string', 'max:1024', function ($attribute, $value, $fail) {
             try {
                 $cursor = Cursor::fromEncoded($value);
                 $date = $cursor?->parameter('created_at');
@@ -36,7 +36,9 @@ class InquiryConversationRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $message = 'La página de la conversación no es válida. Abre de nuevo la solicitud.';
-        if ($this->expectsJson()) throw new HttpResponseException(response()->json(['message' => $message], 422));
+        if ($this->expectsJson()) {
+            throw new HttpResponseException(response()->json(['message' => $message], 422));
+        }
 
         throw new HttpResponseException(response()->view('inquiries.message-error', ['message' => $message,
             'detailUrl' => route('inquiries.show', $this->route('inquiry')).'#conversacion'], 422));

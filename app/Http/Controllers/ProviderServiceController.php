@@ -16,7 +16,7 @@ class ProviderServiceController extends Controller
     {
         Gate::forUser($request->user('web'))->authorize('viewAny', Service::class);
         $profile = $request->user('web')->providerProfile()->first();
-        $services = $profile?->services()->with('category:id,name,is_active')->orderByDesc('id')->paginate(12);
+        $services = $profile?->services()->withPublishedPrice()->with('category:id,name,is_active')->orderByDesc('id')->paginate(12);
 
         return view('provider-services.index', compact('profile', 'services'));
     }
@@ -32,7 +32,20 @@ class ProviderServiceController extends Controller
     public function store(ServiceRequest $request)
     {
         $profile = $request->user('web')->providerProfile()->firstOrFail();
-        $service = $profile->services()->create($request->validated());
+        $details = $request->safe()->only(['title', 'description', 'service_category_id', 'modality', 'status']);
+        if ($request->filled('price_mxn')) {
+            \App\Payments\PricingInput::only($request->except('_token'), ['title', 'description', 'service_category_id', 'modality', 'status', 'price_mxn', 'creation_key']);
+            $cents = \App\Payments\WebMoney::cents($request->input('price_mxn'));
+            // Normalize category identity so HTTP retries have a stable intent fingerprint.
+            $details['service_category_id'] = (int) $details['service_category_id'];
+
+            return \App\Payments\PricingResponse::run($request, function () use ($request, $details, $cents) {
+                $service = app(\App\Payments\CreatePricedService::class)->create($request->user('web'), $details, $cents, $request->validated('creation_key'));
+
+                return redirect()->route('provider-services.edit', $service, 303)->with('success', 'Servicio y precio publicados.');
+            });
+        }
+        $service = $profile->services()->create($details);
 
         return redirect()->route('provider-services.edit', $service, 303)->with('success', 'Servicio creado. Estado: '.$service->status->label().'.');
     }
@@ -41,7 +54,7 @@ class ProviderServiceController extends Controller
     {
         Gate::forUser($request->user('web'))->authorize('update', $service);
 
-        return view('provider-services.form', ['service' => $service,
+        return view('provider-services.form', ['service' => $service, 'price' => app(\App\Payments\PricingStore::class)->latestPrice($service->id),
             'categories' => ServiceCategory::active()->ordered()->get()]);
     }
 
