@@ -31,7 +31,9 @@ class InquiryCsrfTest extends TestCase
         $this->post(route('inquiries.store', $inquiry->service_id), ['message' => 'Necesito revisar mi equipo.'])->assertStatus(419);
         $this->patch(route('inquiries.cancel', $inquiry), ['_token' => 'wrong'])->assertStatus(419);
         $this->actingAs($provider, 'web');
-        foreach (['accept', 'reject', 'complete'] as $action) $this->patch(route('inquiries.'.$action, $inquiry))->assertStatus(419);
+        foreach (['accept', 'reject', 'complete'] as $action) {
+            $this->patch(route('inquiries.'.$action, $inquiry))->assertStatus(419);
+        }
         $this->get(route('inquiries.show', $inquiry))->assertOk()->assertSee('name="_token"', false);
         $this->assertSame($before, $inquiry->fresh()->getAttributes());
         $this->actingAs($this->account(RoleName::Provider), 'web')->patch(route('inquiries.accept', $inquiry), ['_token' => 'inquiry-token'])->assertForbidden();
@@ -67,6 +69,8 @@ class InquiryCsrfTest extends TestCase
         $this->get('/cuenta/solicitudes/recibidas')->assertOk()->assertSee('Necesito resolver un problema con mi equipo.');
         $this->patch(route('inquiries.accept', $inquiry), ['_token' => $token])->assertStatus(303);
         $this->patch(route('inquiries.complete', $inquiry), ['_token' => 'wrong'])->assertStatus(419);
+        $this->patch(route('inquiries.complete', $inquiry), ['_token' => $token])->assertStatus(409);
+        $this->performInquiryReservation($inquiry);
         $this->patch(route('inquiries.complete', $inquiry), ['_token' => $token])->assertStatus(303);
         $this->post('/logout', ['_token' => $token])->assertRedirect('/login');
         $this->post('/login', ['_token' => session()->token(), 'email' => 'inquiry-client@example.test', 'password' => 'test-password'])->assertRedirect('/cuenta');

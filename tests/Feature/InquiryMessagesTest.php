@@ -7,7 +7,6 @@ use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
 use App\Exceptions\InquiryMessageConflict;
 use App\Models\InquiryNotification;
-use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceInquiryMessage;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryWorkflow;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Tests\Support\MessageFixtures;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 class InquiryMessagesTest extends TestCase
@@ -58,8 +58,15 @@ class InquiryMessagesTest extends TestCase
             $inquiry = $this->inquiry($client, $provider);
             $this->message($client, $inquiry, 'HISTORIAL-CONSERVADO-'.$status->value);
             $workflow = app(InquiryWorkflow::class);
-            if ($status === InquiryStatus::Completed) $workflow->decide($provider, $inquiry->id, InquiryAction::Accept);
-            $action = match ($status) { InquiryStatus::Rejected => InquiryAction::Reject, InquiryStatus::Cancelled => InquiryAction::Cancel, InquiryStatus::Completed => InquiryAction::Complete };
+            if ($status === InquiryStatus::Completed) {
+                $workflow->decide($provider, $inquiry->id, InquiryAction::Accept);
+            }
+            if ($status === InquiryStatus::Completed) {
+                $this->performInquiryReservation($inquiry);
+            }
+            $action = match ($status) {
+                InquiryStatus::Rejected => InquiryAction::Reject, InquiryStatus::Cancelled => InquiryAction::Cancel, InquiryStatus::Completed => InquiryAction::Complete
+            };
             $workflow->decide($status === InquiryStatus::Cancelled ? $client : $provider, $inquiry->id, $action);
             $before = $inquiry->fresh()->getAttributes();
             $notices = InquiryNotification::count();
@@ -126,7 +133,8 @@ class InquiryMessagesTest extends TestCase
         $inquiry = $this->inquiry($client);
         $this->actingAs($client, 'web');
         foreach (['', '   ', [], str_repeat('ñ', 2001)] as $body) {
-            $payload = $this->messageData(); $payload['body'] = $body;
+            $payload = $this->messageData();
+            $payload['body'] = $body;
             $this->postJson(route('inquiries.messages.store', $inquiry), $payload)->assertUnprocessable()->assertJsonValidationErrors('body');
         }
         $this->post(route('inquiries.messages.store', $inquiry), $this->messageData("  Línea uno\r\nLínea dos\rLínea tres  "))->assertStatus(303);
@@ -154,7 +162,8 @@ class InquiryMessagesTest extends TestCase
         $client = $this->account(RoleName::Client);
         $provider = $this->account(RoleName::Provider);
         $inquiry = $this->inquiry($client, $provider);
-        $key = (string) Str::uuid(); $payload = $this->messageData('El texto original se conserva.', $key);
+        $key = (string) Str::uuid();
+        $payload = $this->messageData('El texto original se conserva.', $key);
         $this->actingAs($client, 'web')->post(route('inquiries.messages.store', $inquiry), $payload)->assertStatus(303);
         $before = ServiceInquiryMessage::sole()->getAttributes();
         $this->travel(2)->minutes();
@@ -236,7 +245,8 @@ class InquiryMessagesTest extends TestCase
     {
         $client = $this->account(RoleName::Client);
         $inquiry = $this->inquiry($client);
-        $before = $inquiry->getAttributes(); $key = (string) Str::uuid();
+        $before = $inquiry->getAttributes();
+        $key = (string) Str::uuid();
         DB::beginTransaction();
         $this->message($client, $inquiry, 'Mensaje que todavía no está confirmado.', $key);
         $this->assertDatabaseCount('service_inquiry_messages', 1);
@@ -273,7 +283,9 @@ class InquiryMessagesTest extends TestCase
         $client = $this->account(RoleName::Client);
         $inquiry = $this->inquiry($client);
         $this->actingAs($client, 'web');
-        for ($i = 0; $i < 10; $i++) $this->post(route('inquiries.messages.store', $inquiry), $this->messageData('Mensaje '.$i))->assertStatus(303);
+        for ($i = 0; $i < 10; $i++) {
+            $this->post(route('inquiries.messages.store', $inquiry), $this->messageData('Mensaje '.$i))->assertStatus(303);
+        }
         $this->post(route('inquiries.messages.store', $inquiry), $this->messageData('Mensaje limitado.'))->assertStatus(429)->assertHeader('Retry-After')->assertSee('Espera antes de volver');
         $this->assertDatabaseCount('service_inquiry_messages', 10);
         $this->assertDatabaseCount('inquiry_notifications', 1);

@@ -5,11 +5,11 @@ namespace Tests\Feature;
 use App\Enums\InquiryAction;
 use App\Enums\InquiryStatus;
 use App\Enums\RoleName;
-use Tests\Support\Retired\Profesionista;
 use App\Models\ServiceInquiry;
 use App\Services\InquiryWorkflow;
 use Illuminate\Support\Facades\Hash;
 use Tests\Support\InquiryFixtures;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 class ServiceInquiriesTest extends TestCase
@@ -28,7 +28,9 @@ class ServiceInquiriesTest extends TestCase
         $this->assertSame($service->id, $inquiry->service_id);
         $this->assertSame($service->title, $inquiry->service_title);
         $this->assertSame(InquiryStatus::Pending, $inquiry->status);
-        foreach (['accepted_at', 'rejected_at', 'cancelled_at', 'completed_at'] as $column) $this->assertNull($inquiry->$column);
+        foreach (['accepted_at', 'rejected_at', 'cancelled_at', 'completed_at'] as $column) {
+            $this->assertNull($inquiry->$column);
+        }
         $this->assertDatabaseCount('citas', 0);
         $this->get(route('inquiries.show', $inquiry))->assertOk()->assertSee('Necesito revisar el equipo de trabajo.')->assertSee('Pendiente');
     }
@@ -126,7 +128,9 @@ class ServiceInquiriesTest extends TestCase
                 ->assertRedirect(route('inquiries.show', $inquiry))->assertSessionHas('info');
             $this->assertSame($before, $inquiry->fresh()->getAttributes());
             $this->get(route('inquiries.create', $inquiry->service_id))->assertRedirect(route('inquiries.show', $inquiry));
-            if ($status === InquiryStatus::Pending) app(InquiryWorkflow::class)->decide($provider, $inquiry->id, InquiryAction::Accept);
+            if ($status === InquiryStatus::Pending) {
+                app(InquiryWorkflow::class)->decide($provider, $inquiry->id, InquiryAction::Accept);
+            }
         }
         $this->assertDatabaseCount('service_inquiries', 1);
     }
@@ -149,7 +153,9 @@ class ServiceInquiriesTest extends TestCase
     {
         $client = $this->account(RoleName::Client);
         $provider = $this->account(RoleName::Provider);
-        for ($i = 0; $i < 13; $i++) $this->inquiry($client, $provider);
+        for ($i = 0; $i < 13; $i++) {
+            $this->inquiry($client, $provider);
+        }
         $accepted = $this->inquiry($client, $provider, InquiryStatus::Accepted);
         $foreign = $this->inquiry();
         $list = $this->actingAs($client, 'web')->get('/cuenta/solicitudes')->assertOk()->viewData('inquiries');
@@ -161,7 +167,9 @@ class ServiceInquiriesTest extends TestCase
         $this->assertSame([$accepted->id], $filtered->pluck('id')->all());
         $this->actingAs($provider, 'web')->get('/cuenta/solicitudes/recibidas?status=pending')->assertOk();
         $this->assertSame(13, $this->get('/cuenta/solicitudes/recibidas?status=pending')->viewData('inquiries')->total());
-        foreach (['status=admin', 'status[]=pending', 'page=-1', 'page[]=1'] as $query) $this->get('/cuenta/solicitudes/recibidas?'.$query)->assertStatus(422)->assertSee('Revisa los filtros');
+        foreach (['status=admin', 'status[]=pending', 'page=-1', 'page[]=1'] as $query) {
+            $this->get('/cuenta/solicitudes/recibidas?'.$query)->assertStatus(422)->assertSee('Revisa los filtros');
+        }
     }
 
     public function test_unrelated_clients_providers_and_administrators_cannot_read_or_decide(): void
@@ -170,7 +178,9 @@ class ServiceInquiriesTest extends TestCase
         $before = $inquiry->getAttributes();
         foreach ([[RoleName::Client], [RoleName::Provider], [RoleName::Admin], [RoleName::Admin, RoleName::Client, RoleName::Provider]] as $roles) {
             $this->actingAs($this->account(...$roles), 'web')->getJson(route('inquiries.show', $inquiry))->assertForbidden();
-            foreach (InquiryAction::cases() as $action) $this->patchJson(route('inquiries.'.$action->value, $inquiry))->assertForbidden();
+            foreach (InquiryAction::cases() as $action) {
+                $this->patchJson(route('inquiries.'.$action->value, $inquiry))->assertForbidden();
+            }
         }
         $this->assertSame($before, $inquiry->fresh()->getAttributes());
     }
@@ -181,7 +191,9 @@ class ServiceInquiriesTest extends TestCase
         $provider = $this->account(RoleName::Client, RoleName::Provider);
         $inquiry = $this->inquiry($client, $provider);
         $this->actingAs($client, 'web');
-        foreach (['accept', 'reject', 'complete'] as $action) $this->patch(route('inquiries.'.$action, $inquiry))->assertForbidden();
+        foreach (['accept', 'reject', 'complete'] as $action) {
+            $this->patch(route('inquiries.'.$action, $inquiry))->assertForbidden();
+        }
         $this->actingAs($provider, 'web')->patch(route('inquiries.cancel', $inquiry))->assertForbidden();
         $this->assertSame(InquiryStatus::Pending, $inquiry->fresh()->status);
     }
@@ -193,6 +205,9 @@ class ServiceInquiriesTest extends TestCase
         foreach (InquiryStatus::cases() as $source) {
             foreach (InquiryAction::cases() as $action) {
                 $inquiry = $this->inquiry($client, $provider, $source);
+                if ($source === InquiryStatus::Accepted && $action === InquiryAction::Complete) {
+                    $this->performInquiryReservation($inquiry);
+                }
                 $before = $inquiry->getAttributes();
                 $actor = $action === InquiryAction::Cancel ? $client : $provider;
                 $response = $this->actingAs($actor, 'web')->patch(route('inquiries.'.$action->value, $inquiry));
@@ -218,6 +233,7 @@ class ServiceInquiriesTest extends TestCase
         $this->patchJson(route('inquiries.accept', $inquiry))->assertStatus(409)->assertJsonStructure(['message', 'inquiry_url']);
         $this->patch(route('inquiries.reject', $inquiry))->assertStatus(409);
         $this->assertSame($before, $inquiry->fresh()->getAttributes());
+        $this->performInquiryReservation($inquiry);
         $this->patch(route('inquiries.complete', $inquiry))->assertStatus(303);
         $done = $inquiry->fresh();
         $this->assertSame($before['accepted_at'], $done->getRawOriginal('accepted_at'));
@@ -319,8 +335,11 @@ class ServiceInquiriesTest extends TestCase
         for ($i = 0; $i < 6; $i++) {
             $service = $this->service($provider);
             $response = $this->post(route('inquiries.store', $service), ['message' => 'Necesito ayuda con este equipo.']);
-            if ($i < 5) $response->assertStatus(303);
-            else $response->assertStatus(429)->assertHeader('Retry-After')->assertSee('Espera antes de volver a enviar');
+            if ($i < 5) {
+                $response->assertStatus(303);
+            } else {
+                $response->assertStatus(429)->assertHeader('Retry-After')->assertSee('Espera antes de volver a enviar');
+            }
         }
         $this->assertDatabaseCount('service_inquiries', 5);
     }

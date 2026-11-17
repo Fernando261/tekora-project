@@ -26,12 +26,16 @@ class InquiryMessagesConcurrencyTest extends TestCase
     private function sharedMemory(InquiryStatus $status = InquiryStatus::Pending): array
     {
         $uri = 'file:tekora-messages-'.bin2hex(random_bytes(8)).'?mode=memory&cache=shared';
-        foreach (['message_a', 'message_b'] as $name) config(['database.connections.'.$name => [
-            'driver' => 'sqlite', 'database' => $uri, 'prefix' => '', 'foreign_key_constraints' => true, 'busy_timeout' => 0]]);
+        foreach (['message_a', 'message_b'] as $name) {
+            config(['database.connections.'.$name => [
+                'driver' => 'sqlite', 'database' => $uri, 'prefix' => '', 'foreign_key_constraints' => true, 'busy_timeout' => 0]]);
+        }
         DB::setDefaultConnection('message_a');
         $this->assertSame(0, Artisan::call('migrate', ['--database' => 'message_a', '--force' => true]));
         $this->assertNotSame(DB::connection('message_a')->getPdo(), DB::connection('message_b')->getPdo());
-        foreach (['message_a', 'message_b'] as $name) $this->assertSame('', DB::connection($name)->select('PRAGMA database_list')[0]->file);
+        foreach (['message_a', 'message_b'] as $name) {
+            $this->assertSame('', DB::connection($name)->select('PRAGMA database_list')[0]->file);
+        }
         $client = $this->account(RoleName::Client);
         $provider = $this->account(RoleName::Provider);
 
@@ -41,7 +45,8 @@ class InquiryMessagesConcurrencyTest extends TestCase
     public function test_overlapping_replays_from_two_connections_and_unique_index_produce_one_message(): void
     {
         [$client, $provider, $inquiry] = $this->sharedMemory();
-        $key = (string) Str::uuid(); $body = 'Un solo mensaje aunque se reenvíe la petición.';
+        $key = (string) Str::uuid();
+        $body = 'Un solo mensaje aunque se reenvíe la petición.';
         $messaging = app(InquiryMessaging::class);
         DB::connection('message_a')->beginTransaction();
         $first = $messaging->send($client, $inquiry->id, $body, $key)['message'];
@@ -77,6 +82,9 @@ class InquiryMessagesConcurrencyTest extends TestCase
     public function test_a_closure_that_wins_the_write_lock_prevents_a_late_message_even_after_retry(InquiryAction $action): void
     {
         [$client, $provider, $inquiry] = $this->sharedMemory($action->source());
+        if ($action === InquiryAction::Complete) {
+            $this->performInquiryReservation($inquiry);
+        }
         $this->message($client, $inquiry, 'Historial previo que sí estaba confirmado.');
         $key = (string) Str::uuid();
         DB::connection('message_a')->beginTransaction();
