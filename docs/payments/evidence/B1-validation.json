@@ -1,0 +1,177 @@
+{
+  "scope": "TEKORA Payments B1 synthetic pricing and quotes",
+  "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+  "branch": "codex/payments-b1-pricing-quotes",
+  "created_at_utc": "2026-11-11T22:09:18.829609+00:00",
+  "runtime": {
+    "php": "8.4.27",
+    "sqlite": "3.46.1",
+    "phpunit": "11.5.57",
+    "node": "24.22.1",
+    "npm": "11.9.0",
+    "vite": "6.4.5"
+  },
+  "checks": [
+    {
+      "name": "pint",
+      "command": [
+        "php",
+        "vendor/bin/pint",
+        "--test",
+        "app/Payments",
+        "tests/Support/InMemoryPricingStore.php",
+        "tests/Unit/CommercialAmountTest.php",
+        "tests/Feature/PaymentsPricingQuotesTest.php"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 14.78
+    },
+    {
+      "name": "payments-b1",
+      "command": [
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--group",
+        "payments-b1",
+        "--log-junit",
+        "/app/payments-b1-junit.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 11.13,
+      "junit": {
+        "name": "/app/phpunit.xml",
+        "tests": "82",
+        "assertions": "4353",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "3.268074"
+      }
+    },
+    {
+      "name": "full",
+      "command": [
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--log-junit",
+        "/app/full-junit.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 113.86,
+      "junit": {
+        "name": "/app/phpunit.xml",
+        "tests": "871",
+        "assertions": "14697",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "time": "101.991924"
+      }
+    }
+  ],
+  "subsets_from_full_junit": {
+    "W5.1": {
+      "tests": 49,
+      "assertions": 459,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "W6.2a": {
+      "tests": 25,
+      "assertions": 406,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "W6.2b": {
+      "tests": 34,
+      "assertions": 586,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "W6.2c-d": {
+      "tests": 120,
+      "assertions": 1318,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "B1": {
+      "tests": 82,
+      "assertions": 4353,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "baseline_from_full": {
+    "tests": 789,
+    "assertions": 10344,
+    "failures": 0,
+    "errors": 0
+  },
+  "isolation": {
+    "network": "none",
+    "existing_env_read": false,
+    "real_media_read": false,
+    "existing_database_access": false,
+    "database": ":memory:",
+    "new_migration_created": false,
+    "new_migration_applied": false,
+    "production_store_binding": false,
+    "vendor_mount": "read-only"
+  },
+  "compatibility": {
+    "historical_migrations": 37,
+    "api_operations": 21,
+    "existing_tracked_files_changed": [],
+    "protected_source_files_compared": 52
+  },
+  "source_sha256": {
+    "app/Payments/CommercialAmount.php": "345ba97e04ee24ac6df71a1a2d5afc225ec35bae2de3554c73853f34340e08f1",
+    "app/Payments/PriceVersion.php": "4d2dc09871832276662cba06d66131d51b6979c18144c1b6ada046bc1bc8e2e2",
+    "app/Payments/PricingConflict.php": "36647e2685a66565142ba736cf58fac17d29f67c74ab80029c68138dd280f189",
+    "app/Payments/PricingInput.php": "220d51a5799b15b008fd9cee6050c53de1155ce0f3abbdf3a8f736e59c09269e",
+    "app/Payments/PricingStore.php": "3bf2da30d287c2e99c05e6a4a747b3ee620f0631c7bbac233f34acb5cf5cc202",
+    "app/Payments/QuoteAcceptance.php": "8efe3503da53354ff768166f47b68508413143f1ab1f9914ec840d8f54bc650e",
+    "app/Payments/ServicePricing.php": "3daf6328f2635cdf69df8ff1ccbdfe8fcb96d9f061208905fa422bb88c8cdbe5",
+    "app/Payments/SyntheticQuote.php": "c20fe43702847e989940dec3d2ddfee29aef04a5d36d704d0e44bc4c5252c5db",
+    "app/Payments/SyntheticQuotes.php": "219b6b4383054f971fb0a567caab983bd32179ca57121a20cad4c092d4a60b80",
+    "tests/Feature/PaymentsPricingQuotesTest.php": "6ab4a45d047a4bc3e81bd46870ce1b6d1399d9b10f2d0a32a963df7f04f39498",
+    "tests/Support/InMemoryPricingStore.php": "1c273402e6e818898299634339b2577035622579afa0b20c5684e84e15ed366c",
+    "tests/Unit/CommercialAmountTest.php": "754b6341f633f9b91c3bf50e00814e1f000a32369accec5f732810a26e7e60ca"
+  },
+  "junit_sha256": {
+    "full-junit.xml": "e7d13d26b8c7fbc8c439e80ad40f0cf7ae6b0d3bd3b8a0730954106e9a25feaf",
+    "payments-b1-junit.xml": "c5fe0f5e1f57be06c90402f1473cab63dd4769a4120d5508b06f20f15ecba39b"
+  },
+  "initial_full_attempt": {
+    "status": "FAIL_INCOMPLETE",
+    "exit_code": 255,
+    "causes": [
+      "missing Vite manifest in isolated copy",
+      "128 MiB memory limit exhausted"
+    ],
+    "final_counts": null
+  },
+  "not_run": [
+    "Windows/PHP 8.2",
+    "Composer audit",
+    "npm audit",
+    "persistent pricing adapter",
+    "new SQLite schema and concurrency",
+    "financial provider",
+    "B2 slot holds"
+  ],
+  "pending_approvals": [
+    "new migration proposal",
+    "definitive tax/legal treatment",
+    "commercial quote lifetime and ticket limits"
+  ]
+}
