@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\OperationsController;
 use App\Http\Controllers\Api\V1\QuotesController;
 use App\Http\Middleware\MobileClient;
@@ -45,6 +46,12 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             Route::get('reservations/{reservation}/checkout-context', CheckoutContextController::class)->whereNumber('reservation')->name('reservations.checkout-context');
         });
         Route::get('me', [AuthController::class, 'me'])->name('me');
+        Route::middleware('throttle:mobile-private')->group(function () {
+            Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+            Route::get('notifications/unread-count', [NotificationsController::class, 'unreadCount'])->name('notifications.unread-count');
+            Route::post('notifications/{source_type}/{id}/read', [NotificationsController::class, 'read'])->where(['source_type' => 'inquiry|activity', 'id' => '[1-9][0-9]{0,18}'])
+                ->middleware('throttle:mobile-read-writes')->name('notifications.read');
+        });
         Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
     });
     Route::middleware('throttle:mobile-catalog')->group(function () {
