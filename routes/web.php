@@ -37,3 +37,8 @@ Route::middleware('auth:web')->group(function () {
 });
 
 require __DIR__.'/quotes.php';
+
+// Local presentation only; no session/database access and no mutation endpoint.
+Route::get('/demo/checkout', \App\Http\Controllers\CheckoutDemoController::class)
+    ->withoutMiddleware([\Illuminate\Session\Middleware\StartSession::class, \Illuminate\View\Middleware\ShareErrorsFromSession::class, \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])
+    ->name('demo.checkout');
