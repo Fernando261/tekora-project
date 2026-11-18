@@ -23,6 +23,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
                 ['post', 'inquiries/{inquiry}/reservations', 'propose', 'reservations.store', 'mobile-reservation-writes'],
                 ['get', 'reservations', 'reservations', 'reservations.index', null],
                 ['get', 'reservations/{reservation}', 'reservation', 'reservations.show', null],
+                ['patch', 'reservations/{reservation}/commit', 'commitReservation', 'reservations.commit', 'mobile-reservation-writes'],
                 ['patch', 'reservations/{reservation}/cancel', 'cancelReservation', 'reservations.cancel', 'mobile-reservation-writes'],
             ];
             foreach ($operations as [$method, $uri, $action, $name, $limiter]) {

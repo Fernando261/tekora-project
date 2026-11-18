@@ -49,5 +49,6 @@
     <footer class="tk-shell-footer"><span>tekora<span aria-hidden="true">.</span></span><p>Conecta con lo que viene.</p></footer>
     </div>
   </div>
+  @stack('scripts')
 </body>
 </html>

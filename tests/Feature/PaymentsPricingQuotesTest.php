@@ -364,13 +364,13 @@ class PaymentsPricingQuotesTest extends TestCase
     public function test_web_adapter_does_not_add_financial_api_operations(): void
     {
         $this->assertInstanceOf(\App\Payments\SqlitePricingStore::class, app(PricingStore::class));
-        $this->assertCount(38, glob(database_path('migrations/*.php')));
+        $this->assertCount(39, glob(database_path('migrations/*.php')));
         $api = json_decode(file_get_contents(base_path('docs/api/openapi.json')), true, flags: JSON_THROW_ON_ERROR);
         $count = 0;
         foreach ($api['paths'] as $path) {
             $count += count(array_intersect(array_keys($path), ['get', 'post', 'put', 'patch', 'delete']));
         }
-        $this->assertSame(21, $count);
+        $this->assertSame(22, $count);
         foreach (app('router')->getRoutes() as $route) {
             $this->assertStringNotContainsString('App\\Payments\\', $route->getActionName());
         }

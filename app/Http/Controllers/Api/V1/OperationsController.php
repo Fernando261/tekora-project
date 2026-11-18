@@ -104,18 +104,40 @@ final class OperationsController extends Controller
 
     public function reservations(OperationRequest $request, MobileClientOperations $scope): ApiCollection
     {
+        app(ReservationWorkflow::class)->refreshExpirations();
         $query = $scope->reservations($request->user('sanctum'));
         if ($request->has('status')) {
-            $query->where('status', $request->validated('status'));
+            $status = $request->validated('status');
+            if (in_array($status, ['held', 'hold_expired', 'hold_released'], true)) {
+                $query->whereHas('hold', fn ($h) => $h->where('state', match ($status) {
+                    'held' => 'held', 'hold_expired' => 'expired', default => 'released'
+                }));
+            } else {
+                $query->where('status', $status);
+                if ($status === 'requested') {
+                    $query->whereDoesntHave('hold');
+                }
+                if ($status === 'cancelled') {
+                    $query->whereDoesntHave('hold', fn ($h) => $h->whereIn('state', ['expired', 'released']));
+                }
+            }
         }
 
-        return new ApiCollection($query->orderByDesc('id')->paginate($request->validated('per_page', 12))
+        return new ApiCollection($query->with('hold')->orderByDesc('id')->paginate($request->validated('per_page', 12))
             ->through(fn ($row) => new ReservationResource($row)));
     }
 
     public function reservation(OperationRequest $request): ReservationResource
     {
+        app(ReservationWorkflow::class)->refreshExpirations();
+        $request->attributes->get('mobile_reservation')->refresh();
+
         return new ReservationResource($request->attributes->get('mobile_reservation'));
+    }
+
+    public function commitReservation(OperationRequest $request, int $reservation, ReservationWorkflow $workflow): ReservationResource
+    {
+        return new ReservationResource($workflow->decide($request->user('sanctum'), $reservation, 'commit', $request->validated()));
     }
 
     public function cancelReservation(OperationRequest $request, int $reservation, ReservationWorkflow $workflow): ReservationResource

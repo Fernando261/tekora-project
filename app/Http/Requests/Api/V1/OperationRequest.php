@@ -48,8 +48,8 @@ final class OperationRequest extends ApiRequest
                 'idempotency_key' => ['required', 'string', 'uuid']],
             'api.v1.messages.read' => ['read_token' => ['required', 'string', 'max:2048']],
             // ReservationInput valida estos cuerpos en el workflow, sin mantener reglas paralelas.
-            'api.v1.reservations.store' => array_fill_keys(['date', 'time', 'availability_revision', 'idempotency_key'], ['present']),
-            'api.v1.reservations.cancel' => ['version' => ['present']],
+            'api.v1.reservations.store' => array_fill_keys(['date', 'time', 'availability_revision', 'idempotency_key'], ['present']) + ['quote_id' => ['sometimes', 'nullable']],
+            'api.v1.reservations.cancel', 'api.v1.reservations.commit' => ['version' => ['present'], 'idempotency_key' => ['sometimes']],
             default => [],
         };
     }

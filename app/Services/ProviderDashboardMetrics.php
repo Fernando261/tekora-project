@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Gate;
 class ProviderDashboardMetrics
 {
     public const TIMEZONE = 'America/Mexico_City';
+
     public const LIST_LIMIT = 5;
 
     public function build(User $user, array $filters = []): array
@@ -32,7 +33,9 @@ class ProviderDashboardMetrics
         $window = ['days' => (int) $days, 'start' => $start, 'now' => $now, 'start_utc' => $start->utc()->format('Y-m-d H:i:s'),
             'end_utc' => $now->format('Y-m-d H:i:s'), 'label' => $start->format('d/m/Y').' al '.$now->setTimezone(self::TIMEZONE)->format('d/m/Y H:i')];
         $profile = $user->providerProfile()->first(['id', 'user_id', 'display_name']);
-        if (! $profile) return ['profile' => null, 'window' => $window];
+        if (! $profile) {
+            return ['profile' => null, 'window' => $window];
+        }
         Gate::forUser($user)->authorize('update', $profile);
 
         // Toda consulta se deriva del perfil autenticado, nunca de identificadores de la petición.
@@ -44,9 +47,18 @@ class ProviderDashboardMetrics
             COUNT(CASE WHEN accepted_at >= ? AND accepted_at <= ? THEN 1 END) AS accepted,
             COUNT(CASE WHEN rejected_at >= ? AND rejected_at <= ? THEN 1 END) AS rejected", [...$bounds, ...$bounds, ...$bounds])->first();
         $reservations = ServiceReservation::where('service_reservations.provider_profile_id', $profile->id);
-        $reservationStats = (clone $reservations)->selectRaw("COUNT(CASE WHEN status = 'requested' AND starts_at_utc > ? THEN 1 END) AS requested,
-            COUNT(CASE WHEN status = 'confirmed' AND starts_at_utc > ? THEN 1 END) AS upcoming", [$window['end_utc'], $window['end_utc']])->first();
+        $reservationStats = (clone $reservations)->selectRaw("COUNT(CASE WHEN status = 'requested' AND NOT EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id) AND starts_at_utc > ? THEN 1 END) AS requested,
+            COUNT(CASE WHEN status = 'confirmed' AND starts_at_utc > ? THEN 1 END) AS upcoming, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us>max(CAST(tekora_booking_now_us() AS INTEGER),(SELECT high_water_us FROM reservation_hold_clock WHERE id=1))) THEN 1 END) AS held, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us<=max(CAST(tekora_booking_now_us() AS INTEGER),(SELECT high_water_us FROM reservation_hold_clock WHERE id=1))) THEN 1 END) AS expired_holds", [$window['end_utc'], $window['end_utc']])->first();
 
+        if ((int) $reservationStats->expired_holds > 0) {
+            try {
+                app(ReservationWorkflow::class)->refreshExpirations();
+            } catch (\App\Exceptions\ReservationFailure $error) {
+                throw new \App\Exceptions\DashboardFailure('No se pudo comprobar el vencimiento de las retenciones.', 503);
+            }
+
+            return $this->build($user, $filters);
+        }
         $events = ReservationEvent::whereIn('service_reservation_id', (clone $reservations)->select('id'))
             ->whereIn('to_status', ['completed', 'cancelled'])->whereBetween('occurred_at_utc', $bounds)
             ->selectRaw("COUNT(CASE WHEN to_status = 'completed' THEN 1 END) AS completed, COUNT(CASE WHEN to_status = 'cancelled' THEN 1 END) AS cancelled");
@@ -59,7 +71,9 @@ class ProviderDashboardMetrics
             $series[] = ['date' => $day->format('Y-m-d'), 'label' => $day->format('d/m/Y')];
         }
         $eventStats = $events->first();
-        foreach ($series as $i => &$day) $day['count'] = (int) $eventStats->{'day_'.$i};
+        foreach ($series as $i => &$day) {
+            $day['count'] = (int) $eventStats->{'day_'.$i};
+        }
         unset($day);
         $maximum = max(1, max(array_column($series, 'count')));
         foreach ($series as $i => &$day) {
@@ -74,8 +88,10 @@ class ProviderDashboardMetrics
         // Reutiliza exactamente el predicado de lectura; la consulta exterior restringe al lado prestador.
         $unreadQuery = app(InquiryReadTracking::class)->withUnreadCount((clone $inquiries)->select('service_inquiries.id'), $user);
         $unread = (int) DB::query()->fromSub($unreadQuery->toBase(), 'provider_conversations')->sum('unread_messages_count');
-        $accepted = (int) $inquiryStats->accepted; $rejected = (int) $inquiryStats->rejected;
-        $completed = (int) $eventStats->completed; $cancelled = (int) $eventStats->cancelled;
+        $accepted = (int) $inquiryStats->accepted;
+        $rejected = (int) $inquiryStats->rejected;
+        $completed = (int) $eventStats->completed;
+        $cancelled = (int) $eventStats->cancelled;
         $metrics = [
             $this->metric('published', 'Servicios publicados', Service::publiclyVisible()->where('provider_profile_id', $profile->id)->count(), 'current', 'Servicios propios visibles en el catálogo público.', 'provider-services.index'),
             $this->metric('received', 'Solicitudes recibidas', (int) $inquiryStats->received, 'period', 'Solicitudes creadas para tus servicios en el periodo.', 'inquiries.received'),
@@ -88,6 +104,11 @@ class ProviderDashboardMetrics
             $this->metric('rating', 'Calificación promedio', $reviews->total > 0 ? number_format((float) $reviews->average, 1, '.', '').' / 5' : 'Sin calificaciones', 'current', 'Solo reseñas verificadas que siguen siendo públicas.', null, (int) $reviews->total.' reseñas consideradas', $reviews->total > 0 ? route('public-providers.show', $profile->id).'#resenas' : null),
             $this->metric('unread', 'Mensajes sin leer', $unread, 'current', 'Mensajes recibidos en solicitudes de tus servicios; excluye tu actividad como cliente.', 'conversations.index'),
         ];
+
+        $held = (int) $reservationStats->held;
+        if ($held > 0) {
+            $metrics[] = $this->metric('held', 'Horarios retenidos', $held, 'current', 'Aceptados por ti; el cliente debe confirmar antes del vencimiento.', 'reservations.index');
+        }
 
         $agenda = (clone $reservations)->where('service_reservations.status', 'confirmed')->where('starts_at_utc', '>', $window['end_utc'])
             ->join('services', 'services.id', '=', 'service_reservations.service_id')
