@@ -18,6 +18,8 @@ export default defineConfig({
                 'resources/js/tekora/operations.js',
                 'resources/css/tekora/identity.css',
                 'resources/js/tekora/identity.js',
+                'resources/css/tekora/checkout-demo.css',
+                'resources/js/tekora/checkout-demo.js',
             ],
             refresh: true,
         }),
