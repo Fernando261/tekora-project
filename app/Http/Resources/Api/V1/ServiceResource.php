@@ -12,6 +12,7 @@ final class ServiceResource extends JsonResource
         return ['id' => $this->id, 'title' => $this->title, 'description' => $this->description,
             'modality' => $this->modality->value,
             'category' => ['id' => $this->category->id, 'name' => $this->category->name, 'slug' => $this->category->slug],
-            'provider' => new ProviderResource($this->providerProfile)];
+            'provider' => new ProviderResource($this->providerProfile),
+            'price' => ($price = app(\App\Payments\PricingStore::class)->latestPrice($this->id)) ? new PriceResource($price) : null];
     }
 }

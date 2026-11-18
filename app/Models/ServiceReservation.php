@@ -56,7 +56,7 @@ class ServiceReservation extends Model
         return $this->hasOne(ReservationHold::class, 'service_reservation_id');
     }
 
-    public function effectiveStatus(): ReservationStatus
+    public function effectiveStatus(?int $observedMicros = null): ReservationStatus
     {
         if (! $this->quote_id || ! $this->hold) {
             return $this->status;
@@ -72,7 +72,7 @@ class ServiceReservation extends Model
         }
 
         return match ($this->hold->state) {
-            'held' => $this->hold->remainingSeconds() > 0 ? ReservationStatus::Held : ReservationStatus::HoldExpired,
+            'held' => $this->hold->remainingSeconds($observedMicros) > 0 ? ReservationStatus::Held : ReservationStatus::HoldExpired,
             'expired' => ReservationStatus::HoldExpired,
             'released' => ReservationStatus::HoldReleased,
             default => $this->status,

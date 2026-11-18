@@ -200,10 +200,11 @@ class TekoraW3Test extends TestCase
         }
         $this->assertSame($before, $this->reservationRows($tables));
         $detail = $this->get('/api/v1/services/'.$service->id)->assertOk()->json('data');
-        $this->assertSame(['id', 'title', 'description', 'modality', 'category', 'provider'], array_keys($detail));
+        $this->assertSame(['id', 'title', 'description', 'modality', 'category', 'provider', 'price'], array_keys($detail));
         $this->assertSame(['id', 'display_name', 'headline', 'bio'], array_keys($detail['provider']));
+        $this->assertNull($detail['price']);
         $this->assertCount(39, glob(database_path('migrations/*.php')));
-        $this->assertCount(22, array_filter(app('router')->getRoutes()->getRoutes(), fn ($route) => str_starts_with($route->uri(), 'api/')));
+        $this->assertCurrentApiInventory();
     }
 
     public function test_home_and_account_expose_only_tekora(): void

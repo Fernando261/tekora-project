@@ -60,7 +60,7 @@ class WebPricingController extends Controller
         // Authorize before validating the explicit acknowledgement.
         $quotes->view($request->user('web'), $quote);
         PricingInput::only($request->except('_token'), ['acknowledge']);
-        $request->validate(['acknowledge' => ['required', 'accepted']]);
+        $request->validate(PricingInput::acknowledgementRules());
 
         return PricingResponse::run($request, function () use ($request, $quote, $quotes) {
             $quotes->accept($request->user('web'), $quote);

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CatalogController;
+use App\Http\Controllers\Api\V1\CheckoutContextController;
 use App\Http\Controllers\Api\V1\OperationsController;
+use App\Http\Controllers\Api\V1\QuotesController;
 use App\Http\Middleware\MobileClient;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,14 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
                     $route->middleware('throttle:'.$limiter);
                 }
             }
+        });
+        Route::middleware('throttle:mobile-private')->group(function () {
+            Route::get('inquiries/{inquiry}/quotes', [QuotesController::class, 'index'])->whereNumber('inquiry')->name('quotes.index');
+            Route::post('inquiries/{inquiry}/quotes', [QuotesController::class, 'issue'])->whereNumber('inquiry')->middleware('throttle:mobile-quote-writes')->name('quotes.issue');
+            Route::get('quotes/{quote}', [QuotesController::class, 'show'])->whereUuid('quote')->name('quotes.show');
+            Route::post('quotes/{quote}/accept', [QuotesController::class, 'accept'])->whereUuid('quote')->middleware('throttle:mobile-quote-writes')->name('quotes.accept');
+            Route::get('quotes/{quote}/acceptance', [QuotesController::class, 'acceptance'])->whereUuid('quote')->name('quotes.acceptance');
+            Route::get('reservations/{reservation}/checkout-context', CheckoutContextController::class)->whereNumber('reservation')->name('reservations.checkout-context');
         });
         Route::get('me', [AuthController::class, 'me'])->name('me');
         Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');

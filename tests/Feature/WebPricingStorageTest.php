@@ -10,6 +10,7 @@ use PDO;
 use PDOException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
+use WeakReference;
 
 class WebPricingStorageTest extends TestCase
 {
@@ -133,10 +134,13 @@ class WebPricingStorageTest extends TestCase
         mkdir($root, 0700);
         $path = $root.'/synthetic.sqlite';
         $first = new PDO('sqlite:'.$path);
-        $this->connection($first);
+        $firstConnection = $this->connection($first);
         $second = new PDO('sqlite:'.$path);
         $second->exec('PRAGMA foreign_keys=ON; PRAGMA busy_timeout=1');
-        $store = new SqlitePricingStore(new SQLiteConnection($second, $path, '', ['driver' => 'sqlite']));
+        $firstReference = WeakReference::create($first);
+        $secondReference = WeakReference::create($second);
+        $secondConnection = new SQLiteConnection($second, $path, '', ['driver' => 'sqlite']);
+        $store = new SqlitePricingStore($secondConnection);
         $first->beginTransaction();
         $first->exec('UPDATE pricing_write_lock SET id=id');
         $calls = 0;
@@ -164,7 +168,12 @@ class WebPricingStorageTest extends TestCase
             if ($first->inTransaction()) {
                 $first->rollBack();
             }
+            // Connection and its grammar form a cycle: unset alone leaves PDO open.
+            $firstConnection->disconnect();
+            $secondConnection->disconnect();
             unset($store, $second, $first);
+            $this->assertNull($firstReference->get(), 'First PDO must be released before deleting the SQLite file.');
+            $this->assertNull($secondReference->get(), 'Second PDO must be released before deleting the SQLite file.');
             unlink($path);
             rmdir($root);
         }

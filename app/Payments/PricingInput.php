@@ -8,6 +8,11 @@ use InvalidArgumentException;
 
 final class PricingInput
 {
+    public static function acknowledgementRules(): array
+    {
+        return ['acknowledge' => ['required', 'accepted']];
+    }
+
     public static function only(array $input, array $allowed = []): void
     {
         if (array_diff(array_keys($input), $allowed)) {

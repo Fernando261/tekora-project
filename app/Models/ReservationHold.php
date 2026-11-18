@@ -26,12 +26,12 @@ class ReservationHold extends Model
         return $this->hasMany(ReservationHoldEvent::class, 'service_reservation_id', 'service_reservation_id');
     }
 
-    public function remainingSeconds(): int
+    public function remainingSeconds(?int $observedMicros = null): int
     {
         if ($this->state !== 'held') {
             return 0;
         }
 
-        return max(0, intdiv(max(0, $this->expires_at_us - BookingClock::observedMicros()) + 999999, 1000000));
+        return max(0, intdiv(max(0, $this->expires_at_us - ($observedMicros ?? BookingClock::observedMicros())) + 999999, 1000000));
     }
 }

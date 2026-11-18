@@ -23,7 +23,9 @@ final class ApiError
         }
         $status = match (true) {
             $exception instanceof \App\Exceptions\InquiryConflict,
+            $exception instanceof \App\Payments\PricingConflict,
             $exception instanceof \App\Exceptions\InquiryMessageConflict => 409,
+            $exception instanceof \App\Payments\PricingUnavailable => 503,
             $exception instanceof \App\Exceptions\InquiryMessageUnavailable => 503,
             $exception instanceof \App\Exceptions\InquiryReadFailure,
             $exception instanceof \App\Exceptions\ReservationFailure => $exception->status,
