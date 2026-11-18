@@ -1,0 +1,382 @@
+{
+  "base_sha": "043531d6d153f64d5fc0e7cc6afc6a350af33563",
+  "api_source_sha256": "2cc864d0691e78c371c4be233f3ad91677a485664c1a5a15a6f145615f5eeca2",
+  "routes": {
+    "api.v1.auth.login": {
+      "uri": "api/v1/auth/login",
+      "methods": [
+        "POST"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@login",
+      "middleware": [
+        "api",
+        "throttle:mobile-login"
+      ],
+      "wheres": []
+    },
+    "api.v1.auth.logout": {
+      "uri": "api/v1/auth/logout",
+      "methods": [
+        "POST"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@logout",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient"
+      ],
+      "wheres": []
+    },
+    "api.v1.conversations.index": {
+      "uri": "api/v1/conversations",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@conversations",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.inquiries.cancel": {
+      "uri": "api/v1/inquiries/{inquiry}/cancel",
+      "methods": [
+        "PATCH"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@cancelInquiry",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private",
+        "throttle:mobile-inquiry-writes"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.inquiries.index": {
+      "uri": "api/v1/inquiries",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@inquiries",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.inquiries.show": {
+      "uri": "api/v1/inquiries/{inquiry}",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@inquiry",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.inquiries.store": {
+      "uri": "api/v1/services/{service}/inquiries",
+      "methods": [
+        "POST"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@open",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private",
+        "throttle:mobile-inquiry-writes"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.me": {
+      "uri": "api/v1/me",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\AuthController@me",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient"
+      ],
+      "wheres": []
+    },
+    "api.v1.messages.index": {
+      "uri": "api/v1/inquiries/{inquiry}/messages",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@messages",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.messages.read": {
+      "uri": "api/v1/inquiries/{inquiry}/messages/read",
+      "methods": [
+        "POST"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@read",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private",
+        "throttle:mobile-read-writes"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.messages.store": {
+      "uri": "api/v1/inquiries/{inquiry}/messages",
+      "methods": [
+        "POST"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@send",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private",
+        "throttle:mobile-message-writes"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.providers.index": {
+      "uri": "api/v1/providers",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@providersIndex",
+      "middleware": [
+        "api",
+        "throttle:mobile-catalog"
+      ],
+      "wheres": []
+    },
+    "api.v1.providers.show": {
+      "uri": "api/v1/providers/{provider}",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@provider",
+      "middleware": [
+        "api",
+        "throttle:mobile-catalog"
+      ],
+      "wheres": {
+        "provider": "[0-9]+"
+      }
+    },
+    "api.v1.reservations.cancel": {
+      "uri": "api/v1/reservations/{reservation}/cancel",
+      "methods": [
+        "PATCH"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@cancelReservation",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private",
+        "throttle:mobile-reservation-writes"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.reservations.commit": {
+      "uri": "api/v1/reservations/{reservation}/commit",
+      "methods": [
+        "PATCH"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@commitReservation",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private",
+        "throttle:mobile-reservation-writes"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.reservations.index": {
+      "uri": "api/v1/reservations",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@reservations",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.reservations.options": {
+      "uri": "api/v1/inquiries/{inquiry}/reservation-options",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@options",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.reservations.show": {
+      "uri": "api/v1/reservations/{reservation}",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@reservation",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.reservations.store": {
+      "uri": "api/v1/inquiries/{inquiry}/reservations",
+      "methods": [
+        "POST"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\OperationsController@propose",
+      "middleware": [
+        "api",
+        "auth:sanctum",
+        "App\\Http\\Middleware\\MobileClient",
+        "throttle:mobile-private",
+        "throttle:mobile-reservation-writes"
+      ],
+      "wheres": {
+        "inquiry": "[0-9]+",
+        "reservation": "[0-9]+",
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.services.availability": {
+      "uri": "api/v1/services/{service}/availability",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@availability",
+      "middleware": [
+        "api",
+        "throttle:mobile-catalog"
+      ],
+      "wheres": {
+        "service": "[0-9]+"
+      }
+    },
+    "api.v1.services.index": {
+      "uri": "api/v1/services",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@index",
+      "middleware": [
+        "api",
+        "throttle:mobile-catalog"
+      ],
+      "wheres": []
+    },
+    "api.v1.services.show": {
+      "uri": "api/v1/services/{service}",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "action": "App\\Http\\Controllers\\Api\\V1\\CatalogController@show",
+      "middleware": [
+        "api",
+        "throttle:mobile-catalog"
+      ],
+      "wheres": {
+        "service": "[0-9]+"
+      }
+    }
+  }
+}

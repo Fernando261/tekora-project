@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tekora API móvil",
-    "version": "1.2.0",
-    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención.",
+    "version": "1.3.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento.",
     "license": {
       "name": "MIT",
       "identifier": "MIT"
@@ -1523,7 +1523,7 @@
             "$ref": "#/components/responses/Error503"
           }
         },
-        "description": "Solo propietario de solicitud aceptada sin reserva activa, con servicio/participantes autorizados y horarios publicados. 409 si no admite nueva propuesta; 503 ante fallo de lectura. La revisión, zona IANA, intervalos y fechas bloqueadas proceden de la misma transacción. Duración 60 minutos, min_date hoy civil, max_date hoy + horizonte configurado (90 días por defecto), inclusivo. No revela reservas ajenas ni garantiza un hueco: propose vuelve a validar todo. No cambia el GET público informativo de 9B."
+        "description": "Solo propietario de solicitud aceptada sin reserva activa, con servicio/participantes autorizados y horarios publicados. 409 si no admite nueva propuesta; 503 ante fallo de lectura. La revisión, zona IANA, intervalos y fechas bloqueadas proceden de la misma transacción. Duración 60 minutos, min_date hoy civil, max_date hoy + horizonte configurado (90 días por defecto), inclusivo. No revela reservas ajenas ni garantiza un hueco: propose vuelve a validar todo. No cambia el GET público informativo de 9B. B3.0 permite realizar la aceptación mediante API; el fallback web permanece disponible."
       }
     },
     "/inquiries/{inquiry}/reservations": {
@@ -1658,7 +1658,7 @@
             }
           }
         },
-        "description": "Fecha/hora civiles y revisión del GET privado. 201 nueva; reintento del mismo UUID y date/time/revision devuelve 200. Reutilizar UUID con otros datos, revisión obsoleta, estado inválido, fecha bloqueada, horario pasado/solapado o reserva activa: 409. Hora civil inválida/ambigua por DST o fuera de horizonte: 422. No enviar timezone, IDs de participantes, status o version. 10/minuto por usuario, 40/IP, compartidos con cancelaciones. Con precio exige quote_id de commercial.accepted_quotes; sin ella 422, sin crear una reserva incompletable. La clave también incluye quote_id en su intención. El cliente acepta la cotización en la web indicada por quotes_web_url. Nunca se elige una cotización automáticamente."
+        "description": "Fecha/hora civiles y revisión del GET privado. 201 nueva; reintento del mismo UUID y date/time/revision devuelve 200. Reutilizar UUID con otros datos, revisión obsoleta, estado inválido, fecha bloqueada, horario pasado/solapado o reserva activa: 409. Hora civil inválida/ambigua por DST o fuera de horizonte: 422. No enviar timezone, IDs de participantes, status o version. 10/minuto por usuario, 40/IP, compartidos con cancelaciones. Con precio exige quote_id de commercial.accepted_quotes; sin ella 422, sin crear una reserva incompletable. La clave también incluye quote_id en su intención. El cliente puede listar/emitir cotizaciones en /inquiries/{inquiry}/quotes y aceptarlas por POST /quotes/{quote}/accept; quotes_web_url conserva el fallback web. Nunca se elige una cotización automáticamente. B3.0 permite realizar la aceptación mediante API; el fallback web permanece disponible."
       }
     },
     "/reservations": {
@@ -2040,6 +2040,493 @@
         },
         "description": "Solo propietario cliente con rol vigente. Requiere retención held iniciada por el prestador, misma cotización aceptada e inicio aún futuro. A los 900 segundos exactos devuelve 409. Transición atómica; no libera el horario ni procesa pagos. Clave repetida devuelve el resultado actual sin reactivar estados terminales. Se pueden cancelar reservas/retenciones con el endpoint cancel. No hay operaciones móviles de prestador."
       }
+    },
+    "/inquiries/{inquiry}/quotes": {
+      "get": {
+        "operationId": "listInquiryQuotes",
+        "summary": "Listar cotizaciones propias de una solicitud",
+        "description": "Solo solicitante propietario; IDs ajenos/inexistentes devuelven 404 antes de validar. Orden issued_at descendente, id descendente. Páginas acotadas. No acepta campos adicionales.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000
+            }
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o acción idempotente. No crea pagos ni confirma reservas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CommercialQuote"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/B3Quotes"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      },
+      "post": {
+        "operationId": "issueInquiryQuote",
+        "summary": "Emitir u obtener cotización idempotente",
+        "description": "Reutiliza SyntheticQuotes.issue: solicitud aceptada, publicación visible, precio estructurado y permisos vigentes. 200 tanto para primera emisión como reintento del mismo UUID. Clave compartida con web por cliente; reutilizarla en otra solicitud: 409. No enviar importe, participantes, vencimiento ni estados. 10 escrituras/minuto por cliente, compartidas con aceptación. Nunca crea reserva/hold/pago.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o acción idempotente. No crea pagos ni confirma reservas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/CommercialQuote"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/B3QuotePending"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueQuoteInput"
+              },
+              "example": {
+                "idempotency_key": "b54d8c80-3dad-42c2-9238-ae030bd56290"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quotes/{quote}": {
+      "get": {
+        "operationId": "getQuote",
+        "summary": "Consultar snapshot y aceptación de cotización",
+        "description": "Precio histórico inmutable con comisión 15 % incluida, importe en centavos MXN y fechas UTC. No expone clave de idempotencia, emails ni datos bancarios. Cotización vencida/servicio pausado conservan historial. No acepta parámetros extra. pending no garantiza que el comando de aceptación siga siendo admisible.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "quote",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o acción idempotente. No crea pagos ni confirma reservas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/CommercialQuote"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/B3QuotePending"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/quotes/{quote}/accept": {
+      "post": {
+        "operationId": "acceptQuote",
+        "summary": "Aceptar expresamente una cotización propia",
+        "description": "Misma validación de consentimiento y SyntheticQuotes.accept que web. Idempotencia natural por quote_id: una sola aceptación; cada petición requiere acknowledge. Una aceptación ya registrada se conserva después del vencimiento. Primera aceptación en expires_at o después: 409. No crea reserva, hold ni pago; campos extra 422, IDs ajenos 404 antes del cuerpo.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "quote",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o acción idempotente. No crea pagos ni confirma reservas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/CommercialQuote"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/B3QuoteAccepted"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptQuoteInput"
+              },
+              "example": {
+                "acknowledge": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quotes/{quote}/acceptance": {
+      "get": {
+        "operationId": "getQuoteAcceptance",
+        "summary": "Consultar el estado posterior de aceptación",
+        "description": "Estado histórico accepted/pending/expired y hora del servidor. La expiración de la ventana de aceptación no revoca una aceptación existente ni sustituye el TTL B2. No acepta parámetros extra.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "quote",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o acción idempotente. No crea pagos ni confirma reservas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/QuoteAcceptance"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/B3QuoteAcceptance"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/reservations/{reservation}/checkout-context": {
+      "get": {
+        "operationId": "getCheckoutContext",
+        "summary": "Consultar contexto comercial compartido, sin iniciar pagos",
+        "description": "Solo cliente propietario. Lectura coherente y sin reconciliación/escrituras B2. Hold exactamente 900 segundos; state puede ser expired mientras stored_state sigue held. Captura única de reloj observado del servidor; remaining_seconds redondea hacia arriba. Sin cotización: amount/quote null, nunca cero inventado. commercial_eligible es informativo: enabled y can_start son siempre false. La futura admisión debe revalidarse atómicamente; no hay token de pago ni garantía de horario. Incertidumbre/inconsistencia: 503 sin data. No enviar estado financiero, precio, TTL ni IDs en query. La confirmación vigente no exige pagos y no cambia.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o acción idempotente. No crea pagos ni confirma reservas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/CheckoutContext"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/B3CheckoutContext"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2213,6 +2700,17 @@
           },
           "provider": {
             "$ref": "#/components/schemas/Provider"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PublishedPrice"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "B3.0: precio actual informativo; null sin precio estructurado. No es cotización vinculante, pago ni importe cero. Campo aditivo; clientes anteriores pueden omitirlo."
           }
         }
       },
@@ -3055,6 +3553,482 @@
             "description": "Obligatoria para reservas de quoted-slot-hold-v1; la misma clave con distinto contenido devuelve 409."
           }
         }
+      },
+      "CommercialAmount": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "currency",
+          "total_cents",
+          "commission_cents",
+          "provider_cents",
+          "commission_basis_points",
+          "commission_included",
+          "duration_minutes",
+          "policy_version"
+        ],
+        "properties": {
+          "currency": {
+            "const": "MXN"
+          },
+          "total_cents": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000000000
+          },
+          "commission_cents": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 150000000
+          },
+          "provider_cents": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 850000000
+          },
+          "commission_basis_points": {
+            "const": 1500
+          },
+          "commission_included": {
+            "const": true
+          },
+          "duration_minutes": {
+            "const": 60
+          },
+          "policy_version": {
+            "const": "synthetic-commercial-v1-15pct-half-up"
+          }
+        }
+      },
+      "PublishedPrice": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "amount",
+          "quote_required",
+          "binding_quote"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "amount": {
+            "$ref": "#/components/schemas/CommercialAmount"
+          },
+          "quote_required": {
+            "const": true
+          },
+          "binding_quote": {
+            "const": false
+          }
+        }
+      },
+      "QuoteAcceptance": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "quote_id",
+          "state",
+          "accepted_at",
+          "server_now"
+        ],
+        "properties": {
+          "quote_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "expired",
+              "accepted"
+            ]
+          },
+          "accepted_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "server_now": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CommercialQuote": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "inquiry_id",
+          "service_id",
+          "provider_id",
+          "client_id",
+          "synthetic",
+          "price_version",
+          "amount",
+          "issued_at",
+          "expires_at",
+          "acceptance_window_expired",
+          "acceptance",
+          "server_now"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "provider_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "client_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "synthetic": {
+            "const": true
+          },
+          "price_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "amount": {
+            "$ref": "#/components/schemas/CommercialAmount"
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "acceptance_window_expired": {
+            "type": "boolean"
+          },
+          "acceptance": {
+            "$ref": "#/components/schemas/QuoteAcceptance"
+          },
+          "server_now": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "IssueQuoteInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "idempotency_key"
+        ],
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "AcceptQuoteInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "acknowledge"
+        ],
+        "properties": {
+          "acknowledge": {
+            "enum": [
+              true,
+              1,
+              "1",
+              "true",
+              "on",
+              "yes"
+            ],
+            "description": "Consentimiento explícito, mismas reglas accepted que web; enviar true en móvil."
+          }
+        }
+      },
+      "CheckoutHold": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "stored_state",
+          "version",
+          "hold_seconds",
+          "accepted_at",
+          "expires_at",
+          "remaining_seconds"
+        ],
+        "properties": {
+          "state": {
+            "enum": [
+              "held",
+              "committed",
+              "expired",
+              "released"
+            ]
+          },
+          "stored_state": {
+            "enum": [
+              "held",
+              "committed",
+              "expired",
+              "released"
+            ]
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "hold_seconds": {
+            "const": 900
+          },
+          "accepted_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "remaining_seconds": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 900
+          }
+        }
+      },
+      "CheckoutContext": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reservation",
+          "client",
+          "service",
+          "provider",
+          "quote",
+          "amount",
+          "hold",
+          "server_now",
+          "future_payment",
+          "confirmation_policy"
+        ],
+        "properties": {
+          "reservation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "inquiry_id",
+              "status",
+              "version",
+              "starts_at",
+              "ends_at",
+              "timezone"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "inquiry_id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "requested",
+                  "held",
+                  "hold_expired",
+                  "hold_released",
+                  "confirmed",
+                  "rejected",
+                  "cancelled",
+                  "completed"
+                ]
+              },
+              "version": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "starts_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "ends_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "timezone": {
+                "type": "string"
+              }
+            }
+          },
+          "client": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "service": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "title": {
+                "type": "string",
+                "description": "Título conservado en la solicitud, igual que la cotización web; no sustituir por el título actual del catálogo."
+              }
+            }
+          },
+          "provider": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "display_name"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "display_name": {
+                "type": "string"
+              }
+            }
+          },
+          "quote": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CommercialQuote"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CommercialAmount"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hold": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CheckoutHold"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "server_now": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "future_payment": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "enabled",
+              "can_start",
+              "advisory_only",
+              "commercial_eligible",
+              "blocking_reasons"
+            ],
+            "properties": {
+              "enabled": {
+                "const": false
+              },
+              "can_start": {
+                "const": false
+              },
+              "advisory_only": {
+                "const": true
+              },
+              "commercial_eligible": {
+                "type": "boolean"
+              },
+              "blocking_reasons": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "payments_not_enabled",
+                    "commercial_quote_required",
+                    "quote_not_accepted",
+                    "reservation_not_pending",
+                    "inquiry_not_accepted",
+                    "hold_not_started",
+                    "hold_not_active",
+                    "service_already_started",
+                    "participants_unavailable"
+                  ]
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            }
+          },
+          "confirmation_policy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "requires_verified_payment",
+              "protocol"
+            ],
+            "properties": {
+              "requires_verified_payment": {
+                "const": false
+              },
+              "protocol": {
+                "enum": [
+                  "quoted-slot-hold-v1",
+                  "legacy"
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "responses": {
@@ -3233,6 +4207,219 @@
                 "message": "El servicio no está disponible temporalmente.",
                 "fields": {}
               }
+            }
+          }
+        }
+      }
+    },
+    "examples": {
+      "B3QuotePending": {
+        "summary": "Ejemplo sintético; no representa una transacción financiera.",
+        "value": {
+          "data": {
+            "id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+            "inquiry_id": 93,
+            "service_id": 41,
+            "provider_id": 8,
+            "client_id": 17,
+            "synthetic": true,
+            "price_version": 1,
+            "amount": {
+              "currency": "MXN",
+              "total_cents": 100000,
+              "commission_cents": 15000,
+              "provider_cents": 85000,
+              "commission_basis_points": 1500,
+              "commission_included": true,
+              "duration_minutes": 60,
+              "policy_version": "synthetic-commercial-v1-15pct-half-up"
+            },
+            "issued_at": "2030-01-01T11:59:00.000000Z",
+            "expires_at": "2030-01-01T12:29:00.000000Z",
+            "acceptance_window_expired": false,
+            "acceptance": {
+              "quote_id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+              "state": "pending",
+              "accepted_at": null,
+              "server_now": "2030-01-01T12:00:00.000000Z"
+            },
+            "server_now": "2030-01-01T12:00:00.000000Z"
+          }
+        }
+      },
+      "B3QuoteAccepted": {
+        "summary": "Ejemplo sintético; no representa una transacción financiera.",
+        "value": {
+          "data": {
+            "id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+            "inquiry_id": 93,
+            "service_id": 41,
+            "provider_id": 8,
+            "client_id": 17,
+            "synthetic": true,
+            "price_version": 1,
+            "amount": {
+              "currency": "MXN",
+              "total_cents": 100000,
+              "commission_cents": 15000,
+              "provider_cents": 85000,
+              "commission_basis_points": 1500,
+              "commission_included": true,
+              "duration_minutes": 60,
+              "policy_version": "synthetic-commercial-v1-15pct-half-up"
+            },
+            "issued_at": "2030-01-01T11:59:00.000000Z",
+            "expires_at": "2030-01-01T12:29:00.000000Z",
+            "acceptance_window_expired": false,
+            "acceptance": {
+              "quote_id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+              "state": "accepted",
+              "accepted_at": "2030-01-01T11:59:10.000000Z",
+              "server_now": "2030-01-01T12:00:00.000000Z"
+            },
+            "server_now": "2030-01-01T12:00:00.000000Z"
+          }
+        }
+      },
+      "B3QuoteAcceptance": {
+        "summary": "Ejemplo sintético; no representa una transacción financiera.",
+        "value": {
+          "data": {
+            "quote_id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+            "state": "accepted",
+            "accepted_at": "2030-01-01T11:59:10.000000Z",
+            "server_now": "2030-01-01T12:00:00.000000Z"
+          }
+        }
+      },
+      "B3Quotes": {
+        "summary": "Ejemplo sintético; no representa una transacción financiera.",
+        "value": {
+          "data": [
+            {
+              "id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+              "inquiry_id": 93,
+              "service_id": 41,
+              "provider_id": 8,
+              "client_id": 17,
+              "synthetic": true,
+              "price_version": 1,
+              "amount": {
+                "currency": "MXN",
+                "total_cents": 100000,
+                "commission_cents": 15000,
+                "provider_cents": 85000,
+                "commission_basis_points": 1500,
+                "commission_included": true,
+                "duration_minutes": 60,
+                "policy_version": "synthetic-commercial-v1-15pct-half-up"
+              },
+              "issued_at": "2030-01-01T11:59:00.000000Z",
+              "expires_at": "2030-01-01T12:29:00.000000Z",
+              "acceptance_window_expired": false,
+              "acceptance": {
+                "quote_id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+                "state": "pending",
+                "accepted_at": null,
+                "server_now": "2030-01-01T12:00:00.000000Z"
+              },
+              "server_now": "2030-01-01T12:00:00.000000Z"
+            }
+          ],
+          "meta": {
+            "current_page": 1,
+            "per_page": 12,
+            "last_page": 1,
+            "total": 1
+          }
+        }
+      },
+      "B3CheckoutContext": {
+        "summary": "Ejemplo sintético; no representa una transacción financiera.",
+        "value": {
+          "data": {
+            "reservation": {
+              "id": 105,
+              "inquiry_id": 93,
+              "status": "held",
+              "version": 1,
+              "starts_at": "2030-01-07T15:00:00.000000Z",
+              "ends_at": "2030-01-07T16:00:00.000000Z",
+              "timezone": "America/Mexico_City"
+            },
+            "client": {
+              "id": 17,
+              "name": "Cliente de ejemplo"
+            },
+            "service": {
+              "id": 41,
+              "title": "Sesión de demostración comercial"
+            },
+            "provider": {
+              "id": 8,
+              "display_name": "Estudio de ejemplo"
+            },
+            "quote": {
+              "id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+              "inquiry_id": 93,
+              "service_id": 41,
+              "provider_id": 8,
+              "client_id": 17,
+              "synthetic": true,
+              "price_version": 1,
+              "amount": {
+                "currency": "MXN",
+                "total_cents": 100000,
+                "commission_cents": 15000,
+                "provider_cents": 85000,
+                "commission_basis_points": 1500,
+                "commission_included": true,
+                "duration_minutes": 60,
+                "policy_version": "synthetic-commercial-v1-15pct-half-up"
+              },
+              "issued_at": "2030-01-01T11:59:00.000000Z",
+              "expires_at": "2030-01-01T12:29:00.000000Z",
+              "acceptance_window_expired": false,
+              "acceptance": {
+                "quote_id": "161f9f2b-6479-49de-9f68-aa01c78ab7bb",
+                "state": "accepted",
+                "accepted_at": "2030-01-01T11:59:10.000000Z",
+                "server_now": "2030-01-01T12:00:00.000000Z"
+              },
+              "server_now": "2030-01-01T12:00:00.000000Z"
+            },
+            "amount": {
+              "currency": "MXN",
+              "total_cents": 100000,
+              "commission_cents": 15000,
+              "provider_cents": 85000,
+              "commission_basis_points": 1500,
+              "commission_included": true,
+              "duration_minutes": 60,
+              "policy_version": "synthetic-commercial-v1-15pct-half-up"
+            },
+            "hold": {
+              "state": "held",
+              "stored_state": "held",
+              "version": 1,
+              "hold_seconds": 900,
+              "accepted_at": "2030-01-01T12:00:00.000000Z",
+              "expires_at": "2030-01-01T12:15:00.000000Z",
+              "remaining_seconds": 900
+            },
+            "server_now": "2030-01-01T12:00:00.000000Z",
+            "future_payment": {
+              "enabled": false,
+              "can_start": false,
+              "advisory_only": true,
+              "commercial_eligible": true,
+              "blocking_reasons": [
+                "payments_not_enabled"
+              ]
+            },
+            "confirmation_policy": {
+              "requires_verified_payment": false,
+              "protocol": "quoted-slot-hold-v1"
             }
           }
         }

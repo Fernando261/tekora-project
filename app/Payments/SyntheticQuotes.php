@@ -96,7 +96,7 @@ final class SyntheticQuotes
         });
     }
 
-    private function ownedInquiry(User $actor, int $inquiryId): ServiceInquiry
+    public function ownedInquiry(User $actor, int $inquiryId): ServiceInquiry
     {
         Gate::forUser($actor)->authorize(Permission::ManageOwnInquiries->value);
         $inquiry = ServiceInquiry::where('client_user_id', $actor->id)->findOrFail($inquiryId);

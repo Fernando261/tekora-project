@@ -2,21 +2,21 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Str;
 use App\Enums\Permission;
 use App\Models\ProviderProfile;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
 use App\Models\User;
 use App\Policies\ProviderProfilePolicy;
-use App\Policies\ServicePolicy;
 use App\Policies\ServiceInquiryPolicy;
+use App\Policies\ServicePolicy;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         foreach (['mobile-private' => 120, 'mobile-inquiry-writes' => 5, 'mobile-message-writes' => 10,
-            'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10] as $name => $limit) {
+            'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10, 'mobile-quote-writes' => 10] as $name => $limit) {
             RateLimiter::for($name, fn (Request $request) => [
                 Limit::perMinute($limit)->by($name.':actor:'.$request->user('sanctum')->id),
                 Limit::perMinute($limit * 4)->by($name.':ip:'.hash('sha256', $request->ip())),
@@ -50,8 +50,7 @@ class AppServiceProvider extends ServiceProvider
                 Limit::perMinute(20)->by('mobile-login-ip:'.$request->ip()),
             ];
         });
-        RateLimiter::for('mobile-catalog', fn (Request $request) =>
-            Limit::perMinute(120)->by('mobile-catalog:'.$request->ip()));
+        RateLimiter::for('mobile-catalog', fn (Request $request) => Limit::perMinute(120)->by('mobile-catalog:'.$request->ip()));
 
         Gate::policy(\App\Models\ActivityNotification::class, \App\Policies\ActivityNotificationPolicy::class);
         RateLimiter::for('activity-notification-reads', function (Request $request) {
@@ -78,7 +77,9 @@ class AppServiceProvider extends ServiceProvider
             RateLimiter::for($limiter, function (Request $request) use ($limiter, $attempts) {
                 return Limit::perMinute($attempts)->by($limiter.':'.$request->user('web')->id)->response(function (Request $request, array $headers) {
                     $message = 'Has realizado varias operaciones de reserva. Espera antes de volver a intentarlo.';
-                    if ($request->expectsJson()) return response()->json(['message' => $message], 429, $headers);
+                    if ($request->expectsJson()) {
+                        return response()->json(['message' => $message], 429, $headers);
+                    }
 
                     return response()->view('reservations.error', compact('message'), 429, $headers);
                 });
@@ -88,7 +89,9 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('provider-availability', function (Request $request) {
             $response = function (Request $request, array $headers) {
                 $message = 'Has realizado varias ediciones. Espera antes de guardar de nuevo.';
-                if ($request->expectsJson()) return response()->json(['message' => $message], 429, $headers);
+                if ($request->expectsJson()) {
+                    return response()->json(['message' => $message], 429, $headers);
+                }
 
                 return response()->view('availability.error', compact('message'), 429, $headers);
             };
@@ -97,8 +100,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         foreach (Permission::cases() as $permission) {
-            Gate::define($permission->value, fn (Authenticatable $actor) =>
-                $actor instanceof User && $actor->hasPermission($permission));
+            Gate::define($permission->value, fn (Authenticatable $actor) => $actor instanceof User && $actor->hasPermission($permission));
         }
 
         Gate::policy(ProviderProfile::class, ProviderProfilePolicy::class);
@@ -133,7 +135,9 @@ class AppServiceProvider extends ServiceProvider
             $inquiryId = $inquiry instanceof ServiceInquiry ? $inquiry->id : $inquiry;
             $response = function (Request $request, array $headers) {
                 $message = 'Has enviado varios mensajes. Espera antes de volver a intentarlo.';
-                if ($request->expectsJson()) return response()->json(['message' => $message], 429, $headers);
+                if ($request->expectsJson()) {
+                    return response()->json(['message' => $message], 429, $headers);
+                }
 
                 return response()->view('inquiries.message-error', ['message' => $message,
                     'detailUrl' => route('inquiries.show', $request->route('inquiry')).'#conversacion'], 429, $headers);
