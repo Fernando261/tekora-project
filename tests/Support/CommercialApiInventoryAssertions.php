@@ -3,6 +3,7 @@
 namespace Tests\Support;
 
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\QuotesController;
 use App\Http\Middleware\MobileClient;
 
@@ -20,6 +21,9 @@ trait CommercialApiInventoryAssertions
             'api.v1.quotes.accept' => ['POST', 'api/v1/quotes/{quote}/accept', QuotesController::class.'@accept', 'quote'],
             'api.v1.quotes.acceptance' => ['GET', 'api/v1/quotes/{quote}/acceptance', QuotesController::class.'@acceptance', 'quote'],
             'api.v1.reservations.checkout-context' => ['GET', 'api/v1/reservations/{reservation}/checkout-context', CheckoutContextController::class, 'reservation'],
+            'api.v1.notifications.index' => ['GET', 'api/v1/notifications', NotificationsController::class.'@index', null],
+            'api.v1.notifications.unread-count' => ['GET', 'api/v1/notifications/unread-count', NotificationsController::class.'@unreadCount', null],
+            'api.v1.notifications.read' => ['POST', 'api/v1/notifications/{source_type}/{id}/read', NotificationsController::class.'@read', 'source_type'],
         ];
         $actual = [];
         foreach (app('router')->getRoutes() as $route) {
@@ -34,7 +38,7 @@ trait CommercialApiInventoryAssertions
         ksort($actual);
         // Preserve every original method, URI, action, middleware and route constraint.
         $this->assertSame($baseline['routes'], array_diff_key($actual, $approved));
-        $this->assertCount(28, $actual);
+        $this->assertCount(31, $actual);
         foreach ($approved as $name => [$method, $uri, $action, $parameter]) {
             $this->assertArrayHasKey($name, $actual);
             $row = $actual[$name];
@@ -43,10 +47,12 @@ trait CommercialApiInventoryAssertions
             $this->assertSame($action, $row['action']);
             $middleware = ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
             if ($method === 'POST') {
-                $middleware[] = 'throttle:mobile-quote-writes';
+                $middleware[] = $name === 'api.v1.notifications.read' ? 'throttle:mobile-read-writes' : 'throttle:mobile-quote-writes';
             }
             $this->assertSame($middleware, $row['middleware']);
-            $this->assertArrayHasKey($parameter, $row['wheres']);
+            if ($parameter !== null) {
+                $this->assertArrayHasKey($parameter, $row['wheres']);
+            }
         }
     }
 }

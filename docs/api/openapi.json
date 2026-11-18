@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tekora API móvil",
-    "version": "1.3.0",
-    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento.",
+    "version": "1.4.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento. M1 agrega notificaciones del solicitante: filtro SQL por destinatario, rol cliente vigente, evento y propiedad antes de contar/ordenar/paginar. Cuentas duales excluyen avisos exclusivos de prestador. IDs compuestos por origen. Lectura idempotente sin cambiar negocios; errores de almacenamiento nunca se convierten en cero o éxito.",
     "license": {
       "name": "MIT",
       "identifier": "MIT"
@@ -2527,6 +2527,261 @@
           }
         }
       }
+    },
+    "/notifications": {
+      "get": {
+        "operationId": "listClientNotifications",
+        "summary": "Notificaciones autorizadas del solicitante",
+        "description": "Filtro SQL antes de contar y paginar. Orden created_at DESC, source_type DESC, id DESC; lectura consistente por petición. Página fuera del total: 404. Parámetros desconocidos: 422. No marca lectura. Límite 120/minuto por usuario y 480/IP.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "per_page",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o lectura idempotente; no modifica recursos de negocio.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ClientNotification"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/M1Notifications"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/notifications/unread-count": {
+      "get": {
+        "operationId": "countClientNotifications",
+        "summary": "Contar avisos no leídos del solicitante",
+        "description": "Mismo ámbito autorizado del listado, consulta SQL única. No admite parámetros. Cero solo después de una consulta exitosa; fallo de almacenamiento: 503. No confundir este contador con mensajes sin leer.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Consulta o lectura idempotente; no modifica recursos de negocio.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/NotificationUnreadCount"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/M1UnreadCount"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/notifications/{source_type}/{id}/read": {
+      "post": {
+        "operationId": "readClientNotification",
+        "summary": "Marcar un aviso propio como leído",
+        "description": "Propiedad y ámbito cliente antes de validar cuerpo. Ajeno, inexistente o exclusivo de prestador: 404. WHERE read_at IS NULL conserva primera lectura incluso tras reintento concurrente o desde web. Sin clave adicional de idempotencia: identidad natural source_type + id. No modifica solicitudes, reservas, mensajes ni reseñas. Límite adicional compartido mobile-read-writes: 30/minuto por actor y 120/IP. Conflicto de escritura 409; almacenamiento incierto/no disponible 503: consultar/reintentar, nunca asumir éxito.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "source_type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "inquiry",
+                "activity"
+              ]
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9223372036854775807
+            },
+            "description": "source_id positivo; siempre acompañado del origen. Identificadores malformados o ausentes: 404."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta o lectura idempotente; no modifica recursos de negocio.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ClientNotification"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "$ref": "#/components/examples/M1NotificationRead"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        },
+        "requestBody": {
+          "required": false,
+          "description": "Omitir cuerpo o enviar {}. No admite campos, fechas ni destinatarios.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4029,6 +4284,145 @@
             }
           }
         }
+      },
+      "ClientNotification": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "source_type",
+          "source_id",
+          "event",
+          "label",
+          "created_at",
+          "read_at",
+          "resource"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(inquiry|activity):[1-9][0-9]*$"
+          },
+          "source_type": {
+            "enum": [
+              "inquiry",
+              "activity"
+            ]
+          },
+          "source_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "event": {
+            "enum": [
+              "accepted",
+              "rejected",
+              "completed",
+              "reservation_confirmed",
+              "reservation_rejected",
+              "reservation_cancelled",
+              "reservation_completed"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "read_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "pattern": "Z$"
+          },
+          "resource": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "id"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "inquiry",
+                  "reservation"
+                ]
+              },
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        },
+        "description": "Proyección mínima de un aviso autorizado. id es opaco y único entre orígenes; no separar source_id de source_type. Texto plano, sin URLs web, destinatario, cuerpos o relaciones privadas.",
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "source_type": {
+                  "const": "inquiry"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "event": {
+                  "enum": [
+                    "accepted",
+                    "rejected",
+                    "completed"
+                  ]
+                },
+                "resource": {
+                  "properties": {
+                    "type": {
+                      "const": "inquiry"
+                    }
+                  }
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "event": {
+                  "enum": [
+                    "reservation_confirmed",
+                    "reservation_rejected",
+                    "reservation_cancelled",
+                    "reservation_completed"
+                  ]
+                },
+                "resource": {
+                  "properties": {
+                    "type": {
+                      "const": "reservation"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "NotificationUnreadCount": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "unread_count"
+        ],
+        "properties": {
+          "unread_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
       }
     },
     "responses": {
@@ -4421,6 +4815,71 @@
               "requires_verified_payment": false,
               "protocol": "quoted-slot-hold-v1"
             }
+          }
+        }
+      },
+      "M1Notifications": {
+        "summary": "Datos sintéticos de integración M1",
+        "value": {
+          "data": [
+            {
+              "id": "inquiry:2",
+              "source_type": "inquiry",
+              "source_id": 2,
+              "event": "accepted",
+              "label": "Solicitud aceptada",
+              "created_at": "2030-01-01T12:00:00.000000Z",
+              "read_at": null,
+              "resource": {
+                "type": "inquiry",
+                "id": 93
+              }
+            },
+            {
+              "id": "activity:2",
+              "source_type": "activity",
+              "source_id": 2,
+              "event": "reservation_confirmed",
+              "label": "Reserva confirmada",
+              "created_at": "2030-01-01T12:00:00.000000Z",
+              "read_at": null,
+              "resource": {
+                "type": "reservation",
+                "id": 105
+              }
+            }
+          ],
+          "meta": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 12,
+            "total": 2
+          }
+        }
+      },
+      "M1NotificationRead": {
+        "summary": "Datos sintéticos de integración M1",
+        "value": {
+          "data": {
+            "id": "inquiry:2",
+            "source_type": "inquiry",
+            "source_id": 2,
+            "event": "accepted",
+            "label": "Solicitud aceptada",
+            "created_at": "2030-01-01T12:00:00.000000Z",
+            "read_at": "2030-01-01T13:00:00.000000Z",
+            "resource": {
+              "type": "inquiry",
+              "id": 93
+            }
+          }
+        }
+      },
+      "M1UnreadCount": {
+        "summary": "Datos sintéticos de integración M1",
+        "value": {
+          "data": {
+            "unread_count": 2
           }
         }
       }
