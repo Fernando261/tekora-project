@@ -13,6 +13,12 @@ const examples = Object.freeze({
     scenario: { success: true, declined: true, temporary: true },
 });
 
+const resultCopy = {
+    success: ['Simulación completada', 'No se realizó ningún cobro ni se modificó tu reserva.'],
+    declined: ['Simulación rechazada', 'Este rechazo es ficticio. Puedes cambiar el escenario y explorar la experiencia otra vez.'],
+    temporary: ['Un momento, vuelve a intentarlo', 'Error temporal de demostración. Reintentar mostrará una recuperación ficticia; no se enviará ningún dato.'],
+};
+
 const root = document.querySelector('.tk-checkout');
 if (root) {
     const find = (name) => root.querySelector(`[data-${name}]`);
@@ -42,6 +48,7 @@ if (root) {
     let pointerAnimation;
     let flipAnimation;
     let resizeFrame;
+    let layoutOutcome = 'success';
 
     const phase = (next) => {
         state = next;
@@ -161,17 +168,39 @@ if (root) {
         pointerAnimation = run(tilt, { rotateX: 0, rotateY: 0, duration: 600 });
     });
 
+    const mobileResultHeight = () => {
+        // Reserve the forthcoming result before centering starts. Measuring an
+        // inert, invisible copy avoids a second layout change when text appears.
+        const preview = result.cloneNode(true);
+        preview.removeAttribute('hidden');
+        preview.removeAttribute('aria-labelledby');
+        preview.setAttribute('aria-hidden', 'true');
+        preview.inert = true;
+        preview.style.visibility = 'hidden';
+        preview.querySelectorAll('[id]').forEach((element) => element.removeAttribute('id'));
+        preview.querySelector('[data-spinner]').hidden = true;
+        preview.querySelector('[data-result-symbol]').removeAttribute('hidden');
+        preview.querySelector('[data-result-title]').textContent = resultCopy[layoutOutcome][0];
+        preview.querySelector('[data-result-note]').textContent = resultCopy[layoutOutcome][1];
+        preview.querySelector('[data-result-actions]').hidden = false;
+        preview.querySelector('[data-retry]').hidden = layoutOutcome !== 'temporary';
+        stage.append(preview);
+        const height = Math.ceil(preview.getBoundingClientRect().height);
+        preview.remove();
+        return height;
+    };
     const centeredGeometry = () => {
         const frame = stage.getBoundingClientRect();
         const bounds = card.getBoundingClientRect();
         const transform = new DOMMatrixReadOnly(getComputedStyle(card).transform);
         const top = innerWidth > 850 ? 64 : 48;
-        const height = innerWidth > 850 ? Math.max(560, bounds.height + 295) : bounds.height + 380;
+        const resultTop = top + bounds.height + (innerWidth > 850 ? 28 : 16);
+        const height = innerWidth > 850 ? Math.max(560, bounds.height + 295) : resultTop + mobileResultHeight() + 28;
         const recenter = innerWidth > 850 ? (height - frame.height) / 2 : 0;
         return { x: frame.left + frame.width / 2 - (bounds.left - transform.m41 + bounds.width / 2),
             y: frame.top + top - (bounds.top - transform.m42) - recenter,
             height,
-            resultTop: top + bounds.height + 28 };
+            resultTop };
     };
     const positionResult = (instant = false) => {
         const geometry = centeredGeometry();
@@ -187,11 +216,7 @@ if (root) {
         symbol.removeAttribute('hidden');
         actions.hidden = false;
         retryButton.hidden = outcome !== 'temporary';
-        const copy = {
-            success: ['Simulación completada', 'No se realizó ningún cobro ni se modificó tu reserva.'],
-            declined: ['Simulación rechazada', 'Este rechazo es ficticio. Puedes cambiar el escenario y explorar la experiencia otra vez.'],
-            temporary: ['Un momento, vuelve a intentarlo', 'Error temporal de demostración. Reintentar mostrará una recuperación ficticia; no se enviará ningún dato.'],
-        }[outcome];
+        const copy = resultCopy[outcome];
         title.textContent = copy[0];
         note.textContent = copy[1];
         resetButton.firstChild.textContent = outcome === 'success' ? 'Repetir demostración ' : 'Cambiar escenario ';
@@ -212,6 +237,7 @@ if (root) {
     const begin = (outcome, retry = false) => {
         if ((!retry && state !== 'ready') || (retry && state !== 'temporary')) return;
         cancelOperation();
+        layoutOutcome = outcome;
         phase('leaving');
         stage.setAttribute('aria-busy', 'true');
         fields.disabled = true;
