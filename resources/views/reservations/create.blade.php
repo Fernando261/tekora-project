@@ -5,7 +5,7 @@
     <section class="account-card"><h2>Tu propuesta de 60 minutos</h2>
       <p class="account-note">Elige fecha y hora en la zona <strong>{{ $setting->timezone }}</strong>, aunque te encuentres en otra zona. El prestador deberá confirmar el horario. No se realiza ningún pago.</p>
       <form class="account-form reservation-form" method="POST" action="{{ route('reservations.store', $inquiry) }}">
-        @csrf
+        @csrf @if($journeyReturn ?? false)<input type="hidden" name="_journey" value="1">@endif
         <input type="hidden" name="idempotency_key" value="{{ is_string(old('idempotency_key')) ? old('idempotency_key') : $key }}">
         <input type="hidden" name="availability_revision" value="{{ $setting->revision }}">
         @if($commercial)

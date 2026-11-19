@@ -1,4 +1,4 @@
-@props(['reservation'])
+@props(['reservation', 'journeyReturn' => false, 'allowedActions' => null])
 @php
   $state = $reservation->effectiveStatus(); $nowUtc = now('UTC')->format('Y-m-d H:i:s'); $actions = [];
   if ($state === \App\Enums\ReservationStatus::Requested) {
@@ -13,7 +13,8 @@
       if ($reservation->starts_at_utc > $nowUtc) $actions['cancel'] = 'Cancelar reserva';
       if ($reservation->ends_at_utc <= $nowUtc) $actions['complete'] = 'Marcar como realizado';
   }
+  if ($allowedActions !== null) $actions = array_intersect_key($actions, array_flip($allowedActions));
 @endphp
 <div class="reservation-actions">@foreach($actions as $action => $label)@can($action, $reservation)
-  <form method="POST" action="{{ route('reservations.'.$action, $reservation) }}">@csrf @method('PATCH')<input type="hidden" name="version" value="{{ $reservation->version }}">@if($reservation->quote_id)<input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">@endif<button @if($action === 'commit') data-hold-confirm @endif class="account-button {{ in_array($action, ['cancel','reject']) ? 'secondary' : '' }}" type="submit">{{ $label }}</button></form>
+  <form method="POST" action="{{ route('reservations.'.$action, $reservation) }}">@csrf @if($journeyReturn)<input type="hidden" name="_journey" value="1">@endif @method('PATCH')<input type="hidden" name="version" value="{{ $reservation->version }}">@if($reservation->quote_id)<input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">@endif<button @if($action === 'commit') data-hold-confirm @endif class="account-button {{ in_array($action, ['cancel','reject']) ? 'secondary' : '' }}" type="submit">{{ $label }}</button></form>
 @endcan @endforeach</div>

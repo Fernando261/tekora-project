@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/css/tekora/marketplace.css',
                 'resources/js/tekora/marketplace.js',
                 'resources/css/tekora/operations.css',
+                'resources/css/tekora/contracting-journey.css',
                 'resources/js/tekora/operations.js',
                 'resources/css/tekora/identity.css',
                 'resources/js/tekora/identity.js',

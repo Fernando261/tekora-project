@@ -11,7 +11,7 @@
       <p class="account-help">Retirada: {{ $review->withdrawn_at_utc }} UTC.</p>
     @else
       <p class="account-note">La reseña solo se muestra públicamente mientras el servicio cumpla las reglas del catálogo. No puedes editarla. Retirarla es irreversible y no permite reemplazarla.</p>
-      @can('withdraw', $review)<form method="POST" action="{{ route('reviews.withdraw', $review) }}">@csrf @method('PATCH')<button class="account-button secondary tk-ops-danger" type="submit">Retirar reseña de la vista pública</button></form>@endcan
+      @can('withdraw', $review)<form method="POST" action="{{ route('reviews.withdraw', $review) }}">@csrf @if($journeyReturn ?? false)<input type="hidden" name="_journey" value="1">@endif @method('PATCH')<button class="account-button secondary tk-ops-danger" type="submit">Retirar reseña de la vista pública</button></form>@endcan
     @endif
     <p><a href="{{ route('reservations.show', $review->service_reservation_id) }}">Consultar mi reserva</a></p>
     <p><a href="{{ route('reviews.index') }}">Volver a Mis reseñas</a></p>

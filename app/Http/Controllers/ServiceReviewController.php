@@ -7,6 +7,7 @@ use App\Exceptions\ReviewFailure;
 use App\Models\ServiceReservation;
 use App\Models\ServiceReview;
 use App\Services\ReviewWorkflow;
+use App\Support\ContractingReturn;
 use App\Support\ReviewInput;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,9 @@ class ServiceReviewController extends Controller
             $page = ReviewInput::page($request);
             $reviews = ServiceReview::where('client_user_id', $request->user('web')->id)->with('service:id,title')
                 ->orderByDesc('id')->paginate(12, ['*'], 'page', $page);
-            if ($page > $reviews->lastPage()) throw new ReviewFailure('La página de reseñas no existe.', 404);
+            if ($page > $reviews->lastPage()) {
+                throw new ReviewFailure('La página de reseñas no existe.', 404);
+            }
 
             return response()->view('reviews.index', compact('reviews'));
         });
@@ -35,12 +38,17 @@ class ServiceReviewController extends Controller
             return DB::transaction(function () use ($request, $reservation) {
                 $reservation = ServiceReservation::findOrFail($reservation);
                 Gate::forUser($request->user('web'))->authorize('create', [ServiceReview::class, $reservation]);
-                if ($reservation->status !== ReservationStatus::Completed) throw new ReviewFailure('Solo puedes reseñar una reserva completada.');
+                $journeyReturn = ContractingReturn::requested($request);
+                if ($reservation->status !== ReservationStatus::Completed) {
+                    throw new ReviewFailure('Solo puedes reseñar una reserva completada.');
+                }
                 $existing = $reservation->review()->first();
-                if ($existing) return redirect()->route('reviews.show', $existing)->with('info', 'Esta reserva ya tiene una reseña. Se conserva su registro original.');
+                if ($existing) {
+                    return redirect()->route('reviews.show', $existing)->with('info', 'Esta reserva ya tiene una reseña. Se conserva su registro original.');
+                }
                 $reservation->load('service:id,title');
 
-                return response()->view('reviews.create', compact('reservation'));
+                return response()->view('reviews.create', compact('reservation', 'journeyReturn'));
             }, 3);
         });
     }
@@ -50,9 +58,10 @@ class ServiceReviewController extends Controller
         return $this->safely($request, function () use ($request, $reservation, $workflow) {
             $source = ServiceReservation::findOrFail($reservation);
             Gate::forUser($request->user('web'))->authorize('create', [ServiceReview::class, $source]);
-            $result = $workflow->publish($request->user('web'), $reservation, $request->except('_token', '_method'));
+            $journeyReturn = ContractingReturn::requested($request);
+            $result = $workflow->publish($request->user('web'), $reservation, $request->except('_token', '_method', '_journey'));
 
-            return redirect()->route('reviews.show', $result['review'], 303)->with($result['created'] ? 'success' : 'info',
+            return ($journeyReturn ? redirect(ContractingReturn::url($source->service_inquiry_id, 'cierre'), 303) : redirect()->route('reviews.show', $result['review'], 303))->with($result['created'] ? 'success' : 'info',
                 $result['created'] ? 'Reseña publicada. Puedes consultar su estado y retirarla de la presentación pública.' : 'Se conserva la reseña original. No se creó otra.');
         });
     }
@@ -62,9 +71,10 @@ class ServiceReviewController extends Controller
         return $this->safely($request, function () use ($request, $review) {
             $review = ServiceReview::findOrFail($review);
             Gate::forUser($request->user('web'))->authorize('view', $review);
+            $journeyReturn = ContractingReturn::requested($request);
             $review->load('service:id,title');
 
-            return response()->view('reviews.show', compact('review'));
+            return response()->view('reviews.show', compact('review', 'journeyReturn'));
         });
     }
 
@@ -73,22 +83,29 @@ class ServiceReviewController extends Controller
         return $this->safely($request, function () use ($request, $review, $workflow) {
             $source = ServiceReview::findOrFail($review);
             Gate::forUser($request->user('web'))->authorize('withdraw', $source);
-            $updated = $workflow->withdraw($request->user('web'), $review, $request->except('_token', '_method'));
+            $journeyReturn = ContractingReturn::requested($request);
+            $updated = $workflow->withdraw($request->user('web'), $review, $request->except('_token', '_method', '_journey'));
 
-            return redirect()->route('reviews.show', $updated, 303)->with('success', 'Reseña retirada. Se conserva tu registro privado y ya no contribuye a las valoraciones públicas.');
+            return ($journeyReturn ? redirect(ContractingReturn::url($source->reservation->service_inquiry_id, 'cierre'), 303) : redirect()->route('reviews.show', $updated, 303))->with('success', 'Reseña retirada. Se conserva tu registro privado y ya no contribuye a las valoraciones públicas.');
         });
     }
 
     private function safely(Request $request, callable $operation)
     {
-        try { return $operation(); }
-        catch (ReviewFailure $exception) { return $exception->render($request); }
-        catch (\Illuminate\Auth\Access\AuthorizationException $exception) { return (new ReviewFailure('No tienes permiso para consultar o modificar esta reseña.', 403))->render($request); }
-        catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) { return (new ReviewFailure('La reseña o reserva no se encontró.', 404))->render($request); }
-        catch (\Throwable $exception) {
+        try {
+            return $operation();
+        } catch (ReviewFailure $exception) {
+            return $exception->render($request);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $exception) {
+            return (new ReviewFailure('No tienes permiso para consultar o modificar esta reseña.', 403))->render($request);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            return (new ReviewFailure('La reseña o reserva no se encontró.', 404))->render($request);
+        } catch (\Throwable $exception) {
             for ($cause = $exception; $cause; $cause = $cause->getPrevious()) {
                 if ($cause instanceof \PDOException) {
-                    if (! $request->isMethodSafe() && $this->causedByConcurrencyError($cause)) return (new ReviewFailure)->render($request);
+                    if (! $request->isMethodSafe() && $this->causedByConcurrencyError($cause)) {
+                        return (new ReviewFailure)->render($request);
+                    }
 
                     return (new ReviewFailure('Las reseñas no están disponibles temporalmente. Inténtalo más tarde.', 503))->render($request);
                 }
