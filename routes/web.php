@@ -38,7 +38,19 @@ Route::middleware('auth:web')->group(function () {
 
 require __DIR__.'/quotes.php';
 
-// Local presentation only; no session/database access and no mutation endpoint.
-Route::get('/demo/checkout', \App\Http\Controllers\CheckoutDemoController::class)
+// Dedicated demo capabilities/storage/CSRF; never the application's session database.
+Route::middleware(\App\Http\Middleware\CheckoutDemoOnly::class)
     ->withoutMiddleware([\Illuminate\Session\Middleware\StartSession::class, \Illuminate\View\Middleware\ShareErrorsFromSession::class, \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class])
-    ->name('demo.checkout');
+    ->prefix('demo/checkout')->name('demo.checkout')->group(function () {
+        $controller = \App\Http\Controllers\CheckoutDemoController::class;
+        Route::get('/', $controller);
+        Route::get('context', [$controller, 'context'])->name('.context');
+        Route::get('attempts/{attempt}', [$controller, 'context'])->whereUuid('attempt')->name('.result');
+        Route::post('attempts', [$controller, 'submit'])->name('.submit');
+        Route::post('attempts/{attempt}/retry', [$controller, 'retry'])->whereUuid('attempt')->name('.retry');
+        Route::post('new', [$controller, 'fresh'])->name('.new');
+        Route::get('provider/access', [$controller, 'operatorAccess'])->name('.access');
+        Route::get('provider', [$controller, 'provider'])->name('.provider');
+        Route::get('provider/pending', [$controller, 'pending'])->name('.pending');
+        Route::post('provider/{checkout}/{attempt}/receive', [$controller, 'receive'])->whereUuid(['checkout', 'attempt'])->name('.receive');
+    });
