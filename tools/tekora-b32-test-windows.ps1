@@ -35,6 +35,7 @@ try {
         'app/Payments/LocalCheckoutAttemptStore.php', 'tools/tekora-b32-fixture.php',
         'tests/Feature/LocalCheckoutAttemptStoreTest.php',
         'tests/Feature/LocalIntegratedCheckoutHttpTest.php',
+        'tests/Feature/LocalIntegratedCheckoutFixtureExportTest.php',
         'tests/Feature/LocalIntegratedCheckoutBoundaryTest.php',
         'tests/Feature/ReservationHoldConcurrencyTest.php',
         'tests/Support/ReservationHoldWorker.php')) {
@@ -43,7 +44,7 @@ try {
     }
 
     # Formatting first: fail in seconds instead of wasting a full 6–10 minute test run.
-    & php vendor/bin/pint --test app/Http/Controllers/LocalIntegratedCheckoutController.php app/Payments/LocalCheckoutAttemptStore.php tools/tekora-b32-fixture.php tests/Feature/LocalCheckoutAttemptStoreTest.php tests/Feature/LocalIntegratedCheckoutHttpTest.php
+    & php vendor/bin/pint --test app/Http/Controllers/LocalIntegratedCheckoutController.php app/Payments/LocalCheckoutAttemptStore.php tools/tekora-b32-fixture.php tests/Feature/LocalCheckoutAttemptStoreTest.php tests/Feature/LocalIntegratedCheckoutHttpTest.php tests/Feature/LocalIntegratedCheckoutFixtureExportTest.php
     if ($LASTEXITCODE -ne 0) { throw ('Pint FAILED. Evidencia: ' + $evidence) }
 
     & npm run build
