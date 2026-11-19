@@ -9,6 +9,11 @@
       <x-reservation-hold :reservation="$journeyReservation" />
       @if($journey['reservation']['status'] === 'held')<p class="account-note">Confirma antes del vencimiento. Este paso confirma tu horario; Tekora todavía no realiza cobros.</p>@endif
       <x-reservation-actions :reservation="$journeyReservation" :journey-return="true" :allowed-actions="$journey['reservation']['actions']" />
+      @if($journey['viewer_role'] === 'provider'
+          && \App\Http\Controllers\LocalIntegratedCheckoutController::permitsSyntheticRequest(request())
+          && $journeyReservation->providerProfile->user_id === auth('web')->id())
+        <p><a class="account-button secondary" href="{{ route('checkout.local.cash', $journeyReservation->id) }}">Consultar recepción de efectivo</a></p>
+      @endif
       @if(\App\Http\Middleware\CheckoutDemoOnly::permitsLocalRequest(request())
           && $journey['viewer_role'] === 'client' && auth('web')->id() === $journeyReservation->client_user_id
           && in_array('commit', $journey['reservation']['actions'], true)
