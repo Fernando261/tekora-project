@@ -92,8 +92,10 @@ final class LocalIntegratedCheckoutController extends Controller
     {
         $item = $this->providerReservation($request, $reservation);
         $attempt = $store->current($item->id);
-        abort_unless($attempt && $attempt['method'] === 'cash'
-            && (int) $attempt['provider_user_id'] === $request->user('web')->id, 404);
+        if ($attempt && ($attempt['method'] !== 'cash'
+            || (int) $attempt['provider_user_id'] !== $request->user('web')->id)) {
+            $attempt = null;
+        }
 
         return response()->view('checkout.local-cash', ['reservation' => $reservation,
             'attempt' => $attempt])->withHeaders(['Cache-Control' => 'no-store, private', 'X-Robots-Tag' => 'noindex, nofollow']);
