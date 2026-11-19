@@ -2,6 +2,8 @@
 
 namespace App\Payments;
 
+use App\Enums\Permission;
+use App\Enums\ReservationStatus;
 use App\Models\ServiceReservation;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +69,8 @@ final class LocalCheckoutAttemptStore
 
     public function receiveCash(User $provider, ServiceReservation $reservation): array
     {
-        abort_unless($reservation->providerProfile->user_id === $provider->id, 403);
+        abort_unless($reservation->providerProfile->user_id === $provider->id
+            && $provider->hasPermission(Permission::ManageReceivedInquiries), 403);
 
         return DB::transaction(function () use ($reservation, $provider) {
             $row = $this->current($reservation->id);
@@ -77,7 +80,10 @@ final class LocalCheckoutAttemptStore
                 return $row;
             }
             abort_unless($row['status'] === 'awaiting_cash', 409);
-            abort_unless($reservation->fresh()->hold?->remainingSeconds() > 0, 409);
+            $current = $reservation->fresh();
+            abort_unless($current->status === ReservationStatus::Requested
+                && $current->hold?->state === 'held'
+                && $current->hold->remainingSeconds() > 0, 409);
             DB::table('synthetic_checkout_attempts')
                 ->where('reservation_id', $reservation->id)->where('status', 'awaiting_cash')
                 ->update(['status' => 'cash_received', 'received_at' => now('UTC')->toISOString()]);
