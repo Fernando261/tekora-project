@@ -44,14 +44,14 @@ try {
     & php vendor/bin/pint --test app/Http/Controllers/LocalIntegratedCheckoutController.php app/Payments/LocalCheckoutAttemptStore.php tools/tekora-b32-fixture.php tests/Feature/LocalCheckoutAttemptStoreTest.php tests/Feature/LocalIntegratedCheckoutHttpTest.php
     if ($LASTEXITCODE -ne 0) { throw ('Pint FAILED. Evidencia: ' + $evidence) }
 
+    & npm run build
+    if ($LASTEXITCODE -ne 0) { throw 'Build FAILED.' }
+
     & php vendor/bin/phpunit --filter 'LocalIntegratedCheckout|LocalCheckoutAttemptStore|CheckoutContextApiTest|ReservationSlotHoldsTest|CheckoutDemoBridgeTest' --log-junit (Join-Path $evidence 'affected.xml')
     if ($LASTEXITCODE -ne 0) { throw ('Subconjunto funcional FAILED. Evidencia: ' + $evidence) }
 
     & php vendor/bin/phpunit --log-junit (Join-Path $evidence 'full.xml')
     if ($LASTEXITCODE -ne 0) { throw ('Suite completa FAILED. Evidencia: ' + $evidence) }
-
-    & npm run build
-    if ($LASTEXITCODE -ne 0) { throw 'Build FAILED.' }
 
     Write-Host ('B3.2 PASS. Evidencias: ' + $evidence) -ForegroundColor Green
 } finally {
