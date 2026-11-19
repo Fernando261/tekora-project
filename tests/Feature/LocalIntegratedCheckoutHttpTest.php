@@ -103,6 +103,27 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         $this->assertSame('held', $reservation->fresh()->effectiveStatus()->value);
     }
 
+    public function test_only_the_owner_sees_the_integrated_checkout_link_and_provider_sees_cash_receipt(): void
+    {
+        [$client, $provider, $reservation] = $this->held();
+        $inquiryUrl = route('inquiries.show', $reservation->service_inquiry_id);
+        $clientPage = $this->actingAs($client, 'web')->get($inquiryUrl)->assertOk()
+            ->assertSee('Elegir método de pago')
+            ->assertDontSee('Explorar el pago (DEMO)');
+        $this->assertStringContainsString(
+            'href="'.route('checkout.local.show', $reservation->id).'"',
+            $clientPage->getContent()
+        );
+        $this->assertStringContainsString('referrerpolicy="no-referrer"', $clientPage->getContent());
+        $clientPage->assertSee('Confirmar definitivamente mi reserva');
+
+        $this->actingAs($provider, 'web')->get($inquiryUrl)->assertOk()
+            ->assertSee('Consultar recepción de efectivo')
+            ->assertDontSee('Elegir método de pago');
+        $this->actingAs($this->account(\App\Enums\RoleName::Client), 'web')
+            ->get($inquiryUrl)->assertForbidden();
+    }
+
     public function test_invalid_card_or_expired_hold_cannot_change_attempt(): void
     {
         [$client, , $reservation] = $this->held();
