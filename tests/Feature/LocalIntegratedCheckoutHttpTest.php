@@ -22,6 +22,22 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         if (! mkdir($this->fixtureDir, 0700)) {
             throw new \RuntimeException('No se pudo preparar SQLite sintética de prueba.');
         }
+        // The disposable checkout schema must exist BEFORE exporting memory SQLite.
+        // It is intentionally absent from application migrations and real databases.
+        DB::statement("CREATE TABLE synthetic_checkout_attempts (
+            reservation_id INTEGER PRIMARY KEY,
+            client_user_id INTEGER NOT NULL,
+            provider_user_id INTEGER NOT NULL,
+            quote_id TEXT NOT NULL,
+            amount_cents INTEGER NOT NULL CHECK(amount_cents > 0),
+            method TEXT NOT NULL CHECK(method IN ('card','cash')),
+            scenario TEXT NOT NULL,
+            status TEXT NOT NULL CHECK(status IN ('test_approved','declined','temporary_failure','awaiting_cash','cash_received')),
+            idempotency_key TEXT NOT NULL,
+            reference TEXT NOT NULL UNIQUE,
+            attempted_at TEXT NOT NULL,
+            received_at TEXT NULL
+        )");
         $db = $this->fixtureDir.DIRECTORY_SEPARATOR.'tekora.sqlite';
         $pdo = DB::connection('sqlite')->getPdo();
         $pdo->exec("VACUUM main INTO ".$pdo->quote($db));
