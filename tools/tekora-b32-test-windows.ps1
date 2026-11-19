@@ -35,7 +35,9 @@ try {
         'app/Payments/LocalCheckoutAttemptStore.php', 'tools/tekora-b32-fixture.php',
         'tests/Feature/LocalCheckoutAttemptStoreTest.php',
         'tests/Feature/LocalIntegratedCheckoutHttpTest.php',
-        'tests/Feature/LocalIntegratedCheckoutBoundaryTest.php')) {
+        'tests/Feature/LocalIntegratedCheckoutBoundaryTest.php',
+        'tests/Feature/ReservationHoldConcurrencyTest.php',
+        'tests/Support/ReservationHoldWorker.php')) {
         & php -l $file
         if ($LASTEXITCODE -ne 0) { throw ('PHP lint FAILED: ' + $file) }
     }
@@ -47,7 +49,7 @@ try {
     & npm run build
     if ($LASTEXITCODE -ne 0) { throw 'Build FAILED.' }
 
-    & php vendor/bin/phpunit --filter 'LocalIntegratedCheckout|LocalCheckoutAttemptStore|CheckoutContextApiTest|ReservationSlotHoldsTest|CheckoutDemoBridgeTest' --log-junit (Join-Path $evidence 'affected.xml')
+    & php vendor/bin/phpunit --filter 'LocalIntegratedCheckout|LocalCheckoutAttemptStore|CheckoutContextApiTest|ReservationSlotHoldsTest|CheckoutDemoBridgeTest|ReservationHoldConcurrencyTest' --log-junit (Join-Path $evidence 'affected.xml')
     if ($LASTEXITCODE -ne 0) { throw ('Subconjunto funcional FAILED. Evidencia: ' + $evidence) }
 
     & php vendor/bin/phpunit --log-junit (Join-Path $evidence 'full.xml')
