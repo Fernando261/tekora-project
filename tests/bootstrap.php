@@ -5,7 +5,7 @@
 $testEnvironment = [
     'APP_ENV' => 'testing',
     'APP_KEY' => 'base64:'.base64_encode(random_bytes(32)),
-    'APP_CONFIG_CACHE' => sys_get_temp_dir().'/tekora-phpunit-config-'.bin2hex(random_bytes(8)).'.php',
+    'APP_CONFIG_CACHE' => (DIRECTORY_SEPARATOR === '/' ? sys_get_temp_dir() : 'bootstrap/cache').'/tekora-phpunit-config-'.bin2hex(random_bytes(8)).'.php',
     'DB_CONNECTION' => 'sqlite',
     'DB_DATABASE' => ':memory:',
     'DB_URL' => '',
