@@ -40,14 +40,16 @@ try {
         if ($LASTEXITCODE -ne 0) { throw ('PHP lint FAILED: ' + $file) }
     }
 
-    & php vendor/bin/phpunit --filter 'LocalIntegratedCheckout|LocalCheckoutAttemptStore|CheckoutContextApiTest|ReservationSlotHoldsTest' --log-junit (Join-Path $evidence 'affected.xml')
+    # Formatting first: fail in seconds instead of wasting a full 6–10 minute test run.
+    & php vendor/bin/pint --test app/Http/Controllers/LocalIntegratedCheckoutController.php app/Payments/LocalCheckoutAttemptStore.php tools/tekora-b32-fixture.php tests/Feature/LocalCheckoutAttemptStoreTest.php tests/Feature/LocalIntegratedCheckoutHttpTest.php
+    if ($LASTEXITCODE -ne 0) { throw ('Pint FAILED. Evidencia: ' + $evidence) }
+
+    & php vendor/bin/phpunit --filter 'LocalIntegratedCheckout|LocalCheckoutAttemptStore|CheckoutContextApiTest|ReservationSlotHoldsTest|CheckoutDemoBridgeTest' --log-junit (Join-Path $evidence 'affected.xml')
     if ($LASTEXITCODE -ne 0) { throw ('Subconjunto funcional FAILED. Evidencia: ' + $evidence) }
 
     & php vendor/bin/phpunit --log-junit (Join-Path $evidence 'full.xml')
     if ($LASTEXITCODE -ne 0) { throw ('Suite completa FAILED. Evidencia: ' + $evidence) }
 
-    & php vendor/bin/pint --test app/Http/Controllers/LocalIntegratedCheckoutController.php app/Payments/LocalCheckoutAttemptStore.php tools/tekora-b32-fixture.php tests/Feature/LocalCheckoutAttemptStoreTest.php tests/Feature/LocalIntegratedCheckoutHttpTest.php
-    if ($LASTEXITCODE -ne 0) { throw ('Pint FAILED. Evidencia: ' + $evidence) }
     & npm run build
     if ($LASTEXITCODE -ne 0) { throw 'Build FAILED.' }
 
