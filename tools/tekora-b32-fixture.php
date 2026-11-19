@@ -82,6 +82,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
                 quote_id TEXT NOT NULL,
                 amount_cents INTEGER NOT NULL CHECK(amount_cents > 0),
                 method TEXT NOT NULL CHECK(method IN ('card', 'cash')),
+                scenario TEXT NOT NULL,
                 status TEXT NOT NULL CHECK(status IN ('test_approved', 'declined', 'temporary_failure', 'awaiting_cash', 'cash_received')),
                 idempotency_key TEXT NOT NULL,
                 reference TEXT NOT NULL UNIQUE,
