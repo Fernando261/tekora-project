@@ -52,16 +52,20 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
     {
         DB::purge('sqlite');
         parent::tearDown();
+
         if ($this->fixtureDir === null) {
             return;
         }
+
         // Remove only the brand-new, exclusively owned temporary test files.
         foreach (['tekora.sqlite', 'tekora.sqlite-wal', 'tekora.sqlite-shm', '.tekora-b32-synthetic'] as $name) {
             $path = $this->fixtureDir.DIRECTORY_SEPARATOR.$name;
+
             if (is_file($path) && is_link($path) === false) {
                 @unlink($path);
             }
         }
+
         @rmdir($this->fixtureDir);
     }
 
