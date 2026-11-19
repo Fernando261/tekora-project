@@ -49,9 +49,25 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
             $client->update(['name' => 'Lía · Cliente Tekora', 'email' => 'cliente@tekora.test', 'password' => $clientPassword]);
             $provider->update(['name' => 'Alex · Prestador Tekora', 'email' => 'prestador@tekora.test', 'password' => $providerPassword]);
 
+            // Do not reuse pricedProposal() here: that test fixture time-travels
+            // to 2030. The live Windows server must observe this hold as current.
+            $inquiry = $this->inquiry($client, $provider, \App\Enums\InquiryStatus::Accepted);
+            $this->publishSchedule($provider);
+            app(\App\Payments\ServicePricing::class)->publish(
+                $provider, $inquiry->service_id,
+                ['amount_cents' => 100000, 'expected_version' => 0,
+                    'idempotency_key' => (string) \Illuminate\Support\Str::uuid()]
+            );
+            $quote = app(\App\Payments\SyntheticQuotes::class)->issue(
+                $client, $inquiry->id,
+                ['idempotency_key' => (string) \Illuminate\Support\Str::uuid()]
+            );
+            app(\App\Payments\SyntheticQuotes::class)->accept($client, $quote->id);
             $date = now('America/Mexico_City')->addDays(3)->format('Y-m-d');
-            [$client, $provider, $inquiry, $quote, $reservation] =
-                $this->pricedProposal($client, $provider, ['date' => $date, 'time' => '12:00']);
+            $reservation = app(\App\Services\ReservationWorkflow::class)->propose(
+                $client, $inquiry->id,
+                $this->reservationData(['quote_id' => $quote->id, 'date' => $date, 'time' => '12:00'])
+            )['reservation'];
             $provider->providerProfile->update([
                 'display_name' => 'Estudio Nodo',
                 'headline' => 'Diseño y soporte digital',
