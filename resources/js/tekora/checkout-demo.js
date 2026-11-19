@@ -3,8 +3,7 @@ import { animate, createTimeline, cubicBezier, stagger } from 'animejs';
 // Sampled from the reference's card translation: slow departure, then a soft settle.
 const centerEase = cubicBezier(0.4, 0, 0.2, 1);
 
-// The only state is a choice among these fictional tokens. No banking input,
-// form submission, fetch, storage, telemetry, payment SDK or booking command.
+// Only fictional tokens. Results come from the isolated demo server; never a payment SDK or booking command.
 const examples = Object.freeze({
     holder: { valeria: 'VALERIA DEMO', alex: 'ALEX DEMO', nexo: 'NEXO ESTUDIO DEMO' },
     number: { debit: { suffix: '0420', type: 'DÉBITO' }, credit: { suffix: '0860', type: 'CRÉDITO' } },
@@ -14,13 +13,33 @@ const examples = Object.freeze({
 });
 
 const resultCopy = {
-    success: ['Simulación completada', 'No se realizó ningún cobro ni se modificó tu reserva.'],
-    declined: ['Simulación rechazada', 'Este rechazo es ficticio. Puedes cambiar el escenario y explorar la experiencia otra vez.'],
-    temporary: ['Un momento, vuelve a intentarlo', 'Error temporal de demostración. Reintentar mostrará una recuperación ficticia; no se enviará ningún dato.'],
+    success: ['¡Pago realizado con éxito!', 'Resultado de demostración verificado por el servidor. Ningún cobro externo ni cambio de reserva.'],
+    declined: ['No se pudo confirmar', 'Este rechazo es ficticio. Puedes cambiar el escenario y explorar la experiencia otra vez.'],
+    temporary: ['Un momento, vuelve a intentarlo', 'El servidor registró un fallo temporal de demostración. Puedes recuperar la misma intención.'],
+    awaiting: ['Esperando al prestador', 'Entrega en persona. La recepción debe registrarse desde la vista privada del prestador demo. Elegir efectivo no acredita recepción.'],
+    expired: ['La retención de ejemplo venció', 'Los 900 segundos terminaron. Este horario no se renueva; puedes preparar un nuevo ejemplo independiente.'],
+    unknown: ['No pudimos consultar el resultado', 'No se acredita ningún éxito. Consulta al servidor antes de volver a intentarlo.'],
 };
 
 const root = document.querySelector('.tk-checkout');
 if (root) {
+    let context = JSON.parse(root.querySelector('[data-demo-bootstrap]').textContent);
+    let method = context.attempt?.method ?? 'card';
+    let requestPayload;
+    let countdownStarted = performance.now();
+    const statusMap = { demo_completed: 'success', demo_declined: 'declined', demo_temporary_error: 'temporary', demo_awaiting_cash: 'awaiting', demo_expired: 'expired' };
+    const methods = [...root.querySelectorAll('[data-method]')];
+    const api = async (path, body) => {
+        const response = await fetch(`/demo/checkout/${path}`, { method: body === undefined ? 'GET' : 'POST', credentials: 'same-origin', cache: 'no-store',
+            headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-Checkout-Demo-CSRF': context.csrf }, ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
+        const json = await response.json();
+        if (!response.ok || json.data?.scope !== 'isolated_demo' || json.data.real_payments_enabled !== false) {
+            if (response.status === 409 && json.error?.code === 'demo_hold_expired') return { ...context, attempt: { ...context.attempt, status: 'demo_expired', receipt: null } };
+            throw new Error('Demo result unavailable');
+        }
+        return json.data;
+    };
+    const money = (cents) => `${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(cents / 100)} MXN`;
     const find = (name) => root.querySelector(`[data-${name}]`);
     const stage = find('stage');
     const card = find('card-position');
@@ -183,7 +202,8 @@ if (root) {
         preview.querySelector('[data-result-title]').textContent = resultCopy[layoutOutcome][0];
         preview.querySelector('[data-result-note]').textContent = resultCopy[layoutOutcome][1];
         preview.querySelector('[data-result-actions]').hidden = false;
-        preview.querySelector('[data-retry]').hidden = layoutOutcome !== 'temporary';
+        preview.querySelector('[data-retry]').hidden = !['temporary', 'unknown', 'awaiting'].includes(layoutOutcome);
+        preview.querySelector('[data-receipt]').hidden = layoutOutcome !== 'success';
         stage.append(preview);
         const height = Math.ceil(preview.getBoundingClientRect().height);
         preview.remove();
@@ -195,7 +215,7 @@ if (root) {
         const transform = new DOMMatrixReadOnly(getComputedStyle(card).transform);
         const top = innerWidth > 850 ? 64 : 48;
         const resultTop = top + bounds.height + (innerWidth > 850 ? 28 : 16);
-        const height = innerWidth > 850 ? Math.max(560, bounds.height + 295) : resultTop + mobileResultHeight() + 28;
+        const height = Math.max(innerWidth > 850 ? 580 : 0, resultTop + mobileResultHeight() + 28);
         const recenter = innerWidth > 850 ? (height - frame.height) / 2 : 0;
         return { x: frame.left + frame.width / 2 - (bounds.left - transform.m41 + bounds.width / 2),
             y: frame.top + top - (bounds.top - transform.m42) - recenter,
@@ -210,16 +230,26 @@ if (root) {
         return geometry;
     };
     const finish = (outcome) => {
+        if (outcome === 'success' && (!context.attempt?.receipt || context.attempt.receipt.demo_only !== true || context.attempt.receipt.external_charge !== false)) outcome = 'unknown';
         phase(outcome);
         stage.removeAttribute('aria-busy');
         spinner.hidden = true;
         symbol.removeAttribute('hidden');
         actions.hidden = false;
-        retryButton.hidden = outcome !== 'temporary';
+        retryButton.hidden = !['temporary', 'unknown', 'awaiting'].includes(outcome);
+        retryButton.firstChild.textContent = outcome === 'temporary' ? 'Reintentar ' : 'Consultar resultado ';
+        find('receipt').hidden = outcome !== 'success';
+        if (outcome === 'success') {
+            const receipt = context.attempt?.receipt;
+            find('receipt-amount').textContent = money(receipt.amount.total_cents);
+            find('receipt-method').textContent = receipt.method === 'cash' ? 'Efectivo · entrega en persona' : (context.attempt.instrument === 'credit' ? 'Crédito de prueba' : 'Débito de prueba');
+            find('receipt-reference').textContent = receipt.reference;
+            find('receipt-date').textContent = new Intl.DateTimeFormat('es-MX', { dateStyle: 'short', timeStyle: 'short', timeZone: 'America/Mexico_City' }).format(new Date(receipt.recorded_at));
+        }
         const copy = resultCopy[outcome];
         title.textContent = copy[0];
         note.textContent = copy[1];
-        resetButton.firstChild.textContent = outcome === 'success' ? 'Repetir demostración ' : 'Cambiar escenario ';
+        resetButton.firstChild.textContent = outcome === 'success' || outcome === 'awaiting' ? 'Volver al detalle ' : 'Preparar otro ejemplo ';
         checkPath.setAttribute('d', outcome === 'success' ? 'm15 24 6 6 13-14' : outcome === 'declined' ? 'm17 17 14 14m0-14L17 31' : 'M24 14v12m0 7v1');
         run(checkPath, { strokeDashoffset: [38, 0], duration: 380, delay: motion.matches ? 0 : 120 });
         run(symbol, { opacity: [0, 1], scale: [0.82, 1], duration: 400 });
@@ -233,12 +263,18 @@ if (root) {
         }
         announcement.textContent = `${copy[0]}. ${copy[1]}`;
         title.focus({ preventScroll: true });
-    };
-    const begin = (outcome, retry = false) => {
-        if ((!retry && state !== 'ready') || (retry && state !== 'temporary')) return;
-        cancelOperation();
         layoutOutcome = outcome;
+        positionResult();
+        if (outcome === 'awaiting') pollReceipt();
+    };
+    const begin = (operation, retry = false) => {
+        if ((!retry && state !== 'ready') || (retry && !['temporary', 'unknown', 'awaiting'].includes(state))) return;
+        cancelOperation();
+        const operationGeneration = generation;
+        layoutOutcome = method === 'cash' ? 'awaiting' : 'success';
         phase('leaving');
+        methods.forEach((button) => { button.disabled = true; });
+        find('new-demo').disabled = true;
         stage.setAttribute('aria-busy', 'true');
         fields.disabled = true;
         selects.forEach((select) => { select.disabled = true; });
@@ -248,8 +284,8 @@ if (root) {
         actions.hidden = true;
         symbol.setAttribute('hidden', '');
         spinner.hidden = false;
-        title.textContent = 'Preparando la simulación';
-        note.textContent = 'Solo una experiencia visual. No se realiza ningún cobro.';
+        title.textContent = 'Preparando la confirmación';
+        note.textContent = 'Validando el resultado en el entorno de demostración.';
         result.style.opacity = '0';
         result.style.transform = 'translateX(-50%)';
         title.focus({ preventScroll: true });
@@ -277,14 +313,24 @@ if (root) {
         later(() => {
             controls.style.visibility = 'hidden';
             phase('processing');
-            title.textContent = 'Simulando la experiencia';
-            announcement.textContent = 'Simulando la experiencia en este navegador. No se realiza ningún cobro.';
+            title.textContent = 'Procesando tu elección';
+            announcement.textContent = 'Consultando al servidor demo. No se realiza ningún cobro externo.';
         }, motion.matches ? 0 : 660);
         // Reference: form exit/centering ~0–700ms, centered wait, mint at ~2100ms.
-        later(() => finish(outcome), motion.matches ? 450 : (retry ? 1500 : 2100));
+        let settled = false; let serverResult; let minimumElapsed = false;
+        const settle = () => {
+            if (operationGeneration !== generation || !minimumElapsed || !settled) return;
+            find('new-demo').disabled = false;
+            if (!serverResult) { finish('unknown'); return; }
+            context = serverResult; countdownStarted = performance.now();
+            finish(statusMap[context.attempt?.status] ?? 'unknown');
+        };
+        Promise.resolve().then(operation).then((data) => { serverResult = data; settled = true; settle(); })
+            .catch(() => { settled = true; settle(); });
+        later(() => { minimumElapsed = true; settle(); }, motion.matches ? 450 : (retry ? 1500 : 2100));
     };
     const restore = () => {
-        if (!['success', 'declined', 'temporary'].includes(state)) return;
+        if (!Object.keys(resultCopy).includes(state)) return;
         const previous = state;
         cancelOperation();
         phase('restoring');
@@ -318,16 +364,75 @@ if (root) {
             (previous === 'success' ? startButton : root.querySelector('#demo-scenario')).focus();
         }, motion.matches ? 0 : 580);
     };
-    startButton.addEventListener('click', () => {
-        const select = root.querySelector('#demo-scenario');
-        if (example(select) !== null) begin(select.value);
+    const chooseMethod = (value) => {
+        if (state !== 'ready') return;
+        method = value;
+        methods.forEach((button) => { button.setAttribute('aria-checked', String(button.dataset.method === value)); button.tabIndex = button.dataset.method === value ? 0 : -1; });
+        find('card-options').hidden = value === 'cash';
+        find('cash-info').hidden = value !== 'cash';
+        find('cash-face').hidden = value !== 'cash';
+        root.querySelector('#demo-form-title').textContent = value === 'cash' ? 'Entrega en efectivo' : 'Detalles de la tarjeta';
+        showSide(false);
+    };
+    methods.forEach((button) => {
+        button.addEventListener('click', () => chooseMethod(button.dataset.method));
+        button.addEventListener('keydown', (event) => {
+            if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const index = event.key === 'Home' ? 0 : event.key === 'End' ? 1 : (methods.indexOf(button) + 1) % 2;
+            chooseMethod(methods[index].dataset.method); methods[index].focus();
+        });
     });
-    resetButton.addEventListener('click', restore);
-    retryButton.addEventListener('click', () => begin('success', true));
+    const pollReceipt = () => later(async () => {
+        if (state !== 'awaiting') return;
+        const pollingGeneration = generation;
+        try {
+            const data = await api('context');
+            if (pollingGeneration !== generation) return;
+            context = data; countdownStarted = performance.now();
+            const next = statusMap[context.attempt?.status];
+            if (next !== 'awaiting') finish(next ?? 'unknown'); else pollReceipt();
+        } catch { if (pollingGeneration === generation) finish('unknown'); }
+    }, 2000);
+    const refreshExample = async () => {
+        if (['leaving', 'processing'].includes(state)) return;
+        cancelOperation();
+        phase('resetting');
+        find('new-demo').disabled = true;
+        try { await api('new', {}); location.reload(); }
+        catch { find('new-demo').disabled = false; announcement.textContent = 'No se pudo preparar otro ejemplo. El resultado anterior se conserva.'; }
+    };
+    startButton.addEventListener('click', () => {
+        const scenario = root.querySelector('#demo-scenario');
+        if (example(scenario) === null) return;
+        requestPayload = { method, scenario: scenario.value, idempotency_key: context.id };
+        if (method === 'card') requestPayload.instrument = root.querySelector('#demo-card').value;
+        begin(() => api('attempts', requestPayload));
+    });
+    resetButton.addEventListener('click', () => {
+        if (state === 'success' || state === 'awaiting') {
+            root.querySelector('#demo-detail').scrollIntoView({ behavior: motion.matches ? 'instant' : 'smooth' });
+            root.querySelector('#example-summary-title').focus({ preventScroll: true });
+        } else refreshExample();
+    });
+    find('new-demo').addEventListener('click', refreshExample);
+    retryButton.addEventListener('click', () => begin(async () => {
+        const latest = await api('context');
+        if (latest.attempt?.status === 'demo_temporary_error') return api(`attempts/${latest.attempt.id}/retry`, {});
+        if (latest.attempt) return latest;
+        if (requestPayload) return api('attempts', requestPayload);
+        return latest;
+    }, true));
+    const countdown = setInterval(() => {
+        const left = Math.max(0, context.hold.remaining_seconds - Math.floor((performance.now() - countdownStarted) / 1000));
+        find('hold').textContent = `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')}`;
+        if (state === 'ready') startButton.disabled = left === 0;
+    }, 1000);
+    window.addEventListener('pagehide', () => clearInterval(countdown));
     window.addEventListener('resize', () => {
         cancelAnimationFrame(resizeFrame);
         resizeFrame = requestAnimationFrame(() => {
-            if (['leaving', 'processing', 'success', 'declined', 'temporary'].includes(state)) positionResult(true);
+            if (['leaving', 'processing', ...Object.keys(resultCopy)].includes(state)) positionResult(true);
         });
     });
     motion.addEventListener('change', () => {
@@ -340,7 +445,7 @@ if (root) {
             positionResult(true);
             result.style.opacity = '1';
             run(find('mint'), { opacity: state === 'success' ? 1 : 0, duration: 0 });
-            if (['success', 'declined', 'temporary'].includes(state)) {
+            if (Object.keys(resultCopy).includes(state)) {
                 run([symbol, title, note, actions], { opacity: 1, y: 0, scale: 1, duration: 0 });
                 run(checkPath, { strokeDashoffset: 0, duration: 0 });
             }
@@ -352,4 +457,6 @@ if (root) {
     selects.forEach((select) => { select.disabled = false; });
     startButton.disabled = false;
     card.dataset.side = 'front';
+    chooseMethod(method);
+    if (context.attempt) begin(() => Promise.resolve(context));
 }

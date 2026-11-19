@@ -6,10 +6,19 @@ use DOMDocument;
 use DOMXPath;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Support\CheckoutDemoFixtures;
 use Tests\TestCase;
 
 class CheckoutDemoTest extends TestCase
 {
+    use CheckoutDemoFixtures;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->prepareDemo();
+    }
+
     public function test_demo_renders_without_authentication_or_database_queries(): void
     {
         $queries = [];
@@ -17,7 +26,7 @@ class CheckoutDemoTest extends TestCase
             $queries[] = $query->sql;
         });
 
-        $this->get(route('demo.checkout'))->assertOk()->assertHeaderMissing('Set-Cookie')->assertSee('Una demostración. Ningún cobro.')
+        $this->get(route('demo.checkout'))->assertOk()->assertCookieMissing('laravel_session')->assertSee('Una demostración. Ningún cobro.')
             ->assertSee('No escribas datos bancarios.');
         $this->assertSame([], $queries);
     }
@@ -49,15 +58,15 @@ class CheckoutDemoTest extends TestCase
             $this->assertSame('button', $button->getAttribute('type'));
         }
         $this->assertSame(1, $xpath->query('//fieldset[@data-demo-fields and @disabled]')->length);
-        $this->assertStringContainsString('Simulación completada', $html);
+        $this->assertStringContainsString('Recorrido exitoso', $html);
         $this->assertStringNotContainsString('autocomplete="cc-', $html);
-        $this->assertStringNotContainsString('Pago realizado', $html);
+        $this->assertStringContainsString('COMPROBANTE INTERNO · DEMO', $html);
     }
 
     public function test_security_headers_block_transmission_submission_and_embedding(): void
     {
         $response = $this->get(route('demo.checkout'))->assertOk();
-        foreach (["connect-src 'none'", "form-action 'none'", "frame-ancestors 'none'", "script-src 'self'"] as $directive) {
+        foreach (["connect-src 'self'", "form-action 'none'", "frame-ancestors 'none'", "script-src 'self'"] as $directive) {
             $this->assertStringContainsString($directive, $response->headers->get('Content-Security-Policy'));
         }
         $response->assertHeader('Cache-Control', 'no-store, private')->assertHeader('Referrer-Policy', 'no-referrer')
@@ -88,8 +97,8 @@ class CheckoutDemoTest extends TestCase
         });
         $this->post('/demo/checkout')->assertStatus(405);
         $this->patch('/demo/checkout')->assertStatus(405);
-        $this->get('/demo/checkout?reservation_id=999&quote_id=UNTRUSTED_DEMO_TOKEN&amount_cents=1')->assertOk()
-            ->assertSee('$1,000.00 MXN')->assertDontSee('UNTRUSTED_DEMO_TOKEN')->assertDontSee('reserva #999');
+        $this->get('/demo/checkout?reservation_id=999&quote_id=UNTRUSTED_DEMO_TOKEN&amount_cents=1')->assertStatus(422)
+            ->assertDontSee('UNTRUSTED_DEMO_TOKEN')->assertDontSee('reserva #999');
         $this->assertSame([], $queries, 'La ruta de presentación no debe consultar ni mutar datos de negocio.');
     }
 }
