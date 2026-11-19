@@ -8,7 +8,7 @@ final class LocalIntegratedCheckoutFixtureExportTest extends \Tests\TestCase
 
     public function createApplication()
     {
-        $app = require dirname(__DIR__).'/bootstrap/app.php';
+        $app = require dirname(__DIR__, 2).'/bootstrap/app.php';
         $this->traitsUsedByTest = array_flip(class_uses_recursive(self::class));
         $app->useEnvironmentPath(sys_get_temp_dir());
         $app->loadEnvironmentFrom('tekora-b32-no-env-'.bin2hex(random_bytes(16)));
