@@ -135,7 +135,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
 }
 
 try {
-    $fixture = new TekoraB32DisposableFixture('test_disposable_fixture');
+    $fixture = new TekoraB32DisposableFixture('export');
     echo json_encode($fixture->export(), JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n";
 } catch (\Throwable $error) {
     fwrite(STDERR, 'B3.2 fixture fallida: '.$error->getMessage()."\n");
