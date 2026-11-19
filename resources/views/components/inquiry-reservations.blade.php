@@ -15,10 +15,10 @@
           && $journeyReservation->effectiveStatus() === \App\Enums\ReservationStatus::Held
           && $journeyReservation->hold?->remainingSeconds() > 0)
         <aside class="account-note" aria-labelledby="checkout-demo-invitation-title" data-checkout-demo-invitation>
-          <h3 id="checkout-demo-invitation-title">Explora la experiencia de pago</h3>
-          <p>Simulación independiente; el resultado NO paga ni confirma esta reserva. Los importes mostrados son ficticios.</p>
-          <a class="account-button secondary" href="{{ route('demo.checkout') }}" rel="noreferrer" referrerpolicy="no-referrer">Explorar el pago (DEMO)</a>
-          <p class="account-help">Es opcional. Al volver, confirma tu reserva con el botón «Confirmar definitivamente mi reserva» dentro del plazo vigente. La demostración no lo amplía.</p>
+          <h3 id="checkout-demo-invitation-title">Continuar al pago</h3>
+          <p>Consulta el importe acordado y elige cómo pagar. Esta versión local solo acepta instrumentos ficticios.</p>
+          <a class="account-button secondary" href="{{ route('checkout.local.show', $journeyReservation->id) }}" rel="noreferrer" referrerpolicy="no-referrer">Elegir método de pago</a>
+          <p class="account-help">Al terminar, confirma tu reserva desde aquí antes de que venza la retención. El pago de prueba no sustituye esa confirmación.</p>
         </aside>
       @endif
       <details class="cj-event-details"><summary>Historial de este horario</summary><ol class="tk-ops-timeline">@foreach($journeyReservation->events->sortBy('version') as $event)<li><strong>{{ \App\Enums\ReservationStatus::from($event->to_status)->label() }}</strong><span>{{ $event->actor?->name ?? 'Sistema' }} · <x-inquiry-time :at="\Carbon\CarbonImmutable::parse($event->occurred_at_utc, 'UTC')" /></span></li>@endforeach</ol></details>
