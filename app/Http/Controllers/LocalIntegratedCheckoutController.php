@@ -15,16 +15,23 @@ use Illuminate\Support\Facades\Schema;
 final class LocalIntegratedCheckoutController extends Controller
 {
     /** Only a newly generated SQLite fixture within the system temp directory. */
-    private function guard(Request $request): void
+    public static function permitsSyntheticRequest(Request $request): bool
     {
-        abort_unless(CheckoutDemoOnly::permitsLocalRequest($request), 404);
-        abort_unless(config('database.default') === 'sqlite', 404);
+        if (! CheckoutDemoOnly::permitsLocalRequest($request) || config('database.default') !== 'sqlite') {
+            return false;
+        }
         $database = config('database.connections.sqlite.database');
         $root = realpath(sys_get_temp_dir());
         $path = is_string($database) ? realpath($database) : false;
-        abort_unless($root && $path && is_file($path)
-            && str_starts_with(str_replace('\\', '/', $path), str_replace('\\', '/', $root).'/tekora-b32-'), 404);
-        abort_unless(is_file(dirname($path).DIRECTORY_SEPARATOR.'.tekora-b32-synthetic'), 404);
+
+        return (bool) ($root && $path && is_file($path)
+            && str_starts_with(str_replace('\\', '/', $path), str_replace('\\', '/', $root).'/tekora-b32-')
+            && is_file(dirname($path).DIRECTORY_SEPARATOR.'.tekora-b32-synthetic'));
+    }
+
+    private function guard(Request $request): void
+    {
+        abort_unless(self::permitsSyntheticRequest($request), 404);
         abort_unless(Schema::hasTable('synthetic_checkout_attempts'), 404);
     }
 
