@@ -34,7 +34,7 @@ final class LocalCheckoutAttemptStore
                 abort_unless($existing->client_user_id === $client->id && $existing->quote_id === $quoteId
                     && (int) $existing->amount_cents === $amountCents && $existing->provider_user_id === $providerId, 409);
                 if ($existing->idempotency_key === $key) {
-                    abort_unless($existing->method === $method, 409);
+                    abort_unless($existing->method === $method && $existing->scenario === $status, 409);
 
                     return (array) $existing;
                 }
@@ -48,6 +48,7 @@ final class LocalCheckoutAttemptStore
                 'amount_cents' => $amountCents,
                 'method' => $method,
                 'status' => $status,
+                'scenario' => $status,
                 'idempotency_key' => $key,
                 'reference' => 'TK-TEST-'.strtoupper(Str::random(12)),
                 'attempted_at' => now('UTC')->toISOString(),
