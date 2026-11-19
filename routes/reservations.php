@@ -22,4 +22,7 @@ Route::middleware(['auth:web', \App\Http\Middleware\TekoraPageHeaders::class])
     ->group(function () {
         Route::get('/', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'show'])->name('show');
         Route::post('/', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'submit'])->middleware('throttle:reservation-decisions')->name('submit');
+        Route::get('/efectivo', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'cash'])->name('cash');
+        Route::post('/efectivo/recibir', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'receiveCash'])
+            ->middleware('throttle:reservation-decisions')->name('cash.receive');
     });
