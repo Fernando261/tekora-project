@@ -74,6 +74,20 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
                     'idempotency_key' => (string) \Illuminate\Support\Str::uuid()]
             );
 
+            // This table exists only in this disposable SQLite export, never in migrations.
+            \\Illuminate\\Support\\Facades\\DB::statement("CREATE TABLE synthetic_checkout_attempts (
+                reservation_id INTEGER PRIMARY KEY,
+                client_user_id INTEGER NOT NULL,
+                provider_user_id INTEGER NOT NULL,
+                quote_id TEXT NOT NULL,
+                amount_cents INTEGER NOT NULL CHECK(amount_cents > 0),
+                method TEXT NOT NULL CHECK(method IN ('card', 'cash')),
+                status TEXT NOT NULL CHECK(status IN ('test_approved', 'declined', 'temporary_failure', 'awaiting_cash', 'cash_received')),
+                idempotency_key TEXT NOT NULL,
+                reference TEXT NOT NULL UNIQUE,
+                attempted_at TEXT NOT NULL,
+                received_at TEXT NULL
+            )");
             $root = realpath(sys_get_temp_dir());
             if (! $root) {
                 throw new \RuntimeException('No se pudo resolver el directorio temporal.');
