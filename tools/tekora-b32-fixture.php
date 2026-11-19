@@ -15,6 +15,8 @@ if (PHP_SAPI !== 'cli' || is_file($root.'/vendor/bin/phpunit') === false
 
 $output = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR.'tekora-b32-report-'.bin2hex(random_bytes(12)).'.json';
 $process = null;
+$errorMessage = null;
+
 try {
     $command = [
         PHP_BINARY,
@@ -60,10 +62,14 @@ try {
 
     echo $json."\n";
 } catch (Throwable $error) {
-    fwrite(STDERR, 'B3.2 fixture fallida: '.$error->getMessage()."\n");
-    exit(1);
+    $errorMessage = 'B3.2 fixture fallida: '.$error->getMessage();
 } finally {
     if (is_file($output) && is_link($output) === false) {
         unlink($output);
     }
+}
+
+if ($errorMessage !== null) {
+    fwrite(STDERR, $errorMessage."\n");
+    exit(1);
 }
