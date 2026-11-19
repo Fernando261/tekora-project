@@ -24,6 +24,7 @@ final class LocalIntegratedCheckoutFixtureExportTest extends \Tests\TestCase
     public function test_exports_private_sqlite_only_when_requested_by_the_isolated_launcher(): void
     {
         $output = getenv('TEKORA_B32_FIXTURE_OUTPUT');
+
         if ($output === false || $output === '') {
             // The ordinary PHPUnit suite must never export files or credentials.
             $this->assertTrue(true);
@@ -33,17 +34,20 @@ final class LocalIntegratedCheckoutFixtureExportTest extends \Tests\TestCase
 
         $root = realpath(sys_get_temp_dir());
         $parent = realpath(dirname($output));
+
         if ($root === false || $parent !== $root
-            || ! preg_match('/^tekora-b32-report-[a-f0-9]{24}\\.json$/D', basename($output))
+            || preg_match('/^tekora-b32-report-[a-f0-9]{24}\\.json$/D', basename($output)) !== 1
             || file_exists($output) || is_link($output)) {
             throw new \RuntimeException('Ruta de exportación sintética no autorizada.');
         }
 
         $fixture = $this->export();
         $json = json_encode($fixture, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+
         if (file_put_contents($output, $json, LOCK_EX) !== strlen($json)) {
             throw new \RuntimeException('No se pudo entregar el manifiesto sintético.');
         }
+
         if (DIRECTORY_SEPARATOR !== '\\') {
             chmod($output, 0600);
         }
@@ -76,6 +80,7 @@ final class LocalIntegratedCheckoutFixtureExportTest extends \Tests\TestCase
         );
         app(\App\Payments\SyntheticQuotes::class)->accept($client, $quote->id);
         $date = now('America/Mexico_City')->addDays(3)->format('Y-m-d');
+
         $reservation = app(\App\Services\ReservationWorkflow::class)->propose(
             $client, $inquiry->id,
             $this->reservationData(['quote_id' => $quote->id, 'date' => $date, 'time' => '12:00'])
@@ -118,6 +123,7 @@ final class LocalIntegratedCheckoutFixtureExportTest extends \Tests\TestCase
             received_at TEXT NULL
         )");
         $root = realpath(sys_get_temp_dir());
+
         if ($root === false) {
             throw new \RuntimeException('No se pudo resolver el directorio temporal.');
         }
