@@ -19,7 +19,8 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
     {
         parent::setUp(); // Migrates only memory SQLite from Tests\TestCase.
         $this->fixtureDir = realpath(sys_get_temp_dir()).DIRECTORY_SEPARATOR.'tekora-b32-'.bin2hex(random_bytes(12));
-        if (! mkdir($this->fixtureDir, 0700)) {
+
+        if (mkdir($this->fixtureDir, 0700) === false) {
             throw new \RuntimeException('No se pudo preparar SQLite sintética de prueba.');
         }
         // The disposable checkout schema must exist BEFORE exporting memory SQLite.
@@ -40,7 +41,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         )");
         $db = $this->fixtureDir.DIRECTORY_SEPARATOR.'tekora.sqlite';
         $pdo = DB::connection('sqlite')->getPdo();
-        $pdo->exec("VACUUM main INTO ".$pdo->quote($db));
+        $pdo->exec('VACUUM main INTO '.$pdo->quote($db));
         file_put_contents($this->fixtureDir.DIRECTORY_SEPARATOR.'.tekora-b32-synthetic', "TEST ONLY\n");
         DB::purge('sqlite');
         config(['database.connections.sqlite.database' => $db]);
@@ -57,7 +58,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         // Remove only the brand-new, exclusively owned temporary test files.
         foreach (['tekora.sqlite', 'tekora.sqlite-wal', 'tekora.sqlite-shm', '.tekora-b32-synthetic'] as $name) {
             $path = $this->fixtureDir.DIRECTORY_SEPARATOR.$name;
-            if (is_file($path) && ! is_link($path)) {
+            if (is_file($path) && is_link($path) === false) {
                 @unlink($path);
             }
         }
