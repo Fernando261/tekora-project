@@ -69,3 +69,14 @@
 .tk-ops .contracting-hub .account-heading.cj-header { background:transparent; box-shadow:none; position:relative; top:auto; z-index:auto; border-radius:0; display:grid; grid-template-columns:minmax(0,1fr) 230px; padding:14px 0 24px; }
 .cj-header .cj-context { justify-content:flex-start; margin-top:16px; }
 @media(max-width:760px) { .tk-ops .contracting-hub .account-heading.cj-header { grid-template-columns:minmax(0,1fr); min-height:0; } .cj-header .tk-ops-scene { display:none; } }
+
+/* Agreed commercial snapshot takes precedence over prices for a new engagement. */
+.tk-ops .cj-agreed-price { border-color:#85e3cb70; background:linear-gradient(130deg,#12313680,#091722); }
+.tk-ops .cj-overview .cj-agreed-price h2, .tk-ops .cj-agreed-total { font-family:"Space Grotesk",system-ui,sans-serif; font-size:clamp(1.65rem,2.4vw,2.3rem); line-height:1.25; color:#b3f3df; }
+.tk-ops .cj-overview .cj-price-assurance { color:#d0e9e2; }
+.tk-ops .cj-quote-agreement { border:1px solid #85e3cb70; border-radius:16px; padding:clamp(18px,2.4vw,28px); margin:24px 0; }
+.tk-ops .cj-quote-agreement h3 { margin:12px 0; }
+.cj-agreed-total { display:block; overflow-wrap:anywhere; }
+.cj-other-quotes { border:1px solid #90e0ef28; border-radius:12px; padding:16px; margin:24px 0; }
+.cj-other-quotes summary { color:#adc3d1; cursor:pointer; min-height:32px; }
+.cj-other-quotes summary:focus-visible { outline:3px solid #90e0ef; outline-offset:4px; }

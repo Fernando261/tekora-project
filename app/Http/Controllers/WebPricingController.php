@@ -51,10 +51,11 @@ class WebPricingController extends Controller
             Gate::forUser($request->user('web'))->authorize('view', $inquiry);
             $inquiry->load(['client:id,name', 'service.providerProfile:id,display_name']);
             $journeyReturn = ContractingReturn::requested($request);
+            $journey = app(\App\Services\ContractingJourney::class)->forInquiry($request->user('web'), $inquiry->id);
             $acceptance = $store->acceptance($quote->id);
             $publicService = Service::publiclyVisible()->whereKey($quote->serviceId)->exists();
 
-            return response()->view('quotes.show', compact('quote', 'inquiry', 'acceptance', 'publicService', 'journeyReturn'))->header('Cache-Control', 'no-store, private');
+            return response()->view('quotes.show', compact('quote', 'inquiry', 'acceptance', 'publicService', 'journeyReturn', 'journey'))->header('Cache-Control', 'no-store, private');
         });
     }
 
@@ -69,7 +70,7 @@ class WebPricingController extends Controller
         return PricingResponse::run($request, function () use ($request, $quote, $quotes, $source, $journeyReturn) {
             $quotes->accept($request->user('web'), $quote);
 
-            return ($journeyReturn ? redirect(ContractingReturn::url($source->inquiryId, 'cotizaciones'), 303) : redirect()->route('quotes.show', $quote, 303))->with('success', 'Cotización aceptada. No se ha creado una reserva ni realizado un pago.');
+            return ($journeyReturn ? redirect(ContractingReturn::url($source->inquiryId, 'cotizaciones'), 303) : redirect()->route('quotes.show', $quote, 303))->with('success', 'Cotización aceptada. Se conserva este acuerdo; no modifica reservas existentes ni acredita un pago.');
         });
     }
 }
