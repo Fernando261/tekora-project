@@ -13,7 +13,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
 {
     use SlotHoldFixtures;
 
-    private string $fixtureDir;
+    private ?string $fixtureDir = null;
 
     protected function setUp(): void
     {
@@ -35,6 +35,9 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
     {
         DB::purge('sqlite');
         parent::tearDown();
+        if ($this->fixtureDir === null) {
+            return;
+        }
         // Remove only the brand-new, exclusively owned temporary test files.
         foreach (['tekora.sqlite', 'tekora.sqlite-wal', 'tekora.sqlite-shm', '.tekora-b32-synthetic'] as $name) {
             $path = $this->fixtureDir.DIRECTORY_SEPARATOR.$name;
@@ -66,7 +69,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
             ->assertOk()->assertSee('Tarjeta aprobada');
         $this->assertSame('test_approved', app(LocalCheckoutAttemptStore::class)->current($reservation->id)['status']);
         $this->assertSame('held', $reservation->fresh()->effectiveStatus()->value);
-        $this->actingAs($provider, 'web')->get(route('checkout.local.show', $reservation->id))->assertForbidden();
+        $this->actingAs($provider, 'web')->get(route('checkout.local.show', $reservation->id))->assertNotFound();
     }
 
     public function test_provider_receives_cash_and_client_cannot_use_provider_command(): void
