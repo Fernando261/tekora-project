@@ -5,7 +5,7 @@
  * Do not construct PHPUnit TestCase manually from a CLI script.
  */
 $root = dirname(__DIR__);
-if (PHP_SAPI !== 'cli' || ! is_file($root.'/vendor/bin/phpunit')
+if (PHP_SAPI !== 'cli' || is_file($root.'/vendor/bin/phpunit') === false
     || getenv('APP_ENV') !== 'testing' || getenv('DB_CONNECTION') !== 'sqlite'
     || getenv('DB_DATABASE') !== ':memory:' || (getenv('DB_URL') ?: '') !== ''
     || is_file($root.'/.env') || is_file($root.'/bootstrap/cache/config.php')) {
@@ -32,7 +32,7 @@ try {
         1 => ['pipe', 'w'],
         2 => ['pipe', 'w'],
     ], $pipes, $root, $env);
-    if (! is_resource($process)) {
+    if (is_resource($process) === false) {
         throw new RuntimeException('No se pudo iniciar PHPUnit para crear la base sintética.');
     }
 
@@ -44,7 +44,7 @@ try {
 
     $exitCode = proc_close($process);
     $process = null;
-    if ($exitCode !== 0 || ! is_file($output) || is_link($output)) {
+    if ($exitCode !== 0 || is_file($output) === false || is_link($output)) {
         throw new RuntimeException('El exportador PHPUnit falló ('.$exitCode.").\n".$stdout."\n".$stderr);
     }
 
@@ -52,9 +52,9 @@ try {
     $fixture = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
     $database = $fixture['database'] ?? null;
     $tempRoot = realpath(sys_get_temp_dir());
-    if (! is_string($database) || ! is_file($database) || is_link($database)
-        || ! str_starts_with(str_replace('\\', '/', realpath($database)), str_replace('\\', '/', $tempRoot).'/tekora-b32-')
-        || ! is_file(dirname($database).DIRECTORY_SEPARATOR.'.tekora-b32-synthetic')) {
+    if (is_string($database) === false || is_file($database) === false || is_link($database)
+        || str_starts_with(str_replace('\\', '/', realpath($database)), str_replace('\\', '/', $tempRoot).'/tekora-b32-') === false
+        || is_file(dirname($database).DIRECTORY_SEPARATOR.'.tekora-b32-synthetic') === false) {
         throw new RuntimeException('La base exportada no cumple el aislamiento B3.2.');
     }
 
@@ -63,7 +63,7 @@ try {
     fwrite(STDERR, 'B3.2 fixture fallida: '.$error->getMessage()."\n");
     exit(1);
 } finally {
-    if (is_file($output) && ! is_link($output)) {
+    if (is_file($output) && is_link($output) === false) {
         unlink($output);
     }
 }
