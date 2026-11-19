@@ -5,7 +5,7 @@
     <h2>Comparte tu experiencia</h2>
     <p class="account-note">Tu calificación y comentario serán públicos como «Cliente verificado». Una vez publicados no podrás editarlos. Podrás retirar la reseña, conservando su registro privado, pero no reemplazarla ni volver a publicarla.</p>
     <form class="account-form review-form" method="POST" action="{{ route('reviews.store', $reservation) }}">
-      @csrf
+      @csrf @if($journeyReturn ?? false)<input type="hidden" name="_journey" value="1">@endif
       <fieldset class="review-rating"><legend>Calificación de 1 a 5 estrellas</legend>
         @foreach(range(1, 5) as $rating)<label><input type="radio" name="rating" value="{{ $rating }}" @checked((string) (is_scalar(old('rating')) ? old('rating') : '') === (string) $rating) required><span class="tk-ops-rating-star" aria-hidden="true">★</span> {{ $rating }} {{ $rating === 1 ? 'estrella' : 'estrellas' }}</label>@endforeach
       </fieldset>

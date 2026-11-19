@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class MobileNotificationContractTest extends TestCase
 {
-    public function test_all_28_existing_routes_are_identical_and_only_three_authorized_m1_operations_are_added(): void
+    public function test_pre_m1_routes_remain_identical_with_explicit_m1_and_ux_c1_extensions(): void
     {
         $baseline = json_decode(file_get_contents(base_path('tests/Fixtures/m1-api-baseline.json')), true, flags: JSON_THROW_ON_ERROR);
         $this->assertSame('b04cf585b236c4eefbd4096e217cc46aaefef94e', $baseline['base_sha']);
@@ -21,10 +21,10 @@ class MobileNotificationContractTest extends TestCase
             $current[$route->getName()] = ['uri' => $route->uri(), 'methods' => $route->methods(), 'action' => $route->getActionName(),
                 'middleware' => $route->gatherMiddleware(), 'wheres' => $route->wheres];
         }
-        $m1 = ['api.v1.notifications.index' => true, 'api.v1.notifications.unread-count' => true, 'api.v1.notifications.read' => true];
+        $m1 = ['api.v1.inquiries.journey' => true, 'api.v1.notifications.index' => true, 'api.v1.notifications.unread-count' => true, 'api.v1.notifications.read' => true];
         ksort($current);
         $this->assertSame($baseline['routes'], array_diff_key($current, $m1));
-        $this->assertCount(31, $current);
+        $this->assertCount(32, $current);
         $this->assertSame(['source_type' => 'inquiry|activity', 'id' => '[1-9][0-9]{0,18}'], $current['api.v1.notifications.read']['wheres']);
         $this->assertCurrentApiInventory();
     }

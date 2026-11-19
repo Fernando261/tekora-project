@@ -15,6 +15,7 @@ trait CommercialApiInventoryAssertions
         $this->assertSame('043531d6d153f64d5fc0e7cc6afc6a350af33563', $baseline['base_sha']);
         $this->assertCount(22, $baseline['routes']);
         $approved = [
+            'api.v1.inquiries.journey' => ['GET', 'api/v1/inquiries/{inquiry}/journey', \App\Http\Controllers\Api\V1\ContractingJourneyController::class, 'inquiry'],
             'api.v1.quotes.index' => ['GET', 'api/v1/inquiries/{inquiry}/quotes', QuotesController::class.'@index', 'inquiry'],
             'api.v1.quotes.issue' => ['POST', 'api/v1/inquiries/{inquiry}/quotes', QuotesController::class.'@issue', 'inquiry'],
             'api.v1.quotes.show' => ['GET', 'api/v1/quotes/{quote}', QuotesController::class.'@show', 'quote'],
@@ -38,7 +39,7 @@ trait CommercialApiInventoryAssertions
         ksort($actual);
         // Preserve every original method, URI, action, middleware and route constraint.
         $this->assertSame($baseline['routes'], array_diff_key($actual, $approved));
-        $this->assertCount(31, $actual);
+        $this->assertCount(32, $actual);
         foreach ($approved as $name => [$method, $uri, $action, $parameter]) {
             $this->assertArrayHasKey($name, $actual);
             $row = $actual[$name];

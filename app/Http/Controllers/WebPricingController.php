@@ -10,6 +10,7 @@ use App\Payments\PricingStore;
 use App\Payments\ServicePricing;
 use App\Payments\SyntheticQuotes;
 use App\Payments\WebMoney;
+use App\Support\ContractingReturn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -31,12 +32,13 @@ class WebPricingController extends Controller
     public function issue(Request $request, ServiceInquiry $inquiry, SyntheticQuotes $quotes)
     {
         Gate::forUser($request->user('web'))->authorize('view', $inquiry);
-        PricingInput::only($request->except('_token'), ['idempotency_key']);
+        $journeyReturn = ContractingReturn::requested($request);
+        PricingInput::only($request->except('_token', '_journey'), ['idempotency_key']);
 
-        return PricingResponse::run($request, function () use ($request, $inquiry, $quotes) {
+        return PricingResponse::run($request, function () use ($request, $inquiry, $quotes, $journeyReturn) {
             $quote = $quotes->issue($request->user('web'), $inquiry->id, $request->only('idempotency_key'));
 
-            return redirect()->route('quotes.show', $quote->id, 303);
+            return redirect()->route('quotes.show', $journeyReturn ? ['quote' => $quote->id, 'follow' => 1] : $quote->id, 303);
         });
     }
 
@@ -48,24 +50,26 @@ class WebPricingController extends Controller
             $inquiry = ServiceInquiry::findOrFail($quote->inquiryId);
             Gate::forUser($request->user('web'))->authorize('view', $inquiry);
             $inquiry->load(['client:id,name', 'service.providerProfile:id,display_name']);
+            $journeyReturn = ContractingReturn::requested($request);
             $acceptance = $store->acceptance($quote->id);
             $publicService = Service::publiclyVisible()->whereKey($quote->serviceId)->exists();
 
-            return response()->view('quotes.show', compact('quote', 'inquiry', 'acceptance', 'publicService'))->header('Cache-Control', 'no-store, private');
+            return response()->view('quotes.show', compact('quote', 'inquiry', 'acceptance', 'publicService', 'journeyReturn'))->header('Cache-Control', 'no-store, private');
         });
     }
 
     public function accept(Request $request, string $quote, SyntheticQuotes $quotes)
     {
         // Authorize before validating the explicit acknowledgement.
-        $quotes->view($request->user('web'), $quote);
-        PricingInput::only($request->except('_token'), ['acknowledge']);
+        $source = $quotes->view($request->user('web'), $quote);
+        $journeyReturn = ContractingReturn::requested($request);
+        PricingInput::only($request->except('_token', '_journey'), ['acknowledge']);
         $request->validate(PricingInput::acknowledgementRules());
 
-        return PricingResponse::run($request, function () use ($request, $quote, $quotes) {
+        return PricingResponse::run($request, function () use ($request, $quote, $quotes, $source, $journeyReturn) {
             $quotes->accept($request->user('web'), $quote);
 
-            return redirect()->route('quotes.show', $quote, 303)->with('success', 'Cotización aceptada. No se ha creado una reserva ni realizado un pago.');
+            return ($journeyReturn ? redirect(ContractingReturn::url($source->inquiryId, 'cotizaciones'), 303) : redirect()->route('quotes.show', $quote, 303))->with('success', 'Cotización aceptada. No se ha creado una reserva ni realizado un pago.');
         });
     }
 }

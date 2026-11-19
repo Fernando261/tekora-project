@@ -38,6 +38,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             }
         });
         Route::middleware('throttle:mobile-private')->group(function () {
+            Route::get('inquiries/{inquiry}/journey', \App\Http\Controllers\Api\V1\ContractingJourneyController::class)->whereNumber('inquiry')->name('inquiries.journey');
             Route::get('inquiries/{inquiry}/quotes', [QuotesController::class, 'index'])->whereNumber('inquiry')->name('quotes.index');
             Route::post('inquiries/{inquiry}/quotes', [QuotesController::class, 'issue'])->whereNumber('inquiry')->middleware('throttle:mobile-quote-writes')->name('quotes.issue');
             Route::get('quotes/{quote}', [QuotesController::class, 'show'])->whereUuid('quote')->name('quotes.show');

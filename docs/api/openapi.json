@@ -2782,6 +2782,79 @@
           }
         }
       }
+    },
+    "/inquiries/{inquiry}/journey": {
+      "get": {
+        "operationId": "getContractingJourney",
+        "summary": "Consultar el seguimiento unificado de una solicitud propia",
+        "description": "UX-C1: mismo modelo de lectura que la web cliente, Sanctum + MobileClient y throttle mobile-private. Cuenta dual: solo solicitudes como cliente; una participación como prestador no concede acceso. Sin parámetros query ni cuerpo. Todas las fechas de instantes son UTC. Lectura transaccional sin reconciliar vencimientos ni ampliar los 900 segundos. history.reservations contiene los cinco horarios más recientes; los endpoints previos conservan la consulta histórica paginada. reference es una referencia tipada, nunca una URL privada. next_action informa, no concede permisos ni garantiza admisión: cada comando existente revalida estado y versión. Las reseñas se describen en el seguimiento pero su creación/retirada aún no dispone de API; mobile_execution_available=false. No infiere realización por tiempo ni aceptación. Sin pagos, sin B3.1-D. Ante incertidumbre o fallo de almacenamiento, 503 sin data.",
+        "tags": [
+          "Contratación"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "inquiry",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instantánea autorizada. Sin efectos sobre los workflows ni el progreso de lectura de mensajes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ContractingJourney"
+                    }
+                  }
+                },
+                "examples": {
+                  "held": {
+                    "$ref": "#/components/examples/UXC1JourneyHeld"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4423,6 +4496,967 @@
             "minimum": 0
           }
         }
+      },
+      "JourneyHold": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state",
+          "remaining_seconds",
+          "duration_seconds",
+          "expires_at"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "held",
+              "committed",
+              "expired",
+              "released"
+            ]
+          },
+          "remaining_seconds": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 900
+          },
+          "duration_seconds": {
+            "type": "integer",
+            "enum": [
+              900
+            ]
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "JourneyReservation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "label",
+          "version",
+          "starts_at",
+          "ends_at",
+          "local_date",
+          "local_start",
+          "local_end",
+          "timezone",
+          "quote_id",
+          "explicitly_completed",
+          "hold"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "requested",
+              "held",
+              "hold_expired",
+              "hold_released",
+              "confirmed",
+              "rejected",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "starts_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ends_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "local_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "local_start": {
+            "type": "string",
+            "pattern": "^[0-9]{2}:[0-9]{2}$"
+          },
+          "local_end": {
+            "type": "string",
+            "pattern": "^[0-9]{2}:[0-9]{2}$"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "quote_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "explicitly_completed": {
+            "type": "boolean"
+          },
+          "hold": {
+            "oneOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/JourneyHold"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "JourneyCurrentReservation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "label",
+          "version",
+          "starts_at",
+          "ends_at",
+          "local_date",
+          "local_start",
+          "local_end",
+          "timezone",
+          "quote_id",
+          "explicitly_completed",
+          "hold",
+          "actions",
+          "events",
+          "hold_events"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "requested",
+              "held",
+              "hold_expired",
+              "hold_released",
+              "confirmed",
+              "rejected",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "starts_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ends_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "local_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "local_start": {
+            "type": "string",
+            "pattern": "^[0-9]{2}:[0-9]{2}$"
+          },
+          "local_end": {
+            "type": "string",
+            "pattern": "^[0-9]{2}:[0-9]{2}$"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "quote_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "explicitly_completed": {
+            "type": "boolean"
+          },
+          "hold": {
+            "oneOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/JourneyHold"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "confirm",
+                "commit",
+                "cancel",
+                "reject",
+                "complete"
+              ]
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "version",
+                "status",
+                "actor_role",
+                "occurred_at"
+              ],
+              "properties": {
+                "version": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "actor_role": {
+                  "type": "string",
+                  "enum": [
+                    "client",
+                    "provider",
+                    "system"
+                  ]
+                },
+                "occurred_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "hold_events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "version",
+                "state",
+                "occurred_at"
+              ],
+              "properties": {
+                "version": {
+                  "type": "integer"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "occurred_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "JourneyQuote": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "state",
+          "amount",
+          "issued_at",
+          "expires_at",
+          "accepted_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "expired"
+            ]
+          },
+          "amount": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "currency",
+              "total_cents",
+              "commission_cents",
+              "provider_cents",
+              "commission_included",
+              "commission_basis_points"
+            ],
+            "properties": {
+              "currency": {
+                "type": "string",
+                "enum": [
+                  "MXN"
+                ]
+              },
+              "total_cents": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "commission_cents": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "provider_cents": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "commission_included": {
+                "type": "boolean"
+              },
+              "commission_basis_points": {
+                "type": "integer",
+                "enum": [
+                  1500
+                ]
+              }
+            }
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "accepted_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "ContractingJourney": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "inquiry",
+          "viewer_role",
+          "participants",
+          "progress",
+          "next_action",
+          "commercial",
+          "reservation",
+          "review",
+          "closure",
+          "history",
+          "conversation",
+          "payments",
+          "server_now"
+        ],
+        "properties": {
+          "inquiry": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "service_id",
+              "service_title",
+              "message",
+              "status",
+              "label",
+              "created_at",
+              "updated_at"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "service_id": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "service_title": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "accepted",
+                  "rejected",
+                  "cancelled",
+                  "completed"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "created_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "viewer_role": {
+            "type": "string",
+            "enum": [
+              "client"
+            ]
+          },
+          "participants": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "client",
+              "provider"
+            ],
+            "properties": {
+              "client": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "provider": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "display_name"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "display_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "progress": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "current_stage",
+              "steps",
+              "closed"
+            ],
+            "properties": {
+              "current_stage": {
+                "type": "string",
+                "enum": [
+                  "request",
+                  "agreement",
+                  "schedule",
+                  "confirmation",
+                  "service"
+                ]
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "code",
+                    "label",
+                    "status"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "request",
+                        "agreement",
+                        "schedule",
+                        "confirmation",
+                        "service"
+                      ]
+                    },
+                    "label": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "complete",
+                        "current",
+                        "pending",
+                        "stopped"
+                      ]
+                    }
+                  }
+                }
+              },
+              "closed": {
+                "type": "boolean"
+              }
+            }
+          },
+          "next_action": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "stage",
+              "label",
+              "description",
+              "reference",
+              "interaction",
+              "mobile_execution_available"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": [
+                  "read_history",
+                  "wait_inquiry_decision",
+                  "wait_permissions",
+                  "confirm_reservation",
+                  "wait_client_confirmation",
+                  "wait_service",
+                  "cancel_expired_proposal",
+                  "wait_schedule_decision",
+                  "view_review",
+                  "write_review",
+                  "review_quote",
+                  "issue_quote",
+                  "wait_service_availability",
+                  "wait_availability",
+                  "propose_schedule"
+                ]
+              },
+              "stage": {
+                "type": "string",
+                "enum": [
+                  "request",
+                  "agreement",
+                  "schedule",
+                  "confirmation",
+                  "service"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "reference": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "id"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "inquiry",
+                      "quote",
+                      "reservation",
+                      "review"
+                    ]
+                  },
+                  "id": {
+                    "oneOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    ]
+                  }
+                }
+              },
+              "interaction": {
+                "type": "string",
+                "enum": [
+                  "wait",
+                  "navigate"
+                ]
+              },
+              "mobile_execution_available": {
+                "type": "boolean"
+              }
+            }
+          },
+          "commercial": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "mode",
+              "required_for_new_proposal",
+              "quote",
+              "agreed_amount",
+              "can_issue",
+              "can_propose"
+            ],
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "quoted",
+                  "legacy"
+                ]
+              },
+              "required_for_new_proposal": {
+                "type": "boolean"
+              },
+              "quote": {
+                "oneOf": [
+                  {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/JourneyQuote"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "agreed_amount": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": false,
+                "required": [
+                  "currency",
+                  "total_cents",
+                  "commission_cents",
+                  "provider_cents",
+                  "commission_included",
+                  "commission_basis_points"
+                ],
+                "properties": {
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "MXN"
+                    ]
+                  },
+                  "total_cents": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "commission_cents": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "provider_cents": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "commission_included": {
+                    "type": "boolean"
+                  },
+                  "commission_basis_points": {
+                    "type": "integer",
+                    "enum": [
+                      1500
+                    ]
+                  }
+                }
+              },
+              "can_issue": {
+                "type": "boolean"
+              },
+              "can_propose": {
+                "type": "boolean"
+              }
+            }
+          },
+          "reservation": {
+            "oneOf": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/JourneyCurrentReservation"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "review": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "state",
+              "eligible",
+              "reservation_id",
+              "record"
+            ],
+            "properties": {
+              "state": {
+                "type": "string",
+                "enum": [
+                  "published",
+                  "withdrawn",
+                  "available",
+                  "unavailable"
+                ]
+              },
+              "eligible": {
+                "type": "boolean"
+              },
+              "reservation_id": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "record": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "status",
+                  "rating",
+                  "comment",
+                  "created_at",
+                  "withdrawn_at"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "published",
+                      "withdrawn"
+                    ]
+                  },
+                  "rating": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  },
+                  "comment": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "withdrawn_at": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          },
+          "closure": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "inquiry_completed",
+              "can_close",
+              "explicit_service_completed"
+            ],
+            "properties": {
+              "inquiry_completed": {
+                "type": "boolean"
+              },
+              "can_close": {
+                "type": "boolean"
+              },
+              "explicit_service_completed": {
+                "type": "boolean"
+              }
+            }
+          },
+          "history": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "inquiry",
+              "reservations",
+              "reservation_limit"
+            ],
+            "properties": {
+              "inquiry": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "occurred_at"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "occurred_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              },
+              "reservations": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/JourneyReservation"
+                }
+              },
+              "reservation_limit": {
+                "type": "integer",
+                "enum": [
+                  5
+                ]
+              }
+            }
+          },
+          "conversation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "reference",
+              "unread_count",
+              "can_send"
+            ],
+            "properties": {
+              "reference": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "id"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "inquiry"
+                    ]
+                  },
+                  "id": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              },
+              "unread_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "can_send": {
+                "type": "boolean"
+              }
+            }
+          },
+          "payments": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "enabled",
+              "required_for_confirmation",
+              "future_checkout_point"
+            ],
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "enum": [
+                  false
+                ]
+              },
+              "required_for_confirmation": {
+                "type": "boolean",
+                "enum": [
+                  false
+                ]
+              },
+              "future_checkout_point": {
+                "type": "string",
+                "enum": [
+                  "after_provider_acceptance_before_final_confirmation"
+                ]
+              }
+            }
+          },
+          "server_now": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
       }
     },
     "responses": {
@@ -4880,6 +5914,204 @@
         "value": {
           "data": {
             "unread_count": 2
+          }
+        }
+      },
+      "UXC1JourneyHeld": {
+        "summary": "Cliente con horario aceptado por el prestador, pendiente de confirmación definitiva",
+        "value": {
+          "data": {
+            "inquiry": {
+              "id": 1,
+              "service_id": 1,
+              "service_title": "Soporte de computadoras",
+              "message": "Necesito ayuda para revisar mi equipo de trabajo.",
+              "status": "accepted",
+              "label": "Aceptada",
+              "created_at": "2026-11-19T01:38:23.000000Z",
+              "updated_at": "2026-11-19T01:38:56.000000Z"
+            },
+            "viewer_role": "client",
+            "participants": {
+              "client": {
+                "name": "Cliente UX de demostración"
+              },
+              "provider": {
+                "id": 1,
+                "display_name": "Estudio Cian · Demo"
+              }
+            },
+            "progress": {
+              "current_stage": "confirmation",
+              "steps": [
+                {
+                  "code": "request",
+                  "label": "Solicitud",
+                  "status": "complete"
+                },
+                {
+                  "code": "agreement",
+                  "label": "Acuerdo",
+                  "status": "complete"
+                },
+                {
+                  "code": "schedule",
+                  "label": "Horario",
+                  "status": "complete"
+                },
+                {
+                  "code": "confirmation",
+                  "label": "Confirmación",
+                  "status": "current"
+                },
+                {
+                  "code": "service",
+                  "label": "Servicio",
+                  "status": "pending"
+                }
+              ],
+              "closed": false
+            },
+            "next_action": {
+              "code": "confirm_reservation",
+              "stage": "confirmation",
+              "label": "Confirma tu contratación",
+              "description": "El prestador aceptó el horario. Confírmalo antes de que termine el plazo; todavía no es una reserva definitiva.",
+              "reference": {
+                "type": "reservation",
+                "id": 2
+              },
+              "interaction": "navigate",
+              "mobile_execution_available": true
+            },
+            "commercial": {
+              "mode": "quoted",
+              "required_for_new_proposal": true,
+              "quote": {
+                "id": "f56ad7ea-0103-4574-8682-c6f94a2afcc4",
+                "state": "accepted",
+                "amount": {
+                  "currency": "MXN",
+                  "total_cents": 125000,
+                  "commission_cents": 18750,
+                  "provider_cents": 106250,
+                  "commission_included": true,
+                  "commission_basis_points": 1500
+                },
+                "issued_at": "2026-11-19T01:38:47.782994Z",
+                "expires_at": "2026-11-19T02:08:47.782994Z",
+                "accepted_at": "2026-11-19T01:38:49.309967Z"
+              },
+              "agreed_amount": {
+                "currency": "MXN",
+                "total_cents": 125000,
+                "commission_cents": 18750,
+                "provider_cents": 106250,
+                "commission_included": true,
+                "commission_basis_points": 1500
+              },
+              "can_issue": true,
+              "can_propose": false
+            },
+            "reservation": {
+              "id": 2,
+              "status": "held",
+              "label": "Horario reservado temporalmente",
+              "version": 1,
+              "starts_at": "2026-11-21T15:00:00.000000Z",
+              "ends_at": "2026-11-21T16:00:00.000000Z",
+              "local_date": "2026-11-21",
+              "local_start": "09:00",
+              "local_end": "10:00",
+              "timezone": "America/Mexico_City",
+              "quote_id": "f56ad7ea-0103-4574-8682-c6f94a2afcc4",
+              "explicitly_completed": false,
+              "hold": {
+                "state": "held",
+                "remaining_seconds": 895,
+                "duration_seconds": 900,
+                "expires_at": "2026-11-19T01:53:56.300970Z"
+              },
+              "actions": [
+                "commit",
+                "cancel"
+              ],
+              "events": [
+                {
+                  "version": 1,
+                  "status": "requested",
+                  "actor_role": "client",
+                  "occurred_at": "2026-11-19T01:38:52.000000Z"
+                }
+              ],
+              "hold_events": [
+                {
+                  "version": 1,
+                  "state": "held",
+                  "occurred_at": "2026-11-19T01:38:56.300970Z"
+                }
+              ]
+            },
+            "review": {
+              "state": "unavailable",
+              "eligible": false,
+              "reservation_id": null,
+              "record": null
+            },
+            "closure": {
+              "inquiry_completed": false,
+              "can_close": false,
+              "explicit_service_completed": false
+            },
+            "history": {
+              "inquiry": [
+                {
+                  "label": "Solicitud enviada por el cliente",
+                  "occurred_at": "2026-11-19T01:38:23.000000Z"
+                },
+                {
+                  "label": "Aceptada por el prestador",
+                  "occurred_at": "2026-11-19T01:38:44.000000Z"
+                }
+              ],
+              "reservations": [
+                {
+                  "id": 2,
+                  "status": "held",
+                  "label": "Horario reservado temporalmente",
+                  "version": 1,
+                  "starts_at": "2026-11-21T15:00:00.000000Z",
+                  "ends_at": "2026-11-21T16:00:00.000000Z",
+                  "local_date": "2026-11-21",
+                  "local_start": "09:00",
+                  "local_end": "10:00",
+                  "timezone": "America/Mexico_City",
+                  "quote_id": "f56ad7ea-0103-4574-8682-c6f94a2afcc4",
+                  "explicitly_completed": false,
+                  "hold": {
+                    "state": "held",
+                    "remaining_seconds": 895,
+                    "duration_seconds": 900,
+                    "expires_at": "2026-11-19T01:53:56.300970Z"
+                  }
+                }
+              ],
+              "reservation_limit": 5
+            },
+            "conversation": {
+              "reference": {
+                "type": "inquiry",
+                "id": 1
+              },
+              "unread_count": 0,
+              "can_send": true
+            },
+            "payments": {
+              "enabled": false,
+              "required_for_confirmation": false,
+              "future_checkout_point": "after_provider_acceptance_before_final_confirmation"
+            },
+            "server_now": "2026-11-19T01:39:01.942391Z"
           }
         }
       }

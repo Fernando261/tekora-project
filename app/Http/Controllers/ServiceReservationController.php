@@ -8,6 +8,7 @@ use App\Exceptions\ReservationFailure;
 use App\Models\ServiceInquiry;
 use App\Models\ServiceReservation;
 use App\Services\ReservationWorkflow;
+use App\Support\ContractingReturn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -42,13 +43,14 @@ class ServiceReservationController extends Controller
             return DB::transaction(function () use ($request, $inquiry) {
                 $inquiry = ServiceInquiry::with(['service.providerProfile', 'client'])->findOrFail($inquiry);
                 Gate::forUser($request->user('web'))->authorize('propose', [ServiceReservation::class, $inquiry]);
+                $journeyReturn = ContractingReturn::requested($request);
                 app(ReservationWorkflow::class)->refreshExpirations();
                 if ($inquiry->status !== InquiryStatus::Accepted) {
                     throw new ReservationFailure('Solo una solicitud aceptada permite proponer una reserva.');
                 }
                 $active = $inquiry->reservations()->active()->first();
                 if ($active) {
-                    return redirect()->route('reservations.show', $active)->with('info', 'Esta solicitud ya tiene una propuesta o reserva activa.');
+                    return ($journeyReturn ? redirect(ContractingReturn::url($inquiry->id)) : redirect()->route('reservations.show', $active))->with('info', 'Esta solicitud ya tiene una propuesta o reserva activa.');
                 }
                 $profile = $inquiry->service->providerProfile;
                 $setting = $profile->availabilitySetting()->first();
@@ -62,7 +64,7 @@ class ServiceReservationController extends Controller
 
                 $commercial = app(ReservationWorkflow::class)->quoteOptions($inquiry)['commercial'] ?? null;
 
-                return response()->view('reservations.create', compact('commercial', 'inquiry', 'setting', 'schedule', 'minDate', 'maxDate', 'key'));
+                return response()->view('reservations.create', compact('commercial', 'inquiry', 'setting', 'schedule', 'minDate', 'maxDate', 'key', 'journeyReturn'));
             }, 3);
         });
     }
@@ -70,9 +72,10 @@ class ServiceReservationController extends Controller
     public function store(Request $request, int $inquiry, ReservationWorkflow $workflow)
     {
         return $this->safely($request, function () use ($request, $inquiry, $workflow) {
-            $result = $workflow->propose($request->user('web'), $inquiry, $request->except('_token', '_method'));
+            $journeyReturn = ContractingReturn::requested($request);
+            $result = $workflow->propose($request->user('web'), $inquiry, $request->except('_token', '_method', '_journey'));
 
-            return redirect()->route('reservations.show', $result['reservation'], 303)->with($result['created'] ? 'success' : 'info',
+            return ($journeyReturn ? redirect(ContractingReturn::url($inquiry), 303) : redirect()->route('reservations.show', $result['reservation'], 303))->with($result['created'] ? 'success' : 'info',
                 $result['created'] ? 'Horario propuesto. La reserva requiere confirmación explícita del prestador.' : 'Se conserva la propuesta original. No se creó otra reserva.');
         });
     }
@@ -94,9 +97,10 @@ class ServiceReservationController extends Controller
     public function decide(Request $request, int $reservation, ReservationWorkflow $workflow)
     {
         return $this->safely($request, function () use ($request, $reservation, $workflow) {
-            $updated = $workflow->decide($request->user('web'), $reservation, $request->route()->defaults['decision'], $request->except('_token', '_method'));
+            $journeyReturn = ContractingReturn::requested($request);
+            $updated = $workflow->decide($request->user('web'), $reservation, $request->route()->defaults['decision'], $request->except('_token', '_method', '_journey'));
 
-            return redirect()->route('reservations.show', $updated, 303)->with('success', 'Estado actualizado: '.$updated->effectiveStatus()->label().'.');
+            return ($journeyReturn ? redirect(ContractingReturn::url($updated->service_inquiry_id), 303) : redirect()->route('reservations.show', $updated, 303))->with('success', 'Estado actualizado: '.$updated->effectiveStatus()->label().'.');
         });
     }
 

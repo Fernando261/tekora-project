@@ -21,7 +21,7 @@
     @elseif(!$open || !$publicService)
       <p class="account-note">La solicitud o la publicación ya no admite aceptar esta cotización. El historial se conserva.</p>
     @elseif($client)
-      <form class="account-form quote-accept-form" method="POST" action="{{ route('quotes.accept', $quote->id) }}">@csrf
+      <form class="account-form quote-accept-form" method="POST" action="{{ route('quotes.accept', $quote->id) }}">@csrf @if($journeyReturn ?? false)<input type="hidden" name="_journey" value="1">@endif
         <label class="quote-check"><input type="checkbox" name="acknowledge" value="1" required><span>He revisado y acepto el importe de esta cotización. Entiendo que esto no es un pago ni confirma una reserva.</span></label>
         <button class="account-button" type="submit">Aceptar cotización</button>
       </form>

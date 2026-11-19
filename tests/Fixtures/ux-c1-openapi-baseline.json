@@ -1,0 +1,67 @@
+{
+    "base": "3015d5ffb717dc3772682e7b6f17be451b4d86ed",
+    "paths_sha256": "d0d4c7a5584123df777a63f2b14fa2561200c9376e959cee7ee3e8e001c29126",
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": "e33e6b8f10cc505a8655e0f1d476f65932c03a601dd236cdd35cd444cccd437f"
+        },
+        "schemas": {
+            "Error": "8a90c830ada42b1df24ad07d3fd56d0236ccc979d726964341a71e095ce0ba66",
+            "Client": "318e8f58c93c59a1796abc91d4d6df4ad7f3d1cc1dab95c215d95e2c841286aa",
+            "Provider": "28d21be4cb707240aff049b2d78f2c6bcf7c0b9cfb5f7075a0f0253751aa4cae",
+            "Category": "01d77f759b08ace99689c417259a6c16a74c80f8a0894854d2140625e54b20f5",
+            "Service": "7b361fc4a6b2a3e0d71c1b80a7c0e50aa43afbe016b1557ad8d540ceb6aa2752",
+            "Page": "8868076dc86c8b463f503bfc7f6232ac47a1132b4a0b6f562eda89b937c264d6",
+            "Availability": "bb67ef83b863173b2def1ab0e0d6a452749ed60a527b638ee6f49dafe51eae46",
+            "LoginInput": "a69a07e9b8012615f96e21b54b5e67a41a834b005bf719633460a88883ba21e5",
+            "Login": "defe6ab94846a0a0a86720b00eea7539fa09ea7c8d08c5f141f2a1fdd49d2526",
+            "Logout": "af6a423d889084b0b9fbb634c736e937b7ca716f0ec0d81711743a76f3dffbfb",
+            "Inquiry": "74680f893956991512ee6add5ab830c43e134a9056bc3a616ab1b3c89c95b9a9",
+            "Conversation": "d80c405d7ead476811d355f4398ebb8e53bd8f726283ab038b1903e3981eb8eb",
+            "Message": "929ca62bf4e1c6b8deed1b4fbea01bed657459da467e1e8eb5e26f09a4e1dfc2",
+            "MessagePage": "a6021ee9156a901151865c8d7c1d3d2d2c25a628005ffd696c65018e217ecaa8",
+            "ReadProgress": "e5d194e0529c7cbd685c22515a2cd6ff266b16730901292d53daa8454117ca5e",
+            "Reservation": "138cb30c2c72ae85ebd82065e487ed8d5e90ba03bd1a691776ae4554e5dbc87d",
+            "ReservationOptions": "a1d05a86ba7f077593969087c385bdd2b1b1c298b581bed0c8c689f96033cfd9",
+            "OpenInquiryInput": "3fb5cfb02a423cdfcd5f3219d6fa37e6125273655d26c5de9481dd5a6e0ed7c4",
+            "SendMessageInput": "2d752f4d9d377e0c88116f4d29d6361ca3ef403eac4350bdb02f0cf38cdfc9e8",
+            "ReadInput": "bae11430b5852229d01dd0ea6343e3cea3e6c3f2dbf7ed66ce95c0c4444fd563",
+            "ProposalInput": "443f8bebb52a274ec44e5ad5a9266c2a6e0b156e893563b11032d2ba7de30f09",
+            "CancelReservationInput": "0a785294074cdecd1e524248ec74c82bc0c13a67625136c70585a33b881d388a",
+            "ReservationHold": "0318439bc7c459ce8ae4fe359c14499d9e254e6e75a1f8975ad6b830c9052c0a",
+            "CommitReservationInput": "0babfb9757804b1047fc2729092b32c08c0bb8aab005ec1e7150d720f62430c9",
+            "CommercialAmount": "2819c24369c66c3b6cb887e422f64dba98045d94dc0545582fc138ee6356b778",
+            "PublishedPrice": "1cf9d4b741dd0de62950e080fa72251eee5dd60ce4a54692f0891018d7453e8f",
+            "QuoteAcceptance": "108f99ef971ae807bf600121453488705028372b4f40cd9d34393872960bd5d8",
+            "CommercialQuote": "31d9a6c361a951c8a4556a729ffc0cfb4f60f6ea92cd21acfa611241e03bec6f",
+            "IssueQuoteInput": "50a01fba4816f388151dd93e05634c42edf48d716a5c32f79f1827eb5d8e965e",
+            "AcceptQuoteInput": "5a78283fcff56cccb4c552cb72c060b6e99b9bfee2023e8e24649d5c8b213e24",
+            "CheckoutHold": "fae334dca57e215f8628393d0ceca7de2389bca012279d45414acba799ee6119",
+            "CheckoutContext": "da9fab11a6c8428a390e65e88dbb72824e07da147c42f874608092788f66ce75",
+            "ClientNotification": "8e8fe2abfd139d458794ea81877342ec1142f8a59af61b31ca8ca1d6413274ea",
+            "NotificationUnreadCount": "ed278fc10f5fbd48b6e6af7f291a8b2e512651b5a3e25875fe3da47405b121cd"
+        },
+        "responses": {
+            "Error400": "c8427b8036f02d9a3df1f725516e328ddd1b91748c2f3b3effd1ae2cab03264c",
+            "Error401": "d9bf015cdd96c8dfdd5f6917a0507be8d592d3ee10dd6922008f6a8b4e80c57a",
+            "Error403": "21f6c2a7e97e3032b2cd7169290fc86014d89a3be3c225da1f10ab5bedad0ab2",
+            "Error404": "ea4caaf3e63ca7fef2c6453af47ac54eb24dee2fa3350f311be3abb502589569",
+            "Error405": "6b6df18b3761d879c47a04bcb4b51e230c01d35ceeb0ce48979194d869696453",
+            "Error409": "0b81363963a6a8f9c1adc3b87d4b645c93750bb7b04179a909612d14cd9d0a3a",
+            "Error422": "67394113f86b5972d3ca08058b221ab6d42f716042ce0b385893ab81606cc49d",
+            "Error429": "762ddac304dd5f78ee246c0d8645145771197983f46bc4a7125b2064f7f8a320",
+            "Error500": "5cff2d0f60c750b5632f957fd7008fccf63bd4ffb7d137a35c26de4af640bfe9",
+            "Error503": "a53cdf548f4b2fc45a9dea87bc51eff94200de83fc809b9fd32eb8eb15377435"
+        },
+        "examples": {
+            "B3QuotePending": "9fe92b26f3e801303a0da166dd64e887542a311699d0cab21a32a6ab4ffc8305",
+            "B3QuoteAccepted": "9b8be8b34fa8c73508d6612e275c09cbaae80e3553f84b9676c7577fa0b0e5cb",
+            "B3QuoteAcceptance": "3e3606c188eaeeb6da96e591df7f3cad013e0e73d74b6912f77c6076c420493e",
+            "B3Quotes": "f6f8db97acf3fc1340e2b69fc3185879a9113ad9746a8b53772d4df59ff14191",
+            "B3CheckoutContext": "90717b8d3f3fe11c5777756b4a4e2c81ce1e6ad8ec2c21caf9225e6405087e55",
+            "M1Notifications": "7241c361346e5086ae70a3757d8ce2addfcfb337251eaef7397c165bf65fddf5",
+            "M1NotificationRead": "17b9a7145305f973299fb78b81db3ed9dac68c79a535e221a8cae01bab055aa0",
+            "M1UnreadCount": "31129a689f7cb8985fccf5369f7df492e401da352d50a4d2065ee0650e24ea8e"
+        }
+    }
+}

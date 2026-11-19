@@ -91,7 +91,15 @@ class ServiceInquiryController extends Controller
             ->where('q.service_inquiry_id', $inquiry->id)->orderByDesc('q.issued_at_utc')->orderByDesc('q.id')
             ->paginate(10, ['q.*', 'a.accepted_at_utc'], 'quotes_page')->fragment('cotizaciones');
 
-        return view('inquiries.show', compact('publishedPrice', 'quoteRows', 'inquiry', 'publicService', 'messages', 'readMarker', 'unreadMessagesCount', 'messageReadToken'));
+        try {
+            $journey = app(\App\Services\ContractingJourney::class)->forInquiry($request->user('web'), $inquiry->id);
+        } catch (\LogicException $error) {
+            return response()->view('reservations.error', ['message' => 'No se pudo comprobar el seguimiento. Inténtalo más tarde.'], 503);
+        }
+        $journeyReservation = isset($journey['reservation']['id'])
+            ? $inquiry->reservations()->with(['events.actor:id,name', 'hold.events.actor:id,name'])->findOrFail($journey['reservation']['id']) : null;
+
+        return view('inquiries.show', compact('journey', 'journeyReservation', 'publishedPrice', 'quoteRows', 'inquiry', 'publicService', 'messages', 'readMarker', 'unreadMessagesCount', 'messageReadToken'));
     }
 
     public function decide(DecideInquiryRequest $request, ServiceInquiry $inquiry, InquiryWorkflow $workflow)

@@ -1,7 +1,7 @@
 <x-account-layout :operations="true" :title="'Solicitud #'.$inquiry->id">
-  @push('styles')<link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">@endpush
-  <div class="inquiry-page">
-  <x-ops-heading variant="connect"><span class="account-eyebrow">Seguimiento privado</span><h1>Solicitud #{{ $inquiry->id }}</h1><p>Consulta el estado y las decisiones de esta solicitud.</p></x-ops-heading>
+  @push('styles')<link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">@vite('resources/css/tekora/contracting-journey.css')@endpush
+  <div class="inquiry-page contracting-hub">
+  <x-contracting-journey :journey="$journey" />
   <div class="inquiry-detail-grid">
     <section class="account-card inquiry-summary" aria-labelledby="inquiry-service-title">
       <div class="inquiry-summary-heading"><span class="account-eyebrow">Servicio solicitado</span><x-inquiry-status :status="$inquiry->status" /></div>
@@ -13,18 +13,18 @@
       <dl class="inquiry-dates"><div><dt>Enviada</dt><dd><x-inquiry-time :at="$inquiry->created_at" /></dd></div><div><dt>Actualizada</dt><dd><x-inquiry-time :at="$inquiry->updated_at" /></dd></div></dl>
       @if($inquiry->status === \App\Enums\InquiryStatus::Completed)<p class="account-note">Finalizada es un estado operativo. No confirma pago, garantía, satisfacción del cliente ni un contrato formal.</p>@else<p class="account-help">Aceptar una solicitud no crea una reserva, pago ni contrato automático.</p>@endif
     </section>
-    <section class="account-card inquiry-timeline" aria-labelledby="inquiry-history-title">
+    <section class="account-card inquiry-timeline" id="historial" aria-labelledby="inquiry-history-title">
       <h2 id="inquiry-history-title">Historial de decisiones</h2><p class="account-help">Horario de Ciudad de México.</p>
       <ol class="tk-ops-timeline">@foreach($inquiry->timeline() as $event)<li><strong>{{ $event['label'] }}</strong><x-inquiry-time :at="$event['at']" /></li>@endforeach</ol>
       @if(in_array($inquiry->status, [\App\Enums\InquiryStatus::Pending, \App\Enums\InquiryStatus::Accepted], true))
-        <div class="inquiry-next-step" role="group" aria-labelledby="inquiry-next-title"><h3 id="inquiry-next-title">Siguiente paso</h3><x-inquiry-actions :inquiry="$inquiry" /></div>
+        <div class="inquiry-next-step" id="acciones-solicitud" role="group" aria-labelledby="inquiry-next-title"><h3 id="inquiry-next-title">Acciones de la solicitud</h3><x-inquiry-actions :inquiry="$inquiry" /></div>
       @else
         <p class="account-help inquiry-closed-note">Esta solicitud está cerrada. Su historial y conversación se conservan para consulta.</p>
       @endif
     </section>
   </div>
-  <x-inquiry-quotes :inquiry="$inquiry" :published-price="$publishedPrice" :quote-rows="$quoteRows" :public-service="$publicService" />
-  <x-inquiry-reservations :inquiry="$inquiry" />
+  <x-inquiry-quotes :inquiry="$inquiry" :published-price="$publishedPrice" :quote-rows="$quoteRows" :public-service="$publicService" :journey="$journey" />
+  <x-inquiry-reservations :inquiry="$inquiry" :journey="$journey" :journey-reservation="$journeyReservation" />
   <x-inquiry-conversation :inquiry="$inquiry" :messages="$messages" :read-marker="$readMarker" :unread-messages-count="$unreadMessagesCount" :message-read-token="$messageReadToken" />
   <nav class="inquiry-actions" aria-label="Volver a mis paneles">@can(\App\Enums\Permission::ManageOwnInquiries->value)<a href="{{ route('inquiries.index') }}">Mis solicitudes</a>@endcan @can(\App\Enums\Permission::ManageReceivedInquiries->value)<a href="{{ route('inquiries.received') }}">Solicitudes recibidas</a>@endcan</nav>
   </div>
