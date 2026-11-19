@@ -32,7 +32,7 @@
         <h2>Selecciona cómo pagar</h2>
         <form class="b32-controls" method="POST" action="{{ route('checkout.local.submit', $reservation) }}" autocomplete="off" data-b32-form>
           @csrf
-          <input type="hidden" name="idempotency_key" value="{{ (string) \\Illuminate\\Support\\Str::uuid() }}">
+          <input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">
           <fieldset class="b32-methods"><legend>Forma de pago</legend><label><input type="radio" name="method" value="card" checked data-b32-method> Tarjeta</label><label><input type="radio" name="method" value="cash" data-b32-method> Efectivo</label></fieldset>
           <div data-b32-card>
             <label class="b32-label" for="b32-number">Número de tarjeta de prueba</label>
