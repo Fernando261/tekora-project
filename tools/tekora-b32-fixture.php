@@ -7,7 +7,7 @@
  * Run only with APP_ENV=testing, DB_CONNECTION=sqlite, DB_DATABASE=:memory:,
  * DB_URL empty, APP_CONFIG_CACHE pointing to a nonexistent private path.
  */
-if (PHP_SAPI !== 'cli' || ! is_file(dirname(__DIR__).'/vendor/autoload.php')) {
+if (PHP_SAPI !== 'cli' || is_file(dirname(__DIR__).'/vendor/autoload.php') === false) {
     fwrite(STDERR, "Solo CLI con dependencias de desarrollo instaladas.\n");
     exit(1);
 }
@@ -106,33 +106,39 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
                 received_at TEXT NULL
             )");
             $root = realpath(sys_get_temp_dir());
-            if (! $root) {
+            if ($root === false) {
                 throw new \RuntimeException('No se pudo resolver el directorio temporal.');
             }
+
             $dir = $root.DIRECTORY_SEPARATOR.'tekora-b32-'.bin2hex(random_bytes(12));
-            if (! mkdir($dir, 0700) || is_link($dir)) {
+            if (mkdir($dir, 0700) === false || is_link($dir)) {
                 throw new \RuntimeException('No se pudo crear un directorio privado nuevo.');
             }
+
             $db = $dir.DIRECTORY_SEPARATOR.'tekora.sqlite';
             // VACUUM INTO reads only the in-memory test connection and creates a NEW file.
             $pdo = \Illuminate\Support\Facades\DB::connection('sqlite')->getPdo();
-            $pdo->exec("VACUUM main INTO ".$pdo->quote($db));
-            if (! is_file($db) || filesize($db) < 1024) {
+            $pdo->exec('VACUUM main INTO '.$pdo->quote($db));
+            if (is_file($db) === false || filesize($db) < 1024) {
                 throw new \RuntimeException('La exportación SQLite no terminó.');
             }
+
             if (DIRECTORY_SEPARATOR !== '\\') {
                 chmod($db, 0600);
             }
+
             $check = new \PDO('sqlite:'.$db);
             if ($check->query('PRAGMA integrity_check')->fetchColumn() !== 'ok') {
                 throw new \RuntimeException('La nueva SQLite no pasó integrity_check.');
             }
+
             if (file_put_contents($dir.DIRECTORY_SEPARATOR.'.tekora-b32-synthetic', "TEKORA-B32-SYNTHETIC\n", LOCK_EX) === false) {
                 throw new \RuntimeException('No se pudo etiquetar la fixture nueva.');
             }
             if (DIRECTORY_SEPARATOR !== '\\') {
                 chmod($dir.DIRECTORY_SEPARATOR.'.tekora-b32-synthetic', 0600);
             }
+
             return [
                 'database' => realpath($db),
                 'client_email' => $client->email,
