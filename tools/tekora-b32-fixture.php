@@ -75,7 +75,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
             );
 
             // This table exists only in this disposable SQLite export, never in migrations.
-            \\Illuminate\\Support\\Facades\\DB::statement("CREATE TABLE synthetic_checkout_attempts (
+            \Illuminate\Support\Facades\DB::statement("CREATE TABLE synthetic_checkout_attempts (
                 reservation_id INTEGER PRIMARY KEY,
                 client_user_id INTEGER NOT NULL,
                 provider_user_id INTEGER NOT NULL,
