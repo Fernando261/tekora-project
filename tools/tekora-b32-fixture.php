@@ -30,6 +30,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
         $this->traitsUsedByTest = array_flip(class_uses_recursive(self::class));
         $app->useEnvironmentPath(sys_get_temp_dir());
         $app->loadEnvironmentFrom('tekora-b32-no-env-'.bin2hex(random_bytes(16)));
+
         if (is_file($app->environmentFilePath())) {
             throw new \RuntimeException('No debe leerse ningún archivo .env.');
         }
@@ -41,6 +42,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
     public function export(): array
     {
         $this->setUp(); // Existing PHPUnit TestCase migrates an in-memory SQLite only.
+
         try {
             $client = $this->account(\App\Enums\RoleName::Client);
             $provider = $this->account(\App\Enums\RoleName::Client, \App\Enums\RoleName::Provider);
@@ -119,6 +121,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
             // VACUUM INTO reads only the in-memory test connection and creates a NEW file.
             $pdo = \Illuminate\Support\Facades\DB::connection('sqlite')->getPdo();
             $pdo->exec('VACUUM main INTO '.$pdo->quote($db));
+
             if (is_file($db) === false || filesize($db) < 1024) {
                 throw new \RuntimeException('La exportación SQLite no terminó.');
             }
@@ -128,6 +131,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
             }
 
             $check = new \PDO('sqlite:'.$db);
+
             if ($check->query('PRAGMA integrity_check')->fetchColumn() !== 'ok') {
                 throw new \RuntimeException('La nueva SQLite no pasó integrity_check.');
             }
@@ -135,6 +139,7 @@ final class TekoraB32DisposableFixture extends \Tests\TestCase
             if (file_put_contents($dir.DIRECTORY_SEPARATOR.'.tekora-b32-synthetic', "TEKORA-B32-SYNTHETIC\n", LOCK_EX) === false) {
                 throw new \RuntimeException('No se pudo etiquetar la fixture nueva.');
             }
+
             if (DIRECTORY_SEPARATOR !== '\\') {
                 chmod($dir.DIRECTORY_SEPARATOR.'.tekora-b32-synthetic', 0600);
             }
