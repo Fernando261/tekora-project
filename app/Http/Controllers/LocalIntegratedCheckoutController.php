@@ -80,7 +80,8 @@ final class LocalIntegratedCheckoutController extends Controller
             };
         $store->submit($request->user('web'), $context, $data['method'], $scenario, $data['idempotency_key']);
 
-        return redirect()->route('checkout.local.show', ['reservation' => $reservation], 303);
+        return redirect()->route('checkout.local.show', ['reservation' => $reservation], 303)
+            ->with('b32_checkout_result', true);
     }
 
     private function providerReservation(Request $request, int $reservation): ServiceReservation
