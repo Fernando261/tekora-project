@@ -1,53 +1,234 @@
 <x-account-layout :operations="true" title="Finalizar contratación">
   @push('styles')
-    <style>
-      .b32-wrap{max-width:940px;margin:2rem auto;display:grid;gap:1.5rem}.b32-card{padding:2rem;border-radius:1.2rem;background:var(--surface,#101c2e);border:1px solid rgba(120,140,165,.25)}.b32-row{display:flex;justify-content:space-between;gap:1rem;align-items:center}.b32-total{font-size:2rem;font-weight:800}.b32-controls{display:grid;gap:1rem}.b32-controls input,.b32-controls select{width:100%;min-height:46px;padding:.65rem;border-radius:.6rem}.b32-label{display:block;margin-bottom:.35rem}.b32-note{font-size:.9rem;opacity:.82}.b32-methods{display:flex;gap:1.25rem;flex-wrap:wrap}.b32-grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}@media(max-width:650px){.b32-grid{grid-template-columns:1fr}.b32-card{padding:1.1rem}} 
-    </style>
+    @vite(['resources/css/tekora/checkout-demo.css', 'resources/css/tekora/checkout-integrated.css'])
   @endpush
-  <div class="b32-wrap">
-    <a href="{{ route('reservations.show', $reservation) }}">← Volver a mi reserva</a>
-    <header><span class="account-eyebrow">Tekora · Entorno local de pruebas</span><h1>Finaliza tu contratación</h1><p>Confirma tu método de pago para {{ $context['service']['title'] }}.</p></header>
-    <section class="b32-card" aria-label="Resumen de contratación">
-      <div class="b32-row"><div><strong>{{ $context['service']['title'] }}</strong><p>Prestador: {{ $context['provider']['display_name'] }}</p></div><div class="b32-total">{{ $formattedAmount }}</div></div>
-      <p>MXN · Comisión del 15 % incluida · Cotización acordada</p>
-      <p class="b32-note">Horario retenido: {{ $context['hold']['remaining_seconds'] ?? 0 }} segundos restantes al cargar esta pantalla. La operación vuelve a comprobar el tiempo en el servidor.</p>
-    </section>
-    @if($attempt)
-      <section class="b32-card" aria-live="polite">
-        <h2>Resultado de tu solicitud de pago</h2>
-        <p><strong>@switch($attempt['status'])
-          @case('test_approved') Tarjeta aprobada @break
-          @case('declined') Tarjeta rechazada @break
-          @case('temporary_failure') No fue posible procesar la tarjeta @break
-          @case('cash_received') Efectivo recibido por el prestador @break
-          @default Efectivo pendiente de recepción
-        @endswitch</strong></p>
-        <p>Referencia: {{ $attempt['reference'] }}</p>
-        <p class="b32-note">Resultado compartido únicamente mediante la SQLite sintética de esta presentación; no es una operación bancaria ni confirma automáticamente el horario.</p>
-        <a class="account-button secondary" href="{{ route('reservations.show', $reservation) }}">Continuar con mi reserva</a>
-      </section>
-    @endif
-    @if($context['future_payment']['commercial_eligible'] && ($context['hold']['remaining_seconds'] ?? 0) > 0 && (!$attempt || in_array($attempt['status'], ['declined', 'temporary_failure'], true)))
-      <section class="b32-card">
-        <h2>Selecciona cómo pagar</h2>
-        <form class="b32-controls" method="POST" action="{{ route('checkout.local.submit', $reservation) }}" autocomplete="off" data-b32-form>
-          @csrf
-          <input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">
-          <fieldset class="b32-methods"><legend>Forma de pago</legend><label><input type="radio" name="method" value="card" checked data-b32-method> Tarjeta</label><label><input type="radio" name="method" value="cash" data-b32-method> Efectivo</label></fieldset>
-          <div data-b32-card>
-            <label class="b32-label" for="b32-number">Número de tarjeta de prueba</label>
-            <select name="card_number" id="b32-number"><option value="4242424242424242">4242 4242 4242 4242 · Aprobada</option><option value="4000000000000002">4000 0000 0000 0002 · Rechazada</option><option value="4000000000000119">4000 0000 0000 0119 · Error temporal</option></select>
-            <div class="b32-grid"><div><label class="b32-label" for="b32-expiry">Vencimiento de prueba</label><input id="b32-expiry" name="expiry" value="12/30" readonly></div><div><label class="b32-label" for="b32-cvv">CVV de prueba</label><input id="b32-cvv" name="cvv" value="123" readonly></div></div>
+  @php
+    $remaining = (int) ($context['hold']['remaining_seconds'] ?? 0);
+    $canPay = $context['future_payment']['commercial_eligible'] && $remaining > 0;
+    $status = $attempt['status'] ?? null;
+    $retryable = in_array($status, ['declined', 'temporary_failure'], true);
+    $showForm = $canPay && (!$attempt || $retryable);
+    $success = in_array($status, ['test_approved', 'cash_received'], true);
+    $visualState = $success ? 'success' : ($status === 'awaiting_cash' ? 'awaiting' : ($status === 'declined' ? 'declined' : ($status === 'temporary_failure' ? 'temporary' : 'ready')));
+    $method = $attempt['method'] ?? 'card';
+  @endphp
+
+  <div class="tk-checkout b32-checkout" data-b32-checkout data-checkout-state="{{ $visualState }}">
+    <a class="co-back-link b32-back" href="{{ route('reservations.show', $reservation) }}">← Volver a mi reserva</a>
+
+    <div class="co-heading b32-heading">
+      <div>
+        <p class="co-eyebrow">TU PRÓXIMA CONEXIÓN · TEKORA</p>
+        <h1>Finaliza tu contratación<span>.</span></h1>
+      </div>
+      <p class="b32-heading-aside">Un paso más para conectar con lo que necesitas.<small>Checkout integrado · Entorno local de pruebas</small></p>
+    </div>
+
+    <section class="co-shell b32-shell" aria-label="Pago de la contratación">
+      <header class="co-shell-header">
+        <span class="co-shell-title"><span class="co-mini-mark" aria-hidden="true">T</span> CHECKOUT <span> / TU CONTRATACIÓN</span></span>
+        <ol class="co-steps" aria-label="Etapas de contratación">
+          <li><span aria-hidden="true">✓</span> Cotización</li>
+          <li><span aria-hidden="true">✓</span> Horario</li>
+          <li aria-current="step"><span>03</span> Pago</li>
+        </ol>
+      </header>
+
+      <aside class="co-order-bar b32-order" aria-label="Resumen de contratación">
+        <div>
+          <strong>{{ $context['service']['title'] }}</strong>
+          <span>{{ $context['provider']['display_name'] }} · Cotización aceptada</span>
+          <span>Comisión Tekora del 15 % incluida, sin cargos adicionales</span>
+        </div>
+        <div class="b32-order-total">
+          <strong>{{ $formattedAmount }}</strong>
+          <span>Total acordado</span>
+        </div>
+        <p class="b32-hold">
+          Retención del horario
+          <time data-b32-hold data-remaining="{{ $remaining }}">{{ sprintf('%02d:%02d', intdiv($remaining, 60), $remaining % 60) }}</time>
+          <small>Máximo 15 minutos · no se renueva</small>
+        </p>
+      </aside>
+
+      <div class="co-stage b32-stage">
+        <div class="co-card-column b32-card-column">
+          <div class="co-card-position" data-b32-card-position>
+            <div class="co-card-tilt" data-b32-card-tilt>
+              <div class="co-card-flip" data-b32-card-flip aria-hidden="true">
+                <div class="co-card-face co-card-front">
+                  <div class="co-card-surface"></div>
+                  <div class="co-mint-surface" data-b32-mint></div>
+                  <div class="co-card-grain"></div>
+                  <div class="co-card-glint"></div>
+                  <div class="co-card-top">
+                    <span class="co-chip" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <svg class="co-contactless" viewBox="0 0 24 28" fill="none" aria-hidden="true"><path d="M6 10q4 4 0 8m4-12q8 8 0 16m4-20q12 12 0 24"/></svg>
+                    <span class="co-card-level">OBSIDIAN <small>TEKORA</small></span>
+                  </div>
+                  <div class="co-card-number" data-b32-card-number>•••• &nbsp;•••• &nbsp;•••• &nbsp;4242</div>
+                  <div class="co-card-bottom">
+                    <div><small>TITULAR FICTICIO</small><strong>{{ mb_strtoupper($context['client']['name']) }}</strong></div>
+                    <div><small>VENCE</small><strong>12/30</strong></div>
+                    <span class="co-card-network">TARJETA<small>SOLO PRUEBAS</small></span>
+                  </div>
+                  <div class="co-cash-face" data-b32-cash-face @if($method !== 'cash') hidden @endif>
+                    <span class="co-eyebrow">TEKORA · ENTREGA DIRECTA</span>
+                    <svg viewBox="0 0 120 62" fill="none" aria-hidden="true"><rect x="3" y="3" width="114" height="56" rx="9"/><path d="M18 3c0 9-6 15-15 15m114 0c-9 0-15-6-15-15M3 44c9 0 15 6 15 15m84 0c0-9 6-15 15-15"/><circle cx="60" cy="31" r="17"/><path d="M66 23h-8a5 5 0 0 0 0 10h4a5 5 0 0 1 0 10h-8m6-24v28"/></svg>
+                    <strong>EFECTIVO</strong>
+                    <small>Recepción por el prestador</small>
+                    <span>ENTORNO LOCAL</span>
+                  </div>
+                </div>
+                <div class="co-card-face co-card-back">
+                  <div class="co-card-surface"></div>
+                  <div class="co-back-stripe"></div>
+                  <div class="co-signature"><span>CÓDIGO FICTICIO</span><strong>123</strong></div>
+                  <p>Estos datos existen únicamente para probar el recorrido.<br>No introduzcas información bancaria real.</p>
+                  <span class="co-back-brand">tekora<span>.</span><small>PRUEBA</small></span>
+                </div>
+              </div>
+            </div>
           </div>
-          <p class="b32-note">Selecciona una de las tarjetas ficticias de prueba. No introduzcas información bancaria real. Este checkout no está conectado a pasarelas.</p>
-          @if($errors->any())<p role="alert">Revisa los datos de prueba seleccionados.</p>@endif
-          <button class="account-button" type="submit">Confirmar método de pago</button>
-        </form>
-      </section>
-    @else
-      <section class="account-note" role="status">La retención ya no está disponible para continuar al pago. Vuelve a la reserva y revisa su estado.</section>
+          <p class="co-card-caption b32-card-caption"><span aria-hidden="true">◇</span> Diseño Blue Obsidian · Experiencia Tekora</p>
+        </div>
+
+        @if($showForm)
+          <section class="co-form b32-form" aria-labelledby="b32-form-title">
+            <p class="co-eyebrow">03 / MÉTODO DE PAGO</p>
+            <h2 id="b32-form-title">{{ $retryable ? 'Volvamos a intentarlo' : 'Elige cómo pagar' }}</h2>
+            <p class="co-form-note">Utiliza únicamente las opciones ficticias de este entorno. No se realizan cargos bancarios.</p>
+
+            @if($retryable)
+              <div class="b32-feedback b32-feedback-{{ $status }}" role="status">
+                <strong>{{ $status === 'declined' ? 'Tarjeta rechazada' : 'No fue posible procesar la tarjeta' }}</strong>
+                <span>Puedes elegir otro resultado de prueba y volver a intentarlo.</span>
+                <small>Referencia: {{ $attempt['reference'] }}</small>
+              </div>
+            @endif
+
+            <form method="POST" action="{{ route('checkout.local.submit', $reservation) }}" autocomplete="off" data-b32-form>
+              @csrf
+              <input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">
+
+              <fieldset class="co-methods b32-methods">
+                <legend>Elige tu método</legend>
+                <label class="b32-method-option">
+                  <input type="radio" name="method" value="card" checked data-b32-method>
+                  <span class="b32-method-surface"><span class="b32-method-icon" aria-hidden="true">▱</span><strong>Tarjeta</strong><small>Débito o crédito de prueba</small></span>
+                </label>
+                <label class="b32-method-option">
+                  <input type="radio" name="method" value="cash" data-b32-method>
+                  <span class="b32-method-surface"><span class="b32-method-icon" aria-hidden="true">◇</span><strong>Efectivo</strong><small>Entrega en persona</small></span>
+                </label>
+              </fieldset>
+
+              <div data-b32-card>
+                <div class="co-field">
+                  <label for="b32-number">Tarjeta de prueba</label>
+                  <div class="co-select-wrap">
+                    <span aria-hidden="true">▱</span>
+                    <select name="card_number" id="b32-number" data-b32-number>
+                      <option value="4242424242424242">•••• 4242 · Aprobada</option>
+                      <option value="4000000000000002">•••• 0002 · Rechazada</option>
+                      <option value="4000000000000119">•••• 0119 · Error temporal</option>
+                    </select>
+                    <span class="co-chevron" aria-hidden="true">⌄</span>
+                  </div>
+                </div>
+                <div class="co-field-row">
+                  <div class="co-field">
+                    <label for="b32-expiry">Vencimiento ficticio</label>
+                    <div class="co-select-wrap b32-fixed-input"><input id="b32-expiry" name="expiry" value="12/30" readonly data-b32-expiry></div>
+                  </div>
+                  <div class="co-field">
+                    <label for="b32-cvv">Código de prueba (CVV)</label>
+                    <div class="co-select-wrap b32-fixed-input"><input id="b32-cvv" name="cvv" value="123" readonly data-b32-cvv></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="co-cash-info b32-cash-info" data-b32-cash-info hidden>
+                <strong>Entrega en persona</strong>
+                <p>El cliente elige efectivo; el prestador registra su recepción desde su cuenta de Tekora.</p>
+                <p>Seleccionarlo no acredita que se haya recibido dinero.</p>
+              </div>
+
+              <p class="b32-form-security">Solo tarjetas de prueba predefinidas. No escribas datos bancarios reales.</p>
+              @if($errors->any())<p class="b32-feedback b32-feedback-declined" role="alert">Revisa los datos de prueba seleccionados.</p>@endif
+              <div class="co-form-total"><span>Importe acordado</span><strong>{{ $formattedAmount }}</strong></div>
+              <button class="co-primary b32-primary" type="submit" data-b32-submit>Confirmar pago <span aria-hidden="true">→</span></button>
+              <p class="co-local-note"><span aria-hidden="true">◈</span> El servidor valida la retención antes de guardar el resultado.</p>
+            </form>
+          </section>
+        @else
+          <section class="co-form b32-result" aria-labelledby="b32-result-title" aria-live="polite">
+            <div class="b32-result-symbol b32-result-{{ $visualState }}" aria-hidden="true">
+              @if($success) ✓ @elseif($status === 'declined') × @elseif($status === 'temporary_failure') ! @elseif($status === 'awaiting_cash') ◇ @else ◷ @endif
+            </div>
+            <p class="co-eyebrow">ESTADO DE TU CONTRATACIÓN</p>
+            <h2 id="b32-result-title">
+              @switch($status)
+                @case('test_approved') ¡Pago realizado con éxito! @break
+                @case('cash_received') Recepción registrada @break
+                @case('declined') Tarjeta rechazada @break
+                @case('temporary_failure') No fue posible procesar la tarjeta @break
+                @case('awaiting_cash') Efectivo pendiente de recepción @break
+                @default Consulta tu reserva @break
+              @endswitch
+            </h2>
+            <p class="b32-result-lead">
+              @switch($status)
+                @case('test_approved') Tarjeta aprobada · Resultado de prueba registrado. @break
+                @case('cash_received') Efectivo recibido por el prestador · Registro de prueba. @break
+                @case('awaiting_cash') El prestador podrá registrar la recepción del efectivo desde su cuenta. @break
+                @default No se puede registrar otra operación para esta retención. @break
+              @endswitch
+            </p>
+            @if($attempt)
+              <section class="co-receipt b32-receipt" aria-label="Comprobante interno de pruebas">
+                <span>COMPROBANTE INTERNO · TEKORA</span>
+                <strong>{{ $formattedAmount }}</strong>
+                <dl>
+                  <div><dt>Método</dt><dd>{{ $method === 'cash' ? 'Efectivo' : 'Tarjeta ficticia' }}</dd></div>
+                  <div><dt>Referencia</dt><dd>{{ $attempt['reference'] }}</dd></div>
+                </dl>
+                <small>No es un comprobante bancario ni fiscal. No se realizó un cargo real.</small>
+              </section>
+            @endif
+            <a class="co-secondary b32-secondary" href="{{ route('reservations.show', $reservation) }}">Continuar con mi reserva <span aria-hidden="true">↗</span></a>
+          </section>
+        @endif
+      </div>
+
+      <footer class="co-shell-footer"><span><i aria-hidden="true"></i> ENTORNO LOCAL DE PRUEBAS</span><p>El resultado sintético no sustituye la confirmación definitiva de la reserva.</p></footer>
+    </section>
+
+    <section class="co-summary b32-breakdown" aria-label="Desglose del importe acordado">
+      <div class="co-service-example">
+        <span class="co-service-icon" aria-hidden="true">◇</span>
+        <div>
+          <p class="co-eyebrow">TU ACUERDO · IMPORTE CONGELADO</p>
+          <h2>{{ $context['service']['title'] }}</h2>
+          <p>{{ $context['provider']['display_name'] }} · Reserva #{{ $reservation }}</p>
+          <span class="co-slot">{{ \Carbon\CarbonImmutable::parse($context['reservation']['starts_at'])->timezone($context['reservation']['timezone'])->format('d/m/Y · H:i') }} · {{ $context['reservation']['timezone'] }}</span>
+        </div>
+      </div>
+      <dl class="co-price-breakdown">
+        <div class="co-total"><dt>Total de contratación</dt><dd>{{ $formattedAmount }}</dd></div>
+        <div><dt>Para el prestador · 85 %</dt><dd>{{ \App\Payments\WebMoney::format($context['amount']->providerCents) }}</dd></div>
+        <div><dt>Comisión Tekora · 15 %</dt><dd>{{ \App\Payments\WebMoney::format($context['amount']->commissionCents) }}</dd></div>
+        <p>Comisión incluida en el total. Sin cargos adicionales.</p>
+      </dl>
+    </section>
+
+    @if(!$canPay)
+      <div class="b32-notice" role="status"><span aria-hidden="true">◇</span> La reserva ya no permite registrar un nuevo pago de prueba. Revisa su estado desde «Mi reserva».</div>
+    @elseif($attempt && !$retryable)
+      <div class="b32-notice b32-notice-active" role="status"><span aria-hidden="true">◇</span> El resultado está guardado. Regresa a la reserva y confírmala antes de que termine la retención.</div>
     @endif
-    <p class="b32-note">Este entorno privado representa el flujo del producto. Los resultados son de prueba y no acreditan dinero, no generan recibos fiscales y no sustituyen la confirmación manual de la reserva.</p>
+    <p class="b32-legal">Este entorno privado reproduce el recorrido de producto con datos sintéticos. No procesa dinero real, no liquida a prestadores y no genera comprobantes fiscales.</p>
   </div>
+
   @push('scripts')<script defer src="{{ asset('js/tekora/b32-checkout.js') }}"></script>@endpush
 </x-account-layout>
