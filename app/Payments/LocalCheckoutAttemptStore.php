@@ -22,6 +22,33 @@ final class LocalCheckoutAttemptStore
         return $row ? (array) $row : null;
     }
 
+    /**
+     * The B3.2 demo needs an accepted, immutable synthetic choice before B2
+     * commits a quoted hold. Cash pending is a valid choice, not cash received.
+     * Call only after verifying this is the disposable local checkout fixture.
+     */
+    public function permitsCommit(ServiceReservation $reservation): bool
+    {
+        if (! $reservation->quote_id) {
+            return false;
+        }
+
+        $row = DB::table('synthetic_checkout_attempts')
+            ->where('reservation_id', $reservation->id)
+            ->first();
+        if (! $row || (int) $row->client_user_id !== $reservation->client_user_id
+            || $row->quote_id !== $reservation->quote_id
+            || (int) $row->provider_user_id !== $reservation->providerProfile->user_id) {
+            return false;
+        }
+
+        $total = DB::table('service_quotes')->where('id', $reservation->quote_id)->value('total_cents');
+
+        return $total !== null && (int) $row->amount_cents === (int) $total
+            && (($row->method === 'card' && $row->status === 'test_approved')
+                || ($row->method === 'cash' && in_array($row->status, ['awaiting_cash', 'cash_received'], true)));
+    }
+
     public function submit(User $client, array $context, string $method, string $scenario, string $key): array
     {
         $id = (int) $context['reservation']['id'];
@@ -81,9 +108,12 @@ final class LocalCheckoutAttemptStore
             }
             abort_unless($row['status'] === 'awaiting_cash', 409);
             $current = $reservation->fresh();
-            abort_unless($current->status === ReservationStatus::Requested
+            $isLiveHold = $current->status === ReservationStatus::Requested
                 && $current->hold?->state === 'held'
-                && $current->hold->remainingSeconds() > 0, 409);
+                && $current->hold->remainingSeconds() > 0;
+            $isCommittedBooking = $current->status === ReservationStatus::Confirmed
+                && $current->hold?->state === 'committed';
+            abort_unless($isLiveHold || $isCommittedBooking, 409);
             DB::table('synthetic_checkout_attempts')
                 ->where('reservation_id', $reservation->id)->where('status', 'awaiting_cash')
                 ->update(['status' => 'cash_received', 'received_at' => now('UTC')->toISOString()]);
