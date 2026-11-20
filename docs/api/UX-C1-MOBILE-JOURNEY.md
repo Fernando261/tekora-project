@@ -56,3 +56,11 @@ Usar `code` y `reference`, no interpretar textos ni construir URLs a partir de e
 Los códigos de espera (`interaction=wait`) no representan comandos. Las referencias de reseña y las sugerencias que indiquen `mobile_execution_available=false` deben presentarse como información; no inventar endpoints ni permisos. La equivalencia de lectura está implementada; escribir reseñas desde móvil sigue siendo un faltante previo, fuera del alcance de este GET.
 
 Los estados informativos nunca autorizan una operación. Al enviar una confirmación se siguen usando la versión y clave idempotente del contrato B2; 409 requiere consultar otra vez. La realización solo aparece tras el registro explícito del prestador, no porque termine el horario. GET no cambia notificaciones, mensajes, reservas ni pagos.
+
+## Nota de integración posterior a B3.2 (M2.0)
+
+La web B3.2 integrada en `main` **solo permite métodos de prueba en una SQLite temporal local**. No agrega acciones de pago a `/api/v1`: `payments.enabled=false` y `CheckoutContext.future_payment.enabled=false` continúan describiendo la API móvil. El ejemplo `confirm_reservation` de arriba representa el protocolo B2 general; su `mobile_execution_available=true` no es una autorización de cobro ni asegura que el comando pueda completarse en la fixture B3.2.
+
+**Diferencia operativa a considerar:** dentro de la fixture B3.2, el servidor exige primero la selección del método ficticio **a través del flujo web local**. Como no existe endpoint móvil para registrar ese método, la app nativa no debe anunciar que puede completar esa misma demostración desde `/api/v1`, ni intentar saltarse el requisito por petición directa. Esta brecha deberá abordarse en un incremento posterior con controles y pruebas independientes, no exponiendo una base sintética a Internet.
+
+El mapeo seguro y los estados que debe mostrar el cliente móvil están en `docs/api/M2.0-MOBILE-CHECKOUT-HANDOFF.md`. No se ha probado una aplicación nativa en este incremento.

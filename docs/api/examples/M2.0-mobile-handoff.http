@@ -1,0 +1,89 @@
+# Tekora M2.0 — peticiones de referencia para REST Client (.http)
+# NO ejecutar contra B3.2 en Internet, Laragon productivo o bases comerciales.
+# baseUrl = entorno privado de desarrollo aprobado con TLS; NO la SQLite/loopback B3.2.
+# Completa los valores localmente. Nunca subas tokens ni contraseñas a Git.
+@baseUrl = https://REEMPLAZAR-DOMINIO-PRIVADO/api/v1
+@token = REEMPLAZAR_TOKEN_SANCTUM_LOCAL
+@inquiryId = 42
+@quoteId = REEMPLAZAR_UUID_COTIZACION
+@reservationId = 17
+@version = REEMPLAZAR_VERSION_ACTUAL_DE_LA_RESERVA
+@availabilityRevision = REEMPLAZAR_REVISION_DEL_PASO_5
+@date = REEMPLAZAR_FECHA_DISPONIBLE_AAAA_MM_DD
+@time = REEMPLAZAR_HORA_DISPONIBLE_HH_MM
+@proposalKey = REEMPLAZAR_UUID_DE_PROPUESTA
+@commitKey = REEMPLAZAR_UUID_DE_CONFIRMACION
+
+### 1. Consultar seguimiento de una solicitud propia
+GET {{baseUrl}}/inquiries/{{inquiryId}}/journey
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### 2. Consultar cotizaciones propias
+GET {{baseUrl}}/inquiries/{{inquiryId}}/quotes
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### 3. Consultar cotización individual
+GET {{baseUrl}}/quotes/{{quoteId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### 4. Aceptar cotización explícitamente (solo si el cliente lo decidió)
+POST {{baseUrl}}/quotes/{{quoteId}}/accept
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"acknowledge":true}
+
+### 5. Consultar opciones y revisión de disponibilidad
+GET {{baseUrl}}/inquiries/{{inquiryId}}/reservation-options
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### 6. Proponer horario (solo con disponibilidad y cotización válidas)
+# availabilityRevision sale de data.availability_revision del paso 5.
+# date/time deben ser un horario libre dentro de data.min_date y data.max_date.
+# No ejecutar la secuencia completa automáticamente: esperar la decisión web del prestador.
+# quoteId sale de una cotización aceptada. Reutiliza proposalKey en reintentos de propuesta.
+POST {{baseUrl}}/inquiries/{{inquiryId}}/reservations
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "date": "{{date}}",
+  "time": "{{time}}",
+  "availability_revision": {{availabilityRevision}},
+  "quote_id": "{{quoteId}}",
+  "idempotency_key": "{{proposalKey}}"
+}
+
+### 7. Consultar reserva y versión actual
+GET {{baseUrl}}/reservations/{{reservationId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### 8. Consultar cotización retenida y reloj del servidor (NO iniciar pago)
+GET {{baseUrl}}/reservations/{{reservationId}}/checkout-context
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### 9. Confirmación final B2, NO cobro (no completar fixture web B3.2 sin método ficticio)
+# Esperar aceptación por web del prestador y volver a ejecutar los pasos 7 y 8.
+# Llamar solo si el entorno/política lo permite. version = data.version del paso 7
+# (o data.reservation.version del paso 8); no confundir con data.hold.version,
+# y commitKey debe ser un UUID diferente del usado al proponer horario.
+PATCH {{baseUrl}}/reservations/{{reservationId}}/commit
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "version": {{version}},
+  "idempotency_key": "{{commitKey}}"
+}
+
+# No hay POST /api/v1/payments ni POST móvil para métodos sintéticos B3.2.
+# Ante 409: consultar estado otra vez. No inventar éxito ni extender el hold.
