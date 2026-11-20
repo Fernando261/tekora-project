@@ -1,0 +1,25 @@
+{
+  "commit": "815879d448e17ef8955354c6a275201ba6f350fe",
+  "files": {
+    "app/Scheduling/Holds/AcceptedQuoteReference.php": "4ceac934e9a4505895052a752f1d8e235cfd08a4e0887dc0765dd85b3d5aca52",
+    "app/Scheduling/Holds/HoldActor.php": "8316725f063b33f0fee3093bc179d64cfe6f30fc8f08de8b07969b69e9aea9db",
+    "app/Scheduling/Holds/HoldClock.php": "cf4d16d1609abd7c5c12674fc454b557fa9df958d8891ecf2e35fc1d89e05cd7",
+    "app/Scheduling/Holds/HoldEvent.php": "fa494ac7888e26da79698f0fa775ca6513a3fa31b3dfb7bf882ae63c86273a2f",
+    "app/Scheduling/Holds/HoldReceipt.php": "0f23e3364fe49e40ec9952eb206f1d1dcb51da54f5f99ab0f5141eacae009793",
+    "app/Scheduling/Holds/HoldState.php": "9b9a65a84c85e64d1e9213090fe2a0685b4c6c6d8ab3c3efc6dd0fedef0cff90",
+    "app/Scheduling/Holds/HoldStore.php": "6dec835f7b0e6e066f9d10ae6bd9f45ed705b19134c8cab1243f0a94fea25866",
+    "app/Scheduling/Holds/HoldTime.php": "0bda019e2936437f6ab8c6ec6d153eff2eae29579c18e0c86b672946b549b972",
+    "app/Scheduling/Holds/HoldViolation.php": "0ffb71b7f629546a1063dea4b03329dbea8ecdf987fb30327aae61ec1b45318b",
+    "app/Scheduling/Holds/ReservationProposal.php": "9e1ccbb32c18aa10bc02cd5a1f295bb737ff9dfd3679a86b149a25f51ea1fc6b",
+    "app/Scheduling/Holds/SlotHold.php": "ab48d5d1f8414950a1ae03754ccfd809bc768faf61dd101f914028d4053e0013",
+    "app/Scheduling/Holds/SyntheticHoldEngine.php": "62bde7a85ef5b4de9020aa9272431787f8dbc8c825dbd375ce696cd4b8013556",
+    "app/Scheduling/Holds/SystemHoldClock.php": "4923266c8578c1c14ee5ea3c5be7630420e68ab94453a146c61a66b762134413",
+    "app/Scheduling/Holds/UtcInterval.php": "f8de18ba6f128ce86d9e48309db7ff2d15f7e1f3202f87a3637221e29f88339b",
+    "tests/Feature/SyntheticHoldIsolationTest.php": "836cc6d8e65b0e2baaed36135d18a595d1a24c49a3829e4092ef89ad563215ab",
+    "tests/Support/InMemorySlotHoldStore.php": "8bf129434c68857d098a6d2beafbece2b159bc43ea660ae7dff7448f9a4951b6",
+    "tests/Support/MutableSlotHoldClock.php": "3d3c3cefb2cbe236a998ee3fd6be555eab4839bca153d3c0a9cd858d0d5c470b",
+    "tests/Unit/SlotHoldReconstitutionTest.php": "2954fad98e7c242608f4c85fa1843d6eb318096f230d880a40d8983ad7606dae",
+    "tests/Unit/SyntheticSlotHoldEngineTest.php": "8ac2157d5fa0fda3bf594cdba1e0d3ae828888db2dc859cda55bb1269b338649",
+    "tests/Unit/UtcServiceIntervalTest.php": "aba7ddce703454615684880d53cea4f7fef2750ef2109e5a2a6cd50c6a86cf3d"
+  }
+}

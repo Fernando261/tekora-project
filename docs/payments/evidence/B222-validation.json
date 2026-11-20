@@ -1,0 +1,1073 @@
+{
+  "scope": "B2.2.2 isolated synthetic SQLite HoldStore",
+  "status": "READY FOR INDEPENDENT REVIEW",
+  "branch": "codex/payments-b222-sqlite-slot-holds",
+  "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+  "references": {
+    "PR32": "a7efd0e353435c46c633f02120d131507bdc7516",
+    "PR33": "815879d448e17ef8955354c6a275201ba6f350fe",
+    "PR34": "7775938dda5440c03964009847d4a8d9d63b0805"
+  },
+  "checks": {
+    "final-b222": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 12.816,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--log-junit",
+        "/app/review/final-b222.xml"
+      ],
+      "tests": 103,
+      "assertions": 505,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-single": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 8.235,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--group",
+        "b222-sqlite-single",
+        "--log-junit",
+        "/app/review/final-single.xml"
+      ],
+      "tests": 65,
+      "assertions": 283,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-connections": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 16.91,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--group",
+        "b222-sqlite-two-connections",
+        "--log-junit",
+        "/app/review/final-connections.xml"
+      ],
+      "tests": 9,
+      "assertions": 51,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-processes": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 8.857,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "tests/HoldsSqlitePrototype",
+        "--group",
+        "b222-sqlite-processes",
+        "--log-junit",
+        "/app/review/final-processes.xml"
+      ],
+      "tests": 10,
+      "assertions": 148,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-b21": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 8.911,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "tests/payments-b222-bootstrap.php",
+        "/b21/tests",
+        "--log-junit",
+        "/app/review/final-b21.xml"
+      ],
+      "tests": 80,
+      "assertions": 323,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-build": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 1.975,
+      "command": [
+        "npm",
+        "--offline",
+        "run",
+        "build"
+      ],
+      "warnings": [
+        "Two Vite woff2 references deferred to runtime; no visual font check"
+      ]
+    },
+    "final-main": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 117.166,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "-d",
+        "memory_limit=1G",
+        "vendor/bin/phpunit",
+        "--log-junit",
+        "/app/review/final-main.xml"
+      ],
+      "tests": 789,
+      "assertions": 10344,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final-pint": {
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 8.176,
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif,dst=/app",
+        "--mount",
+        "type=bind,src=/workspace/tekora-project/vendor,dst=/app/vendor,readonly",
+        "--mount",
+        "type=bind,src=/workspace/tekora-b222-check-qo10gcif-b21,dst=/b21,readonly",
+        "-e",
+        "TEKORA_B222_B21_REFERENCE=/b21",
+        "-e",
+        "TEKORA_B222_LAB_PARENT=/app/review/labs",
+        "-e",
+        "TEKORA_B222_RUN_TOKEN=<fresh random 64hex per command>",
+        "-w",
+        "/app",
+        "tekora-w62cb-php:local",
+        "php",
+        "vendor/bin/pint",
+        "--test",
+        "tests/Support/HoldsSqlite",
+        "tests/HoldsSqlitePrototype",
+        "tests/payments-b222-bootstrap.php"
+      ]
+    }
+  },
+  "runtime": {
+    "php": "8.4.27",
+    "php_binary": "/usr/local/bin/php",
+    "php_int_size": 8,
+    "os": "Linux",
+    "pdo_driver": "sqlite",
+    "sqlite": "3.46.1",
+    "encoding": "UTF-8",
+    "journal_mode": "delete",
+    "synchronous": 2,
+    "foreign_keys": 1,
+    "ignore_check_constraints": 0,
+    "recursive_triggers": 0,
+    "busy_timeout": 0,
+    "user_version": 222,
+    "tables": [
+      {
+        "name": "b222_clock",
+        "wr": 1,
+        "strict": 1
+      },
+      {
+        "name": "b222_hold_events",
+        "wr": 0,
+        "strict": 1
+      },
+      {
+        "name": "b222_hold_receipts",
+        "wr": 0,
+        "strict": 1
+      },
+      {
+        "name": "b222_holds",
+        "wr": 0,
+        "strict": 1
+      },
+      {
+        "name": "b222_provider_identities",
+        "wr": 1,
+        "strict": 1
+      }
+    ],
+    "catalog_counts": [
+      {
+        "type": "index",
+        "count": 12
+      },
+      {
+        "type": "table",
+        "count": 5
+      },
+      {
+        "type": "trigger",
+        "count": 22
+      }
+    ],
+    "explicit_indexes": [
+      {
+        "name": "b222_due",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE INDEX b222_due ON b222_holds(expires_at_us,hold_id) WHERE state='held'"
+      },
+      {
+        "name": "b222_provider_blocks",
+        "tbl_name": "b222_holds",
+        "sql": "CREATE INDEX b222_provider_blocks ON b222_holds(provider_profile_id,starts_at_us,ends_at_us) WHERE state IN ('held','committed')"
+      },
+      {
+        "name": "b222_receipt_hold",
+        "tbl_name": "b222_hold_receipts",
+        "sql": "CREATE INDEX b222_receipt_hold ON b222_hold_receipts(hold_id,event_version)"
+      }
+    ],
+    "foreign_key_definitions": {
+      "b222_clock": [],
+      "b222_hold_events": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "b222_holds",
+          "from": "hold_id",
+          "to": "hold_id",
+          "on_update": "RESTRICT",
+          "on_delete": "RESTRICT",
+          "match": "NONE"
+        }
+      ],
+      "b222_hold_receipts": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "b222_hold_events",
+          "from": "hold_id",
+          "to": "hold_id",
+          "on_update": "RESTRICT",
+          "on_delete": "RESTRICT",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "seq": 1,
+          "table": "b222_hold_events",
+          "from": "event_version",
+          "to": "version",
+          "on_update": "RESTRICT",
+          "on_delete": "RESTRICT",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "seq": 2,
+          "table": "b222_hold_events",
+          "from": "actor_scope",
+          "to": "actor_scope",
+          "on_update": "RESTRICT",
+          "on_delete": "RESTRICT",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "seq": 3,
+          "table": "b222_hold_events",
+          "from": "recorded_at_us",
+          "to": "occurred_at_us",
+          "on_update": "RESTRICT",
+          "on_delete": "RESTRICT",
+          "match": "NONE"
+        }
+      ],
+      "b222_holds": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "b222_provider_identities",
+          "from": "provider_profile_id",
+          "to": "provider_profile_id",
+          "on_update": "RESTRICT",
+          "on_delete": "RESTRICT",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "seq": 1,
+          "table": "b222_provider_identities",
+          "from": "provider_user_id",
+          "to": "provider_user_id",
+          "on_update": "RESTRICT",
+          "on_delete": "RESTRICT",
+          "match": "NONE"
+        }
+      ],
+      "b222_provider_identities": []
+    },
+    "integrity_check": "ok",
+    "foreign_key_check": []
+  },
+  "phpunit": "11.5.57",
+  "node": "24.22.1",
+  "npm": "11.9.0",
+  "vite": "6.4.5",
+  "source_sha256": {
+    "tests/Support/HoldsSqlite/B21Reference.php": "192b014b3a325c0fb5cd4b8eba95ebc1f8faba4ffcdf487761d9a0fa4cafa1dd",
+    "tests/Support/HoldsSqlite/HoldCommitUncertain.php": "25ee51c202287240dfda4da8e315a3d813110ee27fc883d28ae8c65aace1e364",
+    "tests/Support/HoldsSqlite/HoldFixture.php": "576f0ea467805c4277036a18c1bc6cd64e0ea8671a483642311c5ad0b7874769",
+    "tests/Support/HoldsSqlite/HoldValues.php": "14492576eb7226f78a8fa72ff5c69a3963cfe622b9137ec15ec91dac8568c0ad",
+    "tests/Support/HoldsSqlite/HoldWorker.php": "ced9f3acdb1b7262d4df4daa93f25fdf7a7256a230b54d5d3e43281850fdc3af",
+    "tests/Support/HoldsSqlite/ProcessPeer.php": "5672d7b2f29b659b75e6927ea6206571d1f65ce958d4ba42fb7f1ff113ec480a",
+    "tests/Support/HoldsSqlite/SqliteHoldBusy.php": "5ac954cd5bb53822544fa20fde06119e9bc8beca5c5b3f0e6f24d6b2ad438026",
+    "tests/Support/HoldsSqlite/SqliteHoldStore.php": "818f9e0e0925c9d9de85579a158baf46a7d67a996722b7199bb7967f53a890a4",
+    "tests/Support/HoldsSqlite/SyntheticHoldDatabase.php": "4c9f0f56b4951112db7101198a89b0981da2411beedb73923b9faca1e1297ae0",
+    "tests/Support/HoldsSqlite/b21-reference.json": "a61266bee19cbed25d8511f1ed6fbbd75f18f032b423fd2228873681e22ee28b",
+    "tests/Support/HoldsSqlite/schema.sql": "f925d80aeaaba7d17bf072c66655c9db9573792e7f74b0819076065f072fe9bd",
+    "tests/HoldsSqlitePrototype/HoldValuesTest.php": "bf66869b147fd81126af27d70017df980d8cae8df8fb6223ea587990257548cf",
+    "tests/HoldsSqlitePrototype/SqliteHoldConcurrencyTest.php": "0e4d473ef805af6244cbd507a5800f90d0feb17d49aa6ea9fdd086e21b073369",
+    "tests/HoldsSqlitePrototype/SqliteHoldConstraintsTest.php": "050575f94e9dd63a88056db7bbd3bd7dd898d3d1453d99186f6e5c6826c8d219",
+    "tests/HoldsSqlitePrototype/SqliteHoldLifecycleTest.php": "0906c455df67bc72bdc5523f98e2b2f2bf1ba28edba48c669cdc1750dd5419cf",
+    "tests/HoldsSqlitePrototype/SqliteHoldProcessTest.php": "2a1f412f3239e45fe6c456000e84f938d4a3b52a9d8496043352a974d6666ad3",
+    "tools/payments-b222/export_b21_reference.py": "bcca79c3acecac52fc5f239acd02fc9887d1d06429def2ad7909f28fbe3abac8",
+    "tests/payments-b222-bootstrap.php": "92c14380213e4094a280b2debe7ddfe5cb570e716962614ed18c303316918b06"
+  },
+  "B21_external_sources_verified": {
+    "app/Scheduling/Holds/AcceptedQuoteReference.php": "4ceac934e9a4505895052a752f1d8e235cfd08a4e0887dc0765dd85b3d5aca52",
+    "app/Scheduling/Holds/HoldActor.php": "8316725f063b33f0fee3093bc179d64cfe6f30fc8f08de8b07969b69e9aea9db",
+    "app/Scheduling/Holds/HoldClock.php": "cf4d16d1609abd7c5c12674fc454b557fa9df958d8891ecf2e35fc1d89e05cd7",
+    "app/Scheduling/Holds/HoldEvent.php": "fa494ac7888e26da79698f0fa775ca6513a3fa31b3dfb7bf882ae63c86273a2f",
+    "app/Scheduling/Holds/HoldReceipt.php": "0f23e3364fe49e40ec9952eb206f1d1dcb51da54f5f99ab0f5141eacae009793",
+    "app/Scheduling/Holds/HoldState.php": "9b9a65a84c85e64d1e9213090fe2a0685b4c6c6d8ab3c3efc6dd0fedef0cff90",
+    "app/Scheduling/Holds/HoldStore.php": "6dec835f7b0e6e066f9d10ae6bd9f45ed705b19134c8cab1243f0a94fea25866",
+    "app/Scheduling/Holds/HoldTime.php": "0bda019e2936437f6ab8c6ec6d153eff2eae29579c18e0c86b672946b549b972",
+    "app/Scheduling/Holds/HoldViolation.php": "0ffb71b7f629546a1063dea4b03329dbea8ecdf987fb30327aae61ec1b45318b",
+    "app/Scheduling/Holds/ReservationProposal.php": "9e1ccbb32c18aa10bc02cd5a1f295bb737ff9dfd3679a86b149a25f51ea1fc6b",
+    "app/Scheduling/Holds/SlotHold.php": "ab48d5d1f8414950a1ae03754ccfd809bc768faf61dd101f914028d4053e0013",
+    "app/Scheduling/Holds/SyntheticHoldEngine.php": "62bde7a85ef5b4de9020aa9272431787f8dbc8c825dbd375ce696cd4b8013556",
+    "app/Scheduling/Holds/SystemHoldClock.php": "4923266c8578c1c14ee5ea3c5be7630420e68ab94453a146c61a66b762134413",
+    "app/Scheduling/Holds/UtcInterval.php": "f8de18ba6f128ce86d9e48309db7ff2d15f7e1f3202f87a3637221e29f88339b",
+    "tests/Feature/SyntheticHoldIsolationTest.php": "836cc6d8e65b0e2baaed36135d18a595d1a24c49a3829e4092ef89ad563215ab",
+    "tests/Support/InMemorySlotHoldStore.php": "8bf129434c68857d098a6d2beafbece2b159bc43ea660ae7dff7448f9a4951b6",
+    "tests/Support/MutableSlotHoldClock.php": "3d3c3cefb2cbe236a998ee3fd6be555eab4839bca153d3c0a9cd858d0d5c470b",
+    "tests/Unit/SlotHoldReconstitutionTest.php": "2954fad98e7c242608f4c85fa1843d6eb318096f230d880a40d8983ad7606dae",
+    "tests/Unit/SyntheticSlotHoldEngineTest.php": "8ac2157d5fa0fda3bf594cdba1e0d3ae828888db2dc859cda55bb1269b338649",
+    "tests/Unit/UtcServiceIntervalTest.php": "aba7ddce703454615684880d53cea4f7fef2750ef2109e5a2a6cd50c6a86cf3d"
+  },
+  "protected_source_sha256": {
+    "database/migrations/0001_01_01_000000_create_users_table.php": "116d943de3cfa774f955fb309867f9c35099bae4c9f156e940200c08c045f1fd",
+    "database/migrations/0001_01_01_000001_create_cache_table.php": "20f769d3c11748c1cc42c41cd3789b0b9b2cd0db44ee22d378addac3ff8aed4f",
+    "database/migrations/0001_01_01_000002_create_jobs_table.php": "7c9c712adf4091c87bf2612f4d0dccdfa1df4501553e4ac068b83d7bd5462fa5",
+    "database/migrations/2025_08_02_085013_create_posts_table.php": "10ae453bb7d6898572fc067258fb70ae34177867da857cb002e148eb0b680669",
+    "database/migrations/2025_08_02_092303_create_reminders_table.php": "21dd7ff15a00216489147d58659600d123e02c062e592bc5ab8481a875e213c1",
+    "database/migrations/2025_08_13_022507_create_profesionistas_table.php": "801bdb43588f15c086978de665676dae2cbe1fae8164a98a1bbc861e08225daf",
+    "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php": "8297e7a16edeaf0cfa6c6b782529edba6b53842097a606839e201bcab8042216",
+    "database/migrations/2026_02_15_192040_create_likes_table.php": "2f0e5479eec39fdfb8994ac96ddbc8228537b31739e7c04e1f39097c089da4e7",
+    "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php": "103b5d9938e3551ce4698209350f0164b47e55c41d931927860a70150a483454",
+    "database/migrations/2026_02_15_200848_create_comments_table.php": "d2f7e8dfc7fed6dcf6632732f831802e9ba5811a8de829e38b901bc5a8c48162",
+    "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php": "53ae789fe749e10800a75dffcb4ec7032d4138369f68f6f63444ac9d8b9f523f",
+    "database/migrations/2026_02_16_031436_create_citas_table.php": "45bc07fbb7df8029b935d838d11b9661770c9493500df628c7e084007c152d41",
+    "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php": "e0636f0b5344270d3ef4903b7f9899b7ff19d5c00ec58ec0aa606a6635b9ebd6",
+    "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php": "10d42907cd47cf9b5d309d8f1755d7e780b2c36b35f7e64cd37d02b284397fc8",
+    "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php": "f9362f4e19867852dbf581fca198227800f5967bd2645a87e242f4fc1d42672c",
+    "database/migrations/2026_02_23_235730_create_emotions_table.php": "33693b3e6558fdb16fe1df52a4134292c20ee2184a539e275cf184959257589a",
+    "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php": "f586bb403a7ccda46e4201b0714f1f826735200322821afc4e2e55538c220f3f",
+    "database/migrations/2026_02_24_041833_add_media_to_posts_table.php": "a9c09ab56cae94eee830d07204fb2ada634077f879911586627817f4295aa6da",
+    "database/migrations/2026_02_24_041908_add_media_to_comments_table.php": "677cead791277c33487fa02e0a4a74b6466c0693ad1658087ba51f8c101869eb",
+    "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php": "13e13652d4ab690ee72282faeefc0fa668f947c0cb0e9ac0531b6e9462a7f008",
+    "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php": "b7e17c701414b0faa9a4a42327fb88811f9ef52f47038ac61ac01298ff594aba",
+    "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php": "81ede4a83f328602329d2a561b0ac67cab0c6ea06fc7f6b7d9bca4615f72c876",
+    "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php": "838eaa921f476d78050f17a0eca77b1af8c71ee10b6473a5d8a88ae1caf3d58a",
+    "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php": "fbdeab59c720f5abdc88f408bf3cd496dfc70abefd5118a088a707f364a389b2",
+    "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php": "a7e26defffaf5176b84a15f0bac265c01469a948d59ce5ed99e0f33829cc3395",
+    "database/migrations/2026_10_23_000001_create_provider_profiles_table.php": "859bc5f00a4f0e4f7e7649a287e5d060aa4b4681c1390aaf2b28a7d41f4868b5",
+    "database/migrations/2026_10_28_000000_create_service_categories_table.php": "7c436ef233df60dc33ec77b75892fa54e2afed000526c5f4d84fd7274ebd87f7",
+    "database/migrations/2026_10_28_000001_create_services_table.php": "9402e17acb1f803a1db7e0a9aebf02316a5aeefb34c83ae8f51f4932994a2b19",
+    "database/migrations/2026_10_28_000002_create_service_inquiries_table.php": "bc0ded238e6d42de488263454ca863f8589874d72acf4ff26b73990364a3715d",
+    "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php": "49ae7b0e1ee5d20098df8fcd2b93e85db242026c3000eb377a56e43c6f11f0b7",
+    "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php": "c8c464e419a1c63ca1b63b26e0b22b340210844c4f7a980800353f72ab85b28b",
+    "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php": "3fe86c122ac04efa7378d9c41c4f36a32a504bb4240bdca36ba1beac15fffa4e",
+    "database/migrations/2026_10_30_000002_create_provider_availability_tables.php": "026c92dbf6c808f8f9378379395dc36e8536df2d43c3fdb1ed74faad499badfb",
+    "database/migrations/2026_11_03_000000_create_service_reservations.php": "21031ec1dddd8ba0eac718e7d12a505a527964d97f30d2266d84e711dc2c3c58",
+    "database/migrations/2026_11_03_000001_create_service_reviews.php": "49d5140e9b4b7455f313e4f0123ba424aef48358ca24a76fec1276c502a86a98",
+    "database/migrations/2026_11_03_000002_create_activity_notifications.php": "0e6d333fb8fc7c769d91bd3d2c939b642c75ebe3248e503ff214e8df9a545b8b",
+    "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php": "c81ecde85ea5072188c468dcaf79776728b6eb8f684d63fc0d88a4908484ca75",
+    "routes/web.php": "021dd970cd98f9346703f6be653ee6aaa67e53802edfbc0b565b39425dbe9de2",
+    "routes/api.php": "722e9494ff6073637c592c499c59160e146ae156bdc4b8e25d50bd3b29ec1b71",
+    "routes/reservations.php": "ee468c8ae3b9b07e0246ae0426bb20dc2fdf9fb88a4349e0962e8515c896703e",
+    "app/Services/ReservationWorkflow.php": "34cfde281447bc3964cecda32d0a444dfed01acad3e243858645b321c225d3e9",
+    "app/Services/InquiryWorkflow.php": "1cff5e6a4e07f0186dcd1e6a0989376de8b31ef6f44ef2ad221de6e14975470b",
+    "docs/api/openapi.json": "11e94f81dc140341ca2e8cfbb94f2d5ef33f944f7c06a7e5060a9c168a4baa02",
+    "composer.json": "74fad1305694c0598cd576f06988d99d06ae83ff5f8e8332494d94ef21352dfe",
+    "composer.lock": "62b9f864b4b255b08d5271406f30a6c0393fd0c8dc838a71a5e8914b22f7cdfd",
+    "package.json": "549d710adb4f9c916edc8f952cc4f4262bdcf074fade55bafe299f045a2a167a",
+    "package-lock.json": "1b5b3f59b9c6e50a1698d491fd382aad1b792cd1541c570520cdc0995c8d7314"
+  },
+  "migrations_unchanged": 37,
+  "api_operations_unchanged": 21,
+  "api_version": "1.1.0",
+  "test_counts_not_additive": true,
+  "process_scenarios": [
+    {
+      "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"adjacent\"",
+      "path": "review/labs/tekora-b222-5cb570c467fcb12d21a16dcb210131ed/process-ac9e7523283abc1d.json",
+      "sha256": "de734e9d59c3f0b918aad87ec79ff98d913f759abdc0d02e245c33fcaa8bbba9",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 17,
+          "phases": [
+            "READY",
+            "RUN",
+            "LOCK_ACQUIRED",
+            "CONTINUE",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 18,
+          "phases": [
+            "READY",
+            "RUN",
+            "BUSY",
+            "RETRY",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_process_restart_recovers_committed_intention_or_rolls_back_uncommitted_state with data set #1",
+      "path": "review/labs/tekora-b222-610b47bb8fde3975b3450a545e3147c3/process-ca7832311cebf386.json",
+      "sha256": "6873b624726ace5136afad82360c9266bc755ccc9d17ff50e373cf90c3f23f65",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 41,
+          "phases": [
+            "READY",
+            "RUN",
+            "COMMITTED"
+          ],
+          "outcomes": [],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 43,
+          "phases": [
+            "READY",
+            "RUN",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_release_replay_across_processes_preserves_one_terminal_event",
+      "path": "review/labs/tekora-b222-653f7df796fa2380c747063e6d76d2dd/process-a83242eedb84053c.json",
+      "sha256": "d913d9c70ed12469c670a0a2e929b707be926585a930ba62bdc2bc1ce076faba",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 45,
+          "phases": [
+            "READY",
+            "RUN",
+            "RESULT"
+          ],
+          "outcomes": [
+            "released"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 46,
+          "phases": [
+            "READY",
+            "RUN",
+            "RESULT"
+          ],
+          "outcomes": [
+            "released"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_commit_expiry_and_new_acquisition_are_serialized_at_exact_deadline with data set #1",
+      "path": "review/labs/tekora-b222-6b1f89cdfa5fc0ff7cf9f2267d59c1f1/process-86d4111d8aa53ffc.json",
+      "sha256": "c84cf0dbabbac66d8e63271adcdfabd2b049efa253f4abbcf14148319b02dbd9",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 33,
+          "phases": [
+            "READY",
+            "RUN",
+            "LOCK_ACQUIRED",
+            "CONTINUE",
+            "RESULT"
+          ],
+          "outcomes": [
+            "invalid_state"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 34,
+          "phases": [
+            "READY",
+            "RUN",
+            "BUSY",
+            "RETRY",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"partial-overlap\"",
+      "path": "review/labs/tekora-b222-9cea8317a4b57491f18014471f585977/process-1f3763d9df9db174.json",
+      "sha256": "3514397f981ebc8d62ef246f3a5fe1b65fd0239ac49535d9d25007fadc3ee14b",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 13,
+          "phases": [
+            "READY",
+            "RUN",
+            "LOCK_ACQUIRED",
+            "CONTINUE",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 14,
+          "phases": [
+            "READY",
+            "RUN",
+            "BUSY",
+            "RETRY",
+            "RESULT"
+          ],
+          "outcomes": [
+            "slot_conflict"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_process_restart_recovers_committed_intention_or_rolls_back_uncommitted_state with data set #0",
+      "path": "review/labs/tekora-b222-a00b61f4debc3eeb33244d1ead3de2c0/process-256982f0f5b4324c.json",
+      "sha256": "64f9b97a05d25e549812f95cb7d1f83f157790f5d32c47eb5385d3bf09f89eb4",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 37,
+          "phases": [
+            "READY",
+            "RUN",
+            "BEFORE_COMMIT"
+          ],
+          "outcomes": [],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 39,
+          "phases": [
+            "READY",
+            "RUN",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"other-provider\"",
+      "path": "review/labs/tekora-b222-a544667ed77fbb881be6116d5efc7d4e/process-99561c733d7ae7ec.json",
+      "sha256": "25e16c35bc35398edcb93286eca402e377f9e86617e53373e949e2dcba3b9753",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 21,
+          "phases": [
+            "READY",
+            "RUN",
+            "LOCK_ACQUIRED",
+            "CONTINUE",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 22,
+          "phases": [
+            "READY",
+            "RUN",
+            "BUSY",
+            "RETRY",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"same-intention\"",
+      "path": "review/labs/tekora-b222-aea64efcade0248edf6f54a6d3b038f5/process-812811c583df72d9.json",
+      "sha256": "aaf0f97c82bfb392154a21cf162984fe15cb0248a58e2959e3a69373a9dcc112",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 25,
+          "phases": [
+            "READY",
+            "RUN",
+            "LOCK_ACQUIRED",
+            "CONTINUE",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 26,
+          "phases": [
+            "READY",
+            "RUN",
+            "BUSY",
+            "RETRY",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_commit_expiry_and_new_acquisition_are_serialized_at_exact_deadline with data set #0",
+      "path": "review/labs/tekora-b222-d54123dc7d8554a6efad09eadfa50a66/process-b1fd4b6842ecaa0a.json",
+      "sha256": "51d6a4e6ef2b2336809df6dc0f881014139b29d0836ac5219d506828fc258123",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 29,
+          "phases": [
+            "READY",
+            "RUN",
+            "LOCK_ACQUIRED",
+            "CONTINUE",
+            "RESULT"
+          ],
+          "outcomes": [
+            "committed"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 30,
+          "phases": [
+            "READY",
+            "RUN",
+            "BUSY",
+            "RETRY",
+            "RESULT"
+          ],
+          "outcomes": [
+            "slot_conflict"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    },
+    {
+      "scenario": "test_two_independent_processes_share_one_persistent_authority with data set \"same-slot\"",
+      "path": "review/labs/tekora-b222-e04b9a295b4a0730d196b6cad6ef4253/process-1b830a4a7b018a68.json",
+      "sha256": "4a9f0693a947335c746fd917dd721d116eeae985a79cb12f08c1c5e2b56ff27d",
+      "coordinator_pid": 1,
+      "workers": [
+        {
+          "pid": 9,
+          "phases": [
+            "READY",
+            "RUN",
+            "LOCK_ACQUIRED",
+            "CONTINUE",
+            "RESULT"
+          ],
+          "outcomes": [
+            "held"
+          ],
+          "diagnostic_warning_retained": true
+        },
+        {
+          "pid": 10,
+          "phases": [
+            "READY",
+            "RUN",
+            "BUSY",
+            "RETRY",
+            "RESULT"
+          ],
+          "outcomes": [
+            "slot_conflict"
+          ],
+          "diagnostic_warning_retained": true
+        }
+      ]
+    }
+  ],
+  "evidence_sha256": {
+    "final-b222.log": "3555adf3eae93f8891239b3c49011609ed38a5bd03ae61c3c835816508c30319",
+    "final-b222.xml": "be6a7be8f99142f0b9d754f8d6f4ad4b4e646d1850ba40f9c6f24d0f2b54c975",
+    "runtime.json": "f859a8ecc9b32d0f472af098b391b9f203595452e95ad37f89583d5d4be4d104",
+    "final-single.xml": "683fc6e34f78c6d4af484bdde7c099854d4c98f227efe3e52fc98a758e7a8db1",
+    "final-executions.json": "84852df84e92b867288f300d4566faee615a638ae002f128ae7cc3d5bfb03173",
+    "initial.xml": "a79c3f7119f3e3fd781fb960274ec2b2247134deeedb2e2abf930c262cfee84d",
+    "final-build.log": "dc64e6bc8e974c9a9a3054b1213291cfe3fd5bf313ad9a9b0c873f07e0a9787a",
+    "final-single.log": "cff90593dd886ad09aee493da226cc7f7cd24df30e93dd04acb6a030f162299f",
+    "final-b222-before-scenario-labels.xml": "d6a3ab8b2ad9633bedd1249cb18ee0646a002db432dbe6f7530f5b52a4a754eb",
+    "intermediate.xml": "4d40a75bfb8cb3f2d9191d4e0b2bbbaa273faac569895509f11e072ab90cff73",
+    "final-connections.xml": "d1454b9a2b2541864525bd5182e02fa6de824f99fba100512b3fda6f4da3785f",
+    "final-pint-before-scenario-labels.log": "63a9e92c9368ef46d5ce2bffc2398498ef5e27e0b23a7460089052740ea5d132",
+    "processes-v2.xml": "d3a0027da6c852bc4103f4d9f37af951593b11e2ea6713616db179c07b32d941",
+    "final-main.log": "321e61a25b4d8a431470a029acb8ec5c18adb38b0c04b349a41717b09790c5e3",
+    "final-processes.log": "298b42b3ce18a2f5f7dbf66bf1b25a4829af0a2052a5532bb1a7fd49b1f05ddd",
+    "final-b222-before-scenario-labels.log": "7399ee88b70caf950a2ed247f51a7543599cd82307d574aa65208922945d0b98",
+    "runtime-final.log": "81994d55f7fd92b55be9f16e807c73c741413fc560c482cd41632bb4925a3080",
+    "processes-v3.xml": "6acca2d1c2ecae81531ff3e5dd00a82ae8b57a8930c21838b1d87d8cde1d9ed8",
+    "processes.xml": "57dcdf75d61ce2924473fb86cb00d81f2bbd8366f8260c0b2886300a1fc65502",
+    "final-processes.xml": "0299e179ca29df46488f73373af79b857ce2330593cd03a2969a7e232933e281",
+    "final-connections.log": "f66598444b2f40c482f559e4703ecf6536bfc14e9920973313b7ca6dcdb2d6bc",
+    "final-processes-before-scenario-labels.log": "abba4cd6d1230a0867c94061856e1c289b998a3e5413b65cc8c685d738ebef47",
+    "final-main.xml": "bf67ad79fc1498649cc7fb99a888c74a986c8bfc7bfc334b528713d8bd72ff70",
+    "final-pint.log": "63a9e92c9368ef46d5ce2bffc2398498ef5e27e0b23a7460089052740ea5d132",
+    "final-b21.log": "d3d96e5cf2e69d869688589db6e420676d916963d9ca7a5b38d8c6b7bf3e8bba",
+    "final-b21.xml": "88630375b8d19d1552175342edd66d9c52195dc3aa244b1337fd4a3e38cca08c",
+    "final-processes-before-scenario-labels.xml": "7dc9ea9012746f2bb59dc33d734a78d0ccc65027ed5607a5fea891f0d50dc7c0",
+    "processes.log": "86a5a80a5ccdb58694da734cd920295ff371bdf427b29bffc53a6b15065527e4",
+    "processes-v2.log": "2bd95a001fa4bd3a27eed3195d3dd8ed78f01f72cc03ae7cfee9df0c7a9773e2",
+    "process-debug.log": "abc10e14fff0034592104c71dad04e8fdbd5d2b9c567011d37eeadbfd8300a2e",
+    "process-debug2.log": "79a16849c884a18021683db53adcea26b30216968eba69c1d157ac7562b68314"
+  },
+  "validation_root": "/workspace/tekora-b222-check-qo10gcif",
+  "initial_harness_failures": [
+    {
+      "log": "processes.log",
+      "tests": 10,
+      "errors": 10,
+      "reason": "Uninitialized pipe array in test harness; fixed without changing expectations."
+    },
+    {
+      "log": "processes-v2.log",
+      "tests": 10,
+      "errors": 10,
+      "reason": "Runtime warning on stdout violated JSON protocol; diagnostics routed to stderr and retained, no warning suppression."
+    }
+  ],
+  "isolation": {
+    "new_databases_only": true,
+    "network": "none for PHP/Pint containers; npm --offline",
+    "vendor": "read-only",
+    "existing_env_read": false,
+    "existing_database_access": false,
+    "real_media_read": false,
+    "production_binding": false,
+    "historical_roots_touched": false,
+    "W62e_used": false,
+    "B1_or_B21_merged": false,
+    "financial_integration": false,
+    "check_constraints_disabled": false,
+    "foreign_keys_disabled": false,
+    "WAL_used": false,
+    "resources_deleted": false
+  },
+  "schema": {
+    "tables": 5,
+    "strict_tables": 5,
+    "without_rowid": [
+      "b222_provider_identities",
+      "b222_clock"
+    ],
+    "reason_without_rowid": "Reject explicit NULL instead of silently autogenerating INTEGER PRIMARY KEY identity",
+    "triggers": 22,
+    "explicit_indexes": 3,
+    "catalog_indexes": 12
+  },
+  "not_run": [
+    "Independent acceptance review",
+    "WAL/BUSY_SNAPSHOT",
+    "Power-loss or physical recovery",
+    "Real driver/OS connection loss during COMMIT",
+    "Windows/PHP 8.2; lab currently requires POSIX identity checks",
+    "Minimum SQLite 3.38",
+    "Composer/npm audits",
+    "Productive authorization/integration and legacy occupancy",
+    "Joint financial transaction or B1 fixture integration",
+    "Financial providers/payments",
+    "GitHub CI"
+  ],
+  "pending_approvals": [
+    "Legal",
+    "Fiscal",
+    "Commercial",
+    "Financial provider"
+  ],
+  "full_suite_class_counts": [
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\HoldValuesTest",
+      "tests": 19,
+      "assertions": 23,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldConcurrencyTest",
+      "tests": 9,
+      "assertions": 51,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldConstraintsTest",
+      "tests": 42,
+      "assertions": 157,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldLifecycleTest",
+      "tests": 23,
+      "assertions": 126,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "name": "Tests\\HoldsSqlitePrototype\\SqliteHoldProcessTest",
+      "tests": 10,
+      "assertions": 148,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "warnings": [
+    "sebastian/version Git helper proc_open/posix_spawn diagnostic retained, including worker stderr",
+    "Two Vite woff2 references deferred to runtime; no visual font check"
+  ]
+}
