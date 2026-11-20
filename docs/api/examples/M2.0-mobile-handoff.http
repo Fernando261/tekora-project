@@ -9,7 +9,8 @@
 @reservationId = 17
 @version = 1
 @availabilityRevision = 1
-@idempotencyKey = REEMPLAZAR_UUID_UNICO_POR_INTENCION
+@proposalKey = REEMPLAZAR_UUID_DE_PROPUESTA
+@commitKey = REEMPLAZAR_UUID_DE_CONFIRMACION
 
 ### 1. Consultar seguimiento de una solicitud propia
 GET {{baseUrl}}/inquiries/{{inquiryId}}/journey
@@ -41,7 +42,7 @@ Authorization: Bearer {{token}}
 
 ### 6. Proponer horario (solo con disponibilidad y cotización válidas)
 # availabilityRevision sale de la respuesta del paso 5.
-# quoteId sale de una cotización aceptada. Reutiliza idempotencyKey en reintentos.
+# quoteId sale de una cotización aceptada. Reutiliza proposalKey en reintentos de propuesta.
 POST {{baseUrl}}/inquiries/{{inquiryId}}/reservations
 Accept: application/json
 Content-Type: application/json
@@ -52,7 +53,7 @@ Authorization: Bearer {{token}}
   "time": "09:00",
   "availability_revision": {{availabilityRevision}},
   "quote_id": "{{quoteId}}",
-  "idempotency_key": "{{idempotencyKey}}"
+  "idempotency_key": "{{proposalKey}}"
 }
 
 ### 7. Consultar reserva y versión actual
@@ -67,7 +68,7 @@ Authorization: Bearer {{token}}
 
 ### 9. Confirmación final B2, NO cobro (no completar fixture web B3.2 sin método ficticio)
 # Llamar solo si el entorno/política lo permite. version viene del servidor,
-# y la clave debe ser una intención UUID diferente de la usada al proponer horario.
+# y commitKey debe ser un UUID diferente del usado al proponer horario.
 PATCH {{baseUrl}}/reservations/{{reservationId}}/commit
 Accept: application/json
 Content-Type: application/json
@@ -75,7 +76,7 @@ Authorization: Bearer {{token}}
 
 {
   "version": {{version}},
-  "idempotency_key": "{{idempotencyKey}}"
+  "idempotency_key": "{{commitKey}}"
 }
 
 # No hay POST /api/v1/payments ni POST móvil para métodos sintéticos B3.2.
