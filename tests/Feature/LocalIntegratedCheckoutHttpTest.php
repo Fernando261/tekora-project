@@ -128,7 +128,10 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
             $clientPage->getContent()
         );
         $this->assertStringContainsString('referrerpolicy="no-referrer"', $clientPage->getContent());
-        $clientPage->assertSee('Confirmar definitivamente mi reserva');
+        // A held booking in the disposable B3.2 fixture must offer checkout
+        // first; the final commit form appears only after a valid synthetic choice.
+        $clientPage->assertSee('Antes de confirmar definitivamente tu reserva')
+            ->assertDontSee('data-hold-confirm', false);
 
         $this->actingAs($provider, 'web')->get($inquiryUrl)->assertOk()
             ->assertSee('Consultar recepción de efectivo')
