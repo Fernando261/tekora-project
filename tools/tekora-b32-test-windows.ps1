@@ -31,7 +31,8 @@ try {
     $evidence = Join-Path $env:TEMP ('tekora-b32-validation-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $evidence -ErrorAction Stop | Out-Null
 
-    foreach ($file in @('app/Http/Controllers/LocalIntegratedCheckoutController.php',
+    foreach ($file in @('app/Services/ReservationWorkflow.php',
+        'app/Http/Controllers/LocalIntegratedCheckoutController.php',
         'app/Payments/LocalCheckoutAttemptStore.php', 'tools/tekora-b32-fixture.php',
         'tests/Feature/LocalCheckoutAttemptStoreTest.php',
         'tests/Feature/LocalIntegratedCheckoutHttpTest.php',
