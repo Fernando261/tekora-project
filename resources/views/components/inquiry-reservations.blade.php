@@ -19,11 +19,11 @@
           && in_array('commit', $journey['reservation']['actions'], true)
           && $journeyReservation->effectiveStatus() === \App\Enums\ReservationStatus::Held
           && $journeyReservation->hold?->remainingSeconds() > 0)
+        @php($testSelectionSaved = ($journey['confirmation_readiness']['synthetic_web_requirement'] ?? null) === 'satisfied')
         <aside class="account-note" aria-labelledby="checkout-demo-invitation-title" data-checkout-demo-invitation>
-          <h3 id="checkout-demo-invitation-title">Continuar al pago</h3>
-          <p>Consulta el importe acordado y elige cómo pagar. Esta versión local solo acepta instrumentos ficticios.</p>
-          <a class="account-button secondary" href="{{ route('checkout.local.show', $journeyReservation->id) }}" rel="noreferrer" referrerpolicy="no-referrer">Elegir método de pago</a>
-          <p class="account-help">Al terminar, confirma tu reserva desde aquí antes de que venza la retención. El pago de prueba no sustituye esa confirmación.</p>
+          <h3 id="checkout-demo-invitation-title">{{ $testSelectionSaved ? 'Selección de prueba registrada' : 'Checkout de prueba' }}</h3>
+          <p>{{ $testSelectionSaved ? 'Confirma la reserva desde esta solicitud antes del vencimiento.' : 'Consulta el importe acordado y registra una selección ficticia antes de confirmar la reserva.' }}</p>
+          <a class="account-button secondary" href="{{ route('checkout.local.show', $journeyReservation->id) }}" rel="noreferrer" referrerpolicy="no-referrer">{{ $testSelectionSaved ? 'Consultar resultado de prueba' : 'Elegir método de pago de prueba' }}</a>
         </aside>
       @endif
       <details class="cj-event-details"><summary>Historial de este horario</summary><ol class="tk-ops-timeline">@foreach($journeyReservation->events->sortBy('version') as $event)<li><strong>{{ \App\Enums\ReservationStatus::from($event->to_status)->label() }}</strong><span>{{ $event->actor?->name ?? 'Sistema' }} · <x-inquiry-time :at="\Carbon\CarbonImmutable::parse($event->occurred_at_utc, 'UTC')" /></span></li>@endforeach</ol></details>

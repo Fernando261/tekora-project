@@ -113,18 +113,22 @@ final class LocalCheckoutAttemptStore
                 return $row;
             }
             abort_unless($row['status'] === 'awaiting_cash', 409);
-            $current = $reservation->fresh();
-            $isLiveHold = $current->status === ReservationStatus::Requested
-                && $current->hold?->state === 'held'
-                && $current->hold->remainingSeconds() > 0;
-            $isCommittedBooking = $current->status === ReservationStatus::Confirmed
-                && $current->hold?->state === 'committed';
-            abort_unless($isLiveHold || $isCommittedBooking, 409);
+            abort_unless($this->cashReceptionWindowOpen($reservation->fresh()), 409);
             DB::table('synthetic_checkout_attempts')
                 ->where('reservation_id', $reservation->id)->where('status', 'awaiting_cash')
                 ->update(['status' => 'cash_received', 'received_at' => now('UTC')->toISOString()]);
 
             return $this->current($reservation->id) ?? abort(503);
         }, 3);
+    }
+
+    /** The timing condition only. Actor and attempt validation remain in receiveCash. */
+    public function cashReceptionWindowOpen(ServiceReservation $reservation): bool
+    {
+        return ($reservation->status === ReservationStatus::Requested
+                && $reservation->hold?->state === 'held'
+                && $reservation->hold->remainingSeconds() > 0)
+            || ($reservation->status === ReservationStatus::Confirmed
+                && $reservation->hold?->state === 'committed');
     }
 }

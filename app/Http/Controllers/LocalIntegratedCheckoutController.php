@@ -106,7 +106,8 @@ final class LocalIntegratedCheckoutController extends Controller
         }
 
         return response()->view('checkout.local-cash', ['reservation' => $reservation,
-            'attempt' => $attempt])->withHeaders(['Cache-Control' => 'no-store, private', 'X-Robots-Tag' => 'noindex, nofollow']);
+            'attempt' => $attempt, 'canReceiveCash' => $store->cashReceptionWindowOpen($item)])
+            ->withHeaders(['Cache-Control' => 'no-store, private', 'X-Robots-Tag' => 'noindex, nofollow']);
     }
 
     public function receiveCash(Request $request, int $reservation, LocalCheckoutAttemptStore $store)

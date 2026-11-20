@@ -2,7 +2,9 @@
 
 Marketplace de servicios con Laravel 12, Blade y JavaScript. Una cuenta central `User` permite contratar, ofrecer servicios o ambas cosas mediante roles y permisos.
 
-W6.2b retira la experiencia anterior: pantallas, rutas, acceso profesional separado, Google Calendar, PDF emocional y scaffold exclusivo. No migra identidades ni convierte citas. Las 37 migraciones históricas y las referencias de medios se conservan; no hay purga de datos. Consultar [alcance y validación W6.2b](docs/web/w6/W62B.md).
+El recorrido web actual reúne solicitud, conversación, cotización, horario, confirmación, realización y reseña. La demostración W7.1 usa la fixture local B3.2 y dos cuentas sintéticas. Consulta [preparación y recorrido W7.1](docs/web/w7/W71-END-TO-END.md).
+
+En una entrega anterior, W6.2b retiró la experiencia anterior: pantallas, rutas, acceso profesional separado, Google Calendar, PDF emocional y scaffold exclusivo. No migra identidades ni convierte citas. Las 37 migraciones históricas y las referencias de medios se conservan; no hay purga de datos. Consultar [alcance y validación W6.2b](docs/web/w6/W62B.md).
 
 ## Requisitos
 
@@ -16,8 +18,8 @@ W6.2b retira la experiencia anterior: pantallas, rutas, acceso profesional separ
 Es preferible usar una carpeta nueva para no mezclar cambios locales. Desde su carpeta de proyectos:
 
 ```powershell
-git clone --branch codex/w62b-tekora-only --single-branch https://github.com/Fernando261/tekora-project.git tekora-w62b
-Set-Location .\tekora-w62b
+git clone --branch main --single-branch https://github.com/Fernando261/tekora-project.git tekora-web
+Set-Location .\tekora-web
 php --version
 php --ini
 php -m
@@ -31,7 +33,7 @@ if (-not (Test-Path .\.env)) {
 }
 ```
 
-Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-w62b/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
+Revisar manualmente el entorno antes de migrar: `DB_CONNECTION=sqlite`, sin `DB_URL` que lo sustituya. Puede dejarse `DB_DATABASE` sin definir para usar el archivo `database/database.sqlite`, o indicar una ruta absoluta con barras `/`, por ejemplo `C:/proyectos/tekora-web/database/database.sqlite`. No copiar una configuración de producción sin revisar sus conexiones. No publicar `.env`.
 
 **El siguiente bloque es solo para una instalación nueva, sin datos. Si la base ya existe, seguir el procedimiento de actualización de la guía, sin borrar el archivo.**
 
@@ -63,7 +65,7 @@ El seed es opcional y exclusivamente de desarrollo: `php artisan db:seed`. Crea 
 | `FILESYSTEM_DISK` | Disco predeterminado; los avatares utilizan explícitamente el disco público. |
 | `MAIL_MAILER`, `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME` | Correo. El transporte `log` no envía mensajes y puede registrar enlaces de recuperación: proteger los logs. |
 
-Los valores privados se configuran localmente y no se agregan al repositorio. W6.2b no cambia `.env.example`, `.env` ni credenciales. La aplicación ya no consume configuración Google.
+Los valores privados se configuran localmente y no se agregan al repositorio. El repositorio incluye `.env.example` como referencia para instalaciones nuevas. La aplicación ya no consume configuración Google.
 
 ## Verificación y actualización segura
 
