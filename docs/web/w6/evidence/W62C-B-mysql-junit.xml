@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/app/tests/Integration/mysql-phpunit.xml" tests="6" assertions="18" errors="0" failures="1" skipped="0" time="1.013669">
+    <testsuite name="Explicit disposable MySQL lab" tests="6" assertions="18" errors="0" failures="1" skipped="0" time="1.013669">
+      <testsuite name="Tests\Integration\MySqlRetirementLabTest" file="/app/tests/Integration/MySqlRetirementLabTest.php" tests="6" assertions="18" errors="0" failures="1" skipped="0" time="1.013669">
+        <testsuite name="Tests\Integration\MySqlRetirementLabTest::test_wrong_identity_stops_before_ddl" tests="5" assertions="15" errors="0" failures="0" skipped="0" time="0.198132">
+          <testcase name="test_wrong_identity_stops_before_ddl with data set #0" file="/app/tests/Integration/MySqlRetirementLabTest.php" line="101" class="Tests\Integration\MySqlRetirementLabTest" classname="Tests.Integration.MySqlRetirementLabTest" assertions="3" time="0.152264"/>
+          <testcase name="test_wrong_identity_stops_before_ddl with data set #1" file="/app/tests/Integration/MySqlRetirementLabTest.php" line="101" class="Tests\Integration\MySqlRetirementLabTest" classname="Tests.Integration.MySqlRetirementLabTest" assertions="3" time="0.012433"/>
+          <testcase name="test_wrong_identity_stops_before_ddl with data set #2" file="/app/tests/Integration/MySqlRetirementLabTest.php" line="101" class="Tests\Integration\MySqlRetirementLabTest" classname="Tests.Integration.MySqlRetirementLabTest" assertions="3" time="0.010925"/>
+          <testcase name="test_wrong_identity_stops_before_ddl with data set #3" file="/app/tests/Integration/MySqlRetirementLabTest.php" line="101" class="Tests\Integration\MySqlRetirementLabTest" classname="Tests.Integration.MySqlRetirementLabTest" assertions="3" time="0.010717"/>
+          <testcase name="test_wrong_identity_stops_before_ddl with data set #4" file="/app/tests/Integration/MySqlRetirementLabTest.php" line="101" class="Tests\Integration\MySqlRetirementLabTest" classname="Tests.Integration.MySqlRetirementLabTest" assertions="3" time="0.011793"/>
+        </testsuite>
+        <testcase name="test_all_37_historical_migrations_must_install_without_edits_or_skips" file="/app/tests/Integration/MySqlRetirementLabTest.php" line="126" class="Tests\Integration\MySqlRetirementLabTest" classname="Tests.Integration.MySqlRetirementLabTest" assertions="3" time="0.815536">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Integration\MySqlRetirementLabTest::test_all_37_historical_migrations_must_install_without_edits_or_skips
+BLOCKED: historical MySQL install; see sanitized lab evidence. No retirement, fixtures or restore may proceed.
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'PASS'
++'BLOCKED'
+
+/app/tests/Integration/MySqlRetirementLabTest.php:166</failure>
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
