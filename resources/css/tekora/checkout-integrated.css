@@ -29,7 +29,25 @@
 .b32-heading-aside { max-width:285px;margin:0 0 2px;color:#c0d8e5;font-size:13px;line-height:1.7; }
 .b32-heading-aside small { display:block;margin-top:9px;font-size:10px;letter-spacing:.08em;color:#83c7d9;text-transform:uppercase; }
 .b32-shell.co-shell { background:linear-gradient(122deg,#bce9f90e 0%,#0b1e2de8 30%,#051322f2 82%);border:1px solid #9dd9ef38;border-radius:27px 27px 7px 27px;overflow:visible; }
-.b32-shell .co-shell-header { padding:24px 35px; }
+/* account-base.css applies white/sticky styles to every <header>; remove
+ * those global defaults only for the nested Blue Obsidian checkout header. */
+.b32-checkout.tk-checkout .b32-shell.co-shell > header.co-shell-header {
+  position:static;
+  top:auto;
+  z-index:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  min-height:0;
+  padding:24px 35px;
+  margin:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:#c9e9f4;
+}
 .b32-order.co-order-bar { margin:0 34px 8px;padding:16px 20px;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:18px;align-items:center; }
 .b32-order >div:first-child { min-width:0; }
 .b32-order .b32-order-total { padding-left:20px;border-left:1px solid #90e0ef23;text-align:right; }
@@ -39,6 +57,21 @@
 .b32-order .b32-hold time { font-size:24px;line-height:1.3;color:#98e2ed; }
 .b32-order .b32-hold small { font-size:10px;line-height:1.4; }
 .b32-stage.co-stage { grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:46px;min-height:470px;padding:12px 46px 34px;align-items:center;overflow:visible; }
+/* Results are readable without a long blank vertical lead-in. */
+.b32-checkout[data-checkout-state="success"] .b32-stage.co-stage,
+.b32-checkout[data-checkout-state="awaiting"] .b32-stage.co-stage {
+  min-height:0;
+  padding-top:25px;
+  padding-bottom:24px;
+  align-items:start;
+}
+.b32-checkout[data-checkout-state="success"] .b32-result,
+.b32-checkout[data-checkout-state="awaiting"] .b32-result {
+  align-self:start;
+}
+.b32-checkout #b32-payment-stage, .b32-checkout #b32-result-title {
+  scroll-margin-top:24px;
+}
 .b32-card-column.co-card-column { min-height:300px; }
 .b32-card-column .co-card-position { max-width:400px; }
 .b32-card-column .co-card-face { color:#eafbff; }
