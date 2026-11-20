@@ -10,6 +10,6 @@ final class ContractingJourneyResource extends JsonResource
     public function toArray(Request $request): array
     {
         return array_intersect_key($this->resource, array_flip(['inquiry', 'viewer_role', 'participants', 'progress', 'next_action', 'commercial',
-            'reservation', 'review', 'closure', 'history', 'conversation', 'payments', 'server_now']));
+            'reservation', 'review', 'closure', 'history', 'conversation', 'payments', 'confirmation_readiness', 'server_now']));
     }
 }
