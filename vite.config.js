@@ -20,6 +20,7 @@ export default defineConfig({
                 'resources/css/tekora/identity.css',
                 'resources/js/tekora/identity.js',
                 'resources/css/tekora/checkout-demo.css',
+                'resources/css/tekora/checkout-integrated.css',
                 'resources/js/tekora/checkout-demo.js',
                 'resources/js/tekora/checkout-demo-receiver.js',
             ],
