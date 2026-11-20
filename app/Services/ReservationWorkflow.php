@@ -307,6 +307,13 @@ class ReservationWorkflow
                 throw new ReservationFailure('Los participantes ya no permiten confirmar esta reserva.');
             }
             $this->proposalQuote($reservation->inquiry, ['quote_id' => $reservation->quote_id]);
+            // The original B2 contract stays independent in every non-demo
+            // environment. Only B3.2's private loopback SQLite fixture requires
+            // the customer to select a synthetic payment method before commit.
+            if (\App\Http\Controllers\LocalIntegratedCheckoutController::permitsSyntheticRequest(request())
+                && ! app(\App\Payments\LocalCheckoutAttemptStore::class)->permitsCommit($reservation)) {
+                throw new ReservationFailure('Primero elige y registra un método de pago de prueba antes de confirmar tu reserva.', 409);
+            }
             $this->transition($reservation, ReservationStatus::Confirmed, $actor, 'confirm');
         } else {
             $allowed = match ($action) {

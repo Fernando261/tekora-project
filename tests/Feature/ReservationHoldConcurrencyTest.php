@@ -68,14 +68,32 @@ class ReservationHoldConcurrencyTest extends TestCase
                 fclose($pipes[0]);
                 $processes[$worker] = $process;
             }
-            $deadline = microtime(true) + 10;
+            // Both workers must be ready BEFORE opening the same gate. On Windows,
+            // process creation, PHP bootstrap and antivirus scans may take longer
+            // during the full test suite. A missed startup deadline is not a
+            // booking race failure; report which worker failed to start.
+            $startedWaiting = microtime(true);
+            $deadline = $startedWaiting + 45;
             while (! is_file($root.'/ready-1') || ! is_file($root.'/ready-2')) {
-                if (microtime(true) > $deadline) {
-                    $this->fail('Ambos procesos deben competir: '.file_get_contents($root.'/stderr-1').file_get_contents($root.'/stderr-2'));
+                $workers = [];
+                foreach ($processes as $worker => $process) {
+                    $status = proc_get_status($process);
+                    $workers[$worker] = [
+                        'ready' => is_file($root.'/ready-'.$worker),
+                        'running' => $status['running'],
+                        'exitcode' => $status['exitcode'],
+                        'stderr' => file_get_contents($root.'/stderr-'.$worker),
+                    ];
                 }
-                usleep(1000);
+                if (microtime(true) > $deadline || in_array(false, array_column($workers, 'running'), true)) {
+                    $this->fail('Ambos procesos deben competir; no se alcanzó la barrera de inicio ('
+                        .round(microtime(true) - $startedWaiting, 2).' s): '
+                        .json_encode($workers, JSON_THROW_ON_ERROR));
+                }
+
+                usleep(10000);
             }
-            file_put_contents($root.'/go', 'Both independent workers admitted');
+            $this->assertNotFalse(file_put_contents($root.'/go', 'Both independent workers admitted'));
             $results = [];
             foreach ($processes as $worker => $process) {
                 $code = proc_close($process);

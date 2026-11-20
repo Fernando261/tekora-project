@@ -21,11 +21,15 @@ config(['database.default' => 'sqlite', 'database.connections.sqlite.database' =
 \Illuminate\Support\Carbon::setTestNow(\Carbon\Carbon::parse($clock, 'UTC'));
 $actor = \App\Models\User::findOrFail((int) $actorId);
 file_put_contents($root.'/ready-'.$worker, 'ready');
-$deadline = microtime(true) + 10;
+// The parent may be starting a second independent PHP process on a slow
+// Windows machine. Do not exit before its 45s startup admission deadline.
+$deadline = microtime(true) + 60;
 while (! is_file($root.'/go')) {
     if (microtime(true) > $deadline) {
+        fwrite(STDERR, 'Worker '.$worker.' reached startup barrier but never received go (60s).');
         exit(93);
-    } usleep(1000);
+    }
+    usleep(10000);
 }
 try {
     $reservation = app(\App\Services\ReservationWorkflow::class)->decide($actor, (int) $reservationId, $action, ['version' => 1, 'idempotency_key' => $key]);

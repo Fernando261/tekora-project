@@ -43,25 +43,35 @@ class CheckoutDemoBridgeTest extends TestCase
             'reservation_holds', 'reservation_hold_events', 'reservation_hold_clock', 'reservation_action_receipts', 'service_price_versions', 'service_quotes', 'quote_acceptances', 'service_reviews']);
     }
 
-    public function test_only_owner_client_sees_a_static_secondary_link_with_no_business_context_or_referrer(): void
+    public function test_legacy_checkout_stays_isolated_and_commercial_journey_hides_payment_without_a_b32_fixture(): void
     {
         [$client, $provider, $inquiry, $r] = $this->held();
-        $response = $this->actingAs($client, 'web')->get(route('inquiries.show', $inquiry))->assertOk()->assertSee('Explorar el pago (DEMO)')->assertSee('Simulación independiente; el resultado NO paga ni confirma esta reserva. Los importes mostrados son ficticios.')->assertSee('$2,300.00 MXN');
+        // This test uses SQLite :memory: without B3.2's disposable disk fixture.
+        // The old independent checkout remains available directly, but the
+        // commercial journey must not suggest that its example pays the hold.
+        $response = $this->actingAs($client, 'web')->get(route('inquiries.show', $inquiry))
+            ->assertOk()
+            ->assertDontSee('Explorar el pago (DEMO)')
+            ->assertDontSee('Elegir método de pago')
+            ->assertSee('Confirmar definitivamente mi reserva')
+            ->assertSee('$2,300.00 MXN');
+
         $doc = new DOMDocument;
         @$doc->loadHTML('<?xml encoding="UTF-8">'.$response->getContent());
         $xpath = new DOMXPath($doc);
-        $links = $xpath->query('//*[@data-checkout-demo-invitation]//a');
-        $this->assertSame(1, $links->length);
-        $link = $links->item(0);
-        $this->assertSame(route('demo.checkout'), $link->getAttribute('href'));
-        $this->assertNull(parse_url($link->getAttribute('href'), PHP_URL_QUERY));
-        $this->assertSame('noreferrer', $link->getAttribute('rel'));
-        $this->assertSame('no-referrer', $link->getAttribute('referrerpolicy'));
-        $this->assertStringContainsString('secondary', $link->getAttribute('class'));
+        $this->assertSame(0, $xpath->query('//*[@data-checkout-demo-invitation]//a')->length);
         $this->assertSame(1, $xpath->query('//form[@action="'.route('reservations.commit', $r).'"]')->length);
-        $this->actingAs($provider, 'web')->get(route('inquiries.show', $inquiry))->assertOk()->assertDontSee('Explorar el pago (DEMO)')->assertDontSee('/demo/checkout/provider');
+        $this->assertStringNotContainsString(route('checkout.local.show', $r), $response->getContent());
+
+        $this->actingAs($provider, 'web')->get(route('inquiries.show', $inquiry))
+            ->assertOk()->assertDontSee('Elegir método de pago')->assertDontSee('/demo/checkout/provider');
         $this->get('/demo/checkout/provider')->assertForbidden();
-        $this->actingAs($this->account(RoleName::Client), 'web')->get(route('inquiries.show', $inquiry))->assertForbidden()->assertDontSee('Explorar el pago (DEMO)');
+        $this->actingAs($this->account(RoleName::Client), 'web')
+            ->get(route('inquiries.show', $inquiry))->assertForbidden()->assertDontSee('Elegir método de pago');
+
+        // B3.1-D still works independently, without reservation IDs or customer context.
+        $this->get(route('demo.checkout'))->assertOk()
+            ->assertSee('Simulación independiente; el resultado NO paga ni confirma esta reserva.');
     }
 
     #[DataProvider('methods')]

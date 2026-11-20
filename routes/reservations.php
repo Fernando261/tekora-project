@@ -14,3 +14,15 @@ Route::middleware('auth:web')->prefix('cuenta/reservas')->name('reservations.')-
             ->defaults('decision', $decision)->middleware('throttle:reservation-decisions')->name($decision);
     }
 });
+
+
+// B3.2: reservation-linked checkout; local loopback + disposable synthetic SQLite only.
+Route::middleware(['auth:web', \App\Http\Middleware\TekoraPageHeaders::class])
+    ->prefix('cuenta/reservas/{reservation}/checkout')->where(['reservation' => '[0-9]+'])->name('checkout.local.')
+    ->group(function () {
+        Route::get('/', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'show'])->name('show');
+        Route::post('/', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'submit'])->middleware('throttle:reservation-decisions')->name('submit');
+        Route::get('/efectivo', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'cash'])->name('cash');
+        Route::post('/efectivo/recibir', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'receiveCash'])
+            ->middleware('throttle:reservation-decisions')->name('cash.receive');
+    });
