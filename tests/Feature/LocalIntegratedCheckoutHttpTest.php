@@ -81,13 +81,19 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
     {
         [$client, $provider, $reservation] = $this->held();
         $this->actingAs($client, 'web')->get(route('checkout.local.show', $reservation->id))
-            ->assertOk()->assertSee('Finaliza tu contratación')->assertSee('$1,000.00');
+            ->assertOk()->assertSee('Finaliza tu contratación')->assertSee('$1,000.00')
+            ->assertSee('co-card-position', false)
+            ->assertSee('b32-method-surface', false)
+            ->assertSee('checkout-integrated', false);
         $this->post(route('checkout.local.submit', $reservation->id), [
             'method' => 'card', 'card_number' => '4242424242424242',
             'expiry' => '12/30', 'cvv' => '123', 'idempotency_key' => (string) Str::uuid(),
         ])->assertRedirect(route('checkout.local.show', $reservation->id));
         $this->get(route('checkout.local.show', $reservation->id))
-            ->assertOk()->assertSee('Tarjeta aprobada');
+            ->assertOk()->assertSee('Tarjeta aprobada')
+            ->assertSee('¡Pago realizado con éxito!')
+            ->assertSee('COMPROBANTE INTERNO')
+            ->assertDontSee('La reserva ya no permite registrar un nuevo pago de prueba.');
         $this->assertSame('test_approved', app(LocalCheckoutAttemptStore::class)->current($reservation->id)['status']);
         $this->assertSame('held', $reservation->fresh()->effectiveStatus()->value);
         $this->actingAs($provider, 'web')->get(route('checkout.local.show', $reservation->id))->assertNotFound();
@@ -101,7 +107,9 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         ])->assertRedirect();
         $this->post(route('checkout.local.cash.receive', $reservation->id))->assertForbidden();
         $this->actingAs($provider, 'web')->get(route('checkout.local.cash', $reservation->id))
-            ->assertOk()->assertSee('Pendiente de recepción');
+            ->assertOk()->assertSee('Pendiente de recepción')
+            ->assertSee('co-receiver-panel', false)
+            ->assertSee('COMPROBANTE INTERNO');
         $this->post(route('checkout.local.cash.receive', $reservation->id))->assertRedirect();
         $this->actingAs($client, 'web')->get(route('checkout.local.show', $reservation->id))
             ->assertOk()->assertSee('Efectivo recibido por el prestador');
