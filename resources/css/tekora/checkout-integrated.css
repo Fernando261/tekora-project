@@ -48,7 +48,12 @@
 .b32-checkout .co-card-flip { transition:transform 660ms cubic-bezier(.2,.85,.15,1); }
 .b32-checkout .co-card-glint { transition:transform 400ms ease; }
 .b32-checkout .co-card-face { overflow:hidden; }
+.b32-checkout .co-mint-surface { transition:opacity 750ms ease; }
 .b32-checkout[data-checkout-state="success"] .co-mint-surface { opacity:1; }
+.b32-checkout[data-checkout-state="success"] .co-card-position { animation:b32-success-rise 680ms cubic-bezier(.2,.8,.2,1) both; }
+.b32-checkout[data-checkout-state="success"] .b32-result-symbol { animation:b32-success-pop 520ms cubic-bezier(.17,1.4,.4,1) both; }
+@keyframes b32-success-rise { from { transform:translateY(10px) scale(.975);opacity:.75; } to { transform:translateY(0) scale(1);opacity:1; } }
+@keyframes b32-success-pop { from { transform:scale(.7);opacity:0; } to { transform:scale(1);opacity:1; } }
 .b32-checkout[data-checkout-state="declined"] .co-card-surface { filter:hue-rotate(125deg); }
 .b32-checkout[data-checkout-state="temporary"] .co-card-surface { filter:hue-rotate(55deg); }
 .b32-checkout .co-card-number { font-variant-numeric:tabular-nums; }
