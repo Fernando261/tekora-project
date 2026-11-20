@@ -105,6 +105,22 @@ document.addEventListener('DOMContentLoaded', () => {
     position.addEventListener('pointerleave', resetTilt);
   }
 
+  // After a successful POST/303, place the receipt in the viewport instead
+  // of leaving it below the large page heading. Keep normal refreshes unchanged.
+  if (root.hasAttribute('data-b32-focus-result')) {
+    const focusReceipt = () => {
+      const target = window.matchMedia('(max-width: 900px)').matches
+        ? root.querySelector('.b32-result')
+        : root.querySelector('#b32-payment-stage');
+      target?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    };
+    if (document.readyState === 'complete') {
+      requestAnimationFrame(focusReceipt);
+    } else {
+      window.addEventListener('load', () => requestAnimationFrame(focusReceipt), { once: true });
+    }
+  }
+
   // Advisory timer only: all eligibility and idempotency remain server-side.
   if (hold) {
     function tick() {
