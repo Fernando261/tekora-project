@@ -13,7 +13,7 @@
     $method = $attempt['method'] ?? 'card';
   @endphp
 
-  <div class="tk-checkout b32-checkout" data-b32-checkout data-checkout-state="{{ $visualState }}">
+  <div class="tk-checkout b32-checkout" data-b32-checkout data-checkout-state="{{ $visualState }}" @if(session('b32_checkout_result')) data-b32-focus-result @endif>
     <a class="co-back-link b32-back" href="{{ route('reservations.show', $reservation) }}">← Volver a mi reserva</a>
 
     <div class="co-heading b32-heading">
@@ -51,7 +51,7 @@
         </p>
       </aside>
 
-      <div class="co-stage b32-stage">
+      <div class="co-stage b32-stage" id="b32-payment-stage">
         <div class="co-card-column b32-card-column">
           <div class="co-card-position" data-b32-card-position>
             <div class="co-card-tilt" data-b32-card-tilt>
