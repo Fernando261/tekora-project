@@ -36,9 +36,15 @@ final class LocalCheckoutAttemptStore
         $row = DB::table('synthetic_checkout_attempts')
             ->where('reservation_id', $reservation->id)
             ->first();
-        if (! $row || (int) $row->client_user_id !== $reservation->client_user_id
+        // Reservation pages intentionally eager-load only display_name; resolve
+        // the owner from the authoritative profile row, not a partial relation.
+        $providerId = DB::table('provider_profiles')
+            ->where('id', $reservation->provider_profile_id)
+            ->value('user_id');
+        if (! $row || $providerId === null
+            || (int) $row->client_user_id !== $reservation->client_user_id
             || $row->quote_id !== $reservation->quote_id
-            || (int) $row->provider_user_id !== $reservation->providerProfile->user_id) {
+            || (int) $row->provider_user_id !== (int) $providerId) {
             return false;
         }
 
