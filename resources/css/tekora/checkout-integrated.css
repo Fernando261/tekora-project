@@ -179,3 +179,21 @@
   .b32-method-option input:checked+.b32-method-surface { border:2px solid Highlight;background:Canvas;color:CanvasText; }
   .b32-checkout .co-card-face { background:Canvas;border:2px solid CanvasText;clip-path:none; }
 }
+
+.b32-provider-panel.co-receiver-panel { max-width:850px;margin:0 auto 25px;padding:30px 35px;background:linear-gradient(135deg,#0d2635ed,#071725f0); }
+.b32-provider-panel .co-shell-title { margin:0 0 26px; }
+.b32-provider-panel h2 { color:#e4f5fb;font:500 26px/1.25 var(--tk-display);letter-spacing:-.04em;margin:0 0 8px; }
+.b32-provider-item.co-receiver-item { border-radius:15px;padding:24px; }
+.b32-provider-status { display:flex;align-items:center;gap:15px; }
+.b32-provider-status .b32-result-symbol { width:44px;height:44px;font-size:22px;margin:0;flex:0 0 auto; }
+.b32-provider-status .co-eyebrow { margin-bottom:5px; }
+.b32-provider-status h3 { margin:0;color:#def5fa;font:500 20px/1.3 var(--tk-display); }
+.b32-provider-receipt.co-receipt { max-width:none;margin:21px 0;width:100%; }
+.b32-provider-panel .co-primary { max-width:330px; }
+.b32-provider-panel .b32-legal { margin-top:24px; }
+@media(max-width:620px) {
+  .b32-provider-panel.co-receiver-panel { padding:22px 18px; }
+  .b32-provider-item.co-receiver-item { padding:17px; }
+  .b32-provider-status h3 { font-size:18px; }
+  .b32-provider-panel .co-primary { max-width:none; }
+}
