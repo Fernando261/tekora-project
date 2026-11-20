@@ -18,16 +18,16 @@ final class CheckoutContext
 {
     public function __construct(private readonly PricingStore $store, private readonly QuoteReadModel $quotes) {}
 
-    public function forReservation(User $actor, int $id): array
+    public function forReservation(User $actor, int $id, ?int $observedAt = null): array
     {
-        return DB::transaction(function () use ($actor, $id) {
+        return DB::transaction(function () use ($actor, $id, $observedAt) {
             $reservation = ServiceReservation::where('client_user_id', $actor->id)->findOrFail($id);
             Gate::forUser($actor)->authorize('commit', $reservation);
             $reservation->load(['hold', 'client', 'inquiry', 'service', 'providerProfile.user']);
             if (! DB::table('reservation_hold_clock')->where('id', 1)->exists()) {
                 throw new LogicException('No se puede observar el reloj comercial.');
             }
-            $now = BookingClock::observedMicros();
+            $now = $observedAt ?? BookingClock::observedMicros();
             $date = BookingClock::date($now);
             $hold = $reservation->hold;
             $snapshot = null;
@@ -90,7 +90,8 @@ final class CheckoutContext
                 'server_now' => $date->toISOString(),
                 'future_payment' => ['enabled' => false, 'can_start' => false, 'advisory_only' => true,
                     'commercial_eligible' => $blockers === [], 'blocking_reasons' => ['payments_not_enabled', ...$blockers]],
-                'confirmation_policy' => ['requires_verified_payment' => false, 'protocol' => $reservation->quote_id ? 'quoted-slot-hold-v1' : 'legacy']];
+                'confirmation_policy' => ['requires_verified_payment' => false, 'protocol' => $reservation->quote_id ? 'quoted-slot-hold-v1' : 'legacy'],
+                'confirmation_readiness' => app(ConfirmationReadiness::class)->forReservation($reservation, $blockers, $now)];
         }, 3);
     }
 }

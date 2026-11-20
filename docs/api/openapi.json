@@ -4355,6 +4355,9 @@
                 ]
               }
             }
+          },
+          "confirmation_readiness": {
+            "$ref": "#/components/schemas/ConfirmationReadiness"
           }
         }
       },
@@ -5455,8 +5458,157 @@
           "server_now": {
             "type": "string",
             "format": "date-time"
+          },
+          "confirmation_readiness": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ConfirmationReadiness"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Reserva actual como cliente; null si no existe o el observador web es prestador. mobile_execution_available conserva su semántica anterior de navegación."
           }
         }
+      },
+      "ConfirmationReadiness": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "M2.1: observación orientativa para ofrecer confirmación B2; nunca autorización de escritura ni de pago. El servidor revalida estado, versión, idempotencia y retención. No redefine mobile_execution_available.",
+        "required": [
+          "state",
+          "can_offer_mobile_confirmation",
+          "advisory_only",
+          "reservation_id",
+          "reservation_version",
+          "synthetic_web_requirement",
+          "blocking_reasons",
+          "observed_at"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "awaiting_provider",
+              "ready",
+              "web_checkout_required",
+              "hold_expired",
+              "hold_released",
+              "already_confirmed",
+              "cancelled",
+              "rejected",
+              "completed",
+              "blocked",
+              "not_applicable",
+              "unknown"
+            ]
+          },
+          "can_offer_mobile_confirmation": {
+            "type": "boolean",
+            "description": "True solo para state=ready. Puede perder vigencia después de la lectura; la escritura sigue pudiendo devolver 409/422/503."
+          },
+          "advisory_only": {
+            "type": "boolean",
+            "const": true
+          },
+          "reservation_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reservation_version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "synthetic_web_requirement": {
+            "type": "string",
+            "enum": [
+              "not_applicable",
+              "required",
+              "satisfied"
+            ],
+            "description": "Solo se evalúa en hold por lo demás confirmable dentro de la fixture privada B3.2. No expone método, instrumento, resultado financiero ni comprobante."
+          },
+          "blocking_reasons": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "commercial_quote_required",
+                "quote_not_accepted",
+                "reservation_not_pending",
+                "inquiry_not_accepted",
+                "hold_not_started",
+                "hold_not_active",
+                "service_already_started",
+                "participants_unavailable",
+                "synthetic_web_checkout_required",
+                "server_clock_uncertain"
+              ]
+            }
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Mismo instante UTC que server_now. El hold y su vencimiento permanecen en la reserva/contexto existentes."
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "ready"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "can_offer_mobile_confirmation": {
+                  "const": true
+                },
+                "blocking_reasons": {
+                  "maxItems": 0
+                },
+                "synthetic_web_requirement": {
+                  "enum": [
+                    "not_applicable",
+                    "satisfied"
+                  ]
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "can_offer_mobile_confirmation": {
+                  "const": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "web_checkout_required"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "synthetic_web_requirement": {
+                  "const": "required"
+                },
+                "blocking_reasons": {
+                  "contains": {
+                    "const": "synthetic_web_checkout_required"
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "responses": {
@@ -6113,6 +6265,34 @@
             },
             "server_now": "2026-11-19T01:39:01.942391Z"
           }
+        }
+      },
+      "M21ConfirmationReady": {
+        "summary": "B2 normal, hold activo; no pagos",
+        "value": {
+          "state": "ready",
+          "can_offer_mobile_confirmation": true,
+          "advisory_only": true,
+          "reservation_id": 17,
+          "reservation_version": 1,
+          "synthetic_web_requirement": "not_applicable",
+          "blocking_reasons": [],
+          "observed_at": "2030-01-01T12:00:00.000000Z"
+        }
+      },
+      "M21WebCheckoutRequired": {
+        "summary": "Solo fixture privada B3.2, falta selección sintética válida por web",
+        "value": {
+          "state": "web_checkout_required",
+          "can_offer_mobile_confirmation": false,
+          "advisory_only": true,
+          "reservation_id": 17,
+          "reservation_version": 1,
+          "synthetic_web_requirement": "required",
+          "blocking_reasons": [
+            "synthetic_web_checkout_required"
+          ],
+          "observed_at": "2030-01-01T12:00:00.000000Z"
         }
       }
     }

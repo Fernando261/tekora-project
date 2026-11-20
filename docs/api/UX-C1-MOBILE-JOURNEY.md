@@ -64,3 +64,7 @@ La web B3.2 integrada en `main` **solo permite métodos de prueba en una SQLite 
 **Diferencia operativa a considerar:** dentro de la fixture B3.2, el servidor exige primero la selección del método ficticio **a través del flujo web local**. Como no existe endpoint móvil para registrar ese método, la app nativa no debe anunciar que puede completar esa misma demostración desde `/api/v1`, ni intentar saltarse el requisito por petición directa. Esta brecha deberá abordarse en un incremento posterior con controles y pruebas independientes, no exponiendo una base sintética a Internet.
 
 El mapeo seguro y los estados que debe mostrar el cliente móvil están en `docs/api/M2.0-MOBILE-CHECKOUT-HANDOFF.md`. No se ha probado una aplicación nativa en este incremento.
+
+## M2.1 — Preparación explícita para confirmar
+
+`confirmation_readiness` añade el estado operativo de la reserva actual como cliente (o null sin reserva). Para ofrecer commit, consultar `can_offer_mobile_confirmation`, versión e instante del nuevo objeto; no reutilizar `mobile_execution_available` como autorización. Ese booleano y las demás propiedades conservan su semántica. El objeto procede del mismo checkout-context y comparte `server_now`; no ejecuta escrituras. Estados, compatibilidad, errores y límites: [M2.1-MOBILE-CONFIRMATION.md](M2.1-MOBILE-CONFIRMATION.md).

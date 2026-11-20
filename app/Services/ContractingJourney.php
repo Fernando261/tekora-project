@@ -153,6 +153,8 @@ final class ContractingJourney
                 'conversation' => ['reference' => ['type' => 'inquiry', 'id' => $inquiry->id], 'unread_count' => app(InquiryReadTracking::class)->unreadFor($actor, $inquiry),
                     'can_send' => in_array($inquiry->status, [InquiryStatus::Pending, InquiryStatus::Accepted], true) && Gate::forUser($actor)->allows('sendMessage', $inquiry)],
                 'payments' => ['enabled' => false, 'required_for_confirmation' => false, 'future_checkout_point' => 'after_provider_acceptance_before_final_confirmation'],
+                'confirmation_readiness' => $client && $current
+                    ? app(\App\Payments\CheckoutContext::class)->forReservation($actor, $current->id, $now)['confirmation_readiness'] : null,
                 'server_now' => $date->toISOString()];
         }, 3);
     }

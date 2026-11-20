@@ -310,7 +310,15 @@ class ContractingJourneyTest extends TestCase
         $this->assertSame($old['paths_sha256'], $fingerprint($new['paths']));
         foreach ($old['components'] as $type => $definitions) {
             foreach ($definitions as $name => $value) {
-                $this->assertSame($value, $fingerprint($new['components'][$type][$name]));
+                $definition = $new['components'][$type][$name];
+                if ($type === 'schemas' && $name === 'CheckoutContext') {
+                    // M2.1 adds exactly one optional field. Preserve the complete
+                    // historical fingerprint of every pre-existing field/rule.
+                    $this->assertSame(['$ref' => '#/components/schemas/ConfirmationReadiness'], $definition['properties']['confirmation_readiness']);
+                    $this->assertNotContains('confirmation_readiness', $definition['required']);
+                    unset($definition['properties']['confirmation_readiness']);
+                }
+                $this->assertSame($value, $fingerprint($definition));
             }
         }
         $this->assertSame(array_column(\App\Enums\ReservationStatus::cases(), 'value'), $new['components']['schemas']['JourneyReservation']['properties']['status']['enum']);
