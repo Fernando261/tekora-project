@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (root.hasAttribute('data-b32-focus-result')) {
     const focusReceipt = () => {
       const target = window.matchMedia('(max-width: 900px)').matches
-        ? root.querySelector('.b32-result')
+        ? (root.querySelector('.b32-result') || root.querySelector('.b32-form'))
         : root.querySelector('#b32-payment-stage');
       target?.scrollIntoView({ block: 'start', behavior: 'instant' });
     };
