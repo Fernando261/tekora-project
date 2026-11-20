@@ -205,8 +205,11 @@ class MobileCheckoutHandoffContractTest extends TestCase
         } finally {
             // Release all PDO references before removing only the files owned by this test.
             $pdo = null;
+            $releasedPdo = \WeakReference::create(DB::connection('sqlite')->getPdo());
             Auth::forgetGuards();
             DB::purge('sqlite');
+            $this->app->forgetScopedInstances();
+            $this->assertNull($releasedPdo->get(), 'SQLite must be released before removing the fixture.');
             config(['database.connections.sqlite.database' => ':memory:']);
             foreach (['tekora.sqlite', 'tekora.sqlite-journal', 'tekora.sqlite-wal', 'tekora.sqlite-shm', '.tekora-b32-synthetic'] as $file) {
                 if (is_file($dir.DIRECTORY_SEPARATOR.$file)) {
