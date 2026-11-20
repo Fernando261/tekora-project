@@ -36,7 +36,7 @@ class MobileCheckoutHandoffContractTest extends TestCase
         $this->assertSame(900, $spec['components']['examples']['B3CheckoutContext']['value']['data']['hold']['hold_seconds']);
     }
 
-    public function test_no_mobile_payment_or_cash_write_route_can_be_reached_by_a_native_client(): void
+    public function test_no_mobile_payment_or_cash_write_route_is_registered(): void
     {
         foreach (Route::getRoutes() as $route) {
             if (! str_starts_with($route->uri(), 'api/v1/')) {
