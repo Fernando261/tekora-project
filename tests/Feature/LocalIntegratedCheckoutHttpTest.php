@@ -81,7 +81,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
     {
         [$client, $provider, $reservation] = $this->held();
         $this->actingAs($client, 'web')->get(route('checkout.local.show', $reservation->id))
-            ->assertOk()->assertSee('Finaliza tu contratación')->assertSee('$1,000.00')
+            ->assertOk()->assertSee('Checkout de prueba')->assertSee('$1,000.00')
             ->assertSee('co-card-position', false)
             ->assertSee('b32-method-surface', false)
             ->assertSee('checkout-integrated', false);
@@ -90,10 +90,11 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
             'expiry' => '12/30', 'cvv' => '123', 'idempotency_key' => (string) Str::uuid(),
         ])->assertRedirect(route('checkout.local.show', $reservation->id));
         $this->get(route('checkout.local.show', $reservation->id))
-            ->assertOk()->assertSee('Tarjeta aprobada')
-            ->assertSee('¡Pago realizado con éxito!')
+            ->assertOk()->assertSee('Tarjeta de prueba aprobada')
+            ->assertSee('Reserva pendiente de confirmación')
+            ->assertDontSee('¡Pago realizado con éxito!')
             ->assertSee('COMPROBANTE INTERNO')
-            ->assertDontSee('La reserva ya no permite registrar un nuevo pago de prueba.');
+            ->assertSee('Confirmar la reserva es el siguiente paso.');
         $this->assertSame('test_approved', app(LocalCheckoutAttemptStore::class)->current($reservation->id)['status']);
         $this->assertSame('held', $reservation->fresh()->effectiveStatus()->value);
         $this->actingAs($provider, 'web')->get(route('checkout.local.show', $reservation->id))->assertNotFound();
@@ -122,6 +123,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         $inquiryUrl = route('inquiries.show', $reservation->service_inquiry_id);
         $clientPage = $this->actingAs($client, 'web')->get($inquiryUrl)->assertOk()
             ->assertSee('Elegir método de pago')
+            ->assertSee('data-journey-next="choose_test_checkout"', false)
             ->assertDontSee('Explorar el pago (DEMO)');
         $this->assertStringContainsString(
             'href="'.route('checkout.local.show', $reservation->id).'"',
@@ -173,11 +175,18 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         $this->get(route('reservations.show', $reservation->id))->assertOk()
             ->assertSee('data-hold-confirm', false)
             ->assertDontSee('Antes de confirmar definitivamente tu reserva');
+        $this->get(route('inquiries.show', $reservation->service_inquiry_id))->assertOk()
+            ->assertSee('data-journey-next="confirm_reservation"', false)
+            ->assertSee('data-hold-confirm', false);
 
         $this->patch(route('reservations.commit', $reservation->id), [
             'version' => $version, 'idempotency_key' => (string) Str::uuid(),
         ])->assertRedirect();
         $this->assertSame('confirmed', $reservation->fresh()->status->value);
+        $this->get(route('checkout.local.show', $reservation->id))->assertOk()
+            ->assertSee('Reserva confirmada')
+            ->assertDontSee('Confirmar la reserva es el siguiente paso.')
+            ->assertDontSee('data-b32-form', false);
     }
 
     public function test_disposable_cash_selection_allows_booking_then_provider_receives_cash(): void
@@ -213,5 +222,27 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
             'method' => 'cash', 'idempotency_key' => (string) Str::uuid(),
         ])->assertStatus(409);
         $this->assertNull(app(LocalCheckoutAttemptStore::class)->current($reservation->id));
+        $this->get(route('checkout.local.show', $reservation->id))->assertOk()
+            ->assertSee('Retención vencida')
+            ->assertDontSee('data-b32-form', false);
+    }
+
+    public function test_expired_pending_cash_keeps_history_without_an_unavailable_action(): void
+    {
+        [$client, $provider, $reservation] = $this->held();
+        $this->actingAs($client, 'web')->post(route('checkout.local.submit', $reservation), [
+            'method' => 'cash', 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        $this->actingAs($provider, 'web')->get(route('checkout.local.cash', $reservation))->assertOk()
+            ->assertSee('Registrar recepción de efectivo');
+        $before = app(LocalCheckoutAttemptStore::class)->current($reservation->id);
+        $this->travel(900)->seconds();
+        $this->get(route('checkout.local.cash', $reservation))->assertOk()
+            ->assertSee('Pendiente de recepción')
+            ->assertSee('El estado del horario impide registrar la recepción')
+            ->assertDontSee('Registrar recepción de efectivo');
+        $this->post(route('checkout.local.cash.receive', $reservation))->assertConflict();
+        $this->assertSame($before, app(LocalCheckoutAttemptStore::class)->current($reservation->id));
+        $this->assertHoldIntegrity();
     }
 }

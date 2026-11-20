@@ -1,6 +1,8 @@
 @props(['journey'])
 @php
   $next = $journey['next_action']; $r = $journey['reservation']; $amount = $journey['commercial']['agreed_amount'];
+  $chooseTestMethod = $next['code'] === 'confirm_reservation'
+      && ($journey['confirmation_readiness']['state'] ?? null) === 'web_checkout_required';
   $fixedAgreement = $amount && $r && in_array($r['status'], ['confirmed', 'completed'], true) && $r['quote_id'] === $journey['commercial']['quote']['id'];
   $target = match($next['code']) {
     'decide_inquiry', 'close_inquiry' => '#acciones-solicitud',
@@ -13,6 +15,12 @@
     default => $r ? '#decision-reserva-'.$r['id'] : '#conversacion',
   };
   $stepStates = ['complete' => 'Completada', 'current' => 'Paso actual', 'pending' => 'Pendiente', 'stopped' => 'Cerrada'];
+  if ($chooseTestMethod) {
+      $next['code'] = 'choose_test_checkout';
+      $next['label'] = 'Elegir método de pago de prueba';
+      $next['description'] = 'Registra una selección ficticia y vuelve a confirmar el horario antes de que venza la retención.';
+      $target = route('checkout.local.show', $r['id']);
+  }
 @endphp
 <header class="account-heading tk-ops-heading cj-header">
   <div class="tk-ops-heading-copy"><span class="account-eyebrow">Tu contratación · Solicitud #{{ $journey['inquiry']['id'] }}</span>
@@ -28,7 +36,7 @@
 </nav>
 <section class="account-card cj-next" aria-labelledby="journey-next-title" data-ops-card>
   <div><span class="account-eyebrow">Tu siguiente paso</span><h2 id="journey-next-title" data-journey-next="{{ $next['code'] }}">{{ $next['label'] }}</h2><p>{{ $next['description'] }}</p></div>
-  <div class="cj-next-action">@if($next['interaction'] === 'wait')<span class="cj-wait">En espera</span><a href="#conversacion">Ir a la conversación →</a>@else<a class="account-button" href="{{ $target }}">{{ $next['label'] }} <span aria-hidden="true">→</span></a>@endif</div>
+  <div class="cj-next-action">@if($next['interaction'] === 'wait')<span class="cj-wait">En espera</span><a href="#conversacion">Ir a la conversación →</a>@else<a class="account-button" href="{{ $target }}" @if($chooseTestMethod) rel="noreferrer" referrerpolicy="no-referrer" @endif>{{ $next['label'] }} <span aria-hidden="true">→</span></a>@endif</div>
 </section>
 <div class="cj-overview" aria-label="Resumen de tu contratación">
   <section class="account-card {{ $fixedAgreement ? 'cj-agreed-price' : '' }}"><span class="account-eyebrow">{{ $fixedAgreement ? 'Precio acordado' : 'Acuerdo' }}</span><h2>{{ $amount ? \App\Payments\WebMoney::format($amount['total_cents']) : ($journey['commercial']['mode'] === 'legacy' ? 'Acuerdo directo' : 'Importe por acordar') }}</h2>
