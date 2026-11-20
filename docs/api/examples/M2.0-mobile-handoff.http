@@ -7,8 +7,10 @@
 @inquiryId = 42
 @quoteId = REEMPLAZAR_UUID_COTIZACION
 @reservationId = 17
-@version = 1
-@availabilityRevision = 1
+@version = REEMPLAZAR_VERSION_ACTUAL_DE_LA_RESERVA
+@availabilityRevision = REEMPLAZAR_REVISION_DEL_PASO_5
+@date = REEMPLAZAR_FECHA_DISPONIBLE_AAAA_MM_DD
+@time = REEMPLAZAR_HORA_DISPONIBLE_HH_MM
 @proposalKey = REEMPLAZAR_UUID_DE_PROPUESTA
 @commitKey = REEMPLAZAR_UUID_DE_CONFIRMACION
 
@@ -41,7 +43,9 @@ Accept: application/json
 Authorization: Bearer {{token}}
 
 ### 6. Proponer horario (solo con disponibilidad y cotización válidas)
-# availabilityRevision sale de la respuesta del paso 5.
+# availabilityRevision sale de data.availability_revision del paso 5.
+# date/time deben ser un horario libre dentro de data.min_date y data.max_date.
+# No ejecutar la secuencia completa automáticamente: esperar la decisión web del prestador.
 # quoteId sale de una cotización aceptada. Reutiliza proposalKey en reintentos de propuesta.
 POST {{baseUrl}}/inquiries/{{inquiryId}}/reservations
 Accept: application/json
@@ -49,8 +53,8 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "date": "2030-01-07",
-  "time": "09:00",
+  "date": "{{date}}",
+  "time": "{{time}}",
   "availability_revision": {{availabilityRevision}},
   "quote_id": "{{quoteId}}",
   "idempotency_key": "{{proposalKey}}"
@@ -67,7 +71,9 @@ Accept: application/json
 Authorization: Bearer {{token}}
 
 ### 9. Confirmación final B2, NO cobro (no completar fixture web B3.2 sin método ficticio)
-# Llamar solo si el entorno/política lo permite. version viene del servidor,
+# Esperar aceptación por web del prestador y volver a ejecutar los pasos 7 y 8.
+# Llamar solo si el entorno/política lo permite. version = data.version del paso 7
+# (o data.reservation.version del paso 8); no confundir con data.hold.version,
 # y commitKey debe ser un UUID diferente del usado al proponer horario.
 PATCH {{baseUrl}}/reservations/{{reservationId}}/commit
 Accept: application/json
