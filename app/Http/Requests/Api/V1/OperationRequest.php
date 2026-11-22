@@ -5,6 +5,7 @@ namespace App\Http\Requests\Api\V1;
 use App\Enums\InquiryStatus;
 use App\Enums\ReservationStatus;
 use App\Http\Requests\InquiryConversationRequest;
+use App\Rules\WithoutExternalContact;
 use App\Services\MobileClientOperations;
 use Illuminate\Validation\Rule;
 
@@ -41,7 +42,7 @@ final class OperationRequest extends ApiRequest
             'api.v1.inquiries.index' => $pages + ['status' => ['sometimes', Rule::enum(InquiryStatus::class)]],
             'api.v1.conversations.index' => $pages,
             'api.v1.reservations.index' => $pages + ['status' => ['sometimes', Rule::enum(ReservationStatus::class)]],
-            'api.v1.inquiries.store' => ['message' => ['required', 'string', 'min:10', 'max:2000']],
+            'api.v1.inquiries.store' => ['message' => ['required', 'string', 'min:10', 'max:2000', new WithoutExternalContact]],
             // Reutiliza el formato/cotas del cursor web sin su autorización de sesión.
             'api.v1.messages.index' => (new InquiryConversationRequest)->rules(),
             'api.v1.messages.store' => ['body' => ['required', 'string', 'max:2000'],

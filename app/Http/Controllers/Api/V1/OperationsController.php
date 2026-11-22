@@ -11,12 +11,14 @@ use App\Http\Resources\Api\V1\InquiryResource;
 use App\Http\Resources\Api\V1\MessageResource;
 use App\Http\Resources\Api\V1\ReservationOptionsResource;
 use App\Http\Resources\Api\V1\ReservationResource;
+use App\Rules\WithoutExternalContact;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryReadTracking;
 use App\Services\InquiryWorkflow;
 use App\Services\MobileClientOperations;
 use App\Services\ReservationWorkflow;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 final class OperationsController extends Controller
 {
@@ -78,7 +80,13 @@ final class OperationsController extends Controller
 
     public function send(OperationRequest $request, int $inquiry, InquiryMessaging $messaging)
     {
-        $result = $messaging->send($request->user('sanctum'), $inquiry, $request->validated('body'), $request->validated('idempotency_key'));
+        $result = $messaging->send(
+            $request->user('sanctum'),
+            $inquiry,
+            $request->validated('body'),
+            $request->validated('idempotency_key'),
+            validateNewBody: static fn (string $body) => Validator::validate(['body' => $body], ['body' => [new WithoutExternalContact]]),
+        );
 
         return (new MessageResource($result['message']))->response()->setStatusCode($result['created'] ? 201 : 200);
     }

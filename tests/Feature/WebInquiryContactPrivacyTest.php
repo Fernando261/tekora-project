@@ -123,24 +123,4 @@ class WebInquiryContactPrivacyTest extends TestCase
             ->assertForbidden()->assertDontSee('5500000000');
         $this->assertDatabaseCount('service_inquiry_messages', 1);
     }
-
-    public function test_mobile_contract_still_accepts_the_same_content_and_replays_messages(): void
-    {
-        $client = $this->account(RoleName::Client);
-        $service = $this->service($this->account(RoleName::Provider));
-        $message = 'Necesito ayuda con mi equipo. Escribe a fixture@example.test.';
-        $response = $this->postJson('/api/v1/services/'.$service->id.'/inquiries', ['message' => $message], $this->bearer($client))
-            ->assertCreated()->assertJsonPath('data.message', $message);
-        $inquiryId = $response->json('data.id');
-
-        $payload = ['body' => 'También puedes contactarme al 55 0000 0000.', 'idempotency_key' => (string) Str::uuid()];
-        $endpoint = '/api/v1/inquiries/'.$inquiryId.'/messages';
-        $created = $this->postJson($endpoint, $payload, $this->bearer($client))
-            ->assertCreated()->assertJsonPath('data.body', $payload['body']);
-        $this->postJson($endpoint, $payload, $this->bearer($client))
-            ->assertOk()->assertJsonPath('data.id', $created->json('data.id'));
-        $this->assertDatabaseHas('service_inquiries', ['id' => $inquiryId, 'message' => $message]);
-        $this->assertDatabaseHas('service_inquiry_messages', ['service_inquiry_id' => $inquiryId, 'body' => $payload['body']]);
-        $this->assertDatabaseCount('service_inquiry_messages', 1);
-    }
 }
