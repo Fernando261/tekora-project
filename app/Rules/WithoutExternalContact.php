@@ -21,7 +21,8 @@ final class WithoutExternalContact implements ValidationRule
     private const MEXICAN_NUMBER = '[2-9][0-9]{9}'
         .'|(?:\([2-9][0-9]\)'.self::PHONE_SEPARATOR.'?|[2-9][0-9]'.self::PHONE_SEPARATOR.')[0-9]{4}'.self::PHONE_SEPARATOR.'?[0-9]{4}'
         .'|(?:\([2-9][0-9]{2}\)'.self::PHONE_SEPARATOR.'?|[2-9][0-9]{2}'.self::PHONE_SEPARATOR.')[0-9]{3}'.self::PHONE_SEPARATOR.'?[0-9]{4}'
-        .'|[2-9][0-9](?:'.self::PHONE_SEPARATOR.'[0-9]{2}){4}';
+        .'|[2-9][0-9](?:'.self::PHONE_SEPARATOR.'[0-9]{2}){4}'
+        .'|[2-9](?:\h+[0-9]){9}';
 
     private const IDENTIFIER_PREFIX = '\b(?:modelo|serie|sku|folio|referencia|pedido|c[oó]digo de seguimiento)(?:\h*[:#]\h*|\h+(?:es\h+)?)';
 
@@ -78,6 +79,19 @@ final class WithoutExternalContact implements ValidationRule
         preg_match_all("~{$boundary}(?:\+?52{$separator}?{$national}|{$national}){$end}~u", $text, $matches, PREG_OFFSET_CAPTURE);
 
         foreach ($matches[0] as [$number, $offset]) {
+            // Un codigo tecnico identificado puede contener digitos separados.
+            // Un telefono sin esa identificacion sigue bloqueado.
+            $serialSeparado = preg_match(
+                '~\A[2-9](?:\h+[0-9]){9}\z~u',
+                $number
+            ) === 1;
+
+            if (
+                $serialSeparado &&
+                $this->isLabelledNonContactNumber($text, $number, $offset)
+            ) {
+                continue;
+            }
             if (! ctype_digit($number) || ! $this->isLabelledNonContactNumber($text, $number, $offset)) {
                 return true;
             }
