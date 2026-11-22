@@ -9,7 +9,7 @@
       @csrf
       <label for="message">¿Qué necesitas?</label>
       <textarea id="message" name="message" rows="7" minlength="10" maxlength="2000" required aria-describedby="message-help" @error('message') aria-invalid="true" @enderror>{{ is_string($message) ? $message : '' }}</textarea>
-      <p id="message-help" class="account-help">Entre 10 y 2000 caracteres. Describe tu necesidad sin incluir correo, teléfono, direcciones, contraseñas ni datos de pago. No se admiten archivos adjuntos.</p>
+      <p id="message-help" class="account-help">Entre 10 y 2000 caracteres. Describe tu necesidad sin incluir teléfonos, correos ni enlaces de contacto. Mantén la conversación en Tekora y evita añadir direcciones, contraseñas o datos de pago. No se admiten archivos adjuntos.</p>
       <button class="account-button" type="submit">Confirmar y enviar solicitud</button>
       <a href="{{ route('catalog.show', $service) }}">Volver al servicio</a>
     </form>
