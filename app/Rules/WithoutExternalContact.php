@@ -108,7 +108,9 @@ final class WithoutExternalContact implements ValidationRule
         $identifier = self::IDENTIFIER_PREFIX;
         $currency = self::CURRENCY_PREFIX;
 
-        if (preg_match("~{$contact}(?:{$currency})?\z~iu", $prefix)) {
+        if (preg_match("~{$contact}(?:{$currency})?\z~iu", $prefix)
+            || (preg_match('~\A[2-9](?:\h+[0-9]){9}\z~u', $number)
+                && preg_match("~{$contact}(?:{$identifier})?(?:{$currency})?\z~iu", $prefix))) {
             return false;
         }
 

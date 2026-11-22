@@ -43,6 +43,17 @@ final class WithoutExternalContactSpacedPhoneTest extends TestCase
         $this->assertNotEmpty($errors, 'Debe reconocer los digitos con espacios dobles.');
     }
 
+    public function test_rejects_phone_disguised_as_serial(): void
+    {
+        $errors = $this->validateText(
+            'Mi WhatsApp es Serie: 3 3 2 2 3 3 2 2 3 3.'
+        );
+
+        $this->assertNotEmpty(
+            $errors,
+            'No debe permitir telefonos disfrazados como numeros de serie.'
+        );
+    }
     private function validateText(string $text): array
     {
         $errors = [];
