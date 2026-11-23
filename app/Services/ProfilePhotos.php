@@ -117,11 +117,23 @@ final class ProfilePhotos
         }
 
         $disk = Storage::disk('public');
-        if (! $this->insidePublicRoot($disk, $path) || ! $disk->exists($path) || $disk->size($path) > 2048 * 1024) {
+        if (! $this->isDirectPublicPath($disk, $path) || ! $disk->exists($path) || $disk->size($path) > 2048 * 1024) {
             return null;
         }
 
         return $path;
+    }
+
+    private function isDirectPublicPath(FilesystemAdapter $disk, string $path): bool
+    {
+        if (! $disk->getAdapter() instanceof LocalFilesystemAdapter) {
+            return true;
+        }
+
+        $root = realpath($disk->path(''));
+
+        // A name carrying this user's ID must resolve to that file, even within the public root.
+        return $root !== false && realpath($disk->path($path)) === $root.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $path);
     }
 
     private function isManagedPath(User $user, string $path): bool

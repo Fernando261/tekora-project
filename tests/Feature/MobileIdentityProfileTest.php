@@ -9,10 +9,14 @@ use App\Notifications\MobileIdentityCode;
 use App\Services\MobileRegistrationProof;
 use Illuminate\Contracts\Queue\ShouldBeEncrypted;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Mail\Transport\LogTransport;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Queue;
@@ -136,6 +140,24 @@ class MobileIdentityProfileTest extends TestCase
         $this->assertSame($password, $client->fresh()->password);
     }
 
+    public function test_web_password_reset_keeps_its_redirect_and_invalidates_mobile_access(): void
+    {
+        $client = $this->account(RoleName::Client);
+        $oldBearer = $this->bearer($client);
+        $previousRememberToken = $client->remember_token;
+        $payload = $this->resetPayload($client->email, Password::broker()->createToken($client));
+
+        $this->post(route('password.update'), $payload)->assertRedirect(route('login'))
+            ->assertSessionHas('status', 'Contraseña actualizada correctamente');
+        $this->assertGuest('web');
+        $this->assertNotSame($previousRememberToken, $client->fresh()->remember_token);
+        $this->assertDatabaseCount('password_reset_tokens', 0);
+        $this->getJson('/api/v1/me', $oldBearer)->assertUnauthorized();
+        $this->postJson(self::RESET, $payload)->assertUnprocessable()->assertJsonStructure(['error' => ['fields' => ['token']]]);
+        $this->postJson('/api/v1/auth/login', ['email' => $client->email, 'password' => $payload['password'], 'device_name' => 'prueba'])
+            ->assertCreated()->assertJsonPath('data.user.id', $client->id);
+    }
+
     public function test_reset_rolls_back_password_and_tokens_if_consumption_fails(): void
     {
         $client = $this->account(RoleName::Client);
@@ -221,6 +243,25 @@ class MobileIdentityProfileTest extends TestCase
         Notification::assertNothingSent();
     }
 
+    public function test_effective_log_transport_is_rejected_even_if_the_configured_mailer_is_smtp(): void
+    {
+        config(['mail.default' => 'smtp', 'mail.mailers.smtp.url' => 'log://localhost']);
+        $this->assertInstanceOf(LogTransport::class, Mail::mailer()->getSymfonyTransport());
+        Queue::fake();
+        foreach ([self::REGISTER, self::RECOVERY] as $path) {
+            $this->postJson($path, ['email' => 'synthetic@example.test'])->assertServiceUnavailable()->assertDontSee('synthetic@example.test');
+        }
+        Queue::assertNothingPushed();
+    }
+
+    public function test_smtp_url_is_accepted_without_contacting_a_mail_server(): void
+    {
+        config(['mail.default' => 'smtp', 'mail.mailers.smtp.url' => 'smtp://smtp.example.test:587', 'queue.default' => 'database']);
+        Queue::fake();
+        $this->postJson(self::REGISTER, ['email' => 'synthetic@example.test'])->assertAccepted();
+        Queue::assertPushed(SendMobileIdentityCode::class, 1);
+    }
+
     public function test_profile_is_bearer_scoped_and_only_the_authenticated_name_is_editable(): void
     {
         $client = $this->account(RoleName::Client, RoleName::Provider);
@@ -244,14 +285,7 @@ class MobileIdentityProfileTest extends TestCase
 
     public function test_photo_uses_shared_storage_and_only_returns_the_callers_image(): void
     {
-        $previousStorage = storage_path();
-        $syntheticStorage = sys_get_temp_dir().'/tekora-m28-photo-'.bin2hex(random_bytes(8));
-        app()->useStoragePath($syntheticStorage);
-        $this->beforeApplicationDestroyed(function () use ($previousStorage, $syntheticStorage) {
-            app()->useStoragePath($previousStorage);
-            (new Filesystem)->deleteDirectory($syntheticStorage);
-        });
-        $disk = Storage::fake('public');
+        $disk = $this->syntheticPhotoDisk();
         $client = $this->account(RoleName::Client);
         $other = $this->account(RoleName::Client);
         $old = 'avatars/avatar_'.$client->id.'_previous.png';
@@ -267,11 +301,31 @@ class MobileIdentityProfileTest extends TestCase
         $path = $client->fresh()->profile_photo_path;
         $disk->assertMissing($old);
         $disk->assertExists($path);
+        Auth::forgetGuards();
+        $this->get(self::PHOTO, ['Authorization' => 'Bearer invalid-synthetic-token'])->assertUnauthorized();
         $this->get(self::PHOTO, $this->bearer($client))->assertOk()->assertHeader('Content-Type', 'image/webp')
             ->assertHeader('X-Content-Type-Options', 'nosniff')->assertContent($bytes);
         $other->forceFill(['profile_photo_path' => $path])->save();
         $this->getJson(self::PROFILE, $this->bearer($other))->assertOk()->assertJsonPath('data.photo_url', null);
         $this->getJson(self::PHOTO, $this->bearer($other))->assertNotFound();
+    }
+
+    public function test_a_symbolic_photo_alias_cannot_return_a_different_users_photo(): void
+    {
+        $disk = $this->syntheticPhotoDisk();
+        $client = $this->account(RoleName::Client);
+        $other = $this->account(RoleName::Client);
+        $foreign = 'avatars/avatar_'.$other->id.'_actual.png';
+        $alias = 'avatars/avatar_'.$client->id.'_alias.png';
+        $disk->put($foreign, $this->identityPhotoBytes());
+        if (! @symlink($disk->path($foreign), $disk->path($alias))) {
+            $this->markTestSkipped('Synthetic storage does not support symbolic links.');
+        }
+        $client->forceFill(['profile_photo_path' => $alias])->save();
+
+        $this->getJson(self::PROFILE, $this->bearer($client))->assertOk()->assertJsonPath('data.photo_url', null);
+        $this->getJson(self::PHOTO, $this->bearer($client))->assertNotFound();
+        $disk->assertExists($foreign);
     }
 
     public function test_openapi_documents_m28_without_changing_login_or_me_contracts(): void
@@ -294,6 +348,19 @@ class MobileIdentityProfileTest extends TestCase
     private function resetPayload(string $email, string $token): array
     {
         return ['email' => $email, 'token' => $token, 'password' => 'synthetic-password', 'password_confirmation' => 'synthetic-password'];
+    }
+
+    private function syntheticPhotoDisk(): FilesystemAdapter
+    {
+        $previousStorage = storage_path();
+        $syntheticStorage = sys_get_temp_dir().'/tekora-m28-photo-'.bin2hex(random_bytes(8));
+        app()->useStoragePath($syntheticStorage);
+        $this->beforeApplicationDestroyed(function () use ($previousStorage, $syntheticStorage) {
+            app()->useStoragePath($previousStorage);
+            (new Filesystem)->deleteDirectory($syntheticStorage);
+        });
+
+        return Storage::fake('public');
     }
 
     private function sharedIdentityMemory(): void

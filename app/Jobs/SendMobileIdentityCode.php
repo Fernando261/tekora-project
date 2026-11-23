@@ -8,9 +8,19 @@ use App\Services\MobileRegistrationProof;
 use Illuminate\Contracts\Queue\ShouldBeEncrypted;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Mail\Transport\ArrayTransport;
+use Illuminate\Mail\Transport\ResendTransport;
+use Illuminate\Mail\Transport\SesTransport;
+use Illuminate\Mail\Transport\SesV2Transport;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
+use Symfony\Component\Mailer\Bridge\Mailgun\Transport\MailgunApiTransport;
+use Symfony\Component\Mailer\Bridge\Mailgun\Transport\MailgunHttpTransport;
+use Symfony\Component\Mailer\Bridge\Postmark\Transport\PostmarkApiTransport;
+use Symfony\Component\Mailer\Transport\SendmailTransport;
+use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 use Throwable;
 
 final class SendMobileIdentityCode implements ShouldBeEncrypted, ShouldQueue
@@ -21,10 +31,18 @@ final class SendMobileIdentityCode implements ShouldBeEncrypted, ShouldQueue
 
     public static function canDeliver(): bool
     {
-        $transport = config('mail.mailers.'.config('mail.default').'.transport');
+        // MAIL_URL and legacy mail configuration can override the declared driver.
+        try {
+            $transport = Mail::mailer()->getSymfonyTransport();
+        } catch (Throwable) {
+            return false;
+        }
 
-        return in_array($transport, ['smtp', 'sendmail', 'mailgun', 'ses', 'ses-v2', 'postmark', 'resend'], true)
-            || ($transport === 'array' && app()->environment('testing'));
+        return $transport instanceof SmtpTransport || $transport instanceof SendmailTransport
+            || $transport instanceof MailgunApiTransport || $transport instanceof MailgunHttpTransport
+            || $transport instanceof PostmarkApiTransport || $transport instanceof SesTransport
+            || $transport instanceof SesV2Transport || $transport instanceof ResendTransport
+            || ($transport instanceof ArrayTransport && app()->environment('testing'));
     }
 
     public function handle(AccountPasswords $passwords, MobileRegistrationProof $proof): void
