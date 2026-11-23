@@ -139,8 +139,8 @@ final class MobileIntegrationJourneyTest extends TestCase
                 $contracts[strtoupper($method).' '.$path] = $operation;
             }
         }
-        $this->assertCount(49, $contracts);
-        $this->assertCount(49, array_unique(array_column($contracts, 'operationId')));
+        $this->assertCount(51, $contracts);
+        $this->assertCount(51, array_unique(array_column($contracts, 'operationId')));
 
         foreach (Route::getRoutes() as $route) {
             if (! str_starts_with($route->uri(), 'api/v1/')) {
