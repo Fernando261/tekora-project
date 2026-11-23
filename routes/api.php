@@ -3,14 +3,20 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\IdentityController;
 use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\OperationsController;
+use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\QuotesController;
 use App\Http\Middleware\MobileClient;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::post('auth/login', [AuthController::class, 'login'])->middleware('throttle:mobile-login')->name('auth.login');
+    Route::post('auth/register', [IdentityController::class, 'register'])->middleware('throttle:mobile-identity-request')->name('auth.register');
+    Route::post('auth/register/confirm', [IdentityController::class, 'confirm'])->middleware('throttle:mobile-identity-confirm')->name('auth.register.confirm');
+    Route::post('auth/forgot-password', [IdentityController::class, 'forgotPassword'])->middleware('throttle:mobile-identity-request')->name('auth.forgot-password');
+    Route::post('auth/reset-password', [IdentityController::class, 'resetPassword'])->middleware('throttle:mobile-identity-confirm')->name('auth.reset-password');
     Route::middleware(['auth:sanctum', MobileClient::class])->group(function () {
         Route::middleware('throttle:mobile-private')->group(function () {
             $operations = [
@@ -47,6 +53,12 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             Route::get('reservations/{reservation}/checkout-context', CheckoutContextController::class)->whereNumber('reservation')->name('reservations.checkout-context');
         });
         Route::get('me', [AuthController::class, 'me'])->name('me');
+        Route::middleware('throttle:mobile-private')->group(function () {
+            Route::get('me/profile', [ProfileController::class, 'show'])->name('profile.show');
+            Route::patch('me/profile', [ProfileController::class, 'update'])->middleware('throttle:mobile-profile-writes')->name('profile.update');
+            Route::get('me/photo', [ProfileController::class, 'photo'])->name('profile.photo.show');
+            Route::post('me/photo', [ProfileController::class, 'storePhoto'])->middleware('throttle:mobile-profile-writes')->name('profile.photo.store');
+        });
         Route::middleware('throttle:mobile-private')->group(function () {
             Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
             Route::get('notifications/unread-count', [NotificationsController::class, 'unreadCount'])->name('notifications.unread-count');

@@ -370,7 +370,8 @@ class PaymentsPricingQuotesTest extends TestCase
         foreach ($api['paths'] as $path) {
             $count += count(array_intersect(array_keys($path), ['get', 'post', 'put', 'patch', 'delete']));
         }
-        $this->assertSame(32, $count); // 22 preserved + 6 commercial + 3 M1 + 1 UX-C1 read operation.
+        // Preserve the 32 prior operations and allow only the explicit M2.8 identity inventory.
+        $this->assertSame(32 + count($this->m28ApiInventory()), $count);
         $this->assertCurrentApiInventory();
         foreach (app('router')->getRoutes() as $route) {
             $this->assertStringNotContainsString('App\\Payments\\', $route->getActionName());

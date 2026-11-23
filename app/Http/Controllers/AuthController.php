@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Enums\RoleName;
-use App\Services\RoleMemberships;
 use App\Enums\Permission;
 use App\Http\Requests\RegisterUserRequest;
+use App\Services\AccountRegistration;
+use Illuminate\Validation\ValidationException;
 
 
 class AuthController extends Controller
@@ -20,24 +18,15 @@ class AuthController extends Controller
         return view('auth.registro');
     }
 
-    public function store(RegisterUserRequest $request)
-{
-    DB::transaction(function () use ($request) {
-        $user = User::create([
-            'name' => $request->name,
-            'age' => $request->age,
-            'gender' => $request->gender,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-        app(RoleMemberships::class)->enroll($user, RoleName::Client);
-        if (in_array($request->validated('intent'), ['provider', 'both'], true)) {
-            app(RoleMemberships::class)->enroll($user, RoleName::Provider);
+    public function store(RegisterUserRequest $request, AccountRegistration $registration)
+    {
+        $provider = in_array($request->validated('intent'), ['provider', 'both'], true);
+        if (! $registration->create($request->validated(), provider: $provider)) {
+            throw ValidationException::withMessages(['email' => $request->messages()['email.unique']]);
         }
-    });
 
-    return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
-}
+        return redirect()->route('login')->with('success', 'Registro exitoso. Inicia sesión.');
+    }
 
 public function showLogin()
 {

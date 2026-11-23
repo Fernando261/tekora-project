@@ -3,7 +3,9 @@
 namespace Tests\Support;
 
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\IdentityController;
 use App\Http\Controllers\Api\V1\NotificationsController;
+use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\QuotesController;
 use App\Http\Middleware\MobileClient;
 
@@ -37,6 +39,9 @@ trait CommercialApiInventoryAssertions
                 'middleware' => $route->gatherMiddleware(), 'wheres' => $route->wheres];
         }
         ksort($actual);
+        $m28 = $this->m28ApiInventory();
+        $this->assertSame($m28, array_intersect_key($actual, $m28));
+        $actual = array_diff_key($actual, $m28);
         // Preserve every original method, URI, action, middleware and route constraint.
         $this->assertSame($baseline['routes'], array_diff_key($actual, $approved));
         $this->assertCount(32, $actual);
@@ -55,5 +60,35 @@ trait CommercialApiInventoryAssertions
                 $this->assertArrayHasKey($parameter, $row['wheres']);
             }
         }
+    }
+
+    protected function m28ApiInventory(): array
+    {
+        $routes = [];
+        foreach ([
+            'register' => ['register', 'register', 'request'],
+            'register.confirm' => ['register/confirm', 'confirm', 'confirm'],
+            'forgot-password' => ['forgot-password', 'forgotPassword', 'request'],
+            'reset-password' => ['reset-password', 'resetPassword', 'confirm'],
+        ] as $name => [$uri, $action, $limit]) {
+            $routes['api.v1.auth.'.$name] = ['uri' => 'api/v1/auth/'.$uri, 'methods' => ['POST'],
+                'action' => IdentityController::class.'@'.$action, 'middleware' => ['api', 'throttle:mobile-identity-'.$limit], 'wheres' => []];
+        }
+        foreach ([
+            'show' => ['profile', 'show', 'GET'],
+            'update' => ['profile', 'update', 'PATCH'],
+            'photo.show' => ['photo', 'photo', 'GET'],
+            'photo.store' => ['photo', 'storePhoto', 'POST'],
+        ] as $name => [$uri, $action, $method]) {
+            $middleware = ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
+            if ($method !== 'GET') {
+                $middleware[] = 'throttle:mobile-profile-writes';
+            }
+            $routes['api.v1.profile.'.$name] = ['uri' => 'api/v1/me/'.$uri, 'methods' => $method === 'GET' ? ['GET', 'HEAD'] : [$method],
+                'action' => ProfileController::class.'@'.$action, 'middleware' => $middleware, 'wheres' => []];
+        }
+        ksort($routes);
+
+        return $routes;
     }
 }
