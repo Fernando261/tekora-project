@@ -306,6 +306,13 @@ class ContractingJourneyTest extends TestCase
         $new = json_decode(file_get_contents(base_path('docs/api/openapi.json')), true, flags: JSON_THROW_ON_ERROR);
         $added = $new['paths']['/inquiries/{inquiry}/journey']['get'];
         unset($new['paths']['/inquiries/{inquiry}/journey']);
+        foreach ($this->mobileClientExtensions() as $route) {
+            $path = substr($route['uri'], strlen('api/v1'));
+            unset($new['paths'][$path][strtolower($route['methods'][0])]);
+            if (empty($new['paths'][$path])) {
+                unset($new['paths'][$path]);
+            }
+        }
         $fingerprint = fn ($value) => hash('sha256', json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
         $this->assertSame($old['paths_sha256'], $fingerprint($new['paths']));
         foreach ($old['components'] as $type => $definitions) {

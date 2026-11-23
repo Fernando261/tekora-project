@@ -23,6 +23,7 @@ class MobileNotificationContractTest extends TestCase
         }
         $m1 = ['api.v1.inquiries.journey' => true, 'api.v1.notifications.index' => true, 'api.v1.notifications.unread-count' => true, 'api.v1.notifications.read' => true];
         ksort($current);
+        $current = array_diff_key($current, $this->mobileClientExtensions());
         $this->assertSame($baseline['routes'], array_diff_key($current, $m1));
         $this->assertCount(32, $current);
         $this->assertSame(['source_type' => 'inquiry|activity', 'id' => '[1-9][0-9]{0,18}'], $current['api.v1.notifications.read']['wheres']);

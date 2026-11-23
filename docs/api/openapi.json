@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tekora API móvil",
-    "version": "1.4.0",
-    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento. M1 agrega notificaciones del solicitante: filtro SQL por destinatario, rol cliente vigente, evento y propiedad antes de contar/ordenar/paginar. Cuentas duales excluyen avisos exclusivos de prestador. IDs compuestos por origen. Lectura idempotente sin cambiar negocios; errores de almacenamiento nunca se convierten en cero o éxito.",
+    "version": "1.7.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept, salvo la descarga binaria de foto propia en M2.8. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento. M1 agrega notificaciones del solicitante: filtro SQL por destinatario, rol cliente vigente, evento y propiedad antes de contar/ordenar/paginar. Cuentas duales excluyen avisos exclusivos de prestador. IDs compuestos por origen. Lectura idempotente sin cambiar negocios; errores de almacenamiento nunca se convierten en cero o éxito. M2.8 agrega registro por correo, recuperación y perfil propio sin cambiar login ni /me. M2.9 agrega reseñas públicas anónimas y operaciones de reseñas propias del solicitante. M3.0 agrega categorías, servicios por prestador y una instantánea privada del solicitante.",
     "license": {
       "name": "MIT",
       "identifier": "MIT"
@@ -16,6 +16,1502 @@
     }
   ],
   "paths": {
+    "/categories": {
+      "get": {
+        "operationId": "listCategories",
+        "summary": "Categorías activas del catálogo",
+        "description": "Consulta pública sin parámetros ni cuerpo. Orden ascendente por sort_order, nombre e id. Si no hay categorías activas, data es un arreglo vacío.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "name": "Soporte técnico",
+                      "slug": "soporte-tecnico"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/providers/{provider}/services": {
+      "get": {
+        "operationId": "listProviderServices",
+        "summary": "Servicios públicos de un prestador",
+        "description": "Usa la visibilidad y el precio público del catálogo. Orden por id descendente. Un prestador sin servicios visibles devuelve 404. Una página válida fuera del total devuelve data vacío. Solo admite page y per_page en la consulta y no admite cuerpo.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Service"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 21,
+                      "title": "Soporte de computadoras",
+                      "description": "Diagnóstico remoto.",
+                      "modality": "remote",
+                      "category": {
+                        "id": 1,
+                        "name": "Soporte técnico",
+                        "slug": "soporte-tecnico"
+                      },
+                      "provider": {
+                        "id": 7,
+                        "display_name": "Soporte local",
+                        "headline": "Especialista en equipos",
+                        "bio": "Diagnóstico y mantenimiento."
+                      },
+                      "price": null
+                    }
+                  ],
+                  "meta": {
+                    "current_page": 1,
+                    "per_page": 12,
+                    "last_page": 1,
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/me/dashboard": {
+      "get": {
+        "operationId": "getClientDashboard",
+        "summary": "Resumen del solicitante",
+        "description": "Instantánea privada de solo lectura del solicitante autenticado. No admite parámetros ni cuerpo. La agenda contiene hasta cinco reservas confirmadas por inicio ascendente e id ascendente. Las solicitudes recientes se ordenan por creación e id descendentes. Las retenciones vencidas quedan fuera de held y requested. Si el reloj o el almacenamiento no permiten verificar los datos, devuelve 503 sin instantánea parcial.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M30ClientDashboard"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "as_of": "2030-01-01T12:00:00.000000Z",
+                    "timezone": "America/Mexico_City",
+                    "counts": {
+                      "active": 2,
+                      "confirmed": 1,
+                      "requested": 0,
+                      "completed": 1,
+                      "cancelled": 0,
+                      "held": 1,
+                      "unread_conversations": 1,
+                      "unread_notifications": 2
+                    },
+                    "upcoming_reservations": [
+                      {
+                        "id": 14,
+                        "inquiry_id": 92,
+                        "service_id": 21,
+                        "title": "Soporte de computadoras",
+                        "status": "confirmed",
+                        "starts_at": "2030-01-07T15:00:00.000000Z",
+                        "ends_at": "2030-01-07T16:00:00.000000Z"
+                      }
+                    ],
+                    "recent_inquiries": [
+                      {
+                        "id": 92,
+                        "service_id": 21,
+                        "title": "Soporte de computadoras",
+                        "status": "accepted",
+                        "created_at": "2029-12-30T19:00:00.000000Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/services/{service}/reviews": {
+      "get": {
+        "operationId": "listServiceReviews",
+        "summary": "Reseñas públicas de un servicio",
+        "security": [],
+        "description": "Devuelve páginas de cinco reseñas en orden descendente de publicación. El promedio y el total abarcan todas las reseñas publicables.",
+        "parameters": [
+          {
+            "name": "service",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta o repetición sin cambios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/M29PublicReviewPage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso ajeno, no visible, inexistente o página fuera de rango.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Consulta o cuerpo no válido. Consultar error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Consultar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Las reseñas no están disponibles temporalmente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/{provider}/reviews": {
+      "get": {
+        "operationId": "listProviderReviews",
+        "summary": "Reseñas públicas de un prestador",
+        "security": [],
+        "description": "Promedio ponderado por reseña sobre los servicios actualmente visibles. Cinco elementos por página.",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta o repetición sin cambios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/M29PublicReviewPage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso ajeno, no visible, inexistente o página fuera de rango.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Consulta o cuerpo no válido. Consultar error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Consultar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Las reseñas no están disponibles temporalmente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews": {
+      "get": {
+        "operationId": "listOwnReviews",
+        "summary": "Listar reseñas propias",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Incluye publicaciones y retiros de la cuenta solicitante. Doce elementos por página.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta o repetición sin cambios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/M29OwnedReviewPage"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Se requiere autenticación Bearer Sanctum.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permisos de solicitante insuficientes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso ajeno, no visible, inexistente o página fuera de rango.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Consulta o cuerpo no válido. Consultar error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Consultar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Las reseñas no están disponibles temporalmente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/{review}": {
+      "get": {
+        "operationId": "showOwnReview",
+        "summary": "Consultar una reseña propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "review",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta o repetición sin cambios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M29OwnedReview"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Se requiere autenticación Bearer Sanctum.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permisos de solicitante insuficientes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso ajeno, no visible, inexistente o página fuera de rango.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Consulta o cuerpo no válido. Consultar error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Consultar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Las reseñas no están disponibles temporalmente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations/{reservation}/review": {
+      "post": {
+        "operationId": "publishOwnReview",
+        "summary": "Publicar una reseña de la reserva propia completada",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Un reintento con la misma calificación y comentario normalizado devuelve la reseña existente, incluso si está retirada. La reserva admite una sola reseña.",
+        "parameters": [
+          {
+            "name": "reservation",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M29ReviewInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta o repetición sin cambios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M29OwnedReview"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Primera publicación de la reseña.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M29OwnedReview"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Se requiere autenticación Bearer Sanctum.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permisos de solicitante insuficientes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso ajeno, no visible, inexistente o página fuera de rango.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "La reserva no está completada, el contenido difiere de una reseña existente o hay una escritura concurrente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Consulta o cuerpo no válido. Consultar error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Consultar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Las reseñas no están disponibles temporalmente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/{review}/withdraw": {
+      "patch": {
+        "operationId": "withdrawOwnReview",
+        "summary": "Retirar una reseña propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Retiro idempotente. Se conserva el registro privado y deja de contribuir a las reseñas públicas.",
+        "parameters": [
+          {
+            "name": "review",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta o repetición sin cambios.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M29OwnedReview"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Se requiere autenticación Bearer Sanctum.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Permisos de solicitante insuficientes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Recurso ajeno, no visible, inexistente o página fuera de rango.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "La reserva no está completada, el contenido difiere de una reseña existente o hay una escritura concurrente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Consulta o cuerpo no válido. Consultar error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Consultar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Las reseñas no están disponibles temporalmente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "requestMobileRegistration",
+        "summary": "Solicitar código de registro",
+        "security": [],
+        "description": "Envía un código de registro por correo. La respuesta no confirma la existencia de una cuenta.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28EmailInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitud aceptada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register/confirm": {
+      "post": {
+        "operationId": "confirmMobileRegistration",
+        "summary": "Confirmar registro del solicitante",
+        "security": [],
+        "description": "El código está asociado al correo y vence en 30 minutos. Para una cuenta existente la respuesta es idéntica y no se cambian sus datos. No emite un token Sanctum.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28RegistrationConfirmationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitud aceptada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "operationId": "requestMobilePasswordReset",
+        "summary": "Solicitar código de recuperación",
+        "security": [],
+        "description": "La respuesta es uniforme. Se envía el código si la dirección corresponde a un solicitante elegible.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28EmailInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitud aceptada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "operationId": "resetMobilePassword",
+        "summary": "Restablecer contraseña central",
+        "security": [],
+        "description": "Consume el código del broker central y revoca los tokens Sanctum del titular. Inicia sesión de nuevo tras el éxito.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28PasswordResetInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/profile": {
+      "get": {
+        "operationId": "getMobileProfile",
+        "summary": "Consultar el perfil propio",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28Profile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateMobileProfileName",
+        "summary": "Actualizar el nombre propio",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28NameInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28Profile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/photo": {
+      "get": {
+        "operationId": "getMobileProfilePhoto",
+        "summary": "Descargar la foto propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bytes de la foto del solicitante.",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Foto disponible solo si la cuenta tiene una imagen compatible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "setMobileProfilePhoto",
+        "summary": "Actualizar la foto propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/M28PhotoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28Profile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "operationId": "login",
@@ -2866,6 +4362,424 @@
       }
     },
     "schemas": {
+      "M29PublicReview": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rating",
+          "comment",
+          "month",
+          "service_id",
+          "service_title"
+        ],
+        "properties": {
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "comment": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000,
+            "description": "Texto plano. Puede ser nulo."
+          },
+          "month": {
+            "type": "string",
+            "example": "enero de 2030"
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_title": {
+            "type": "string"
+          }
+        }
+      },
+      "M29OwnedReview": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "reservation_id",
+          "service_id",
+          "service_title",
+          "rating",
+          "comment",
+          "status",
+          "created_at",
+          "withdrawn_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reservation_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_title": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "comment": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000,
+            "description": "Texto plano. Puede ser nulo."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "published",
+              "withdrawn"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "withdrawn_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "M29ReviewInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rating"
+        ],
+        "properties": {
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "comment": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000,
+            "description": "Texto plano. Puede ser nulo."
+          }
+        }
+      },
+      "M29PublicReviewPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "meta"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "$ref": "#/components/schemas/M29PublicReview"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "current_page",
+              "per_page",
+              "last_page",
+              "total",
+              "average_rating"
+            ],
+            "properties": {
+              "current_page": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "per_page": {
+                "const": 5
+              },
+              "last_page": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "average_rating": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 1,
+                "maximum": 5,
+                "description": "Promedio con un decimal sobre todo el conjunto. Nulo cuando total es cero."
+              }
+            }
+          }
+        }
+      },
+      "M29OwnedReviewPage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "meta"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "$ref": "#/components/schemas/M29OwnedReview"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "current_page",
+              "per_page",
+              "last_page",
+              "total"
+            ],
+            "properties": {
+              "current_page": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "per_page": {
+                "const": 12
+              },
+              "last_page": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      },
+      "M28EmailInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "pattern": "^[\\x00-\\x7F]+$",
+            "description": "Correo ASCII. Se normaliza a minúsculas."
+          }
+        }
+      },
+      "M28RegistrationConfirmationInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "token",
+          "password",
+          "password_confirmation",
+          "name",
+          "age",
+          "gender"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "pattern": "^[\\x00-\\x7F]+$",
+            "description": "Correo ASCII. Se normaliza a minúsculas."
+          },
+          "token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "writeOnly": true
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8,
+            "maxLength": 72,
+            "writeOnly": true,
+            "description": "Máximo 72 bytes UTF-8. Sin caracteres nulos."
+          },
+          "password_confirmation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 72,
+            "format": "password",
+            "writeOnly": true,
+            "description": "Debe ser igual a password."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "age": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 255
+          },
+          "gender": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "M28PasswordResetInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "token",
+          "password",
+          "password_confirmation"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "pattern": "^[\\x00-\\x7F]+$",
+            "description": "Correo ASCII. Se normaliza a minúsculas."
+          },
+          "token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "writeOnly": true
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8,
+            "maxLength": 72,
+            "writeOnly": true,
+            "description": "Máximo 72 bytes UTF-8. Sin caracteres nulos."
+          },
+          "password_confirmation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 72,
+            "format": "password",
+            "writeOnly": true,
+            "description": "Debe ser igual a password."
+          }
+        }
+      },
+      "M28IdentityNotice": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "M28Profile": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "email",
+          "age",
+          "gender",
+          "email_verified",
+          "photo_url"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean"
+          },
+          "photo_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Ruta relativa al origen. La descarga requiere Bearer."
+          }
+        }
+      },
+      "M28NameInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "M28PhotoInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "photo"
+        ],
+        "properties": {
+          "photo": {
+            "type": "string",
+            "format": "binary",
+            "description": "JPEG, PNG o WebP. Máximo 2 MiB."
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "additionalProperties": false,
@@ -5609,6 +7523,184 @@
             }
           }
         ]
+      },
+      "M30ClientDashboard": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "as_of",
+          "timezone",
+          "counts",
+          "upcoming_reservations",
+          "recent_inquiries"
+        ],
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          },
+          "timezone": {
+            "type": "string",
+            "const": "America/Mexico_City"
+          },
+          "counts": {
+            "$ref": "#/components/schemas/M30DashboardCounts"
+          },
+          "upcoming_reservations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/M30DashboardReservation"
+            },
+            "maxItems": 5
+          },
+          "recent_inquiries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/M30DashboardInquiry"
+            },
+            "maxItems": 5
+          }
+        }
+      },
+      "M30DashboardCounts": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "active",
+          "confirmed",
+          "requested",
+          "completed",
+          "cancelled",
+          "held",
+          "unread_conversations",
+          "unread_notifications"
+        ],
+        "properties": {
+          "active": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Solicitudes en estado pending o accepted."
+          },
+          "confirmed": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Reservas confirmadas cuyo inicio es posterior a as_of."
+          },
+          "requested": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Propuestas con inicio futuro que todavía no tienen una retención."
+          },
+          "completed": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Reservas realizadas explícitamente, en estado completed."
+          },
+          "cancelled": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Reservas en estado cancelled."
+          },
+          "held": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Retenciones en estado held con vencimiento estrictamente posterior a as_of."
+          },
+          "unread_conversations": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Conversaciones propias con al menos un mensaje recibido sin leer."
+          },
+          "unread_notifications": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Notificaciones sin leer dirigidas al rol solicitante y a recursos propios."
+          }
+        }
+      },
+      "M30DashboardReservation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "inquiry_id",
+          "service_id",
+          "title",
+          "status",
+          "starts_at",
+          "ends_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "const": "confirmed"
+          },
+          "starts_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          },
+          "ends_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          }
+        }
+      },
+      "M30DashboardInquiry": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "service_id",
+          "title",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          }
+        }
       }
     },
     "responses": {

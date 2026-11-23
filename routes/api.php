@@ -3,14 +3,22 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\DashboardController;
+use App\Http\Controllers\Api\V1\IdentityController;
 use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\OperationsController;
+use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\QuotesController;
+use App\Http\Controllers\Api\V1\ReviewsController;
 use App\Http\Middleware\MobileClient;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::post('auth/login', [AuthController::class, 'login'])->middleware('throttle:mobile-login')->name('auth.login');
+    Route::post('auth/register', [IdentityController::class, 'register'])->middleware('throttle:mobile-identity-request')->name('auth.register');
+    Route::post('auth/register/confirm', [IdentityController::class, 'confirm'])->middleware('throttle:mobile-identity-confirm')->name('auth.register.confirm');
+    Route::post('auth/forgot-password', [IdentityController::class, 'forgotPassword'])->middleware('throttle:mobile-identity-request')->name('auth.forgot-password');
+    Route::post('auth/reset-password', [IdentityController::class, 'resetPassword'])->middleware('throttle:mobile-identity-confirm')->name('auth.reset-password');
     Route::middleware(['auth:sanctum', MobileClient::class])->group(function () {
         Route::middleware('throttle:mobile-private')->group(function () {
             $operations = [
@@ -47,6 +55,21 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             Route::get('reservations/{reservation}/checkout-context', CheckoutContextController::class)->whereNumber('reservation')->name('reservations.checkout-context');
         });
         Route::get('me', [AuthController::class, 'me'])->name('me');
+        Route::get('me/dashboard', DashboardController::class)->middleware('throttle:mobile-private')->name('dashboard.show');
+        Route::middleware('throttle:mobile-private')->group(function () {
+            Route::get('reviews', [ReviewsController::class, 'index'])->name('reviews.index');
+            Route::get('reviews/{review}', [ReviewsController::class, 'show'])->whereNumber('review')->name('reviews.show');
+            Route::post('reservations/{reservation}/review', [ReviewsController::class, 'store'])->whereNumber('reservation')
+                ->middleware('throttle:mobile-review-writes')->name('reviews.store');
+            Route::patch('reviews/{review}/withdraw', [ReviewsController::class, 'withdraw'])->whereNumber('review')
+                ->middleware('throttle:mobile-review-writes')->name('reviews.withdraw');
+        });
+        Route::middleware('throttle:mobile-private')->group(function () {
+            Route::get('me/profile', [ProfileController::class, 'show'])->name('profile.show');
+            Route::patch('me/profile', [ProfileController::class, 'update'])->middleware('throttle:mobile-profile-writes')->name('profile.update');
+            Route::get('me/photo', [ProfileController::class, 'photo'])->name('profile.photo.show');
+            Route::post('me/photo', [ProfileController::class, 'storePhoto'])->middleware('throttle:mobile-profile-writes')->name('profile.photo.store');
+        });
         Route::middleware('throttle:mobile-private')->group(function () {
             Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
             Route::get('notifications/unread-count', [NotificationsController::class, 'unreadCount'])->name('notifications.unread-count');
@@ -56,10 +79,14 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
     });
     Route::middleware('throttle:mobile-catalog')->group(function () {
+        Route::get('categories', [CatalogController::class, 'categories'])->name('categories.index');
         Route::get('services', [CatalogController::class, 'index'])->name('services.index');
         Route::get('services/{service}', [CatalogController::class, 'show'])->whereNumber('service')->name('services.show');
         Route::get('services/{service}/availability', [CatalogController::class, 'availability'])->whereNumber('service')->name('services.availability');
+        Route::get('services/{service}/reviews', [ReviewsController::class, 'forService'])->whereNumber('service')->name('services.reviews.index');
         Route::get('providers', [CatalogController::class, 'providersIndex'])->name('providers.index');
         Route::get('providers/{provider}', [CatalogController::class, 'provider'])->whereNumber('provider')->name('providers.show');
+        Route::get('providers/{provider}/services', [CatalogController::class, 'providerServices'])->whereNumber('provider')->name('providers.services.index');
+        Route::get('providers/{provider}/reviews', [ReviewsController::class, 'forProvider'])->whereNumber('provider')->name('providers.reviews.index');
     });
 });

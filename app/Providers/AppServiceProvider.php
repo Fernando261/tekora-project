@@ -34,7 +34,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         foreach (['mobile-private' => 120, 'mobile-inquiry-writes' => 5, 'mobile-message-writes' => 10,
-            'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10, 'mobile-quote-writes' => 10] as $name => $limit) {
+            'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10, 'mobile-quote-writes' => 10, 'mobile-profile-writes' => 10,
+            'mobile-review-writes' => 10] as $name => $limit) {
             RateLimiter::for($name, fn (Request $request) => [
                 Limit::perMinute($limit)->by($name.':actor:'.$request->user('sanctum')->id),
                 Limit::perMinute($limit * 4)->by($name.':ip:'.hash('sha256', $request->ip())),
@@ -50,6 +51,18 @@ class AppServiceProvider extends ServiceProvider
                 Limit::perMinute(20)->by('mobile-login-ip:'.$request->ip()),
             ];
         });
+        foreach (['mobile-identity-request' => [3, 10], 'mobile-identity-confirm' => [5, 1]] as $name => [$limit, $minutes]) {
+            RateLimiter::for($name, function (Request $request) use ($name, $limit, $minutes) {
+                $email = $request->input('email');
+                $address = is_string($email) ? Str::lower(trim($email)) : '';
+                $operation = $name.':'.$request->route()->getName();
+
+                return [
+                    Limit::perMinutes($minutes, $limit)->by($operation.':email:'.hash('sha256', $address)),
+                    Limit::perMinutes($minutes, $limit * 4)->by($operation.':ip:'.hash('sha256', $request->ip())),
+                ];
+            });
+        }
         RateLimiter::for('mobile-catalog', fn (Request $request) => Limit::perMinute(120)->by('mobile-catalog:'.$request->ip()));
 
         Gate::policy(\App\Models\ActivityNotification::class, \App\Policies\ActivityNotificationPolicy::class);

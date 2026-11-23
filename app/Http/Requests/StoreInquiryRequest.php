@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\ServiceInquiry;
+use App\Rules\WithoutExternalContact;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreInquiryRequest extends FormRequest
@@ -22,7 +23,7 @@ class StoreInquiryRequest extends FormRequest
 
     public function rules(): array
     {
-        return ['message' => ['required', 'string', 'min:10', 'max:2000']] + self::protectedFields();
+        return ['message' => ['required', 'string', 'min:10', 'max:2000', new WithoutExternalContact]] + self::protectedFields();
     }
 
     public function messages(): array

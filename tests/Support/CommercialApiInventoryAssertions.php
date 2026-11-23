@@ -2,9 +2,14 @@
 
 namespace Tests\Support;
 
+use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\DashboardController;
+use App\Http\Controllers\Api\V1\IdentityController;
 use App\Http\Controllers\Api\V1\NotificationsController;
+use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\QuotesController;
+use App\Http\Controllers\Api\V1\ReviewsController;
 use App\Http\Middleware\MobileClient;
 
 trait CommercialApiInventoryAssertions
@@ -37,6 +42,10 @@ trait CommercialApiInventoryAssertions
                 'middleware' => $route->gatherMiddleware(), 'wheres' => $route->wheres];
         }
         ksort($actual);
+        $extensions = $this->mobileClientExtensions();
+        ksort($extensions);
+        $this->assertSame($extensions, array_intersect_key($actual, $extensions));
+        $actual = array_diff_key($actual, $extensions);
         // Preserve every original method, URI, action, middleware and route constraint.
         $this->assertSame($baseline['routes'], array_diff_key($actual, $approved));
         $this->assertCount(32, $actual);
@@ -55,5 +64,74 @@ trait CommercialApiInventoryAssertions
                 $this->assertArrayHasKey($parameter, $row['wheres']);
             }
         }
+    }
+
+    protected function m28ApiInventory(): array
+    {
+        $routes = [];
+        foreach ([
+            'register' => ['register', 'register', 'request'],
+            'register.confirm' => ['register/confirm', 'confirm', 'confirm'],
+            'forgot-password' => ['forgot-password', 'forgotPassword', 'request'],
+            'reset-password' => ['reset-password', 'resetPassword', 'confirm'],
+        ] as $name => [$uri, $action, $limit]) {
+            $routes['api.v1.auth.'.$name] = ['uri' => 'api/v1/auth/'.$uri, 'methods' => ['POST'],
+                'action' => IdentityController::class.'@'.$action, 'middleware' => ['api', 'throttle:mobile-identity-'.$limit], 'wheres' => []];
+        }
+        foreach ([
+            'show' => ['profile', 'show', 'GET'],
+            'update' => ['profile', 'update', 'PATCH'],
+            'photo.show' => ['photo', 'photo', 'GET'],
+            'photo.store' => ['photo', 'storePhoto', 'POST'],
+        ] as $name => [$uri, $action, $method]) {
+            $middleware = ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
+            if ($method !== 'GET') {
+                $middleware[] = 'throttle:mobile-profile-writes';
+            }
+            $routes['api.v1.profile.'.$name] = ['uri' => 'api/v1/me/'.$uri, 'methods' => $method === 'GET' ? ['GET', 'HEAD'] : [$method],
+                'action' => ProfileController::class.'@'.$action, 'middleware' => $middleware, 'wheres' => []];
+        }
+        ksort($routes);
+
+        return $routes;
+    }
+
+    protected function mobileClientExtensions(): array
+    {
+        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory();
+    }
+
+    protected function m30ApiInventory(): array
+    {
+        return [
+            'api.v1.categories.index' => ['uri' => 'api/v1/categories', 'methods' => ['GET', 'HEAD'],
+                'action' => CatalogController::class.'@categories', 'middleware' => ['api', 'throttle:mobile-catalog'], 'wheres' => []],
+            'api.v1.providers.services.index' => ['uri' => 'api/v1/providers/{provider}/services', 'methods' => ['GET', 'HEAD'],
+                'action' => CatalogController::class.'@providerServices', 'middleware' => ['api', 'throttle:mobile-catalog'], 'wheres' => ['provider' => '[0-9]+']],
+            'api.v1.dashboard.show' => ['uri' => 'api/v1/me/dashboard', 'methods' => ['GET', 'HEAD'],
+                'action' => DashboardController::class, 'middleware' => ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'], 'wheres' => []],
+        ];
+    }
+
+    protected function m29ApiInventory(): array
+    {
+        $routes = [];
+        foreach ([
+            'services.reviews.index' => ['GET', 'services/{service}/reviews', 'forService', 'service', true],
+            'providers.reviews.index' => ['GET', 'providers/{provider}/reviews', 'forProvider', 'provider', true],
+            'reviews.index' => ['GET', 'reviews', 'index', null, false],
+            'reviews.show' => ['GET', 'reviews/{review}', 'show', 'review', false],
+            'reviews.store' => ['POST', 'reservations/{reservation}/review', 'store', 'reservation', false],
+            'reviews.withdraw' => ['PATCH', 'reviews/{review}/withdraw', 'withdraw', 'review', false],
+        ] as $name => [$method, $uri, $action, $parameter, $public]) {
+            $middleware = $public ? ['api', 'throttle:mobile-catalog'] : ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
+            if ($method !== 'GET') {
+                $middleware[] = 'throttle:mobile-review-writes';
+            }
+            $routes['api.v1.'.$name] = ['uri' => 'api/v1/'.$uri, 'methods' => $method === 'GET' ? ['GET', 'HEAD'] : [$method],
+                'action' => ReviewsController::class.'@'.$action, 'middleware' => $middleware, 'wheres' => $parameter === null ? [] : [$parameter => '[0-9]+']];
+        }
+
+        return $routes;
     }
 }

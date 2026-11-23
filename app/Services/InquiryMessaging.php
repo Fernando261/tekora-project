@@ -8,6 +8,7 @@ use App\Exceptions\InquiryMessageUnavailable;
 use App\Models\ServiceInquiry;
 use App\Models\ServiceInquiryMessage;
 use App\Models\User;
+use Closure;
 use Illuminate\Database\DetectsConcurrencyErrors;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\DB;
@@ -18,23 +19,30 @@ class InquiryMessaging
     use DetectsConcurrencyErrors;
 
     /** @return array{message: ServiceInquiryMessage, created: bool} */
-    public function send(User $author, int $inquiryId, string $body, string $key): array
+    public function send(User $author, int $inquiryId, string $body, string $key, ?Closure $validateNewBody = null): array
     {
         $key = strtolower($key);
         try {
-            return DB::transaction(function () use ($author, $inquiryId, $body, $key) {
+            return DB::transaction(function () use ($author, $inquiryId, $body, $key, $validateNewBody) {
                 $inquiry = ServiceInquiry::findOrFail($inquiryId);
                 Gate::forUser($author)->authorize('sendMessage', $inquiry);
                 $existing = $this->existing($inquiry, $author, $key);
-                if ($existing) return $this->replay($existing, $body);
+                if ($existing) {
+                    return $this->replay($existing, $body);
+                }
 
                 // SQLite no ofrece SELECT FOR UPDATE. Este UPDATE condicional obtiene el bloqueo
                 // de escritura compartido con las decisiones, sin cambiar estado ni timestamps.
                 $writable = DB::table('service_inquiries')->where('id', $inquiryId)
                     ->whereIn('status', [InquiryStatus::Pending->value, InquiryStatus::Accepted->value])
                     ->update(['status' => DB::raw('status')]);
-                if ($writable !== 1) throw new InquiryMessageConflict;
+                if ($writable !== 1) {
+                    throw new InquiryMessageConflict;
+                }
                 Gate::forUser($author)->authorize('sendMessage', $inquiry->fresh());
+
+                // Las reglas del nuevo envío no se aplican a un mensaje ya guardado.
+                $validateNewBody?->__invoke($body);
 
                 $message = new ServiceInquiryMessage;
                 $message->setConnection($inquiry->getConnectionName());
@@ -50,7 +58,9 @@ class InquiryMessaging
             $inquiry = ServiceInquiry::findOrFail($inquiryId);
             Gate::forUser($author)->authorize('sendMessage', $inquiry);
             $existing = $this->existing($inquiry, $author, $key);
-            if ($existing) return $this->replay($existing, $body);
+            if ($existing) {
+                return $this->replay($existing, $body);
+            }
             throw new InquiryMessageUnavailable;
         } catch (\PDOException $exception) {
             // Incluye QueryException y DeadlockException de transacciones anidadas,

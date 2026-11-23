@@ -1,0 +1,40 @@
+@base = http://127.0.0.1:8013/api/v1
+@service = 7
+@provider = 3
+@reservation = 11
+@review = 18
+@bearer = REEMPLAZAR_TOKEN_SANCTUM
+
+### Reseñas públicas del servicio
+GET {{base}}/services/{{service}}/reviews?page=1
+Accept: application/json
+
+### Reseñas públicas del prestador
+GET {{base}}/providers/{{provider}}/reviews?page=1
+Accept: application/json
+
+### Reseñas propias
+GET {{base}}/reviews?page=1
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Publicar en una reserva propia que ya está completada
+POST {{base}}/reservations/{{reservation}}/review
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"rating":5,"comment":"La visita fue puntual."}
+
+### Consultar la reseña propia
+GET {{base}}/reviews/{{review}}
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Retirar la reseña propia
+PATCH {{base}}/reviews/{{review}}/withdraw
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{}

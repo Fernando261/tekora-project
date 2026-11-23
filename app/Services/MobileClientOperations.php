@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\ServiceInquiry;
 use App\Models\ServiceReservation;
+use App\Models\ServiceReview;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Gate;
@@ -35,5 +36,10 @@ final class MobileClientOperations
         Gate::forUser($user)->authorize('view', $reservation);
 
         return $reservation;
+    }
+
+    public function reviews(User $user): Builder
+    {
+        return ServiceReview::query()->where('service_reviews.client_user_id', $user->id);
     }
 }

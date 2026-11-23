@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\ProfileInput;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class PerfilController extends Controller
     public function updateNombre(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255'
+            'name' => ProfileInput::name(),
         ]);
 
         $user = Auth::user();

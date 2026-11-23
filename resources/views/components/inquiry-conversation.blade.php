@@ -37,7 +37,7 @@
         <input type="hidden" name="idempotency_key" value="{{ old('idempotency_key', (string) \Illuminate\Support\Str::uuid()) }}">
         <label for="message-body">Tu mensaje</label>
         <textarea id="message-body" name="body" rows="4" maxlength="2000" required aria-describedby="message-help" @if($errors->has('body')) aria-invalid="true" @endif>{{ old('body') }}</textarea>
-        <p class="account-help" id="message-help">Hasta 2000 caracteres de texto. No hay archivos adjuntos ni avisos automáticos por mensaje. Recarga para consultar novedades.</p>
+        <p class="account-help" id="message-help">Hasta 2000 caracteres. Mantén la conversación en Tekora. Evita compartir teléfonos, correos o enlaces de contacto. No hay archivos adjuntos ni avisos automáticos por mensaje. Recarga para consultar novedades.</p>
         @error('body')<p class="account-help" role="alert">{{ $message }}</p>@enderror
         @error('idempotency_key')<p class="account-help" role="alert">{{ $message }}</p>@enderror
         <button class="account-button" type="submit">Enviar mensaje</button>
