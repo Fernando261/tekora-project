@@ -9,39 +9,18 @@ use App\Models\User;
 use App\Notifications\MobileIdentityCode;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryWorkflow;
-use Illuminate\Database\QueryException;
-use Illuminate\Foundation\Testing\TestCase;
+use App\Services\ProviderAvailability;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
-use Tests\Support\CatalogFixtures;
 
-final class FoundationTest extends TestCase
+final class FoundationTest extends LabTestCase
 {
-    use CatalogFixtures;
-
-    public function createApplication()
-    {
-        return mysqlV81Application();
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->migrateFoundation();
-    }
-
-    private function migrateFoundation(): void
-    {
-        $this->artisan('migrate', ['--path' => mysqlV81MigrationPaths(), '--realpath' => true, '--force' => true])
-            ->assertExitCode(0);
-    }
-
     public function test_foundation_migrations_are_idempotent_and_restart_preserves_inquiry(): void
     {
         $expected = array_map(fn ($path) => basename($path, '.php'), mysqlV81MigrationPaths());
-        $this->assertCount(33, $expected);
+        $this->assertCount(34, $expected);
         $records = DB::table('migrations')->orderBy('id')->get();
         $this->assertSame($expected, $records->pluck('migration')->all());
         $this->migrateFoundation();
@@ -54,7 +33,13 @@ final class FoundationTest extends TestCase
         fwrite(STDOUT, sprintf("\nMySQL %s / %s / isolation=%s / migrations=%d / TCP disabled\n", $settings->version, $settings->engine, $settings->isolation_level, count($expected)));
 
         if (getenv('TEKORA_V81_RESTARTED') !== '1') {
-            $service = $this->service($this->account(RoleName::Provider));
+            $provider = $this->account(RoleName::Provider);
+            $service = $this->service($provider);
+            app(ProviderAvailability::class)->save($provider, [
+                'revision' => 0, 'timezone' => 'America/Mexico_City',
+                'intervals' => [['day_of_week' => 1, 'start' => '09:00', 'end' => '10:00']],
+                'blocked_dates' => ['2032-02-29'],
+            ]);
             app(InquiryWorkflow::class)->open($this->account(RoleName::Client), $service->id, 'Marcador de reinicio V8.1');
         }
         $saved = ServiceInquiry::where('message', 'Marcador de reinicio V8.1')->sole();
@@ -62,6 +47,12 @@ final class FoundationTest extends TestCase
         $this->assertFalse($result['created']);
         $this->assertSame($saved->id, $result['inquiry']->id);
         $this->assertDatabaseHas('inquiry_notifications', ['service_inquiry_id' => $saved->id, 'event' => 'created']);
+        $profile = $saved->service->providerProfile;
+        $availability = $profile->availabilitySetting()->sole();
+        $this->assertSame(1, $availability->revision);
+        $this->assertSame('America/Mexico_City', $availability->timezone);
+        $this->assertSame(540, (int) $profile->weeklyIntervals()->sole()->start_minute);
+        $this->assertSame(['2032-02-29'], $profile->blockedDates()->pluck('blocked_date')->all());
     }
 
     public function test_active_uniqueness_terminal_history_and_foreign_keys(): void
@@ -124,8 +115,8 @@ final class FoundationTest extends TestCase
         $service = $this->service($this->account(RoleName::Provider));
         $workers = [];
         try {
-            $workers[] = $this->startWorker('open', $service->id, $client->id);
-            $workers[] = $this->startWorker('open', $service->id, $client->id);
+            $workers[] = $this->startWorker('inquiry-worker.php', 'open', $service->id, $client->id);
+            $workers[] = $this->startWorker('inquiry-worker.php', 'open', $service->id, $client->id);
             foreach ($workers as [,$pipes]) {
                 fwrite($pipes[0], "go\n");
             }
@@ -145,7 +136,7 @@ final class FoundationTest extends TestCase
         $worker = null;
         try {
             app(InquiryWorkflow::class)->open($other, $service->id, 'Existe solo dentro de esta transacción');
-            $worker = $this->startWorker('insert', $service->id, $other->id);
+            $worker = $this->startWorker('inquiry-worker.php', 'insert', $service->id, $other->id);
             fwrite($worker[1][0], "go\n");
             $this->assertSame(['sqlstate' => 'HY000', 'diagnostic' => 1205], $this->workerResult($worker));
         } finally {
@@ -166,8 +157,8 @@ final class FoundationTest extends TestCase
         ]);
         $workers = [];
         try {
-            $workers[] = $this->startWorker('deadlock', 1, 2);
-            $workers[] = $this->startWorker('deadlock', 2, 1);
+            $workers[] = $this->startWorker('inquiry-worker.php', 'deadlock', 1, 2);
+            $workers[] = $this->startWorker('inquiry-worker.php', 'deadlock', 2, 1);
             foreach ($workers as [, $pipes]) {
                 fwrite($pipes[0], "go\n");
             }
@@ -310,50 +301,5 @@ final class FoundationTest extends TestCase
         Auth::forgetGuards();
 
         return ['Authorization' => 'Bearer '.$token];
-    }
-
-    private function assertMySqlError(int $code, callable $operation): void
-    {
-        try {
-            $operation();
-            $this->fail('Expected InnoDB to reject the statement.');
-        } catch (QueryException $e) {
-            $this->assertSame($code, (int) $e->errorInfo[1]);
-        }
-    }
-
-    private function startWorker(string $mode, int $service, int $client): array
-    {
-        $process = proc_open([PHP_BINARY, __DIR__.'/inquiry-worker.php', $mode, (string) $service, (string) $client],
-            [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => STDERR], $pipes);
-        $this->assertIsResource($process);
-        stream_set_timeout($pipes[1], 15);
-        $worker = [$process, $pipes];
-        try {
-            $this->assertSame("ready\n", fgets($pipes[1]));
-        } catch (\Throwable $e) {
-            $this->closeWorker($worker);
-            throw $e;
-        }
-
-        return $worker;
-    }
-
-    private function workerResult(array $worker): array
-    {
-        $line = fgets($worker[1][1]);
-        $this->assertIsString($line);
-
-        return json_decode($line, true, flags: JSON_THROW_ON_ERROR);
-    }
-
-    private function closeWorker(array $worker): void
-    {
-        [$process, $pipes] = $worker;
-        foreach ($pipes as $pipe) {
-            fclose($pipe);
-        }
-        proc_terminate($process);
-        proc_close($process);
     }
 }
