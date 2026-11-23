@@ -1,6 +1,6 @@
 # Tekora V8.1.3 — Portabilidad del esquema de reservas a MySQL 8.4
 
-> **Estado: especificación inicial — aún NO implementado.** No acredita paridad comercial ni autoriza despliegue en VPS. Preparado después de integrar PR #61; HEAD base `f7ab348815c051187e33f9500b82bf268c4ded1c`.
+> **Alcance: esquema de reservas en laboratorio.** La matriz distingue la implementación validada del recorrido comercial bloqueado. Base `f7ab348815c051187e33f9500b82bf268c4ded1c`, después de integrar PR #61. [Estado de compatibilidad](V81-MYSQL-FOUNDATION.md)
 
 ## Alcance acotado
 
