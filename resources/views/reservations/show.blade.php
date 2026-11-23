@@ -15,7 +15,7 @@
       @else
         <p class="account-note">Este registro es histórico y no vuelve a activarse. Si la solicitud sigue aceptada, el cliente puede preparar otra propuesta.</p>
       @endif
-      <p class="account-help">Duración: 60 minutos. No se han realizado pagos desde esta plataforma.</p>
+      <p class="account-help">Duración: 60 minutos. Tekora no procesa cobros bancarios reales; los estados de prueba se muestran por separado.</p>
       <x-reservation-hold :reservation="$reservation" />
       <x-reservation-actions :reservation="$reservation" />
       <x-reservation-review :reservation="$reservation" />
