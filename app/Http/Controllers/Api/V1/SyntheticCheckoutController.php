@@ -31,7 +31,7 @@ final class SyntheticCheckoutController extends Controller
     public function show(Request $request, int $reservation, MobileClientOperations $scope, CheckoutContext $checkout, LocalCheckoutAttemptStore $store): JsonResponse
     {
         $context = $this->context($request, $reservation, $scope, $checkout);
-        abort_unless($request->all() === [] && $request->getContent() === '', 422);
+        abort_unless($request->query() === [] && $request->all() === [] && $request->getContent() === '', 422);
 
         return $this->respond($context, $store->current($reservation));
     }
@@ -39,6 +39,8 @@ final class SyntheticCheckoutController extends Controller
     public function submit(Request $request, int $reservation, MobileClientOperations $scope, CheckoutContext $checkout, LocalCheckoutAttemptStore $store): JsonResponse
     {
         $context = $this->context($request, $reservation, $scope, $checkout);
+        // Synthetic checkout accepts only JSON request bodies, never query string fields.
+        abort_unless($request->isJson() && $request->query() === [], 422);
         abort_unless($context['future_payment']['commercial_eligible']
             && ($context['hold']['remaining_seconds'] ?? 0) > 0, 409);
         abort_unless(array_diff(array_keys($request->all()),
