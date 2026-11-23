@@ -29,7 +29,7 @@ Las 39 migraciones históricas permanecen intactas. El laboratorio selecciona ex
 | `2026_11_18_000000` precios y cotizaciones | 1 | BLOCKED | Tablas append-only, identidad del snapshot y adaptador MySQL |
 | `2026_11_19_000000` retenciones B2 | 1 | BLOCKED | High-water UTC, 900.000.000 μs, exclusión, recibos y transiciones |
 
-**Total MySQL:** 33 identidades ejecutadas en laboratorio, 6 pendientes. Un PASS DDL no certifica los casos de uso de ese tramo. SQLite continúa usando las 39 migraciones originales.
+**Total MySQL:** 33 identidades ejecutadas por el laboratorio, 6 pendientes. Un PASS DDL acredita la creación del esquema en ese tramo. SQLite continúa usando las 39 migraciones originales.
 
 ## Matriz de web y API
 
@@ -67,6 +67,17 @@ bash tools/mysql-v81/run.sh /tmp/tekora-v81-evidence
 El destino de evidencias debe ser nuevo y estar fuera del checkout. El runner monta código y dependencias como solo lectura. MySQL y PHP usan `--network none` y comparten únicamente el socket Unix para el acceso a la base. El usuario del laboratorio recibe permisos en un esquema nuevo. El runner registra versión, motor, aislamiento, manifiesto Docker y JUnit. Reinicia el mismo contenedor, repite las migraciones y comprueba el identificador y aviso de una solicitud ya persistida. Al finalizar libera el contenedor y los volúmenes que creó.
 
 La suite MySQL se ejecuta separadamente de PHPUnit normal, cuyo bootstrap sigue forzando SQLite desechable. Las pruebas diferencian 1062 por unicidad, 1451/1452 por FK, un lock wait 1205 y un deadlock real cuya víctima reintenta bajo Laravel. La prueba de deadlock comprueba que los efectos de su intento revertido no se duplican. Esa evidencia aplica a las transacciones probadas, no a B2.
+
+## Cobertura local y GitHub Actions
+
+| Ejecución | Qué acredita | Evidencia |
+| --- | --- | --- |
+| Docker local, `tools/mysql-v81/run.sh` | MySQL 8.4.13, InnoDB y PHP 8.4.27. Instalación de 33 migraciones, segunda ejecución, operaciones HTTP, concurrencia, deadlock, rollback y persistencia tras reiniciar | `isolation.log`, logs y dos JUnit en el directorio de evidencia elegido |
+| [`MySQL 8.4 foundation`](../../.github/workflows/mysql-v81.yml) | Mismo runner y suites sobre el HEAD exacto del PR. Revisa que no haya puertos publicados, que ambos JUnit estén completos y que Docker libere los recursos | Artefacto `mysql-v81-<run_id>-<attempt>` y conclusión del job en el HEAD correspondiente |
+| `Mobile API integration` y `T1 isolated laboratory` | Regresiones SQLite de API móvil y T1 en PHP 8.2 y 8.4 | Resultados de sus workflows en el HEAD correspondiente |
+| PHPUnit completo, Pint, lint y build locales | Regresiones de la aplicación en SQLite, estilo PHP del incremento, sintaxis y assets | Logs locales independientes de los jobs de GitHub |
+
+El job instala `composer.lock` sin plugins ni scripts antes de arrancar la base. Los contenedores de MySQL y PHPUnit carecen de red y de credenciales externas. MySQL también usa `--skip-networking` y desactiva el plugin X. El runner comprueba la configuración de red y el número de puertos publicados antes de ejecutar las pruebas. La migración interrumpida se trata como fallo del laboratorio y el esquema se descarta. La recuperación de una instalación parcial fuera del laboratorio sigue **NOT RUN**.
 
 ## Siguiente incremento
 

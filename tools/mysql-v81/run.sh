@@ -62,6 +62,7 @@ wait_ready() {
 
 export APP_KEY="base64:$(openssl rand -base64 32)"
 export DB_PASSWORD="$MYSQL_PASSWORD"
+export TEKORA_V81_RESTARTED=0
 run_php() {
     docker run --rm --network none --read-only --workdir /project \
         --user "$(id -u):$(id -g)" \
@@ -74,8 +75,13 @@ run_php() {
         -e DB_SOCKET=/run/tekora-mysql/mysql.sock "$php_image" php "$@"
 }
 
+isolation=$(docker inspect "$server_id" --format 'network={{.HostConfig.NetworkMode}} publish_all={{.HostConfig.PublishAllPorts}} bindings={{len .HostConfig.PortBindings}}')
+printf '%s\n' "$isolation" | tee "$evidence/isolation.log"
+if [[ "$isolation" != 'network=none publish_all=false bindings=0' ]]; then
+    printf '%s\n' 'BLOCKED: MySQL must have no network or published port bindings.' >&2
+    exit 1
+fi
 wait_ready
-docker inspect "$server_id" --format 'network={{.HostConfig.NetworkMode}} published_ports={{json .HostConfig.PortBindings}}' | tee "$evidence/isolation.log"
 docker image inspect "$mysql_image" --format 'image={{.Id}} digests={{json .RepoDigests}}' | tee -a "$evidence/isolation.log"
 docker image inspect "$php_image" --format 'test_runtime={{.Id}}' | tee -a "$evidence/isolation.log"
 run_php vendor/bin/phpunit -c tests/MySqlV81/phpunit.xml --log-junit /evidence/mysql-junit.xml 2>&1 | tee "$evidence/mysql-phpunit.log"
