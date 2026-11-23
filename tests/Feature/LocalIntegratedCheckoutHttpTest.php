@@ -200,6 +200,83 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         $this->assertSame('confirmed', $reservation->fresh()->status->value);
     }
 
+    public function test_provider_views_show_bound_card_status_and_internal_reference_after_mobile_style_checkout(): void
+    {
+        [$client, $provider, $reservation] = $this->held();
+        $booking = route('reservations.show', $reservation->id);
+        $inquiry = route('inquiries.show', $reservation->service_inquiry_id);
+
+        $this->actingAs($provider, 'web')->get($booking)->assertOk()
+            ->assertSee('Estado de pago de prueba')
+            ->assertSee('Sin método de prueba seleccionado');
+        $this->actingAs($client, 'web')->post(route('checkout.local.submit', $reservation->id), [
+            'method' => 'card', 'card_number' => '4242424242424242',
+            'expiry' => '12/30', 'cvv' => '123', 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        $ref = app(LocalCheckoutAttemptStore::class)->current($reservation->id)['reference'];
+
+        $this->actingAs($provider, 'web')->get($booking)->assertOk()
+            ->assertSee('Tarjeta aprobada (prueba)')
+            ->assertSee($ref)
+            ->assertDontSee('4242424242424242');
+        $this->actingAs($client, 'web')->patch(route('reservations.commit', $reservation->id), [
+            'version' => $reservation->fresh()->version, 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        $this->actingAs($provider, 'web')->get($booking)->assertOk()
+            ->assertSee('Pagado (prueba)')
+            ->assertSee($ref);
+        $this->get($inquiry)->assertOk()
+            ->assertSee('Estado de pago de prueba')
+            ->assertSee('Pagado (prueba)')
+            ->assertSee($ref);
+        $this->actingAs($client, 'web')->get($booking)->assertOk()
+            ->assertDontSee('data-b32-provider-payment', false);
+        $this->actingAs($this->account(\App\Enums\RoleName::Client), 'web')
+            ->get($booking)->assertForbidden();
+    }
+
+    public function test_cancellation_keeps_historical_receipt_without_claiming_active_payment_or_refund(): void
+    {
+        [$client, $provider, $reservation] = $this->held();
+        $this->actingAs($client, 'web')->post(route('checkout.local.submit', $reservation->id), [
+            'method' => 'card', 'card_number' => '4242424242424242',
+            'expiry' => '12/30', 'cvv' => '123', 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        $this->patch(route('reservations.commit', $reservation->id), [
+            'version' => $reservation->fresh()->version, 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        $this->patch(route('reservations.cancel', $reservation->id), [
+            'version' => $reservation->fresh()->version, 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        $this->assertSame('cancelled', $reservation->fresh()->status->value);
+        $this->actingAs($provider, 'web')->get(route('reservations.show', $reservation->id))->assertOk()
+            ->assertSee('Aprobación de prueba histórica')
+            ->assertSee('no implica devolución, reembolso ni liquidación')
+            ->assertDontSee('>Pagado (prueba)<', false);
+        $this->assertSame('test_approved', app(LocalCheckoutAttemptStore::class)->current($reservation->id)['status']);
+    }
+
+    public function test_provider_sees_cash_pending_but_not_as_received(): void
+    {
+        [$client, $provider, $reservation] = $this->held();
+        $this->actingAs($client, 'web')->post(route('checkout.local.submit', $reservation->id), [
+            'method' => 'cash', 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        $this->patch(route('reservations.commit', $reservation->id), [
+            'version' => $reservation->fresh()->version, 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+
+        $this->actingAs($provider, 'web')->get(route('inquiries.show', $reservation->service_inquiry_id))->assertOk()
+            ->assertSee('Efectivo pendiente')
+            ->assertDontSee('>Pagado (prueba)<', false);
+        $this->get(route('reservations.show', $reservation->id))->assertOk()
+            ->assertSee('Consultar recepción de efectivo');
+        $this->post(route('checkout.local.cash.receive', $reservation->id))->assertRedirect();
+        $this->get(route('reservations.show', $reservation->id))->assertOk()
+            ->assertSee('Efectivo recibido (prueba)')
+            ->assertDontSee('>Pagado (prueba)<', false);
+    }
+
     public function test_invalid_card_or_expired_hold_cannot_change_attempt(): void
     {
         [$client, , $reservation] = $this->held();
