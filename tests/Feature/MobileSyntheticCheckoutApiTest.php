@@ -100,7 +100,8 @@ final class MobileSyntheticCheckoutApiTest extends TestCase
         $this->getJson($url, $this->bearer($provider))->assertNotFound();
         $this->postJson($url, ['method' => 'cash', 'idempotency_key' => (string) Str::uuid()],
             $this->bearer($provider))->assertNotFound();
-        $this->getJson($url, $this->bearer($client))->assertOk()
+        // This private endpoint intentionally rejects GET bodies; getJson() sends [] in tests.
+        $this->get($url, $this->bearer($client) + ['Accept' => 'application/json'])->assertOk()
             ->assertJsonPath('data.status', 'not_selected')
             ->assertJsonPath('data.can_choose', true)
             ->assertJsonPath('data.can_confirm', false);
