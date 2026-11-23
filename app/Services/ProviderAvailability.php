@@ -24,27 +24,46 @@ class ProviderAvailability
         $data = AvailabilityInput::validated($input);
         try {
             return DB::transaction(function () use ($user, $profile, $data) {
-                Gate::forUser($user)->authorize('update', $profile->fresh());
-                $setting = $profile->availabilitySetting()->first();
+                $mysql = $profile->getConnection()->getDriverName() === 'mysql';
+                if ($mysql) {
+                    // Lock the profile even when revision 0 has no settings row yet.
+                    $profile = $profile->newQuery()->lockForUpdate()->findOrFail($profile->id);
+                }
+                Gate::forUser($user)->authorize('update', $mysql ? $profile : $profile->fresh());
+                $settings = $profile->availabilitySetting();
+                if ($mysql) {
+                    $settings->lockForUpdate();
+                }
+                $setting = $settings->first();
                 if (! $setting) {
-                    if ((int) $data['revision'] !== 0) throw new AvailabilityFailure;
+                    if ((int) $data['revision'] !== 0) {
+                        throw new AvailabilityFailure;
+                    }
                     $setting = new ProviderAvailabilitySetting;
-                    $setting->provider_profile_id = $profile->id; $setting->timezone = $data['timezone']; $setting->revision = 1;
+                    $setting->provider_profile_id = $profile->id;
+                    $setting->timezone = $data['timezone'];
+                    $setting->revision = 1;
                     $setting->save();
                 } else {
                     $changed = ProviderAvailabilitySetting::whereKey($setting->id)->where('revision', (int) $data['revision'])->update([
                         'timezone' => $data['timezone'], 'revision' => $setting->revision + 1, 'updated_at' => now()]);
-                    if ($changed !== 1) throw new AvailabilityFailure;
+                    if ($changed !== 1) {
+                        throw new AvailabilityFailure;
+                    }
                 }
                 // Solo se reemplazan intervalos/fechas de este perfil en las tablas nuevas, dentro del mismo bloqueo.
                 $profile->weeklyIntervals()->delete();
                 foreach ($data['intervals'] ?? [] as $row) {
-                    if (empty($row['start']) && empty($row['end'])) continue;
+                    if (empty($row['start']) && empty($row['end'])) {
+                        continue;
+                    }
                     $profile->weeklyIntervals()->getQuery()->insert(['provider_profile_id' => $profile->id, 'day_of_week' => (int) $row['day_of_week'],
                         'start_minute' => AvailabilityInput::minute($row['start']), 'end_minute' => AvailabilityInput::minute($row['end'])]);
                 }
                 $profile->blockedDates()->delete();
-                foreach ($data['blocked_dates'] ?? [] as $date) $profile->blockedDates()->getQuery()->insert(['provider_profile_id' => $profile->id, 'blocked_date' => $date]);
+                foreach ($data['blocked_dates'] ?? [] as $date) {
+                    $profile->blockedDates()->getQuery()->insert(['provider_profile_id' => $profile->id, 'blocked_date' => $date]);
+                }
 
                 return $setting->fresh();
             }, 3);
@@ -60,9 +79,17 @@ class ProviderAvailability
         // Una sola instantánea: no mezclar una zona antigua con intervalos de una edición posterior.
         try {
             return $profile->getConnection()->transaction(function () use ($profile) {
-                if (! $profile->services()->publiclyVisible()->exists()) return null;
+                if ($profile->getConnection()->getDriverName() === 'mysql'
+                    && ! $profile->newQuery()->sharedLock()->find($profile->id)) {
+                    return null;
+                }
+                if (! $profile->services()->publiclyVisible()->exists()) {
+                    return null;
+                }
                 $setting = $profile->availabilitySetting()->first();
-                if (! $setting) return null;
+                if (! $setting) {
+                    return null;
+                }
                 $today = now($setting->timezone)->format('Y-m-d');
 
                 return ['timezone' => $setting->timezone,
