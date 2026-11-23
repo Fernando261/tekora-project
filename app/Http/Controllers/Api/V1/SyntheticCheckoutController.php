@@ -69,9 +69,21 @@ final class SyntheticCheckoutController extends Controller
         $eligible = $context['future_payment']['commercial_eligible']
             && ($context['hold']['remaining_seconds'] ?? 0) > 0;
         $status = $attempt['status'] ?? 'not_selected';
+        // This is an advisory, synthetic-only receipt. Use the SAME binding
+        // predicate as reservation commit before displaying a paid-test badge.
+        $selectionVerified = false;
+        if ($attempt && in_array($status, ['test_approved', 'awaiting_cash', 'cash_received'], true)) {
+            $reservation = \App\Models\ServiceReservation::query()
+                ->where('client_user_id', $context['client']['id'])
+                ->findOrFail($context['reservation']['id']);
+            $selectionVerified = app(LocalCheckoutAttemptStore::class)->permitsCommit($reservation);
+        }
 
         return response()->json(['data' => [
             'reservation_id' => $context['reservation']['id'],
+            'quote_id' => $context['quote']?->quote->id,
+            'reservation_status' => $context['reservation']['status'],
+            'selection_verified' => $selectionVerified,
             'method' => $attempt['method'] ?? null,
             'status' => $status,
             'reference' => $attempt['reference'] ?? null,
