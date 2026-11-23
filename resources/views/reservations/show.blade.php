@@ -15,7 +15,7 @@
       @else
         <p class="account-note">Este registro es histórico y no vuelve a activarse. Si la solicitud sigue aceptada, el cliente puede preparar otra propuesta.</p>
       @endif
-      <p class="account-help">Duración: 60 minutos. No se han realizado pagos desde esta plataforma.</p>
+      <p class="account-help">Duración: 60 minutos. Tekora no procesa cobros bancarios reales; los estados de prueba se muestran por separado.</p>
       <x-reservation-hold :reservation="$reservation" />
       <x-reservation-actions :reservation="$reservation" />
       <x-reservation-review :reservation="$reservation" />
@@ -24,6 +24,7 @@
       @endif
       <p><a href="{{ route('inquiries.show', $reservation->service_inquiry_id) }}">Consultar solicitud y conversación</a></p>
     </section>
+    <x-synthetic-provider-payment :summary="$providerCheckout" />
     <section class="account-card"><h2>Historial de la reserva</h2><p class="account-help">Fechas de decisiones expresadas en UTC. El horario del servicio aparece en su zona original.</p>
       <ol class="reservation-history tk-ops-timeline">@foreach($reservation->events->sortBy('version') as $event)<li>
         <strong>{{ \App\Enums\ReservationStatus::from($event->to_status)->label() }}</strong>

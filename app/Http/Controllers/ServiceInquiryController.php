@@ -99,7 +99,10 @@ class ServiceInquiryController extends Controller
         $journeyReservation = isset($journey['reservation']['id'])
             ? $inquiry->reservations()->with(['events.actor:id,name', 'hold.events.actor:id,name'])->findOrFail($journey['reservation']['id']) : null;
 
-        return view('inquiries.show', compact('journey', 'journeyReservation', 'publishedPrice', 'quoteRows', 'inquiry', 'publicService', 'messages', 'readMarker', 'unreadMessagesCount', 'messageReadToken'));
+        $providerCheckout = app(\App\Payments\ProviderSyntheticCheckoutSummary::class)
+            ->forReservation($request, $journeyReservation);
+
+        return view('inquiries.show', compact('providerCheckout', 'journey', 'journeyReservation', 'publishedPrice', 'quoteRows', 'inquiry', 'publicService', 'messages', 'readMarker', 'unreadMessagesCount', 'messageReadToken'));
     }
 
     public function decide(DecideInquiryRequest $request, ServiceInquiry $inquiry, InquiryWorkflow $workflow)

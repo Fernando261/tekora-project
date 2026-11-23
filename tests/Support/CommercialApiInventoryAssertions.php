@@ -98,7 +98,24 @@ trait CommercialApiInventoryAssertions
 
     protected function mobileClientExtensions(): array
     {
-        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory();
+        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory() + $this->m31ApiInventory();
+    }
+
+
+    /** The only added payment-like API is private, synthetic and fixture-gated at runtime. */
+    protected function m31ApiInventory(): array
+    {
+        $base = ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
+        $uri = 'api/v1/reservations/{reservation}/demo-checkout';
+
+        return [
+            'api.v1.reservations.demo-checkout.show' => ['uri' => $uri, 'methods' => ['GET', 'HEAD'],
+                'action' => \App\Http\Controllers\Api\V1\SyntheticCheckoutController::class.'@show',
+                'middleware' => $base, 'wheres' => ['reservation' => '[0-9]+']],
+            'api.v1.reservations.demo-checkout.submit' => ['uri' => $uri, 'methods' => ['POST'],
+                'action' => \App\Http\Controllers\Api\V1\SyntheticCheckoutController::class.'@submit',
+                'middleware' => [...$base, 'throttle:mobile-reservation-writes'], 'wheres' => ['reservation' => '[0-9]+']],
+        ];
     }
 
     protected function m30ApiInventory(): array

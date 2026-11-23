@@ -16,8 +16,8 @@ use Tests\Support\SlotHoldFixtures;
 use Tests\TestCase;
 
 /**
- * M2.0 deliberately ships no mobile payment write endpoint.
- * Keep this boundary while the B3.2 checkout stays a local web-only fixture.
+ * M2.0 shipped no mobile payment writes. M3.1 adds only the explicitly
+ * isolated B3.2 synthetic transport while preserving the general boundary.
  */
 class MobileCheckoutHandoffContractTest extends TestCase
 {
@@ -46,7 +46,7 @@ class MobileCheckoutHandoffContractTest extends TestCase
         $this->assertSame(900, $spec['components']['examples']['B3CheckoutContext']['value']['data']['hold']['hold_seconds']);
     }
 
-    public function test_no_mobile_payment_or_cash_write_route_is_registered(): void
+    public function test_only_private_synthetic_checkout_payment_like_writes_are_registered(): void
     {
         // The exact inventory also detects aliases without payment-related words.
         $this->assertCurrentApiInventory();
@@ -59,8 +59,16 @@ class MobileCheckoutHandoffContractTest extends TestCase
                 continue;
             }
 
+            if ($route->getName() === 'api.v1.reservations.demo-checkout.submit') {
+                $this->assertSame(['POST'], $route->methods());
+                $this->assertSame('api/v1/reservations/{reservation}/demo-checkout', $route->uri());
+                $this->assertContains('auth:sanctum', $route->gatherMiddleware());
+                $this->assertContains(MobileClient::class, $route->gatherMiddleware());
+
+                continue;
+            }
             $this->assertSame([], array_intersect(['POST', 'PUT', 'PATCH', 'DELETE'], $route->methods()),
-                'Mobile payment write unexpectedly exposed: '.$route->uri());
+                'Unexpected mobile payment write exposed: '.$route->uri());
         }
 
         $checkoutPage = Route::getRoutes()->getByName('checkout.local.show');

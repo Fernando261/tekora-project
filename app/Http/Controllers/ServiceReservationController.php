@@ -89,7 +89,10 @@ class ServiceReservationController extends Controller
                 app(ReservationWorkflow::class)->refreshExpirations();
                 $reservation->load(['inquiry:id,service_title,status,client_user_id,service_id', 'client:id,name', 'providerProfile:id,display_name', 'events.actor:id,name', 'hold.events.actor:id,name']);
 
-                return response()->view('reservations.show', compact('reservation'));
+                $providerCheckout = app(\App\Payments\ProviderSyntheticCheckoutSummary::class)
+                    ->forReservation($request, $reservation);
+
+                return response()->view('reservations.show', compact('reservation', 'providerCheckout'));
             }, 3);
         });
     }
