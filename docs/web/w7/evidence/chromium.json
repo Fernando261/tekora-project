@@ -1,0 +1,672 @@
+{
+  "facts": {
+    "registration_activation_profile_and_availability": true,
+    "next_label_before_choice": "Elegir método de pago de prueba",
+    "next_target_before_choice": "/cuenta/reservas/2/checkout",
+    "result_title": "Tarjeta de prueba aprobada",
+    "no_early_completion": true,
+    "cash_pending_and_received_without_javascript": true,
+    "expired_checkout_keeps_history": true,
+    "keyboard_focus": true,
+    "reduced_motion": true,
+    "dashboard_updated_and_filter_without_javascript": true
+  },
+  "flow": [
+    "registro, login, activacion, perfil y disponibilidad",
+    "publicacion web",
+    "catalogo",
+    "solicitud nueva",
+    "mensajes de ambos actores",
+    "aceptacion prestador",
+    "cotizacion aceptada",
+    "propuesta horario",
+    "hold",
+    "rechazo",
+    "fallo temporal",
+    "tarjeta prueba aprobada",
+    "confirmacion B2 explicita",
+    "realizacion explicita tras el horario",
+    "cierre",
+    "resena",
+    "historial de ambos roles"
+  ],
+  "screenshots": [
+    {
+      "name": "00-registro",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "00-registro",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "00-registro",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "00-registro",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "00-registro",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "00-registro",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "00-registro",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "00-registro-validacion",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "00-perfil-profesional",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "00-perfil-profesional",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "00-perfil-profesional",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "00-perfil-profesional",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "00-perfil-profesional",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "00-perfil-profesional",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "00-perfil-profesional",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "00-disponibilidad",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "00-disponibilidad",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "00-disponibilidad",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "00-disponibilidad",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "00-disponibilidad",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "00-disponibilidad",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "00-disponibilidad",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "01-catalogo",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "01-catalogo",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "01-catalogo",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "01-catalogo",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "01-catalogo",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "01-catalogo",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "01-catalogo",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "02-solicitud-cliente",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "02-solicitud-cliente",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "02-solicitud-cliente",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "02-solicitud-cliente",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "02-solicitud-cliente",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "02-solicitud-cliente",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "02-solicitud-cliente",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "03-solicitud-prestador",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "03-solicitud-prestador",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "03-solicitud-prestador",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "03-solicitud-prestador",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "03-solicitud-prestador",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "03-solicitud-prestador",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "03-solicitud-prestador",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "04-cotizacion",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "04-cotizacion",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "04-cotizacion",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "04-cotizacion",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "04-cotizacion",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "04-cotizacion",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "04-cotizacion",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "05-hold-prestador",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "05-hold-prestador",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "05-hold-prestador",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "05-hold-prestador",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "05-hold-prestador",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "05-hold-prestador",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "05-hold-prestador",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "06-hold-cliente",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "06-hold-cliente",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "06-hold-cliente",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "06-hold-cliente",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "06-hold-cliente",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "06-hold-cliente",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "06-hold-cliente",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "07-checkout-inicial",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "07-checkout-inicial",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "07-checkout-inicial",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "07-checkout-inicial",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "07-checkout-inicial",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "07-checkout-inicial",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "07-checkout-inicial",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "08-rechazo",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "08-temporal",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "09-tarjeta-aprobada",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "09-tarjeta-aprobada",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "09-tarjeta-aprobada",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "09-tarjeta-aprobada",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "09-tarjeta-aprobada",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "09-tarjeta-aprobada",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "09-tarjeta-aprobada",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "10-reserva-confirmada",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "10-reserva-confirmada",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "10-reserva-confirmada",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "10-reserva-confirmada",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "10-reserva-confirmada",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "10-reserva-confirmada",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "10-reserva-confirmada",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "13-efectivo-pendiente",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "14-efectivo-prestador",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "14-efectivo-prestador",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "14-efectivo-prestador",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "14-efectivo-prestador",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "14-efectivo-prestador",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "14-efectivo-prestador",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "14-efectivo-prestador",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "15-efectivo-recibido",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "16-retencion-vencida",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "11-cierre-resena-cliente",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "11-cierre-resena-cliente",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "11-cierre-resena-cliente",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "11-cierre-resena-cliente",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "11-cierre-resena-cliente",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "11-cierre-resena-cliente",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "11-cierre-resena-cliente",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "12-cierre-prestador",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "12-cierre-prestador",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "12-cierre-prestador",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "12-cierre-prestador",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "12-cierre-prestador",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "12-cierre-prestador",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "12-cierre-prestador",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "17-dashboard-prestador",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "17-dashboard-prestador",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "17-dashboard-prestador",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "17-dashboard-prestador",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "17-dashboard-prestador",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "17-dashboard-prestador",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "17-dashboard-prestador",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "18-dashboard-cliente",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "18-dashboard-cliente",
+      "width": 375,
+      "scroll": 375
+    },
+    {
+      "name": "18-dashboard-cliente",
+      "width": 430,
+      "scroll": 430
+    },
+    {
+      "name": "18-dashboard-cliente",
+      "width": 768,
+      "scroll": 768
+    },
+    {
+      "name": "18-dashboard-cliente",
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "name": "18-dashboard-cliente",
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "name": "18-dashboard-cliente",
+      "width": 2048,
+      "scroll": 2048
+    },
+    {
+      "name": "19-dashboard-sin-javascript",
+      "width": 375,
+      "scroll": 375
+    }
+  ],
+  "page_errors": [],
+  "console_errors": [],
+  "unexpected_http": [],
+  "separate_browser_contexts": true,
+  "synthetic_clock_in_test_router_only": true,
+  "browser": "Chromium 155.0.8059.79",
+  "php": "8.4.27"
+}

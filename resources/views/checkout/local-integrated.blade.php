@@ -1,10 +1,12 @@
-<x-account-layout :operations="true" title="Finalizar contratación">
+<x-account-layout :operations="true" title="Checkout de prueba">
   @push('styles')
     @vite(['resources/css/tekora/checkout-demo.css', 'resources/css/tekora/checkout-integrated.css'])
   @endpush
   @php
     $remaining = (int) ($context['hold']['remaining_seconds'] ?? 0);
-    $canPay = $context['future_payment']['commercial_eligible'] && $remaining > 0;
+    $readiness = $context['confirmation_readiness']['state'];
+    $canPay = in_array($readiness, ['ready', 'web_checkout_required'], true);
+    $bookingStatus = \App\Enums\ReservationStatus::from($context['reservation']['status']);
     $status = $attempt['status'] ?? null;
     $retryable = in_array($status, ['declined', 'temporary_failure'], true);
     $showForm = $canPay && (!$attempt || $retryable);
@@ -19,18 +21,18 @@
     <div class="co-heading b32-heading">
       <div>
         <p class="co-eyebrow">TU PRÓXIMA CONEXIÓN · TEKORA</p>
-        <h1>Finaliza tu contratación<span>.</span></h1>
+        <h1>Checkout de prueba<span>.</span></h1>
       </div>
       <p class="b32-heading-aside">Un paso más para conectar con lo que necesitas.<small>Checkout integrado · Entorno local de pruebas</small></p>
     </div>
 
-    <section class="co-shell b32-shell" aria-label="Pago de la contratación">
+    <section class="co-shell b32-shell" aria-label="Selección de prueba de la contratación">
       <header class="co-shell-header">
         <span class="co-shell-title"><span class="co-mini-mark" aria-hidden="true">T</span> CHECKOUT <span> / TU CONTRATACIÓN</span></span>
         <ol class="co-steps" aria-label="Etapas de contratación">
           <li><span aria-hidden="true">✓</span> Cotización</li>
           <li><span aria-hidden="true">✓</span> Horario</li>
-          <li aria-current="step"><span>03</span> Pago</li>
+          <li aria-current="step"><span>03</span> Método de prueba</li>
         </ol>
       </header>
 
@@ -96,12 +98,12 @@
         @if($showForm)
           <section class="co-form b32-form" aria-labelledby="b32-form-title">
             <p class="co-eyebrow">03 / MÉTODO DE PAGO</p>
-            <h2 id="b32-form-title">{{ $retryable ? 'Volvamos a intentarlo' : 'Elige cómo pagar' }}</h2>
+            <h2 id="b32-form-title" tabindex="-1">{{ $retryable ? 'Volvamos a intentarlo' : 'Elige un método de prueba' }}</h2>
             <p class="co-form-note">Utiliza únicamente las opciones ficticias de este entorno. No se realizan cargos bancarios.</p>
 
             @if($retryable)
               <div class="b32-feedback b32-feedback-{{ $status }}" role="status">
-                <strong>{{ $status === 'declined' ? 'Tarjeta rechazada' : 'No fue posible procesar la tarjeta' }}</strong>
+                <strong>{{ $status === 'declined' ? 'Tarjeta de prueba rechazada' : 'Fallo temporal de la tarjeta de prueba' }}</strong>
                 <span>Puedes elegir otro resultado de prueba y volver a intentarlo.</span>
                 <small>Referencia: {{ $attempt['reference'] }}</small>
               </div>
@@ -117,7 +119,7 @@
                   <input type="radio" name="method" value="card" checked data-b32-method>
                   <span class="b32-method-surface"><span class="b32-method-icon" aria-hidden="true">▱</span><strong>Tarjeta</strong><small>Débito o crédito de prueba</small></span>
                 </label>
-                <label class="b32-method-option">
+                <label class="b32-method-option" data-b32-cash-option hidden>
                   <input type="radio" name="method" value="cash" data-b32-method>
                   <span class="b32-method-surface"><span class="b32-method-icon" aria-hidden="true">◇</span><strong>Efectivo</strong><small>Entrega en persona</small></span>
                 </label>
@@ -157,8 +159,15 @@
               <p class="b32-form-security">Solo tarjetas de prueba predefinidas. No escribas datos bancarios reales.</p>
               @if($errors->any())<p class="b32-feedback b32-feedback-declined" role="alert">Revisa los datos de prueba seleccionados.</p>@endif
               <div class="co-form-total"><span>Importe acordado</span><strong>{{ $formattedAmount }}</strong></div>
-              <button class="co-primary b32-primary" type="submit" data-b32-submit>Confirmar pago <span aria-hidden="true">→</span></button>
+              <button class="co-primary b32-primary" type="submit" data-b32-submit>Registrar selección de prueba <span aria-hidden="true">→</span></button>
               <p class="co-local-note"><span aria-hidden="true">◈</span> El servidor valida la retención antes de guardar el resultado.</p>
+            </form>
+
+            <form class="b32-cash-fallback" method="POST" action="{{ route('checkout.local.submit', $reservation) }}" data-b32-cash-fallback>
+              @csrf
+              <input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">
+              <input type="hidden" name="method" value="cash">
+              <button class="co-primary b32-primary" type="submit">Registrar efectivo de prueba</button>
             </form>
           </section>
         @else
@@ -166,23 +175,29 @@
             <div class="b32-result-symbol b32-result-{{ $visualState }}" aria-hidden="true">
               @if($success) ✓ @elseif($status === 'declined') × @elseif($status === 'temporary_failure') ! @elseif($status === 'awaiting_cash') ◇ @else ◷ @endif
             </div>
-            <p class="co-eyebrow">ESTADO DE TU CONTRATACIÓN</p>
-            <h2 id="b32-result-title">
+            <p class="co-eyebrow">RESULTADO DEL CHECKOUT DE PRUEBA</p>
+            <h2 id="b32-result-title" tabindex="-1">
               @switch($status)
-                @case('test_approved') ¡Pago realizado con éxito! @break
-                @case('cash_received') Recepción registrada @break
-                @case('declined') Tarjeta rechazada @break
-                @case('temporary_failure') No fue posible procesar la tarjeta @break
+                @case('test_approved') Tarjeta de prueba aprobada @break
+                @case('cash_received') Recepción de prueba registrada @break
+                @case('declined') Tarjeta de prueba rechazada @break
+                @case('temporary_failure') Fallo temporal de la tarjeta de prueba @break
                 @case('awaiting_cash') Efectivo pendiente de recepción @break
-                @default Consulta tu reserva @break
+                @default {{ $bookingStatus->label() }} @break
               @endswitch
             </h2>
             <p class="b32-result-lead">
               @switch($status)
-                @case('test_approved') Tarjeta aprobada · Resultado de prueba registrado. @break
+                @case('test_approved') Resultado guardado en el entorno local. @break
                 @case('cash_received') Efectivo recibido por el prestador · Registro de prueba. @break
-                @case('awaiting_cash') El prestador podrá registrar la recepción del efectivo desde su cuenta. @break
-                @default No se puede registrar otra operación para esta retención. @break
+                @case('awaiting_cash')
+                  @if($canReceiveCash)
+                    El prestador podrá registrar la recepción del efectivo desde su cuenta.
+                  @else
+                    La selección de efectivo se conserva en el historial de la reserva. La recepción no quedó registrada.
+                  @endif
+                  @break
+                @default Consulta el horario y su historial en el detalle de la reserva. @break
               @endswitch
             </p>
             @if($attempt)
@@ -196,7 +211,8 @@
                 <small>No es un comprobante bancario ni fiscal. No se realizó un cargo real.</small>
               </section>
             @endif
-            <a class="co-secondary b32-secondary" href="{{ route('reservations.show', $reservation) }}">Continuar con mi reserva <span aria-hidden="true">↗</span></a>
+            <p class="b32-result-lead" data-b32-booking-status>{{ $bookingStatus === \App\Enums\ReservationStatus::Held ? 'Reserva pendiente de confirmación' : $bookingStatus->label() }}</p>
+            <a class="co-secondary b32-secondary" href="{{ route('reservations.show', $reservation) }}">{{ $readiness === 'ready' ? 'Ir a confirmar mi reserva' : 'Consultar mi reserva' }} <span aria-hidden="true">↗</span></a>
           </section>
         @endif
       </div>
@@ -222,10 +238,12 @@
       </dl>
     </section>
 
-    @if(!$canPay)
-      <div class="b32-notice" role="status"><span aria-hidden="true">◇</span> La reserva ya no permite registrar un nuevo pago de prueba. Revisa su estado desde «Mi reserva».</div>
-    @elseif($attempt && !$retryable)
-      <div class="b32-notice b32-notice-active" role="status"><span aria-hidden="true">◇</span> El resultado está guardado. Regresa a la reserva y confírmala antes de que termine la retención.</div>
+    @if($readiness === 'unknown' || $readiness === 'blocked')
+      <div class="b32-notice" role="status"><span aria-hidden="true">◇</span> No se puede verificar que el horario siga disponible para confirmar. Consulta la reserva antes de reintentar.</div>
+    @elseif($readiness === 'hold_expired')
+      <div class="b32-notice" role="status"><span aria-hidden="true">◇</span> Retención vencida. Consulta la reserva para preparar otro horario si corresponde.</div>
+    @elseif($readiness === 'ready' && $attempt && !$retryable)
+      <div class="b32-notice b32-notice-active" role="status"><span aria-hidden="true">◇</span> Confirmar la reserva es el siguiente paso. Hazlo antes de que venza la retención.</div>
     @endif
     <p class="b32-legal">Este entorno privado reproduce el recorrido de producto con datos sintéticos. No procesa dinero real, no liquida a prestadores y no genera comprobantes fiscales.</p>
   </div>

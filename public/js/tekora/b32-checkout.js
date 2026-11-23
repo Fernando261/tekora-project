@@ -67,10 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
       cvv.addEventListener('blur', () => showBack(false));
     }
 
-    form.addEventListener('submit', () => {
-      if (inFlight) return;
+    const button = form.querySelector('[data-b32-submit]');
+    const originalLabel = button?.innerHTML;
+    form.addEventListener('submit', (event) => {
+      if (inFlight || (hold && performance.now() >= endTime)) {
+        event.preventDefault();
+        return;
+      }
       inFlight = true;
-      const button = form.querySelector('[data-b32-submit]');
       if (button) {
         button.disabled = true;
         button.textContent = 'Validando en Tekora…';
@@ -81,13 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('pageshow', (event) => {
       if (event.persisted) {
         inFlight = false;
-        const button = form.querySelector('[data-b32-submit]');
-        if (button) {
+        if (button && performance.now() < endTime) {
           button.disabled = false;
-          button.innerHTML = 'Confirmar pago <span aria-hidden="true">→</span>';
+          button.innerHTML = originalLabel;
         }
       }
     });
+
+    const cashOption = form.querySelector('[data-b32-cash-option]');
+    const cashFallback = root.querySelector('[data-b32-cash-fallback]');
+    if (cashOption && cashFallback) {
+      cashOption.hidden = false;
+      cashFallback.hidden = true;
+    }
   }
 
   // Same subtle interaction as the original 3D card; entirely decorative.
@@ -109,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // of leaving it below the large page heading. Keep normal refreshes unchanged.
   if (root.hasAttribute('data-b32-focus-result')) {
     const focusReceipt = () => {
+      root.querySelector('#b32-result-title, #b32-form-title')?.focus({ preventScroll: true });
       const target = window.matchMedia('(max-width: 900px)').matches
         ? (root.querySelector('.b32-result') || root.querySelector('.b32-form'))
         : root.querySelector('#b32-payment-stage');
@@ -135,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     tick();
-    const timer = window.setInterval(tick, 1000);
-    window.addEventListener('pagehide', () => window.clearInterval(timer), { once: true });
+    // A page restored from the back/forward cache keeps its original deadline.
+    window.setInterval(tick, 1000);
+    window.addEventListener('pageshow', tick);
   }
 });

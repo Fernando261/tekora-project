@@ -39,12 +39,15 @@
             </dl>
             <small>Resultado interno de prueba; no constituye un recibo bancario ni fiscal.</small>
           </section>
-          @if($attempt['status'] === 'awaiting_cash')
+          @if($attempt['status'] === 'awaiting_cash' && $canReceiveCash)
             <form method="POST" action="{{ route('checkout.local.cash.receive', $reservation) }}">
               @csrf
               <button type="submit" class="co-primary b32-primary">Registrar recepción de efectivo <span aria-hidden="true">→</span></button>
             </form>
           @else
+            @if($attempt['status'] === 'awaiting_cash')
+              <p class="b32-notice" role="status">El estado del horario impide registrar la recepción. Consulta la reserva y su historial.</p>
+            @endif
             <a href="{{ route('reservations.show', $reservation) }}" class="co-secondary b32-secondary">Volver al seguimiento de la reserva</a>
           @endif
         </div>

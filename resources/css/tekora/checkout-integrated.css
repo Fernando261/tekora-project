@@ -95,6 +95,7 @@
 .b32-form .co-methods { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;padding:0;border:0; }
 .b32-form .co-methods legend { margin-bottom:11px;float:none;width:100%; }
 .b32-method-option { position:relative;display:block;min-width:0;cursor:pointer; }
+.b32-cash-fallback { margin-top:12px; }
 .b32-method-option input { position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer; }
 .b32-method-surface { min-height:85px;display:grid;grid-template-columns:27px 1fr;grid-template-rows:auto auto;align-content:center;gap:4px 7px;border:1px solid #86c8de38;border-radius:11px;background:#071725;padding:13px 11px;color:#cce6ef;transition:background 170ms,border-color 170ms,box-shadow 170ms;pointer-events:none; }
 .b32-method-icon { grid-row:span 2;display:flex;align-items:center;font-size:26px;line-height:1;color:#87ddec; }
@@ -179,7 +180,10 @@
   .b32-heading-aside { max-width:none;margin-top:12px; }
   .b32-heading-aside small { margin-top:4px; }
   .b32-shell.co-shell { border-radius:19px 19px 5px 19px; }
-  .b32-shell .co-shell-header { padding:21px 20px 17px;display:block; }
+  .b32-checkout.tk-checkout .b32-shell.co-shell > header.co-shell-header {
+    display:block;
+    padding:21px 20px 17px;
+  }
   .b32-shell .co-steps { margin-top:18px;gap:12px; }
   .b32-order.co-order-bar { grid-template-columns:1fr;gap:12px;margin:0 15px 8px;padding:15px; }
   .b32-order .b32-order-total { padding:12px 0 0;border-left:0;border-top:1px solid #90e0ef23;text-align:left; }

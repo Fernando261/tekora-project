@@ -1,0 +1,12 @@
+{
+  "integrity_check": "ok",
+  "foreign_key_check": [],
+  "foreign_keys": 1,
+  "final_reservation_and_inquiry": "completed",
+  "agreed_amount_cents": 100000,
+  "commission_cents": 15000,
+  "provider_cents": 85000,
+  "hold_seconds": 900,
+  "review_rating": 5,
+  "synthetic_card_outcome": "test_approved"
+}
