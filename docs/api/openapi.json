@@ -3995,6 +3995,8 @@
                         "method",
                         "status",
                         "reference",
+                        "attempted_at",
+                        "received_at",
                         "can_choose",
                         "can_confirm",
                         "amount",
@@ -4046,6 +4048,14 @@
                             "string",
                             "null"
                           ]
+                        },
+                        "attempted_at": {
+                          "type": ["string", "null"],
+                          "format": "date-time"
+                        },
+                        "received_at": {
+                          "type": ["string", "null"],
+                          "format": "date-time"
                         },
                         "can_choose": {
                           "type": "boolean"
@@ -4207,6 +4217,8 @@
                         "method",
                         "status",
                         "reference",
+                        "attempted_at",
+                        "received_at",
                         "can_choose",
                         "can_confirm",
                         "amount",
@@ -4258,6 +4270,14 @@
                             "string",
                             "null"
                           ]
+                        },
+                        "attempted_at": {
+                          "type": ["string", "null"],
+                          "format": "date-time"
+                        },
+                        "received_at": {
+                          "type": ["string", "null"],
+                          "format": "date-time"
                         },
                         "can_choose": {
                           "type": "boolean"
