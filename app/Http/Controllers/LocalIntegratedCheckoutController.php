@@ -47,11 +47,21 @@ final class LocalIntegratedCheckoutController extends Controller
     public function show(Request $request, int $reservation, CheckoutContext $checkout, LocalCheckoutAttemptStore $store)
     {
         $context = $this->context($request, $reservation, $checkout);
+        $attempt = $store->current($reservation);
+        $canReceiveCash = false;
+        if (($attempt['status'] ?? null) === 'awaiting_cash' && $attempt['method'] === 'cash') {
+            $item = ServiceReservation::with(['hold', 'providerProfile.user'])->findOrFail($reservation);
+            $provider = $item->providerProfile->user;
+            $canReceiveCash = (int) $attempt['provider_user_id'] === $provider->id
+                && $provider->hasPermission(Permission::ManageReceivedInquiries)
+                && $store->cashReceptionWindowOpen($item);
+        }
 
         return response()->view('checkout.local-integrated', [
             'context' => $context,
             'reservation' => $reservation,
-            'attempt' => $store->current($reservation),
+            'attempt' => $attempt,
+            'canReceiveCash' => $canReceiveCash,
             'formattedAmount' => WebMoney::format($context['amount']->totalCents),
         ])->withHeaders(['Cache-Control' => 'no-store, private', 'X-Robots-Tag' => 'noindex, nofollow']);
     }

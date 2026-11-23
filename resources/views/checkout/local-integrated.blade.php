@@ -190,7 +190,13 @@
               @switch($status)
                 @case('test_approved') Resultado guardado en el entorno local. @break
                 @case('cash_received') Efectivo recibido por el prestador · Registro de prueba. @break
-                @case('awaiting_cash') El prestador podrá registrar la recepción del efectivo desde su cuenta. @break
+                @case('awaiting_cash')
+                  @if($canReceiveCash)
+                    El prestador podrá registrar la recepción del efectivo desde su cuenta.
+                  @else
+                    La selección de efectivo se conserva en el historial de la reserva. La recepción no quedó registrada.
+                  @endif
+                  @break
                 @default Consulta el horario y su historial en el detalle de la reserva. @break
               @endswitch
             </p>

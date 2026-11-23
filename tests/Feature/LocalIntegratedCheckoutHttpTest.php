@@ -9,6 +9,7 @@ use DOMElement;
 use DOMXPath;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Support\SlotHoldFixtures;
 use Tests\TestCase;
 
@@ -215,6 +216,10 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         ])->assertRedirect();
         $this->assertSame('confirmed', $reservation->fresh()->status->value);
 
+        $this->travel(900)->seconds();
+        $this->get(route('checkout.local.show', $reservation))->assertOk()
+            ->assertSee('El prestador podrá registrar la recepción del efectivo desde su cuenta.');
+
         $this->actingAs($provider, 'web')->get(route('checkout.local.cash', $reservation->id))
             ->assertOk()->assertSee('Pendiente de recepción');
         $this->post(route('checkout.local.cash.receive', $reservation->id))->assertRedirect();
@@ -246,6 +251,8 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         $this->actingAs($client, 'web')->post(route('checkout.local.submit', $reservation), [
             'method' => 'cash', 'idempotency_key' => (string) Str::uuid(),
         ])->assertRedirect();
+        $this->get(route('checkout.local.show', $reservation))->assertOk()
+            ->assertSee('El prestador podrá registrar la recepción del efectivo desde su cuenta.');
         $this->actingAs($provider, 'web')->get(route('checkout.local.cash', $reservation))->assertOk()
             ->assertSee('Registrar recepción de efectivo');
         $before = app(LocalCheckoutAttemptStore::class)->current($reservation->id);
@@ -255,7 +262,41 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
             ->assertSee('El estado del horario impide registrar la recepción')
             ->assertDontSee('Registrar recepción de efectivo');
         $this->post(route('checkout.local.cash.receive', $reservation))->assertConflict();
+        $this->actingAs($client, 'web')->get(route('checkout.local.show', $reservation))->assertOk()
+            ->assertSee('Retención vencida')
+            ->assertSee('La selección de efectivo se conserva en el historial de la reserva. La recepción no quedó registrada.')
+            ->assertSee($before['reference'])
+            ->assertDontSee('El prestador podrá registrar la recepción del efectivo desde su cuenta.');
         $this->assertSame($before, app(LocalCheckoutAttemptStore::class)->current($reservation->id));
         $this->assertHoldIntegrity();
+    }
+
+    public static function cancelledCashBookings(): array
+    {
+        return [
+            'hold released before confirmation' => [false, 'Retención liberada'],
+            'confirmed booking cancelled' => [true, 'Reserva cancelada'],
+        ];
+    }
+
+    #[DataProvider('cancelledCashBookings')]
+    public function test_cancelled_pending_cash_is_shown_as_history_to_the_client(bool $confirmed, string $bookingStatus): void
+    {
+        [$client, $provider, $reservation] = $this->held();
+        $this->actingAs($client, 'web')->post(route('checkout.local.submit', $reservation), [
+            'method' => 'cash', 'idempotency_key' => (string) Str::uuid(),
+        ])->assertRedirect();
+        if ($confirmed) {
+            $this->patch(route('reservations.commit', $reservation), $this->holdInput())->assertRedirect();
+        }
+        $this->patch(route('reservations.cancel', $reservation), $this->holdInput([
+            'version' => $reservation->fresh()->version,
+        ]))->assertRedirect();
+
+        $this->get(route('checkout.local.show', $reservation))->assertOk()
+            ->assertSee($bookingStatus)
+            ->assertSee('La selección de efectivo se conserva en el historial de la reserva. La recepción no quedó registrada.')
+            ->assertDontSee('El prestador podrá registrar la recepción del efectivo desde su cuenta.');
+        $this->actingAs($provider, 'web')->post(route('checkout.local.cash.receive', $reservation))->assertConflict();
     }
 }
