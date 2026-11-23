@@ -3951,6 +3951,356 @@
         }
       }
     },
+    "/reservations/{reservation}/demo-checkout": {
+      "get": {
+        "operationId": "getPrivateSyntheticCheckout",
+        "summary": "Consultar selección de pago ficticio (solo fixture SQLite temporal local)",
+        "description": "Bearer de cliente propietario, host e IP loopback, base temporal B3.2 marcada. No hay datos bancarios ni cobro real; en bases normales devuelve 404.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado sintético de la reserva, sin instrumentos de tarjeta ni recibos reales",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "reservation_id",
+                        "method",
+                        "status",
+                        "reference",
+                        "can_choose",
+                        "can_confirm",
+                        "amount",
+                        "server_now",
+                        "expires_at",
+                        "remaining_seconds",
+                        "synthetic_only"
+                      ],
+                      "properties": {
+                        "reservation_id": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "method": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "enum": [
+                            "card",
+                            "cash",
+                            null
+                          ]
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "not_selected",
+                            "test_approved",
+                            "declined",
+                            "temporary_failure",
+                            "awaiting_cash",
+                            "cash_received"
+                          ]
+                        },
+                        "reference": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "can_choose": {
+                          "type": "boolean"
+                        },
+                        "can_confirm": {
+                          "type": "boolean"
+                        },
+                        "amount": {
+                          "oneOf": [
+                            {
+                              "$ref": "#/components/schemas/CommercialAmount"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "server_now": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "expires_at": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "format": "date-time"
+                        },
+                        "remaining_seconds": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 900
+                        },
+                        "synthetic_only": {
+                          "type": "boolean",
+                          "const": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      },
+      "post": {
+        "operationId": "submitPrivateSyntheticCheckout",
+        "summary": "Elegir tarjeta ficticia o efectivo (solo B3.2 local, sin cobro)",
+        "description": "Misma validación e idempotencia de B3.2 web. Debe existir retención vigente y cotización aceptada. No confirma reserva ni acredita pago.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "method",
+                  "idempotency_key"
+                ],
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "card",
+                      "cash"
+                    ]
+                  },
+                  "card_number": {
+                    "type": "string",
+                    "enum": [
+                      "4242424242424242",
+                      "4000000000000002",
+                      "4000000000000119"
+                    ]
+                  },
+                  "expiry": {
+                    "type": "string",
+                    "enum": [
+                      "12/30"
+                    ]
+                  },
+                  "cvv": {
+                    "type": "string",
+                    "enum": [
+                      "123"
+                    ]
+                  },
+                  "idempotency_key": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Estado ficticio; efectivo pendiente no significa recibido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "reservation_id",
+                        "method",
+                        "status",
+                        "reference",
+                        "can_choose",
+                        "can_confirm",
+                        "amount",
+                        "server_now",
+                        "expires_at",
+                        "remaining_seconds",
+                        "synthetic_only"
+                      ],
+                      "properties": {
+                        "reservation_id": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "method": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "enum": [
+                            "card",
+                            "cash",
+                            null
+                          ]
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "not_selected",
+                            "test_approved",
+                            "declined",
+                            "temporary_failure",
+                            "awaiting_cash",
+                            "cash_received"
+                          ]
+                        },
+                        "reference": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "can_choose": {
+                          "type": "boolean"
+                        },
+                        "can_confirm": {
+                          "type": "boolean"
+                        },
+                        "amount": {
+                          "oneOf": [
+                            {
+                              "$ref": "#/components/schemas/CommercialAmount"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "server_now": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "expires_at": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "format": "date-time"
+                        },
+                        "remaining_seconds": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 900
+                        },
+                        "synthetic_only": {
+                          "type": "boolean",
+                          "const": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
     "/reservations/{reservation}/checkout-context": {
       "get": {
         "operationId": "getCheckoutContext",
