@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tekora API móvil",
-    "version": "1.6.0",
-    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept, salvo la descarga binaria de foto propia en M2.8. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento. M1 agrega notificaciones del solicitante: filtro SQL por destinatario, rol cliente vigente, evento y propiedad antes de contar/ordenar/paginar. Cuentas duales excluyen avisos exclusivos de prestador. IDs compuestos por origen. Lectura idempotente sin cambiar negocios; errores de almacenamiento nunca se convierten en cero o éxito. M2.8 agrega registro por correo, recuperación y perfil propio sin cambiar login ni /me. M2.9 agrega reseñas públicas anónimas y operaciones de reseñas propias del solicitante.",
+    "version": "1.7.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept, salvo la descarga binaria de foto propia en M2.8. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento. M1 agrega notificaciones del solicitante: filtro SQL por destinatario, rol cliente vigente, evento y propiedad antes de contar/ordenar/paginar. Cuentas duales excluyen avisos exclusivos de prestador. IDs compuestos por origen. Lectura idempotente sin cambiar negocios; errores de almacenamiento nunca se convierten en cero o éxito. M2.8 agrega registro por correo, recuperación y perfil propio sin cambiar login ni /me. M2.9 agrega reseñas públicas anónimas y operaciones de reseñas propias del solicitante. M3.0 agrega categorías, servicios por prestador y una instantánea privada del solicitante.",
     "license": {
       "name": "MIT",
       "identifier": "MIT"
@@ -16,6 +16,258 @@
     }
   ],
   "paths": {
+    "/categories": {
+      "get": {
+        "operationId": "listCategories",
+        "summary": "Categorías activas del catálogo",
+        "description": "Consulta pública sin parámetros ni cuerpo. Orden ascendente por sort_order, nombre e id. Si no hay categorías activas, data es un arreglo vacío.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "name": "Soporte técnico",
+                      "slug": "soporte-tecnico"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/providers/{provider}/services": {
+      "get": {
+        "operationId": "listProviderServices",
+        "summary": "Servicios públicos de un prestador",
+        "description": "Usa la visibilidad y el precio público del catálogo. Orden por id descendente. Un prestador sin servicios visibles devuelve 404. Una página válida fuera del total devuelve data vacío. Solo admite page y per_page en la consulta y no admite cuerpo.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 12
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "meta"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Service"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Page"
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "id": 21,
+                      "title": "Soporte de computadoras",
+                      "description": "Diagnóstico remoto.",
+                      "modality": "remote",
+                      "category": {
+                        "id": 1,
+                        "name": "Soporte técnico",
+                        "slug": "soporte-tecnico"
+                      },
+                      "provider": {
+                        "id": 7,
+                        "display_name": "Soporte local",
+                        "headline": "Especialista en equipos",
+                        "bio": "Diagnóstico y mantenimiento."
+                      },
+                      "price": null
+                    }
+                  ],
+                  "meta": {
+                    "current_page": 1,
+                    "per_page": 12,
+                    "last_page": 1,
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/me/dashboard": {
+      "get": {
+        "operationId": "getClientDashboard",
+        "summary": "Resumen del solicitante",
+        "description": "Instantánea privada de solo lectura del solicitante autenticado. No admite parámetros ni cuerpo. La agenda contiene hasta cinco reservas confirmadas por inicio ascendente e id ascendente. Las solicitudes recientes se ordenan por creación e id descendentes. Las retenciones vencidas quedan fuera de held y requested. Si el reloj o el almacenamiento no permiten verificar los datos, devuelve 503 sin instantánea parcial.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M30ClientDashboard"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "as_of": "2030-01-01T12:00:00.000000Z",
+                    "timezone": "America/Mexico_City",
+                    "counts": {
+                      "active": 2,
+                      "confirmed": 1,
+                      "requested": 0,
+                      "completed": 1,
+                      "cancelled": 0,
+                      "held": 1,
+                      "unread_conversations": 1,
+                      "unread_notifications": 2
+                    },
+                    "upcoming_reservations": [
+                      {
+                        "id": 14,
+                        "inquiry_id": 92,
+                        "service_id": 21,
+                        "title": "Soporte de computadoras",
+                        "status": "confirmed",
+                        "starts_at": "2030-01-07T15:00:00.000000Z",
+                        "ends_at": "2030-01-07T16:00:00.000000Z"
+                      }
+                    ],
+                    "recent_inquiries": [
+                      {
+                        "id": 92,
+                        "service_id": 21,
+                        "title": "Soporte de computadoras",
+                        "status": "accepted",
+                        "created_at": "2029-12-30T19:00:00.000000Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
     "/services/{service}/reviews": {
       "get": {
         "operationId": "listServiceReviews",
@@ -7271,6 +7523,184 @@
             }
           }
         ]
+      },
+      "M30ClientDashboard": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "as_of",
+          "timezone",
+          "counts",
+          "upcoming_reservations",
+          "recent_inquiries"
+        ],
+        "properties": {
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          },
+          "timezone": {
+            "type": "string",
+            "const": "America/Mexico_City"
+          },
+          "counts": {
+            "$ref": "#/components/schemas/M30DashboardCounts"
+          },
+          "upcoming_reservations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/M30DashboardReservation"
+            },
+            "maxItems": 5
+          },
+          "recent_inquiries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/M30DashboardInquiry"
+            },
+            "maxItems": 5
+          }
+        }
+      },
+      "M30DashboardCounts": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "active",
+          "confirmed",
+          "requested",
+          "completed",
+          "cancelled",
+          "held",
+          "unread_conversations",
+          "unread_notifications"
+        ],
+        "properties": {
+          "active": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Solicitudes en estado pending o accepted."
+          },
+          "confirmed": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Reservas confirmadas cuyo inicio es posterior a as_of."
+          },
+          "requested": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Propuestas con inicio futuro que todavía no tienen una retención."
+          },
+          "completed": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Reservas realizadas explícitamente, en estado completed."
+          },
+          "cancelled": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Reservas en estado cancelled."
+          },
+          "held": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Retenciones en estado held con vencimiento estrictamente posterior a as_of."
+          },
+          "unread_conversations": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Conversaciones propias con al menos un mensaje recibido sin leer."
+          },
+          "unread_notifications": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Notificaciones sin leer dirigidas al rol solicitante y a recursos propios."
+          }
+        }
+      },
+      "M30DashboardReservation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "inquiry_id",
+          "service_id",
+          "title",
+          "status",
+          "starts_at",
+          "ends_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "inquiry_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "const": "confirmed"
+          },
+          "starts_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          },
+          "ends_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          }
+        }
+      },
+      "M30DashboardInquiry": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "service_id",
+          "title",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "service_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "accepted",
+              "rejected",
+              "cancelled",
+              "completed"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Fecha y hora UTC en formato ISO 8601."
+          }
+        }
       }
     },
     "responses": {

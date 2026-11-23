@@ -11,8 +11,10 @@ use App\Http\Resources\Api\V1\ProviderResource;
 use App\Http\Resources\Api\V1\ServiceResource;
 use App\Models\ProviderProfile;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Services\ProviderAvailability;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 
 final class CatalogController extends Controller
 {
@@ -60,6 +62,11 @@ final class CatalogController extends Controller
         return new ServiceResource($this->services()->findOrFail($service));
     }
 
+    public function categories(CatalogRequest $request): JsonResponse
+    {
+        return response()->json(['data' => ServiceCategory::active()->ordered()->get(['id', 'name', 'slug'])]);
+    }
+
     public function providersIndex(CatalogRequest $request): ApiCollection
     {
         $filters = $request->validated();
@@ -75,6 +82,17 @@ final class CatalogController extends Controller
     public function provider(CatalogRequest $request, int $provider): ProviderResource
     {
         return new ProviderResource($this->providers()->findOrFail($provider));
+    }
+
+    public function providerServices(CatalogRequest $request, string $provider): ApiCollection
+    {
+        $id = filter_var($provider, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+        abort_if($id === false, 404);
+        $profile = $this->providers()->findOrFail($id);
+        $page = $this->services()->where('provider_profile_id', $profile->id)
+            ->orderByDesc('id')->paginate($request->validated('per_page', 12));
+
+        return new ApiCollection($page->through(fn ($service) => new ServiceResource($service)));
     }
 
     public function availability(CatalogRequest $request, int $service, ProviderAvailability $availability): AvailabilityResource

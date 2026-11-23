@@ -1,0 +1,50 @@
+@base = http://127.0.0.1:8013/api/v1
+@provider = 7
+@reservation = 14
+@inquiry = 92
+@category = soporte-tecnico
+@bearer = REEMPLAZAR_TOKEN_SANCTUM
+
+### Categorías activas para filtros
+GET {{base}}/categories
+Accept: application/json
+
+### Catálogo filtrado por el slug seleccionado
+GET {{base}}/services?category={{category}}
+Accept: application/json
+
+### Perfil público
+GET {{base}}/providers/{{provider}}
+Accept: application/json
+
+### Servicios del prestador en la ficha
+GET {{base}}/providers/{{provider}}/services?page=1&per_page=12
+Accept: application/json
+
+### Reseñas públicas del prestador
+GET {{base}}/providers/{{provider}}/reviews?page=1
+Accept: application/json
+
+### Inicio del solicitante
+GET {{base}}/me/dashboard
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Detalle desde la agenda
+GET {{base}}/reservations/{{reservation}}
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Detalle desde la actividad reciente
+GET {{base}}/inquiries/{{inquiry}}
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### 422 al enviar filtros de identidad al panel
+GET {{base}}/me/dashboard?client_user_id=2
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### 422 si la página es inválida
+GET {{base}}/providers/{{provider}}/services?page=0
+Accept: application/json

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\V1;
 
 use App\Enums\ServiceModality;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 final class CatalogRequest extends ApiRequest
 {
@@ -19,7 +20,16 @@ final class CatalogRequest extends ApiRequest
                 'modality' => ['sometimes', Rule::enum(ServiceModality::class)],
             ],
             'api.v1.providers.index' => $pagination + ['q' => ['sometimes', 'string', 'max:120']],
+            'api.v1.providers.services.index' => $pagination,
             default => [],
         };
+    }
+
+    public function withValidator(Validator $validator): void
+    {
+        parent::withValidator($validator);
+        if ($this->routeIs('api.v1.categories.index', 'api.v1.providers.services.index') && $this->getContent() !== '') {
+            $validator->after(fn (Validator $validator) => $validator->errors()->add('request', 'Envía los parámetros de lectura en la consulta.'));
+        }
     }
 }

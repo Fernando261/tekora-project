@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\IdentityController;
 use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\OperationsController;
@@ -54,6 +55,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             Route::get('reservations/{reservation}/checkout-context', CheckoutContextController::class)->whereNumber('reservation')->name('reservations.checkout-context');
         });
         Route::get('me', [AuthController::class, 'me'])->name('me');
+        Route::get('me/dashboard', DashboardController::class)->middleware('throttle:mobile-private')->name('dashboard.show');
         Route::middleware('throttle:mobile-private')->group(function () {
             Route::get('reviews', [ReviewsController::class, 'index'])->name('reviews.index');
             Route::get('reviews/{review}', [ReviewsController::class, 'show'])->whereNumber('review')->name('reviews.show');
@@ -77,12 +79,14 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
     });
     Route::middleware('throttle:mobile-catalog')->group(function () {
+        Route::get('categories', [CatalogController::class, 'categories'])->name('categories.index');
         Route::get('services', [CatalogController::class, 'index'])->name('services.index');
         Route::get('services/{service}', [CatalogController::class, 'show'])->whereNumber('service')->name('services.show');
         Route::get('services/{service}/availability', [CatalogController::class, 'availability'])->whereNumber('service')->name('services.availability');
         Route::get('services/{service}/reviews', [ReviewsController::class, 'forService'])->whereNumber('service')->name('services.reviews.index');
         Route::get('providers', [CatalogController::class, 'providersIndex'])->name('providers.index');
         Route::get('providers/{provider}', [CatalogController::class, 'provider'])->whereNumber('provider')->name('providers.show');
+        Route::get('providers/{provider}/services', [CatalogController::class, 'providerServices'])->whereNumber('provider')->name('providers.services.index');
         Route::get('providers/{provider}/reviews', [ReviewsController::class, 'forProvider'])->whereNumber('provider')->name('providers.reviews.index');
     });
 });
