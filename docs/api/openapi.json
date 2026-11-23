@@ -3989,6 +3989,9 @@
                       "additionalProperties": false,
                       "required": [
                         "reservation_id",
+                        "quote_id",
+                        "reservation_status",
+                        "selection_verified",
                         "method",
                         "status",
                         "reference",
@@ -4004,6 +4007,17 @@
                         "reservation_id": {
                           "type": "integer",
                           "minimum": 1
+                        },
+                        "quote_id": {
+                          "type": ["string", "null"],
+                          "format": "uuid"
+                        },
+                        "reservation_status": {
+                          "type": "string",
+                          "enum": ["requested", "held", "confirmed", "hold_expired", "hold_released", "rejected", "cancelled", "completed"]
+                        },
+                        "selection_verified": {
+                          "type": "boolean"
                         },
                         "method": {
                           "type": [
@@ -4187,6 +4201,9 @@
                       "additionalProperties": false,
                       "required": [
                         "reservation_id",
+                        "quote_id",
+                        "reservation_status",
+                        "selection_verified",
                         "method",
                         "status",
                         "reference",
@@ -4202,6 +4219,17 @@
                         "reservation_id": {
                           "type": "integer",
                           "minimum": 1
+                        },
+                        "quote_id": {
+                          "type": ["string", "null"],
+                          "format": "uuid"
+                        },
+                        "reservation_status": {
+                          "type": "string",
+                          "enum": ["requested", "held", "confirmed", "hold_expired", "hold_released", "rejected", "cancelled", "completed"]
+                        },
+                        "selection_verified": {
+                          "type": "boolean"
                         },
                         "method": {
                           "type": [
