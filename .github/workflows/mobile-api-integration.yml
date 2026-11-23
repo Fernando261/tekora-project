@@ -61,4 +61,4 @@ jobs:
       - name: Run clean-install, mobile journey and compatibility tests
         run: |
           php vendor/bin/phpunit --do-not-cache-result \
-            --filter 'Mobile(CleanInstallation|IntegrationJourney|ApiAuth|ApiCatalog|CatalogDashboard|IdentityProfile|OperationsContract|OperationsConcurrency|ContactPrivacy|Notifications|NotificationConcurrency|Reviews|QuotesApi|QuoteConcurrency|CheckoutHandoffContract|ConfirmationReadiness)Test|ReservationHold(ApiAndGuards|Concurrency)Test|ReviewConcurrencyTest|ContractingJourneyTest'
+            --filter 'Mobile(CleanInstallation|IntegrationJourney|ApiAuth|ApiCatalog|CatalogDashboard|IdentityProfile|OperationsContract|OperationsConcurrency|ContactPrivacy|Notifications|NotificationConcurrency|Reviews|QuotesApi|QuoteConcurrency|CheckoutHandoffContract|ConfirmationReadiness|SyntheticCheckoutApi)Test|ReservationHold(ApiAndGuards|Concurrency)Test|ReviewConcurrencyTest|ContractingJourneyTest'
