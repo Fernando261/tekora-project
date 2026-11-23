@@ -2,7 +2,9 @@
 
 namespace Tests\Support;
 
+use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\CheckoutContextController;
+use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\IdentityController;
 use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\ProfileController;
@@ -96,7 +98,19 @@ trait CommercialApiInventoryAssertions
 
     protected function mobileClientExtensions(): array
     {
-        return $this->m28ApiInventory() + $this->m29ApiInventory();
+        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory();
+    }
+
+    protected function m30ApiInventory(): array
+    {
+        return [
+            'api.v1.categories.index' => ['uri' => 'api/v1/categories', 'methods' => ['GET', 'HEAD'],
+                'action' => CatalogController::class.'@categories', 'middleware' => ['api', 'throttle:mobile-catalog'], 'wheres' => []],
+            'api.v1.providers.services.index' => ['uri' => 'api/v1/providers/{provider}/services', 'methods' => ['GET', 'HEAD'],
+                'action' => CatalogController::class.'@providerServices', 'middleware' => ['api', 'throttle:mobile-catalog'], 'wheres' => ['provider' => '[0-9]+']],
+            'api.v1.dashboard.show' => ['uri' => 'api/v1/me/dashboard', 'methods' => ['GET', 'HEAD'],
+                'action' => DashboardController::class, 'middleware' => ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'], 'wheres' => []],
+        ];
     }
 
     protected function m29ApiInventory(): array
