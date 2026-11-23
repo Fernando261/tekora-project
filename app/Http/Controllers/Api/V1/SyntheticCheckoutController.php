@@ -76,7 +76,9 @@ final class SyntheticCheckoutController extends Controller
             'status' => $status,
             'reference' => $attempt['reference'] ?? null,
             'can_choose' => $eligible && in_array($status, ['not_selected', 'declined', 'temporary_failure'], true),
-            'can_confirm' => $eligible && in_array($status, ['test_approved', 'awaiting_cash', 'cash_received'], true),
+            'can_confirm' => $eligible && in_array($status, ['test_approved', 'awaiting_cash', 'cash_received'], true)
+                && ($context['confirmation_readiness']['state'] ?? null) === 'ready'
+                && ($context['confirmation_readiness']['synthetic_web_requirement'] ?? null) === 'satisfied',
             'amount' => $amount ? [
                 'currency' => 'MXN',
                 'total_cents' => $amount->totalCents,
