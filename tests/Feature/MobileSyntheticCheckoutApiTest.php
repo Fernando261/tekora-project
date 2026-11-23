@@ -103,6 +103,9 @@ final class MobileSyntheticCheckoutApiTest extends TestCase
         // This private endpoint intentionally rejects GET bodies; getJson() sends [] in tests.
         $this->get($url, $this->bearer($client) + ['Accept' => 'application/json'])->assertOk()
             ->assertJsonPath('data.status', 'not_selected')
+            ->assertJsonPath('data.quote_id', $reservation->quote_id)
+            ->assertJsonPath('data.reservation_status', 'held')
+            ->assertJsonPath('data.selection_verified', false)
             ->assertJsonPath('data.can_choose', true)
             ->assertJsonPath('data.can_confirm', false);
         $this->postJson($url, ['method' => 'cash', 'idempotency_key' => (string) Str::uuid(), 'amount_cents' => 1],
@@ -117,6 +120,7 @@ final class MobileSyntheticCheckoutApiTest extends TestCase
         ];
         $this->postJson($url, $failed, $this->bearer($client))->assertOk()
             ->assertJsonPath('data.status', 'declined')
+            ->assertJsonPath('data.selection_verified', false)
             ->assertJsonPath('data.can_confirm', false);
         $this->patchJson('/api/v1/reservations/'.$reservation->id.'/commit',
             $this->holdInput(['version' => $reservation->fresh()->version]),
@@ -128,6 +132,7 @@ final class MobileSyntheticCheckoutApiTest extends TestCase
         ];
         $response = $this->postJson($url, $approved, $this->bearer($client))->assertOk()
             ->assertJsonPath('data.status', 'test_approved')
+            ->assertJsonPath('data.selection_verified', true)
             ->assertJsonPath('data.can_confirm', true);
         foreach (['card_number', 'cvv', '4242424242424242', 'idempotency_key'] as $sensitive) {
             $this->assertStringNotContainsString($sensitive, $response->getContent());
@@ -138,6 +143,13 @@ final class MobileSyntheticCheckoutApiTest extends TestCase
         $this->patchJson('/api/v1/reservations/'.$reservation->id.'/commit',
             $this->holdInput(['version' => $reservation->fresh()->version]),
             $this->bearer($client))->assertOk()->assertJsonPath('data.status', 'confirmed');
+        // After commit, the read API preserves the verified attempt for the quote UI.
+        $this->get($url, $this->bearer($client) + ['Accept' => 'application/json'])->assertOk()
+            ->assertJsonPath('data.quote_id', $reservation->quote_id)
+            ->assertJsonPath('data.reservation_status', 'confirmed')
+            ->assertJsonPath('data.status', 'test_approved')
+            ->assertJsonPath('data.selection_verified', true)
+            ->assertJsonPath('data.can_confirm', false);
     }
 
     public function test_cash_pending_allows_booking_but_not_cash_received(): void
@@ -148,11 +160,17 @@ final class MobileSyntheticCheckoutApiTest extends TestCase
         $this->postJson($url, ['method' => 'cash', 'idempotency_key' => (string) Str::uuid()],
             $this->bearer($client))->assertOk()
             ->assertJsonPath('data.status', 'awaiting_cash')
+            ->assertJsonPath('data.selection_verified', true)
             ->assertJsonPath('data.can_confirm', true);
         $this->assertSame('awaiting_cash', app(LocalCheckoutAttemptStore::class)->current($reservation->id)['status']);
         $this->patchJson('/api/v1/reservations/'.$reservation->id.'/commit',
             $this->holdInput(['version' => $reservation->fresh()->version]),
             $this->bearer($client))->assertOk()->assertJsonPath('data.status', 'confirmed');
         $this->assertSame('awaiting_cash', app(LocalCheckoutAttemptStore::class)->current($reservation->id)['status']);
+        $this->get($url, $this->bearer($client) + ['Accept' => 'application/json'])->assertOk()
+            ->assertJsonPath('data.quote_id', $reservation->quote_id)
+            ->assertJsonPath('data.reservation_status', 'confirmed')
+            ->assertJsonPath('data.status', 'awaiting_cash')
+            ->assertJsonPath('data.selection_verified', true);
     }
 }
