@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\OperationsController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\QuotesController;
+use App\Http\Controllers\Api\V1\ReviewsController;
 use App\Http\Middleware\MobileClient;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,14 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         });
         Route::get('me', [AuthController::class, 'me'])->name('me');
         Route::middleware('throttle:mobile-private')->group(function () {
+            Route::get('reviews', [ReviewsController::class, 'index'])->name('reviews.index');
+            Route::get('reviews/{review}', [ReviewsController::class, 'show'])->whereNumber('review')->name('reviews.show');
+            Route::post('reservations/{reservation}/review', [ReviewsController::class, 'store'])->whereNumber('reservation')
+                ->middleware('throttle:mobile-review-writes')->name('reviews.store');
+            Route::patch('reviews/{review}/withdraw', [ReviewsController::class, 'withdraw'])->whereNumber('review')
+                ->middleware('throttle:mobile-review-writes')->name('reviews.withdraw');
+        });
+        Route::middleware('throttle:mobile-private')->group(function () {
             Route::get('me/profile', [ProfileController::class, 'show'])->name('profile.show');
             Route::patch('me/profile', [ProfileController::class, 'update'])->middleware('throttle:mobile-profile-writes')->name('profile.update');
             Route::get('me/photo', [ProfileController::class, 'photo'])->name('profile.photo.show');
@@ -71,7 +80,9 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('services', [CatalogController::class, 'index'])->name('services.index');
         Route::get('services/{service}', [CatalogController::class, 'show'])->whereNumber('service')->name('services.show');
         Route::get('services/{service}/availability', [CatalogController::class, 'availability'])->whereNumber('service')->name('services.availability');
+        Route::get('services/{service}/reviews', [ReviewsController::class, 'forService'])->whereNumber('service')->name('services.reviews.index');
         Route::get('providers', [CatalogController::class, 'providersIndex'])->name('providers.index');
         Route::get('providers/{provider}', [CatalogController::class, 'provider'])->whereNumber('provider')->name('providers.show');
+        Route::get('providers/{provider}/reviews', [ReviewsController::class, 'forProvider'])->whereNumber('provider')->name('providers.reviews.index');
     });
 });

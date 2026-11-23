@@ -204,10 +204,10 @@ final class ContractingJourney
                 return $make('close_inquiry', 'service', 'Finaliza la solicitud', 'La realización ya está registrada. Cierra operativamente esta solicitud.', mobile: false);
             }
             if ($client && $review) {
-                return $make('view_review', 'service', $review->status->value === 'withdrawn' ? 'Consulta tu reseña retirada' : 'Consulta tu reseña publicada', 'Tu registro privado se conserva junto al servicio realizado.', ['type' => 'review', 'id' => $review->id], mobile: false);
+                return $make('view_review', 'service', $review->status->value === 'withdrawn' ? 'Consulta tu reseña retirada' : 'Consulta tu reseña publicada', 'Tu registro privado se conserva junto al servicio realizado.', ['type' => 'review', 'id' => $review->id]);
             }
             if ($client && $reviewEligible) {
-                return $make('write_review', 'service', 'Comparte tu experiencia', 'El servicio está registrado como realizado. Puedes dejar una reseña conforme a las reglas vigentes.', ['type' => 'reservation', 'id' => $reviewReservation], mobile: false);
+                return $make('write_review', 'service', 'Comparte tu experiencia', 'El servicio está registrado como realizado. Puedes dejar una reseña conforme a las reglas vigentes.', ['type' => 'reservation', 'id' => $reviewReservation]);
             }
 
             return $make('read_history', 'service', 'Consulta el cierre y su historial', 'Se conservan las decisiones, la conversación y los horarios del servicio.');
