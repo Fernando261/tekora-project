@@ -28,14 +28,29 @@ class InquiryReadTracking
 
         return ServiceInquiry::query()->where(function (Builder $query) use ($user, $client, $provider) {
             $query->whereRaw('0 = 1');
-            if ($client) $query->orWhere('client_user_id', $user->id);
-            if ($provider) $query->orWhereHas('service.providerProfile', fn ($profiles) => $profiles->where('user_id', $user->id));
+            if ($client) {
+                $query->orWhere('client_user_id', $user->id);
+            }
+            if ($provider) {
+                $query->orWhereHas('service.providerProfile', fn ($profiles) => $profiles->where('user_id', $user->id));
+            }
         });
     }
 
     public function withUnreadCount(Builder $query, User $user): Builder
     {
         return $query->withCount(['messages as unread_messages_count' => fn (Builder $messages) => $this->unread($messages, $user)]);
+    }
+
+    public function inboxOrder(Builder $query, User $user): Builder
+    {
+        // MySQL cannot resolve the count alias inside the SQLite CASE expression.
+        return $this->withUnreadCount($query, $user)
+            ->withExists(['messages as has_unread_messages' => fn (Builder $messages) => $this->unread($messages, $user)])
+            ->withMax('messages as latest_message_id', 'id')
+            ->orderByDesc('has_unread_messages')
+            ->orderByDesc('latest_message_id')
+            ->orderByDesc('id');
     }
 
     public function totalUnread(User $user): int
@@ -73,9 +88,13 @@ class InquiryReadTracking
         Gate::forUser($user)->authorize('view', $inquiry);
         // Solo mensajes recibidos realmente incluidos en la página servida; nunca MAX global al hacer POST.
         $ids = $page->where('author_user_id', '!=', $user->id)->pluck('id');
-        if ($ids->isEmpty()) return null;
+        if ($ids->isEmpty()) {
+            return null;
+        }
         $bound = $inquiry->messages()->where('author_user_id', '!=', $user->id)->whereIn('id', $ids)->max('id');
-        if (! $bound || $bound <= $this->markerFor($user, $inquiry)) return null;
+        if (! $bound || $bound <= $this->markerFor($user, $inquiry)) {
+            return null;
+        }
 
         return Crypt::encryptString(json_encode(['user_id' => $user->id, 'inquiry_id' => $inquiry->id, 'through' => (int) $bound], JSON_THROW_ON_ERROR));
     }
@@ -98,13 +117,26 @@ class InquiryReadTracking
                 }
                 $now = now()->format('Y-m-d H:i:s');
                 // Un solo UPSERT: un formulario repetido u obsoleto nunca reduce el marcador ni cambia su fecha.
-                DB::statement('INSERT INTO service_inquiry_reads (service_inquiry_id, user_id, last_read_message_id, created_at, updated_at)
+                $mysql = DB::connection()->getDriverName() === 'mysql';
+                $upsert = $mysql
+                    ? 'INSERT INTO service_inquiry_reads (service_inquiry_id, user_id, last_read_message_id, created_at, updated_at)
+                        VALUES (?, ?, ?, ?, ?) AS incoming ON DUPLICATE KEY UPDATE
+                        updated_at = IF(service_inquiry_reads.last_read_message_id < incoming.last_read_message_id,
+                            incoming.updated_at, service_inquiry_reads.updated_at),
+                        last_read_message_id = GREATEST(service_inquiry_reads.last_read_message_id, incoming.last_read_message_id)'
+                    : 'INSERT INTO service_inquiry_reads (service_inquiry_id, user_id, last_read_message_id, created_at, updated_at)
                     VALUES (?, ?, ?, ?, ?) ON CONFLICT(service_inquiry_id, user_id) DO UPDATE SET
                     last_read_message_id = excluded.last_read_message_id, updated_at = excluded.updated_at
-                    WHERE service_inquiry_reads.last_read_message_id < excluded.last_read_message_id',
-                    [$inquiry->id, $user->id, $payload['through'], $now, $now]);
+                    WHERE service_inquiry_reads.last_read_message_id < excluded.last_read_message_id';
+                DB::statement($upsert, [$inquiry->id, $user->id, $payload['through'], $now, $now]);
 
-                return InquiryReadProgress::where('service_inquiry_id', $inquiry->id)->where('user_id', $user->id)->firstOrFail();
+                $progress = InquiryReadProgress::where('service_inquiry_id', $inquiry->id)->where('user_id', $user->id);
+                if ($mysql) {
+                    // Read the current row even after a no-op update under REPEATABLE READ.
+                    $progress->lockForUpdate();
+                }
+
+                return $progress->firstOrFail();
             }, 3);
         } catch (\PDOException $exception) {
             throw new InquiryReadFailure($this->causedByConcurrencyError($exception) ? 409 : 503);

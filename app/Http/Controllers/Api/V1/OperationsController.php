@@ -54,9 +54,7 @@ final class OperationsController extends Controller
     {
         $user = $request->user('sanctum');
         $query = $tracking->conversations($user)->where('service_inquiries.client_user_id', $user->id);
-        $page = $tracking->withUnreadCount($query, $user)->withMax('messages as latest_message_id', 'id')
-            ->orderByRaw('CASE WHEN unread_messages_count > 0 THEN 0 ELSE 1 END')
-            ->orderByDesc('latest_message_id')->orderByDesc('id')->paginate($request->validated('per_page', 12));
+        $page = $tracking->inboxOrder($query, $user)->paginate($request->validated('per_page', 12));
 
         return new ApiCollection($page->through(fn ($row) => new ConversationResource($row)));
     }

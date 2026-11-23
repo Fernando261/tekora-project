@@ -24,19 +24,28 @@ class InquiryMessaging
         $key = strtolower($key);
         try {
             return DB::transaction(function () use ($author, $inquiryId, $body, $key, $validateNewBody) {
-                $inquiry = ServiceInquiry::findOrFail($inquiryId);
+                $mysql = DB::connection()->getDriverName() === 'mysql';
+                $query = ServiceInquiry::query();
+                if ($mysql) {
+                    // Read the current status under the same row lock used by decisions.
+                    $query->lockForUpdate();
+                }
+                $inquiry = $query->findOrFail($inquiryId);
                 Gate::forUser($author)->authorize('sendMessage', $inquiry);
                 $existing = $this->existing($inquiry, $author, $key);
                 if ($existing) {
                     return $this->replay($existing, $body);
                 }
 
-                // SQLite no ofrece SELECT FOR UPDATE. Este UPDATE condicional obtiene el bloqueo
-                // de escritura compartido con las decisiones, sin cambiar estado ni timestamps.
-                $writable = DB::table('service_inquiries')->where('id', $inquiryId)
-                    ->whereIn('status', [InquiryStatus::Pending->value, InquiryStatus::Accepted->value])
-                    ->update(['status' => DB::raw('status')]);
-                if ($writable !== 1) {
+                $writableStates = [InquiryStatus::Pending, InquiryStatus::Accepted];
+                // In MySQL a no-op UPDATE reports zero changed rows. SQLite still
+                // needs the conditional write to acquire its writer lock.
+                $writable = $mysql
+                    ? in_array($inquiry->status, $writableStates, true)
+                    : DB::table('service_inquiries')->where('id', $inquiryId)
+                        ->whereIn('status', array_column($writableStates, 'value'))
+                        ->update(['status' => DB::raw('status')]) === 1;
+                if (! $writable) {
                     throw new InquiryMessageConflict;
                 }
                 Gate::forUser($author)->authorize('sendMessage', $inquiry->fresh());
