@@ -16,10 +16,9 @@ class ConversationController extends Controller
         $user = $request->user('web');
         Gate::forUser($user)->authorize('conversations', ServiceInquiry::class);
         $request->validate(['page' => ['sometimes', 'integer', 'min:1', 'max:10000']]);
-        $conversations = $tracking->withUnreadCount($tracking->conversations($user)->select([
+        $conversations = $tracking->inboxOrder($tracking->conversations($user)->select([
             'id', 'service_id', 'client_user_id', 'service_title', 'status', 'created_at', 'updated_at']), $user)
-            ->withMax('messages as latest_message_id', 'id')->orderByRaw('CASE WHEN unread_messages_count > 0 THEN 0 ELSE 1 END')
-            ->orderByDesc('latest_message_id')->orderByDesc('id')->paginate(12);
+            ->paginate(12);
 
         return view('conversations.index', compact('conversations'));
     }
@@ -32,7 +31,9 @@ class ConversationController extends Controller
 
             return redirect()->to($detailUrl, 303)->with('success', 'Lectura actualizada.');
         } catch (InquiryReadFailure $exception) {
-            if ($request->expectsJson()) return response()->json(['message' => $exception->getMessage()], $exception->status);
+            if ($request->expectsJson()) {
+                return response()->json(['message' => $exception->getMessage()], $exception->status);
+            }
 
             return response()->view('conversations.read-error', ['message' => $exception->getMessage(), 'detailUrl' => $detailUrl], $exception->status);
         }
