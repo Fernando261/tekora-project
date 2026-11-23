@@ -119,7 +119,7 @@
                   <input type="radio" name="method" value="card" checked data-b32-method>
                   <span class="b32-method-surface"><span class="b32-method-icon" aria-hidden="true">▱</span><strong>Tarjeta</strong><small>Débito o crédito de prueba</small></span>
                 </label>
-                <label class="b32-method-option">
+                <label class="b32-method-option" data-b32-cash-option hidden>
                   <input type="radio" name="method" value="cash" data-b32-method>
                   <span class="b32-method-surface"><span class="b32-method-icon" aria-hidden="true">◇</span><strong>Efectivo</strong><small>Entrega en persona</small></span>
                 </label>
@@ -161,6 +161,13 @@
               <div class="co-form-total"><span>Importe acordado</span><strong>{{ $formattedAmount }}</strong></div>
               <button class="co-primary b32-primary" type="submit" data-b32-submit>Registrar selección de prueba <span aria-hidden="true">→</span></button>
               <p class="co-local-note"><span aria-hidden="true">◈</span> El servidor valida la retención antes de guardar el resultado.</p>
+            </form>
+
+            <form class="b32-cash-fallback" method="POST" action="{{ route('checkout.local.submit', $reservation) }}" data-b32-cash-fallback>
+              @csrf
+              <input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">
+              <input type="hidden" name="method" value="cash">
+              <button class="co-primary b32-primary" type="submit">Registrar efectivo de prueba</button>
             </form>
           </section>
         @else

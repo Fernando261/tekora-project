@@ -133,7 +133,8 @@ async def run():
             for _ in range(2)
         ]
         cp, pp = [await c.new_page() for c in contexts]
-        for page in [cp, pp]:
+
+        def observe(page):
             page.set_default_timeout(20000)
             page.on("pageerror", lambda e: errors.append(str(e)))
             page.on(
@@ -151,6 +152,9 @@ async def run():
                 ),
             )
 
+        for page in [cp, pp]:
+            observe(page)
+
         async def nav(page, path):
             response = await page.goto(path if path.startswith("http") else base + path)
             assert response.status == 200, (path, response.status)
@@ -160,15 +164,16 @@ async def run():
             await page.get_by_role("button", name=name, exact=True).click()
             await page.wait_for_load_state("networkidle")
 
-        async def login(page, role):
+        async def login(page, email, password):
             await nav(page, "/login")
-            await page.locator("[name=email]").fill(fixture[role + "_email"])
-            await page.locator("[name=password]").fill(fixture[role + "_password"])
+            await page.locator("[name=email]").fill(email)
+            await page.locator("[name=password]").fill(password)
             await press(page, "Entrar a mi cuenta")
 
         async def shot(page, name, width):
             await page.set_viewport_size({"width": width, "height": 1000})
             await page.wait_for_timeout(100)
+            await page.evaluate("window.scrollTo(0, 0)")
             dimensions = await page.evaluate(
                 "({width:innerWidth,scroll:document.documentElement.scrollWidth})"
             )
@@ -184,29 +189,84 @@ async def run():
             for width in [320, 375, 430, 768, 1024, 1440, 2048]:
                 await shot(page, name, width)
 
-        await login(pp, "provider")
-        await login(cp, "client")
-        await nav(pp, "/cuenta/servicios/crear")
-        await pp.locator("#title").fill("Sesión digital W7.1 · datos sintéticos")
-        await pp.locator("#description").fill(
-            "Asesoría digital ficticia para demostrar contratación, acuerdo y seguimiento, sin pagos reales."
+        async def publish_and_request(title, capture_catalog=False):
+            await nav(pp, "/cuenta/servicios/crear")
+            await pp.locator("#title").fill(title)
+            await pp.locator("#description").fill(
+                "Asesoría digital ficticia para demostrar contratación, acuerdo y seguimiento, sin pagos reales."
+            )
+            await pp.locator("#service_category_id").select_option(index=1)
+            await pp.locator("#modality").select_option("remote")
+            await pp.locator("#status").select_option("published")
+            await pp.locator("#price_mxn").fill("1000.00")
+            await press(pp, "Guardar servicio")
+            await nav(cp, "/servicios")
+            if capture_catalog:
+                await widths(cp, "01-catalogo")
+            await cp.get_by_role("link", name=title, exact=True).click()
+            await cp.get_by_role("link", name="Solicitar servicio", exact=False).click()
+            await cp.locator("#message").fill(
+                "Necesito una sesión ficticia para revisar mi proyecto de demostración."
+            )
+            await press(cp, "Confirmar y enviar solicitud")
+            return cp.url.split("#")[0]
+
+        async def propose_and_hold(inquiry, time):
+            await cp.locator(".cj-next-action a.account-button").click()
+            await cp.locator("#reservation-quote").select_option(index=1)
+            await cp.locator("#reservation-date").fill(date)
+            await cp.locator("#reservation-time").fill(time)
+            await press(cp, "Enviar propuesta de horario")
+            assert cp.url.split("#")[0] == inquiry, await cp.locator("main").inner_text()
+            await nav(pp, inquiry)
+            await press(pp, "Aceptar propuesta y retener 15 minutos")
+
+        provider_email = "prestador-w71@example.test"
+        provider_password = secrets.token_urlsafe(24)
+        await nav(pp, "/registro")
+        await widths(pp, "00-registro")
+        await pp.locator("#name").fill("Alex · Prestador W7.1")
+        await pp.locator("#age").fill("30")
+        await pp.locator("#gender").select_option("Prefiero no decirlo")
+        await pp.locator('[name=intent][value=client]').check()
+        await pp.locator("#email").fill(provider_email)
+        await pp.locator("#password").fill(provider_password)
+        await pp.locator("#password_confirmation").fill("confirmacion-distinta")
+        await press(pp, "Crear mi cuenta única")
+        await pp.locator("#password_confirmation-error").wait_for()
+        await shot(pp, "00-registro-validacion", 375)
+        await pp.locator("#password").fill(provider_password)
+        await pp.locator("#password_confirmation").fill(provider_password)
+        await press(pp, "Crear mi cuenta única")
+        assert pp.url.split("?")[0] == base + "/login"
+        await login(pp, provider_email, provider_password)
+        await pp.get_by_role("link", name="Convertirme en prestador", exact=True).click()
+        await press(pp, "Activar Prestador y completar mi perfil")
+        await pp.locator("#display_name").fill("Estudio Digital W7.1")
+        await pp.locator("#headline").fill("Asesoría y soporte digital")
+        await pp.locator("#bio").fill("Perfil sintético para el recorrido de presentación.")
+        await press(pp, "Crear mi perfil")
+        await pp.get_by_role("button", name="Guardar cambios").wait_for()
+        await widths(pp, "00-perfil-profesional")
+        await pp.get_by_role("link", name="Panel del prestador", exact=True).click()
+        await pp.get_by_role("heading", name="Estudio Digital W7.1").wait_for()
+        await nav(pp, "/cuenta/disponibilidad")
+        for day in await pp.locator(".availability-day").all():
+            await day.locator('input[type=time]').nth(0).fill("08:00")
+            await day.locator('input[type=time]').nth(1).fill("18:00")
+        await press(pp, "Guardar disponibilidad")
+        await pp.get_by_text("Disponibilidad informativa guardada.", exact=True).wait_for()
+        await widths(pp, "00-disponibilidad")
+        await login(cp, fixture["client_email"], fixture["client_password"])
+        facts["registration_activation_profile_and_availability"] = True
+        date = (
+            (now + datetime.timedelta(days=4))
+            .astimezone(ZoneInfo("America/Mexico_City"))
+            .date()
+            .isoformat()
         )
-        await pp.locator("#service_category_id").select_option(index=1)
-        await pp.locator("#modality").select_option("remote")
-        await pp.locator("#status").select_option("published")
-        await pp.locator("#price_mxn").fill("1000.00")
-        await press(pp, "Guardar servicio")
-        await nav(cp, "/servicios")
-        await widths(cp, "01-catalogo")
-        await cp.get_by_role(
-            "link", name="Sesión digital W7.1 · datos sintéticos", exact=True
-        ).click()
-        await cp.get_by_role("link", name="Solicitar servicio", exact=False).click()
-        await cp.locator("#message").fill(
-            "Necesito una sesión ficticia para revisar mi proyecto de demostración."
-        )
-        await press(cp, "Confirmar y enviar solicitud")
-        inquiry = cp.url.split("#")[0]
+
+        inquiry = await publish_and_request("Sesión digital W7.1 · datos sintéticos", capture_catalog=True)
         await widths(cp, "02-solicitud-cliente")
         await nav(pp, inquiry)
         await widths(pp, "03-solicitud-prestador")
@@ -220,20 +280,7 @@ async def run():
         await cp.locator("[name=acknowledge]").check()
         await widths(cp, "04-cotizacion")
         await press(cp, "Aceptar cotización")
-        await cp.locator(".cj-next-action a.account-button").click()
-        await cp.locator("#reservation-quote").select_option(index=1)
-        date = (
-            (now + datetime.timedelta(days=4))
-            .astimezone(ZoneInfo("America/Mexico_City"))
-            .date()
-            .isoformat()
-        )
-        await cp.locator("#reservation-date").fill(date)
-        await cp.locator("#reservation-time").fill("12:00")
-        await press(cp, "Enviar propuesta de horario")
-        assert cp.url.split("#")[0] == inquiry, await cp.locator("main").inner_text()
-        await nav(pp, inquiry)
-        await press(pp, "Aceptar propuesta y retener 15 minutos")
+        await propose_and_hold(inquiry, "12:00")
         await widths(pp, "05-hold-prestador")
         await nav(cp, inquiry)
         await widths(cp, "06-hold-cliente")
@@ -245,6 +292,10 @@ async def run():
         ).get_attribute("href")
         assert facts["next_target_before_choice"].endswith("/checkout")
         await cp.locator(".cj-next-action a.account-button").click()
+        await cp.get_by_role("radio", name="Efectivo").check()
+        assert await cp.locator("#b32-number").is_disabled()
+        assert not await cp.locator("[data-b32-cash-fallback]").is_visible()
+        await cp.get_by_role("radio", name="Tarjeta").check()
         await widths(cp, "07-checkout-inicial")
         # Two negative outcomes and recovery use ordinary server forms, not JS success.
         for number, expected in [
@@ -295,25 +346,44 @@ async def run():
             ).count()
             == 0
         )
-        cash_url = (
-            base
-            + "/cuenta/reservas/"
-            + str(fixture["held_reservation_id"])
-            + "/checkout"
-        )
-        await nav(cp, cash_url)
-        await cp.get_by_role("radio", name="Efectivo").check()
-        await cp.locator("[data-b32-submit]").click()
-        await cp.get_by_role(
+        cash_inquiry = await publish_and_request("Segunda sesión · efectivo de prueba")
+        await nav(pp, cash_inquiry)
+        await press(pp, "Aceptar solicitud")
+        await nav(cp, cash_inquiry)
+        await press(cp, "Consultar nueva cotización")
+        await cp.locator("[name=acknowledge]").check()
+        await press(cp, "Aceptar cotización")
+        await propose_and_hold(cash_inquiry, "15:00")
+        await nav(cp, cash_inquiry)
+        cash_url = await cp.locator(".cj-next-action a.account-button").get_attribute("href")
+        assert cash_url.endswith("/checkout")
+
+        # Reuse both signed-in identities in separate contexts with scripts disabled.
+        no_js = [
+            await browser.new_context(
+                storage_state=await ctx.storage_state(),
+                java_script_enabled=False,
+                viewport={"width": 375, "height": 1000},
+            )
+            for ctx in contexts
+        ]
+        contexts.extend(no_js)
+        cash_client, cash_provider = [await ctx.new_page() for ctx in no_js]
+        observe(cash_client)
+        observe(cash_provider)
+        await nav(cash_client, cash_url)
+        assert not await cash_client.get_by_role("radio", name="Efectivo").count()
+        await press(cash_client, "Registrar efectivo de prueba")
+        await cash_client.get_by_role(
             "heading", name="Efectivo pendiente de recepción"
         ).wait_for()
-        await shot(cp, "13-efectivo-pendiente", 375)
-        await nav(pp, "/cuenta/solicitudes/" + str(fixture["held_inquiry_id"]))
-        await pp.get_by_role("link", name="Consultar recepción de efectivo").click()
-        await pp.get_by_role("heading", name="Pendiente de recepción").wait_for()
-        await widths(pp, "14-efectivo-prestador")
-        await press(pp, "Registrar recepción de efectivo")
-        await pp.get_by_role(
+        await shot(cash_client, "13-efectivo-pendiente", 375)
+        await nav(cash_provider, cash_inquiry)
+        await cash_provider.get_by_role("link", name="Consultar recepción de efectivo").click()
+        await cash_provider.get_by_role("heading", name="Pendiente de recepción").wait_for()
+        await widths(cash_provider, "14-efectivo-prestador")
+        await press(cash_provider, "Registrar recepción de efectivo")
+        await cash_provider.get_by_role(
             "heading", name="Recepción de prueba registrada"
         ).wait_for()
         await nav(cp, cash_url)
@@ -324,7 +394,7 @@ async def run():
             > 0
         )
         await shot(cp, "15-efectivo-recibido", 375)
-        facts["cash_pending_and_received"] = True
+        facts["cash_pending_and_received_without_javascript"] = True
         # Only this explicit browser-test process reads this synthetic test clock.
         ends = (
             datetime.datetime.fromisoformat(date + "T13:00:00")
@@ -343,11 +413,11 @@ async def run():
         clock((ends + datetime.timedelta(seconds=1)).isoformat())
         await nav(pp, inquiry)
         if "/login" in pp.url:
-            await login(pp, "provider")
+            await login(pp, provider_email, provider_password)
             await nav(pp, inquiry)
         await nav(cp, inquiry)
         if "/login" in cp.url:
-            await login(cp, "client")
+            await login(cp, fixture["client_email"], fixture["client_password"])
             await nav(cp, inquiry)
         if not await pp.get_by_role(
             "button", name="Marcar como realizado", exact=True
@@ -394,7 +464,24 @@ async def run():
         facts["reduced_motion"] = await cp.evaluate(
             'matchMedia("(prefers-reduced-motion: reduce)").matches'
         )
+        await nav(pp, "/cuenta/prestador/dashboard")
+        await pp.get_by_text("1 completadas en 30 días.", exact=False).wait_for()
+        await widths(pp, "17-dashboard-prestador")
+        await nav(cp, "/cuenta/cliente")
+        await widths(cp, "18-dashboard-cliente")
+        await nav(cash_provider, "/cuenta/prestador/dashboard")
+        if "/login" in cash_provider.url:
+            await login(cash_provider, provider_email, provider_password)
+            await nav(cash_provider, "/cuenta/prestador/dashboard")
+        await cash_provider.locator("#dashboard-period").select_option("7")
+        await press(cash_provider, "Aplicar")
+        await cash_provider.get_by_text("1 completadas en 7 días.", exact=False).wait_for()
+        await cash_provider.get_by_text("Consultar datos por día", exact=True).click()
+        await cash_provider.get_by_role("table", name="Reservas completadas por fecha local").wait_for()
+        await shot(cash_provider, "19-dashboard-sin-javascript", 375)
+        facts["dashboard_updated_and_filter_without_javascript"] = True
         flow = [
+            "registro, login, activacion, perfil y disponibilidad",
             "publicacion web",
             "catalogo",
             "solicitud nueva",

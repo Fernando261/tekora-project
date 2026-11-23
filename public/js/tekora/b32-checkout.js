@@ -91,6 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+
+    const cashOption = form.querySelector('[data-b32-cash-option]');
+    const cashFallback = root.querySelector('[data-b32-cash-fallback]');
+    if (cashOption && cashFallback) {
+      cashOption.hidden = false;
+      cashFallback.hidden = true;
+    }
   }
 
   // Same subtle interaction as the original 3D card; entirely decorative.

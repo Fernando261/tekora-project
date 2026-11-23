@@ -4,6 +4,9 @@ namespace Tests\Feature;
 
 use App\Payments\LocalCheckoutAttemptStore;
 use App\Services\ReservationWorkflow;
+use DOMDocument;
+use DOMElement;
+use DOMXPath;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\Support\SlotHoldFixtures;
@@ -103,9 +106,19 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
     public function test_provider_receives_cash_and_client_cannot_use_provider_command(): void
     {
         [$client, $provider, $reservation] = $this->held();
-        $this->actingAs($client, 'web')->post(route('checkout.local.submit', $reservation->id), [
-            'method' => 'cash', 'idempotency_key' => (string) Str::uuid(),
-        ])->assertRedirect();
+        $checkout = $this->actingAs($client, 'web')->get(route('checkout.local.show', $reservation->id))->assertOk();
+        $document = new DOMDocument;
+        $document->loadHTML($checkout->getContent(), LIBXML_NOERROR | LIBXML_NOWARNING);
+        $form = (new DOMXPath($document))->query('//form[@data-b32-cash-fallback]')->item(0);
+        $this->assertInstanceOf(DOMElement::class, $form);
+        $this->assertSame(route('checkout.local.submit', $reservation->id), $form->getAttribute('action'));
+        $fields = [];
+        foreach ($form->getElementsByTagName('input') as $field) {
+            $fields[$field->getAttribute('name')] = $field->getAttribute('value');
+        }
+        $this->assertEqualsCanonicalizing(['_token', 'method', 'idempotency_key'], array_keys($fields));
+        $this->assertSame('cash', $fields['method']);
+        $this->post($form->getAttribute('action'), $fields)->assertRedirect();
         $this->post(route('checkout.local.cash.receive', $reservation->id))->assertForbidden();
         $this->actingAs($provider, 'web')->get(route('checkout.local.cash', $reservation->id))
             ->assertOk()->assertSee('Pendiente de recepción')
@@ -122,7 +135,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
         [$client, $provider, $reservation] = $this->held();
         $inquiryUrl = route('inquiries.show', $reservation->service_inquiry_id);
         $clientPage = $this->actingAs($client, 'web')->get($inquiryUrl)->assertOk()
-            ->assertSee('Elegir método de pago')
+            ->assertSee('Elegir método de pago de prueba')
             ->assertSee('data-journey-next="choose_test_checkout"', false)
             ->assertDontSee('Explorar el pago (DEMO)');
         $this->assertStringContainsString(
@@ -150,7 +163,7 @@ class LocalIntegratedCheckoutHttpTest extends TestCase
 
         $this->get(route('reservations.show', $reservation->id))->assertOk()
             ->assertSee('Antes de confirmar definitivamente tu reserva')
-            ->assertSee('Elegir método de pago')
+            ->assertSee('Elegir método de pago de prueba')
             ->assertDontSee('data-hold-confirm', false);
 
         $this->patch(route('reservations.commit', $reservation->id), [

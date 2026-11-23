@@ -29,7 +29,7 @@
     <div class="account-note" role="status" data-b32-checkout-required>
       Antes de confirmar definitivamente tu reserva, elige un método de pago de prueba.
       @unless($journeyReturn)
-        <a href="{{ route('checkout.local.show', $reservation) }}" rel="noreferrer" referrerpolicy="no-referrer">Elegir método de pago</a>
+        <a href="{{ route('checkout.local.show', $reservation) }}" rel="noreferrer" referrerpolicy="no-referrer">Elegir método de pago de prueba</a>
       @endunless
     </div>
   @endif
