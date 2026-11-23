@@ -108,6 +108,14 @@ final class MobileSyntheticCheckoutApiTest extends TestCase
             ->assertJsonPath('data.selection_verified', false)
             ->assertJsonPath('data.can_choose', true)
             ->assertJsonPath('data.can_confirm', false);
+        // Malformed transports must never create a checkout attempt.
+        $this->getJson($url.'?method=cash', $this->bearer($client))->assertUnprocessable();
+        $this->postJson($url.'?method=cash', [
+            'method' => 'cash', 'idempotency_key' => (string) Str::uuid(),
+        ], $this->bearer($client))->assertUnprocessable();
+        $this->post($url, ['method' => 'cash', 'idempotency_key' => (string) Str::uuid()],
+            $this->bearer($client) + ['Accept' => 'application/json'])->assertUnprocessable();
+        $this->assertDatabaseCount('synthetic_checkout_attempts', 0);
         $this->postJson($url, ['method' => 'cash', 'idempotency_key' => (string) Str::uuid(), 'amount_cents' => 1],
             $this->bearer($client))->assertUnprocessable();
         $this->postJson($url, [
