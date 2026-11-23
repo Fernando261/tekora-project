@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tekora API móvil",
-    "version": "1.4.0",
-    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento. M1 agrega notificaciones del solicitante: filtro SQL por destinatario, rol cliente vigente, evento y propiedad antes de contar/ordenar/paginar. Cuentas duales excluyen avisos exclusivos de prestador. IDs compuestos por origen. Lectura idempotente sin cambiar negocios; errores de almacenamiento nunca se convierten en cero o éxito.",
+    "version": "1.5.0",
+    "description": "Etapa 9B. JSON UTF-8 incluso sin Accept, salvo la descarga binaria de foto propia en M2.8. Todas las respuestas usan Cache-Control: no-store, private y X-Content-Type-Options: nosniff. Solo Bearer real para endpoints privados; las cookies web no lo sustituyen. Se revalidan rol y permisos actuales de solicitante. Las cuentas duales obtienen solo experiencia client. Los parámetros adicionales se rechazan con 422 en login y consultas públicas. Orden de servicios: id descendente; perfiles: display_name, id ascendente. Las páginas fuera del total devuelven data vacío. El texto es texto plano; el cliente no debe interpretarlo como HTML. 9C agrega operaciones privadas de solicitante con conflictos 409. Todas restringen ownership además de policies, incluso para cuentas duales. Los campos desconocidos se rechazan. Límite común nuevo: 120/minuto por usuario Sanctum y 480/IP; límites de escritura adicionales por operación. El nombre legacy de ability client:read no sustituye permisos/rol actuales, que se revalidan en cada petición y workflow. B2 incorpora el protocolo quoted-slot-hold-v1 para propuestas nuevas con precio: quote_id aceptada obligatoria, aceptación del prestador por web, retención fija de 900 segundos y confirmación final del cliente por PATCH /reservations/{reservation}/commit. La cohorte sin cotización conserva sus respuestas y flujo anteriores. Clientes que no soportan este protocolo deben mostrar la URL web de cotizaciones/opciones; no hay fallback que omita la retención. B3.0 añade API de cotizaciones y contexto comercial compartido, solo preparación sin pagos. La emisión y aceptación son las mismas que web. El precio informativo del catálogo se añade en price; el snapshot vinculante de una cotización no cambia. El contexto nunca habilita el inicio de pagos; no existe API de pasarela, intentos, tokenización o webhooks en este incremento. M1 agrega notificaciones del solicitante: filtro SQL por destinatario, rol cliente vigente, evento y propiedad antes de contar/ordenar/paginar. Cuentas duales excluyen avisos exclusivos de prestador. IDs compuestos por origen. Lectura idempotente sin cambiar negocios; errores de almacenamiento nunca se convierten en cero o éxito. M2.8 agrega registro por correo, recuperación y perfil propio sin cambiar login ni /me.",
     "license": {
       "name": "MIT",
       "identifier": "MIT"
@@ -16,6 +16,620 @@
     }
   ],
   "paths": {
+    "/auth/register": {
+      "post": {
+        "operationId": "requestMobileRegistration",
+        "summary": "Solicitar código de registro",
+        "security": [],
+        "description": "Envía un código de registro por correo. La respuesta no confirma la existencia de una cuenta.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28EmailInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitud aceptada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register/confirm": {
+      "post": {
+        "operationId": "confirmMobileRegistration",
+        "summary": "Confirmar registro del solicitante",
+        "security": [],
+        "description": "El código está asociado al correo y vence en 30 minutos. Para una cuenta existente la respuesta es idéntica y no se cambian sus datos. No emite un token Sanctum.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28RegistrationConfirmationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitud aceptada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "operationId": "requestMobilePasswordReset",
+        "summary": "Solicitar código de recuperación",
+        "security": [],
+        "description": "La respuesta es uniforme. Se envía el código si la dirección corresponde a un solicitante elegible.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28EmailInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitud aceptada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "operationId": "resetMobilePassword",
+        "summary": "Restablecer contraseña central",
+        "security": [],
+        "description": "Consume el código del broker central y revoca los tokens Sanctum del titular. Inicia sesión de nuevo tras el éxito.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28PasswordResetInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28IdentityNotice"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/profile": {
+      "get": {
+        "operationId": "getMobileProfile",
+        "summary": "Consultar el perfil propio",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28Profile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateMobileProfileName",
+        "summary": "Actualizar el nombre propio",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/M28NameInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28Profile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/photo": {
+      "get": {
+        "operationId": "getMobileProfilePhoto",
+        "summary": "Descargar la foto propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bytes de la foto del solicitante.",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Foto disponible solo si la cuenta tiene una imagen compatible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "setMobileProfilePhoto",
+        "summary": "Actualizar la foto propia",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/M28PhotoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operación correcta.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/M28Profile"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token requerido o inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "La cuenta o token no tiene permisos de solicitante.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Cuerpo o código no válido. El error usa error.fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite alcanzado. Revisar Retry-After.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Operación temporalmente no disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "operationId": "login",
@@ -2866,6 +3480,204 @@
       }
     },
     "schemas": {
+      "M28EmailInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "pattern": "^[\\x00-\\x7F]+$",
+            "description": "Correo ASCII. Se normaliza a minúsculas."
+          }
+        }
+      },
+      "M28RegistrationConfirmationInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "token",
+          "password",
+          "password_confirmation",
+          "name",
+          "age",
+          "gender"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "pattern": "^[\\x00-\\x7F]+$",
+            "description": "Correo ASCII. Se normaliza a minúsculas."
+          },
+          "token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "writeOnly": true
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8,
+            "maxLength": 72,
+            "writeOnly": true,
+            "description": "Máximo 72 bytes UTF-8. Sin caracteres nulos."
+          },
+          "password_confirmation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 72,
+            "format": "password",
+            "writeOnly": true,
+            "description": "Debe ser igual a password."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "age": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 255
+          },
+          "gender": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "M28PasswordResetInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "token",
+          "password",
+          "password_confirmation"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "pattern": "^[\\x00-\\x7F]+$",
+            "description": "Correo ASCII. Se normaliza a minúsculas."
+          },
+          "token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "writeOnly": true
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 8,
+            "maxLength": 72,
+            "writeOnly": true,
+            "description": "Máximo 72 bytes UTF-8. Sin caracteres nulos."
+          },
+          "password_confirmation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 72,
+            "format": "password",
+            "writeOnly": true,
+            "description": "Debe ser igual a password."
+          }
+        }
+      },
+      "M28IdentityNotice": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "M28Profile": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "email",
+          "age",
+          "gender",
+          "email_verified",
+          "photo_url"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "email_verified": {
+            "type": "boolean"
+          },
+          "photo_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Ruta relativa al origen. La descarga requiere Bearer."
+          }
+        }
+      },
+      "M28NameInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "M28PhotoInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "photo"
+        ],
+        "properties": {
+          "photo": {
+            "type": "string",
+            "format": "binary",
+            "description": "JPEG, PNG o WebP. Máximo 2 MiB."
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "additionalProperties": false,

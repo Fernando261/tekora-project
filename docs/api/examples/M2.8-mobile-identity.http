@@ -1,0 +1,64 @@
+@base = http://127.0.0.1:8013/api/v1
+@email = solicitante@example.test
+@bearer = REEMPLAZAR_TOKEN_SANCTUM
+@registrationCode = REEMPLAZAR_CODIGO_REGISTRO_DEL_CORREO
+@recoveryCode = REEMPLAZAR_CODIGO_RECUPERACION_DEL_CORREO
+@password = REEMPLAZAR_CONTRASENA_DE_PRUEBA
+@newPassword = REEMPLAZAR_NUEVA_CONTRASENA_DE_PRUEBA
+
+### Solicitar un código de registro
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{"email":"{{email}}"}
+
+### Confirmar usando el código recibido
+POST {{base}}/auth/register/confirm
+Content-Type: application/json
+
+{"email":"{{email}}","token":"{{registrationCode}}","name":"Solicitante de prueba","age":30,"gender":"Prefiero no decirlo","password":"{{password}}","password_confirmation":"{{password}}"}
+
+### Inicio de sesión existente
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{"email":"{{email}}","password":"{{password}}","device_name":"dispositivo de prueba"}
+
+### Solicitar recuperación
+POST {{base}}/auth/forgot-password
+Content-Type: application/json
+
+{"email":"{{email}}"}
+
+### Restablecer contraseña y revocar tokens
+POST {{base}}/auth/reset-password
+Content-Type: application/json
+
+{"email":"{{email}}","token":"{{recoveryCode}}","password":"{{newPassword}}","password_confirmation":"{{newPassword}}"}
+
+### Consultar el perfil con un token vigente
+GET {{base}}/me/profile
+Authorization: Bearer {{bearer}}
+
+### Actualizar nombre
+PATCH {{base}}/me/profile
+Authorization: Bearer {{bearer}}
+Content-Type: application/json
+
+{"name":"Nombre nuevo de prueba"}
+
+### Actualizar foto con una imagen sintética local
+POST {{base}}/me/photo
+Authorization: Bearer {{bearer}}
+Content-Type: multipart/form-data; boundary=tekoraFixture
+
+--tekoraFixture
+Content-Disposition: form-data; name="photo"; filename="sintetica.png"
+Content-Type: image/png
+
+< ./REEMPLAZAR_IMAGEN_SINTETICA.png
+--tekoraFixture--
+
+### Descargar la foto propia
+GET {{base}}/me/photo
+Authorization: Bearer {{bearer}}
