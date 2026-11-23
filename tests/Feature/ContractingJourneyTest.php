@@ -306,7 +306,7 @@ class ContractingJourneyTest extends TestCase
         $new = json_decode(file_get_contents(base_path('docs/api/openapi.json')), true, flags: JSON_THROW_ON_ERROR);
         $added = $new['paths']['/inquiries/{inquiry}/journey']['get'];
         unset($new['paths']['/inquiries/{inquiry}/journey']);
-        foreach ($this->m28ApiInventory() as $route) {
+        foreach ($this->mobileClientExtensions() as $route) {
             $path = substr($route['uri'], strlen('api/v1'));
             unset($new['paths'][$path][strtolower($route['methods'][0])]);
             if (empty($new['paths'][$path])) {

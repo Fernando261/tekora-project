@@ -29,6 +29,7 @@ final class ApiError
             $exception instanceof \App\Exceptions\InquiryMessageUnavailable => 503,
             $exception instanceof \App\Exceptions\InquiryReadFailure,
             $exception instanceof \App\Exceptions\NotificationFailure,
+            $exception instanceof \App\Exceptions\ReviewFailure,
             $exception instanceof \App\Exceptions\ReservationFailure => $exception->status,
             $exception instanceof AuthenticationException => 401,
             $exception instanceof AuthorizationException => 403,

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\IdentityController;
 use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\QuotesController;
+use App\Http\Controllers\Api\V1\ReviewsController;
 use App\Http\Middleware\MobileClient;
 
 trait CommercialApiInventoryAssertions
@@ -39,9 +40,10 @@ trait CommercialApiInventoryAssertions
                 'middleware' => $route->gatherMiddleware(), 'wheres' => $route->wheres];
         }
         ksort($actual);
-        $m28 = $this->m28ApiInventory();
-        $this->assertSame($m28, array_intersect_key($actual, $m28));
-        $actual = array_diff_key($actual, $m28);
+        $extensions = $this->mobileClientExtensions();
+        ksort($extensions);
+        $this->assertSame($extensions, array_intersect_key($actual, $extensions));
+        $actual = array_diff_key($actual, $extensions);
         // Preserve every original method, URI, action, middleware and route constraint.
         $this->assertSame($baseline['routes'], array_diff_key($actual, $approved));
         $this->assertCount(32, $actual);
@@ -88,6 +90,33 @@ trait CommercialApiInventoryAssertions
                 'action' => ProfileController::class.'@'.$action, 'middleware' => $middleware, 'wheres' => []];
         }
         ksort($routes);
+
+        return $routes;
+    }
+
+    protected function mobileClientExtensions(): array
+    {
+        return $this->m28ApiInventory() + $this->m29ApiInventory();
+    }
+
+    protected function m29ApiInventory(): array
+    {
+        $routes = [];
+        foreach ([
+            'services.reviews.index' => ['GET', 'services/{service}/reviews', 'forService', 'service', true],
+            'providers.reviews.index' => ['GET', 'providers/{provider}/reviews', 'forProvider', 'provider', true],
+            'reviews.index' => ['GET', 'reviews', 'index', null, false],
+            'reviews.show' => ['GET', 'reviews/{review}', 'show', 'review', false],
+            'reviews.store' => ['POST', 'reservations/{reservation}/review', 'store', 'reservation', false],
+            'reviews.withdraw' => ['PATCH', 'reviews/{review}/withdraw', 'withdraw', 'review', false],
+        ] as $name => [$method, $uri, $action, $parameter, $public]) {
+            $middleware = $public ? ['api', 'throttle:mobile-catalog'] : ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
+            if ($method !== 'GET') {
+                $middleware[] = 'throttle:mobile-review-writes';
+            }
+            $routes['api.v1.'.$name] = ['uri' => 'api/v1/'.$uri, 'methods' => $method === 'GET' ? ['GET', 'HEAD'] : [$method],
+                'action' => ReviewsController::class.'@'.$action, 'middleware' => $middleware, 'wheres' => $parameter === null ? [] : [$parameter => '[0-9]+']];
+        }
 
         return $routes;
     }

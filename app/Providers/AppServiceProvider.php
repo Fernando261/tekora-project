@@ -34,7 +34,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         foreach (['mobile-private' => 120, 'mobile-inquiry-writes' => 5, 'mobile-message-writes' => 10,
-            'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10, 'mobile-quote-writes' => 10, 'mobile-profile-writes' => 10] as $name => $limit) {
+            'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10, 'mobile-quote-writes' => 10, 'mobile-profile-writes' => 10,
+            'mobile-review-writes' => 10] as $name => $limit) {
             RateLimiter::for($name, fn (Request $request) => [
                 Limit::perMinute($limit)->by($name.':actor:'.$request->user('sanctum')->id),
                 Limit::perMinute($limit * 4)->by($name.':ip:'.hash('sha256', $request->ip())),
