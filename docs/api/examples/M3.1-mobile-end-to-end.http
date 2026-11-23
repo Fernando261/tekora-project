@@ -1,0 +1,282 @@
+# Utiliza un laboratorio aislado con datos sintéticos y reemplaza las variables.
+# El recorrido automatizado prepara el prestador y controla el reloj en PHPUnit.
+# En el cliente HTTP, usa IDs, versión, fecha disponible y tokens de ese laboratorio.
+# Conserva cada UUID para repetir la misma intención. Cambia los UUID para una prueba nueva.
+@base = https://tekora-mobile-lab.example.test/api/v1
+@email = solicitante@example.test
+@password = synthetic-lab-password
+@registration = PEGAR_CODIGO_OPACO
+@recovery = PEGAR_CODIGO_DE_RECUPERACION
+@bearer = PEGAR_TOKEN_SANCTUM
+@service = 21
+@provider = 7
+@slug = soporte-tecnico
+@inquiry = 92
+@quote = 76c6309a-4b48-4ea5-a965-9335f1ba9768
+@reservation = 14
+@review = 19
+@readToken = PEGAR_EL_META_READ_TOKEN_DE_LA_PAGINA
+@noticeSource = inquiry
+@noticeId = 2
+@slotDate = 2030-01-07
+@slotTime = 09:00
+@availabilityRevision = 1
+@reservationVersion = 1
+@messageKey = c02c9803-3da0-4621-a697-87a1d808c28a
+@quoteKey = 75ea529c-5112-46ea-9cf2-490a40e81e18
+@proposalKey = e8ca8eb3-367a-42b7-923c-6549dfaae9eb
+@commitKey = 37ac71d7-9ea5-4dbf-996f-3ee5b7003331
+
+### Registro · 202 neutral
+POST {{base}}/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{"email":"{{email}}"}
+
+### Confirmar registro con el código completo · 202
+POST {{base}}/auth/register/confirm
+Content-Type: application/json
+Accept: application/json
+
+{"email":"{{email}}","token":"{{registration}}","name":"Solicitante de prueba","age":30,"gender":"Prefiero no decirlo","password":"{{password}}","password_confirmation":"{{password}}"}
+
+### Inicio de sesión · 201, copiar data.access_token para las peticiones privadas
+POST {{base}}/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{"email":"{{email}}","password":"{{password}}","device_name":"Android de laboratorio"}
+
+### Sesión y perfil
+GET {{base}}/me
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+GET {{base}}/me/profile
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Cambiar nombre
+PATCH {{base}}/me/profile
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"name":"Solicitante M3.1"}
+
+### Subir foto propia con un PNG sintético local
+POST {{base}}/me/photo
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: multipart/form-data; boundary=tekora-m31-test
+
+--tekora-m31-test
+Content-Disposition: form-data; name="photo"; filename="foto-sintetica.png"
+Content-Type: image/png
+
+< ./foto-sintetica.png
+--tekora-m31-test--
+
+### Descargar foto propia · bytes de imagen o 404
+GET {{base}}/me/photo
+Authorization: Bearer {{bearer}}
+
+### Inicio
+GET {{base}}/me/dashboard
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Catálogo y prestador
+GET {{base}}/categories
+Accept: application/json
+
+###
+GET {{base}}/services?category={{slug}}&modality=remote&q=computadora&page=1&per_page=12
+Accept: application/json
+
+###
+GET {{base}}/services/{{service}}
+Accept: application/json
+
+###
+GET {{base}}/providers/{{provider}}
+Accept: application/json
+
+###
+GET {{base}}/providers/{{provider}}/services?page=1&per_page=12
+Accept: application/json
+
+###
+GET {{base}}/providers/{{provider}}/reviews?page=1
+Accept: application/json
+
+###
+GET {{base}}/services/{{service}}/availability
+Accept: application/json
+
+### Abrir solicitud · 201 inicial, 200 si ya está activa
+POST {{base}}/services/{{service}}/inquiries
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"message":"Necesito un diagnóstico de mi computadora."}
+
+### Seguir solicitud · el prestador acepta previamente en web
+GET {{base}}/inquiries/{{inquiry}}/journey
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Enviar mensaje · repetir con el mismo cuerpo y UUID si se pierde la respuesta
+POST {{base}}/inquiries/{{inquiry}}/messages
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"body":"¿Qué detalles necesitas del equipo?","idempotency_key":"{{messageKey}}"}
+
+### Leer la página después de que el prestador responda en web
+GET {{base}}/inquiries/{{inquiry}}/messages
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Confirmar solo la página mostrada cuando meta.read_token esté presente
+POST {{base}}/inquiries/{{inquiry}}/messages/read
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"read_token":"{{readToken}}"}
+
+### Cotizaciones · una emisión inicial o repetida con el mismo UUID devuelve 200
+GET {{base}}/inquiries/{{inquiry}}/quotes
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+POST {{base}}/inquiries/{{inquiry}}/quotes
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"idempotency_key":"{{quoteKey}}"}
+
+### Contrastar importe y aceptar
+GET {{base}}/quotes/{{quote}}
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+POST {{base}}/quotes/{{quote}}/accept
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"acknowledge":true}
+
+### Horarios · obtener revisión y rango, luego elegir horario futuro
+GET {{base}}/inquiries/{{inquiry}}/reservation-options
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+POST {{base}}/inquiries/{{inquiry}}/reservations
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"quote_id":"{{quote}}","date":"{{slotDate}}","time":"{{slotTime}}","availability_revision":{{availabilityRevision}},"idempotency_key":"{{proposalKey}}"}
+
+### Retención · el prestador acepta el horario en web
+GET {{base}}/reservations/{{reservation}}
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+GET {{base}}/reservations/{{reservation}}/checkout-context
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Confirmar la reserva B2 mientras sea elegible · 200, sin pago en flujo normal
+PATCH {{base}}/reservations/{{reservation}}/commit
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"version":{{reservationVersion}},"idempotency_key":"{{commitKey}}"}
+
+### Avisos · usar source_type y source_id del aviso elegido
+GET {{base}}/notifications?per_page=12
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+POST {{base}}/notifications/{{noticeSource}}/{{noticeId}}/read
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+###
+GET {{base}}/notifications/unread-count
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Reseñar tras la realización explícita del servicio en web
+POST {{base}}/reservations/{{reservation}}/review
+Authorization: Bearer {{bearer}}
+Accept: application/json
+Content-Type: application/json
+
+{"rating":5,"comment":"El diagnóstico fue claro."}
+
+###
+GET {{base}}/services/{{service}}/reviews?page=1
+Accept: application/json
+
+###
+GET {{base}}/reviews?page=1
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+PATCH {{base}}/reviews/{{review}}/withdraw
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Historial y dashboard al cerrar operativamente la solicitud
+GET {{base}}/inquiries?status=completed
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+GET {{base}}/reservations?status=completed
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+###
+GET {{base}}/me/dashboard
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Cerrar sesión · el mismo Bearer devolverá 401 en rutas privadas
+POST {{base}}/auth/logout
+Authorization: Bearer {{bearer}}
+Accept: application/json
+
+### Recuperación de contraseña · escenario independiente con entrega habilitada
+POST {{base}}/auth/forgot-password
+Accept: application/json
+Content-Type: application/json
+
+{"email":"{{email}}"}
+
+###
+POST {{base}}/auth/reset-password
+Accept: application/json
+Content-Type: application/json
+
+{"email":"{{email}}","token":"{{recovery}}","password":"synthetic-new-password","password_confirmation":"synthetic-new-password"}

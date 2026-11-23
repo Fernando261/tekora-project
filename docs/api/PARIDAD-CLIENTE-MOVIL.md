@@ -1,6 +1,6 @@
 # Auditoría de paridad del cliente móvil
 
-Base auditada para M3.0 `c3fb2421991daecd3b5b05e54c38bcd4cbe10d69`, `main` después de la PR #55. La comparación cubrió las rutas de `routes/web.php`, `routes/api.php`, OpenAPI y los contratos hasta M2.9.
+Base auditada para M3.1 `6447fe67e581e63f5be70a2fe16b3833b37531f5`, `main` después de la PR #56. La comparación cubrió las rutas web, las 49 operaciones de API cargadas por Laravel, OpenAPI y los contratos hasta M3.0.
 
 | Función | Web y dominio | API del solicitante | Fase y evidencia |
 |---|---|---|---|
@@ -16,4 +16,4 @@ Base auditada para M3.0 `c3fb2421991daecd3b5b05e54c38bcd4cbe10d69`, `main` despu
 | Notificaciones | `routes/notifications.php`, `NotificationInbox` | Listado, contador y marca de lectura. | Disponible. `MobileNotificationsTest`, `MobileNotificationContractTest`. |
 | Checkout B3.2 | Demostración web local protegida. | M2.0 ofrece contexto comercial privado de solo lectura. | El checkout local queda fuera de la API pública. `LocalIntegratedCheckoutBoundaryTest`. |
 
-La [guía M2.9](M2.9-MOBILE-REVIEWS.md) documenta las reseñas. La [guía M3.0](M3.0-MOBILE-CATALOG-DASHBOARD.md) describe las lecturas de catálogo y del panel. La validación integral M3.1 queda pendiente.
+La [guía M2.9](M2.9-MOBILE-REVIEWS.md) documenta las reseñas. La [guía M3.0](M3.0-MOBILE-CATALOG-DASHBOARD.md) describe las lecturas de catálogo y del panel. La [validación M3.1](M3.1-MOBILE-INTEGRATION-VALIDATION.md) cubre el backend. La [matriz Android definitiva](M3.1-ANDROID-HANDOFF.md#matriz-de-pantallas-y-endpoints) vincula pantallas con los endpoints, sus respuestas y las pruebas. Quedan pendientes SMTP real, Android y conectividad en un entorno autorizado.

@@ -49,11 +49,11 @@ Usar `code` y `reference`, no interpretar textos ni construir URLs a partir de e
 | Historial de solicitud y horario | `history.inquiry`, `reservation.events`, `reservation.hold_events`, últimos cinco en `history.reservations`; listado de reservas existente para el resto |
 | Conversación y no leídos | `conversation`; mensajes, paginación y marcado explícito en endpoints existentes |
 | Realización y cierre operativo | `closure`, estado `completed`; no existe acción móvil de prestador |
-| Reseña disponible/publicada/retirada | `review` con estado y registro propio; crear/retirar continúa solo web (`mobile_execution_available=false`) |
+| Reseña disponible/publicada/retirada | `review` con estado y registro propio; desde M2.9, crear, consultar y retirar mediante la [API de reseñas](M2.9-MOBILE-REVIEWS.md) |
 | Notificaciones | Endpoints M1 existentes, sin cambios |
 | Pagos | Deshabilitados; no usar `/demo/checkout` como API |
 
-Los códigos de espera (`interaction=wait`) no representan comandos. Las referencias de reseña y las sugerencias que indiquen `mobile_execution_available=false` deben presentarse como información; no inventar endpoints ni permisos. La equivalencia de lectura está implementada; escribir reseñas desde móvil sigue siendo un faltante previo, fuera del alcance de este GET.
+Los códigos de espera (`interaction=wait`) no representan comandos. Presenta como información las sugerencias con `mobile_execution_available=false`. Desde M2.9, `write_review` enlaza al formulario con el ID de reserva y `view_review` a la reseña propia con su ID.
 
 Los estados informativos nunca autorizan una operación. Al enviar una confirmación se siguen usando la versión y clave idempotente del contrato B2; 409 requiere consultar otra vez. La realización solo aparece tras el registro explícito del prestador, no porque termine el horario. GET no cambia notificaciones, mensajes, reservas ni pagos.
 
