@@ -24,9 +24,24 @@ final class LocalIntegratedCheckoutController extends Controller
         $root = realpath(sys_get_temp_dir());
         $path = is_string($database) ? realpath($database) : false;
 
-        return (bool) ($root && $path && is_file($path)
+        $fixture = (bool) ($root && $path && is_file($path)
             && str_starts_with(str_replace('\\', '/', $path), str_replace('\\', '/', $root).'/tekora-b32-')
             && is_file(dirname($path).DIRECTORY_SEPARATOR.'.tekora-b32-synthetic'));
+        if ($fixture) {
+            return true;
+        }
+
+        // Explicit opt-in for the ORIGINAL local development app at :8000.
+        // Never enable on a VPS, production, LAN, or with an arbitrary database.
+        // This creates only labelled synthetic attempts; there is NO bank charge.
+        $mainDatabase = realpath(database_path('database.sqlite'));
+
+        return app()->environment('local')
+            && config('tekora_checkout.local_demo_payments') === true
+            && $path !== false
+            && $mainDatabase !== false
+            && $path === $mainDatabase
+            && Schema::hasTable('synthetic_checkout_attempts');
     }
 
     private function guard(Request $request): void
