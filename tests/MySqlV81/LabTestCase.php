@@ -2,8 +2,11 @@
 
 namespace Tests\MySqlV81;
 
+use App\Models\ServiceInquiry;
+use App\Services\ReservationTime;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\TestCase;
+use Illuminate\Support\Str;
 use Tests\Support\CatalogFixtures;
 
 abstract class LabTestCase extends TestCase
@@ -27,13 +30,29 @@ abstract class LabTestCase extends TestCase
             ->assertExitCode(0);
     }
 
-    protected function assertMySqlError(int $code, callable $operation): void
+    protected function reservationRow(ServiceInquiry $inquiry, string $time = '09:00', string $date = '2030-01-07', string $timezone = 'America/Mexico_City'): array
+    {
+        $slot = app(ReservationTime::class)->resolve($date, $time, $timezone);
+
+        return ['service_inquiry_id' => $inquiry->id, 'service_id' => $inquiry->service_id,
+            'provider_profile_id' => $inquiry->service->provider_profile_id, 'client_user_id' => $inquiry->client_user_id,
+            'timezone' => $timezone, 'local_date' => $date, 'local_start_minute' => $slot['local_start_minute'],
+            'starts_at_utc' => $slot['starts_at_utc'], 'ends_at_utc' => $slot['ends_at_utc'],
+            'availability_revision' => 1, 'idempotency_key' => (string) Str::uuid(), 'status' => 'requested', 'version' => 1,
+            'last_actor_user_id' => $inquiry->client_user_id, 'last_reason' => 'proposal',
+            'created_at' => '2030-01-01 12:00:00', 'updated_at' => '2030-01-01 12:00:00'];
+    }
+
+    protected function assertMySqlError(int $code, callable $operation, ?string $diagnostic = null): void
     {
         try {
             $operation();
             $this->fail('Expected InnoDB to reject the statement.');
         } catch (QueryException $e) {
             $this->assertSame($code, (int) $e->errorInfo[1]);
+            if ($diagnostic !== null) {
+                $this->assertSame($diagnostic, $e->errorInfo[2]);
+            }
         }
     }
 

@@ -20,7 +20,7 @@ final class FoundationTest extends LabTestCase
     public function test_foundation_migrations_are_idempotent_and_restart_preserves_inquiry(): void
     {
         $expected = array_map(fn ($path) => basename($path, '.php'), mysqlV81MigrationPaths());
-        $this->assertCount(34, $expected);
+        $this->assertCount(35, $expected);
         $records = DB::table('migrations')->orderBy('id')->get();
         $this->assertSame($expected, $records->pluck('migration')->all());
         $this->migrateFoundation();
@@ -40,7 +40,14 @@ final class FoundationTest extends LabTestCase
                 'intervals' => [['day_of_week' => 1, 'start' => '09:00', 'end' => '10:00']],
                 'blocked_dates' => ['2032-02-29'],
             ]);
-            app(InquiryWorkflow::class)->open($this->account(RoleName::Client), $service->id, 'Marcador de reinicio V8.1');
+            $inquiries = app(InquiryWorkflow::class);
+            $inquiry = $inquiries->open($this->account(RoleName::Client), $service->id, 'Marcador de reinicio V8.1')['inquiry'];
+            $inquiry = $inquiries->decide($provider, $inquiry->id, InquiryAction::Accept);
+            $reservation = DB::table('service_reservations')->insertGetId($this->reservationRow($inquiry));
+            DB::table('service_reservations')->where('id', $reservation)->update([
+                'status' => 'confirmed', 'version' => 2, 'last_actor_user_id' => $provider->id,
+                'last_reason' => 'confirm', 'updated_at' => '2030-01-02 12:00:00',
+            ]);
         }
         $saved = ServiceInquiry::where('message', 'Marcador de reinicio V8.1')->sole();
         $result = app(InquiryWorkflow::class)->open($saved->client, $saved->service_id, 'Reintento después de la lectura');
@@ -53,6 +60,11 @@ final class FoundationTest extends LabTestCase
         $this->assertSame('America/Mexico_City', $availability->timezone);
         $this->assertSame(540, (int) $profile->weeklyIntervals()->sole()->start_minute);
         $this->assertSame(['2032-02-29'], $profile->blockedDates()->pluck('blocked_date')->all());
+        $reservation = $saved->reservations()->sole();
+        $this->assertSame('confirmed', $reservation->status->value);
+        $this->assertSame(2, $reservation->version);
+        $this->assertSame('2030-01-07 15:00:00', $reservation->starts_at_utc);
+        $this->assertSame(['proposal', 'confirm'], $reservation->events()->orderBy('version')->pluck('reason')->all());
     }
 
     public function test_active_uniqueness_terminal_history_and_foreign_keys(): void

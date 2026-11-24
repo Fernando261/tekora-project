@@ -4,6 +4,7 @@
         <testsuite name="MySQL 8.4 V8.1 foundation">
             <file>FoundationTest.php</file>
             <file>AvailabilityTest.php</file>
+            <file>ReservationTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
