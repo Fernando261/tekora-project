@@ -24,20 +24,20 @@ Artisan::command('tekora:local-demo-payments-setup', function () {
         return 1;
     }
 
-    if (\\Illuminate\\Support\\Facades\\Schema::hasTable('synthetic_checkout_attempts')) {
+    if (\Illuminate\Support\Facades\Schema::hasTable('synthetic_checkout_attempts')) {
         $this->info('La tabla de intentos ficticios ya existe. No se modifico nada.');
         return 0;
     }
 
     $backup = database_path('backup-before-demo-payments-'.date('Ymd-His').'-'.bin2hex(random_bytes(4)).'.sqlite');
     try {
-        $pdo = \\Illuminate\\Support\\Facades\\DB::connection('sqlite')->getPdo();
+        $pdo = \Illuminate\Support\Facades\DB::connection('sqlite')->getPdo();
         // SQLite online backup, including committed WAL content.
         $pdo->exec('VACUUM main INTO '.$pdo->quote($backup));
         if (! is_file($backup) || filesize($backup) < 1024) {
-            throw new \\RuntimeException('No se pudo verificar el respaldo SQLite.');
+            throw new \RuntimeException('No se pudo verificar el respaldo SQLite.');
         }
-        \\Illuminate\\Support\\Facades\\DB::statement(<<<'SQL'
+        \Illuminate\Support\Facades\DB::statement(<<<'SQL'
 CREATE TABLE synthetic_checkout_attempts (
   reservation_id INTEGER PRIMARY KEY REFERENCES service_reservations(id) ON DELETE RESTRICT,
   client_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
@@ -53,7 +53,7 @@ CREATE TABLE synthetic_checkout_attempts (
   received_at TEXT NULL
 )
 SQL);
-    } catch (\\Throwable $error) {
+    } catch (\Throwable $error) {
         $this->error('Configuracion no completada; verifica permisos y SQLite. No se borro ningun dato.');
         return 1;
     }
