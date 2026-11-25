@@ -65,7 +65,7 @@ jobs:
           from pathlib import Path
 
           root = Path(sys.argv[1])
-          for name, minimum in [('mysql-junit.xml', 47), ('mysql-restart-junit.xml', 1)]:
+          for name, minimum in [('mysql-junit.xml', 94), ('mysql-restart-junit.xml', 1)]:
               suite = ET.parse(root / name).getroot().find('testsuite')
               if suite is None:
                   sys.exit(f'{name}: missing PHPUnit suite')

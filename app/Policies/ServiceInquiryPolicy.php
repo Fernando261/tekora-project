@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Database\PricingMySqlConnection;
 use App\Enums\Permission;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
@@ -13,7 +14,7 @@ class ServiceInquiryPolicy
     public function create(Authenticatable $actor, Service $service): bool
     {
         return $actor instanceof User && $actor->hasPermission(Permission::ManageOwnInquiries)
-            && ! $service->providerProfile()->where('user_id', $actor->id)->exists();
+            && ! PricingMySqlConnection::lockPricingRead($service->providerProfile()->where('user_id', $actor->id)->getQuery())->exists();
     }
 
     public function view(Authenticatable $actor, ServiceInquiry $inquiry): bool

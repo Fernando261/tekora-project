@@ -8,6 +8,9 @@ use App\Models\ServiceInquiry;
 use App\Models\ServiceReview;
 use App\Models\User;
 use App\Notifications\MobileIdentityCode;
+use App\Payments\PricingStore;
+use App\Payments\ServicePricing;
+use App\Payments\SyntheticQuotes;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryWorkflow;
 use App\Services\NotificationInbox;
@@ -23,7 +26,7 @@ final class FoundationTest extends LabTestCase
     public function test_foundation_migrations_are_idempotent_and_restart_preserves_inquiry(): void
     {
         $expected = array_map(fn ($path) => basename($path, '.php'), mysqlV81MigrationPaths());
-        $this->assertCount(37, $expected);
+        $this->assertCount(38, $expected);
         $records = DB::table('migrations')->orderBy('id')->get();
         $this->assertSame($expected, $records->pluck('migration')->all());
         $this->migrateFoundation();
@@ -60,6 +63,11 @@ final class FoundationTest extends LabTestCase
             $reviews->withdraw($reviewed->client, $review->id);
             $noticeId = DB::table('activity_notifications')->where('service_reservation_id', $reservation)->where('event', 'reservation_confirmed')->value('id');
             app(NotificationInbox::class)->readActivity($inquiry->client, (string) $noticeId);
+            app(ServicePricing::class)->publish($provider, $service->id, [
+                'amount_cents' => 10, 'expected_version' => 0, 'idempotency_key' => '431c42d1-975b-44f9-994f-13835c7b27b1',
+            ]);
+            $quote = app(SyntheticQuotes::class)->issue($inquiry->client, $inquiry->id, ['idempotency_key' => '09aed269-4e81-49e9-b6f4-3957519f8fb8']);
+            app(SyntheticQuotes::class)->accept($inquiry->client, $quote->id);
             $this->travelBack();
         }
         $saved = ServiceInquiry::where('message', 'Marcador de reinicio V8.1')->sole();
@@ -89,6 +97,15 @@ final class FoundationTest extends LabTestCase
         $this->assertSame(['reservation_requested', 'reservation_confirmed'], $notices->pluck('event')->all());
         $this->assertSame([null, '2030-01-08 12:00:00'], $notices->pluck('read_at')->all());
         $this->assertSame(['review_published', 'review_withdrawn'], DB::table('activity_notifications')->where('service_review_id', $review->id)->orderBy('id')->pluck('event')->all());
+        $prices = app(PricingStore::class);
+        $price = $prices->latestPrice($saved->service_id);
+        $quote = $prices->quoteByKey($saved->client_user_id, '09aed269-4e81-49e9-b6f4-3957519f8fb8');
+        $acceptance = $prices->acceptance($quote->id);
+        $this->assertSame($price->id, $quote->price->id);
+        $this->assertSame([10, 2, 8], [$price->amount->totalCents, $price->amount->commissionCents, $price->amount->providerCents]);
+        $this->assertSame($saved->id, $quote->inquiryId);
+        $this->assertSame($saved->client_user_id, $acceptance->clientId);
+        $this->assertSame('2030-01-08 12:00:00.000000', $acceptance->acceptedAt->format('Y-m-d H:i:s.u'));
     }
 
     public function test_active_uniqueness_terminal_history_and_foreign_keys(): void

@@ -1,10 +1,10 @@
 # V8.1 · Fundamentos MySQL 8.4
 
-El fundamento V8.1 prueba identidad y solicitudes sobre InnoDB. V8.1.2 añadió disponibilidad, V8.1.3 el esquema de reservas, V8.1.4 las reseñas y V8.1.5 los avisos de actividad. La instalación completa de Tekora sobre MySQL sigue **BLOCKED**. El diagnóstico previo queda en [PR #59](https://github.com/Fernando261/tekora-project/pull/59).
+El fundamento V8.1 prueba identidad y solicitudes sobre InnoDB. V8.1.2 añadió disponibilidad, V8.1.3 el esquema de reservas, V8.1.4 las reseñas V8.1.5 los avisos de actividad y V8.1.6 los precios, cotizaciones y aceptaciones. La instalación completa de Tekora sobre MySQL sigue **BLOCKED**. El diagnóstico previo queda en [PR #59](https://github.com/Fernando261/tekora-project/pull/59).
 
 ## Esquema y transacciones
 
-El laboratorio selecciona las primeras 36 identidades de migración, hasta avisos de actividad, y añade Sanctum. La ruta MySQL alternativa usa las identidades históricas de sus siete variantes. El migrador ordinario conserva las guardas de SQLite.
+El laboratorio selecciona las primeras 38 identidades de migración hasta precios y cotizaciones, incluido Sanctum. La ruta MySQL alternativa usa las identidades históricas de sus ocho variantes. El migrador ordinario conserva las guardas de SQLite.
 
 - **Solicitudes.** Una columna generada invisible vale 1 para estados `pending` y `accepted`, y NULL para los terminales. El índice único sobre servicio, cliente y esa columna impide dos solicitudes activas a nivel de InnoDB. El estado tiene un CHECK con comparación binaria. El historial terminal permite múltiples filas y la columna generada queda fuera de `SELECT *`.
 - **Mensajes y lecturas.** Las dos tablas conservan unicidad de envío y la FK compuesta que une el marcador a un mensaje de la misma conversación. MySQL limita los nombres a 64 caracteres, por lo que las variantes asignan nombres cortos. Los índices de mensajes se crean junto a su tabla. Cada variante crea su tabla en una sola operación DDL.
@@ -20,13 +20,24 @@ El laboratorio selecciona las primeras 36 identidades de migración, hasta aviso
 - **Bandejas.** MySQL usa sesión UTC y normaliza collation y representación de fecha antes de combinar solicitudes y actividad. El total y la página comparten una sentencia bajo READ COMMITTED. El marcado usa la fila y el alcance actuales tras bloquear, incluso si la transacción ya tiene una instantánea REPEATABLE READ. La bandeja web admite ambos roles y protege los enlaces con las reglas de cada recurso. La API móvil filtra avisos del solicitante antes de contar, paginar o marcar y devuelve una proyección mínima.
 - **Límites.** DDL en MySQL puede confirmar implícitamente. Una base que haya sufrido una instalación interrumpida requiere inspección y recuperación explícita. La prueba de segunda ejecución cubre el esquema instalado correctamente. El laboratorio crea una base nueva para cada ejecución. El puerto TCP y el plugin X quedan apagados. La prueba de rollback usa un trigger de fallo en la base efímera, con binlog desactivado exclusivamente en el laboratorio.
 
+## Precios y cotizaciones InnoDB
+
+- El adaptador fija el PDO de escritura y acredita BEGIN antes de tomar en exclusivo `pricing_write_lock.id=1` con `SELECT … FOR UPDATE`. Cualquier precio, cotización, aceptación o recibo insertado por SQL toma esa misma admisión en su trigger. El nivel de transacción visible para Laravel dirige Eloquent al mismo PDO y desactiva sus reintentos por desconexión. Laravel no puede abrir savepoints, confirmar ni revertir esta unidad. La única participación anidada del módulo comparte la unidad propia, como en la creación de servicio con precio inicial.
+- Después de la admisión, los triggers leen y bloquean en compartido las filas actuales de servicio y perfil al publicar, de solicitud, servicio y perfil al cotizar, y de cotización y solicitud al aceptar. La admisión también serializa la comprobación de versión y el recibo de creación. Los UPDATE sobre propietarios o participantes ya tienen el lock del padre y realizan una lectura actual del historial asociado, sin adquirir la admisión de precios. Así un resultado confirmado preserva las identidades incluso con una instantánea anterior. Los triggers de reservas y reseñas mantienen sus locks de solicitud, servicio, perfil y reserva. Un UPDATE directo puede llegar con su fila bloqueada o InnoDB puede elegir otro orden para un JOIN. Estas intercalaciones pueden producir deadlock; la aplicación solo permite un reintento explícito con la misma clave.
+- **FIX1 · autorización actual.** Las lecturas ordinarias previas a la transacción siguen siendo filtros de entrada. Dentro de la unidad MySQL, la misma policy comprueba el usuario, la asignación y el rol con una lectura compartida actual. La emisión comprueba al cliente y bloquea la solicitud antes de decidir si devuelve un historial existente o evalúa una nueva emisión. La aceptación lee y bloquea primero la cotización, luego comprueba y bloquea las filas de autorización del cliente y la solicitud. Para nuevas emisiones y aceptaciones, la consulta compartida bloquea el servicio y también aplica locks explícitos a las subconsultas de categoría, perfil, usuario prestador y su asignación de rol. Al publicar precio, el orden de aplicación es servicio, permiso vigente del prestador y perfil propietario. Las lecturas confirman los criterios vigentes bajo REPEATABLE READ y READ COMMITTED, incluso cuando otra sentencia ya abrió una instantánea.
+- **Interacción de locks.** La admisión sigue siendo el primer lock de negocio para las escrituras de precios. Las comprobaciones compartidas se mantienen hasta COMMIT, incluidos los padres que consumirán los triggers y las claves foráneas de la escritura. Un UPDATE o DELETE sobre un servicio, categoría o asignación usa su lock exclusivo habitual. El optimizador determina el orden físico dentro de cada consulta. Reservas y reseñas conservan sus propios locks de solicitud, servicio, perfil y reserva. Los avisos siguen en la transacción del evento o reseña y no adquieren admisión de precios. Una operación ajena puede traer locks en otro orden y producir un deadlock. La política de reintento explícito del adaptador sigue vigente. Las reglas de elegibilidad son de la aplicación. Los triggers siguen imponiendo las restricciones de identidad, estado e historial del esquema.
+- **Reloj y reintentos.** Una cotización nueva toma la hora UTC después de las comprobaciones con lock y la lectura actual del precio. La aceptación devuelve primero su recibo existente cuando el cliente conserva el permiso y la propiedad. Para una aceptación nueva, MySQL vuelve a muestrear la hora UTC una vez terminadas las esperas de autorización y elegibilidad, justo antes de insertar. El último microsegundo anterior al vencimiento se admite y el instante de vencimiento se rechaza. Los reintentos válidos de emisión y aceptación conservan el snapshot y el recibo previos aunque cambien la visibilidad, el precio o la vigencia. SQLite conserva la semántica anterior.
+- Los importes se almacenan como dígitos decimales canónicos de centavos enteros. Validar el texto antes del CAST evita la coerción de fracciones por columnas INTEGER o DECIMAL de escala fija. Los CHECK calculan la comisión con `(total * 15 + 50) DIV 100` y el complemento por sustracción exacta. El adaptador valida los tipos devueltos por PDO, verifica el desglose y reconstruye el dominio con enteros. Las cifras llevan comisión incluida y el total conserva el máximo de 1.000.000.000 de centavos.
+- Cotizaciones, precios, recibos y aceptaciones son append-only, con referencias restrictivas y UTC canónico a seis decimales. La vigencia de cotización es de 1–86.400 segundos, 1.800 por defecto. El límite de aceptación es exclusivo. Una aceptación ya persistida permite reintentos después de vencer. La retención B2 de 900 segundos permanece pendiente de portar.
+- El laboratorio fuerza 1205 en admisión y después de escrituras parciales; acredita rollback propio antes de permitir el reintento. Fuerza también 1213 con dos procesos y comprueba el rollback implícito de InnoDB y una sola ejecución del callback. Pérdida simulada de la confirmación de BEGIN/COMMIT y fallo de rollback se prueban por inyección sobre PDO conectado al laboratorio. Una conexión incierta queda retirada y en cuarentena hasta apagar el proceso. Reiniciar el worker afectado y consultar el historial antes de emitir un reintento con la misma clave.
+
 ## Matriz de las 39 identidades de migración
 
 | Archivo o tramo ordenado | Cantidad | MySQL V8.1 | Comprobación |
 | --- | ---: | --- | --- |
 | `0001_01_01_000000` a `0001_01_01_000002` | 3 | PASS | Instalación. Usuarios, tokens de recuperación y sesiones ejercitados |
 | `2025_08_02_085013` a `2026_02_24_075954` | 21 | PASS DDL | Historial legado conserva tablas, índices y FK. Funciones legadas fuera de esta validación |
-| `2026_10_23_000000` a `2026_10_28_000001` | 4 | PASS | Roles, perfiles, categorías y servicios. Catálogo público depende además de pricing/reseñas |
+| `2026_10_23_000000` a `2026_10_28_000001` | 4 | PASS | Roles, perfiles, categorías y servicios. Incluye precios y reseñas públicas en las rutas probadas |
 | `2026_10_28_000002` solicitudes | 1 | PASS | Variante InnoDB, CHECK, FK, exclusividad activa y carrera de altas |
 | `2026_10_29_000000` avisos de solicitud | 1 | PASS | Unicidad y rollback conjunto de alta y decisión |
 | `2026_10_30_000000` y `000001` mensajes y lecturas | 2 | PASS | Variantes InnoDB. FK compuesta, reintento, alcance, orden y marcador monótono |
@@ -35,10 +46,10 @@ El laboratorio selecciona las primeras 36 identidades de migración, hasta aviso
 | `2026_11_03_000001` reseñas | 1 | PASS | Reserva completada, unicidad, identidad, contenido y retiro inmutables, concurrencia y persistencia |
 | `2026_11_03_000002` avisos de actividad | 1 | PASS | FK compuesta, destinatarios, unicidad, historial, emisión atómica y primer marcado concurrente |
 | `2026_11_04_000000` Sanctum | 1 | PASS | Emitir Bearer, alcance móvil, invalidación y revocación |
-| `2026_11_18_000000` precios y cotizaciones | 1 | BLOCKED | Tablas append-only, identidad del snapshot y adaptador MySQL |
+| `2026_11_18_000000` precios y cotizaciones | 1 | PASS | Cinco tablas InnoDB, invariantes de importe e identidad, admisión, historial y persistencia. Elegibilidad actual y carreras con ambos órdenes en RR/RC |
 | `2026_11_19_000000` retenciones B2 | 1 | BLOCKED | High-water UTC, 900.000.000 μs, exclusión, recibos y transiciones |
 
-**Total MySQL:** 37 identidades ejecutadas por el laboratorio, 2 pendientes. Un PASS DDL acredita la creación del esquema en ese tramo. SQLite continúa usando las 39 migraciones originales.
+**Total MySQL:** 38 identidades ejecutadas por el laboratorio, 1 pendiente. Un PASS DDL acredita la creación del esquema en ese tramo. SQLite continúa usando las 39 migraciones originales.
 
 ## Matriz de web y API
 
@@ -51,13 +62,14 @@ El laboratorio selecciona las primeras 36 identidades de migración, hasta aviso
 | Solicitudes `GET /inquiries`, `GET /inquiries/{id}`, alta desde servicio | PASS. Cancelación HTTP **NOT RUN** en MySQL |
 | Decisiones de solicitud | PASS para aceptar/rechazar desde el servicio de dominio. Cierre con realización **BLOCKED** por el adaptador y B2 |
 | Conversaciones, listado, envío y lectura | PASS API. Vista web comparte orden SQL y se cubre en las regresiones SQLite |
-| Categorías, catálogo y prestadores | Catálogo completo **BLOCKED** por las proyecciones de precio. Se verifican las rutas públicas dedicadas de reseñas por servicio y prestador |
+| Categorías, catálogo y prestadores | PASS para búsqueda y detalle web de servicio, precio publicado y reseña pública, y detalle básico de catálogo móvil. Opciones comerciales y de reserva siguen bloqueadas |
 | Disponibilidad semanal, fechas bloqueadas y zona del prestador | PASS en el servicio compartido. PHP valida las zonas IANA y MySQL aplica límites de almacenamiento y fechas civiles |
 | Opciones para reservar y proyecciones comerciales del catálogo | BLOCKED |
 | Reservas e historial mediante SQL directo | PASS en el esquema y las políticas de participantes. Espera InnoDB, conflicto de versión, solapamiento, rollback y reintento probados |
 | Web/API de reservas, vistas de ocupación y reservas activas, retenciones B2 | BLOCKED. `ReservationTransactions` sigue siendo SQLite y las vistas se crean en B2 |
-| Listar, emitir, aceptar y consultar cotizaciones; contexto de checkout | BLOCKED |
-| Historial de contratación y dashboard | BLOCKED por lecturas comerciales pendientes |
+| Cotizaciones | PASS para emitir y aceptar vía web, y para listar, emitir, aceptar y consultar detalle o aceptación vía API. Las escrituras nuevas serializan con pausas, desactivaciones y revocaciones; los reintentos autorizados preservan su historial. El detalle web autenticado todavía carga el recorrido dependiente de B2 |
+| Contexto de checkout | BLOCKED por B2 y el adaptador de reservas |
+| Historial de contratación y dashboard | BLOCKED para las rutas que dependen de B2 |
 | Reseñas privadas y públicas | PASS en el laboratorio con reservas completadas sembradas mediante el esquema. Rutas web dedicadas de reseñas y API pública y privada. La publicación y el retiro generan avisos al prestador |
 | Bandeja y lectura de notificaciones | PASS en el laboratorio. Unión, orden, página y contador, autorización web y Bearer, doble rol y reintento tras bloqueo o deadlock |
 | Checkout B3.2 web y endpoints `demo-checkout` | Se verifican los 404 de la demo visual, GET/POST del checkout web y GET/POST móvil en entorno MySQL con configuración de producción simulada |
@@ -75,7 +87,7 @@ docker build -t tekora-v81-lab-php:8.4.27 tools/mysql-v81
 bash tools/mysql-v81/run.sh /tmp/tekora-v81-evidence
 ```
 
-El destino de evidencias debe ser nuevo y estar fuera del checkout. El runner monta código y dependencias como solo lectura. MySQL y PHP usan `--network none` y comparten únicamente el socket Unix para el acceso a la base. El usuario del laboratorio recibe permisos en un esquema nuevo. El runner registra versión, motor, aislamiento, manifiesto Docker y JUnit. Reinicia el mismo contenedor, repite las migraciones y comprueba la solicitud, su aviso, la disponibilidad, la reserva confirmada, sus dos eventos, la reseña retirada, sus avisos y el primer marcado persistido. Al finalizar libera el contenedor y los volúmenes que creó.
+El destino de evidencias debe ser nuevo y estar fuera del checkout. El runner monta código y dependencias como solo lectura. MySQL y PHP usan `--network none` y comparten únicamente el socket Unix para el acceso a la base. El usuario del laboratorio recibe permisos en un esquema nuevo. El runner registra versión, motor, aislamiento, manifiesto Docker y JUnit. Reinicia el mismo contenedor, repite las migraciones y comprueba la solicitud, su aviso, la disponibilidad, la reserva confirmada, sus dos eventos, la reseña retirada, sus avisos, el primer marcado, el precio versionado, la cotización y su aceptación persistidos. Al finalizar libera el contenedor y los volúmenes que creó.
 
 La suite MySQL se ejecuta separadamente de PHPUnit normal, cuyo bootstrap sigue forzando SQLite desechable. Las pruebas diferencian 1062 por unicidad, 1451/1452 por FK, un lock wait 1205 y un deadlock real cuya víctima reintenta bajo Laravel. La prueba de deadlock comprueba que los efectos de su intento revertido no se duplican. Esa evidencia aplica a las transacciones probadas, no a B2.
 
@@ -83,7 +95,7 @@ La suite MySQL se ejecuta separadamente de PHPUnit normal, cuyo bootstrap sigue 
 
 | Ejecución | Qué acredita | Evidencia |
 | --- | --- | --- |
-| Docker local, `tools/mysql-v81/run.sh` | MySQL 8.4.13, InnoDB y PHP 8.4.27. Instalación de 37 migraciones, segunda ejecución, bandejas y escrituras de avisos, concurrencia, deadlock, rollback y persistencia tras reiniciar | `isolation.log`, logs y dos JUnit en el directorio de evidencia elegido |
+| Docker local, `tools/mysql-v81/run.sh` | MySQL 8.4.13, InnoDB y PHP 8.4.27. Instalación de 38 migraciones, segunda ejecución, precios y cotizaciones, concurrencia, lock waits, deadlock, rollback y persistencia tras reiniciar | `isolation.log`, logs y dos JUnit en el directorio de evidencia elegido |
 | [`MySQL 8.4 foundation`](../../.github/workflows/mysql-v81.yml) | Mismo runner y suites sobre el HEAD exacto del PR. Revisa que no haya puertos publicados, que ambos JUnit estén completos y que Docker libere los recursos | Artefacto `mysql-v81-<run_id>-<attempt>` y conclusión del job en el HEAD correspondiente |
 | `Mobile API integration` y `T1 isolated laboratory` | Regresiones SQLite de API móvil y T1 en PHP 8.2 y 8.4 | Resultados de sus workflows en el HEAD correspondiente |
 | PHPUnit completo, Pint, lint y build locales | Regresiones de la aplicación en SQLite, estilo PHP del incremento, sintaxis y assets | Logs locales independientes de los jobs de GitHub |
@@ -92,4 +104,4 @@ El job instala `composer.lock` sin plugins ni scripts antes de arrancar la base.
 
 ## Siguiente incremento
 
-El adaptador de reservas requerirá fijar el orden de locks con la admisión B2 y probar recuperación de COMMIT incierto. El reloj debe preservar el valor de 64 bits, impedir retrocesos y comprobar el límite exacto de 900 segundos. El adaptador de precios debe adquirir su propia transacción antes de leer versiones, conservar snapshots y calcular comisión con aritmética entera. El aprovisionamiento de triggers con binlog habilitado sigue **NOT RUN**, junto con la restauración de respaldos, SMTP, HTTPS y despliegue reversible de código en la VPS.
+El adaptador de reservas requerirá fijar el orden de locks con la admisión B2 y probar recuperación de COMMIT incierto. El reloj debe preservar el valor de 64 bits, impedir retrocesos y comprobar el límite exacto de 900 segundos. El aprovisionamiento de triggers con binlog habilitado sigue **NOT RUN**, junto con la restauración de respaldos, SMTP, HTTPS y despliegue reversible de código en la VPS.

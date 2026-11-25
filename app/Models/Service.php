@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Database\PricingMySqlConnection;
 use App\Enums\RoleName;
 use App\Enums\ServiceModality;
 use App\Enums\ServiceStatus;
@@ -49,8 +50,12 @@ class Service extends Model
     // Una sola regla para catálogo, detalle y fichas públicas. No carga datos de User.
     public function scopePubliclyVisible(Builder $query): void
     {
-        $query->where('status', ServiceStatus::Published->value)
-            ->whereHas('category', fn (Builder $categories) => $categories->active())
-            ->whereHas('providerProfile.user.roles', fn (Builder $roles) => $roles->where('slug', RoleName::Provider->value));
+        $current = PricingMySqlConnection::lockPricingRead(...);
+        $current($query)->where('status', ServiceStatus::Published->value)
+            ->whereHas('category', fn (Builder $categories) => $current($categories)->active())
+            // A lock on services alone does not apply to the nested EXISTS queries in MySQL.
+            ->whereHas('providerProfile', fn (Builder $profile) => $current($profile)->whereHas('user',
+                fn (Builder $owner) => $current($owner)->whereHas('roles',
+                    fn (Builder $roles) => $current($roles)->where('roles.slug', RoleName::Provider->value))));
     }
 }
