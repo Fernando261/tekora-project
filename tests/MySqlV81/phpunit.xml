@@ -7,6 +7,8 @@
             <file>ReservationTest.php</file>
             <file>ReviewTest.php</file>
             <file>ActivityNotificationTest.php</file>
+            <file>PricingTest.php</file>
+            <file>PricingFaultTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

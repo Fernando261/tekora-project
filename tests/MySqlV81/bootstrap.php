@@ -51,7 +51,7 @@ function mysqlV81Application(): Application
 function mysqlV81MigrationPaths(): array
 {
     $root = dirname(__DIR__, 2);
-    $last = '2026_11_03_000002_create_activity_notifications.php';
+    $last = '2026_11_18_000000_create_web_pricing_and_quotes.php';
     $variants = [
         '2026_10_28_000002_create_service_inquiries_table.php',
         '2026_10_30_000000_create_service_inquiry_messages_table.php',
@@ -59,12 +59,10 @@ function mysqlV81MigrationPaths(): array
         '2026_10_30_000002_create_provider_availability_tables.php',
         '2026_11_03_000000_create_service_reservations.php',
         '2026_11_03_000001_create_service_reviews.php',
+        '2026_11_03_000002_create_activity_notifications.php',
         $last,
     ];
     $files = array_filter(glob($root.'/database/migrations/*.php'), fn ($path) => basename($path) <= $last);
-    $paths = array_map(fn ($path) => in_array(basename($path), $variants, true) ? $root.'/database/mysql/migrations/'.basename($path) : $path, $files);
-    // Sanctum has no dependency on the still-blocked commercial migrations.
-    $paths[] = $root.'/database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php';
 
-    return $paths;
+    return array_map(fn ($path) => in_array(basename($path), $variants, true) ? $root.'/database/mysql/migrations/'.basename($path) : $path, $files);
 }
