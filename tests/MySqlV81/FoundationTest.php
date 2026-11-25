@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Notifications\MobileIdentityCode;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryWorkflow;
+use App\Services\NotificationInbox;
 use App\Services\ProviderAvailability;
 use App\Services\ReviewWorkflow;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ final class FoundationTest extends LabTestCase
     public function test_foundation_migrations_are_idempotent_and_restart_preserves_inquiry(): void
     {
         $expected = array_map(fn ($path) => basename($path, '.php'), mysqlV81MigrationPaths());
-        $this->assertCount(36, $expected);
+        $this->assertCount(37, $expected);
         $records = DB::table('migrations')->orderBy('id')->get();
         $this->assertSame($expected, $records->pluck('migration')->all());
         $this->migrateFoundation();
@@ -57,6 +58,8 @@ final class FoundationTest extends LabTestCase
             $reviews = app(ReviewWorkflow::class);
             $review = $reviews->publish($reviewed->client, $completed->id, ['rating' => 5, 'comment' => 'Marcador de reseña retirada'])['review'];
             $reviews->withdraw($reviewed->client, $review->id);
+            $noticeId = DB::table('activity_notifications')->where('service_reservation_id', $reservation)->where('event', 'reservation_confirmed')->value('id');
+            app(NotificationInbox::class)->readActivity($inquiry->client, (string) $noticeId);
             $this->travelBack();
         }
         $saved = ServiceInquiry::where('message', 'Marcador de reinicio V8.1')->sole();
@@ -82,6 +85,10 @@ final class FoundationTest extends LabTestCase
         $this->assertSame(5, $review->rating);
         $this->assertSame('2030-01-08 12:00:00', $review->withdrawn_at_utc);
         $this->assertSame($review->client_user_id, $review->withdrawn_by_user_id);
+        $notices = DB::table('activity_notifications')->where('service_reservation_id', $reservation->id)->orderBy('reservation_version')->get();
+        $this->assertSame(['reservation_requested', 'reservation_confirmed'], $notices->pluck('event')->all());
+        $this->assertSame([null, '2030-01-08 12:00:00'], $notices->pluck('read_at')->all());
+        $this->assertSame(['review_published', 'review_withdrawn'], DB::table('activity_notifications')->where('service_review_id', $review->id)->orderBy('id')->pluck('event')->all());
     }
 
     public function test_active_uniqueness_terminal_history_and_foreign_keys(): void

@@ -14,9 +14,12 @@ use App\Models\User;
 use App\Support\NotificationEntry;
 use Illuminate\Database\DetectsConcurrencyErrors;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
+use PDOException;
 
 class NotificationInbox
 {
@@ -24,47 +27,89 @@ class NotificationInbox
 
     private function rows(User $user, bool $unreadOnly = false, bool $clientOnly = false): Builder
     {
-        $inquiries = DB::table('inquiry_notifications')->where('user_id', $user->id);
-        $activity = DB::table('activity_notifications')->where('user_id', $user->id);
-        if ($clientOnly) {
-            $scope = app(MobileClientOperations::class);
-            $clientEvents = array_map(fn ($event) => $event->value, array_filter(InquiryNotificationEvent::cases(), fn ($event) => ! $event->forProvider()));
-            $inquiries->whereIn('event', $clientEvents)
-                ->whereIn('service_inquiry_id', $scope->inquiries($user)->select('service_inquiries.id'));
-            // Review and requested notifications belong to the provider experience.
-            $activity->whereIn('event', ['reservation_confirmed', 'reservation_rejected', 'reservation_cancelled', 'reservation_completed'])
-                ->whereNull('service_review_id')
-                ->whereIn('service_reservation_id', $scope->reservations($user)->select('service_reservations.id'));
-        }
+        $inquiries = $this->sourceRows($user, 'inquiry', $clientOnly);
+        $activity = $this->sourceRows($user, 'activity', $clientOnly);
         if ($unreadOnly) {
             $inquiries->whereNull('read_at');
             $activity->whereNull('read_at');
         }
-        $inquiries->selectRaw("id, 'inquiry' as source_type, event, created_at, read_at, service_inquiry_id, NULL as service_reservation_id, NULL as service_review_id");
-        $activity->selectRaw("id, 'activity' as source_type, event, created_at, read_at, NULL as service_inquiry_id, service_reservation_id, service_review_id");
 
         $feed = DB::query()->fromSub($inquiries->unionAll($activity), 'notification_feed');
+
+        return $clientOnly ? $this->withClientRole($feed, $user) : $feed;
+    }
+
+    private function sourceRows(User $user, string $source, bool $clientOnly, bool $current = false): Builder
+    {
+        $inquiry = $source === 'inquiry';
+        $table = $inquiry ? 'inquiry_notifications' : 'activity_notifications';
+        $rows = DB::table($table)->where('user_id', $user->id);
         if ($clientOnly) {
-            // Role is checked in this same SQL statement, before count/order/pagination.
-            $feed->whereExists(fn ($query) => $query->selectRaw('1')->from('role_user')
-                ->join('roles', 'roles.id', '=', 'role_user.role_id')
-                ->where('role_user.user_id', $user->id)->where('roles.slug', RoleName::Client->value));
+            $scope = app(MobileClientOperations::class);
+            $clientEvents = array_map(fn ($event) => $event->value, array_filter(InquiryNotificationEvent::cases(), fn ($event) => ! $event->forProvider()));
+            if ($inquiry) {
+                $rows->whereIn('event', $clientEvents);
+                $resources = $scope->inquiries($user)->whereColumn('service_inquiries.id', 'inquiry_notifications.service_inquiry_id');
+            } else {
+                // Review and requested notifications belong to the provider experience.
+                $rows->whereIn('event', ['reservation_confirmed', 'reservation_rejected', 'reservation_cancelled', 'reservation_completed'])
+                    ->whereNull('service_review_id');
+                $resources = $scope->reservations($user)->whereColumn('service_reservations.id', 'activity_notifications.service_reservation_id');
+            }
+            if ($current) {
+                $resources->sharedLock();
+            }
+            $rows->whereExists($resources->selectRaw('1')->toBase());
         }
 
-        return $feed;
+        $fields = 'event, created_at, read_at';
+        if (DB::connection()->getDriverName() === 'mysql') {
+            // Normalize ENUM and VARCHAR collations. The connection exposes TIMESTAMP in UTC.
+            $fields = 'CAST(event AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_0900_bin AS event, '
+                .'CAST(created_at AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_0900_bin AS created_at, '
+                .'CAST(read_at AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_0900_bin AS read_at';
+        }
+        $references = $inquiry ? 'service_inquiry_id, NULL as service_reservation_id, NULL as service_review_id'
+            : 'NULL as service_inquiry_id, service_reservation_id, service_review_id';
+
+        return $rows->selectRaw("id, '{$source}' as source_type, {$fields}, {$references}");
+    }
+
+    private function withClientRole(Builder $rows, User $user, bool $current = false): Builder
+    {
+        $role = DB::table('role_user')->selectRaw('1')->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->where('role_user.user_id', $user->id)->where('roles.slug', RoleName::Client->value);
+        if ($current) {
+            $role->sharedLock();
+        }
+
+        return $rows->whereExists($role);
     }
 
     public function clientListing(User $user, int $page = 1, int $perPage = 12)
     {
-        return DB::transaction(function () use ($user, $page, $perPage) {
-            $feed = $this->rows($user, clientOnly: true)->orderByDesc('created_at')->orderByDesc('source_type')->orderByDesc('id')
-                ->paginate($perPage, ['*'], 'page', $page);
-            if ($page > $feed->lastPage()) {
-                throw new NotificationFailure('La página de notificaciones no existe.', 404);
-            }
+        return DB::transaction(fn () => $this->paginate($this->rows($user, clientOnly: true), $page, $perPage), 3);
+    }
 
-            return $feed;
-        }, 3);
+    private function paginate(Builder $feed, int $page, int $perPage): LengthAwarePaginator
+    {
+        $ordered = $feed->orderByDesc('created_at')->orderByDesc('source_type')->orderByDesc('id');
+        if (DB::connection()->getDriverName() === 'mysql') {
+            // The total and the bounded page use one statement snapshot, including empty pages.
+            $total = DB::query()->fromSub((clone $feed)->reorder(), 'feed_count')->selectRaw('COUNT(*) as inbox_total');
+            $rows = DB::query()->fromSub($total, 'feed_total')
+                ->leftJoinSub($ordered->forPage($page, $perPage), 'feed_page', fn (JoinClause $join) => $join->whereRaw('1 = 1'))
+                ->orderByDesc('feed_page.created_at')->orderByDesc('feed_page.source_type')->orderByDesc('feed_page.id')->get();
+            $results = new LengthAwarePaginator($rows->whereNotNull('id')->values(), (int) $rows->first()->inbox_total,
+                $perPage, $page, ['path' => LengthAwarePaginator::resolveCurrentPath()]);
+        } else {
+            $results = $ordered->paginate($perPage, ['*'], 'page', $page);
+        }
+        if ($page > $results->lastPage()) {
+            throw new NotificationFailure('La página de notificaciones no existe.', 404);
+        }
+
+        return $results;
     }
 
     public function clientUnreadCount(User $user): int
@@ -84,20 +129,24 @@ class NotificationInbox
 
     public function readClient(User $user, string $source, string $id): object
     {
+        $driver = DB::connection()->getDriverName();
         try {
-            return DB::transaction(function () use ($user, $source, $id) {
-                $notice = $this->clientNotice($user, $source, $id);
+            return DB::transaction(function () use ($user, $source, $id, $driver) {
+                abort_unless(in_array($source, ['inquiry', 'activity'], true), 404);
+                $current = $driver === 'mysql'
+                    ? $this->withClientRole($this->sourceRows($user, $source, true, current: true), $user, current: true)->where('id', $id)->lockForUpdate()
+                    : null;
+                $notice = $current === null ? $this->clientNotice($user, $source, $id) : $current->first();
+                abort_unless($notice, 404);
                 // Same conditional read_at transition as the web; never overwrite first read.
                 $table = $source === 'inquiry' ? 'inquiry_notifications' : 'activity_notifications';
                 DB::table($table)->where('user_id', $user->id)->where('id', $notice->id)->whereNull('read_at')
                     ->update(['read_at' => now('UTC')->format('Y-m-d H:i:s')]);
 
-                return $this->clientNotice($user, $source, $id);
+                return $current === null ? $this->clientNotice($user, $source, $id) : $current->first();
             }, 3);
-        } catch (\PDOException $exception) {
-            $code = ((int) ($exception->errorInfo[1] ?? 0)) & 255;
-            $conflict = in_array($code, [5, 6, 19], true) || $this->causedByConcurrencyError($exception);
-            throw new NotificationFailure(status: $conflict ? 409 : 503);
+        } catch (PDOException $exception) {
+            throw $this->readFailure($exception, $driver);
         }
     }
 
@@ -113,10 +162,7 @@ class NotificationInbox
 
     public function listing(User $user, int $page = 1)
     {
-        $notifications = $this->rows($user)->orderByDesc('created_at')->orderByDesc('source_type')->orderByDesc('id')->paginate(12, ['*'], 'page', $page);
-        if ($page > $notifications->lastPage()) {
-            throw new NotificationFailure('La página de notificaciones no existe.', 404);
-        }
+        $notifications = $this->paginate($this->rows($user), $page, 12);
         $rows = $notifications->getCollection();
         if ($rows->isEmpty()) {
             return $notifications;
@@ -180,21 +226,40 @@ class NotificationInbox
 
     public function readActivity(User $user, string $id, array $input = []): ActivityNotification
     {
+        $driver = DB::connection()->getDriverName();
         try {
-            return DB::transaction(function () use ($user, $id, $input) {
-                $notice = ActivityNotification::where('user_id', $user->id)->findOrFail($id);
+            return DB::transaction(function () use ($user, $id, $input, $driver) {
+                $owned = ActivityNotification::where('user_id', $user->id);
+                if ($driver === 'mysql') {
+                    $owned->lockForUpdate();
+                }
+                $notice = $owned->findOrFail($id);
                 Gate::forUser($user)->authorize('read', $notice);
                 if ($input !== []) {
                     throw ValidationException::withMessages(['form' => 'Utiliza únicamente el botón de lectura. No puedes cambiar destinatario, evento, recurso ni fechas.']);
                 }
                 ActivityNotification::whereKey($notice->id)->where('user_id', $user->id)->unread()->update(['read_at' => now('UTC')->format('Y-m-d H:i:s')]);
 
-                return $notice->fresh();
+                return $driver === 'mysql' ? $owned->findOrFail($id) : $notice->fresh();
             }, 3);
-        } catch (\PDOException $exception) {
-            $code = ((int) ($exception->errorInfo[1] ?? 0)) & 255;
-            $conflict = in_array($code, [5, 6, 19], true) || $this->causedByConcurrencyError($exception);
-            throw new NotificationFailure($conflict ? 'Hay otra operación de lectura en curso. Consulta la bandeja e inténtalo de nuevo.' : 'No se pudo registrar la lectura. Inténtalo más tarde.', $conflict ? 409 : 503);
+        } catch (PDOException $exception) {
+            throw $this->readFailure($exception, $driver);
         }
+    }
+
+    private function readFailure(PDOException $exception, string $driver): NotificationFailure
+    {
+        $cause = $exception->getPrevious();
+        $info = $exception->errorInfo ?? ($cause instanceof PDOException ? $cause->errorInfo : null) ?? [];
+        $code = (int) ($info[1] ?? 0);
+        $conflict = match ($driver) {
+            'sqlite' => in_array($code & 255, [5, 6, 19], true) || $this->causedByConcurrencyError($exception),
+            'mysql' => in_array($code, [1205, 1213, 3819], true)
+                || ($code === 1644 && ($info[2] ?? null) === 'activity_immutable'),
+            default => false,
+        };
+
+        return new NotificationFailure($conflict ? 'Hay otra operación de lectura en curso. Consulta la bandeja e inténtalo de nuevo.'
+            : 'No se pudo registrar la lectura. Inténtalo más tarde.', $conflict ? 409 : 503);
     }
 }

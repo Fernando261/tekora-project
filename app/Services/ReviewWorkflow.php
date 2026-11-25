@@ -67,6 +67,12 @@ class ReviewWorkflow
             try {
                 return DB::transaction(fn () => $operation(), 3);
             } catch (UniqueConstraintViolationException $exception) {
+                // InnoDB serializes this lookup and insert via the reservation lock. A duplicate
+                // here can come from an AFTER trigger, in which case the review was rolled back.
+                if ($mysql || ($exception->errorInfo[2] ?? null) !== 'UNIQUE constraint failed: service_reviews.service_reservation_id') {
+                    throw new ReviewFailure('Las reseñas no están disponibles temporalmente. Inténtalo más tarde.', 503);
+                }
+
                 // Tras el rollback, volver a autorizar y reconocer únicamente el mismo contenido.
                 return DB::transaction(fn () => $operation(true), 3);
             }
@@ -117,7 +123,7 @@ class ReviewWorkflow
             [$state, $code, $diagnostic] = array_pad($exception->errorInfo ?? ($cause instanceof PDOException ? $cause->errorInfo : []) ?? [], 3, null);
             $conflict = match ($driver) {
                 'sqlite' => in_array(((int) $code) & 255, [5, 6, 19], true) || $this->causedByConcurrencyError($exception),
-                'mysql' => in_array((int) $code, [1062, 1205, 1213, 1451, 1452, 3819], true)
+                'mysql' => in_array((int) $code, [1205, 1213, 1451, 1452, 3819], true)
                     || ((int) $code === 1644 && $state === '45000' && in_array($diagnostic,
                         ['review_initial_state', 'review_completed_identity', 'review_immutable', 'review_history_required'], true)),
                 default => false,
