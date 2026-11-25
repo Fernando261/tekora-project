@@ -176,8 +176,9 @@ final class PricingTest extends LabTestCase
                 $observed[$info] = true;
             }
             foreach ($needles as $needle) {
-                if (str_contains($info, strtolower($needle))) {
-                    $this->assertContains($process->Command, ['Query', 'Execute']);
+                // A native prepared statement can appear before execution reaches the lock.
+                if (in_array($process->Command ?? null, ['Query', 'Execute'], true) && str_contains($info, strtolower($needle))) {
+                    $this->assertSame($connection, (int) $process->Id);
 
                     return;
                 }
