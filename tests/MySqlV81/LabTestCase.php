@@ -3,9 +3,12 @@
 namespace Tests\MySqlV81;
 
 use App\Models\ServiceInquiry;
+use App\Models\ServiceReservation;
+use App\Models\User;
 use App\Services\ReservationTime;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\TestCase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\Support\CatalogFixtures;
 
@@ -54,6 +57,19 @@ abstract class LabTestCase extends TestCase
                 $this->assertSame($diagnostic, $e->errorInfo[2]);
             }
         }
+    }
+
+    protected function completedReservation(ServiceInquiry $inquiry, User $provider, string $time = '09:00'): ServiceReservation
+    {
+        $row = $this->reservationRow($inquiry, $time);
+        $id = DB::table('service_reservations')->insertGetId($row);
+        $reservation = DB::table('service_reservations')->where('id', $id);
+        $reservation->update(['status' => 'confirmed', 'version' => 2, 'last_actor_user_id' => $provider->id,
+            'last_reason' => 'confirm', 'updated_at' => '2030-01-02 12:00:00']);
+        $reservation->update(['status' => 'completed', 'version' => 3, 'last_actor_user_id' => $provider->id,
+            'last_reason' => 'complete', 'updated_at' => $row['ends_at_utc']]);
+
+        return ServiceReservation::findOrFail($id);
     }
 
     protected function startWorker(string $script, string|int ...$arguments): array

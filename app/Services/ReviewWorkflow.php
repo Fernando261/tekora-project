@@ -13,6 +13,7 @@ use Illuminate\Database\DetectsConcurrencyErrors;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use PDOException;
 
 class ReviewWorkflow
 {
@@ -21,20 +22,40 @@ class ReviewWorkflow
     /** @return array{review: ServiceReview, created: bool} */
     public function publish(User $actor, int $reservationId, array $input): array
     {
-        return $this->safely(function () use ($actor, $reservationId, $input) {
-            $operation = function (bool $existingOnly = false) use ($actor, $reservationId, $input) {
-                $reservation = ServiceReservation::findOrFail($reservationId);
+        return $this->safely(function (bool $mysql) use ($actor, $reservationId, $input) {
+            $operation = function (bool $existingOnly = false) use ($actor, $reservationId, $input, $mysql) {
+                $reservations = ServiceReservation::query();
+                if ($mysql) {
+                    // Serialize publications even when there is no review row yet.
+                    $reservations->lockForUpdate();
+                }
+                $reservation = $reservations->findOrFail($reservationId);
                 Gate::forUser($actor)->authorize('create', [ServiceReview::class, $reservation]);
-                if ($reservation->status !== ReservationStatus::Completed) throw new ReviewFailure('Solo puedes reseñar una reserva completada.');
+                if ($reservation->status !== ReservationStatus::Completed) {
+                    throw new ReviewFailure('Solo puedes reseñar una reserva completada.');
+                }
                 $data = ReviewInput::publish($input);
-                $existing = ServiceReview::where('service_reservation_id', $reservationId)->first();
-                if ($existing) return $this->replay($existing, $data);
-                if ($existingOnly) throw new ReviewFailure;
+                $reviews = ServiceReview::where('service_reservation_id', $reservationId);
+                if ($mysql) {
+                    // A consistent read can return the old published state after a withdrawal.
+                    $reviews->lockForUpdate();
+                }
+                $existing = $reviews->first();
+                if ($existing) {
+                    return $this->replay($existing, $data);
+                }
+                if ($existingOnly) {
+                    throw new ReviewFailure;
+                }
 
                 $review = new ServiceReview;
-                $review->service_reservation_id = $reservation->id; $review->service_id = $reservation->service_id;
-                $review->provider_profile_id = $reservation->provider_profile_id; $review->client_user_id = $reservation->client_user_id;
-                $review->rating = $data['rating']; $review->comment = $data['comment']; $review->status = ReviewVisibility::Published;
+                $review->service_reservation_id = $reservation->id;
+                $review->service_id = $reservation->service_id;
+                $review->provider_profile_id = $reservation->provider_profile_id;
+                $review->client_user_id = $reservation->client_user_id;
+                $review->rating = $data['rating'];
+                $review->comment = $data['comment'];
+                $review->status = ReviewVisibility::Published;
                 $review->created_at = now('UTC')->format('Y-m-d H:i:s');
                 // El INSERT obtiene el bloqueo de escritura; UNIQUE y los triggers son la garantía final.
                 // No se escribe en reservas ni eventos para obtener un bloqueo artificial.
@@ -43,8 +64,9 @@ class ReviewWorkflow
 
                 return ['review' => $review->fresh(), 'created' => true];
             };
-            try { return DB::transaction(fn () => $operation(), 3); }
-            catch (UniqueConstraintViolationException $exception) {
+            try {
+                return DB::transaction(fn () => $operation(), 3);
+            } catch (UniqueConstraintViolationException $exception) {
                 // Tras el rollback, volver a autorizar y reconocer únicamente el mismo contenido.
                 return DB::transaction(fn () => $operation(true), 3);
             }
@@ -53,12 +75,18 @@ class ReviewWorkflow
 
     public function withdraw(User $actor, int $reviewId, array $input = []): ServiceReview
     {
-        return $this->safely(function () use ($actor, $reviewId, $input) {
-            return DB::transaction(function () use ($actor, $reviewId, $input) {
-                $review = ServiceReview::findOrFail($reviewId);
+        return $this->safely(function (bool $mysql) use ($actor, $reviewId, $input) {
+            return DB::transaction(function () use ($actor, $reviewId, $input, $mysql) {
+                $reviews = ServiceReview::query();
+                if ($mysql) {
+                    $reviews->lockForUpdate();
+                }
+                $review = $reviews->findOrFail($reviewId);
                 Gate::forUser($actor)->authorize('withdraw', $review);
                 ReviewInput::only($input);
-                if ($review->status === ReviewVisibility::Withdrawn) return $review;
+                if ($review->status === ReviewVisibility::Withdrawn) {
+                    return $review;
+                }
                 ServiceReview::whereKey($reviewId)->where('status', ReviewVisibility::Published->value)->update([
                     'status' => ReviewVisibility::Withdrawn->value, 'withdrawn_at_utc' => now('UTC')->format('Y-m-d H:i:s'), 'withdrawn_by_user_id' => $actor->id]);
                 $updated = $review->fresh();
@@ -80,11 +108,20 @@ class ReviewWorkflow
 
     private function safely(callable $operation): mixed
     {
-        try { return $operation(); }
-        catch (\PDOException $exception) {
-            // Usar códigos del motor, nunca nombres de conexión, SQL o comentario del usuario.
-            $sqliteCode = ((int) ($exception->errorInfo[1] ?? 0)) & 255;
-            $conflict = in_array($sqliteCode, [5, 6, 19], true) || $this->causedByConcurrencyError($exception);
+        $driver = DB::connection()->getDriverName();
+        try {
+            return $operation($driver === 'mysql');
+        } catch (PDOException $exception) {
+            // Laravel can wrap a nested deadlock without copying its PDO errorInfo.
+            $cause = $exception->getPrevious();
+            [$state, $code, $diagnostic] = array_pad($exception->errorInfo ?? ($cause instanceof PDOException ? $cause->errorInfo : []) ?? [], 3, null);
+            $conflict = match ($driver) {
+                'sqlite' => in_array(((int) $code) & 255, [5, 6, 19], true) || $this->causedByConcurrencyError($exception),
+                'mysql' => in_array((int) $code, [1062, 1205, 1213, 1451, 1452, 3819], true)
+                    || ((int) $code === 1644 && $state === '45000' && in_array($diagnostic,
+                        ['review_initial_state', 'review_completed_identity', 'review_immutable', 'review_history_required'], true)),
+                default => false,
+            };
             throw new ReviewFailure($conflict ? 'Hay un conflicto con el envío. Consulta Mis reseñas antes de reintentar.' : 'Las reseñas no están disponibles temporalmente. Inténtalo más tarde.', $conflict ? 409 : 503);
         }
     }

@@ -5,11 +5,13 @@ namespace Tests\MySqlV81;
 use App\Enums\InquiryAction;
 use App\Enums\RoleName;
 use App\Models\ServiceInquiry;
+use App\Models\ServiceReview;
 use App\Models\User;
 use App\Notifications\MobileIdentityCode;
 use App\Services\InquiryMessaging;
 use App\Services\InquiryWorkflow;
 use App\Services\ProviderAvailability;
+use App\Services\ReviewWorkflow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -20,7 +22,7 @@ final class FoundationTest extends LabTestCase
     public function test_foundation_migrations_are_idempotent_and_restart_preserves_inquiry(): void
     {
         $expected = array_map(fn ($path) => basename($path, '.php'), mysqlV81MigrationPaths());
-        $this->assertCount(35, $expected);
+        $this->assertCount(36, $expected);
         $records = DB::table('migrations')->orderBy('id')->get();
         $this->assertSame($expected, $records->pluck('migration')->all());
         $this->migrateFoundation();
@@ -48,6 +50,14 @@ final class FoundationTest extends LabTestCase
                 'status' => 'confirmed', 'version' => 2, 'last_actor_user_id' => $provider->id,
                 'last_reason' => 'confirm', 'updated_at' => '2030-01-02 12:00:00',
             ]);
+            $reviewed = $inquiries->open($this->account(RoleName::Client), $service->id, 'Marcador de reseñas V8.1.4')['inquiry'];
+            $reviewed = $inquiries->decide($provider, $reviewed->id, InquiryAction::Accept);
+            $completed = $this->completedReservation($reviewed, $provider, '10:00');
+            $this->travelTo(now('UTC')->setDate(2030, 1, 8)->setTime(12, 0, 0));
+            $reviews = app(ReviewWorkflow::class);
+            $review = $reviews->publish($reviewed->client, $completed->id, ['rating' => 5, 'comment' => 'Marcador de reseña retirada'])['review'];
+            $reviews->withdraw($reviewed->client, $review->id);
+            $this->travelBack();
         }
         $saved = ServiceInquiry::where('message', 'Marcador de reinicio V8.1')->sole();
         $result = app(InquiryWorkflow::class)->open($saved->client, $saved->service_id, 'Reintento después de la lectura');
@@ -65,6 +75,13 @@ final class FoundationTest extends LabTestCase
         $this->assertSame(2, $reservation->version);
         $this->assertSame('2030-01-07 15:00:00', $reservation->starts_at_utc);
         $this->assertSame(['proposal', 'confirm'], $reservation->events()->orderBy('version')->pluck('reason')->all());
+        $review = ServiceReview::where('service_id', $saved->service_id)->sole();
+        $this->assertSame('completed', $review->reservation->status->value);
+        $this->assertSame('withdrawn', $review->status->value);
+        $this->assertSame('Marcador de reseña retirada', $review->comment);
+        $this->assertSame(5, $review->rating);
+        $this->assertSame('2030-01-08 12:00:00', $review->withdrawn_at_utc);
+        $this->assertSame($review->client_user_id, $review->withdrawn_by_user_id);
     }
 
     public function test_active_uniqueness_terminal_history_and_foreign_keys(): void
