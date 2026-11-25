@@ -37,14 +37,13 @@ function mysqlV81Application(): Application
     $app->make(Kernel::class)->bootstrap();
 
     $parameters = DB::selectOne('SELECT VERSION() AS version, @@default_storage_engine AS engine,
-        @@foreign_key_checks AS fk, @@sql_mode AS sql_mode, @@skip_networking AS no_tcp, DATABASE() AS db');
+        @@foreign_key_checks AS fk, @@sql_mode AS sql_mode, @@skip_networking AS no_tcp, @@session.time_zone AS timezone, DATABASE() AS db');
     if (! $app->environment('testing') || DB::connection()->getDriverName() !== 'mysql'
         || ! preg_match('/^8\.4\.\d+(?:-commercial)?$/D', $parameters->version)
         || $parameters->engine !== 'InnoDB' || (int) $parameters->fk !== 1 || (int) $parameters->no_tcp !== 1
-        || ! str_contains($parameters->sql_mode, 'STRICT_TRANS_TABLES') || $parameters->db !== getenv('DB_DATABASE')) {
+        || ! str_contains($parameters->sql_mode, 'STRICT_TRANS_TABLES') || $parameters->db !== getenv('DB_DATABASE') || $parameters->timezone !== '+00:00') {
         throw new RuntimeException('MySQL 8.4/InnoDB lab identity or integrity requirements failed.');
     }
-    DB::statement("SET SESSION time_zone = '+00:00'");
 
     return $app;
 }
@@ -52,13 +51,14 @@ function mysqlV81Application(): Application
 function mysqlV81MigrationPaths(): array
 {
     $root = dirname(__DIR__, 2);
-    $last = '2026_11_03_000001_create_service_reviews.php';
+    $last = '2026_11_03_000002_create_activity_notifications.php';
     $variants = [
         '2026_10_28_000002_create_service_inquiries_table.php',
         '2026_10_30_000000_create_service_inquiry_messages_table.php',
         '2026_10_30_000001_create_service_inquiry_reads_table.php',
         '2026_10_30_000002_create_provider_availability_tables.php',
         '2026_11_03_000000_create_service_reservations.php',
+        '2026_11_03_000001_create_service_reviews.php',
         $last,
     ];
     $files = array_filter(glob($root.'/database/migrations/*.php'), fn ($path) => basename($path) <= $last);

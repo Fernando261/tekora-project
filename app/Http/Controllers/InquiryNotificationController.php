@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Exceptions\NotificationFailure;
 use App\Services\NotificationInbox;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class InquiryNotificationController extends Controller
@@ -13,7 +13,9 @@ class InquiryNotificationController extends Controller
     {
         return $this->safely($request, function () use ($request) {
             $page = \Illuminate\Support\Facades\Validator::make(['page' => $request->query('page', 1)], ['page' => ['required', 'integer', 'min:1', 'max:10000']]);
-            if ($page->fails()) return (new NotificationFailure('La página de notificaciones no es válida.', 422))->render($request);
+            if ($page->fails()) {
+                return (new NotificationFailure('La página de notificaciones no es válida.', 422))->render($request);
+            }
 
             return DB::transaction(function () use ($request, $page) {
                 $notifications = app(NotificationInbox::class)->listing($request->user('web'), (int) $page->validated()['page']);
@@ -28,7 +30,7 @@ class InquiryNotificationController extends Controller
         // Buscar dentro de la cuenta evita revelar si un identificador ajeno existe.
         return $this->safely($request, function () use ($request, $notification) {
             $notice = $request->user('web')->inquiryNotifications()->findOrFail($notification);
-            $request->user('web')->inquiryNotifications()->whereKey($notice->id)->unread()->update(['read_at' => now()]);
+            $request->user('web')->inquiryNotifications()->whereKey($notice->id)->unread()->update(['read_at' => now('UTC')->format('Y-m-d H:i:s')]);
 
             return redirect()->route('notifications.index', [], 303)->with('success', 'Notificación marcada como leída.');
         });
@@ -45,16 +47,29 @@ class InquiryNotificationController extends Controller
 
     private function safely(Request $request, callable $operation)
     {
-        try { return $operation(); }
-        catch (NotificationFailure $exception) { return $exception->render($request); }
-        catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) { return (new NotificationFailure('La notificación no está disponible.', 404))->render($request); }
-        catch (\Illuminate\Auth\Access\AuthorizationException $exception) { return (new NotificationFailure('No tienes permiso para consultar esta notificación.', 403))->render($request); }
-        catch (\Throwable $exception) {
+        try {
+            return $operation();
+        } catch (NotificationFailure $exception) {
+            return $exception->render($request);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            return (new NotificationFailure('La notificación no está disponible.', 404))->render($request);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $exception) {
+            return (new NotificationFailure('No tienes permiso para consultar esta notificación.', 403))->render($request);
+        } catch (\Throwable $exception) {
             for ($cause = $exception; $cause; $cause = $cause->getPrevious()) {
-                if ($cause instanceof NotificationFailure) return $cause->render($request);
+                if ($cause instanceof NotificationFailure) {
+                    return $cause->render($request);
+                }
                 if ($cause instanceof \PDOException) {
-                    $code = ((int) ($cause->errorInfo[1] ?? 0)) & 255;
-                    if (! $request->isMethodSafe() && in_array($code, [5, 6], true)) return (new NotificationFailure('Hay otra lectura en curso. Inténtalo de nuevo.', 409))->render($request);
+                    $code = (int) ($cause->errorInfo[1] ?? 0);
+                    $conflict = match (DB::connection()->getDriverName()) {
+                        'sqlite' => in_array($code & 255, [5, 6], true),
+                        'mysql' => in_array($code, [1205, 1213], true),
+                        default => false,
+                    };
+                    if (! $request->isMethodSafe() && $conflict) {
+                        return (new NotificationFailure('Hay otra lectura en curso. Inténtalo de nuevo.', 409))->render($request);
+                    }
 
                     return (new NotificationFailure)->render($request);
                 }

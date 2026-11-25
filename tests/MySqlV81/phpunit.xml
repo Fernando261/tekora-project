@@ -6,6 +6,7 @@
             <file>AvailabilityTest.php</file>
             <file>ReservationTest.php</file>
             <file>ReviewTest.php</file>
+            <file>ActivityNotificationTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
