@@ -420,6 +420,8 @@ final class PricingTest extends LabTestCase
 
     public function test_api_and_web_write_boundaries_sanitize_errors_and_keep_history_private(): void
     {
+        // This socket-only lab validates server responses. Vite is built separately.
+        $this->withoutVite();
         [$provider, $client, $service, $inquiry] = $this->scenario();
         $bearer = fn ($actor) => ['Authorization' => 'Bearer '.$actor->createToken('mobile:v816', ['client:read'], now()->addDay())->plainTextToken];
         $headers = $bearer($client);
@@ -462,6 +464,8 @@ final class PricingTest extends LabTestCase
 
     public function test_catalog_renders_exact_price_and_public_reviews_without_b2(): void
     {
+        // This socket-only lab validates server responses. Vite is built separately.
+        $this->withoutVite();
         [$provider, $client, $service, $inquiry] = $this->scenario();
         $reservation = $this->completedReservation($inquiry, $provider);
         $this->travelTo(CarbonImmutable::parse('2030-01-08 12:00:00', 'UTC'));
