@@ -5,6 +5,7 @@
             <file>FoundationTest.php</file>
             <file>AvailabilityTest.php</file>
             <file>ReservationTest.php</file>
+            <file>ReviewTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -52,12 +52,13 @@ function mysqlV81Application(): Application
 function mysqlV81MigrationPaths(): array
 {
     $root = dirname(__DIR__, 2);
-    $last = '2026_11_03_000000_create_service_reservations.php';
+    $last = '2026_11_03_000001_create_service_reviews.php';
     $variants = [
         '2026_10_28_000002_create_service_inquiries_table.php',
         '2026_10_30_000000_create_service_inquiry_messages_table.php',
         '2026_10_30_000001_create_service_inquiry_reads_table.php',
         '2026_10_30_000002_create_provider_availability_tables.php',
+        '2026_11_03_000000_create_service_reservations.php',
         $last,
     ];
     $files = array_filter(glob($root.'/database/migrations/*.php'), fn ($path) => basename($path) <= $last);
