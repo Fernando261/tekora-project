@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Database;
 
 use Closure;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\MySqlConnection;
 use LogicException;
 use PDO;
@@ -15,6 +16,22 @@ final class PricingMySqlConnection extends MySqlConnection
     private ?PDO $pricingOwner = null;
 
     private bool $pricingInvalid = false;
+
+    public function hasPricingTransaction(): bool
+    {
+        return $this->pricingOwner !== null;
+    }
+
+    /** Read the current row and protect it through COMMIT, only for a pricing write. */
+    public static function lockPricingRead(Builder $query): Builder
+    {
+        $connection = $query->getConnection();
+        if ($connection instanceof self && $connection->hasPricingTransaction()) {
+            $query->sharedLock();
+        }
+
+        return $query;
+    }
 
     public function beginPricing(PDO $pdo): void
     {

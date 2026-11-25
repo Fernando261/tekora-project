@@ -2,6 +2,7 @@
 
 namespace App\Payments;
 
+use App\Database\PricingMySqlConnection;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -13,7 +14,7 @@ final class ServicePricing
 
     public function publish(User $actor, int $serviceId, array $input): PriceVersion
     {
-        $service = Service::findOrFail($serviceId);
+        $service = PricingMySqlConnection::lockPricingRead(Service::query())->findOrFail($serviceId);
         Gate::forUser($actor)->authorize('update', $service);
         PricingInput::only($input, ['amount_cents', 'expected_version', 'idempotency_key']);
         $amount = PricingInput::amount($input);
@@ -21,7 +22,7 @@ final class ServicePricing
         $key = PricingInput::key($input);
 
         return $this->store->atomic(function () use ($actor, $serviceId, $amount, $version, $key) {
-            $service = Service::findOrFail($serviceId);
+            $service = PricingMySqlConnection::lockPricingRead(Service::query())->findOrFail($serviceId);
             Gate::forUser($actor)->authorize('update', $service);
             $existing = $this->store->priceByKey($serviceId, $key);
             if ($existing) {

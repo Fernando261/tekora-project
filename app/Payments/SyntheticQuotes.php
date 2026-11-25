@@ -2,6 +2,7 @@
 
 namespace App\Payments;
 
+use App\Database\PricingMySqlConnection;
 use App\Enums\InquiryStatus;
 use App\Enums\Permission;
 use App\Models\Service;
@@ -79,16 +80,17 @@ final class SyntheticQuotes
             if ($existing) {
                 return $existing;
             }
-            $now = now('UTC')->toDateTimeImmutable();
-            if ($now >= $quote->expiresAt) {
-                throw new PricingConflict('La cotización venció; solicita una nueva sin alterar la anterior.');
-            }
+            $now = $this->acceptanceTime($quote);
             $inquiry = $this->ownedInquiry($actor, $quote->inquiryId);
             if ($inquiry->status !== InquiryStatus::Accepted) {
                 throw new PricingConflict('La solicitud ya no admite una nueva aceptación.');
             }
             $service = Service::publiclyVisible()->findOrFail($quote->serviceId);
             Gate::forUser($actor)->authorize('create', [ServiceInquiry::class, $service]);
+            if ($this->store instanceof MysqlPricingStore) {
+                // The current eligibility reads above can wait on service, category or role locks.
+                $now = $this->acceptanceTime($quote);
+            }
             $acceptance = new QuoteAcceptance($quote->id, $actor->id, $now);
             $this->store->appendAcceptance($acceptance);
 
@@ -99,9 +101,19 @@ final class SyntheticQuotes
     public function ownedInquiry(User $actor, int $inquiryId): ServiceInquiry
     {
         Gate::forUser($actor)->authorize(Permission::ManageOwnInquiries->value);
-        $inquiry = ServiceInquiry::where('client_user_id', $actor->id)->findOrFail($inquiryId);
+        $inquiry = PricingMySqlConnection::lockPricingRead(ServiceInquiry::where('client_user_id', $actor->id))->findOrFail($inquiryId);
         Gate::forUser($actor)->authorize('view', $inquiry);
 
         return $inquiry;
+    }
+
+    private function acceptanceTime(SyntheticQuote $quote): \DateTimeImmutable
+    {
+        $now = now('UTC')->toDateTimeImmutable();
+        if ($now >= $quote->expiresAt) {
+            throw new PricingConflict('La cotización venció; solicita una nueva sin alterar la anterior.');
+        }
+
+        return $now;
     }
 }

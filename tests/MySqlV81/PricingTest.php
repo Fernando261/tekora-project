@@ -13,9 +13,11 @@ use App\Payments\SyntheticQuotes;
 use App\Services\InquiryWorkflow;
 use App\Services\ReviewWorkflow;
 use Carbon\CarbonImmutable;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use LogicException;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 final class PricingTest extends LabTestCase
 {
@@ -23,7 +25,7 @@ final class PricingTest extends LabTestCase
     {
         $provider = $this->account(RoleName::Provider);
         $client = $this->account(RoleName::Client);
-        $service = $this->service($provider);
+        $service = $this->service($provider, ['service_category_id' => $this->category('pricing-'.Str::uuid())->id]);
         $inquiry = app(InquiryWorkflow::class)->open($client, $service->id, 'Solicitud de cotización sintética')['inquiry'];
         $inquiry = app(InquiryWorkflow::class)->decide($provider, $inquiry->id, InquiryAction::Accept);
 
@@ -165,7 +167,7 @@ final class PricingTest extends LabTestCase
         return $this->workerResult($worker)['connection'];
     }
 
-    private function awaitStatement(int $connection, string ...$needles): void
+    private function awaitStatement(int $connection, string|array ...$patterns): void
     {
         $limit = hrtime(true) + 5_000_000_000;
         $observed = [];
@@ -175,9 +177,9 @@ final class PricingTest extends LabTestCase
             if ($info !== '') {
                 $observed[$info] = true;
             }
-            foreach ($needles as $needle) {
+            foreach ($patterns as $pattern) {
                 // A native prepared statement can appear before execution reaches the lock.
-                if (in_array($process->Command ?? null, ['Query', 'Execute'], true) && str_contains($info, strtolower($needle))) {
+                if (in_array($process->Command ?? null, ['Query', 'Execute'], true) && array_all((array) $pattern, fn ($needle) => str_contains($info, strtolower($needle)))) {
                     $this->assertSame($connection, (int) $process->Id);
 
                     return;
@@ -185,7 +187,7 @@ final class PricingTest extends LabTestCase
             }
             usleep(10_000);
         } while (hrtime(true) < $limit);
-        $this->fail('Worker never reached the blocked statement for '.implode(' or ', $needles).'. Observed: '.implode('; ', array_keys($observed)));
+        $this->fail('Worker never reached the blocked statement for '.json_encode($patterns, JSON_THROW_ON_ERROR).'. Observed: '.implode('; ', array_keys($observed)));
     }
 
     private function race(array $one, array $two): array
@@ -280,32 +282,182 @@ final class PricingTest extends LabTestCase
         app(ServicePricing::class)->publish($provider, $service->id, $this->input());
         $quote = $this->issue($inquiry);
         $accept = ['operation' => 'accept', 'actor' => $client->id, 'quote' => $quote];
-        $this->assertSame(1644, $this->parentWins($accept, 'quote_acceptances', fn () => DB::table('service_inquiries')
-            ->where('id', $inquiry->id)->update(['status' => 'completed']))['native']);
+        $closed = $this->inquiryChangeWins($accept, fn () => DB::table('service_inquiries')
+            ->where('id', $inquiry->id)->update(['status' => 'completed']));
+        $this->assertTrue($closed['conflict']);
+        $this->assertNull($closed['native']);
         $this->assertNull(app(PricingStore::class)->acceptance($quote));
 
         [$provider, $client, $service, $inquiry] = $this->scenario();
         app(ServicePricing::class)->publish($provider, $service->id, $this->input());
         $replacement = $this->account(RoleName::Client);
         $issue = ['operation' => 'issue', 'actor' => $client->id, 'inquiry' => $inquiry->id, 'key' => (string) Str::uuid(), 'isolation' => 'READ COMMITTED'];
-        $this->assertSame(1644, $this->parentWins($issue, 'service_quotes', fn () => DB::table('service_inquiries')
-            ->where('id', $inquiry->id)->update(['client_user_id' => $replacement->id]))['native']);
+        $this->assertSame(404, $this->inquiryChangeWins($issue, fn () => DB::table('service_inquiries')
+            ->where('id', $inquiry->id)->update(['client_user_id' => $replacement->id]))['denied']);
         $this->assertNull(app(PricingStore::class)->quoteByKey($client->id, $issue['key']));
         $this->assertSame($replacement->id, $inquiry->fresh()->client_user_id);
     }
 
-    private function parentWins(array $action, string $table, callable $change): array
+    private function inquiryChangeWins(array $action, callable $change): array
     {
         $worker = $this->startPricingWorker($action);
         try {
-            DB::transaction(function () use ($change, $worker, $table) {
+            DB::transaction(function () use ($change, $worker) {
                 $this->assertSame(1, $change());
-                $this->awaitStatement($this->dispatch($worker), 'insert into '.$table, 'select i.id into parent_id');
+                $this->awaitStatement($this->dispatch($worker), ['lock in share mode', 'from `service_inquiries`']);
             });
 
             return $this->workerResult($worker);
         } finally {
             $this->closeWorker($worker);
+        }
+    }
+
+    public static function eligibilityRaces(): iterable
+    {
+        foreach (['REPEATABLE READ', 'READ COMMITTED'] as $isolation) {
+            foreach ([
+                ['issue', 'pause', 404], ['accept', 'pause', 404], ['issue', 'category', 404],
+                ['issue', 'provider', 404], ['accept', 'client', 403], ['publish', 'provider', 403],
+            ] as [$operation, $change, $denied]) {
+                foreach ([true, false] as $eligibilityFirst) {
+                    $order = $eligibilityFirst ? 'eligibility first' : 'commerce first';
+                    yield "$isolation $operation $change $order" => [$isolation, $operation, $change, $denied, $eligibilityFirst];
+                }
+            }
+        }
+    }
+
+    #[DataProvider('eligibilityRaces')]
+    public function test_commercial_writes_serialize_with_current_eligibility(string $isolation, string $operation, string $change, int $denied, bool $eligibilityFirst): void
+    {
+        [$provider, $client, $service, $inquiry] = $this->scenario();
+        $input = $this->input();
+        $quoteId = null;
+        if ($operation !== 'publish') {
+            app(ServicePricing::class)->publish($provider, $service->id, $this->input());
+            if ($operation === 'accept') {
+                $quoteId = $this->issue($inquiry);
+            }
+        }
+        [$mutation, $predicate] = match ($change) {
+            'pause' => [['change' => 'pause', 'target' => $service->id], ['from `services`']],
+            'category' => [['change' => 'category', 'target' => $service->service_category_id], ['from `services`', '`service_categories`']],
+            'provider' => [['change' => 'role', 'target' => $provider->id, 'role' => $provider->roles()->sole()->id], $operation === 'publish' ? ['from `roles`', '`role_user`'] : ['from `services`', '`role_user`']],
+            'client' => [['change' => 'role', 'target' => $client->id, 'role' => $client->roles()->sole()->id], ['from `roles`', '`role_user`']],
+        };
+        $action = ['operation' => $operation, 'actor' => $operation === 'publish' ? $provider->id : $client->id,
+            'service' => $service->id, 'quote' => $quoteId, 'inquiry' => $inquiry->id, 'body' => $input, 'key' => $input['idempotency_key']];
+        $record = match ($operation) {
+            'issue' => DB::table('service_quotes')->where('idempotency_key', $input['idempotency_key']),
+            'accept' => DB::table('quote_acceptances')->where('quote_id', $quoteId),
+            'publish' => DB::table('service_price_versions')->where('idempotency_key', $input['idempotency_key']),
+        };
+        DB::statement('SET SESSION TRANSACTION ISOLATION LEVEL '.$isolation);
+        $worker = $this->startPricingWorker(($eligibilityFirst ? $action : ['operation' => 'ineligible', 'timeout' => 1] + $mutation) + ['isolation' => $isolation]);
+        try {
+            if ($eligibilityFirst) {
+                DB::transaction(function () use ($mutation, $worker, $predicate) {
+                    $this->assertSame(1, match ($mutation['change']) {
+                        'pause' => DB::table('services')->where('id', $mutation['target'])->update(['status' => 'paused']),
+                        'category' => DB::table('service_categories')->where('id', $mutation['target'])->update(['is_active' => false]),
+                        'role' => DB::table('role_user')->where('user_id', $mutation['target'])->where('role_id', $mutation['role'])->delete(),
+                    });
+                    $this->awaitStatement($this->dispatch($worker), ['lock in share mode', ...$predicate]);
+                });
+                $outcome = $this->workerResult($worker);
+                $this->assertSame($denied, $outcome['denied']);
+                $this->assertTrue($outcome['released']);
+                $this->assertTrue($outcome['same_session']);
+                $this->assertFalse($record->exists());
+            } else {
+                app(PricingStore::class)->atomic(function () use ($operation, $client, $provider, $inquiry, $service, $quoteId, $input, $worker) {
+                    match ($operation) {
+                        'issue' => app(SyntheticQuotes::class)->issue($client, $inquiry->id, ['idempotency_key' => $input['idempotency_key']]),
+                        'accept' => app(SyntheticQuotes::class)->accept($client, $quoteId),
+                        'publish' => app(ServicePricing::class)->publish($provider, $service->id, $input),
+                    };
+                    $this->dispatch($worker);
+                    $this->assertSame(['native' => 1205], $this->workerResult($worker));
+                });
+                fwrite($worker[1][0], "retry\n");
+                $this->assertSame(1, $this->workerResult($worker)['rows']);
+                $this->assertSame(1, $record->count());
+            }
+        } finally {
+            $this->closeWorker($worker);
+        }
+    }
+
+    #[DataProvider('acceptanceBoundaries')]
+    public function test_acceptance_clock_is_sampled_after_waiting_for_the_service(string $isolation, int $microsBeforeExpiry): void
+    {
+        [$provider, $client, $service, $inquiry] = $this->scenario();
+        $this->travelTo(CarbonImmutable::parse('2030-01-06 12:00:00.234567', 'UTC'));
+        app(ServicePricing::class)->publish($provider, $service->id, $this->input());
+        $quote = app(PricingStore::class)->quote($this->issue($inquiry));
+        $from = CarbonImmutable::instance($quote->expiresAt)->subSecond()->format('Y-m-d H:i:s.u');
+        $afterLock = CarbonImmutable::instance($quote->expiresAt)->subMicrosecond($microsBeforeExpiry)->format('Y-m-d H:i:s.u');
+
+        $worker = $this->startPricingWorker([
+            'operation' => 'accept', 'actor' => $client->id, 'quote' => $quote->id, 'isolation' => $isolation,
+            'clock' => $from, 'after_lock' => $afterLock,
+        ]);
+        try {
+            DB::transaction(function () use ($service, $worker) {
+                DB::table('services')->where('id', $service->id)->lockForUpdate()->sole();
+                $this->awaitStatement($this->dispatch($worker), ['lock in share mode', 'from `services`']);
+            });
+            $result = $this->workerResult($worker);
+            $receipt = app(PricingStore::class)->acceptance($quote->id);
+            if ($microsBeforeExpiry === 0) {
+                $this->assertTrue($result['conflict']);
+                $this->assertNull($receipt);
+            } else {
+                $this->assertSame($afterLock, $result['at']);
+                $this->assertSame($afterLock, $receipt->acceptedAt->format('Y-m-d H:i:s.u'));
+            }
+        } finally {
+            $this->closeWorker($worker);
+            $this->travelBack();
+        }
+    }
+
+    public static function acceptanceBoundaries(): iterable
+    {
+        foreach (['REPEATABLE READ', 'READ COMMITTED'] as $isolation) {
+            yield "$isolation at expiry" => [$isolation, 0];
+            yield "$isolation one microsecond before expiry" => [$isolation, 1];
+        }
+    }
+
+    public function test_historical_quote_and_acceptance_survive_later_eligibility_and_price_changes(): void
+    {
+        [$provider, $client, $service, $inquiry] = $this->scenario();
+        app(ServicePricing::class)->publish($provider, $service->id, $this->input());
+        $quotes = app(SyntheticQuotes::class);
+        $input = ['idempotency_key' => $this->input()['idempotency_key']];
+        $quote = $quotes->issue($client, $inquiry->id, $input);
+        $receipt = $quotes->accept($client, $quote->id);
+        app(ServicePricing::class)->publish($provider, $service->id, $this->input(200, 1));
+        $service->update(['status' => 'paused']);
+        $service->category->update(['is_active' => false]);
+        $provider->roles()->detach();
+        $this->travelTo(CarbonImmutable::instance($quote->expiresAt)->addSecond());
+        try {
+            $this->assertEquals($quote, $quotes->issue($client, $inquiry->id, $input));
+            $this->assertEquals($receipt, $quotes->accept($client, $quote->id));
+            $client->roles()->detach();
+            foreach ([fn () => $quotes->issue($client, $inquiry->id, $input), fn () => $quotes->accept($client, $quote->id)] as $replay) {
+                try {
+                    $replay();
+                    $this->fail('The historical record must remain private after client revocation.');
+                } catch (AuthorizationException) {
+                    $this->assertDatabaseHas('quote_acceptances', ['quote_id' => $quote->id, 'client_user_id' => $client->id]);
+                }
+            }
+        } finally {
+            $this->travelBack();
         }
     }
 

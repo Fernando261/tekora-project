@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Database\PricingMySqlConnection;
 use App\Enums\Permission;
 use App\Enums\RoleName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -93,6 +94,13 @@ class User extends Authenticatable
         // Consultar la asignación actual, sin confiar en relaciones cacheadas.
         $roles = array_map(fn (RoleName $role) => $role->value, $permission->roles());
 
-        return $this->roles()->whereIn('slug', $roles)->exists();
+        $query = $this->roles()->whereIn('roles.slug', $roles)->getQuery();
+        $connection = $query->getConnection();
+        if ($connection instanceof PricingMySqlConnection && $connection->hasPricingTransaction()) {
+            // Lock the account (FK parent), its assignment and the role defining the permission.
+            $query->join('users', 'users.id', '=', 'role_user.user_id')->sharedLock();
+        }
+
+        return $query->exists();
     }
 }

@@ -145,6 +145,11 @@ final class MysqlPricingStore implements PricingStore
         $this->connection->retirePricing();
     }
 
+    private function pricingReadLock(): string
+    {
+        return $this->active ? ' FOR SHARE' : '';
+    }
+
     private function normalizePricingRow(array $row): array
     {
         foreach ([

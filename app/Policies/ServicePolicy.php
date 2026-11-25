@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Database\PricingMySqlConnection;
 use App\Enums\Permission;
 use App\Models\Service;
 use App\Models\User;
@@ -16,12 +17,12 @@ class ServicePolicy
 
     public function create(Authenticatable $actor): bool
     {
-        return $this->viewAny($actor) && $actor->providerProfile()->exists();
+        return $this->viewAny($actor) && PricingMySqlConnection::lockPricingRead($actor->providerProfile()->getQuery())->exists();
     }
 
     public function update(Authenticatable $actor, Service $service): bool
     {
-        return $this->viewAny($actor) && $service->providerProfile()->where('user_id', $actor->id)->exists();
+        return $this->viewAny($actor) && PricingMySqlConnection::lockPricingRead($service->providerProfile()->where('user_id', $actor->id)->getQuery())->exists();
     }
 
     public function publish(Authenticatable $actor, Service $service): bool

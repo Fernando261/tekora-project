@@ -12,6 +12,11 @@ use PDO;
 
 trait PersistsPricing
 {
+    private function pricingReadLock(): string
+    {
+        return '';
+    }
+
     private function normalizePricingRow(array $row): array
     {
         return $row;
@@ -63,7 +68,7 @@ trait PersistsPricing
 
     public function latestPrice(int $serviceId): ?PriceVersion
     {
-        $row = $this->row('SELECT * FROM service_price_versions WHERE service_id=? ORDER BY version DESC LIMIT 1', [$serviceId]);
+        $row = $this->row('SELECT * FROM service_price_versions WHERE service_id=? ORDER BY version DESC LIMIT 1'.$this->pricingReadLock(), [$serviceId]);
 
         return $row ? $this->price($row) : null;
     }
@@ -82,7 +87,7 @@ trait PersistsPricing
 
     public function quote(string $id): ?SyntheticQuote
     {
-        $row = $this->row('SELECT * FROM service_quotes WHERE id=?', [$id]);
+        $row = $this->row('SELECT * FROM service_quotes WHERE id=?'.$this->pricingReadLock(), [$id]);
         if (! $row) {
             return null;
         }
