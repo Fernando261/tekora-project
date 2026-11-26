@@ -215,7 +215,22 @@ php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_persisted_jo
 start target 81502
 accounts target
 export TEKORA_V818_INSTANCE=target
-"$project/deploy/vps/restore.sh" "$private/target-admin.cnf" "$private/snapshot" "$private/restored-storage" "$private/target-migrator.json" --isolated-empty-target
+if ! "$project/deploy/vps/restore.sh" "$private/target-admin.cnf" "$private/snapshot" "$private/restored-storage" "$private/target-migrator.json" --isolated-empty-target; then
+    # This contains schema only from disposable instances, never data or account definitions.
+    for instance in source target; do
+        {
+            while IFS=$'\t' read -r kind object; do
+                [[ "$object" =~ ^[a-zA-Z0-9_]+$ ]] || exit 1
+                admin "$instance" tekora --raw -e "SHOW CREATE $kind $object"
+            done < <(admin "$instance" tekora -e "
+                SELECT IF(TABLE_TYPE='VIEW','VIEW','TABLE'),TABLE_NAME FROM information_schema.tables WHERE table_schema='tekora'
+                UNION ALL SELECT ROUTINE_TYPE, ROUTINE_NAME FROM information_schema.routines WHERE routine_schema='tekora'
+                UNION ALL SELECT 'TRIGGER',TRIGGER_NAME FROM information_schema.triggers WHERE trigger_schema='tekora'
+                ORDER BY 1,2")
+        } > "$evidence/schema-$instance.log" || true
+    done
+    exit 1
+fi
 administrative_window_closed target
 [[ $(admin target tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1') == "$watermark" ]]
 printf '%s\n' 'Watermark idéntico tras reinicio y restauración.'

@@ -157,20 +157,34 @@ final class MySqlProvisioner
     private function schemaDigest(PricingMySqlConnection $db): string
     {
         $definitions = [];
-        $triggerOrder = $db->table('information_schema.TRIGGERS')->whereRaw('TRIGGER_SCHEMA=DATABASE()')
-            ->pluck('ACTION_ORDER', 'TRIGGER_NAME');
+        $triggers = $db->table('information_schema.TRIGGERS')->whereRaw('TRIGGER_SCHEMA=DATABASE()')
+            ->orderBy('TRIGGER_NAME')->get([
+                'TRIGGER_NAME', 'DEFINER', 'EVENT_MANIPULATION', 'EVENT_OBJECT_TABLE', 'ACTION_ORDER',
+                'ACTION_TIMING', 'ACTION_STATEMENT', 'SQL_MODE', 'CHARACTER_SET_CLIENT',
+                'COLLATION_CONNECTION', 'DATABASE_COLLATION',
+            ])->keyBy('TRIGGER_NAME');
         foreach ($this->objects($db) as [$type, $name]) {
+            // mysqldump reconstructs the CREATE TRIGGER header. Compare its stored definition,
+            // execution order and session metadata instead of the original header's whitespace.
+            if ($type === 'TRIGGER') {
+                $trigger = $triggers->get($name);
+                if ($trigger === null || ! is_string($trigger->ACTION_STATEMENT) || $trigger->ACTION_STATEMENT === '') {
+                    throw new ProvisioningFailure('Faltan metadatos de un trigger del esquema.');
+                }
+                $definitions[] = [$type, $name, $trigger];
+
+                continue;
+            }
             $identifier = '`'.str_replace('`', '``', $name).'`';
             $record = (array) $db->selectOne("SHOW CREATE {$type} {$identifier}");
-            $field = $type === 'TRIGGER' ? 'SQL Original Statement' : 'Create '.ucfirst(strtolower($type));
-            $ddl = $record[$field] ?? null;
+            $ddl = $record['Create '.ucfirst(strtolower($type))] ?? null;
             if (! is_string($ddl) || $ddl === '') {
                 throw new ProvisioningFailure('Se requiere acceso de metadatos para acreditar objetos del esquema.');
             }
             if ($type === 'TABLE') {
                 $ddl = preg_replace('/(?<=\))([^\n]*) AUTO_INCREMENT=\d+/', '$1', $ddl);
             }
-            $definitions[] = [$type, $name, $ddl, $record['sql_mode'] ?? null, $triggerOrder->get($name)];
+            $definitions[] = [$type, $name, $ddl, $record['sql_mode'] ?? null];
         }
 
         return hash('sha256', json_encode($definitions, JSON_THROW_ON_ERROR));
