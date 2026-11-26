@@ -3,9 +3,13 @@
     @vite(['resources/css/tekora/checkout-demo.css', 'resources/css/tekora/checkout-integrated.css'])
   @endpush
   @php
+    $officialCheckout = $officialCheckout ?? false;
+    $submitRoute = $officialCheckout ? 'checkout.integrated.submit' : 'checkout.local.submit';
     $remaining = (int) ($context['hold']['remaining_seconds'] ?? 0);
     $readiness = $context['confirmation_readiness']['state'];
-    $canPay = in_array($readiness, ['ready', 'web_checkout_required'], true);
+    $canPay = $officialCheckout
+      ? \App\Payments\IntegratedCheckout::enabled() && $readiness === 'simulated_checkout_required'
+      : in_array($readiness, ['ready', 'web_checkout_required'], true);
     $bookingStatus = \App\Enums\ReservationStatus::from($context['reservation']['status']);
     $status = $attempt['status'] ?? null;
     $retryable = in_array($status, ['declined', 'temporary_failure'], true);
@@ -23,7 +27,7 @@
         <p class="co-eyebrow">TU PRÓXIMA CONEXIÓN · TEKORA</p>
         <h1>Checkout de prueba<span>.</span></h1>
       </div>
-      <p class="b32-heading-aside">Un paso más para conectar con lo que necesitas.<small>Checkout integrado · Entorno local de pruebas</small></p>
+      <p class="b32-heading-aside">Un paso más para conectar con lo que necesitas.<small>Checkout integrado · {{ $officialCheckout ? 'Procesamiento simulado' : 'Entorno local de pruebas' }}</small></p>
     </div>
 
     <section class="co-shell b32-shell" aria-label="Selección de prueba de la contratación">
@@ -70,7 +74,7 @@
                   </div>
                   <div class="co-card-number" data-b32-card-number>•••• &nbsp;•••• &nbsp;•••• &nbsp;4242</div>
                   <div class="co-card-bottom">
-                    <div><small>TITULAR FICTICIO</small><strong>{{ mb_strtoupper($context['client']['name']) }}</strong></div>
+                    <div><small>TITULAR FICTICIO</small><strong>{{ $officialCheckout ? 'PERSONA DE PRUEBA' : mb_strtoupper($context['client']['name']) }}</strong></div>
                     <div><small>VENCE</small><strong>12/30</strong></div>
                     <span class="co-card-network">TARJETA<small>SOLO PRUEBAS</small></span>
                   </div>
@@ -79,7 +83,7 @@
                     <svg viewBox="0 0 120 62" fill="none" aria-hidden="true"><rect x="3" y="3" width="114" height="56" rx="9"/><path d="M18 3c0 9-6 15-15 15m114 0c-9 0-15-6-15-15M3 44c9 0 15 6 15 15m84 0c0-9 6-15 15-15"/><circle cx="60" cy="31" r="17"/><path d="M66 23h-8a5 5 0 0 0 0 10h4a5 5 0 0 1 0 10h-8m6-24v28"/></svg>
                     <strong>EFECTIVO</strong>
                     <small>Recepción por el prestador</small>
-                    <span>ENTORNO LOCAL</span>
+                    <span>{{ $officialCheckout ? 'RESULTADO DE PRUEBA' : 'ENTORNO LOCAL' }}</span>
                   </div>
                 </div>
                 <div class="co-card-face co-card-back">
@@ -109,7 +113,7 @@
               </div>
             @endif
 
-            <form method="POST" action="{{ route('checkout.local.submit', $reservation) }}" autocomplete="off" data-b32-form>
+            <form method="POST" action="{{ route($submitRoute, $reservation) }}" autocomplete="off" data-b32-form>
               @csrf
               <input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">
 
@@ -130,22 +134,28 @@
                   <label for="b32-number">Tarjeta de prueba</label>
                   <div class="co-select-wrap">
                     <span aria-hidden="true">▱</span>
+                    @if($officialCheckout)
+                      <select name="instrument" id="b32-number" data-b32-number>
+                        <option value="{{ \App\Payments\SimulatedCheckoutProcessor::INSTRUMENT }}" data-b32-last-four="4242">•••• 4242 · Ficticia</option>
+                      </select>
+                    @else
                     <select name="card_number" id="b32-number" data-b32-number>
                       <option value="4242424242424242">•••• 4242 · Aprobada</option>
                       <option value="4000000000000002">•••• 0002 · Rechazada</option>
                       <option value="4000000000000119">•••• 0119 · Error temporal</option>
                     </select>
+                    @endif
                     <span class="co-chevron" aria-hidden="true">⌄</span>
                   </div>
                 </div>
                 <div class="co-field-row">
                   <div class="co-field">
                     <label for="b32-expiry">Vencimiento ficticio</label>
-                    <div class="co-select-wrap b32-fixed-input"><input id="b32-expiry" name="expiry" value="12/30" readonly data-b32-expiry></div>
+                    <div class="co-select-wrap b32-fixed-input"><input id="b32-expiry" @unless($officialCheckout) name="expiry" @endunless value="12/30" readonly data-b32-expiry></div>
                   </div>
                   <div class="co-field">
                     <label for="b32-cvv">Código de prueba (CVV)</label>
-                    <div class="co-select-wrap b32-fixed-input"><input id="b32-cvv" name="cvv" value="123" readonly data-b32-cvv></div>
+                    <div class="co-select-wrap b32-fixed-input"><input id="b32-cvv" @unless($officialCheckout) name="cvv" @endunless value="123" readonly data-b32-cvv></div>
                   </div>
                 </div>
               </div>
@@ -163,7 +173,7 @@
               <p class="co-local-note"><span aria-hidden="true">◈</span> El servidor valida la retención antes de guardar el resultado.</p>
             </form>
 
-            <form class="b32-cash-fallback" method="POST" action="{{ route('checkout.local.submit', $reservation) }}" data-b32-cash-fallback>
+            <form class="b32-cash-fallback" method="POST" action="{{ route($submitRoute, $reservation) }}" data-b32-cash-fallback>
               @csrf
               <input type="hidden" name="idempotency_key" value="{{ (string) \Illuminate\Support\Str::uuid() }}">
               <input type="hidden" name="method" value="cash">
@@ -188,7 +198,7 @@
             </h2>
             <p class="b32-result-lead">
               @switch($status)
-                @case('test_approved') Resultado guardado en el entorno local. @break
+                @case('test_approved') {{ $officialCheckout ? 'Resultado simulado guardado en Tekora.' : 'Resultado guardado en el entorno local.' }} @break
                 @case('cash_received') Efectivo recibido por el prestador · Registro de prueba. @break
                 @case('awaiting_cash')
                   @if($canReceiveCash)
@@ -217,7 +227,7 @@
         @endif
       </div>
 
-      <footer class="co-shell-footer"><span><i aria-hidden="true"></i> ENTORNO LOCAL DE PRUEBAS</span><p>El resultado sintético no sustituye la confirmación definitiva de la reserva.</p></footer>
+      <footer class="co-shell-footer"><span><i aria-hidden="true"></i> {{ $officialCheckout ? 'PROCESAMIENTO SIMULADO' : 'ENTORNO LOCAL DE PRUEBAS' }}</span><p>El resultado sintético no sustituye la confirmación definitiva de la reserva.</p></footer>
     </section>
 
     <section class="co-summary b32-breakdown" aria-label="Desglose del importe acordado">
@@ -238,14 +248,16 @@
       </dl>
     </section>
 
-    @if($readiness === 'unknown' || $readiness === 'blocked')
+    @if($officialCheckout && $readiness === 'simulated_checkout_required' && ! $canPay)
+      <div class="b32-notice" role="status">La selección de prueba no está disponible en este momento.</div>
+    @elseif($readiness === 'unknown' || $readiness === 'blocked')
       <div class="b32-notice" role="status"><span aria-hidden="true">◇</span> No se puede verificar que el horario siga disponible para confirmar. Consulta la reserva antes de reintentar.</div>
     @elseif($readiness === 'hold_expired')
       <div class="b32-notice" role="status"><span aria-hidden="true">◇</span> Retención vencida. Consulta la reserva para preparar otro horario si corresponde.</div>
     @elseif($readiness === 'ready' && $attempt && !$retryable)
       <div class="b32-notice b32-notice-active" role="status"><span aria-hidden="true">◇</span> Confirmar la reserva es el siguiente paso. Hazlo antes de que venza la retención.</div>
     @endif
-    <p class="b32-legal">Este entorno privado reproduce el recorrido de producto con datos sintéticos. No procesa dinero real, no liquida a prestadores y no genera comprobantes fiscales.</p>
+    <p class="b32-legal">{{ $officialCheckout ? 'Selección ficticia para la contratación en Tekora.' : 'Este entorno privado reproduce el recorrido de producto con datos sintéticos.' }} No procesa dinero real, no liquida a prestadores y no genera comprobantes fiscales.</p>
   </div>
 
   @push('scripts')<script defer src="{{ asset('js/tekora/b32-checkout.js') }}"></script>@endpush

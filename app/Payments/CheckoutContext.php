@@ -91,7 +91,10 @@ final class CheckoutContext
                 'future_payment' => ['enabled' => false, 'can_start' => false, 'advisory_only' => true,
                     'commercial_eligible' => $blockers === [], 'blocking_reasons' => ['payments_not_enabled', ...$blockers]],
                 'confirmation_policy' => ['requires_verified_payment' => false, 'protocol' => $reservation->quote_id ? 'quoted-slot-hold-v1' : 'legacy'],
-                'confirmation_readiness' => app(ConfirmationReadiness::class)->forReservation($reservation, $blockers, $now)];
+                'confirmation_readiness' => app(ConfirmationReadiness::class)->forReservation($reservation, $blockers, $now),
+                ...(IntegratedCheckout::requiresChoice($reservation) ? ['simulated_checkout' => [
+                    'required' => true, 'enabled' => IntegratedCheckout::enabled(), 'synthetic_only' => true,
+                ]] : [])];
         }, 3);
     }
 }

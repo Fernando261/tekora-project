@@ -12,6 +12,7 @@
     'write_review' => route('reviews.create', ['reservation' => $next['reference']['id'], 'follow' => 1]),
     'view_review' => route('reviews.show', ['review' => $next['reference']['id'], 'follow' => 1]),
     'read_history' => '#historial',
+    'choose_simulated_checkout' => route('checkout.integrated.show', $r['id']),
     default => $r ? '#decision-reserva-'.$r['id'] : '#conversacion',
   };
   $stepStates = ['complete' => 'Completada', 'current' => 'Paso actual', 'pending' => 'Pendiente', 'stopped' => 'Cerrada'];

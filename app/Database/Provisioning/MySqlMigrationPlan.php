@@ -21,14 +21,24 @@ final class MySqlMigrationPlan
         return array_values($files);
     }
 
-    public static function identities(): array
+    public static function extensions(): array
     {
-        return array_map(fn (string $path) => basename($path, '.php'), self::files());
+        return [database_path('mysql/extensions/2026_11_26_000000_create_integrated_checkout.php')];
     }
 
-    public static function digest(): string
+    private static function forVersion(bool $checkout): array
     {
-        $hashes = array_map(fn (string $path) => [basename($path), hash_file('sha256', $path)], self::files());
+        return $checkout ? [...self::files(), ...self::extensions()] : self::files();
+    }
+
+    public static function identities(bool $checkout = false): array
+    {
+        return array_map(fn (string $path) => basename($path, '.php'), self::forVersion($checkout));
+    }
+
+    public static function digest(bool $checkout = false): string
+    {
+        $hashes = array_map(fn (string $path) => [basename($path), hash_file('sha256', $path)], self::forVersion($checkout));
         $hashes[] = ['ServiceCategorySeeder.php', hash_file('sha256', database_path('seeders/ServiceCategorySeeder.php'))];
 
         return hash('sha256', json_encode($hashes, JSON_THROW_ON_ERROR));

@@ -1,4 +1,5 @@
 <x-account-layout :operations="true" title="Recepción de efectivo">
+  @php($officialCheckout = $officialCheckout ?? false)
   @push('styles')
     @vite(['resources/css/tekora/checkout-demo.css', 'resources/css/tekora/checkout-integrated.css'])
   @endpush
@@ -9,7 +10,7 @@
         <p class="co-eyebrow">RECEPCIÓN DE EFECTIVO · TEKORA</p>
         <h1>La otra parte de la experiencia<span>.</span></h1>
       </div>
-      <p class="b32-heading-aside">Vista privada del prestador.<small>Checkout integrado · Entorno local de pruebas</small></p>
+      <p class="b32-heading-aside">Vista privada del prestador.<small>Checkout integrado · {{ $officialCheckout ? 'Procesamiento simulado' : 'Entorno local de pruebas' }}</small></p>
     </div>
     <section class="co-receiver-panel b32-provider-panel" aria-labelledby="b32-cash-title">
       <div class="co-shell-title"><span class="co-mini-mark" aria-hidden="true">T</span> CHECKOUT <span> / PRESTADOR</span></div>
@@ -40,7 +41,7 @@
             <small>Resultado interno de prueba; no constituye un recibo bancario ni fiscal.</small>
           </section>
           @if($attempt['status'] === 'awaiting_cash' && $canReceiveCash)
-            <form method="POST" action="{{ route('checkout.local.cash.receive', $reservation) }}">
+            <form method="POST" action="{{ route($officialCheckout ? 'checkout.integrated.cash.receive' : 'checkout.local.cash.receive', $reservation) }}">
               @csrf
               <button type="submit" class="co-primary b32-primary">Registrar recepción de efectivo <span aria-hidden="true">→</span></button>
             </form>
@@ -52,7 +53,7 @@
           @endif
         </div>
       @endif
-      <p class="b32-legal">La recepción se registra exclusivamente en la SQLite sintética local. No acredita cobros reales, no liquida al prestador y no confirma automáticamente la reserva.</p>
+      <p class="b32-legal">{{ $officialCheckout ? 'La recepción se guarda como resultado simulado de Tekora.' : 'La recepción se registra exclusivamente en la SQLite sintética local.' }} No acredita cobros reales, no liquida al prestador y no confirma automáticamente la reserva.</p>
     </section>
   </div>
 </x-account-layout>

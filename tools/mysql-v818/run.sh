@@ -21,7 +21,7 @@ export TEKORA_V818_INSTANCE=source
 cleanup() {
     local status=$?
     trap - EXIT
-    for instance in source target; do
+    for instance in source target clean; do
         local name="$lab-$instance"
         if docker inspect "$name" >/dev/null 2>&1; then
             docker logs "$name" > "$evidence/mysql-$instance.log" 2>&1
@@ -34,7 +34,7 @@ cleanup() {
         done
     done
     # The container user owns its initialized files; remove via the isolated image.
-    docker run --rm --network none --mount "type=bind,src=$private,dst=/lab" "$image" sh -c 'rm -rf /lab/source-data /lab/target-data' || status=1
+    docker run --rm --network none --mount "type=bind,src=$private,dst=/lab" "$image" sh -c 'rm -rf /lab/source-data /lab/target-data /lab/clean-data' || status=1
     rm -rf -- "$private" || status=1
     exit "$status"
 }
@@ -91,6 +91,7 @@ set -euo pipefail
 case "$1" in
     "--defaults-file=$TEKORA_V818_PRIVATE/source-"*) instance=source ;;
     "--defaults-file=$TEKORA_V818_PRIVATE/target-"*) instance=target ;;
+    "--defaults-file=$TEKORA_V818_PRIVATE/clean-"*) instance=clean ;;
     *) exit 2 ;;
 esac
 exec docker exec -i "$TEKORA_V818_LAB-$instance" "${0##*/}" "$@"
@@ -102,7 +103,7 @@ set -euo pipefail
 case "$1" in
     "$TEKORA_V818_PROJECT/"*) script=${1#"$TEKORA_V818_PROJECT/"}; shift; set -- "$script" "$@" ;;
 esac
-case "$TEKORA_V818_INSTANCE" in source|target) ;; *) exit 2;; esac
+case "$TEKORA_V818_INSTANCE" in source|target|clean) ;; *) exit 2;; esac
 mounts=()
 case "$1" in
     artisan)
@@ -165,11 +166,66 @@ administrative_window_closed source
 printf '%s\n' 'Instalación interrumpida rechazada; marca intacta y privilegios temporales retirados.'
 # Only this fixture created above is explicitly removed by the owner of the disposable lab.
 admin source tekora -e 'DROP TABLE tekora_provisioning'
-"$provision" "$private/source-admin.cnf" "$private/source-migrator.json"
-administrative_window_closed source
-"$provision" "$private/source-admin.cnf" "$private/source-migrator.json"
+base=705dd1c2cd2c115675601e27a08eab713c22d332
+[[ $(git rev-parse "$base^{tree}") == bc38af5aafe1b1ee10677389ff5a0812eb2c5b20 ]]
+legacy="$private/legacy-project"
+mkdir "$legacy"
+git archive "$base" | tar -x -C "$legacy"
+cmp "$legacy/composer.lock" "$project/composer.lock"
+cp -a "$project/vendor" "$legacy/vendor"
+TEKORA_V818_PROJECT="$legacy" "$legacy/deploy/vps/provision.sh" "$private/source-admin.cnf" "$private/source-migrator.json"
 administrative_window_closed source
 admin source < "$project/deploy/vps/mysql-runtime-grants.sql"
+php --version
+# Exercise completion after the actual business deadline using a historical clock only in this
+# disposable source. Restore the original definition and verify its digest before native-clock tests.
+fixture_clock() {
+    local instance=$1
+    {
+        printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
+        sed '/RETURN TIMESTAMPDIFF/i\    IF @tekora_v818_lab_clock IS NOT NULL THEN RETURN @tekora_v818_lab_clock; END IF;' "$private/clock.sql"
+        printf '//\nDELIMITER ;\n'
+    } | admin "$instance" tekora
+    admin "$instance" < "$project/deploy/vps/mysql-runtime-grants.sql"
+}
+restore_clock() {
+    local instance=$1
+    {
+        printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
+        cat "$private/clock.sql"
+        printf '//\nDELIMITER ;\n'
+    } | admin "$instance" tekora
+    admin "$instance" < "$project/deploy/vps/mysql-runtime-grants.sql"
+}
+admin source tekora --raw -e 'SHOW CREATE FUNCTION tekora_booking_now_us' |
+    python3 -c 'import sys; print(sys.stdin.read().split("\t", 2)[2].rsplit("\t", 3)[0])' > "$private/clock.sql"
+fixture_clock source
+TEKORA_V818_PROJECT="$legacy" php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_historical_journey --log-junit /evidence/mysql-completed.xml
+restore_clock source
+TEKORA_V818_PROJECT="$legacy" php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml \
+    --filter test_live_clock --log-junit /evidence/mysql-before-upgrade.xml
+watermark_before=$(admin source tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1')
+legacy_before=$(admin source tekora -e "SELECT id,status,quote_id,version FROM service_reservations")
+[[ -n "$legacy_before" ]]
+"$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
+if "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade; then
+    printf '%s\n' 'FAIL: se aceptó actualizar con la cuenta de aplicación habilitada.' >&2
+    exit 1
+fi
+admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT LOCK"
+"$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
+administrative_window_closed source
+"$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
+administrative_window_closed source
+[[ $(admin source tekora -e 'SELECT COUNT(*) FROM migrations') == 40 ]]
+[[ $(admin source tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1') == "$watermark_before" ]]
+[[ $(admin source tekora -e 'SELECT id,status,quote_id,version FROM service_reservations') == "$legacy_before" ]]
+[[ $(admin source tekora -e 'SELECT COUNT(*) FROM service_reservations WHERE checkout_required=1') == 0 ]]
+[[ $(admin source tekora -e 'SELECT COUNT(*) FROM integrated_checkout_attempts') == 0 ]]
+digest=$(admin source tekora -e 'SELECT schema_sha256 FROM tekora_provisioning')
+admin source < "$project/deploy/vps/mysql-checkout-grants.sql"
+admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT UNLOCK"
+
 admin source tekora -e 'CREATE TABLE altered_schema_fixture (id INT PRIMARY KEY)'
 if "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify; then
     printf '%s\n' 'FAIL: se aceptó un esquema con drift.' >&2
@@ -187,26 +243,11 @@ admin source tekora -e 'ALTER TABLE tekora_provisioning MODIFY state VARCHAR(16)
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
 
 
-php --version
-# Exercise completion after the actual business deadline using a historical clock only in this
-# disposable source. Restore the original definition and verify its digest before native-clock tests.
-admin source tekora --raw -e 'SHOW CREATE FUNCTION tekora_booking_now_us' |
-    python3 -c 'import sys; print(sys.stdin.read().split("\t", 2)[2].rsplit("\t", 3)[0])' > "$private/clock.sql"
-{
-    printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
-    sed '/RETURN TIMESTAMPDIFF/i\    IF @tekora_v818_lab_clock IS NOT NULL THEN RETURN @tekora_v818_lab_clock; END IF;' "$private/clock.sql"
-    printf '//\nDELIMITER ;\n'
-} | admin source tekora
-admin source < "$project/deploy/vps/mysql-runtime-grants.sql"
-php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_historical_journey --log-junit /evidence/mysql-completed.xml
-{
-    printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
-    cat "$private/clock.sql"
-    printf '//\nDELIMITER ;\n'
-} | admin source tekora
-admin source < "$project/deploy/vps/mysql-runtime-grants.sql"
+php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter 'test_runtime|test_ordinary|test_identity|test_official_checkout' --log-junit /evidence/mysql-provisioned.xml
+fixture_clock source
+php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_integrated_checkout_at_exact_expiry --log-junit /evidence/mysql-checkout-expiry.xml
+restore_clock source
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
-php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter 'test_runtime|test_ordinary|test_live_clock|test_identity' --log-junit /evidence/mysql-provisioned.xml
 mkdir -p "$private/source-storage/app/private" "$private/source-storage/app/public/photos"
 printf 'private synthetic fixture\n' > "$private/source-storage/app/private/fixture.txt"
 printf 'public synthetic fixture\n' > "$private/source-storage/app/public/photos/fixture.txt"
@@ -244,3 +285,27 @@ administrative_window_closed target
 printf '%s\n' 'Watermark idéntico tras reinicio y restauración.'
 diff -r -- "$private/source-storage" "$private/restored-storage"
 php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_persisted_journey --log-junit /evidence/mysql-restored.xml
+
+fixture_clock target
+php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_checkout_lifecycle_after_restore --log-junit /evidence/mysql-checkout-completed.xml
+
+for instance in source target; do docker stop "$lab-$instance" >/dev/null; done
+start clean 81503
+accounts clean
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json"
+[[ $(admin clean tekora -e 'SELECT schema_sha256 FROM tekora_provisioning') == "$digest" ]]
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --verify
+# Emulate interruption after a committed DDL statement on the disposable comparison instance.
+admin clean tekora -e "UPDATE tekora_provisioning SET state='upgrading'; DROP TRIGGER integrated_checkout_commit"
+if TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --upgrade; then
+    printf '%s\n' 'FAIL: se aceptó actualizar un esquema interrumpido.' >&2
+    exit 1
+fi
+[[ $(admin clean tekora -e 'SELECT state FROM tekora_provisioning') == upgrading ]]
+[[ $(admin clean -e "SELECT COUNT(*) FROM information_schema.triggers WHERE TRIGGER_SCHEMA='tekora' AND TRIGGER_NAME='integrated_checkout_commit'") == 0 ]]
+administrative_window_closed clean
+docker logs "$lab-clean" > "$evidence/mysql-clean.log" 2>&1
+docker rm -f "$lab-clean" >/dev/null
+docker volume rm "$lab-clean-socket" >/dev/null
+docker run --rm --network none --mount "type=bind,src=$private,dst=/lab" "$image" sh -c 'rm -rf /lab/clean-data'
+printf '%s\n' 'Instalación limpia y actualización coinciden; migración interrumpida rechazada.'

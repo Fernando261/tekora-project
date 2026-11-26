@@ -12,9 +12,9 @@ use Throwable;
 
 final class ProvisionMysql extends Command
 {
-    protected $signature = 'tekora:mysql:provision {--credentials= : Archivo JSON privado del instalador} {--verify : Solo verificar una instalación sellada}';
+    protected $signature = 'tekora:mysql:provision {--credentials= : Archivo JSON privado del instalador} {--verify : Solo verificar una instalación sellada} {--upgrade : Actualizar V8.1.8 bajo mantenimiento}';
 
-    protected $description = 'Instalar o verificar las 39 migraciones aprobadas de Tekora en MySQL local';
+    protected $description = 'Instalar, verificar o actualizar el esquema MySQL local de Tekora';
 
     public function handle(MySqlProvisioner $provisioner): int
     {
@@ -30,7 +30,7 @@ final class ProvisionMysql extends Command
             if (! $db instanceof PricingMySqlConnection) {
                 throw new ProvisioningFailure('Falta el adaptador InnoDB aprobado.');
             }
-            $this->info($provisioner->run($db, app('migrator')->setOutput($this->output), (bool) $this->option('verify')));
+            $this->info($provisioner->run($db, app('migrator')->setOutput($this->output), (bool) $this->option('verify'), (bool) $this->option('upgrade')));
 
             return self::SUCCESS;
         } catch (ProvisioningFailure $error) {

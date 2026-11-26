@@ -18,6 +18,9 @@ final class ProviderSyntheticCheckoutSummary
 {
     public function forReservation(Request $request, ?ServiceReservation $reservation): ?array
     {
+        if ($reservation && $request->user('web') && IntegratedCheckout::requiresChoice($reservation)) {
+            return app(IntegratedCheckout::class)->providerSummary($request->user('web'), $reservation);
+        }
         if (! $reservation || ! $reservation->quote_id ||
             ! LocalIntegratedCheckoutController::permitsSyntheticRequest($request)) {
             return null;

@@ -14,6 +14,10 @@
           && $journeyReservation->providerProfile->user_id === auth('web')->id())
         <p><a class="account-button secondary" href="{{ route('checkout.local.cash', $journeyReservation->id) }}">Consultar recepción de efectivo</a></p>
       @endif
+      @if(\App\Payments\IntegratedCheckout::requiresChoice($journeyReservation)
+          && $journey['viewer_role'] === 'client' && auth('web')->id() === $journeyReservation->client_user_id)
+        <p><a class="account-button secondary" href="{{ route('checkout.integrated.show', $journeyReservation->id) }}">Consultar checkout de prueba</a></p>
+      @endif
       @if(\App\Http\Controllers\LocalIntegratedCheckoutController::permitsSyntheticRequest(request())
           && $journey['viewer_role'] === 'client' && auth('web')->id() === $journeyReservation->client_user_id
           && in_array('commit', $journey['reservation']['actions'], true)

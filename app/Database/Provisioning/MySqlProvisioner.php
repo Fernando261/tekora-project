@@ -12,9 +12,13 @@ final class MySqlProvisioner
 
     public const DEFINER = 'tekora_definer@localhost';
 
-    public function run(PricingMySqlConnection $connection, Migrator $migrator, bool $verify): string
+    public function run(PricingMySqlConnection $connection, Migrator $migrator, bool $verify, bool $upgrade): string
     {
+        if ($verify && $upgrade) {
+            throw new ProvisioningFailure('Usa --verify o --upgrade por separado.');
+        }
         $session = $this->preflight($connection);
+        // Keep the V8.1.8 lock name so a previous provisioner cannot run concurrently.
         $name = hash('sha256', 'tekora:provision:v818');
         $connection->setReconnector(static fn () => throw new ProvisioningFailure('Sesión de instalación perdida; revisar el esquema antes de reintentar.'));
         if ((int) $connection->selectOne('SELECT GET_LOCK(?, 0) AS acquired', [$name])->acquired !== 1) {
@@ -22,14 +26,21 @@ final class MySqlProvisioner
         }
 
         try {
-            $objects = $this->objects($connection);
-            if ($objects !== []) {
-                $this->verify($connection);
+            if ($this->objects($connection) !== []) {
+                $checkout = $this->verify($connection);
+                if (! $upgrade || $checkout) {
+                    $count = $checkout ? 40 : 39;
 
-                return 'MySQL verificado: 39/39 migraciones; esquema e identidades coinciden.';
+                    return "MySQL verificado: {$count}/{$count} migraciones; esquema e identidades coinciden.";
+                }
+                $this->maintenance($connection, $session);
+                $this->mark($connection, 'ready', ['state' => 'upgrading']);
+                $this->extend($connection, $migrator, 'upgrading');
+
+                return 'MySQL actualizado: 40/40 migraciones y esquema verificado.';
             }
-            if ($verify) {
-                throw new ProvisioningFailure('Esquema vacío. La verificación no escribe.');
+            if ($verify || $upgrade) {
+                throw new ProvisioningFailure('Esquema vacío. Este modo requiere una instalación sellada.');
             }
             if ((int) $session->trust_creators !== 1) {
                 throw new ProvisioningFailure('El administrador debe habilitar temporalmente la creación de rutinas con binlog.');
@@ -41,7 +52,7 @@ final class MySqlProvisioner
                 schema_sha256 CHAR(64) NULL
             ) ENGINE=InnoDB');
             $connection->table('tekora_provisioning')->insert([
-                'id' => 1, 'state' => 'installing', 'migration_sha256' => MySqlMigrationPlan::digest(),
+                'id' => 1, 'state' => 'installing', 'migration_sha256' => MySqlMigrationPlan::digest(true),
             ]);
 
             $connection->usingProvisioningDefiner(fn () => $migrator->usingConnection(self::CONNECTION, function () use ($migrator) {
@@ -49,15 +60,41 @@ final class MySqlProvisioner
                 $migrator->run(MySqlMigrationPlan::files());
                 app(ServiceCategorySeeder::class)->run();
             }));
-            $this->verifyLedgerAndClock($connection);
-            $connection->table('tekora_provisioning')->where('id', 1)->where('state', 'installing')
-                ->update(['state' => 'ready', 'schema_sha256' => $this->schemaDigest($connection)]);
-            $this->verify($connection);
+            $this->extend($connection, $migrator, 'installing');
 
-            return 'MySQL instalado: 39/39 migraciones y esquema verificado.';
+            return 'MySQL instalado: 40/40 migraciones y esquema verificado.';
         } finally {
             // Disconnecting frees the session lock even when the last statement failed.
             $connection->disconnect();
+        }
+    }
+
+    private function maintenance(PricingMySqlConnection $db, object $session): void
+    {
+        if ((int) $session->trust_creators !== 1
+            || $db->selectOne("SELECT account_locked FROM mysql.user WHERE User='tekora_app' AND Host='localhost'")?->account_locked !== 'Y'
+            || (int) $db->selectOne("SELECT COUNT(*) AS sessions FROM performance_schema.threads
+                WHERE PROCESSLIST_ID <> CONNECTION_ID() AND (PROCESSLIST_USER IN ('tekora_app','tekora_migrator')
+                    OR PROCESSLIST_DB='tekora')")->sessions !== 0) {
+            throw new ProvisioningFailure('Actualización bloqueada. Detener escritores, bloquear la cuenta de aplicación y drenar las sesiones.');
+        }
+    }
+
+    private function extend(PricingMySqlConnection $connection, Migrator $migrator, string $state): void
+    {
+        $connection->usingProvisioningDefiner(fn () => $migrator->usingConnection(self::CONNECTION,
+            fn () => $migrator->run(MySqlMigrationPlan::extensions())));
+        $this->verifyLedgerAndClock($connection, true);
+        $this->mark($connection, $state, [
+            'state' => 'ready', 'migration_sha256' => MySqlMigrationPlan::digest(true), 'schema_sha256' => $this->schemaDigest($connection),
+        ]);
+        $this->verify($connection);
+    }
+
+    private function mark(PricingMySqlConnection $db, string $previous, array $values): void
+    {
+        if ($db->table('tekora_provisioning')->where('id', 1)->where('state', $previous)->update($values) !== 1) {
+            throw new ProvisioningFailure('No se confirmó la transición del sello de aprovisionamiento.');
         }
     }
 
@@ -100,7 +137,7 @@ final class MySqlProvisioner
         }
     }
 
-    private function verify(PricingMySqlConnection $db): void
+    private function verify(PricingMySqlConnection $db): bool
     {
         if (! in_array(['TABLE', 'tekora_provisioning'], $this->objects($db), true)) {
             throw new ProvisioningFailure('Esquema parcial o ajeno. No se aplicó DDL; requiere revisión y recuperación administrativa.');
@@ -108,21 +145,24 @@ final class MySqlProvisioner
         $rows = $db->table('tekora_provisioning')->limit(2)->get();
         $state = $rows->first();
         if ($rows->count() !== 1 || (int) $state->id !== 1 || $state->state !== 'ready'
-            || $state->migration_sha256 !== MySqlMigrationPlan::digest()) {
+            || ! in_array($state->migration_sha256, [MySqlMigrationPlan::digest(), MySqlMigrationPlan::digest(true)], true)) {
             throw new ProvisioningFailure('Instalación interrumpida o manifiesto incompatible. No se aplicó DDL ni se borraron datos.');
         }
-        $this->verifyLedgerAndClock($db);
+        $checkout = $state->migration_sha256 === MySqlMigrationPlan::digest(true);
+        $this->verifyLedgerAndClock($db, $checkout);
         if ($state->schema_sha256 !== $this->schemaDigest($db)) {
             throw new ProvisioningFailure('La estructura instalada difiere del manifiesto sellado. Revisar antes de operar.');
         }
+
+        return $checkout;
     }
 
-    private function verifyLedgerAndClock(PricingMySqlConnection $db): void
+    private function verifyLedgerAndClock(PricingMySqlConnection $db, bool $checkout): void
     {
         $records = $db->table('migrations')->orderBy('id')->get(['migration', 'batch']);
-        if ($records->pluck('migration')->all() !== MySqlMigrationPlan::identities()
-            || $records->contains(fn (object $row) => (int) $row->batch !== 1)) {
-            throw new ProvisioningFailure('El libro de migraciones no contiene exactamente las 39 identidades aprobadas.');
+        if ($records->pluck('migration')->all() !== MySqlMigrationPlan::identities($checkout)
+            || $records->contains(fn (object $row, int $index) => (int) $row->batch !== ($index < 39 ? 1 : 2))) {
+            throw new ProvisioningFailure('El libro de migraciones no coincide con las identidades y lotes de la versión sellada.');
         }
         $this->verifyClock($db, 'tekora_booking_now_us()');
         $clock = $db->table('reservation_hold_clock')->get(['id', 'high_water_us']);

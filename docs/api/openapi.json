@@ -3534,7 +3534,7 @@
             }
           }
         },
-        "description": "Solo propietario cliente con rol vigente. Requiere retención held iniciada por el prestador, misma cotización aceptada e inicio aún futuro. A los 900 segundos exactos devuelve 409. Transición atómica; no libera el horario ni procesa pagos. Clave repetida devuelve el resultado actual sin reactivar estados terminales. Se pueden cancelar reservas/retenciones con el endpoint cancel. No hay operaciones móviles de prestador."
+        "description": "Solo propietario cliente con rol vigente. Requiere retención held iniciada por el prestador, misma cotización aceptada e inicio aún futuro. A los 900 segundos exactos devuelve 409. Transición atómica; no libera el horario ni procesa pagos. Clave repetida devuelve el resultado actual sin reactivar estados terminales. Se pueden cancelar reservas/retenciones con el endpoint cancel. No hay operaciones móviles de prestador. Una reserva vinculada al checkout integrado requiere una selección simulada válida antes de confirmar, incluso si posteriormente se desactiva el procesador."
       }
     },
     "/inquiries/{inquiry}/quotes": {
@@ -4353,7 +4353,7 @@
       "get": {
         "operationId": "getCheckoutContext",
         "summary": "Consultar contexto comercial compartido, sin iniciar pagos",
-        "description": "Solo cliente propietario. Lectura coherente y sin reconciliación/escrituras B2. Hold exactamente 900 segundos; state puede ser expired mientras stored_state sigue held. Captura única de reloj observado del servidor; remaining_seconds redondea hacia arriba. Sin cotización: amount/quote null, nunca cero inventado. commercial_eligible es informativo: enabled y can_start son siempre false. La futura admisión debe revalidarse atómicamente; no hay token de pago ni garantía de horario. Incertidumbre/inconsistencia: 503 sin data. No enviar estado financiero, precio, TTL ni IDs en query. La confirmación vigente no exige pagos y no cambia.",
+        "description": "Solo cliente propietario. Lectura coherente y sin reconciliación/escrituras B2. Hold exactamente 900 segundos; state puede ser expired mientras stored_state sigue held. Captura única de reloj observado del servidor; remaining_seconds redondea hacia arriba. Sin cotización: amount/quote null, nunca cero inventado. commercial_eligible es informativo: enabled y can_start son siempre false. La futura admisión debe revalidarse atómicamente; no hay token de pago ni garantía de horario. Incertidumbre/inconsistencia: 503 sin data. No enviar estado financiero, precio, TTL ni IDs en query. La confirmación nunca exige un pago bancario verificado. Las nuevas reservas vinculadas a checkout de prueba requieren selección simulada válida y confirmación explícita.",
         "security": [
           {
             "bearerAuth": []
@@ -4390,6 +4390,205 @@
                 "examples": {
                   "success": {
                     "$ref": "#/components/examples/B3CheckoutContext"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      }
+    },
+    "/reservations/{reservation}/checkout": {
+      "get": {
+        "operationId": "getIntegratedCheckout",
+        "summary": "Consultar checkout de prueba integrado",
+        "description": "Solo cliente propietario y reserva vinculada. Devuelve el último intento; null antes de elegir. can_choose y can_confirm son informativos. Sin parámetros de consulta.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estado de prueba. No confirma la reserva ni acredita dinero.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/IntegratedCheckoutStatus"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "reservation_id": 42,
+                    "attempt": {
+                      "reservation_id": 42,
+                      "quote_id": "1d55959e-5d60-439e-aba9-572a2d57fd3a",
+                      "method": "card",
+                      "status": "test_approved",
+                      "reference": "badc4e56-4ab1-4e93-8a49-3f3848852519",
+                      "currency": "MXN",
+                      "amount_cents": 50000,
+                      "commission_cents": 7500,
+                      "provider_cents": 42500,
+                      "attempted_at": "2030-01-01T12:03:00.000000Z",
+                      "received_at": null,
+                      "synthetic_only": true
+                    },
+                    "synthetic_only": true,
+                    "can_choose": false,
+                    "can_confirm": true,
+                    "server_now": "2030-01-01T12:03:01.000000Z",
+                    "expires_at": "2030-01-01T12:15:00.000000Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error401"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error403"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error404"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error409"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          },
+          "500": {
+            "$ref": "#/components/responses/Error500"
+          },
+          "503": {
+            "$ref": "#/components/responses/Error503"
+          }
+        }
+      },
+      "post": {
+        "operationId": "selectIntegratedCheckout",
+        "summary": "Registrar un método de prueba para una retención",
+        "description": "Sanctum Bearer y MobileClient. Precio y participantes se derivan de la cotización aceptada. Repetir misma clave, reserva y método devuelve la misma referencia. Para reintentar un rechazo o fallo temporal usa una clave nueva. Un resultado válido no confirma la reserva. Sin parámetros de consulta ni datos bancarios.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "reservation",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntegratedCheckoutSelection"
+              },
+              "examples": {
+                "card": {
+                  "value": {
+                    "method": "card",
+                    "instrument": "tekora-test-card",
+                    "idempotency_key": "b7f2976e-e74a-43b7-936e-9b43dd090421"
+                  }
+                },
+                "cash": {
+                  "value": {
+                    "method": "cash",
+                    "idempotency_key": "b7f2976e-e74a-43b7-936e-9b43dd090421"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Estado de prueba. No confirma la reserva ni acredita dinero.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/IntegratedCheckoutAttempt"
+                    }
+                  }
+                },
+                "example": {
+                  "data": {
+                    "reservation_id": 42,
+                    "quote_id": "1d55959e-5d60-439e-aba9-572a2d57fd3a",
+                    "method": "card",
+                    "status": "test_approved",
+                    "reference": "badc4e56-4ab1-4e93-8a49-3f3848852519",
+                    "currency": "MXN",
+                    "amount_cents": 50000,
+                    "commission_cents": 7500,
+                    "provider_cents": 42500,
+                    "attempted_at": "2030-01-01T12:03:00.000000Z",
+                    "received_at": null,
+                    "synthetic_only": true
                   }
                 }
               }
@@ -6670,6 +6869,28 @@
           },
           "confirmation_readiness": {
             "$ref": "#/components/schemas/ConfirmationReadiness"
+          },
+          "simulated_checkout": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "required",
+              "enabled",
+              "synthetic_only"
+            ],
+            "properties": {
+              "required": {
+                "type": "boolean",
+                "const": true
+              },
+              "enabled": {
+                "type": "boolean"
+              },
+              "synthetic_only": {
+                "type": "boolean",
+                "const": true
+              }
+            }
           }
         }
       },
@@ -7042,7 +7263,8 @@
                 "commit",
                 "cancel",
                 "reject",
-                "complete"
+                "complete",
+                "checkout"
               ]
             }
           },
@@ -7392,7 +7614,8 @@
                   "issue_quote",
                   "wait_service_availability",
                   "wait_availability",
-                  "propose_schedule"
+                  "propose_schedule",
+                  "choose_simulated_checkout"
                 ]
               },
               "stage": {
@@ -7813,7 +8036,8 @@
               "completed",
               "blocked",
               "not_applicable",
-              "unknown"
+              "unknown",
+              "simulated_checkout_required"
             ]
           },
           "can_offer_mobile_confirmation": {
@@ -7856,7 +8080,8 @@
                 "service_already_started",
                 "participants_unavailable",
                 "synthetic_web_checkout_required",
-                "server_clock_uncertain"
+                "server_clock_uncertain",
+                "simulated_checkout_required"
               ]
             }
           },
@@ -7864,6 +8089,11 @@
             "type": "string",
             "format": "date-time",
             "description": "Mismo instante UTC que server_now. El hold y su vencimiento permanecen en la reserva/contexto existentes."
+          },
+          "simulated_checkout_required": {
+            "type": "boolean",
+            "const": true,
+            "description": "Identifica las reservas vinculadas a la política de checkout de prueba."
           }
         },
         "allOf": [
@@ -8099,6 +8329,189 @@
             "description": "Fecha y hora UTC en formato ISO 8601."
           }
         }
+      },
+      "IntegratedCheckoutAttempt": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reservation_id",
+          "quote_id",
+          "method",
+          "status",
+          "reference",
+          "currency",
+          "amount_cents",
+          "commission_cents",
+          "provider_cents",
+          "attempted_at",
+          "received_at",
+          "synthetic_only"
+        ],
+        "properties": {
+          "reservation_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "quote_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "card",
+              "cash"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "test_approved",
+              "declined",
+              "temporary_failure",
+              "awaiting_cash",
+              "cash_received"
+            ]
+          },
+          "reference": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "currency": {
+            "type": "string",
+            "const": "MXN"
+          },
+          "amount_cents": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "commission_cents": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "provider_cents": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "attempted_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "received_at": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "synthetic_only": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      },
+      "IntegratedCheckoutStatus": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reservation_id",
+          "attempt",
+          "synthetic_only",
+          "can_choose",
+          "can_confirm",
+          "server_now",
+          "expires_at"
+        ],
+        "properties": {
+          "reservation_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "attempt": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IntegratedCheckoutAttempt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "synthetic_only": {
+            "type": "boolean",
+            "const": true
+          },
+          "can_choose": {
+            "type": "boolean"
+          },
+          "can_confirm": {
+            "type": "boolean"
+          },
+          "server_now": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires_at": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "IntegratedCheckoutSelection": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "method",
+              "instrument",
+              "idempotency_key"
+            ],
+            "properties": {
+              "method": {
+                "type": "string",
+                "const": "card"
+              },
+              "instrument": {
+                "type": "string",
+                "const": "tekora-test-card"
+              },
+              "idempotency_key": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "method",
+              "idempotency_key"
+            ],
+            "properties": {
+              "method": {
+                "type": "string",
+                "const": "cash"
+              },
+              "idempotency_key": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        ]
       }
     },
     "responses": {

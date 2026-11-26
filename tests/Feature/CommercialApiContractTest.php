@@ -18,6 +18,8 @@ class CommercialApiContractTest extends TestCase
             'quotes.accept' => ['POST', '/quotes/{quote}/accept'],
             'quotes.acceptance' => ['GET', '/quotes/{quote}/acceptance'],
             'reservations.checkout-context' => ['GET', '/reservations/{reservation}/checkout-context'],
+            'reservations.checkout.show' => ['GET', '/reservations/{reservation}/checkout'],
+            'reservations.checkout.submit' => ['POST', '/reservations/{reservation}/checkout'],
         ];
         foreach ($operations as $name => [$method, $path]) {
             $route = Route::getRoutes()->getByName('api.v1.'.$name);

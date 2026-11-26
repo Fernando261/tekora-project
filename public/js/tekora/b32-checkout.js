@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const select = form.querySelector('[data-b32-number]');
     const updateCard = () => {
       if (!select || !cardNumber) return;
-      cardNumber.textContent = '••••   ••••   ••••   ' + select.value.slice(-4);
+      cardNumber.textContent = '••••   ••••   ••••   ' + (select.selectedOptions[0]?.dataset.b32LastFour || select.value.slice(-4));
     };
     select?.addEventListener('change', updateCard);
     updateCard();

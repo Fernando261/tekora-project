@@ -96,7 +96,7 @@ final class ContractingJourney
                     }
                 } elseif ($state === ReservationStatus::Held) {
                     if ($current->starts_at_utc > $nowSql && $can('commit')) {
-                        $actions[] = 'commit';
+                        $actions[] = app(\App\Payments\IntegratedCheckout::class)->permitsCommit($current) ? 'commit' : 'checkout';
                     }
                     if ($can('cancel')) {
                         $actions[] = 'cancel';
@@ -179,6 +179,9 @@ final class ContractingJourney
         if ($r && in_array($r['status'], ['requested', 'held', 'confirmed'], true)) {
             $reservationRef = ['type' => 'reservation', 'id' => $r['id']];
             if ($r['status'] === 'held') {
+                if ($client && in_array('checkout', $r['actions'], true)) {
+                    return $make('choose_simulated_checkout', 'confirmation', 'Elige un método de pago de prueba', 'Registra una selección ficticia y confirma el horario antes de que venza la retención.', $reservationRef);
+                }
                 if ($client && in_array('commit', $r['actions'], true)) {
                     return $make('confirm_reservation', 'confirmation', 'Confirma tu contratación', 'El prestador aceptó el horario. Confírmalo antes de que termine el plazo; todavía no es una reserva definitiva.', $reservationRef);
                 }
