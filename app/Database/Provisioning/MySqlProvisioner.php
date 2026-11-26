@@ -182,7 +182,10 @@ final class MySqlProvisioner
                 throw new ProvisioningFailure('Se requiere acceso de metadatos para acreditar objetos del esquema.');
             }
             if ($type === 'TABLE') {
-                $ddl = preg_replace('/(?<=\))([^\n]*) AUTO_INCREMENT=\d+/', '$1', $ddl);
+                // A logical restore can make a column's charset explicit. Its collation
+                // already identifies the charset, so keep the collation in the seal.
+                $ddl = preg_replace('/^(  `[^`]+` [a-z]+(?:\([^\n]*?\))?) CHARACTER SET utf8mb4(?= COLLATE utf8mb4_[a-z0-9_]+)/m', '$1', $ddl);
+                $ddl = preg_replace('/^(\) ENGINE=InnoDB) AUTO_INCREMENT=\d+/m', '$1', $ddl);
             }
             $definitions[] = [$type, $name, $ddl, $record['sql_mode'] ?? null];
         }

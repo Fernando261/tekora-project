@@ -178,6 +178,14 @@ fi
 [[ $(admin source tekora -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='tekora' AND table_name='altered_schema_fixture'") == 1 ]]
 admin source tekora -e 'DROP TABLE altered_schema_fixture'
 printf '%s\n' 'Drift rechazado y objeto de la prueba intacto.'
+admin source tekora -e 'ALTER TABLE tekora_provisioning MODIFY state VARCHAR(16) COLLATE utf8mb4_0900_ai_ci NOT NULL'
+if "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify; then
+    printf '%s\n' 'FAIL: se aceptó una collation de columna alterada.' >&2
+    exit 1
+fi
+admin source tekora -e 'ALTER TABLE tekora_provisioning MODIFY state VARCHAR(16) COLLATE utf8mb4_unicode_ci NOT NULL'
+"$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
+
 
 php --version
 # Exercise completion after the actual business deadline using a historical clock only in this
