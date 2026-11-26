@@ -221,7 +221,7 @@ if ! "$project/deploy/vps/restore.sh" "$private/target-admin.cnf" "$private/snap
         {
             while IFS=$'\t' read -r kind object; do
                 [[ "$object" =~ ^[a-zA-Z0-9_]+$ ]] || exit 1
-                admin "$instance" tekora --raw -e "SHOW CREATE $kind $object"
+                admin "$instance" tekora --raw -e "SHOW CREATE $kind $object" </dev/null
             done < <(admin "$instance" tekora -e "
                 SELECT IF(TABLE_TYPE='VIEW','VIEW','TABLE'),TABLE_NAME FROM information_schema.tables WHERE table_schema='tekora'
                 UNION ALL SELECT ROUTINE_TYPE, ROUTINE_NAME FROM information_schema.routines WHERE routine_schema='tekora'

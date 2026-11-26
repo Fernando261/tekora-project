@@ -7,12 +7,14 @@ use App\Models\Role;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 trait CatalogFixtures
 {
     protected function account(RoleName ...$roles): User
     {
-        $user = User::factory()->create();
+        // The InnoDB regression lab retains rows across PHPUnit application bootstraps.
+        $user = User::factory()->create(['email' => Str::uuid().'@example.test']);
         $user->roles()->attach(Role::whereIn('slug', array_map(fn ($role) => $role->value, $roles))->pluck('id'));
 
         return $user;
