@@ -16,6 +16,11 @@ class PricingServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        if ($this->app->runningInConsole()) {
+            // Laravel suppresses Symfony console events in testing. The MySQL guard also applies to test CLIs.
+            $this->app->make(\Illuminate\Contracts\Console\Kernel::class)->rerouteSymfonyCommandEvents();
+        }
+
         $this->app['events']->listen(CommandStarting::class, function (CommandStarting $event) {
             $command = $event->command;
             if ($command === null || ($command !== 'db:wipe' && $command !== 'migrate' && ! str_starts_with($command, 'migrate:'))

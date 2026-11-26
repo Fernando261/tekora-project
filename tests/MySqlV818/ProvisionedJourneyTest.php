@@ -16,13 +16,13 @@ use App\Services\ReservationWorkflow;
 use App\Support\BookingClock;
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use LogicException;
+use PDOException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Support\CatalogFixtures;
 
@@ -74,10 +74,10 @@ final class ProvisionedJourneyTest extends TestCase
     public function test_runtime_account_cannot_administer_mysql(string $sql, int $code): void
     {
         try {
-            DB::statement($sql);
+            DB::connection()->getPdo()->exec($sql);
             $this->fail('The runtime account executed a privileged statement.');
-        } catch (QueryException $error) {
-            $this->assertSame($code, $error->errorInfo[1]);
+        } catch (PDOException $error) {
+            $this->assertSame($code, $error->errorInfo[1] ?? null, $error->getMessage());
         }
     }
 
@@ -114,7 +114,7 @@ final class ProvisionedJourneyTest extends TestCase
         $this->app['env'] = 'testing';
         auth()->forgetGuards();
         $headers = $this->bearer($client);
-        $this->getJson('/api/v1/me/dashboard', $headers)->assertOk();
+        $this->get('/api/v1/me/dashboard', $headers + ['Accept' => 'application/json'])->assertOk();
         auth()->forgetGuards();
         Notification::fake();
         $this->postJson('/api/v1/auth/forgot-password', ['email' => $email])->assertAccepted();
