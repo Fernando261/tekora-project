@@ -1,0 +1,9 @@
+PHPUnit 11.5.57 by Sebastian Bergmann and contributors.
+
+Error in bootstrap script: RuntimeException:
+BLOCKED: explicit disposable-container lab configuration required
+#0 /workspace/tekora-project/vendor/phpunit/phpunit/src/TextUI/Application.php(352): include_once()
+#1 /workspace/tekora-project/vendor/phpunit/phpunit/src/TextUI/Application.php(122): PHPUnit\TextUI\Application->loadBootstrapScript('/workspace/teko...')
+#2 /workspace/tekora-project/vendor/phpunit/phpunit/phpunit(104): PHPUnit\TextUI\Application->run(Array)
+#3 /workspace/tekora-project/vendor/bin/phpunit(122): include('/workspace/teko...')
+#4 {main}

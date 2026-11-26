@@ -1,0 +1,61 @@
+{
+  "run": "29c050b3beeebd72",
+  "mysql_image": "mysql@sha256:a81d043930e51745522bd5c430961cf8286f0a23f0a9a2a6e0108f7ea71b0902",
+  "status": "BLOCKED",
+  "cleanup": [
+    {
+      "container_id": "a8558fa1e847d40498ed0d990ceeccaa57acbf2386efe9a0f9c8be74ca8d8817",
+      "removed": true
+    },
+    {
+      "container_id": "faee3711ea0c37f360165ed83408c2a1095dbadc639d47c4491892239d8f6678",
+      "removed": true
+    },
+    {
+      "network": "w62cb-net-29c050b3beeebd72",
+      "removed": true
+    }
+  ],
+  "host_mounts": false,
+  "published_ports": false,
+  "real_env_or_media_imported": false,
+  "mysql_repo_digests": [
+    "mysql@sha256:a81d043930e51745522bd5c430961cf8286f0a23f0a9a2a6e0108f7ea71b0902"
+  ],
+  "worker_image_id": "sha256:3e801756fb2e158f6539312f4ac4223f033c4c58834cf40f9eff309233f179c5",
+  "internal_network_verified": true,
+  "mysql_container": {
+    "container_id": "faee3711ea0c37f360165ed83408c2a1095dbadc639d47c4491892239d8f6678",
+    "image_id": "sha256:0f1a0ccadda3a1734d1db557e203ec58621d56fa248525016e85fe4f631311ec",
+    "hostname": "w62cb-mysql-29c050b3beeebd72",
+    "networks": [
+      "w62cb-net-29c050b3beeebd72"
+    ],
+    "mount_types": [],
+    "tmpfs_paths": [
+      "/var/lib/mysql"
+    ],
+    "port_bindings": {}
+  },
+  "server": {
+    "hostname": "w62cb-mysql-29c050b3beeebd72",
+    "uuid": "b60dff50-dd8a-11f1-aca3-5a6a98939d2a",
+    "version": "8.4.13",
+    "engine": "InnoDB"
+  },
+  "worker_container": {
+    "container_id": "a8558fa1e847d40498ed0d990ceeccaa57acbf2386efe9a0f9c8be74ca8d8817",
+    "image_id": "sha256:3e801756fb2e158f6539312f4ac4223f033c4c58834cf40f9eff309233f179c5",
+    "hostname": "a8558fa1e847",
+    "networks": [
+      "w62cb-net-29c050b3beeebd72"
+    ],
+    "mount_types": [],
+    "tmpfs_paths": [],
+    "port_bindings": {}
+  },
+  "copied_code_files": 15221,
+  "phpunit_exit_code": 1,
+  "historical_install_worker_exit": 1,
+  "coverage": "Installation gate and identity negatives only; downstream retirement/restoration not implemented pending historical schema compatibility"
+}

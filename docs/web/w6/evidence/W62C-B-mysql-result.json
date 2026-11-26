@@ -1,0 +1,2839 @@
+{
+    "status": "BLOCKED",
+    "server": {
+        "uuid": "b60dff50-dd8a-11f1-aca3-5a6a98939d2a",
+        "hostname": "w62cb-mysql-29c050b3beeebd72",
+        "version": "8.4.13",
+        "engine": "InnoDB",
+        "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    },
+    "worker_php": "8.4.27",
+    "laravel": "12.71.0",
+    "applied": [
+        "0001_01_01_000000_create_users_table.php",
+        "0001_01_01_000001_create_cache_table.php",
+        "0001_01_01_000002_create_jobs_table.php",
+        "2025_08_02_085013_create_posts_table.php",
+        "2025_08_02_092303_create_reminders_table.php",
+        "2025_08_13_022507_create_profesionistas_table.php",
+        "2026_02_13_022342_add_remember_token_to_profesionistas_table.php",
+        "2026_02_15_192040_create_likes_table.php",
+        "2026_02_15_194127_add_deleted_at_to_posts_table.php",
+        "2026_02_15_200848_create_comments_table.php",
+        "2026_02_16_031349_create_profesionista_bloqueos_table.php",
+        "2026_02_16_031436_create_citas_table.php",
+        "2026_02_20_224556_add_google_fields_to_profesionistas_table.php",
+        "2026_02_21_071030_add_start_end_to_citas_table.php",
+        "2026_02_21_191448_create_profesionista_disponibilidades_table.php",
+        "2026_02_23_235730_create_emotions_table.php",
+        "2026_02_24_033502_add_profile_photo_path_to_users_table.php",
+        "2026_02_24_041833_add_media_to_posts_table.php",
+        "2026_02_24_041908_add_media_to_comments_table.php",
+        "2026_02_24_061342_alter_posts_content_nullable.php",
+        "2026_02_24_071445_add_likeable_to_likes_table.php",
+        "2026_02_24_072517_add_unique_likeable_to_likes_table.php",
+        "2026_02_24_072708_make_post_id_nullable_in_likes_table.php",
+        "2026_02_24_075954_alter_comments_content_nullable.php",
+        "2026_10_23_000000_create_roles_and_role_user_tables.php",
+        "2026_10_23_000001_create_provider_profiles_table.php",
+        "2026_10_28_000000_create_service_categories_table.php",
+        "2026_10_28_000001_create_services_table.php"
+    ],
+    "expected": 37,
+    "retirement_ddl_executed": false,
+    "downstream_scenarios": "NOT RUN until all 37 migrations pass",
+    "failed_migration": "2026_10_28_000002_create_service_inquiries_table.php",
+    "exception_class": "RuntimeException",
+    "reason": "Las solicitudes requieren SQLite y su \u00edndice \u00fanico parcial. Revisar la estrategia antes de usar otro motor.",
+    "seconds": 0.719,
+    "ddl_statements_verified": 76,
+    "catalog": {
+        "cache": {
+            "columns": [
+                {
+                    "name": "key",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "value",
+                    "type_name": "mediumtext",
+                    "type": "mediumtext",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "expiration",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "key"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "cache_locks": {
+            "columns": [
+                {
+                    "name": "key",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "owner",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "expiration",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "key"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "citas": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "profesionista_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "start_datetime",
+                    "type_name": "datetime",
+                    "type": "datetime",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "end_datetime",
+                    "type_name": "datetime",
+                    "type": "datetime",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "motivo",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "estado",
+                    "type_name": "enum",
+                    "type": "enum('pendiente','aceptada','rechazada','cancelada')",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": "pendiente",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "starts_at",
+                    "type_name": "datetime",
+                    "type": "datetime",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "ends_at",
+                    "type_name": "datetime",
+                    "type": "datetime",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "google_event_id",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "status",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": "pending",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "citas_profesionista_id_estado_index",
+                    "columns": [
+                        "profesionista_id",
+                        "estado"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "citas_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "uniq_prof_slot",
+                    "columns": [
+                        "profesionista_id",
+                        "start_datetime"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "citas_profesionista_id_foreign",
+                    "columns": [
+                        "profesionista_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "profesionistas",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                },
+                {
+                    "name": "citas_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "users",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "comments": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "content",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "media_path",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "media_type",
+                    "type_name": "varchar",
+                    "type": "varchar(20)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "post_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "deleted_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "comments_post_id_foreign",
+                    "columns": [
+                        "post_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "comments_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "comments_post_id_foreign",
+                    "columns": [
+                        "post_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "posts",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                },
+                {
+                    "name": "comments_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "users",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "emotions": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "name",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "slug",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "image_path",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "subtitle",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "description",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "accent",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "order",
+                    "type_name": "tinyint",
+                    "type": "tinyint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": "0",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "emotions_slug_unique",
+                    "columns": [
+                        "slug"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "failed_jobs": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "uuid",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "connection",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "queue",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "payload",
+                    "type_name": "longtext",
+                    "type": "longtext",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "exception",
+                    "type_name": "longtext",
+                    "type": "longtext",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "failed_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": false,
+                    "default": "CURRENT_TIMESTAMP",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "failed_jobs_uuid_unique",
+                    "columns": [
+                        "uuid"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "job_batches": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "name",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "total_jobs",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "pending_jobs",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "failed_jobs",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "failed_job_ids",
+                    "type_name": "longtext",
+                    "type": "longtext",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "options",
+                    "type_name": "mediumtext",
+                    "type": "mediumtext",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "cancelled_at",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "finished_at",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "jobs": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "queue",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "payload",
+                    "type_name": "longtext",
+                    "type": "longtext",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "attempts",
+                    "type_name": "tinyint",
+                    "type": "tinyint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "reserved_at",
+                    "type_name": "int",
+                    "type": "int unsigned",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "available_at",
+                    "type_name": "int",
+                    "type": "int unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "int",
+                    "type": "int unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "jobs_queue_index",
+                    "columns": [
+                        "queue"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "likes": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "likeable_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "likeable_type",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "post_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "likes_post_id_foreign",
+                    "columns": [
+                        "post_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "likes_user_id_post_id_unique",
+                    "columns": [
+                        "user_id",
+                        "post_id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                },
+                {
+                    "name": "likes_user_likeable_unique",
+                    "columns": [
+                        "user_id",
+                        "likeable_id",
+                        "likeable_type"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "likes_post_id_foreign",
+                    "columns": [
+                        "post_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "posts",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                },
+                {
+                    "name": "likes_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "users",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "migrations": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "int",
+                    "type": "int unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "migration",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "batch",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "password_reset_tokens": {
+            "columns": [
+                {
+                    "name": "email",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "token",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "email"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        },
+        "posts": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "content",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "media_path",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "media_type",
+                    "type_name": "varchar",
+                    "type": "varchar(20)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "deleted_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "posts_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "posts_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "users",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "profesionista_bloqueos": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "profesionista_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "start_datetime",
+                    "type_name": "datetime",
+                    "type": "datetime",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "end_datetime",
+                    "type_name": "datetime",
+                    "type": "datetime",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "motivo",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "idx_prof_blk_range",
+                    "columns": [
+                        "profesionista_id",
+                        "start_datetime",
+                        "end_datetime"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "profesionista_bloqueos_profesionista_id_foreign",
+                    "columns": [
+                        "profesionista_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "profesionistas",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "profesionista_disponibilidades": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "profesionista_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "day_of_week",
+                    "type_name": "tinyint",
+                    "type": "tinyint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "start_time",
+                    "type_name": "time",
+                    "type": "time",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "end_time",
+                    "type_name": "time",
+                    "type": "time",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "is_active",
+                    "type_name": "tinyint",
+                    "type": "tinyint(1)",
+                    "collation": null,
+                    "nullable": false,
+                    "default": "1",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "pd_prof_dow_idx",
+                    "columns": [
+                        "profesionista_id",
+                        "day_of_week"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "profesionista_disponibilidades_profesionista_id_foreign",
+                    "columns": [
+                        "profesionista_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "profesionistas",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "profesionistas": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "nombre",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "email",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "password",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "cedula",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "google_access_token",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "google_refresh_token",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "google_calendar_id",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "google_token_expires_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "remember_token",
+                    "type_name": "varchar",
+                    "type": "varchar(100)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "profesionistas_cedula_unique",
+                    "columns": [
+                        "cedula"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                },
+                {
+                    "name": "profesionistas_email_unique",
+                    "columns": [
+                        "email"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": []
+        },
+        "provider_profiles": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "display_name",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "headline",
+                    "type_name": "varchar",
+                    "type": "varchar(160)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "bio",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "provider_profiles_user_id_unique",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "provider_profiles_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "users",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "reminders": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "title",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "description",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "remind_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "reminders_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "reminders_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "users",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "role_user": {
+            "columns": [
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "role_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "user_id",
+                        "role_id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "role_user_role_id_index",
+                    "columns": [
+                        "role_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "role_user_role_id_foreign",
+                    "columns": [
+                        "role_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "roles",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "restrict"
+                },
+                {
+                    "name": "role_user_user_id_foreign",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "users",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "cascade"
+                }
+            ]
+        },
+        "roles": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "slug",
+                    "type_name": "varchar",
+                    "type": "varchar(32)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "name",
+                    "type_name": "varchar",
+                    "type": "varchar(64)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "roles_slug_unique",
+                    "columns": [
+                        "slug"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": []
+        },
+        "service_categories": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "name",
+                    "type_name": "varchar",
+                    "type": "varchar(120)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "slug",
+                    "type_name": "varchar",
+                    "type": "varchar(120)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "description",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "is_active",
+                    "type_name": "tinyint",
+                    "type": "tinyint(1)",
+                    "collation": null,
+                    "nullable": false,
+                    "default": "1",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "sort_order",
+                    "type_name": "int",
+                    "type": "int unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": "0",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "service_categories_is_active_sort_order_index",
+                    "columns": [
+                        "is_active",
+                        "sort_order"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "service_categories_slug_unique",
+                    "columns": [
+                        "slug"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": []
+        },
+        "services": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "provider_profile_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "service_category_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "title",
+                    "type_name": "varchar",
+                    "type": "varchar(160)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "description",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "modality",
+                    "type_name": "enum",
+                    "type": "enum('remote','onsite','both')",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "status",
+                    "type_name": "enum",
+                    "type": "enum('draft','published','paused')",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": "draft",
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "services_provider_profile_id_status_id_index",
+                    "columns": [
+                        "provider_profile_id",
+                        "status",
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "services_service_category_id_status_id_index",
+                    "columns": [
+                        "service_category_id",
+                        "status",
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "services_status_modality_id_index",
+                    "columns": [
+                        "status",
+                        "modality",
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": [
+                {
+                    "name": "services_provider_profile_id_foreign",
+                    "columns": [
+                        "provider_profile_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "provider_profiles",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "restrict"
+                },
+                {
+                    "name": "services_service_category_id_foreign",
+                    "columns": [
+                        "service_category_id"
+                    ],
+                    "foreign_schema": "w62cblab29c050b3beeebd72",
+                    "foreign_table": "service_categories",
+                    "foreign_columns": [
+                        "id"
+                    ],
+                    "on_update": "no action",
+                    "on_delete": "restrict"
+                }
+            ]
+        },
+        "sessions": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "ip_address",
+                    "type_name": "varchar",
+                    "type": "varchar(45)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "user_agent",
+                    "type_name": "text",
+                    "type": "text",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "payload",
+                    "type_name": "longtext",
+                    "type": "longtext",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "last_activity",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "sessions_last_activity_index",
+                    "columns": [
+                        "last_activity"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                },
+                {
+                    "name": "sessions_user_id_index",
+                    "columns": [
+                        "user_id"
+                    ],
+                    "type": "btree",
+                    "unique": false,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": []
+        },
+        "users": {
+            "columns": [
+                {
+                    "name": "id",
+                    "type_name": "bigint",
+                    "type": "bigint unsigned",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": true,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "name",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "email",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "profile_photo_path",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "age",
+                    "type_name": "int",
+                    "type": "int",
+                    "collation": null,
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "gender",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "email_verified_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "password",
+                    "type_name": "varchar",
+                    "type": "varchar(255)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "remember_token",
+                    "type_name": "varchar",
+                    "type": "varchar(100)",
+                    "collation": "utf8mb4_unicode_ci",
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "created_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                },
+                {
+                    "name": "updated_at",
+                    "type_name": "timestamp",
+                    "type": "timestamp",
+                    "collation": null,
+                    "nullable": true,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "id"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                },
+                {
+                    "name": "users_email_unique",
+                    "columns": [
+                        "email"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": false
+                }
+            ],
+            "foreign_keys": []
+        },
+        "w62cb_identity": {
+            "columns": [
+                {
+                    "name": "marker",
+                    "type_name": "varchar",
+                    "type": "varchar(64)",
+                    "collation": "utf8mb4_0900_ai_ci",
+                    "nullable": false,
+                    "default": null,
+                    "auto_increment": false,
+                    "comment": null,
+                    "generation": null
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "primary",
+                    "columns": [
+                        "marker"
+                    ],
+                    "type": "btree",
+                    "unique": true,
+                    "primary": true
+                }
+            ],
+            "foreign_keys": []
+        }
+    },
+    "table_engines": [
+        {
+            "TABLE_NAME": "cache",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "cache_locks",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "citas",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "comments",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "emotions",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "failed_jobs",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "job_batches",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "jobs",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "likes",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "migrations",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "password_reset_tokens",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "posts",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "profesionista_bloqueos",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "profesionista_disponibilidades",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "profesionistas",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "provider_profiles",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "reminders",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "role_user",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "roles",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "service_categories",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "services",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "sessions",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "users",
+            "ENGINE": "InnoDB"
+        },
+        {
+            "TABLE_NAME": "w62cb_identity",
+            "ENGINE": "InnoDB"
+        }
+    ],
+    "objects": {
+        "TRIGGERS": 0,
+        "VIEWS": 0,
+        "ROUTINES": 0,
+        "EVENTS": 0
+    }
+}
