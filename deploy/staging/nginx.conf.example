@@ -1,0 +1,52 @@
+# TEMPLATE ONLY — substitute domain, paths, verified FPM socket, TLS cert and QA IPs.
+# Install only after certificate provisioning and nginx -t. Use DNS validation for TLS
+# or a separately reviewed ACME challenge listener. No HTTP application endpoint.
+server {
+    listen 443 ssl;
+    server_name staging.example.invalid;
+
+    ssl_certificate     /etc/letsencrypt/live/staging.example.invalid/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/staging.example.invalid/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    # Documentation-only address: replace with authorized QA addresses or a private VPN.
+    # Do not remove the allowlist to make staging public.
+    allow 192.0.2.10;
+    deny all;
+
+    root /srv/tekora-staging/current/public;
+    index index.php;
+    client_max_body_size 12m;
+
+    # Application authorization and headers remain enforced by Laravel.
+    # No authorization headers, bodies, query strings or tokenized URLs in access logs.
+    access_log off;
+    error_log /var/log/nginx/tekora-staging-error.log warn;
+
+    location ~ /\. {
+        deny all;
+    }
+
+    location ~ ^/(?:demo/checkout(?:/|$)|api/v1/reservations/[0-9]+/demo-checkout(?:/|$)) {
+        return 404;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /index.php {
+        internal;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $realpath_root/index.php;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        fastcgi_param HTTP_AUTHORIZATION $http_authorization;
+        fastcgi_param HTTPS on;
+        fastcgi_pass unix:/run/php/tekora-staging.sock;
+    }
+
+    # Only the front controller can execute. Never run PHP from public uploads.
+    location ~* \.php(?:/|$) {
+        return 404;
+    }
+}

@@ -1,0 +1,21 @@
+# TEMPLATE ONLY — review the path, dedicated user/group and runtime before installing.
+# Enable only after staging schema, mail sandbox and application configuration pass checks.
+[Unit]
+Description=Tekora staging Laravel queue
+After=network.target
+
+[Service]
+Type=simple
+User=tekora-staging
+Group=tekora-staging
+WorkingDirectory=/srv/tekora-staging/current
+ExecStart=/usr/bin/php artisan queue:work database --sleep=3 --tries=3 --timeout=60
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=75
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
