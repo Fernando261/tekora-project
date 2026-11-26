@@ -206,7 +206,9 @@ final class ProvisionedJourneyTest extends TestCase
         $this->postJson($url.'/messages', ['body' => 'Synthetic message', 'idempotency_key' => (string) Str::uuid()], $headers)->assertCreated();
         $this->getJson($url.'/messages', $headers)->assertOk();
         $quote = $this->postJson($url.'/quotes', ['idempotency_key' => (string) Str::uuid()], $headers)->assertOk()->json('data.id');
-        $this->postJson("/api/v1/quotes/{$quote}/accept", [], $headers)->assertSuccessful();
+        $this->postJson("/api/v1/quotes/{$quote}/accept", [], $headers)->assertUnprocessable();
+        $this->postJson("/api/v1/quotes/{$quote}/accept", ['acknowledge' => true], $headers)->assertOk()
+            ->assertJsonPath('data.acceptance.state', 'accepted');
         $this->getJson($url.'/reservation-options', $headers)->assertOk()
             ->assertJsonPath('data.commercial.accepted_quotes.0.total_cents', 100010);
         $proposal = ['date' => BookingClock::date(BookingClock::micros())->addDay()->toDateString(), 'time' => '09:00',

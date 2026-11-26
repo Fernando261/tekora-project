@@ -33,6 +33,8 @@ with tarfile.open(sys.argv[1], "r:gz") as archive:
             sys.exit("Tipo de archivo o entrada duplicada no permitida.")
         seen.add(p)
 PY
+[[ $(mysql_local -e "SELECT CONCAT(VERSION(),':',@@global.log_bin,':',@@global.binlog_format,':',@@global.log_bin_trust_function_creators)") =~ ^8\.4\.13(-commercial)?:1:ROW:0$ ]] ||
+    fail 'El destino debe ser MySQL 8.4.13, con binlog ROW y la ventana administrativa cerrada.'
 [[ $(mysql_local -e "SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name='tekora' AND default_collation_name='utf8mb4_unicode_ci'") == 1 ]] ||
     fail 'El administrador debe crear el esquema canónico vacío.'
 [[ $(mysql_local -e "SELECT COUNT(*) FROM mysql.user WHERE user='tekora_definer' AND host='localhost' AND account_locked='Y'") == 1 ]] ||
