@@ -6,6 +6,7 @@ use App\Enums\Permission;
 use App\Models\ServiceInquiry;
 use App\Models\ServiceReservation;
 use App\Models\User;
+use App\Services\ReservationTransactions;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class ServiceReservationPolicy
@@ -20,7 +21,8 @@ class ServiceReservationPolicy
     {
         return $actor instanceof User && $actor->id === $inquiry->client_user_id
             && $actor->hasPermission(Permission::ManageOwnInquiries)
-            && ! $inquiry->service()->whereHas('providerProfile', fn ($q) => $q->where('user_id', $actor->id))->exists();
+            && ! ReservationTransactions::current($inquiry->service()->getQuery())->whereHas('providerProfile',
+                fn ($q) => ReservationTransactions::current($q)->where('user_id', $actor->id))->exists();
     }
 
     public function view(Authenticatable $actor, ServiceReservation $reservation): bool
@@ -31,7 +33,7 @@ class ServiceReservationPolicy
     public function confirm(Authenticatable $actor, ServiceReservation $reservation): bool
     {
         return $actor instanceof User && $actor->hasPermission(Permission::ManageReceivedInquiries)
-            && $reservation->providerProfile()->where('user_id', $actor->id)->exists();
+            && ReservationTransactions::current($reservation->providerProfile()->where('user_id', $actor->id)->getQuery())->exists();
     }
 
     public function commit(Authenticatable $actor, ServiceReservation $reservation): bool

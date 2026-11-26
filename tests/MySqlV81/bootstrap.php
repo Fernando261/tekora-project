@@ -51,7 +51,7 @@ function mysqlV81Application(): Application
 function mysqlV81MigrationPaths(): array
 {
     $root = dirname(__DIR__, 2);
-    $last = '2026_11_18_000000_create_web_pricing_and_quotes.php';
+    $last = '2026_11_19_000000_add_reservation_slot_holds.php';
     $variants = [
         '2026_10_28_000002_create_service_inquiries_table.php',
         '2026_10_30_000000_create_service_inquiry_messages_table.php',
@@ -60,9 +60,44 @@ function mysqlV81MigrationPaths(): array
         '2026_11_03_000000_create_service_reservations.php',
         '2026_11_03_000001_create_service_reviews.php',
         '2026_11_03_000002_create_activity_notifications.php',
+        '2026_11_18_000000_create_web_pricing_and_quotes.php',
         $last,
     ];
     $files = array_filter(glob($root.'/database/migrations/*.php'), fn ($path) => basename($path) <= $last);
 
     return array_map(fn ($path) => in_array(basename($path), $variants, true) ? $root.'/database/mysql/migrations/'.basename($path) : $path, $files);
+}
+
+/** The lab owns this synthetic schema. Production has no reference to this override. */
+function mysqlV81EnableBookingFixtureClock(): void
+{
+    if (getenv('TEKORA_MYSQL_LAB') !== '1' || DB::selectOne('SELECT DATABASE() AS db')->db !== getenv('DB_DATABASE')) {
+        throw new RuntimeException('Fixture clock requires the private MySQL lab.');
+    }
+    $definition = (array) DB::selectOne('SHOW CREATE FUNCTION tekora_booking_now_us');
+    if (str_contains($definition['Create Function'], '@tekora_v81_booking_us')) {
+        return;
+    }
+    DB::statement('SET SESSION timestamp=946684800');
+    DB::statement('SET @tekora_v81_booking_us=946684800000000');
+    try {
+        $time = (int) DB::selectOne('SELECT tekora_booking_now_us() AS micros')->micros;
+        if ($time < (time() - 5) * 1000000 || $time > (time() + 5) * 1000000) {
+            throw new RuntimeException('Production SQL clock accepted a session override.');
+        }
+    } finally {
+        DB::statement('SET SESSION timestamp=DEFAULT');
+        DB::statement('SET @tekora_v81_booking_us=NULL');
+    }
+
+    DB::unprepared('DROP FUNCTION tekora_booking_now_us');
+    DB::unprepared(<<<'SQL'
+        CREATE FUNCTION tekora_booking_now_us() RETURNS BIGINT NOT DETERMINISTIC NO SQL
+        BEGIN
+            IF NOT REGEXP_LIKE(@@session.time_zone, '^[+-][0-9]{2}:[0-9]{2}$', 'c') THEN
+                SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'reservation_clock_timezone';
+            END IF;
+            RETURN COALESCE(@tekora_v81_booking_us, TIMESTAMPDIFF(MICROSECOND, '1970-01-01 00:00:00', CONVERT_TZ(SYSDATE(6), @@session.time_zone, '+00:00')));
+        END
+        SQL);
 }

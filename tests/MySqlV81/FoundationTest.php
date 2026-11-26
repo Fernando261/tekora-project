@@ -26,7 +26,7 @@ final class FoundationTest extends LabTestCase
     public function test_foundation_migrations_are_idempotent_and_restart_preserves_inquiry(): void
     {
         $expected = array_map(fn ($path) => basename($path, '.php'), mysqlV81MigrationPaths());
-        $this->assertCount(38, $expected);
+        $this->assertCount(39, $expected);
         $records = DB::table('migrations')->orderBy('id')->get();
         $this->assertSame($expected, $records->pluck('migration')->all());
         $this->migrateFoundation();
@@ -106,6 +106,43 @@ final class FoundationTest extends LabTestCase
         $this->assertSame($saved->id, $quote->inquiryId);
         $this->assertSame($saved->client_user_id, $acceptance->clientId);
         $this->assertSame('2030-01-08 12:00:00.000000', $acceptance->acceptedAt->format('Y-m-d H:i:s.u'));
+        if (getenv('TEKORA_V81_RESTARTED') === '1') {
+            $marker = ServiceInquiry::where('message', 'Marcador comercial V8.1.7')->sole();
+            $booking = $marker->reservations()->sole();
+            $this->assertSame('completed', $marker->status->value);
+            $this->assertSame('completed', $booking->status->value);
+            $this->assertSame('committed', $booking->hold->state);
+            $this->assertSame(900_000_000, $booking->hold->expires_at_us - $booking->hold->accepted_at_us);
+            $this->assertSame(['held', 'committed'], $booking->hold->events()->orderBy('version')->pluck('to_state')->all());
+            $this->assertSame(['proposal', 'confirm', 'complete'], $booking->events()->orderBy('version')->pluck('reason')->all());
+            $this->assertSame(3, DB::table('reservation_action_receipts')->where('service_reservation_id', $booking->id)->count());
+            foreach ([
+                ['service_reservations', 'quote_id', 'service_quotes', 'id'],
+                ['reservation_holds', 'service_reservation_id', 'service_reservations', 'id'],
+                ['reservation_holds', 'accepted_by', 'users', 'id'],
+                ['reservation_holds', 'last_actor_user_id', 'users', 'id'],
+                ['reservation_hold_events', 'service_reservation_id', 'reservation_holds', 'service_reservation_id'],
+                ['reservation_hold_events', 'actor_user_id', 'users', 'id'],
+                ['reservation_action_receipts', 'service_reservation_id', 'service_reservations', 'id'],
+                ['reservation_action_receipts', 'actor_user_id', 'users', 'id'],
+            ] as [$table, $foreign, $referenced, $key]) {
+                $this->assertTrue(DB::table('information_schema.KEY_COLUMN_USAGE')->whereRaw('TABLE_SCHEMA=DATABASE()')
+                    ->where(['TABLE_NAME' => $table, 'COLUMN_NAME' => $foreign, 'REFERENCED_TABLE_NAME' => $referenced, 'REFERENCED_COLUMN_NAME' => $key])->exists());
+                $this->assertFalse(DB::table($table.' as origin')->leftJoin($referenced.' as destination', 'origin.'.$foreign, '=', 'destination.'.$key)
+                    ->whereNotNull('origin.'.$foreign)->whereNull('destination.'.$key)->exists());
+            }
+            $this->assertSame('Recorrido B2 verificado', $booking->review()->sole()->comment);
+            $watermark = (int) DB::table('reservation_hold_clock')->where('id', 1)->value('high_water_us');
+            $this->assertGreaterThanOrEqual($booking->hold->expires_at_us, $watermark);
+            $this->bookingFixtureClock(\App\Support\BookingClock::date($watermark - 1)->format('Y-m-d H:i:s.u'));
+            try {
+                app(\App\Services\ReservationTransactions::class)->run(fn () => $this->fail('Clock rollback executed callback.'));
+                $this->fail('Expected a clock rollback rejection.');
+            } catch (\App\Exceptions\ReservationFailure $error) {
+                $this->assertSame(503, $error->status);
+            }
+            $this->assertSame($watermark, (int) DB::table('reservation_hold_clock')->where('id', 1)->value('high_water_us'));
+        }
     }
 
     public function test_active_uniqueness_terminal_history_and_foreign_keys(): void

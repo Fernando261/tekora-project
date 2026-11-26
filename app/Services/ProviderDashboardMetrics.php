@@ -10,6 +10,7 @@ use App\Models\ServiceInquiry;
 use App\Models\ServiceReservation;
 use App\Models\ServiceReview;
 use App\Models\User;
+use App\Support\BookingClock;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -42,13 +43,14 @@ class ProviderDashboardMetrics
         $services = Service::where('services.provider_profile_id', $profile->id)->select('id');
         $inquiries = ServiceInquiry::whereIn('service_inquiries.service_id', $services);
         $bounds = [$window['start_utc'], $window['end_utc']];
+        $holdClock = BookingClock::observedSql();
         $inquiryStats = (clone $inquiries)->selectRaw("COUNT(CASE WHEN created_at >= ? AND created_at <= ? THEN 1 END) AS received,
             COUNT(CASE WHEN status = 'pending' THEN 1 END) AS pending,
             COUNT(CASE WHEN accepted_at >= ? AND accepted_at <= ? THEN 1 END) AS accepted,
             COUNT(CASE WHEN rejected_at >= ? AND rejected_at <= ? THEN 1 END) AS rejected", [...$bounds, ...$bounds, ...$bounds])->first();
         $reservations = ServiceReservation::where('service_reservations.provider_profile_id', $profile->id);
         $reservationStats = (clone $reservations)->selectRaw("COUNT(CASE WHEN status = 'requested' AND NOT EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id) AND starts_at_utc > ? THEN 1 END) AS requested,
-            COUNT(CASE WHEN status = 'confirmed' AND starts_at_utc > ? THEN 1 END) AS upcoming, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us>max(CAST(tekora_booking_now_us() AS INTEGER),(SELECT high_water_us FROM reservation_hold_clock WHERE id=1))) THEN 1 END) AS held, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us<=max(CAST(tekora_booking_now_us() AS INTEGER),(SELECT high_water_us FROM reservation_hold_clock WHERE id=1))) THEN 1 END) AS expired_holds", [$window['end_utc'], $window['end_utc']])->first();
+            COUNT(CASE WHEN status = 'confirmed' AND starts_at_utc > ? THEN 1 END) AS upcoming, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us>{$holdClock}) THEN 1 END) AS held, COUNT(CASE WHEN EXISTS(SELECT 1 FROM reservation_holds h WHERE h.service_reservation_id=service_reservations.id AND h.state='held' AND h.expires_at_us<={$holdClock}) THEN 1 END) AS expired_holds", [$window['end_utc'], $window['end_utc']])->first();
 
         if ((int) $reservationStats->expired_holds > 0) {
             try {

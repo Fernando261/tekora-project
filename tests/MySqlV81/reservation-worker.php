@@ -38,7 +38,7 @@ if ($mode === 'deadlock') {
     $attempts = 0;
     $diagnostics = [];
     DB::transaction(function () use ($input, &$attempts, &$diagnostics) {
-        DB::table('service_reservations')->insert($input['row']);
+        DB::table('provider_profiles')->where('id', $input['row']['provider_profile_id'])->lockForUpdate()->sole();
         if (++$attempts === 1) {
             echo "locked\n";
             fflush(STDOUT);
@@ -46,6 +46,7 @@ if ($mode === 'deadlock') {
         }
         try {
             DB::table('provider_profiles')->where('id', $input['other_profile'])->lockForUpdate()->value('id');
+            DB::table('service_reservations')->insert($input['row']);
         } catch (QueryException $error) {
             $diagnostics[] = (int) $error->errorInfo[1];
             throw $error;

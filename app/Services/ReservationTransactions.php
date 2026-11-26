@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Database\PricingMySqlConnection;
 use App\Exceptions\ReservationFailure;
 use App\Exceptions\ReservationStorageUncertain;
 use App\Support\BookingClock;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use LogicException;
 use PDO;
@@ -19,8 +22,11 @@ final class ReservationTransactions
     public function run(callable $operation): mixed
     {
         $connection = DB::connection();
+        if ($connection instanceof PricingMySqlConnection) {
+            return app(MysqlReservationTransactions::class)->run($connection, $operation);
+        }
         if ($connection->getDriverName() !== 'sqlite') {
-            throw new ReservationFailure('Reservas requiere SQLite.', 503);
+            throw new ReservationFailure('Motor de reservas no soportado.', 503);
         }
         $pdo = $connection->getPdo();
         if ($pdo instanceof PDO && $connection->transactionLevel() > 0 && $pdo->inTransaction()) {
@@ -93,6 +99,40 @@ final class ReservationTransactions
         }
 
         return $result;
+    }
+
+    public static function writingMysql(): bool
+    {
+        $connection = DB::connection();
+
+        return $connection instanceof PricingMySqlConnection && $connection->hasReservationTransaction();
+    }
+
+    public static function current(Builder|EloquentBuilder $query): Builder|EloquentBuilder
+    {
+        if (self::writingMysql()) {
+            $query->sharedLock();
+        }
+
+        return $query;
+    }
+
+    public static function activeRows(bool $occupancy = false): Builder
+    {
+        $now = 'tekora_booking_now_us()';
+
+        return DB::table('service_reservations as current_booking')
+            ->leftJoin('reservation_holds as current_hold', 'current_hold.service_reservation_id', '=', 'current_booking.id')
+            ->where(function (Builder $state) use ($now, $occupancy) {
+                $state->where('current_booking.status', 'confirmed')->orWhere(function (Builder $requested) use ($now, $occupancy) {
+                    $requested->where('current_booking.status', 'requested')->where(function (Builder $hold) use ($now, $occupancy) {
+                        $hold->where(fn (Builder $held) => $held->where('current_hold.state', 'held')->whereRaw("current_hold.expires_at_us > {$now}"));
+                        if (! $occupancy) {
+                            $hold->orWhereNull('current_hold.state');
+                        }
+                    });
+                });
+            })->sharedLock();
     }
 
     private function admit(): void

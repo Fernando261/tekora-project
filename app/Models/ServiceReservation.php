@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ReservationStatus;
+use App\Services\ReservationTransactions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -81,6 +82,11 @@ class ServiceReservation extends Model
 
     public function scopeActive(Builder $query): void
     {
+        if (ReservationTransactions::writingMysql()) {
+            $query->sharedLock()->whereIn('service_reservations.id', ReservationTransactions::activeRows()->select('current_booking.id'));
+
+            return;
+        }
         $query->whereIn('service_reservations.id', \Illuminate\Support\Facades\DB::table('reservation_active_bookings')->select('reservation_id'));
     }
 

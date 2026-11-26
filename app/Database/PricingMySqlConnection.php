@@ -17,16 +17,54 @@ final class PricingMySqlConnection extends MySqlConnection
 
     private bool $pricingInvalid = false;
 
+    private ?PDO $reservationOwner = null;
+
+    private bool $callerMustRollback = false;
+
+    public function hasReservationTransaction(): bool
+    {
+        return $this->reservationOwner !== null;
+    }
+
+    public function beginReservationWork(PDO $pdo, int $parent, string $savepoint): void
+    {
+        $this->assertOutsidePricing();
+        if ($this->transactions !== $parent || $this->getRawPdo() !== $pdo || $pdo->inTransaction() !== ($parent > 0)) {
+            throw new LogicException('No se acreditó la propiedad de la transacción de reservas.');
+        }
+        if ($parent > 0) {
+            if (! preg_match('/^tekora_b2_[0-9a-f]{24}$/D', $savepoint) || $pdo->exec('SAVEPOINT '.$savepoint) === false) {
+                throw new LogicException('SAVEPOINT no acreditado.');
+            }
+        } elseif (! $pdo->beginTransaction() || ! $pdo->inTransaction()) {
+            throw new LogicException('BEGIN no acreditó la transacción de reservas.');
+        }
+        $this->reservationOwner = $pdo;
+        $this->transactions = $parent + 1;
+    }
+
+    public function ownsReservationWork(PDO $pdo, int $parent): bool
+    {
+        return $this->reservationOwner === $pdo && $this->getRawPdo() === $pdo && $this->transactions === $parent + 1;
+    }
+
+    public function finishReservationWork(int $parent, bool $mustRollback = false): void
+    {
+        $this->reservationOwner = null;
+        $this->transactions = $parent;
+        $this->callerMustRollback = $mustRollback;
+    }
+
     public function hasPricingTransaction(): bool
     {
         return $this->pricingOwner !== null;
     }
 
-    /** Read the current row and protect it through COMMIT, only for a pricing write. */
+    /** Read the current row and protect it through COMMIT, during a commercial write. */
     public static function lockPricingRead(Builder $query): Builder
     {
         $connection = $query->getConnection();
-        if ($connection instanceof self && $connection->hasPricingTransaction()) {
+        if ($connection instanceof self && ($connection->hasPricingTransaction() || $connection->hasReservationTransaction())) {
             $query->sharedLock();
         }
 
@@ -81,6 +119,20 @@ final class PricingMySqlConnection extends MySqlConnection
 
     public function rollBack($toLevel = null)
     {
+        if ($this->callerMustRollback) {
+            if (($toLevel ?? $this->transactions - 1) !== 0) {
+                throw new LogicException('El llamador debe revertir la transacción completa.');
+            }
+            $pdo = $this->getRawPdo();
+            if (! $pdo instanceof PDO || ($pdo->inTransaction() && (! $pdo->rollBack() || $pdo->inTransaction()))) {
+                throw new LogicException('El llamador conserva una transacción incierta.');
+            }
+            $this->finishReservationWork(0);
+            $this->transactionsManager?->rollback($this->getName(), 0);
+            $this->fireConnectionEvent('rollingBack');
+
+            return;
+        }
         $this->assertOutsidePricing();
         parent::rollBack($toLevel);
     }
@@ -90,7 +142,13 @@ final class PricingMySqlConnection extends MySqlConnection
         if ($this->pricingInvalid) {
             throw new LogicException('Conexión de precios invalidada. Retira el worker.');
         }
+        if ($this->callerMustRollback) {
+            throw new LogicException('El llamador debe revertir la transacción completa.');
+        }
         $pdo = $this->getRawPdo();
+        if ($this->reservationOwner !== null && ($pdo !== $this->reservationOwner || ! $pdo->inTransaction())) {
+            throw new LogicException('La transacción de reservas ya no está activa.');
+        }
         if ($this->pricingOwner !== null && (! $pdo instanceof PDO || ! $this->ownsPricing($pdo) || ! $pdo->inTransaction())) {
             throw new LogicException('La transacción de precios ya no está activa.');
         }
@@ -100,7 +158,7 @@ final class PricingMySqlConnection extends MySqlConnection
 
     private function assertOutsidePricing(): void
     {
-        if ($this->pricingInvalid || $this->pricingOwner !== null) {
+        if ($this->pricingInvalid || $this->pricingOwner !== null || $this->reservationOwner !== null || $this->callerMustRollback) {
             throw new LogicException('La transacción pertenece al adaptador de precios.');
         }
     }

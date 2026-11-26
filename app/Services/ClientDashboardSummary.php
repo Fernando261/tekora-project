@@ -48,7 +48,7 @@ final class ClientDashboardSummary
 
         $holdClock = $mobile
             ? '?'
-            : 'max(CAST(tekora_booking_now_us() AS INTEGER), (SELECT high_water_us FROM reservation_hold_clock WHERE id = 1))';
+            : BookingClock::observedSql();
         $totals = (clone $reservations)
             ->leftJoin('reservation_holds as hold', 'hold.service_reservation_id', '=', 'service_reservations.id')
             ->selectRaw("COUNT(CASE WHEN status = 'confirmed' AND starts_at_utc > ? THEN 1 END) AS confirmed,
