@@ -8,9 +8,6 @@
       @if($profile->headline)
         <p class="mp-profile-headline" data-market-enter>{{ $profile->headline }}</p>
       @endif
-      @unless($profile->publicCredential()['status'] === 'verified')
-        <p class="account-note">Perfil sin verificación profesional.</p>
-      @endunless
       <a class="mp-text-link" href="#published-services">Explorar sus servicios <span aria-hidden="true">↓</span></a>
     </div>
     <x-marketplace-scene variant="identity" :initial="mb_strtoupper(mb_substr(trim($profile->display_name), 0, 1))" />

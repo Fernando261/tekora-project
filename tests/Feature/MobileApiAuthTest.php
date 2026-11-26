@@ -95,7 +95,8 @@ class MobileApiAuthTest extends TestCase
     public function test_web_session_cannot_replace_a_bearer_token_and_still_works_on_web(): void
     {
         $user = $this->account(RoleName::Client, RoleName::Provider);
-        $this->post('/login', ['email' => $user->email, 'password' => 'password'])->assertRedirect('/cuenta/prestador');
+        $this->post('/login', ['email' => $user->email, 'password' => 'password'])->assertRedirect(route('trust.onboarding'));
+        $this->post(route('trust.onboarding.store'), ['license_disposition' => 'none'])->assertRedirect('/cuenta/prestador');
         $this->get('/cuenta')->assertOk();
         $this->get('/api/v1/me')->assertUnauthorized()->assertJsonPath('error.code', 'unauthenticated');
         $this->post('/api/v1/auth/logout')->assertUnauthorized();

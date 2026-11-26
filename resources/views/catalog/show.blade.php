@@ -11,9 +11,6 @@
       <x-published-price :cents="$service->published_price_cents" />
       <div class="mp-detail-rule" aria-hidden="true"><span></span></div>
       <h2>Sobre este servicio</h2><p class="catalog-bio">{{ $service->description }}</p>
-      @unless($service->providerProfile->publicCredential()['status'] === 'verified')
-        <p class="account-note">Publicación sin verificación profesional.</p>
-      @endunless
     </article>
     <aside class="account-card mp-provider-aside" aria-label="Prestador y solicitud">
       <span class="mp-kicker">LA PERSONA DETRÁS</span><x-marketplace-avatar :name="$service->providerProfile->display_name" />

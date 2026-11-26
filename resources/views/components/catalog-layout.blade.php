@@ -33,7 +33,7 @@
   <footer class="mp-footer mp-wrap">
     <div><x-tekora-brand /><p>Tu talento. Una nueva posibilidad.</p></div>
     <nav aria-label="Enlaces complementarios"><a href="{{ route('catalog.index') }}">Explorar servicios</a><a href="{{ route('public-providers.index') }}">Conocer prestadores</a><a href="{{ route('tekora.home') }}#como-funciona">Cómo funciona Tekora</a></nav>
-    <p class="mp-disclaimer">Los perfiles y servicios son presentaciones de sus prestadores. Su publicación no acredita verificación profesional.</p>
+    <p class="mp-disclaimer">Los prestadores publican y actualizan sus perfiles y servicios.</p>
     <span class="mp-footer-signature" aria-hidden="true">IDEAS QUE ENCUENTRAN TALENTO.</span>
   <x-legal-links /></footer>
 </body>

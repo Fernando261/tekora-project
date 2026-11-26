@@ -41,7 +41,7 @@ final class MarketplaceFilters
             $query->whereHas('location', fn (Builder $location) => $location->where('municipality_slug', $filters['municipality']));
         }
         if ($search && ! empty($filters['verified'])) {
-            $query->whereHas('providerProfile.credential', fn (Builder $credentials) => $credentials->where('status', 'verified'));
+            $query->whereHas('providerProfile.credential', fn (Builder $credentials) => $credentials->withApprovedCertificate());
         }
 
         return $query;
@@ -53,7 +53,7 @@ final class MarketplaceFilters
             self::search($query, $filters['q'], ['display_name', 'headline']);
         }
         if (! empty($filters['verified'])) {
-            $query->whereHas('credential', fn (Builder $credentials) => $credentials->where('status', 'verified'));
+            $query->whereHas('credential', fn (Builder $credentials) => $credentials->withApprovedCertificate());
         }
 
         return $query->whereHas('services', fn (Builder $services) => self::services($services->publiclyVisible(), $filters, search: false));

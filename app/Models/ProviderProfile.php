@@ -31,7 +31,7 @@ class ProviderProfile extends Model
     public function scopeWithPublicCredential(Builder $query, ?bool $available = null): void
     {
         if ($available ?? TrustSchema::available()) {
-            $query->with('credential:user_id,status,license_number,public_license');
+            $query->with('credential:user_id,status,license_number,public_license,evidence_path');
         }
     }
 
@@ -40,9 +40,9 @@ class ProviderProfile extends Model
         $credential = $this->relationLoaded('credential') ? $this->credential : null;
 
         return [
-            'status' => $credential?->status ?? 'unverified',
-            'badge' => $credential?->status === 'verified' ? 'Profesional Tekora' : null,
-            'license_number' => $credential?->status === 'verified' && $credential->public_license ? $credential->license_number : null,
+            'status' => $credential?->evidence_path !== null ? $credential->status : 'unverified',
+            'badge' => $credential?->status === 'verified' && $credential->evidence_path !== null ? 'Profesional Tekora' : null,
+            'license_number' => $credential?->public_license ? $credential->license_number : null,
         ];
     }
 

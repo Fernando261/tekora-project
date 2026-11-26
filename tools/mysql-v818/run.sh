@@ -327,8 +327,24 @@ fi
 [[ $(admin clean tekora -e 'SELECT state FROM tekora_provisioning') == upgrading ]]
 [[ $(admin clean -e "SELECT COUNT(*) FROM information_schema.triggers WHERE TRIGGER_SCHEMA='tekora' AND TRIGGER_NAME='integrated_checkout_commit'") == 0 ]]
 administrative_window_closed clean
-docker logs "$lab-clean" > "$evidence/mysql-clean.log" 2>&1
+docker logs "$lab-clean" > "$evidence/mysql-clean-install.log" 2>&1
 docker rm -f "$lab-clean" >/dev/null
 docker volume rm "$lab-clean-socket" >/dev/null
 docker run --rm --network none --mount "type=bind,src=$private,dst=/lab" "$image" sh -c 'rm -rf /lab/clean-data'
 printf '%s\n' 'Instalación limpia y actualización coinciden; migración interrumpida rechazada.'
+
+# Reuse the now-empty comparison slot to test the sealed 39-to-41 path directly.
+start clean 81504
+accounts clean
+TEKORA_V818_INSTANCE=clean TEKORA_V818_PROJECT="$legacy" "$legacy/deploy/vps/provision.sh" "$private/clean-admin.cnf" "$private/clean-migrator.json"
+[[ $(admin clean tekora -e 'SELECT COUNT(*) FROM migrations') == 39 ]]
+admin clean -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT LOCK"
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --upgrade
+administrative_window_closed clean
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --upgrade
+administrative_window_closed clean
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --verify
+[[ $(admin clean tekora -e 'SELECT batch, COUNT(*) FROM migrations GROUP BY batch ORDER BY batch') == $'1\t39\n2\t1\n3\t1' ]]
+[[ $(admin clean tekora -e 'SELECT schema_sha256 FROM tekora_provisioning') == "$digest" ]]
+docker logs "$lab-clean" > "$evidence/mysql-direct-upgrade.log" 2>&1
+printf '%s\n' 'Actualización directa 39→41: dos lotes, idempotencia y sello coincidente con instalación nueva.'

@@ -69,7 +69,7 @@ class TekoraW3Test extends TestCase
         $response = $this->get(route('catalog.show', $service))->assertOk();
         $xpath = $this->document($response->getContent());
         $this->assertSame($canRequest ? 1 : 0, $xpath->query('//a[@href="'.route('inquiries.create', $service).'"]')->length);
-        $response->assertSee('Enviar una solicitud no crea reservas, pagos ni contratos automáticos.')->assertSee('sin verificación profesional');
+        $response->assertSee('Enviar una solicitud no crea reservas, pagos ni contratos automáticos.')->assertDontSee('Profesional Tekora');
         if ($own) {
             $response->assertSee('No puedes solicitarlo desde tu cuenta.');
         }

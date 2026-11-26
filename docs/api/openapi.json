@@ -8789,7 +8789,7 @@
               {
                 "type": "string",
                 "pattern": "^[0-9]{5,16}$",
-                "description": "Cédula verificada con consentimiento expreso."
+                "description": "Número de cédula declarado por el prestador, con consentimiento expreso para mostrarlo."
               },
               {
                 "type": "null"

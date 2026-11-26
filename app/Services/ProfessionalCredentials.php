@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\Permission;
 use App\Models\ProfessionalCredential;
 use App\Models\User;
+use finfo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -17,59 +18,65 @@ final class ProfessionalCredentials
 {
     public const LABELS = ['unverified' => 'Sin verificar', 'pending' => 'Pendiente', 'verified' => 'Verificado', 'rejected' => 'Rechazado'];
 
-    public static function licenseRules(bool $required, bool $withEvidence = false): array
+    public static function licenseRules(bool $required): array
     {
         return [
             'license_disposition' => [Rule::requiredIf($required), 'nullable', Rule::in(['available', 'none'])],
             'license_number' => ['exclude_unless:license_disposition,available', 'required', 'string', 'regex:/\A[0-9]{5,16}\z/'],
             'public_license' => ['exclude_unless:license_disposition,available', 'sometimes', 'accepted'],
-        ] + ($withEvidence ? [
-            'certificate' => ['nullable', 'prohibits:remove_certificate', 'file', 'max:5120', 'mimetypes:application/pdf,image/jpeg,image/png'],
-            'remove_certificate' => ['sometimes', 'accepted'],
-        ] : []);
+        ];
     }
 
     public function enroll(User $owner, array $input): void
     {
-        if (! isset($input['license_disposition'])) {
-            return;
+        if (isset($input['license_disposition'])) {
+            $this->declareLicense($owner, $input, initial: true);
         }
-
-        $this->update($owner, $input, true);
     }
 
-    public function update(User $owner, array $input, bool $initial = false): void
+    public function declareLicense(User $owner, array $input, bool $initial = false): void
     {
-        $file = $input['certificate'] ?? null;
-        $mime = $file ? ((new \finfo(FILEINFO_MIME_TYPE))->file($file->getPathname()) ?: null) : null;
-        $number = $input['license_disposition'] === 'available' ? $input['license_number'] : null;
-        $public = $number !== null && isset($input['public_license']);
-        $remove = isset($input['remove_certificate']);
-        $path = $file ? $this->upload($file, $mime) : null;
+        DB::transaction(function () use ($owner, $input, $initial) {
+            $this->lockOwner($owner);
+            $credential = ProfessionalCredential::lockForUpdate()->find($owner->id);
+            if ($initial && $credential) {
+                return;
+            }
+            if (! $credential) {
+                $credential = new ProfessionalCredential;
+                $credential->user_id = $owner->id;
+                $credential->status = 'unverified';
+                $credential->revision = 1;
+            }
+            $credential->license_number = $input['license_disposition'] === 'available' ? $input['license_number'] : null;
+            $credential->public_license = $credential->license_number !== null && isset($input['public_license']);
+            $credential->save();
+        }, 3);
+    }
+
+    public function updateCertificate(User $owner, ?UploadedFile $file): void
+    {
+        $mime = $file ? self::certificateMime($file->getPathname()) : null;
+        if ($file && $mime === null) {
+            throw ValidationException::withMessages(['certificate' => 'Selecciona un PDF, JPG o PNG válido.']);
+        }
+        $path = $file ? $this->upload($file) : null;
 
         try {
-            $previous = DB::transaction(function () use ($owner, $number, $public, $remove, $path, $mime, $initial) {
+            $previous = DB::transaction(function () use ($owner, $path, $mime) {
                 $this->lockOwner($owner);
-                $credential = ProfessionalCredential::find($owner->id);
-                if ($initial && $credential) {
+                $credential = ProfessionalCredential::lockForUpdate()->findOrFail($owner->id);
+                $oldPath = $credential->evidence_path;
+                if ($path === $oldPath) {
                     return null;
                 }
-                $oldPath = $credential?->evidence_path;
-                $newPath = $remove ? null : ($path ?? $oldPath);
-                $credential ??= new ProfessionalCredential;
-                $changed = ! $credential->exists || $number !== $credential->license_number || $newPath !== $oldPath;
-                $credential->user_id = $owner->id;
-                $credential->license_number = $number;
-                $credential->public_license = $public;
-                $credential->evidence_path = $newPath;
-                $credential->evidence_mime = $newPath === null ? null : ($mime ?? $credential->evidence_mime);
-                if ($changed) {
-                    $credential->status = $number || $newPath ? 'pending' : 'unverified';
-                    $credential->revision = ($credential->revision ?? 0) + 1;
-                }
+                $credential->evidence_path = $path;
+                $credential->evidence_mime = $mime;
+                $credential->status = $path === null ? 'unverified' : 'pending';
+                $credential->revision++;
                 $credential->save();
 
-                return $oldPath !== $newPath ? $oldPath : null;
+                return $oldPath;
             }, 3);
         } catch (Throwable $error) {
             // Keep staged evidence if storage cannot establish whether a commit took effect.
@@ -92,10 +99,11 @@ final class ProfessionalCredentials
         DB::transaction(function () use ($reviewer, $owner, $input) {
             $this->lockOwner($owner, $input['decision'] !== 'revoked');
             abort_unless($reviewer->hasPermission(Permission::ReviewProviderProfiles) && $reviewer->id !== $owner->id, 403);
-            $credential = ProfessionalCredential::findOrFail($owner->id);
+            $credential = ProfessionalCredential::lockForUpdate()->findOrFail($owner->id);
             $decision = $input['decision'];
             abort_unless($credential->revision === (int) $input['revision']
                 && $credential->status === ($decision === 'revoked' ? 'verified' : 'pending'), 409, 'La documentación o su estado cambiaron.');
+            abort_if($decision === 'verified' && ! self::hasValidCertificate($credential), 409, 'Se requiere un certificado privado vigente y válido.');
             $credential->status = $decision === 'revoked' ? 'unverified' : $decision;
             $credential->save();
             DB::table('professional_reviews')->insert([
@@ -112,13 +120,30 @@ final class ProfessionalCredentials
         abort_unless(! $requireProvider || $current->hasPermission(Permission::ManageProviderProfile), 403);
     }
 
-    private function upload(UploadedFile $file, ?string $mime): string
+    public static function hasValidCertificate(ProfessionalCredential $credential): bool
     {
-        $image = in_array($mime, ['image/jpeg', 'image/png'], true);
-        if ((! $image && $mime !== 'application/pdf') || ($image && ! getimagesize($file->getPathname()))) {
-            throw ValidationException::withMessages(['certificate' => 'Selecciona un PDF, JPG o PNG válido.']);
+        if (! Str::isUuid($credential->evidence_path) || $credential->evidence_mime === null) {
+            return false;
         }
 
+        return self::certificateMime(Storage::disk('professional')->path($credential->evidence_path)) === $credential->evidence_mime;
+    }
+
+    private static function certificateMime(string $path): ?string
+    {
+        if (! is_file($path) || ! is_readable($path) || filesize($path) > 5 * 1024 * 1024) {
+            return null;
+        }
+        $mime = (new finfo(FILEINFO_MIME_TYPE))->file($path);
+        if ($mime === 'application/pdf') {
+            return $mime;
+        }
+
+        return in_array($mime, ['image/jpeg', 'image/png'], true) && getimagesize($path) ? $mime : null;
+    }
+
+    private function upload(UploadedFile $file): string
+    {
         $stored = $file->storeAs('', (string) Str::uuid(), ['disk' => 'professional', 'visibility' => 'private']);
         abort_unless(is_string($stored), 503, 'El archivo privado no pudo guardarse.');
 

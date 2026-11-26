@@ -45,7 +45,7 @@ class ProviderProfileController extends Controller
             return response()->json(['provider_profile' => $providerProfile]);
         }
         if (\App\Support\TrustSchema::available()) {
-            $providerProfile->load('credential:user_id,status,license_number,public_license');
+            $providerProfile->load('credential:user_id,status,license_number,public_license,evidence_path');
         }
 
         return view('account.provider-show', ['profile' => $providerProfile]);

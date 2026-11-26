@@ -17,7 +17,7 @@ class PublicCatalogTest extends TestCase
         $service = $this->service($owner, ['title' => 'Reparación de laptops']);
         $profile = $service->providerProfile;
         $this->get('/servicios')->assertOk()->assertSee('Reparación de laptops')->assertSee($profile->display_name);
-        $this->get('/servicios/'.$service->id)->assertOk()->assertSee($service->description)->assertSee('sin verificación profesional');
+        $this->get('/servicios/'.$service->id)->assertOk()->assertSee($service->description)->assertDontSee('Profesional Tekora');
         $this->get('/prestadores')->assertOk()->assertSee($profile->display_name)->assertSee('1 servicio publicado');
         $this->get('/prestadores/'.$profile->id)->assertOk()->assertSee($profile->display_name)->assertSee($profile->headline)
             ->assertSee($profile->bio)->assertSee('Reparación de laptops');

@@ -153,19 +153,40 @@ final class ProvisionedJourneyTest extends TestCase
         $this->put(route('provider-services.update', $service), $this->serviceData([
             'title' => $service->title, 'modality' => 'onsite', 'municipality' => 'tonala',
         ]))->assertRedirect();
-        $this->post(route('trust.update'), ['license_disposition' => 'available', 'license_number' => '2244567', 'public_license' => '1',
-            'certificate' => \Illuminate\Http\UploadedFile::fake()->createWithContent('trust.pdf', "%PDF-1.4\n% Synthetic fixture\n%%EOF\n"),
+        $license = ['license_disposition' => 'available', 'license_number' => '2244567', 'public_license' => '1'];
+        $certificate = route('trust.certificate.update');
+        $approval = ['revision' => 2, 'decision' => 'verified', 'reason' => 'Validación de laboratorio'];
+        $serviceApi = '/api/v1/services/'.$service->id;
+        $professional = 'data.provider.professional_credential.';
+        $this->post(route('trust.update'), $license)->assertRedirect();
+        $this->getJson($serviceApi)->assertOk()->assertJsonPath($professional.'license_number', '2244567')->assertJsonPath($professional.'badge', null);
+        $this->actingAs($reviewer, 'web')->post(route('trust.decide', $provider), array_replace($approval, ['revision' => 1]))->assertConflict();
+        $content = "%PDF-1.4\n% Synthetic fixture\n%%EOF\n";
+        $this->actingAs($provider, 'web')->post($certificate, [
+            'certificate' => \Illuminate\Http\UploadedFile::fake()->createWithContent('trust.pdf', $content),
         ])->assertRedirect();
         $this->get(route('trust.download', $provider))->assertDownload('certificado.pdf');
         $this->actingAs($this->account(RoleName::Client), 'web')->get(route('trust.download', $provider))->assertNotFound();
-        $this->actingAs($reviewer, 'web')->post(route('trust.decide', $provider), [
-            'revision' => 1, 'decision' => 'verified', 'reason' => 'Validación de laboratorio',
-        ])->assertRedirect();
+        $this->actingAs($reviewer, 'web')->post(route('trust.decide', $provider), $approval)->assertRedirect();
         $this->getJson('/api/v1/services?verified=1&municipality=tonala&q=Tekora%20V811')->assertOk()->assertJsonCount(1, 'data')
             ->assertJsonPath('data.0.provider.professional_credential.license_number', '2244567')
             ->assertJsonPath('data.0.location.municipality.name', 'Tonalá')
             ->assertJsonMissingPath('data.0.provider.evidence_path');
         $this->assertDatabaseHas('professional_reviews', ['provider_user_id' => $provider->id, 'reviewer_user_id' => $reviewer->id]);
+        $this->actingAs($provider, 'web')->post(route('trust.update'), array_diff_key($license, ['public_license' => true]))->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'license_number', null)->assertJsonPath($professional.'badge', 'Profesional Tekora');
+        $this->post(route('trust.update'), ['license_disposition' => 'none'])->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'license_number', null)->assertJsonPath($professional.'badge', 'Profesional Tekora');
+        $this->post(route('trust.update'), $license)->assertRedirect();
+        $this->post($certificate, [
+            'certificate' => \Illuminate\Http\UploadedFile::fake()->createWithContent('replacement.pdf', $content),
+        ])->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'license_number', '2244567')->assertJsonPath($professional.'badge', null);
+        $this->actingAs($reviewer, 'web')->post(route('trust.decide', $provider), $approval)->assertConflict();
+        $this->post(route('trust.decide', $provider), array_replace($approval, ['revision' => 3]))->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', 'Profesional Tekora');
+        $this->actingAs($provider, 'web')->post($certificate, ['remove_certificate' => '1'])->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'license_number', '2244567')->assertJsonPath($professional.'badge', null);
     }
 
     public function test_historical_journey_with_lab_clock(): void

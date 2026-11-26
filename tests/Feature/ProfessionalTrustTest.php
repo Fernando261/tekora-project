@@ -46,7 +46,25 @@ final class ProfessionalTrustTest extends TestCase
         $this->post(route('legal.cookies'), ['optional' => 'accepted', '_token' => 'cookie-fixture'])->assertCookie('tekora_preferences_v1', 'accepted');
     }
 
-    public function test_document_is_private_and_only_a_current_admin_decision_can_publish_badge_and_number(): void
+    public function test_existing_provider_is_prompted_on_login_until_declaring_even_without_a_number(): void
+    {
+        $this->withoutVite();
+        $provider = $this->account(RoleName::Client, RoleName::Provider);
+        $login = ['email' => $provider->email, 'password' => 'password'];
+        $this->post('/login', $login)->assertRedirect(route('trust.onboarding'));
+        $this->get(route('trust.onboarding'))->assertOk()->assertSee('Completa tu declaración de cédula');
+        $this->postJson(route('trust.onboarding.store'), ['license_disposition' => 'available', 'license_number' => 'inválida'])
+            ->assertUnprocessable()->assertJsonValidationErrors('license_number');
+        $this->assertDatabaseMissing('professional_credentials', ['user_id' => $provider->id]);
+        $this->post(route('trust.onboarding.store'), ['license_disposition' => 'none'])->assertRedirect(route('account.provider'));
+        $this->assertDatabaseHas('professional_credentials', ['user_id' => $provider->id, 'license_number' => null]);
+        $this->post('/logout')->assertRedirect('/login');
+        $this->post('/login', $login)->assertRedirect(route('account.provider'));
+        $this->get(route('trust.onboarding'))->assertRedirect(route('account.provider'));
+        $this->actingAs($this->account(RoleName::Client))->get(route('trust.onboarding'))->assertForbidden();
+    }
+
+    public function test_cedula_consent_and_certificate_approval_are_independent(): void
     {
         $this->withoutVite();
         Storage::fake('professional');
@@ -54,52 +72,104 @@ final class ProfessionalTrustTest extends TestCase
         $admin = $this->account(RoleName::Admin);
         $client = $this->account(RoleName::Client);
         $service = $this->service($provider);
+        $serviceApi = '/api/v1/services/'.$service->id;
+        $professional = 'data.provider.professional_credential.';
         $license = ['license_disposition' => 'available', 'license_number' => '1532467', 'public_license' => '1'];
-        $this->actingAs($provider)->postJson(route('trust.update'), $license + ['certificate' => UploadedFile::fake()->createWithContent('falso.pdf', 'sitio HTML')])
+        $certificate = route('trust.certificate.update');
+        $decision = ['revision' => 1, 'decision' => 'verified', 'reason' => 'Evidencia sintética revisada'];
+        $this->actingAs($provider)->post(route('trust.update'), $license)->assertRedirect();
+        $this->get(route('catalog.show', $service))->assertOk()->assertSee('Cédula declarada: 1532467')->assertDontSee('Profesional Tekora')->assertDontSee('Verificación:');
+        $this->get('/servicios')->assertOk()->assertSee('Cédula declarada: 1532467');
+        $this->get(route('public-providers.show', $service->provider_profile_id))->assertOk()->assertSee('Cédula declarada: 1532467')->assertDontSee('Profesional Tekora');
+        $this->getJson($serviceApi)->assertOk()->assertJsonPath($professional.'license_number', '1532467')->assertJsonPath($professional.'badge', null);
+        $this->getJson('/api/v1/services?verified=1')->assertOk()->assertJsonCount(0, 'data');
+
+        $this->getJson('/api/v1/providers/'.$service->provider_profile_id)->assertOk()
+            ->assertJsonPath('data.professional_credential.license_number', '1532467')
+            ->assertJsonPath('data.professional_credential.badge', null);
+        $credentialRow = DB::table('professional_credentials')->where('user_id', $provider->id);
+        $credentialRow->update(['status' => 'verified']);
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', null);
+        $this->getJson('/api/v1/services?verified=1')->assertJsonCount(0, 'data');
+        $credentialRow->update(['status' => 'pending']);
+        $this->actingAs($admin)->get(route('trust.review'))->assertOk()->assertDontSee('value="verified"', false);
+        $this->post(route('trust.decide', $provider), $decision)->assertConflict();
+        $this->assertDatabaseMissing('professional_reviews', ['provider_user_id' => $provider->id]);
+        $this->actingAs($provider)->postJson($certificate, ['certificate' => UploadedFile::fake()->createWithContent('falso.pdf', 'sitio HTML')])
             ->assertUnprocessable()->assertJsonValidationErrors('certificate');
-        $this->postJson(route('trust.update'), $license + ['certificate' => UploadedFile::fake()->create('grande.pdf', 5121, 'application/pdf')])
+        $this->postJson($certificate, ['certificate' => UploadedFile::fake()->create('grande.pdf', 5121, 'application/pdf')])
             ->assertUnprocessable()->assertJsonValidationErrors('certificate');
-        $pdf = UploadedFile::fake()->createWithContent('credencial.pdf', "%PDF-1.4\n% Synthetic school fixture\n%%EOF\n");
-        $this->post(route('trust.update'), $license + ['certificate' => $pdf])->assertRedirect();
+        $this->post($certificate, ['certificate' => $this->certificate()])->assertRedirect();
         $credential = ProfessionalCredential::findOrFail($provider->id);
         $this->assertSame('pending', $credential->status);
-        Storage::disk('professional')->assertExists($credential->evidence_path);
+        $storage = Storage::disk('professional');
+        $storage->assertExists($credential->evidence_path);
         $this->get(route('trust.download', $provider))->assertDownload('certificado.pdf')->assertHeader('X-Content-Type-Options', 'nosniff');
-        $this->getJson('/api/v1/services/'.$service->id)->assertOk()->assertJsonPath('data.provider.professional_credential.license_number', null);
-        $decision = ['revision' => $credential->revision, 'decision' => 'verified', 'reason' => 'Evidencia sintética revisada'];
+        $decision['revision'] = $credential->revision;
         $this->actingAs($client)->get(route('trust.download', $provider))->assertNotFound();
         $this->post(route('trust.decide', $provider), $decision)->assertForbidden();
-        $this->actingAs($admin)->get(route('trust.download', $provider))->assertDownload('certificado.pdf');
+
+        $this->actingAs($admin)->get(route('trust.review'))->assertOk()->assertSee('value="verified"', false);
+        $original = $storage->get($credential->evidence_path);
+        $storage->put($credential->evidence_path, 'contenido incompatible');
+        $this->get(route('trust.review'))->assertOk()->assertDontSee('value="verified"', false);
+        $this->post(route('trust.decide', $provider), $decision)->assertConflict();
+        $storage->delete($credential->evidence_path);
+        $this->post(route('trust.decide', $provider), $decision)->assertConflict();
+        $storage->put($credential->evidence_path, $original);
+        $this->get(route('trust.download', $provider))->assertDownload('certificado.pdf');
         $this->post(route('trust.decide', $provider), $decision)->assertRedirect();
         $this->assertDatabaseHas('professional_reviews', ['provider_user_id' => $provider->id, 'reviewer_user_id' => $admin->id, 'decision' => 'verified']);
         $this->get(route('catalog.show', $service))->assertOk()->assertSee('Profesional Tekora')->assertSee('1532467')->assertDontSee($credential->evidence_path);
-        $this->get(route('public-providers.show', $service->provider_profile_id))->assertOk()->assertSee('Profesional Tekora')
-            ->assertDontSee('Perfil sin verificación profesional.');
+
         $this->actingAs($provider)->post(route('trust.update'), ['license_disposition' => 'available', 'license_number' => '1532467'])->assertRedirect();
-        $this->getJson('/api/v1/services/'.$service->id)->assertJsonPath('data.provider.professional_credential.status', 'verified')->assertJsonPath('data.provider.professional_credential.license_number', null);
-        $this->actingAs($admin)->post(route('trust.decide', $provider), array_replace($decision, ['decision' => 'revoked']))->assertRedirect();
-        $this->get(route('catalog.show', $service))->assertOk()->assertDontSee('Profesional Tekora');
-        $this->actingAs($provider)->post(route('trust.update'), array_replace($license, ['license_number' => '2532467']))->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', 'Profesional Tekora')->assertJsonPath($professional.'license_number', null);
+        $this->post(route('trust.update'), ['license_disposition' => 'none', 'public_license' => '1'])->assertRedirect();
+        $this->get(route('catalog.show', $service))->assertOk()->assertSee('Profesional Tekora')->assertDontSee('1532467');
+        $this->getJson($serviceApi)->assertJsonPath($professional.'license_number', null);
+        $this->post(route('trust.update'), array_replace($license, ['license_number' => '2532467']))->assertRedirect();
+        $this->assertSame($decision['revision'], $credential->fresh()->revision);
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', 'Profesional Tekora')->assertJsonPath($professional.'license_number', '2532467');
+
+        $this->post($certificate, ['certificate' => $this->certificate()])->assertRedirect();
+        $storage->assertMissing($credential->evidence_path);
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', null)->assertJsonPath($professional.'license_number', '2532467');
         $this->actingAs($admin)->post(route('trust.decide', $provider), $decision)->assertConflict();
-        $this->assertSame('pending', $credential->fresh()->status);
-        $this->post(route('trust.decide', $provider), [
-            'revision' => $credential->fresh()->revision, 'decision' => 'rejected', 'reason' => 'Cédula distinta del documento',
-        ])->assertRedirect();
+        $replacement = $credential->fresh();
+        $this->post(route('trust.decide', $provider), array_replace($decision, ['revision' => $replacement->revision]))->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', 'Profesional Tekora');
+        $this->actingAs($provider)->post($certificate, ['remove_certificate' => '1'])->assertRedirect();
+        $storage->assertMissing($replacement->evidence_path);
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', null)->assertJsonPath($professional.'license_number', '2532467');
+        $this->getJson('/api/v1/services?verified=1')->assertOk()->assertJsonCount(0, 'data');
+        $this->assertSame('unverified', $credential->fresh()->status);
+
+        $this->travel(61)->seconds();
+        $this->post($certificate, ['certificate' => $this->certificate()])->assertRedirect();
+        $decision['revision'] = $credential->fresh()->revision;
+        $this->actingAs($admin)->post(route('trust.decide', $provider), array_replace($decision, ['decision' => 'rejected']))->assertRedirect();
         $this->assertSame('rejected', $credential->fresh()->status);
-        $this->getJson('/api/v1/services/'.$service->id)->assertJsonPath('data.provider.professional_credential.badge', null);
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', null)->assertJsonPath($professional.'license_number', '2532467');
+        $this->actingAs($provider)->post($certificate, ['certificate' => $this->certificate()])->assertRedirect();
+        $decision['revision'] = $credential->fresh()->revision;
+        $this->actingAs($admin)->post(route('trust.decide', $provider), $decision)->assertRedirect();
+        $this->post(route('trust.decide', $provider), array_replace($decision, ['decision' => 'revoked']))->assertRedirect();
+        $this->getJson($serviceApi)->assertJsonPath($professional.'badge', null)->assertJsonPath($professional.'license_number', '2532467');
     }
 
     public function test_location_filters_combine_with_search_category_and_verification(): void
     {
         $this->withoutVite();
+        Storage::fake('professional');
         $provider = $this->account(RoleName::Provider);
         $service = $this->service($provider, ['title' => 'Soporte sintético', 'modality' => 'onsite']);
         $data = $this->serviceData(['title' => 'Soporte sintético', 'modality' => 'onsite', 'service_category_id' => $service->service_category_id]);
         $this->actingAs($provider)->putJson(route('provider-services.update', $service), $data)->assertUnprocessable()->assertJsonValidationErrors('municipality');
         $this->put(route('provider-services.update', $service), $data + ['municipality' => 'zapopan'])->assertRedirect();
         $this->post(route('trust.update'), ['license_disposition' => 'available', 'license_number' => '2244567'])->assertRedirect();
+        $this->post(route('trust.certificate.update'), ['certificate' => $this->certificate()])->assertRedirect();
         $admin = $this->account(RoleName::Admin);
-        $this->actingAs($admin)->post(route('trust.decide', $provider), ['revision' => 1, 'decision' => 'verified', 'reason' => 'Sintético'])->assertRedirect();
+        $this->actingAs($admin)->post(route('trust.decide', $provider), ['revision' => 2, 'decision' => 'verified', 'reason' => 'Sintético'])->assertRedirect();
         $this->assertCount(9, $this->get('/api/v1/municipalities', ['Accept' => 'application/json'])->assertOk()->json('data'));
         $query = http_build_query(['municipality' => 'zapopan', 'verified' => '1', 'q' => 'Soporte', 'category' => $service->category->slug]);
         $this->getJson('/api/v1/services?'.$query)->assertOk()->assertJsonCount(1, 'data')->assertJsonPath('data.0.location.municipality.slug', 'zapopan');
@@ -108,5 +178,10 @@ final class ProfessionalTrustTest extends TestCase
         $this->getJson('/api/v1/providers?municipality=zapopan&verified=1')->assertOk()->assertJsonCount(1, 'data');
         $this->actingAs($provider)->put(route('provider-services.update', $service), array_replace($data, ['modality' => 'remote', 'municipality' => 'zapopan']))->assertRedirect();
         $this->getJson('/api/v1/services/'.$service->id)->assertJsonPath('data.location.remote', true)->assertJsonPath('data.location.municipality', null);
+    }
+
+    private function certificate(): UploadedFile
+    {
+        return UploadedFile::fake()->createWithContent('credencial.pdf', "%PDF-1.4\n% Synthetic school fixture\n%%EOF\n");
     }
 }
