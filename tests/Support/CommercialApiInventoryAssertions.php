@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\CheckoutContextController;
 use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\IdentityController;
+use App\Http\Controllers\Api\V1\IntegratedCheckoutController;
 use App\Http\Controllers\Api\V1\NotificationsController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\V1\QuotesController;
@@ -98,11 +99,10 @@ trait CommercialApiInventoryAssertions
 
     protected function mobileClientExtensions(): array
     {
-        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory() + $this->m31ApiInventory();
+        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory() + $this->m31ApiInventory() + $this->v810ApiInventory();
     }
 
-
-    /** The only added payment-like API is private, synthetic and fixture-gated at runtime. */
+    /** The B3.2 sandbox routes are private, synthetic and fixture-gated at runtime. */
     protected function m31ApiInventory(): array
     {
         $base = ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
@@ -114,6 +114,21 @@ trait CommercialApiInventoryAssertions
                 'middleware' => $base, 'wheres' => ['reservation' => '[0-9]+']],
             'api.v1.reservations.demo-checkout.submit' => ['uri' => $uri, 'methods' => ['POST'],
                 'action' => \App\Http\Controllers\Api\V1\SyntheticCheckoutController::class.'@submit',
+                'middleware' => [...$base, 'throttle:mobile-reservation-writes'], 'wheres' => ['reservation' => '[0-9]+']],
+        ];
+    }
+
+    protected function v810ApiInventory(): array
+    {
+        $base = ['api', 'auth:sanctum', MobileClient::class, 'throttle:mobile-private'];
+        $uri = 'api/v1/reservations/{reservation}/checkout';
+
+        return [
+            'api.v1.reservations.checkout.show' => ['uri' => $uri, 'methods' => ['GET', 'HEAD'],
+                'action' => IntegratedCheckoutController::class.'@show',
+                'middleware' => $base, 'wheres' => ['reservation' => '[0-9]+']],
+            'api.v1.reservations.checkout.submit' => ['uri' => $uri, 'methods' => ['POST'],
+                'action' => IntegratedCheckoutController::class.'@submit',
                 'middleware' => [...$base, 'throttle:mobile-reservation-writes'], 'wheres' => ['reservation' => '[0-9]+']],
         ];
     }

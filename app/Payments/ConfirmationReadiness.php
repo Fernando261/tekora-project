@@ -24,6 +24,11 @@ final class ConfirmationReadiness
         if ($state === 'ready' && BookingClock::micros() < $observedAt) {
             $state = 'unknown';
             $blockers[] = 'server_clock_uncertain';
+        } elseif ($state === 'ready' && IntegratedCheckout::requiresChoice($reservation)) {
+            if (! app(IntegratedCheckout::class)->permitsCommit($reservation)) {
+                $state = 'simulated_checkout_required';
+                $blockers[] = 'simulated_checkout_required';
+            }
         } elseif ($state === 'ready' && LocalIntegratedCheckoutController::permitsSyntheticRequest(request())) {
             // Same predicate used by ReservationWorkflow, never a second payment policy.
             $satisfied = app(LocalCheckoutAttemptStore::class)->permitsCommit($reservation);
@@ -38,6 +43,7 @@ final class ConfirmationReadiness
             'advisory_only' => true, 'reservation_id' => $reservation->id,
             'reservation_version' => $reservation->version,
             'synthetic_web_requirement' => $requirement, 'blocking_reasons' => $blockers,
+            ...(IntegratedCheckout::requiresChoice($reservation) ? ['simulated_checkout_required' => true] : []),
             'observed_at' => BookingClock::date($observedAt)->toISOString()];
     }
 }

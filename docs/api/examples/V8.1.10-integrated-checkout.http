@@ -1,0 +1,47 @@
+@api = https://tekora.example.test/api/v1
+@reservation = 42
+@version = 1
+
+### Contexto y vencimiento calculados por el servidor
+GET {{api}}/reservations/{{reservation}}/checkout-context
+Authorization: Bearer {{mobile_token}}
+Accept: application/json
+
+### Estado persistido
+GET {{api}}/reservations/{{reservation}}/checkout
+Authorization: Bearer {{mobile_token}}
+Accept: application/json
+
+### Selección con tarjeta ficticia
+POST {{api}}/reservations/{{reservation}}/checkout
+Authorization: Bearer {{mobile_token}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "method": "card",
+  "instrument": "tekora-test-card",
+  "idempotency_key": "b7f2976e-e74a-43b7-936e-9b43dd090421"
+}
+
+### Alternativa de efectivo (usar otra reserva o ejecutar antes de la selección de tarjeta)
+POST {{api}}/reservations/{{reservation}}/checkout
+Authorization: Bearer {{mobile_token}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "method": "cash",
+  "idempotency_key": "59b8172e-dbe2-4103-8e4a-eda71d08c34b"
+}
+
+### Confirmación explícita de la reserva tras la selección válida
+PATCH {{api}}/reservations/{{reservation}}/commit
+Authorization: Bearer {{mobile_token}}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "version": {{version}},
+  "idempotency_key": "fc91ce2d-3d01-4a5f-8db6-bffe01f071ee"
+}

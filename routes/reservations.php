@@ -15,7 +15,6 @@ Route::middleware('auth:web')->prefix('cuenta/reservas')->name('reservations.')-
     }
 });
 
-
 // B3.2: reservation-linked checkout; local loopback + disposable synthetic SQLite only.
 Route::middleware(['auth:web', \App\Http\Middleware\TekoraPageHeaders::class])
     ->prefix('cuenta/reservas/{reservation}/checkout')->where(['reservation' => '[0-9]+'])->name('checkout.local.')
@@ -25,4 +24,13 @@ Route::middleware(['auth:web', \App\Http\Middleware\TekoraPageHeaders::class])
         Route::get('/efectivo', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'cash'])->name('cash');
         Route::post('/efectivo/recibir', [\App\Http\Controllers\LocalIntegratedCheckoutController::class, 'receiveCash'])
             ->middleware('throttle:reservation-decisions')->name('cash.receive');
+    });
+
+Route::middleware(['auth:web', \App\Http\Middleware\TekoraPageHeaders::class])
+    ->prefix('cuenta/reservas/{reservation}/pago-de-prueba')->where(['reservation' => '[0-9]+'])->name('checkout.integrated.')
+    ->controller(\App\Http\Controllers\IntegratedCheckoutController::class)->group(function () {
+        Route::get('/', 'show')->name('show');
+        Route::post('/', 'submit')->middleware('throttle:reservation-decisions')->name('submit');
+        Route::get('/efectivo', 'cash')->name('cash');
+        Route::post('/efectivo/recibir', 'receiveCash')->middleware('throttle:reservation-decisions')->name('cash.receive');
     });

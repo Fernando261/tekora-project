@@ -59,9 +59,13 @@ class MobileCheckoutHandoffContractTest extends TestCase
                 continue;
             }
 
-            if ($route->getName() === 'api.v1.reservations.demo-checkout.submit') {
+            $checkoutWrites = [
+                'api.v1.reservations.demo-checkout.submit' => 'demo-checkout',
+                'api.v1.reservations.checkout.submit' => 'checkout',
+            ];
+            if (isset($checkoutWrites[$route->getName()])) {
                 $this->assertSame(['POST'], $route->methods());
-                $this->assertSame('api/v1/reservations/{reservation}/demo-checkout', $route->uri());
+                $this->assertSame('api/v1/reservations/{reservation}/'.$checkoutWrites[$route->getName()], $route->uri());
                 $this->assertContains('auth:sanctum', $route->gatherMiddleware());
                 $this->assertContains(MobileClient::class, $route->gatherMiddleware());
 

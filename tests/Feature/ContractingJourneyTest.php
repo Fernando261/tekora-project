@@ -313,17 +313,27 @@ class ContractingJourneyTest extends TestCase
                 unset($new['paths'][$path]);
             }
         }
+        $context = &$new['paths']['/reservations/{reservation}/checkout-context']['get']['description'];
+        $newContext = ' La confirmación nunca exige un pago bancario verificado. Las nuevas reservas vinculadas a checkout de prueba requieren selección simulada válida y confirmación explícita.';
+        $this->assertStringEndsWith($newContext, $context);
+        $context = substr($context, 0, -strlen($newContext)).' La confirmación vigente no exige pagos y no cambia.';
+        $commit = &$new['paths']['/reservations/{reservation}/commit']['patch']['description'];
+        $newCommit = ' Una reserva vinculada al checkout integrado requiere una selección simulada válida antes de confirmar, incluso si posteriormente se desactiva el procesador.';
+        $this->assertStringEndsWith($newCommit, $commit);
+        $commit = substr($commit, 0, -strlen($newCommit));
+
         $fingerprint = fn ($value) => hash('sha256', json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
         $this->assertSame($old['paths_sha256'], $fingerprint($new['paths']));
         foreach ($old['components'] as $type => $definitions) {
             foreach ($definitions as $name => $value) {
                 $definition = $new['components'][$type][$name];
                 if ($type === 'schemas' && $name === 'CheckoutContext') {
-                    // M2.1 adds exactly one optional field. Preserve the complete
-                    // historical fingerprint of every pre-existing field/rule.
+                    // Preserve the historical fingerprint of every pre-existing field and rule.
                     $this->assertSame(['$ref' => '#/components/schemas/ConfirmationReadiness'], $definition['properties']['confirmation_readiness']);
                     $this->assertNotContains('confirmation_readiness', $definition['required']);
-                    unset($definition['properties']['confirmation_readiness']);
+                    $this->assertNotContains('simulated_checkout', $definition['required']);
+                    $this->assertTrue($definition['properties']['simulated_checkout']['properties']['synthetic_only']['const']);
+                    unset($definition['properties']['confirmation_readiness'], $definition['properties']['simulated_checkout']);
                 }
                 $this->assertSame($value, $fingerprint($definition));
             }

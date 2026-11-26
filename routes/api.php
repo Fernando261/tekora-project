@@ -54,6 +54,10 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
             Route::post('quotes/{quote}/accept', [QuotesController::class, 'accept'])->whereUuid('quote')->middleware('throttle:mobile-quote-writes')->name('quotes.accept');
             Route::get('quotes/{quote}/acceptance', [QuotesController::class, 'acceptance'])->whereUuid('quote')->name('quotes.acceptance');
             Route::get('reservations/{reservation}/checkout-context', CheckoutContextController::class)->whereNumber('reservation')->name('reservations.checkout-context');
+            Route::get('reservations/{reservation}/checkout', [\App\Http\Controllers\Api\V1\IntegratedCheckoutController::class, 'show'])
+                ->whereNumber('reservation')->name('reservations.checkout.show');
+            Route::post('reservations/{reservation}/checkout', [\App\Http\Controllers\Api\V1\IntegratedCheckoutController::class, 'submit'])
+                ->whereNumber('reservation')->middleware('throttle:mobile-reservation-writes')->name('reservations.checkout.submit');
             // Separate Bearer transport for B3.2 disposable loopback SQLite only.
             Route::get('reservations/{reservation}/demo-checkout', [SyntheticCheckoutController::class, 'show'])->whereNumber('reservation')->name('reservations.demo-checkout.show');
             Route::post('reservations/{reservation}/demo-checkout', [SyntheticCheckoutController::class, 'submit'])->whereNumber('reservation')->middleware('throttle:mobile-reservation-writes')->name('reservations.demo-checkout.submit');
