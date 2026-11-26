@@ -166,7 +166,9 @@ final class ProvisionedJourneyTest extends TestCase
 
     public function test_official_checkout_with_bearer_and_web(): void
     {
-        $settings = ['APP_ENV' => 'production', 'TEKORA_CHECKOUT_PROCESSOR' => 'simulated'];
+        $cache = sys_get_temp_dir().'/tekora-v810-'.bin2hex(random_bytes(12));
+        $settings = ['APP_ENV' => 'production', 'TEKORA_CHECKOUT_PROCESSOR' => 'simulated',
+            'APP_CONFIG_CACHE' => $cache.'-config.php', 'APP_ROUTES_CACHE' => $cache.'-routes.php'];
         $before = [];
         foreach ($settings as $key => $value) {
             $before[$key] = getenv($key);
@@ -236,6 +238,53 @@ final class ProvisionedJourneyTest extends TestCase
         $this->assertLessThanOrEqual(BookingClock::micros(), $watermark);
     }
 
+    public function test_integrated_checkout_at_exact_expiry(): void
+    {
+        config(['checkout.processor' => 'simulated']);
+        [$provider, , $reservation, $headers] = $this->journey('V810 expiry boundary', 'expiry');
+        $path = "/api/v1/reservations/{$reservation->id}";
+        $get = $headers + ['Accept' => 'application/json'];
+        $data = ['method' => 'cash', 'idempotency_key' => (string) Str::uuid()];
+        DB::beginTransaction();
+        try {
+            DB::statement('SET @tekora_v818_lab_clock=?', [$reservation->hold->expires_at_us - 1]);
+            $this->postJson($path.'/checkout', $data, $headers)->assertOk()->assertJsonPath('data.status', 'awaiting_cash');
+            DB::statement('SET @tekora_v818_lab_clock=?', [$reservation->hold->expires_at_us]);
+            $this->assertSame($reservation->hold->expires_at_us, BookingClock::micros());
+            $this->get($path.'/checkout', $get)->assertOk()->assertJsonPath('data.can_confirm', false)
+                ->assertJsonPath('data.attempt.status', 'awaiting_cash');
+            $this->patchJson($path.'/commit', $this->action(), $headers)->assertConflict();
+            auth()->forgetGuards();
+            $this->actingAs($provider, 'web')->post(route('checkout.integrated.cash.receive', $reservation->id))->assertConflict();
+        } finally {
+            DB::rollBack();
+            DB::statement('SET @tekora_v818_lab_clock=NULL');
+        }
+        $this->assertSame(ReservationStatus::Requested, $reservation->fresh()->status);
+        $this->assertDatabaseMissing('integrated_checkout_attempts', ['reservation_id' => $reservation->id]);
+    }
+
+    public function test_checkout_lifecycle_after_restore(): void
+    {
+        $this->withoutVite();
+        $reservations = ServiceReservation::whereIn('service_inquiry_id', DB::table('service_inquiries')
+            ->whereIn('message', ['V810 synthetic card', 'V810 synthetic cash'])->select('id'))
+            ->with(['providerProfile.user', 'client'])->orderBy('id')->get();
+        $this->assertCount(2, $reservations);
+        $this->at(CarbonImmutable::parse($reservations->max('ends_at_utc'), 'UTC')->getTimestamp() + 1);
+        foreach ($reservations as $reservation) {
+            $provider = $reservation->providerProfile->user;
+            $this->actingAs($provider, 'web')->patch(route('reservations.complete', $reservation->id), $this->action(2))->assertRedirect();
+            $this->assertSame(ReservationStatus::Completed, $reservation->fresh()->status);
+            app(InquiryWorkflow::class)->decide($provider, $reservation->service_inquiry_id, InquiryAction::Complete);
+            $response = $this->postJson("/api/v1/reservations/{$reservation->id}/review", [
+                'rating' => 5, 'comment' => 'Synthetic verified review after checkout',
+            ], $this->bearer($reservation->client))->assertCreated();
+            $this->assertDatabaseHas('activity_notifications', ['user_id' => $provider->id, 'event' => 'review_published',
+                'service_review_id' => $response->json('data.id')]);
+        }
+    }
+
     private function journey(string $label, ?string $method = null): array
     {
         $this->withoutVite();
@@ -275,6 +324,9 @@ final class ProvisionedJourneyTest extends TestCase
         $this->assertSame(15002, CommercialAmount::fromCents(100010)->commissionCents);
         $this->getJson($reservationUrl.'/demo-checkout', $headers)->assertNotFound();
         $commit = $this->action();
+        if ($method === 'expiry') {
+            return [$provider, (int) $id, $held, $headers];
+        }
         if ($method !== null) {
             $urlCheckout = $reservationUrl.'/checkout';
             $this->get($urlCheckout, $headers + ['Accept' => 'application/json'])->assertOk()->assertJsonPath('data.can_choose', true)
@@ -367,11 +419,14 @@ final class ProvisionedJourneyTest extends TestCase
         if ($method === 'cash') {
             auth()->forgetGuards();
             $this->actingAs($this->account(RoleName::Provider), 'web')->get(route('checkout.integrated.cash', $idReservation))->assertNotFound();
-            $this->actingAs($provider, 'web')->get(route('checkout.integrated.cash', $idReservation))->assertOk();
-            $this->post(route('checkout.integrated.cash.receive', $idReservation))->assertRedirect();
+            $csrf = Str::random(40);
+            $this->actingAs($provider, 'web')->withSession(['_token' => $csrf])->get(route('checkout.integrated.cash', $idReservation))->assertOk();
+            $receiveUrl = route('checkout.integrated.cash.receive', $idReservation);
+            $this->post($receiveUrl)->assertStatus(419);
+            $this->post($receiveUrl, ['_token' => $csrf])->assertRedirect();
             $receivedAt = DB::table('integrated_checkout_attempts')->where('reservation_id', $idReservation)->value('received_at');
             $this->assertNotNull($receivedAt);
-            $this->post(route('checkout.integrated.cash.receive', $idReservation))->assertRedirect();
+            $this->post($receiveUrl, ['_token' => $csrf])->assertRedirect();
             $this->assertSame($receivedAt, DB::table('integrated_checkout_attempts')->where('reservation_id', $idReservation)->value('received_at'));
             auth()->forgetGuards();
             if ($this->wantsVisualEvidence()) {
@@ -408,9 +463,10 @@ final class ProvisionedJourneyTest extends TestCase
 
     private function concurrentSelection(User $client, int $reservation, array $selection, callable $post)
     {
-        $worker = new Process([PHP_BINARY, __DIR__.'/checkout-worker.php'], input: json_encode([
-            'actor' => $client->id, 'reservation' => $reservation, 'selection' => $selection,
-        ], JSON_THROW_ON_ERROR), timeout: 15);
+        $worker = new Process([PHP_BINARY, __DIR__.'/checkout-worker.php'],
+            env: ['APP_CONFIG_CACHE' => false, 'APP_ROUTES_CACHE' => false], input: json_encode([
+                'actor' => $client->id, 'reservation' => $reservation, 'selection' => $selection,
+            ], JSON_THROW_ON_ERROR), timeout: 15);
         try {
             $response = DB::transaction(function () use ($worker, $post) {
                 DB::table('reservation_hold_clock')->where('id', 1)->lockForUpdate()->sole();
@@ -420,7 +476,7 @@ final class ProvisionedJourneyTest extends TestCase
                     $id = strtok(trim($worker->getOutput()), "\n");
                     if ($id !== false) {
                         foreach (DB::select('SHOW FULL PROCESSLIST') as $process) {
-                            if ((string) $process->Id === $id
+                            if ((string) $process->Id === $id && in_array($process->Command, ['Execute', 'Query'], true)
                                 && str_contains(strtolower((string) $process->Info), 'reservation_hold_clock')
                                 && str_contains(strtolower((string) $process->Info), 'for update')) {
                                 return $post();
@@ -429,7 +485,7 @@ final class ProvisionedJourneyTest extends TestCase
                     }
                     usleep(10000);
                 } while ($worker->isRunning() && hrtime(true) < $limit);
-                $this->fail('The second connection never executed the expected locking statement.');
+                $this->fail('The second connection never executed the expected locking statement. '.$worker->getErrorOutput());
             });
             $this->assertSame(0, $worker->wait(), $worker->getErrorOutput());
             [, $json] = explode("\n", trim($worker->getOutput()), 2);

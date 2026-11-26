@@ -179,21 +179,29 @@ admin source < "$project/deploy/vps/mysql-runtime-grants.sql"
 php --version
 # Exercise completion after the actual business deadline using a historical clock only in this
 # disposable source. Restore the original definition and verify its digest before native-clock tests.
+fixture_clock() {
+    local instance=$1
+    {
+        printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
+        sed '/RETURN TIMESTAMPDIFF/i\    IF @tekora_v818_lab_clock IS NOT NULL THEN RETURN @tekora_v818_lab_clock; END IF;' "$private/clock.sql"
+        printf '//\nDELIMITER ;\n'
+    } | admin "$instance" tekora
+    admin "$instance" < "$project/deploy/vps/mysql-runtime-grants.sql"
+}
+restore_clock() {
+    local instance=$1
+    {
+        printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
+        cat "$private/clock.sql"
+        printf '//\nDELIMITER ;\n'
+    } | admin "$instance" tekora
+    admin "$instance" < "$project/deploy/vps/mysql-runtime-grants.sql"
+}
 admin source tekora --raw -e 'SHOW CREATE FUNCTION tekora_booking_now_us' |
     python3 -c 'import sys; print(sys.stdin.read().split("\t", 2)[2].rsplit("\t", 3)[0])' > "$private/clock.sql"
-{
-    printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
-    sed '/RETURN TIMESTAMPDIFF/i\    IF @tekora_v818_lab_clock IS NOT NULL THEN RETURN @tekora_v818_lab_clock; END IF;' "$private/clock.sql"
-    printf '//\nDELIMITER ;\n'
-} | admin source tekora
-admin source < "$project/deploy/vps/mysql-runtime-grants.sql"
+fixture_clock source
 TEKORA_V818_PROJECT="$legacy" php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_historical_journey --log-junit /evidence/mysql-completed.xml
-{
-    printf 'DROP FUNCTION tekora_booking_now_us;\nDELIMITER //\n'
-    cat "$private/clock.sql"
-    printf '//\nDELIMITER ;\n'
-} | admin source tekora
-admin source < "$project/deploy/vps/mysql-runtime-grants.sql"
+restore_clock source
 TEKORA_V818_PROJECT="$legacy" php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml \
     --filter test_live_clock --log-junit /evidence/mysql-before-upgrade.xml
 watermark_before=$(admin source tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1')
@@ -236,6 +244,10 @@ admin source tekora -e 'ALTER TABLE tekora_provisioning MODIFY state VARCHAR(16)
 
 
 php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter 'test_runtime|test_ordinary|test_identity|test_official_checkout' --log-junit /evidence/mysql-provisioned.xml
+fixture_clock source
+php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_integrated_checkout_at_exact_expiry --log-junit /evidence/mysql-checkout-expiry.xml
+restore_clock source
+"$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
 mkdir -p "$private/source-storage/app/private" "$private/source-storage/app/public/photos"
 printf 'private synthetic fixture\n' > "$private/source-storage/app/private/fixture.txt"
 printf 'public synthetic fixture\n' > "$private/source-storage/app/public/photos/fixture.txt"
@@ -273,6 +285,9 @@ administrative_window_closed target
 printf '%s\n' 'Watermark idéntico tras reinicio y restauración.'
 diff -r -- "$private/source-storage" "$private/restored-storage"
 php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_persisted_journey --log-junit /evidence/mysql-restored.xml
+
+fixture_clock target
+php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_checkout_lifecycle_after_restore --log-junit /evidence/mysql-checkout-completed.xml
 
 for instance in source target; do docker stop "$lab-$instance" >/dev/null; done
 start clean 81503

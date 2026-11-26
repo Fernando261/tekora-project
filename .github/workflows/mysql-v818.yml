@@ -71,7 +71,8 @@ jobs:
 
           root = Path(sys.argv[1])
           expected = {"mysql-completed.xml": 1, "mysql-before-upgrade.xml": 1, "mysql-provisioned.xml": 17,
-                      "mysql-restarted.xml": 1, "mysql-restored.xml": 1}
+                      "mysql-restarted.xml": 1, "mysql-restored.xml": 1,
+                      "mysql-checkout-expiry.xml": 1, "mysql-checkout-completed.xml": 1}
           for name, count in expected.items():
               suite = ET.parse(root / name).getroot().find("testsuite")
               cases = suite.findall(".//testcase")
