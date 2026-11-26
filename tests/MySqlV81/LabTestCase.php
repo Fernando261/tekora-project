@@ -37,8 +37,12 @@ abstract class LabTestCase extends TestCase
 
     protected function migrateFoundation(): void
     {
-        $this->artisan('migrate', ['--path' => mysqlV81MigrationPaths(), '--realpath' => true, '--force' => true])
-            ->assertExitCode(0);
+        $migrator = app('migrator');
+        if (! $migrator->getRepository()->repositoryExists()) {
+            $migrator->getRepository()->createRepository();
+        }
+        $migrator->run(mysqlV81MigrationPaths());
+        $this->assertTrue($migrator->getRepository()->repositoryExists());
     }
 
     protected function reservationRow(ServiceInquiry $inquiry, string $time = '09:00', string $date = '2030-01-07', string $timezone = 'America/Mexico_City'): array

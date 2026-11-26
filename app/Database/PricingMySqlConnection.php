@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Database;
 
+use App\Database\Provisioning\MySqlProvisioner;
 use App\Exceptions\ReservationStorageUncertain;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,6 +25,32 @@ final class PricingMySqlConnection extends MySqlConnection
     private ?Throwable $callerRollbackCause = null;
 
     private ?PDO $callerRollbackPdo = null;
+
+    private bool $provisioning = false;
+
+    public function usingProvisioningDefiner(Closure $operation): mixed
+    {
+        if ($this->getName() !== MySqlProvisioner::CONNECTION || $this->provisioning || $this->transactionLevel() !== 0) {
+            throw new LogicException('El DEFINER pertenece a la sesión de aprovisionamiento.');
+        }
+        $this->provisioning = true;
+        try {
+            return $operation();
+        } finally {
+            $this->provisioning = false;
+        }
+    }
+
+    public function unprepared($query)
+    {
+        if ($this->provisioning) {
+            // The original migration bodies and normal query paths remain intact.
+            $query = preg_replace('/^\s*CREATE\s+(FUNCTION|PROCEDURE|TRIGGER|VIEW)\s+/i',
+                'CREATE DEFINER=`tekora_definer`@`localhost` $1 ', $query);
+        }
+
+        return parent::unprepared($query);
+    }
 
     public function hasReservationTransaction(): bool
     {

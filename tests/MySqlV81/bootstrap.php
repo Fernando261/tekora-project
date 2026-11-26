@@ -50,22 +50,7 @@ function mysqlV81Application(): Application
 
 function mysqlV81MigrationPaths(): array
 {
-    $root = dirname(__DIR__, 2);
-    $last = '2026_11_19_000000_add_reservation_slot_holds.php';
-    $variants = [
-        '2026_10_28_000002_create_service_inquiries_table.php',
-        '2026_10_30_000000_create_service_inquiry_messages_table.php',
-        '2026_10_30_000001_create_service_inquiry_reads_table.php',
-        '2026_10_30_000002_create_provider_availability_tables.php',
-        '2026_11_03_000000_create_service_reservations.php',
-        '2026_11_03_000001_create_service_reviews.php',
-        '2026_11_03_000002_create_activity_notifications.php',
-        '2026_11_18_000000_create_web_pricing_and_quotes.php',
-        $last,
-    ];
-    $files = array_filter(glob($root.'/database/migrations/*.php'), fn ($path) => basename($path) <= $last);
-
-    return array_map(fn ($path) => in_array(basename($path), $variants, true) ? $root.'/database/mysql/migrations/'.basename($path) : $path, $files);
+    return \App\Database\Provisioning\MySqlMigrationPlan::files();
 }
 
 /** The lab owns this synthetic schema. Production has no reference to this override. */
