@@ -1,9 +1,18 @@
 <x-catalog-layout :title="$profile->display_name" :description="\Illuminate\Support\Str::limit($profile->headline ?: ($profile->bio ?: 'Conoce los servicios publicados por este prestador en Tekora.'), 155)">
   <a class="catalog-back" href="{{ route('public-providers.index') }}"><span aria-hidden="true">←</span> Explorar prestadores</a>
   <header class="mp-profile-hero">
-    <div class="mp-profile-copy"><span class="mp-kicker" data-market-enter>PRESENTACIÓN DEL PRESTADOR</span><h1 data-market-enter>{{ $profile->display_name }}</h1>
-  <x-professional-credential :profile="$profile" />
-@if($profile->headline)<p class="mp-profile-headline" data-market-enter>{{ $profile->headline }}</p>@endif@unless($profile->publicCredential()['status'] === 'verified')<p class="account-note">Perfil sin verificación profesional.</p>@endunless<a class="mp-text-link" href="#published-services">Explorar sus servicios <span aria-hidden="true">↓</span></a></div>
+    <div class="mp-profile-copy">
+      <span class="mp-kicker" data-market-enter>PRESENTACIÓN DEL PRESTADOR</span>
+      <h1 data-market-enter>{{ $profile->display_name }}</h1>
+      <x-professional-credential :profile="$profile" />
+      @if($profile->headline)
+        <p class="mp-profile-headline" data-market-enter>{{ $profile->headline }}</p>
+      @endif
+      @unless($profile->publicCredential()['status'] === 'verified')
+        <p class="account-note">Perfil sin verificación profesional.</p>
+      @endunless
+      <a class="mp-text-link" href="#published-services">Explorar sus servicios <span aria-hidden="true">↓</span></a>
+    </div>
     <x-marketplace-scene variant="identity" :initial="mb_strtoupper(mb_substr(trim($profile->display_name), 0, 1))" />
   </header>
   @if($profile->bio)<section class="account-card mp-profile-bio"><span class="mp-kicker">EN SUS PALABRAS</span><h2>Sobre el prestador</h2><p class="catalog-bio">{{ $profile->bio }}</p></section>@endif

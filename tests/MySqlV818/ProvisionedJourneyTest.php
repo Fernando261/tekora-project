@@ -41,6 +41,9 @@ final class ProvisionedJourneyTest extends TestCase
 
     public function createApplication()
     {
+        // The archived V8.1.10 journey shares database cache state with this run.
+        // Use a distinct synthetic client address so neither phase consumes the other's IP quota.
+        $this->withServerVariables(['REMOTE_ADDR' => '192.0.2.11']);
         $app = require dirname(__DIR__, 2).'/bootstrap/app.php';
         $app->useEnvironmentPath(sys_get_temp_dir());
         $app->loadEnvironmentFrom('tekora-v818-no-env-'.bin2hex(random_bytes(12)));

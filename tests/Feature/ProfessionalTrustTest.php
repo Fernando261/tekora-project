@@ -73,6 +73,8 @@ final class ProfessionalTrustTest extends TestCase
         $this->post(route('trust.decide', $provider), $decision)->assertRedirect();
         $this->assertDatabaseHas('professional_reviews', ['provider_user_id' => $provider->id, 'reviewer_user_id' => $admin->id, 'decision' => 'verified']);
         $this->get(route('catalog.show', $service))->assertOk()->assertSee('Profesional Tekora')->assertSee('1532467')->assertDontSee($credential->evidence_path);
+        $this->get(route('public-providers.show', $service->provider_profile_id))->assertOk()->assertSee('Profesional Tekora')
+            ->assertDontSee('Perfil sin verificación profesional.');
         $this->actingAs($provider)->post(route('trust.update'), ['license_disposition' => 'available', 'license_number' => '1532467'])->assertRedirect();
         $this->getJson('/api/v1/services/'.$service->id)->assertJsonPath('data.provider.professional_credential.status', 'verified')->assertJsonPath('data.provider.professional_credential.license_number', null);
         $this->actingAs($admin)->post(route('trust.decide', $provider), array_replace($decision, ['decision' => 'revoked']))->assertRedirect();

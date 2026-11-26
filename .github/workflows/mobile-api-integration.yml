@@ -61,7 +61,7 @@ jobs:
       - name: Run clean-install, mobile journey and compatibility tests
         run: |
           php vendor/bin/phpunit --do-not-cache-result --log-junit "$RUNNER_TEMP/tekora-api.xml" \
-            --filter 'Mobile(CleanInstallation|IntegrationJourney|ApiAuth|ApiCatalog|CatalogDashboard|IdentityProfile|OperationsContract|OperationsConcurrency|ContactPrivacy|Notifications|NotificationConcurrency|Reviews|QuotesApi|QuoteConcurrency|CheckoutHandoffContract|ConfirmationReadiness|SyntheticCheckoutApi)Test|ReservationHold(ApiAndGuards|Concurrency)Test|ReviewConcurrencyTest|ContractingJourneyTest|LocalIntegratedCheckoutHttpTest|ProfessionalTrustTest'
+            --filter 'Mobile(CleanInstallation|IntegrationJourney|ApiAuth|ApiCatalog|CatalogDashboard|IdentityProfile|OperationsContract|OperationsConcurrency|ContactPrivacy|Notifications|NotificationConcurrency|Reviews|QuotesApi|QuoteConcurrency|CheckoutHandoffContract|ConfirmationReadiness|SyntheticCheckoutApi)Test|ReservationHold(ApiAndGuards|Concurrency)Test|ReviewConcurrencyTest|ContractingJourneyTest|LocalIntegratedCheckoutHttpTest|ProfessionalTrustTest|PublicCatalogTest'
 
 
       - name: Preserve PHPUnit results
