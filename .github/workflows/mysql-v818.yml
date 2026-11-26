@@ -1,0 +1,90 @@
+name: MySQL 8.4 provisioning and recovery
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  mysql-v818:
+    name: MySQL 8.4.13 / binlog / PHP 8.3
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Prepare evidence
+        run: |
+          set -euo pipefail
+          evidence=$(mktemp -d "$RUNNER_TEMP/tekora-v818.XXXXXXXX")
+          echo "TEKORA_V818_ARTIFACTS=$evidence" >> "$GITHUB_ENV"
+          printf 'V8.1.8 provisioning evidence\n' > "$evidence/preparation.log"
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        with:
+          php-version: '8.3'
+          tools: composer:2.8.12
+          coverage: none
+
+      - name: Verify sources and install Composer lock
+        env:
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$PR_HEAD"
+          test -z "$(git status --porcelain)"
+          test ! -e .env
+          test ! -e .env.testing
+          test ! -e bootstrap/cache/config.php
+          test ! -e database/database.sqlite
+          {
+            git rev-parse HEAD 'HEAD^{tree}'
+            sha256sum composer.lock
+          } | tee -a "$TEKORA_V818_ARTIFACTS/preparation.log"
+          composer install --no-interaction --no-progress --prefer-dist --no-scripts --no-plugins 2>&1 \
+            | tee -a "$TEKORA_V818_ARTIFACTS/preparation.log"
+
+      - name: Provision, restart and restore in independent socket-only servers
+        run: |
+          set -euo pipefail
+          for script in deploy/vps/*.sh tools/mysql-v818/*.sh; do bash -n "$script"; done
+          docker build -t tekora-v818-lab-php:8.3.37 tools/mysql-v818 2>&1 | tee "$TEKORA_V818_ARTIFACTS/image.log"
+          bash tools/mysql-v818/run.sh "$TEKORA_V818_ARTIFACTS/lab"
+
+      - name: Verify JUnit, source and cleanup
+        run: |
+          set -euo pipefail
+          test -z "$(git status --porcelain)"
+          test -z "$(docker ps -aq --filter label=tekora.v818.lab)"
+          test -z "$(docker volume ls -q --filter label=tekora.v818.lab)"
+          python3 - "$TEKORA_V818_ARTIFACTS/lab" <<'PY'
+          import sys
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+
+          root = Path(sys.argv[1])
+          expected = {"mysql-completed.xml": 1, "mysql-provisioned.xml": 15,
+                      "mysql-restarted.xml": 1, "mysql-restored.xml": 1}
+          for name, count in expected.items():
+              suite = ET.parse(root / name).getroot().find("testsuite")
+              cases = suite.findall(".//testcase")
+              if (len(cases) != count or int(suite.attrib["tests"]) != count
+                  or any(suite.attrib[key] != "0" for key in ("errors", "failures", "skipped"))
+                  or any(int(case.attrib["assertions"]) < 1 for case in cases)):
+                  sys.exit(f"{name}: incomplete or unsuccessful execution")
+              print(f"{name}: {count} tests, {suite.attrib['assertions']} assertions, zero skips")
+          PY
+
+      - name: Preserve JUnit and sanitized logs
+        if: always() && env.TEKORA_V818_ARTIFACTS != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mysql-v818-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.TEKORA_V818_ARTIFACTS }}
+          if-no-files-found: error
+          retention-days: 14
