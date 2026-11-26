@@ -1,0 +1,665 @@
+{
+  "recommendation": "READY FOR INDEPENDENT REVIEW",
+  "scope": "Local B2.3.1-fix1 only; not READY FOR PR; no push/publication",
+  "original_commit": "6121f35b2f567f15482530bf7564e8722e8fb25c",
+  "base": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+  "corrected_commit": "Provided in local delivery; no self-referential commit hash",
+  "results": {
+    "php82": {
+      "b231": {
+        "tests": 83,
+        "assertions": 655,
+        "counts": {
+          "PASS": 83
+        },
+        "xml": "php82/b231.xml"
+      },
+      "included_groups": [
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+          "tests": "17",
+          "assertions": "105",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+          "tests": "12",
+          "assertions": "115",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+          "tests": "14",
+          "assertions": "105",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\ProcessLifecycleTest",
+          "tests": "5",
+          "assertions": "56",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+          "tests": "19",
+          "assertions": "144",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+          "tests": "6",
+          "assertions": "52",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+          "tests": "10",
+          "assertions": "78",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        }
+      ],
+      "pr32": {
+        "tests": 82,
+        "assertions": 4353,
+        "counts": {
+          "PASS": 82
+        },
+        "xml": "php82/pr32.xml"
+      },
+      "pr33": {
+        "tests": 80,
+        "assertions": 323,
+        "counts": {
+          "PASS": 80
+        },
+        "xml": "php82/pr33.xml"
+      },
+      "pr34": {
+        "tests": 135,
+        "assertions": 620,
+        "counts": {
+          "PASS": 134,
+          "ERROR": 1
+        },
+        "xml": "php82/pr34.xml"
+      },
+      "pr35": {
+        "tests": 125,
+        "assertions": 765,
+        "counts": {
+          "PASS": 125
+        },
+        "xml": "php82/pr35.xml"
+      },
+      "main": {
+        "tests": 789,
+        "assertions": 10344,
+        "counts": {
+          "PASS": 789
+        },
+        "xml": "php82/main.xml"
+      }
+    },
+    "php84": {
+      "b231": {
+        "tests": 83,
+        "assertions": 655,
+        "counts": {
+          "PASS": 83
+        },
+        "xml": "php84/b231.xml"
+      },
+      "included_groups": [
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\ContentionTest",
+          "tests": "17",
+          "assertions": "105",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\JointRollbackTest",
+          "tests": "12",
+          "assertions": "115",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\OccupancyHistoryTest",
+          "tests": "14",
+          "assertions": "105",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\ProcessLifecycleTest",
+          "tests": "5",
+          "assertions": "56",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\QuoteBindingTest",
+          "tests": "19",
+          "assertions": "144",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\RecoveryProcessesTest",
+          "tests": "6",
+          "assertions": "52",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        },
+        {
+          "name": "Tests\\PaymentsIntegrationPrototype\\SharedSessionTest",
+          "tests": "10",
+          "assertions": "78",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0"
+        }
+      ],
+      "pr32": {
+        "tests": 82,
+        "assertions": 4353,
+        "counts": {
+          "PASS": 82
+        },
+        "xml": "php84/pr32.xml"
+      },
+      "pr33": {
+        "tests": 80,
+        "assertions": 323,
+        "counts": {
+          "PASS": 80
+        },
+        "xml": "php84/pr33.xml"
+      },
+      "pr34": {
+        "tests": 135,
+        "assertions": 621,
+        "counts": {
+          "PASS": 135
+        },
+        "xml": "php84/pr34.xml"
+      },
+      "pr35": {
+        "tests": 125,
+        "assertions": 765,
+        "counts": {
+          "PASS": 125
+        },
+        "xml": "php84/pr35.xml"
+      },
+      "main": {
+        "tests": 789,
+        "assertions": 10344,
+        "counts": {
+          "PASS": 789
+        },
+        "xml": "php84/main.xml"
+      }
+    }
+  },
+  "profile": {
+    "php82": {
+      "php": "8.2.35",
+      "pdo_sqlite_extension": "8.2.35",
+      "sqlite": "3.40.1",
+      "sqlite_source_id": "2022-12-28 14:03:47 df5c253c0b3dd24916e4ec7cf77d3db5294cc9fd45ae7b9c5e82ad8197f3alt1",
+      "phpunit_loaded": false,
+      "cases": [
+        {
+          "mode": "pdo",
+          "pdo_in_transaction": true,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "BEGIN",
+          "pdo_in_transaction": false,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "BEGIN IMMEDIATE",
+          "pdo_in_transaction": false,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "BEGIN EXCLUSIVE",
+          "pdo_in_transaction": false,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "SAVEPOINT probe",
+          "pdo_in_transaction": false,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        }
+      ]
+    },
+    "php84": {
+      "php": "8.4.27",
+      "pdo_sqlite_extension": "8.4.27",
+      "sqlite": "3.40.1",
+      "sqlite_source_id": "2022-12-28 14:03:47 df5c253c0b3dd24916e4ec7cf77d3db5294cc9fd45ae7b9c5e82ad8197f3alt1",
+      "phpunit_loaded": false,
+      "cases": [
+        {
+          "mode": "pdo",
+          "pdo_in_transaction": true,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "BEGIN",
+          "pdo_in_transaction": true,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "BEGIN IMMEDIATE",
+          "pdo_in_transaction": true,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "BEGIN EXCLUSIVE",
+          "pdo_in_transaction": true,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        },
+        {
+          "mode": "SAVEPOINT probe",
+          "pdo_in_transaction": true,
+          "second_begin_sqlite_code": 1,
+          "rows_after_rollback": 0,
+          "pdo_after_rollback": false
+        }
+      ]
+    }
+  },
+  "safe_process_evidence": {
+    "php82": {
+      "t07": [
+        {
+          "file": "php82/traces/t07-505d21378137eb5c.json",
+          "sha256": "e843a4bf9f8bd1adf62d9992dc3b623e2a28da6b705b208893de8faa7435a779",
+          "data": {
+            "parent_pid": 1,
+            "startup": {
+              "phase": "started",
+              "protocol": "b231-exec-v1",
+              "pid": 16,
+              "sqlite_descriptors": 0
+            },
+            "result": {
+              "phase": "result",
+              "pid": 16,
+              "foreign_lease_denied": true,
+              "foreign_session_denied": true,
+              "own_process_valid": true
+            },
+            "closed": {
+              "phase": "closed",
+              "pid": 16,
+              "clean": true,
+              "sqlite_descriptors": 0
+            },
+            "exit_code": 0,
+            "journal_before": [
+              108906,
+              4616,
+              "d75a9327a774b217c83fbebd77555cab47574ded1ec1cfb940a1653879af5cf9"
+            ],
+            "journal_after": [
+              108906,
+              4616,
+              "d75a9327a774b217c83fbebd77555cab47574ded1ec1cfb940a1653879af5cf9"
+            ],
+            "parent_outcome": "committed"
+          }
+        }
+      ],
+      "lifecycle": [
+        {
+          "file": "php82/traces/lifecycle-7a3b1fcf4c643b30.json",
+          "sha256": "98d205f0f02ac5f773c326c54884a13df7b088d3840c0e923b4e0c369febce88",
+          "exit_code": 0
+        },
+        {
+          "file": "php82/traces/lifecycle-d21402dabd44876a.json",
+          "sha256": "dffd910ac4e26ab2b93560ac518cc1d11eabcb89e7222e2d5a1db6d44b303919",
+          "exit_code": 1
+        },
+        {
+          "file": "php82/traces/lifecycle-3cb2f72979e2d766.json",
+          "sha256": "ad24ae32fda4239c0a56c0fd88c0b227ecdc799700096a7b539df2cc00226cb9",
+          "exit_code": 1
+        }
+      ]
+    },
+    "php84": {
+      "t07": [
+        {
+          "file": "php84/traces/t07-5bae69ce00a2701d.json",
+          "sha256": "2e90bcfdccbba6695c5192a2ba01bafe21a3d033bed4fb4818b5c735887af033",
+          "data": {
+            "parent_pid": 1,
+            "startup": {
+              "phase": "started",
+              "protocol": "b231-exec-v1",
+              "pid": 15,
+              "sqlite_descriptors": 0
+            },
+            "result": {
+              "phase": "result",
+              "pid": 15,
+              "foreign_lease_denied": true,
+              "foreign_session_denied": true,
+              "own_process_valid": true
+            },
+            "closed": {
+              "phase": "closed",
+              "pid": 15,
+              "clean": true,
+              "sqlite_descriptors": 0
+            },
+            "exit_code": 0,
+            "journal_before": [
+              113812,
+              4616,
+              "c46c86dde129df654a6ec91c2b65a7120c1dd39d1003126526bd68e1c92b281a"
+            ],
+            "journal_after": [
+              113812,
+              4616,
+              "c46c86dde129df654a6ec91c2b65a7120c1dd39d1003126526bd68e1c92b281a"
+            ],
+            "parent_outcome": "committed"
+          }
+        }
+      ],
+      "lifecycle": [
+        {
+          "file": "php84/traces/lifecycle-46799cee76d42c2f.json",
+          "sha256": "7837b90421afd0d0b08f4c29d04a9109d8e60492b95c30d404bd7e35e84175f6",
+          "exit_code": 0
+        },
+        {
+          "file": "php84/traces/lifecycle-f57606d6dcc62d67.json",
+          "sha256": "3041d5550a0de8a7a71887c7ee260a9daf5f0d57ef4e2e03c53de232387ec3c3",
+          "exit_code": 1
+        },
+        {
+          "file": "php84/traces/lifecycle-f8265fbabf818e42.json",
+          "sha256": "30f1441e252d10e97c3453732afa5f92199d5dce202ec9cf64f9b0904fb0abed",
+          "exit_code": 1
+        }
+      ]
+    }
+  },
+  "integrity_scans": {
+    "php82": {
+      "checked": 166,
+      "stopped": [
+        {
+          "run": "tekora-b231-67105d21d778e9eef4c10a66a5c353af",
+          "reason": "Synthetic resource identity changed"
+        },
+        {
+          "run": "tekora-b231-762a72f54360755d1596c4ee3ffb5e9f",
+          "reason": "Synthetic resource identity changed"
+        }
+      ],
+      "failures": []
+    },
+    "php84": {
+      "checked": 166,
+      "stopped": [
+        {
+          "run": "tekora-b231-1711c3b103aa1ea6e1f506ef132a9976",
+          "reason": "Synthetic resource identity changed"
+        },
+        {
+          "run": "tekora-b231-98590a3a77fbad139c91924fadbdd796",
+          "reason": "Synthetic resource identity changed"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "new_executable_sources": {
+    "tests/PaymentsIntegrationPrototype/ProcessLifecycleTest.php": "ce62a5da2f6b4fd5b0e189b8ab2bc2717c5ea11e8080a80fbad8c459ab6a0128",
+    "tests/Support/PaymentsIntegration/ProcessRuntime.php": "44ca93f92b80f9d6330de778a4061226b461ac6e641eeabff3df6168b7e28f0e",
+    "tools/payments-b231/diagnose_transaction_state.php": "9eea51af038ff07a8f0ab414feff1b679ee2cb08ff49e04ceef08effb101ae7f",
+    "tests/PaymentsIntegrationPrototype/ContentionTest.php": "01be02e611ca94a4edec2e24adec891d9a2be993f71b5f031c9fe1ed27332608",
+    "tests/PaymentsIntegrationPrototype/JointRollbackTest.php": "8fd329d399cce49991f8b0fd62295e8c396b336e902ecdd13a547c0143bcba4c",
+    "tests/PaymentsIntegrationPrototype/OccupancyHistoryTest.php": "7f0ee8cf69d63068e7da326a2b18c0157396947ae961828832eae62f91015921",
+    "tests/PaymentsIntegrationPrototype/QuoteBindingTest.php": "440c48bbd462eb296cc886ff7f6da7d002af8136b32bada239381182467f565e",
+    "tests/PaymentsIntegrationPrototype/RecoveryProcessesTest.php": "9ff64d1494dd884c3e955069ff3061d27921046d57eeb475ac0c48e1c4de7158",
+    "tests/PaymentsIntegrationPrototype/SharedSessionTest.php": "531588d34c9c5538ba3943f8a174a1f95c1b2e14f093af02c971490fc4fa5a96",
+    "tests/Support/PaymentsIntegration/CommandEnvelope.php": "6cc10fc79b44a881c72620d18a180a30368c38c7ca88eb71171c9f0725371c3b",
+    "tests/Support/PaymentsIntegration/FixtureClock.php": "e075fa8867143f40788208ca6c5d8d3b24f2e174ddfaa89be7b176997f2ac323",
+    "tests/Support/PaymentsIntegration/IntegrationBusy.php": "e076e56bf403cbb987590da009678db96156e49a89c3ecf061a3fd6f2e8aebb0",
+    "tests/Support/PaymentsIntegration/IntegrationTestCase.php": "a666d2b437796c944a654046dd568efd036759612826329cc20690904965cd20",
+    "tests/Support/PaymentsIntegration/IntegrationUncertain.php": "f7dafb3307768f5be217b7ffde3abd1af30f1d8f2ba9dc0d5cab3d422bf23a55",
+    "tests/Support/PaymentsIntegration/IntegrationWorker.php": "678733e10f6e1cc5ab60257940c61ac46969641bcf726f0b34943bf8e9ce935d",
+    "tests/Support/PaymentsIntegration/OwnedIntegrationLab.php": "4b577f6c301231d9dd62ec2c574a06caa7a21ffb14eb4e8253c7d66b61389a32",
+    "tests/Support/PaymentsIntegration/ProcessPeer.php": "e916beec52ffa16bb61302c64eefad959d651a13f1b26ee4d8188cc984d243a9",
+    "tests/Support/PaymentsIntegration/ReferenceLoader.php": "16f68fb91ff3a61c180cdeacdbdbb677518fd7727777111925297fcb7de2076e",
+    "tests/Support/PaymentsIntegration/ScenarioFixture.php": "e6d520c52681c18182417ef12e43d35b8a9e59fbd11e94212aa04cef9b1e36b9",
+    "tests/Support/PaymentsIntegration/SessionLease.php": "2c9ca04ea4d6e93a9d63112632e51959629d214f42c9cf21e3cb531ffc65f4da",
+    "tests/Support/PaymentsIntegration/SessionSqlExecutor.php": "33033f24d4a2d0c7b183c364752e337355cc05ecd094927f79363a56437af32f",
+    "tests/Support/PaymentsIntegration/SharedCommandRepository.php": "f87a089591adb84a2742bcae876b9d24172bb9d6e321dc735f4452e109c8a72e",
+    "tests/Support/PaymentsIntegration/SharedHoldHistoryRepository.php": "910ffae554cb78147b37b59ccf65a53843c075bf895d05f6dcf52583cccf6294",
+    "tests/Support/PaymentsIntegration/SharedOccupancyRepository.php": "d4f4874d6e67aab9e966c040f7017f5f8e0276ac01ee26e341e9fea82fbc1bbb",
+    "tests/Support/PaymentsIntegration/SharedPricingRepository.php": "080e049705b7bf06f87f6a47914fb3b2ae450c176cba4d45089ef04cd6a232fd",
+    "tests/Support/PaymentsIntegration/SharedProposalBindingRepository.php": "8dfcd484efe72f5f6179551043ad39d1c26984747fa743a4d3ff6be984506cb1",
+    "tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php": "d5b143f29c55b33941d3c465e16f00d366d8567015ef272f697b7ed84fb518f7",
+    "tests/Support/PaymentsIntegration/SqliteOutcomePolicy.php": "d4bc8f6ba62e3ecc6877636a267e4ed0ed29f303c5c14ff168203ffd290546d4",
+    "tests/Support/PaymentsIntegration/TransactionOutcome.php": "d2040b6839fef00d4d0ac64f8c62fcab9423c36b2535c793f18b2659fe916976",
+    "tests/Support/PaymentsIntegration/WriteSession.php": "0a5accbe79c933583037a7ce4ad7fce96f202e95de066b725a8a961d6e71630c",
+    "tests/Support/PaymentsIntegration/fixture-schema.sql": "b2d5b28c0508bd79ed51589e6ae69d12203c1c68453d8e63869264b6a13ef401",
+    "tests/Support/PaymentsIntegration/references.json": "6a1a16ef862bb50d5461088eaf62fde80d28318cab7b81dc82440d377c8c2fa4",
+    "tests/payments-b231-bootstrap.php": "b804583ff8f972128652910f6708d248e3f8e8e78c25b2d69c37bf155110481c",
+    "tools/payments-b231/export_references.py": "29e5f5b8b8a15beb15ec165740a92836600f370d11cd72693c3d89c02054cd1c"
+  },
+  "protected_unchanged": {
+    "database/migrations/0001_01_01_000000_create_users_table.php": "116d943de3cfa774f955fb309867f9c35099bae4c9f156e940200c08c045f1fd",
+    "database/migrations/0001_01_01_000001_create_cache_table.php": "20f769d3c11748c1cc42c41cd3789b0b9b2cd0db44ee22d378addac3ff8aed4f",
+    "database/migrations/0001_01_01_000002_create_jobs_table.php": "7c9c712adf4091c87bf2612f4d0dccdfa1df4501553e4ac068b83d7bd5462fa5",
+    "database/migrations/2025_08_02_085013_create_posts_table.php": "10ae453bb7d6898572fc067258fb70ae34177867da857cb002e148eb0b680669",
+    "database/migrations/2025_08_02_092303_create_reminders_table.php": "21dd7ff15a00216489147d58659600d123e02c062e592bc5ab8481a875e213c1",
+    "database/migrations/2025_08_13_022507_create_profesionistas_table.php": "801bdb43588f15c086978de665676dae2cbe1fae8164a98a1bbc861e08225daf",
+    "database/migrations/2026_02_13_022342_add_remember_token_to_profesionistas_table.php": "8297e7a16edeaf0cfa6c6b782529edba6b53842097a606839e201bcab8042216",
+    "database/migrations/2026_02_15_192040_create_likes_table.php": "2f0e5479eec39fdfb8994ac96ddbc8228537b31739e7c04e1f39097c089da4e7",
+    "database/migrations/2026_02_15_194127_add_deleted_at_to_posts_table.php": "103b5d9938e3551ce4698209350f0164b47e55c41d931927860a70150a483454",
+    "database/migrations/2026_02_15_200848_create_comments_table.php": "d2f7e8dfc7fed6dcf6632732f831802e9ba5811a8de829e38b901bc5a8c48162",
+    "database/migrations/2026_02_16_031349_create_profesionista_bloqueos_table.php": "53ae789fe749e10800a75dffcb4ec7032d4138369f68f6f63444ac9d8b9f523f",
+    "database/migrations/2026_02_16_031436_create_citas_table.php": "45bc07fbb7df8029b935d838d11b9661770c9493500df628c7e084007c152d41",
+    "database/migrations/2026_02_20_224556_add_google_fields_to_profesionistas_table.php": "e0636f0b5344270d3ef4903b7f9899b7ff19d5c00ec58ec0aa606a6635b9ebd6",
+    "database/migrations/2026_02_21_071030_add_start_end_to_citas_table.php": "10d42907cd47cf9b5d309d8f1755d7e780b2c36b35f7e64cd37d02b284397fc8",
+    "database/migrations/2026_02_21_191448_create_profesionista_disponibilidades_table.php": "f9362f4e19867852dbf581fca198227800f5967bd2645a87e242f4fc1d42672c",
+    "database/migrations/2026_02_23_235730_create_emotions_table.php": "33693b3e6558fdb16fe1df52a4134292c20ee2184a539e275cf184959257589a",
+    "database/migrations/2026_02_24_033502_add_profile_photo_path_to_users_table.php": "f586bb403a7ccda46e4201b0714f1f826735200322821afc4e2e55538c220f3f",
+    "database/migrations/2026_02_24_041833_add_media_to_posts_table.php": "a9c09ab56cae94eee830d07204fb2ada634077f879911586627817f4295aa6da",
+    "database/migrations/2026_02_24_041908_add_media_to_comments_table.php": "677cead791277c33487fa02e0a4a74b6466c0693ad1658087ba51f8c101869eb",
+    "database/migrations/2026_02_24_061342_alter_posts_content_nullable.php": "13e13652d4ab690ee72282faeefc0fa668f947c0cb0e9ac0531b6e9462a7f008",
+    "database/migrations/2026_02_24_071445_add_likeable_to_likes_table.php": "b7e17c701414b0faa9a4a42327fb88811f9ef52f47038ac61ac01298ff594aba",
+    "database/migrations/2026_02_24_072517_add_unique_likeable_to_likes_table.php": "81ede4a83f328602329d2a561b0ac67cab0c6ea06fc7f6b7d9bca4615f72c876",
+    "database/migrations/2026_02_24_072708_make_post_id_nullable_in_likes_table.php": "838eaa921f476d78050f17a0eca77b1af8c71ee10b6473a5d8a88ae1caf3d58a",
+    "database/migrations/2026_02_24_075954_alter_comments_content_nullable.php": "fbdeab59c720f5abdc88f408bf3cd496dfc70abefd5118a088a707f364a389b2",
+    "database/migrations/2026_10_23_000000_create_roles_and_role_user_tables.php": "a7e26defffaf5176b84a15f0bac265c01469a948d59ce5ed99e0f33829cc3395",
+    "database/migrations/2026_10_23_000001_create_provider_profiles_table.php": "859bc5f00a4f0e4f7e7649a287e5d060aa4b4681c1390aaf2b28a7d41f4868b5",
+    "database/migrations/2026_10_28_000000_create_service_categories_table.php": "7c436ef233df60dc33ec77b75892fa54e2afed000526c5f4d84fd7274ebd87f7",
+    "database/migrations/2026_10_28_000001_create_services_table.php": "9402e17acb1f803a1db7e0a9aebf02316a5aeefb34c83ae8f51f4932994a2b19",
+    "database/migrations/2026_10_28_000002_create_service_inquiries_table.php": "bc0ded238e6d42de488263454ca863f8589874d72acf4ff26b73990364a3715d",
+    "database/migrations/2026_10_29_000000_create_inquiry_notifications_table.php": "49ae7b0e1ee5d20098df8fcd2b93e85db242026c3000eb377a56e43c6f11f0b7",
+    "database/migrations/2026_10_30_000000_create_service_inquiry_messages_table.php": "c8c464e419a1c63ca1b63b26e0b22b340210844c4f7a980800353f72ab85b28b",
+    "database/migrations/2026_10_30_000001_create_service_inquiry_reads_table.php": "3fe86c122ac04efa7378d9c41c4f36a32a504bb4240bdca36ba1beac15fffa4e",
+    "database/migrations/2026_10_30_000002_create_provider_availability_tables.php": "026c92dbf6c808f8f9378379395dc36e8536df2d43c3fdb1ed74faad499badfb",
+    "database/migrations/2026_11_03_000000_create_service_reservations.php": "21031ec1dddd8ba0eac718e7d12a505a527964d97f30d2266d84e711dc2c3c58",
+    "database/migrations/2026_11_03_000001_create_service_reviews.php": "49d5140e9b4b7455f313e4f0123ba424aef48358ca24a76fec1276c502a86a98",
+    "database/migrations/2026_11_03_000002_create_activity_notifications.php": "0e6d333fb8fc7c769d91bd3d2c939b642c75ebe3248e503ff214e8df9a545b8b",
+    "database/migrations/2026_11_04_000000_create_personal_access_tokens_table.php": "c81ecde85ea5072188c468dcaf79776728b6eb8f684d63fc0d88a4908484ca75",
+    "docs/api/openapi.json": "11e94f81dc140341ca2e8cfbb94f2d5ef33f944f7c06a7e5060a9c168a4baa02",
+    "app/Services/ReservationWorkflow.php": "34cfde281447bc3964cecda32d0a444dfed01acad3e243858645b321c225d3e9",
+    "routes/api.php": "722e9494ff6073637c592c499c59160e146ae156bdc4b8e25d50bd3b29ec1b71",
+    "routes/web.php": "021dd970cd98f9346703f6be653ee6aaa67e53802edfbc0b565b39425dbe9de2",
+    "composer.json": "74fad1305694c0598cd576f06988d99d06ae83ff5f8e8332494d94ef21352dfe",
+    "composer.lock": "62b9f864b4b255b08d5271406f30a6c0393fd0c8dc838a71a5e8914b22f7cdfd",
+    "package.json": "549d710adb4f9c916edc8f952cc4f4262bdcf074fade55bafe299f045a2a167a",
+    "package-lock.json": "1b5b3f59b9c6e50a1698d491fd382aad1b792cd1541c570520cdc0995c8d7314"
+  },
+  "exact_reference_files_verified": 68,
+  "regression_source_correspondence": {
+    "main": {
+      "commit": "ac999cea8f592ce7b94481ee30f602b67d9f5bea",
+      "tracked_files_verified": 1444
+    },
+    "pr32": {
+      "commit": "a7efd0e353435c46c633f02120d131507bdc7516",
+      "tracked_files_verified": 1461
+    },
+    "pr33": {
+      "commit": "815879d448e17ef8955354c6a275201ba6f350fe",
+      "tracked_files_verified": 1467
+    },
+    "pr34": {
+      "commit": "7775938dda5440c03964009847d4a8d9d63b0805",
+      "tracked_files_verified": 1463
+    },
+    "pr35": {
+      "commit": "c3a3943c96d702bff3e1a9afbb13f57be789e137",
+      "tracked_files_verified": 1471
+    }
+  },
+  "changed_files": [
+    "docs/payments/B231-FIX1.md",
+    "docs/payments/B231-INVENTORY.md",
+    "docs/payments/B231-RISK-STATUS.csv",
+    "docs/payments/B231-SHARED-SESSION.md",
+    "docs/payments/B231-TEST-RESULTS.csv",
+    "docs/payments/B231-VALIDATION.md",
+    "docs/payments/evidence/B231-fix1-history.json",
+    "docs/payments/evidence/B231-fix1-validation.json",
+    "tests/PaymentsIntegrationPrototype/ProcessLifecycleTest.php",
+    "tests/PaymentsIntegrationPrototype/SharedSessionTest.php",
+    "tests/Support/PaymentsIntegration/IntegrationWorker.php",
+    "tests/Support/PaymentsIntegration/OwnedIntegrationLab.php",
+    "tests/Support/PaymentsIntegration/ProcessPeer.php",
+    "tests/Support/PaymentsIntegration/ProcessRuntime.php",
+    "tests/Support/PaymentsIntegration/SessionLease.php",
+    "tests/Support/PaymentsIntegration/SharedSqliteUnitOfWork.php",
+    "tools/payments-b231/diagnose_transaction_state.php"
+  ],
+  "raw_evidence_sha256": {
+    "php82/integrity.json": "4a30f6929cf16b5b6628367a9b87ead312562384e1c435454db1e776e8bdb810",
+    "php82/pr33.xml": "b1677d315b34f330affaa3c2375a2c350326a7327b7e07064b64074e5b2c66a2",
+    "php82/pr34.xml": "89407173c033fc800bf9164ac9959a50a6664a4effcd4049e309d03980feaa11",
+    "php82/main.xml": "d89e53100747e0f42a7d61cf39f289323b8d3b90c3a1826a611496a2eca05c50",
+    "php82/pr35.xml": "2be4f017b2e0c1587c637ff81e0444ccd0ee2a43b3e3e0a10968d28736353807",
+    "php82/pr32.xml": "05cc11531f3ad8e4e6319a9316bf774732528659c9e5d5f84df9807d9b4bf241",
+    "php82/main.log": "e8db42cbce2060830f535adc5fa98308c9750b53769bc8fea3f48b88853e4b33",
+    "php82/pr32.log": "d5b0ad90f595a666307392fc6f7fe247a29da06212de8b3555eee9cae027feaa",
+    "php82/pr35.log": "a7244de128a6adfb8c09b4b05a1d221b9ff9f5421d2bba88420f03e82a49909a",
+    "php82/pr34.log": "175050efbfa1bce9ddc57641814d10e01cabf6f345e337a806069c7b8e543fe4",
+    "php82/pr33.log": "b9ede9cf8fa416f01332fbb2cb106751b29820eda5e2d284acbf20660cfa56ef",
+    "php82/transaction-state.json": "338171433d8213355e4283add8649643276313655f7afa31fd0073b5616d2d75",
+    "php82/b231.xml": "53ba2e2c68844fd2657b1b55456795738363aa8e33949abc4755103e88e1b3a6",
+    "php82/b231.log": "f49563c0d970ee2fe1ffe2813077c1f6fcce07db32f84b618020253243562a9a",
+    "php84/integrity.json": "24caa541fbe826a2601cafb323a38cd0a5c4f8200a8480431dcc260540c268c7",
+    "php84/main-1g.log": "e5748a74f9eb86d719564a2e364a76869d9f68ee135d42dc6958889ca46dce31",
+    "php84/pr34.xml": "249911f29ae70cf275c5d7e69f63e3b413c533b8a449ad7e3df2a17aa955ed9e",
+    "php84/pr35.xml": "8404715b23c9a34798a9be27bf6ddb0259d7d73636961ad112a6de4d2863b7cf",
+    "php84/main.xml": "80d4222ee94c09e3ec9a99c0af2b9d3f18a114a0a1ef23521eb366050e9b08ff",
+    "php84/pr32.xml": "5c25b9aaf74d7735fb88965b25c0f5d9c8868ecb016ebd65b5d653dfec34c921",
+    "php84/pr33.xml": "435b9e74fb9037a3f7b7281cd21d2e8e1bfa1085e6daf45da1c54f0842126851",
+    "php84/pr33.log": "629097fc338f33c933733edbac9d1c6425558da57683fa3d1f399420e6a2a5e1",
+    "php84/pr35.log": "b2cc20bd3619835f46d287761938e80180d44cdcd3bf0ee357627e9a9f3ca4a3",
+    "php84/pr34.log": "52725b2f40d19c2e15f7d2fd9c114a8a2fcab936db90309b28ab6e67ba0d8698",
+    "php84/pr32.log": "b9836514e913a6821e29e7ec70306078e0df976e3219cf183b7724bade43d049",
+    "php84/main.log": "7955a94a9648c39f13a1d55946d628519c6fd3cbad289ffae5c994172211ce11",
+    "php84/transaction-state.json": "3d66fc500861c2bd6554e54fbd3e64bf3bafb967a2d5efdd932f2f6310274498",
+    "php84/b231.xml": "fd57940c1f4b9aac67741f91fa49ae060d8a7b1250e9a9abd0f70e14c3b49e21",
+    "php84/b231.log": "fe829557555396ea4c90e8524cac7f01663601ade79316a2d34f80fa47c94048",
+    "pint.log": "54c08584f0fbeeaf3f9ede93874bd8ea82744fdbe0494ee073a8e7ecde821cc4",
+    "build.log": "ecc51bef0b950d815207618598a7acd483d314e2cfd8b1317c8f242cb80c27b4",
+    "runtime-images.txt": "87196e3ae4c28dd1594d02b5fb41f26e2dc436122cdf54d4129d0939a39f44f2",
+    "sqlite-howtocorrupt.html": "e00709e3f37e95332d8e6df243510665e9cab1d7938d4fd85cbf5f47648a50bf",
+    "php82-tag-sqlite_driver.c": "3bdd78d45de5ed0d354eabce4a9e41174f5d82d7f745fbaa39c3adfa80fd92c8",
+    "php84-tag-sqlite_driver.c": "1bb4f0f9ae2c374732df431336cb66d0e4eaa3e5f1297e584d432b4ec9401e61",
+    "Dockerfile.php84": "2d1ba6c1822e64057e1b082528caab01c73204d1ed709d4811a67ef5e6467ead"
+  },
+  "raw_evidence_root": "/tmp/tekora-b231-fix1",
+  "historical_evidence": "B231-fix1-history.json preserves original unsafe T07 and its FAIL; it was NOT rerun",
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P1",
+      "status": "MITIGATED IN MANAGED LAB; PENDING NEW INDEPENDENT REVIEW",
+      "residual": "Raw fork with open SQLite forbidden/not supported; product integration open"
+    },
+    {
+      "id": "D1",
+      "priority": "P2",
+      "status": "OPEN IN ORIGINAL B2.2.1; SEPARATE TASK",
+      "cause": "PHP 8.2 PDO_SQLITE inTransaction misses SQL BEGIN/SAVEPOINT; PHP 8.4 reads sqlite3_get_autocommit; no causal link with F1"
+    }
+  ],
+  "limits_not_run": [
+    "Windows/PHP8.2/NTFS",
+    "SQLite minimum3.38",
+    "WAL",
+    "physical recovery and actual driver fault campaign",
+    "Composer/npm dependency audits and prior Composer audit HTTP403",
+    "production reservations and real legacy writers",
+    "Illuminate/Gate integration",
+    "API v2 and real states/notifications",
+    "legal/fiscal/commercial/provider validations"
+  ],
+  "preparation_notes": [
+    "PHP8.4 historical main first exceeded default128M; final unchanged suite ran with memory_limit=1G and passed",
+    "Buildx cache relocated to task-owned writable directory",
+    "No original unsafe fork, SIGKILL alternative or historical external IndependentTest suite was rerun"
+  ],
+  "migration_count_unchanged": 37,
+  "api_operations_unchanged": 21,
+  "historical_matrix_columns_preserved": true,
+  "artifact_provenance_note": "safe_process_evidence selects the final 83-test run only. Earlier preparation traces remain in the external raw directory and are not counted or attributed to the final source hashes. main.log for PHP8.4 records the initial128M attempt; main.xml/main-1g.log are final."
+}
