@@ -13,6 +13,7 @@
   @vite(['resources/css/tekora/ambient.css', 'resources/css/tekora/tekora.css', 'resources/js/tekora/tekora.js'])
   @endif
   @if($identity)<x-identity-assets />@endif
+  <link rel="stylesheet" href="{{ asset('css/tekora/trust.css') }}">
 </head>
 <body class="tk-page tk-page-{{ $page }} tekora-ambient-page {{ $identity ? 'tk-identity tk-identity-access' : '' }}">
   <x-tekora-ambient />
@@ -35,10 +36,11 @@
   </header>
   @if($page === 'access')<p class="tk-auth-progress" data-auth-progress role="status" aria-live="polite" tabindex="-1"></p>@endif
   <main id="contenido">{{ $slot }}</main>
+  <x-cookie-banner />
   <footer class="tk-footer tk-wrap">
     <x-tekora-brand />
     <p>Una cuenta. Tu talento. Nuevas posibilidades.</p>
     <nav aria-label="Enlaces complementarios"><a href="{{ route('public-providers.index') }}">Prestadores</a><a href="{{ route('catalog.index') }}">Servicios</a></nav>
-  </footer>
+  <x-legal-links /></footer>
 </body>
 </html>

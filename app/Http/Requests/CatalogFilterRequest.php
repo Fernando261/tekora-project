@@ -22,7 +22,7 @@ class CatalogFilterRequest extends FormRequest
             'category' => ['nullable', 'string', 'max:120', Rule::exists('service_categories', 'slug')->where('is_active', true)],
             'modality' => ['nullable', Rule::enum(ServiceModality::class)],
             'page' => ['sometimes', 'integer', 'min:1', 'max:10000'],
-        ];
+        ] + \App\Support\MarketplaceFilters::trustRules();
     }
 
     public function messages(): array

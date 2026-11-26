@@ -98,7 +98,7 @@ class TekoraW3Test extends TestCase
         $xpath = $this->document($response->getContent());
         $this->assertSame(12, $xpath->query('//article[@data-market-card]')->length);
         $this->assertSame(1, $xpath->query('//form[@method="GET" and @role="search"]')->length);
-        $this->assertSame(['q', 'category', 'modality'], array_map(fn ($node) => $node->nodeValue, iterator_to_array($xpath->query('//form//input/@name | //form//select/@name'))));
+        $this->assertSame(['q', 'category', 'modality', 'municipality', 'verified'], array_map(fn ($node) => $node->nodeValue, iterator_to_array($xpath->query('//form[@role="search"]//input/@name | //form[@role="search"]//select/@name'))));
         $this->assertSame('120', $xpath->query('//input[@name="q"]/@maxlength')->item(0)->nodeValue);
         $next = $xpath->query('//nav[contains(@class,"catalog-pagination")]//a[@rel="next"]/@href')->item(0)->nodeValue;
         parse_str(parse_url($next, PHP_URL_QUERY), $query);
@@ -200,8 +200,8 @@ class TekoraW3Test extends TestCase
         }
         $this->assertSame($before, $this->reservationRows($tables));
         $detail = $this->get('/api/v1/services/'.$service->id)->assertOk()->json('data');
-        $this->assertSame(['id', 'title', 'description', 'modality', 'category', 'provider', 'price'], array_keys($detail));
-        $this->assertSame(['id', 'display_name', 'headline', 'bio'], array_keys($detail['provider']));
+        $this->assertSame(['id', 'title', 'description', 'modality', 'location', 'category', 'provider', 'price'], array_keys($detail));
+        $this->assertSame(['id', 'display_name', 'headline', 'bio', 'professional_credential'], array_keys($detail['provider']));
         $this->assertNull($detail['price']);
         $this->assertCount(39, glob(database_path('migrations/*.php')));
         $this->assertCurrentApiInventory();

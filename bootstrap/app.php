@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(fn (Request $request) => route('login'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->dontFlash(['license_number']);
         $exceptions->report(function (\PDOException $exception) {
             if (request()->is('api/v1', 'api/v1/*', 'cuenta/reservas/*/contexto-comercial')) {
                 // Un fallo de INSERT puede llevar cuerpos privados en sus bindings.

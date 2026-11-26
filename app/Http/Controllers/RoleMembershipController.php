@@ -7,16 +7,24 @@ use App\Http\Requests\EnrollRoleRequest;
 use App\Http\Requests\UpdateBusinessRolesRequest;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\ProfessionalCredentials;
 use App\Services\RoleMemberships;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleMembershipController extends Controller
 {
     public function store(EnrollRoleRequest $request, RoleMemberships $memberships)
     {
         $user = $request->user('web');
-        $memberships->enroll($user, RoleName::from($request->validated('role')));
+        DB::transaction(function () use ($memberships, $request, $user) {
+            $role = RoleName::from($request->validated('role'));
+            $memberships->enroll($user, $role);
+            if ($role === RoleName::Provider) {
+                app(ProfessionalCredentials::class)->enroll($user, $request->validated());
+            }
+        }, 3);
 
         if ($request->expectsJson()) {
             return response()->json(['roles' => $user->roles()->orderBy('slug')->pluck('slug')]);

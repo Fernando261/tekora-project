@@ -322,6 +322,14 @@ class ContractingJourneyTest extends TestCase
         $this->assertStringEndsWith($newCommit, $commit);
         $commit = substr($commit, 0, -strlen($newCommit));
 
+        // Strip only the documented additive filters before comparing the historical signature.
+        foreach (['/services' => 2, '/providers' => 4] as $path => $extra) {
+            $parameters = &$new['paths'][$path]['get']['parameters'];
+            $this->assertSame(['municipality', 'verified'], array_column(array_slice($parameters, -2), 'name'));
+            $parameters = array_slice($parameters, 0, -$extra);
+            unset($parameters);
+        }
+
         $fingerprint = fn ($value) => hash('sha256', json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
         $this->assertSame($old['paths_sha256'], $fingerprint($new['paths']));
         foreach ($old['components'] as $type => $definitions) {
@@ -334,6 +342,13 @@ class ContractingJourneyTest extends TestCase
                     $this->assertNotContains('simulated_checkout', $definition['required']);
                     $this->assertTrue($definition['properties']['simulated_checkout']['properties']['synthetic_only']['const']);
                     unset($definition['properties']['confirmation_readiness'], $definition['properties']['simulated_checkout']);
+                }
+                foreach (['Provider' => 'professional_credential', 'Service' => 'location'] as $schema => $field) {
+                    if ($type === 'schemas' && $name === $schema) {
+                        $this->assertArrayHasKey($field, $definition['properties']);
+                        $this->assertNotContains($field, $definition['required']);
+                        unset($definition['properties'][$field]);
+                    }
                 }
                 $this->assertSame($value, $fingerprint($definition));
             }

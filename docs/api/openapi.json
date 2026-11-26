@@ -106,6 +106,70 @@
               "maximum": 50,
               "default": 12
             }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Slug de categoría activa."
+            }
+          },
+          {
+            "name": "modality",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "remote",
+                "onsite",
+                "both"
+              ],
+              "description": "remote/onsite también incluyen servicios both."
+            }
+          },
+          {
+            "name": "municipality",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "guadalajara",
+                "zapopan",
+                "san-pedro-tlaquepaque",
+                "tonala",
+                "tlajomulco-de-zuniga",
+                "el-salto",
+                "juanacatlan",
+                "ixtlahuacan-de-los-membrillos",
+                "zapotlanejo"
+              ]
+            },
+            "description": "Municipio de un servicio publicado."
+          },
+          {
+            "name": "verified",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "description": "Envía 1 para incluir solo prestadores con revisión vigente. 0 conserva el catálogo completo."
           }
         ],
         "responses": {
@@ -1837,6 +1901,37 @@
               ],
               "description": "remote/onsite también incluyen servicios both."
             }
+          },
+          {
+            "name": "municipality",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "guadalajara",
+                "zapopan",
+                "san-pedro-tlaquepaque",
+                "tonala",
+                "tlajomulco-de-zuniga",
+                "el-salto",
+                "juanacatlan",
+                "ixtlahuacan-de-los-membrillos",
+                "zapotlanejo"
+              ]
+            },
+            "description": "Municipio de un servicio publicado."
+          },
+          {
+            "name": "verified",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "description": "Envía 1 para incluir solo prestadores con revisión vigente. 0 conserva el catálogo completo."
           }
         ]
       }
@@ -2010,6 +2105,61 @@
               "maxLength": 120,
               "description": "Búsqueda literal en display_name y headline."
             }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 120,
+              "description": "Slug de categoría activa."
+            }
+          },
+          {
+            "name": "modality",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "remote",
+                "onsite",
+                "both"
+              ],
+              "description": "remote/onsite también incluyen servicios both."
+            }
+          },
+          {
+            "name": "municipality",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "guadalajara",
+                "zapopan",
+                "san-pedro-tlaquepaque",
+                "tonala",
+                "tlajomulco-de-zuniga",
+                "el-salto",
+                "juanacatlan",
+                "ixtlahuacan-de-los-membrillos",
+                "zapotlanejo"
+              ]
+            },
+            "description": "Municipio de un servicio publicado."
+          },
+          {
+            "name": "verified",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "description": "Envía 1 para incluir solo prestadores con revisión vigente. 0 conserva el catálogo completo."
           }
         ]
       }
@@ -4948,6 +5098,51 @@
           }
         }
       }
+    },
+    "/municipalities": {
+      "get": {
+        "operationId": "listMunicipalities",
+        "summary": "Consultar el catálogo de municipios",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Municipios habilitados para servicios presenciales de Tekora.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Municipality"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "data": [
+                    {
+                      "slug": "zapopan",
+                      "name": "Zapopan"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/Error422"
+          },
+          "429": {
+            "$ref": "#/components/responses/Error429"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5480,6 +5675,9 @@
               "string",
               "null"
             ]
+          },
+          "professional_credential": {
+            "$ref": "#/components/schemas/ProfessionalCredential"
           }
         }
       },
@@ -5550,6 +5748,9 @@
               }
             ],
             "description": "B3.0: precio actual informativo; null sin precio estructurado. No es cotización vinculante, pago ni importe cero. Campo aditivo; clientes anteriores pueden omitirlo."
+          },
+          "location": {
+            "$ref": "#/components/schemas/ServiceLocation"
           }
         }
       },
@@ -8512,6 +8713,90 @@
             }
           }
         ]
+      },
+      "Municipality": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "slug",
+          "name"
+        ],
+        "properties": {
+          "slug": {
+            "type": "string",
+            "example": "zapopan"
+          },
+          "name": {
+            "type": "string",
+            "example": "Zapopan"
+          }
+        }
+      },
+      "ServiceLocation": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "municipality",
+          "remote"
+        ],
+        "properties": {
+          "municipality": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Municipality"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "remote": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProfessionalCredential": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "badge",
+          "license_number"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "unverified",
+              "pending",
+              "verified",
+              "rejected"
+            ]
+          },
+          "badge": {
+            "oneOf": [
+              {
+                "type": "string",
+                "const": "Profesional Tekora"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "license_number": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9]{5,16}$",
+                "description": "Cédula verificada con consentimiento expreso."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
       }
     },
     "responses": {

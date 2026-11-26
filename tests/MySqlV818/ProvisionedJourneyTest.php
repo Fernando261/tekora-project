@@ -110,6 +110,7 @@ final class ProvisionedJourneyTest extends TestCase
         $this->post('/registro', [
             'name' => 'Cliente sintético', 'age' => 28, 'gender' => 'Prefiero no decirlo',
             'email' => $email, 'password' => $password, 'password_confirmation' => $password, 'intent' => 'client',
+            'terms_version' => \App\Support\LegalPolicies::VERSION, 'accept_terms' => '1',
         ])->assertRedirect('/login');
         $client = User::whereEmail($email)->sole();
         $this->post('/login', ['email' => $email, 'password' => $password])->assertRedirect('/cuenta');
@@ -133,6 +134,35 @@ final class ProvisionedJourneyTest extends TestCase
         $this->assertTrue(Hash::check($newPassword, $client->fresh()->password));
         $this->getJson('/api/v1/me', $headers)->assertUnauthorized();
         $this->assertDatabaseMissing('password_reset_tokens', ['email' => $email]);
+    }
+
+    public function test_trust_location_and_private_certification_with_restricted_runtime(): void
+    {
+        $this->withoutVite();
+        config(['filesystems.disks.professional.root' => sys_get_temp_dir().'/tekora-trust-'.Str::uuid()]);
+        $provider = $this->account(RoleName::Provider);
+        $reviewer = $this->account(RoleName::Admin);
+        $service = $this->service($provider, ['title' => 'Tekora V811 synthetic', 'modality' => 'onsite']);
+        $this->actingAs($provider, 'web')->post(route('legal.accept'), [
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION,
+        ])->assertRedirect();
+        $this->assertDatabaseHas('terms_acceptances', ['user_id' => $provider->id, 'version' => \App\Support\LegalPolicies::VERSION]);
+        $this->put(route('provider-services.update', $service), $this->serviceData([
+            'title' => $service->title, 'modality' => 'onsite', 'municipality' => 'tonala',
+        ]))->assertRedirect();
+        $this->post(route('trust.update'), ['license_disposition' => 'available', 'license_number' => '2244567', 'public_license' => '1',
+            'certificate' => \Illuminate\Http\UploadedFile::fake()->createWithContent('trust.pdf', "%PDF-1.4\n% Synthetic fixture\n%%EOF\n"),
+        ])->assertRedirect();
+        $this->get(route('trust.download', $provider))->assertDownload('certificado.pdf');
+        $this->actingAs($this->account(RoleName::Client), 'web')->get(route('trust.download', $provider))->assertNotFound();
+        $this->actingAs($reviewer, 'web')->post(route('trust.decide', $provider), [
+            'revision' => 1, 'decision' => 'verified', 'reason' => 'Validación de laboratorio',
+        ])->assertRedirect();
+        $this->getJson('/api/v1/services?verified=1&municipality=tonala&q=Tekora%20V811')->assertOk()->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.provider.professional_credential.license_number', '2244567')
+            ->assertJsonPath('data.0.location.municipality.name', 'Tonalá')
+            ->assertJsonMissingPath('data.0.provider.evidence_path');
+        $this->assertDatabaseHas('professional_reviews', ['provider_user_id' => $provider->id, 'reviewer_user_id' => $reviewer->id]);
     }
 
     public function test_historical_journey_with_lab_clock(): void
@@ -185,7 +215,7 @@ final class ProvisionedJourneyTest extends TestCase
             $this->assertFalse(config('app.debug'));
             $this->assertTrue(IntegratedCheckout::enabled());
             foreach (['card', 'cash'] as $method) {
-                [, , $reservation] = $this->journey("V810 synthetic $method", $method);
+                [, , $reservation] = $this->journey("V811 synthetic $method", $method);
                 $this->assertSame(ReservationStatus::Confirmed, $reservation->status);
             }
         } finally {
@@ -226,7 +256,7 @@ final class ProvisionedJourneyTest extends TestCase
             auth()->forgetGuards();
         }
         foreach (['card' => 'test_approved', 'cash' => 'cash_received'] as $method => $status) {
-            $inquiry = DB::table('service_inquiries')->where('message', "V810 synthetic $method")->sole();
+            $inquiry = DB::table('service_inquiries')->where('message', "V811 synthetic $method")->sole();
             $reservation = ServiceReservation::whereServiceInquiryId($inquiry->id)->sole();
             $this->assertSame(ReservationStatus::Confirmed, $reservation->status);
             $this->assertDatabaseHas('integrated_checkout_attempts', [
@@ -268,7 +298,7 @@ final class ProvisionedJourneyTest extends TestCase
     {
         $this->withoutVite();
         $reservations = ServiceReservation::whereIn('service_inquiry_id', DB::table('service_inquiries')
-            ->whereIn('message', ['V810 synthetic card', 'V810 synthetic cash'])->select('id'))
+            ->whereIn('message', ['V811 synthetic card', 'V811 synthetic cash'])->select('id'))
             ->with(['providerProfile.user', 'client'])->orderBy('id')->get();
         $this->assertCount(2, $reservations);
         $this->at(CarbonImmutable::parse($reservations->max('ends_at_utc'), 'UTC')->getTimestamp() + 1);

@@ -26,4 +26,7 @@
     @endcan
   </div>
   <section class="account-card tk-identity-personal-link"><div><h2>Tus datos, en un solo lugar</h2><p>Revisa tu nombre, correo y foto de perfil desde tu cuenta privada.</p></div><a class="account-button secondary" href="{{ route('perfil') }}">Mis datos personales</a></section>
+  @can(\App\Enums\Permission::ReviewProviderProfiles->value)
+    <a class="account-button secondary" href="{{ route('trust.review') }}">Revisar certificaciones profesionales</a>
+  @endcan
 </x-account-layout>

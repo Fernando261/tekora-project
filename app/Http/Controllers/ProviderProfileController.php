@@ -41,8 +41,14 @@ class ProviderProfileController extends Controller
     {
         Gate::forUser($request->user('web'))->authorize('view', $providerProfile);
 
-        return $request->expectsJson() ? response()->json(['provider_profile' => $providerProfile])
-            : view('account.provider-show', ['profile' => $providerProfile]);
+        if ($request->expectsJson()) {
+            return response()->json(['provider_profile' => $providerProfile]);
+        }
+        if (\App\Support\TrustSchema::available()) {
+            $providerProfile->load('credential:user_id,status,license_number,public_license');
+        }
+
+        return view('account.provider-show', ['profile' => $providerProfile]);
     }
 
     public function update(ProviderProfileRequest $request, ProviderProfile $providerProfile)

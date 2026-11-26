@@ -4,6 +4,7 @@ namespace App\Payments;
 
 use App\Models\Service;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -31,7 +32,8 @@ final class CreatePricedService
 
                 return $service;
             }
-            $service = $actor->providerProfile()->firstOrFail()->services()->create($details);
+            $service = $actor->providerProfile()->firstOrFail()->services()->create(Arr::except($details, 'municipality'));
+            $service->syncMunicipality($details['municipality'] ?? null);
             $price = $this->pricing->publish($actor, $service->id, ['amount_cents' => $cents, 'expected_version' => 0, 'idempotency_key' => (string) Str::uuid()]);
             DB::table('service_pricing_creations')->insert(['actor_id' => $actor->id, 'idempotency_key' => $key, 'service_id' => $service->id, 'price_version_id' => $price->id, 'fingerprint' => $fingerprint]);
 

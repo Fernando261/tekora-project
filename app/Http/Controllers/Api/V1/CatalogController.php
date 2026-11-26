@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Enums\ServiceModality;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\CatalogRequest;
 use App\Http\Resources\Api\V1\ApiCollection;
@@ -13,6 +12,8 @@ use App\Models\ProviderProfile;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Services\ProviderAvailability;
+use App\Support\MarketplaceFilters;
+use App\Support\Municipalities;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 
@@ -20,38 +21,19 @@ final class CatalogController extends Controller
 {
     private function services(): Builder
     {
-        return Service::publiclyVisible()->with(['category:id,name,slug', 'providerProfile:id,display_name,headline,bio']);
+        return Service::publiclyVisible()->withMarketplaceDetails();
     }
 
     private function providers(): Builder
     {
-        return ProviderProfile::select(['id', 'display_name', 'headline', 'bio'])
+        return ProviderProfile::select(['id', 'user_id', 'display_name', 'headline', 'bio'])->withPublicCredential()
             ->whereHas('services', fn (Builder $services) => $services->publiclyVisible());
-    }
-
-    private function search(Builder $query, string $term, array $columns): void
-    {
-        $literal = '%'.str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $term).'%';
-        $query->where(function (Builder $search) use ($literal, $columns) {
-            foreach ($columns as $column) {
-                $search->orWhereRaw("{$column} LIKE ? ESCAPE '!'", [$literal]);
-            }
-        });
     }
 
     public function index(CatalogRequest $request): ApiCollection
     {
         $filters = $request->validated();
-        $query = $this->services();
-        if (isset($filters['q'])) {
-            $this->search($query, $filters['q'], ['title', 'description']);
-        }
-        if (isset($filters['category'])) {
-            $query->whereHas('category', fn (Builder $category) => $category->where('slug', $filters['category']));
-        }
-        if (isset($filters['modality'])) {
-            $query->whereIn('modality', array_unique([$filters['modality'], ServiceModality::Both->value]));
-        }
+        $query = MarketplaceFilters::services($this->services(), $filters);
         $page = $query->orderByDesc('id')->paginate($filters['per_page'] ?? 12);
 
         return new ApiCollection($page->through(fn ($service) => new ServiceResource($service)));
@@ -67,13 +49,15 @@ final class CatalogController extends Controller
         return response()->json(['data' => ServiceCategory::active()->ordered()->get(['id', 'name', 'slug'])]);
     }
 
+    public function municipalities(CatalogRequest $request): JsonResponse
+    {
+        return response()->json(['data' => Municipalities::rows()]);
+    }
+
     public function providersIndex(CatalogRequest $request): ApiCollection
     {
         $filters = $request->validated();
-        $query = $this->providers();
-        if (isset($filters['q'])) {
-            $this->search($query, $filters['q'], ['display_name', 'headline']);
-        }
+        $query = MarketplaceFilters::providers($this->providers(), $filters);
         $page = $query->orderBy('display_name')->orderBy('id')->paginate($filters['per_page'] ?? 12);
 
         return new ApiCollection($page->through(fn ($provider) => new ProviderResource($provider)));
@@ -89,7 +73,7 @@ final class CatalogController extends Controller
         $id = filter_var($provider, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
         abort_if($id === false, 404);
         $profile = $this->providers()->findOrFail($id);
-        $page = $this->services()->where('provider_profile_id', $profile->id)
+        $page = MarketplaceFilters::services($this->services()->where('provider_profile_id', $profile->id), $request->validated())
             ->orderByDesc('id')->paginate($request->validated('per_page', 12));
 
         return new ApiCollection($page->through(fn ($service) => new ServiceResource($service)));

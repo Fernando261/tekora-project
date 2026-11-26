@@ -20,6 +20,11 @@ abstract class TestCase extends BaseTestCase
             throw new \LogicException('Las pruebas requieren SQLite :memory: sin DB_URL.');
         }
 
-        $this->artisan('migrate', ['--force' => true])->assertExitCode(0);
+        $this->artisan('migrate', ['--force' => true] + $this->migrationFixtureOptions())->assertExitCode(0);
+    }
+
+    protected function migrationFixtureOptions(): array
+    {
+        return [];
     }
 }

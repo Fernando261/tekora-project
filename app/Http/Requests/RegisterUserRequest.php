@@ -14,7 +14,13 @@ class RegisterUserRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
+        $trust = \App\Support\TrustSchema::available();
+        $provider = in_array($this->input('intent'), ['provider', 'both'], true);
+
+        return ($trust ? [
+            'accept_terms' => ['required', 'accepted'],
+            'terms_version' => ['required', Rule::in([\App\Support\LegalPolicies::VERSION])],
+        ] + ($provider ? \App\Services\ProfessionalCredentials::licenseRules(true) : []) : []) + [
             'name' => ['required', 'string', 'max:255'],
             'age' => ['required', 'integer', 'min:1'],
             'gender' => ['required', 'string', 'max:255'],
@@ -28,6 +34,7 @@ class RegisterUserRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'accept_terms.accepted' => 'Acepta la versión vigente de los términos para continuar.',
             'required' => 'Completa el campo :attribute.',
             'string' => 'El campo :attribute debe ser texto.',
             'max' => 'El campo :attribute supera el tamaño permitido.',

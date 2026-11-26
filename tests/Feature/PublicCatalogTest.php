@@ -99,7 +99,9 @@ class PublicCatalogTest extends TestCase
     public function test_search_pagination_is_stable_and_preserves_filters(): void
     {
         $owner = $this->account(RoleName::Provider);
-        for ($i = 1; $i <= 14; $i++) $this->service($owner, ['title' => 'Servicio numerado '.$i]);
+        for ($i = 1; $i <= 14; $i++) {
+            $this->service($owner, ['title' => 'Servicio numerado '.$i]);
+        }
         $response = $this->get('/servicios?q=numerado&category=soporte-tecnico&modality=remote')->assertOk();
         $services = $response->viewData('services');
         $this->assertSame(14, $services->total());
@@ -150,24 +152,31 @@ class PublicCatalogTest extends TestCase
         $this->get('/servicios')->assertOk();
         $small = count(DB::getQueryLog());
         DB::disableQueryLog();
-        for ($i = 0; $i < 15; $i++) $this->service($owner);
+        for ($i = 0; $i < 15; $i++) {
+            $this->service($owner);
+        }
         DB::enableQueryLog();
         DB::flushQueryLog();
         $this->get('/servicios')->assertOk();
         $large = count(DB::getQueryLog());
         DB::disableQueryLog();
         $this->assertSame($small, $large);
-        $this->assertLessThanOrEqual(6, $large);
+        // The projection adds bounded eager reads of credentials and locations.
+        $this->assertLessThanOrEqual(8, $large);
     }
 
     public function test_directory_and_provider_services_are_paginated(): void
     {
-        for ($i = 0; $i < 13; $i++) $this->service($this->account(RoleName::Provider));
+        for ($i = 0; $i < 13; $i++) {
+            $this->service($this->account(RoleName::Provider));
+        }
         $directory = $this->get('/prestadores')->assertOk()->viewData('providers');
         $this->assertSame(13, $directory->total());
         $this->assertCount(12, $directory);
         $owner = $this->account(RoleName::Provider);
-        for ($i = 0; $i < 13; $i++) $this->service($owner);
+        for ($i = 0; $i < 13; $i++) {
+            $this->service($owner);
+        }
         $profile = $owner->providerProfile()->firstOrFail();
         $first = $this->get('/prestadores/'.$profile->id)->assertOk()->viewData('services');
         $second = $this->get('/prestadores/'.$profile->id.'?page=2')->assertOk()->viewData('services');

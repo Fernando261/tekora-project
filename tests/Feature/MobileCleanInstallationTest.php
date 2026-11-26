@@ -59,7 +59,7 @@ final class MobileCleanInstallationTest extends TestCase
             self::assertSame([
                 'cache' => 'database',
                 'database' => $database,
-                'migrations' => count(glob($root.'/database/migrations/*.php')),
+                'migrations' => count(glob($root.'/database/migrations/*.php')) + 1,
                 'integrity' => 'ok',
                 'foreign_keys' => 1,
                 'foreign_key_check' => [],

@@ -4,6 +4,9 @@
   <div class="mp-service-top"><span class="mp-service-symbol" aria-hidden="true"><x-tekora-icon name="briefcase" /></span><span class="mp-service-mode">{{ $service->modality->label() }}</span></div>
   <span class="mp-card-category">{{ $service->category->name }}</span>
   <h2><a href="{{ route('catalog.show', $service) }}">{{ $service->title }}</a></h2>
+  <x-service-location :service="$service" />
+  <x-professional-credential :profile="$service->providerProfile" />
+
   <p class="service-excerpt">{{ \Illuminate\Support\Str::limit($service->description, 180) }}</p>
   <x-published-price :cents="$service->published_price_cents" />
   <a class="service-provider" href="{{ route('public-providers.show', $service->providerProfile) }}"><x-marketplace-avatar :name="$service->providerProfile->display_name" /><span>{{ $service->providerProfile->display_name }}</span></a>

@@ -15,7 +15,10 @@ class EnrollRoleRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
+        $professional = \App\Support\TrustSchema::available() && $this->input('role') === RoleName::Provider->value
+            && ! $this->user('web')->hasRole(RoleName::Provider);
+
+        return ($professional ? \App\Services\ProfessionalCredentials::licenseRules(true) : []) + [
             'role' => ['required', 'string', Rule::in(RoleName::businessValues())],
             'user_id' => ['prohibited'],
             'roles' => ['prohibited'],

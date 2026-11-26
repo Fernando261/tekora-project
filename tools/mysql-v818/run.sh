@@ -212,16 +212,39 @@ if "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --up
     printf '%s\n' 'FAIL: se aceptó actualizar con la cuenta de aplicación habilitada.' >&2
     exit 1
 fi
+checkout_base=af04234cc8cd57d82103322de07c777c50be4f10
+[[ $(git rev-parse "$checkout_base^{tree}") == 559091158fb1ff8db106fe1b5c355165289be5b4 ]]
+checkout_project="$private/checkout-project"
+mkdir "$checkout_project"
+git archive "$checkout_base" | tar -x -C "$checkout_project"
+cmp "$checkout_project/composer.lock" "$project/composer.lock"
+cp -al "$project/vendor" "$checkout_project/vendor"
+admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT LOCK"
+TEKORA_V818_PROJECT="$checkout_project" "$checkout_project/deploy/vps/provision.sh" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
+admin source < "$project/deploy/vps/mysql-checkout-grants.sql"
+admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT UNLOCK"
+TEKORA_V818_PROJECT="$checkout_project" php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_official_checkout --log-junit /evidence/mysql-v810-before-upgrade.xml
+"$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
+watermark_before=$(admin source tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1')
+legacy_before=$(admin source tekora -e 'SELECT id,status,quote_id,version FROM service_reservations ORDER BY id')
+checkout_before=$(admin source tekora -e 'SELECT id,reservation_id,status,reference,received_at FROM integrated_checkout_attempts ORDER BY id')
+[[ -n "$checkout_before" ]]
+if "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade; then
+    printf '%s\n' 'FAIL: se aceptó actualizar V8.1.10 con la cuenta de aplicación habilitada.' >&2
+    exit 1
+fi
 admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT LOCK"
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
 administrative_window_closed source
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
 administrative_window_closed source
-[[ $(admin source tekora -e 'SELECT COUNT(*) FROM migrations') == 40 ]]
+[[ $(admin source tekora -e 'SELECT COUNT(*) FROM migrations') == 41 ]]
 [[ $(admin source tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1') == "$watermark_before" ]]
-[[ $(admin source tekora -e 'SELECT id,status,quote_id,version FROM service_reservations') == "$legacy_before" ]]
-[[ $(admin source tekora -e 'SELECT COUNT(*) FROM service_reservations WHERE checkout_required=1') == 0 ]]
-[[ $(admin source tekora -e 'SELECT COUNT(*) FROM integrated_checkout_attempts') == 0 ]]
+[[ $(admin source tekora -e 'SELECT id,status,quote_id,version FROM service_reservations ORDER BY id') == "$legacy_before" ]]
+[[ $(admin source tekora -e 'SELECT id,reservation_id,status,reference,received_at FROM integrated_checkout_attempts ORDER BY id') == "$checkout_before" ]]
+[[ $(admin source tekora -e 'SELECT COUNT(*) FROM municipalities') == 9 ]]
+admin source < "$project/deploy/vps/mysql-trust-grants.sql"
+printf '%s\n' 'V8.1.11 conserva reservas, resultados V8.1.10 y reloj.'
 digest=$(admin source tekora -e 'SELECT schema_sha256 FROM tekora_provisioning')
 admin source < "$project/deploy/vps/mysql-checkout-grants.sql"
 admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT UNLOCK"
@@ -243,7 +266,7 @@ admin source tekora -e 'ALTER TABLE tekora_provisioning MODIFY state VARCHAR(16)
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
 
 
-php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter 'test_runtime|test_ordinary|test_identity|test_official_checkout' --log-junit /evidence/mysql-provisioned.xml
+php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter 'test_runtime|test_ordinary|test_identity|test_official_checkout|test_trust' --log-junit /evidence/mysql-provisioned.xml
 fixture_clock source
 php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_integrated_checkout_at_exact_expiry --log-junit /evidence/mysql-checkout-expiry.xml
 restore_clock source

@@ -1,0 +1,13 @@
+.trust-links { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem 1rem; }
+.trust-links a, .trust-license a, .trust-policy a { text-decoration: underline; text-underline-offset: .2em; }
+.trust-policy { max-width: 70ch; margin: 2rem auto; }
+.trust-policy h2 { margin-top: 1.4rem; }
+.trust-cookie-banner { max-width: 69rem; margin: 1rem auto; }
+.trust-cookie-banner h2 { margin-top: 0; font-size: 1.1rem; }
+.trust-choice { display: flex; align-items: baseline; gap: .5rem; }
+.trust-choice input[type="checkbox"] { width: auto; flex: none; }
+.trust-license { min-width: 0; display: grid; gap: .45rem; border-radius: .75rem; padding: .8rem; }
+.trust-badge { display: inline-block; padding: .25em .65em; border-radius: 1em; background: #123a66; color: #d5eeff; }
+.trust-credential { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; }
+.trust-location { display: block; overflow-wrap: anywhere; }
+.trust-review-list { display: grid; gap: 1rem; }

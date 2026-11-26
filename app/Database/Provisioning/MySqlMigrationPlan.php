@@ -26,20 +26,31 @@ final class MySqlMigrationPlan
         return [database_path('mysql/extensions/2026_11_26_000000_create_integrated_checkout.php')];
     }
 
-    private static function forVersion(bool $checkout): array
+    public const CURRENT = 3;
+
+    public static function trust(): array
     {
-        return $checkout ? [...self::files(), ...self::extensions()] : self::files();
+        return [database_path('extensions/2026_11_26_000001_create_professional_trust_and_locations.php')];
     }
 
-    public static function identities(bool $checkout = false): array
+    private static function forVersion(int $version): array
     {
-        return array_map(fn (string $path) => basename($path, '.php'), self::forVersion($checkout));
+        return [...self::files(), ...($version >= 2 ? self::extensions() : []), ...($version >= 3 ? self::trust() : [])];
     }
 
-    public static function digest(bool $checkout = false): string
+    public static function identities(int $version = 1): array
     {
-        $hashes = array_map(fn (string $path) => [basename($path), hash_file('sha256', $path)], self::forVersion($checkout));
+        return array_map(fn (string $path) => basename($path, '.php'), self::forVersion($version));
+    }
+
+    public static function digest(int $version = 1): string
+    {
+        $hashes = array_map(fn (string $path) => [basename($path), hash_file('sha256', $path)], self::forVersion($version));
         $hashes[] = ['ServiceCategorySeeder.php', hash_file('sha256', database_path('seeders/ServiceCategorySeeder.php'))];
+
+        if ($version >= 3) {
+            $hashes[] = ['Municipalities.php', hash_file('sha256', app_path('Support/Municipalities.php'))];
+        }
 
         return hash('sha256', json_encode($hashes, JSON_THROW_ON_ERROR));
     }

@@ -87,6 +87,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
     });
     Route::middleware('throttle:mobile-catalog')->group(function () {
+        Route::get('municipalities', [CatalogController::class, 'municipalities'])->middleware('throttle:mobile-catalog')->name('municipalities.index');
         Route::get('categories', [CatalogController::class, 'categories'])->name('categories.index');
         Route::get('services', [CatalogController::class, 'index'])->name('services.index');
         Route::get('services/{service}', [CatalogController::class, 'show'])->whereNumber('service')->name('services.show');

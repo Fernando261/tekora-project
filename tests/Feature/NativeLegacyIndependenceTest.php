@@ -109,7 +109,8 @@ class NativeLegacyIndependenceTest extends TestCase
     public function test_central_registration_login_profile_and_logout_need_no_professional_identity(): void
     {
         $this->post('/registro', ['name' => 'Cuenta sintética', 'email' => 'synthetic-w62a@example.test', 'age' => 30,
-            'gender' => 'Otro', 'password' => 'synthetic-password', 'password_confirmation' => 'synthetic-password', 'intent' => 'both'])
+            'gender' => 'Otro', 'password' => 'synthetic-password', 'password_confirmation' => 'synthetic-password', 'intent' => 'both',
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION, 'license_disposition' => 'none'])
             ->assertRedirect('/login')->assertSessionHasNoErrors();
         $user = User::sole();
         $this->assertTrue($user->hasRole(RoleName::Client));

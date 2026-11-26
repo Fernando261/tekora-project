@@ -28,8 +28,8 @@ class MobileApiCatalogTest extends TestCase
         $this->get('/api/v1/services', ['Accept' => 'text/html'])->assertOk()->assertJsonCount(1, 'data')
             ->assertJsonPath('data.0.id', $service->id)->assertJsonPath('meta.total', 1);
         $detail = $this->get('/api/v1/services/'.$service->id)->assertOk()->json('data');
-        $this->assertSame(['id', 'title', 'description', 'modality', 'category', 'provider', 'price'], array_keys($detail));
-        $this->assertSame(['id', 'display_name', 'headline', 'bio'], array_keys($detail['provider']));
+        $this->assertSame(['id', 'title', 'description', 'modality', 'location', 'category', 'provider', 'price'], array_keys($detail));
+        $this->assertSame(['id', 'display_name', 'headline', 'bio', 'professional_credential'], array_keys($detail['provider']));
         $this->assertNull($detail['price']); // Legacy services never acquire a fabricated zero price.
         $this->get('/api/v1/providers')->assertOk()->assertJsonCount(1, 'data');
         $this->get('/api/v1/providers/'.$provider->providerProfile->id)->assertOk()
@@ -60,7 +60,8 @@ class MobileApiCatalogTest extends TestCase
             $this->get('/api/v1/services?'.$filter)->assertUnprocessable()->assertJsonPath('error.code', 'validation_failed');
         }
         $this->get('/api/v1/providers?q=Nombre&per_page=1')->assertOk()->assertJsonCount(1, 'data');
-        $this->get('/api/v1/providers?modality=remote')->assertUnprocessable();
+        $this->get('/api/v1/providers?modality=remote')->assertOk()->assertJsonCount(1, 'data');
+        $this->get('/api/v1/providers?modality=invalid')->assertUnprocessable();
         $this->get('/api/v1/services/'.$first->id.'?include=user')->assertUnprocessable();
     }
 

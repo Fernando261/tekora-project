@@ -52,6 +52,7 @@ class InquiryCsrfTest extends TestCase
         $service = $this->service($provider);
         $this->get(route('inquiries.create', $service))->assertRedirect('/login');
         $this->withSession(['_token' => 'before-login'])->post('/registro', [
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION,
             '_token' => 'before-login', 'name' => 'Cliente de prueba', 'age' => 30, 'gender' => 'Prefiero no decirlo',
             'email' => 'inquiry-client@example.test', 'password' => 'test-password', 'password_confirmation' => 'test-password', 'intent' => 'client',
         ])->assertRedirect('/login');

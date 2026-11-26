@@ -8,6 +8,8 @@ use App\Http\Requests\ServiceStatusRequest;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class ProviderServiceController extends Controller
@@ -32,9 +34,9 @@ class ProviderServiceController extends Controller
     public function store(ServiceRequest $request)
     {
         $profile = $request->user('web')->providerProfile()->firstOrFail();
-        $details = $request->safe()->only(['title', 'description', 'service_category_id', 'modality', 'status']);
+        $details = $request->safe()->only(['title', 'description', 'service_category_id', 'modality', 'status', 'municipality']);
         if ($request->filled('price_mxn')) {
-            \App\Payments\PricingInput::only($request->except('_token'), ['title', 'description', 'service_category_id', 'modality', 'status', 'price_mxn', 'creation_key']);
+            \App\Payments\PricingInput::only($request->except('_token'), ['title', 'description', 'service_category_id', 'modality', 'status', 'municipality', 'price_mxn', 'creation_key']);
             $cents = \App\Payments\WebMoney::cents($request->input('price_mxn'));
             // Normalize category identity so HTTP retries have a stable intent fingerprint.
             $details['service_category_id'] = (int) $details['service_category_id'];
@@ -45,7 +47,12 @@ class ProviderServiceController extends Controller
                 return redirect()->route('provider-services.edit', $service, 303)->with('success', 'Servicio y precio publicados.');
             });
         }
-        $service = $profile->services()->create($details);
+        $service = DB::transaction(function () use ($profile, $details) {
+            $service = $profile->services()->create(Arr::except($details, 'municipality'));
+            $service->syncMunicipality($details['municipality'] ?? null);
+
+            return $service;
+        });
 
         return redirect()->route('provider-services.edit', $service, 303)->with('success', 'Servicio creado. Estado: '.$service->status->label().'.');
     }
@@ -54,13 +61,22 @@ class ProviderServiceController extends Controller
     {
         Gate::forUser($request->user('web'))->authorize('update', $service);
 
+        if (\App\Support\TrustSchema::available()) {
+            $service->load('location');
+        }
+
         return view('provider-services.form', ['service' => $service, 'price' => app(\App\Payments\PricingStore::class)->latestPrice($service->id),
             'categories' => ServiceCategory::active()->ordered()->get()]);
     }
 
     public function update(ServiceRequest $request, Service $service)
     {
-        $service->update($request->validated());
+        DB::transaction(function () use ($request, $service) {
+            $current = Service::whereKey($service->id)->lockForUpdate()->firstOrFail();
+            Gate::forUser($request->user('web'))->authorize('update', $current);
+            $current->update($request->safe()->except('municipality'));
+            $current->syncMunicipality($request->validated('municipality'));
+        });
 
         return redirect()->route('provider-services.edit', $service, 303)->with('success', 'Servicio actualizado. Estado: '.$service->status->label().'.');
     }

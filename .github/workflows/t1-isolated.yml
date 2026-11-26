@@ -2,7 +2,7 @@ name: T1 isolated laboratory
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, codex/v810-integrated-simulated-checkout]
 
 permissions:
   contents: read

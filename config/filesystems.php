@@ -38,6 +38,13 @@ return [
             'report' => false,
         ],
 
+        'professional' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/professional-certificates'),
+            'visibility' => 'private',
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

@@ -3,6 +3,8 @@
   <span class="mp-card-plane" data-market-plane aria-hidden="true"></span>
   <div class="mp-provider-heading"><x-marketplace-avatar :name="$profile->display_name" /><span class="mp-kicker">PERFIL PÚBLICO</span></div>
   <h2><a href="{{ route('public-providers.show', $profile) }}">{{ $profile->display_name }}</a></h2>
+  <x-professional-credential :profile="$profile" />
+
   @if($profile->headline)<p class="provider-headline">{{ $profile->headline }}</p>@endif
   @if($profile->bio)<p class="service-excerpt">{{ \Illuminate\Support\Str::limit($profile->bio, 180) }}</p>@endif
   <p class="mp-published-count"><span aria-hidden="true"></span>{{ $profile->published_services_count }} {{ $profile->published_services_count === 1 ? 'servicio publicado' : 'servicios publicados' }}</p>
