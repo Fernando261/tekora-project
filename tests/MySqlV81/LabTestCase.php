@@ -6,6 +6,7 @@ use App\Models\ServiceInquiry;
 use App\Models\ServiceReservation;
 use App\Models\User;
 use App\Services\ReservationTime;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,13 @@ abstract class LabTestCase extends TestCase
     {
         parent::setUp();
         $this->migrateFoundation();
+        mysqlV81EnableBookingFixtureClock();
+    }
+
+    protected function bookingFixtureClock(?string $utc): void
+    {
+        $date = $utc === null ? null : CarbonImmutable::parse($utc, 'UTC');
+        DB::statement('SET @tekora_v81_booking_us=?', [$date === null ? null : $date->getTimestamp() * 1000000 + (int) $date->micro]);
     }
 
     protected function migrateFoundation(): void
@@ -66,8 +74,13 @@ abstract class LabTestCase extends TestCase
         $reservation = DB::table('service_reservations')->where('id', $id);
         $reservation->update(['status' => 'confirmed', 'version' => 2, 'last_actor_user_id' => $provider->id,
             'last_reason' => 'confirm', 'updated_at' => '2030-01-02 12:00:00']);
-        $reservation->update(['status' => 'completed', 'version' => 3, 'last_actor_user_id' => $provider->id,
-            'last_reason' => 'complete', 'updated_at' => $row['ends_at_utc']]);
+        $this->bookingFixtureClock($row['ends_at_utc']);
+        try {
+            $reservation->update(['status' => 'completed', 'version' => 3, 'last_actor_user_id' => $provider->id,
+                'last_reason' => 'complete', 'updated_at' => $row['ends_at_utc']]);
+        } finally {
+            $this->bookingFixtureClock(null);
+        }
 
         return ServiceReservation::findOrFail($id);
     }

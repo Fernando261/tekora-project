@@ -96,7 +96,7 @@ class User extends Authenticatable
 
         $query = $this->roles()->whereIn('roles.slug', $roles)->getQuery();
         $connection = $query->getConnection();
-        if ($connection instanceof PricingMySqlConnection && $connection->hasPricingTransaction()) {
+        if ($connection instanceof PricingMySqlConnection && ($connection->hasPricingTransaction() || $connection->hasReservationTransaction())) {
             // Lock the account (FK parent), its assignment and the role defining the permission.
             $query->join('users', 'users.id', '=', 'role_user.user_id')->sharedLock();
         }

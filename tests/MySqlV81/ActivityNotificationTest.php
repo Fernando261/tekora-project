@@ -352,9 +352,16 @@ final class ActivityNotificationTest extends LabTestCase
 
     private function transition(ServiceReservation $reservation, string $status, string $reason, User $actor): ServiceReservation
     {
-        DB::table('service_reservations')->where('id', $reservation->id)->update(['status' => $status, 'version' => $reservation->version + 1,
-            'last_reason' => $reason, 'last_actor_user_id' => $actor->id,
-            'updated_at' => $status === 'completed' ? $reservation->ends_at_utc : '2030-01-02 12:00:00']);
+        if ($status === 'completed') {
+            $this->bookingFixtureClock($reservation->ends_at_utc);
+        }
+        try {
+            DB::table('service_reservations')->where('id', $reservation->id)->update(['status' => $status, 'version' => $reservation->version + 1,
+                'last_reason' => $reason, 'last_actor_user_id' => $actor->id,
+                'updated_at' => $status === 'completed' ? $reservation->ends_at_utc : '2030-01-02 12:00:00']);
+        } finally {
+            $this->bookingFixtureClock(null);
+        }
 
         return $reservation->refresh();
     }

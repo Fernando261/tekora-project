@@ -612,7 +612,8 @@ final class PricingTest extends LabTestCase
         $this->postJson($quoteUrl.'/accept', ['acknowledge' => true], $headers)->assertOk()->assertJsonPath('data.acceptance.state', 'accepted');
         $this->getJson($quoteUrl.'/acceptance', $headers)->assertOk()->assertJsonPath('data.state', 'accepted');
         $this->assertDatabaseMissing('service_reservations', ['service_inquiry_id' => $inquiry->id]);
-        $this->assertFalse(DB::getSchemaBuilder()->hasTable('reservation_holds'));
+        $this->assertFalse(DB::table('reservation_holds')->join('service_reservations', 'service_reservations.id', '=', 'reservation_holds.service_reservation_id')
+            ->where('service_inquiry_id', $inquiry->id)->exists());
     }
 
     public function test_catalog_renders_exact_price_and_public_reviews_without_b2(): void

@@ -4,7 +4,6 @@ namespace Tests\MySqlV81;
 
 use App\Enums\InquiryAction;
 use App\Enums\RoleName;
-use App\Exceptions\ReservationFailure;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
 use App\Models\ServiceReservation;
@@ -55,7 +54,7 @@ final class ReservationTest extends LabTestCase
         $this->assertFalse(Gate::forUser($other)->allows('view', $reservation));
         $this->assertFalse(Gate::forUser($other)->allows('confirm', $reservation));
 
-        $this->assertSame(['provider_profiles', 'service_inquiries', 'services', 'users', 'users'], DB::table('information_schema.KEY_COLUMN_USAGE')
+        $this->assertSame(['provider_profiles', 'service_inquiries', 'service_quotes', 'services', 'users', 'users'], DB::table('information_schema.KEY_COLUMN_USAGE')
             ->whereRaw('TABLE_SCHEMA = DATABASE()')->where('TABLE_NAME', 'service_reservations')->whereNotNull('REFERENCED_TABLE_NAME')
             ->orderBy('REFERENCED_TABLE_NAME')->pluck('REFERENCED_TABLE_NAME')->all());
         $this->assertSame(['service_reservations', 'users'], DB::table('information_schema.KEY_COLUMN_USAGE')
@@ -63,13 +62,8 @@ final class ReservationTest extends LabTestCase
             ->orderBy('REFERENCED_TABLE_NAME')->pluck('REFERENCED_TABLE_NAME')->all());
         $this->assertMySqlError(1451, fn () => $client->delete());
 
-        try {
-            app(ReservationTransactions::class)->run(fn () => $this->fail('The application never enters the B2 workflow on MySQL.'));
-            $this->fail('Expected the driver guard.');
-        } catch (ReservationFailure $exception) {
-            $this->assertSame(503, $exception->status);
-        }
-        $this->assertFalse(DB::getSchemaBuilder()->hasTable('reservation_holds'));
+        $this->assertSame('admitted', app(ReservationTransactions::class)->run(fn () => 'admitted'));
+        $this->assertFalse(DB::table('reservation_holds')->where('service_reservation_id', $id)->exists());
     }
 
     public function test_transition_matrix_versions_and_event_immutability(): void
@@ -89,7 +83,12 @@ final class ReservationTest extends LabTestCase
             ->update(['updated_at' => $row['starts_at_utc']] + $complete), 'reservation_transition');
         $this->assertMySqlError(1644, fn () => $this->reservations()->where('id', $id)->update(
             $this->decision('cancelled', 'cancel', $inquiry->client_user_id, 3, $row['starts_at_utc'])), 'reservation_transition');
-        $this->assertSame(1, $this->reservations()->where('id', $id)->update($complete));
+        $this->bookingFixtureClock($row['ends_at_utc']);
+        try {
+            $this->assertSame(1, $this->reservations()->where('id', $id)->update($complete));
+        } finally {
+            $this->bookingFixtureClock(null);
+        }
         $events = $this->events($id);
         $this->assertSame([1, 2, 3], $events->map(fn ($event) => (int) $event->version)->all());
         $this->assertSame([null, 'requested', 'confirmed'], $events->pluck('from_status')->all());
@@ -199,7 +198,7 @@ final class ReservationTest extends LabTestCase
         $row = $this->reservationRow($inquiry);
         $duplicate = $this->reservationRow($inquiry, '10:00');
         $this->assertWaitThenReject('insert', ['profile' => $service->provider_profile_id, 'visible_status' => 'requested', 'row' => $duplicate],
-            fn () => $this->reservations()->insert($row), 1062, null);
+            fn () => $this->reservations()->insert($row), 1644, 'reservation_one_active_inquiry');
         $persisted = $this->reservations()->where('service_inquiry_id', $inquiry->id)->sole();
         $this->assertSame($row['idempotency_key'], $persisted->idempotency_key);
         $this->reservations()->where('id', $persisted->id)->update($this->decision('rejected', 'reject', $provider->id));

@@ -9,6 +9,9 @@
             <file>ActivityNotificationTest.php</file>
             <file>PricingTest.php</file>
             <file>PricingFaultTest.php</file>
+            <file>BookingHoldTest.php</file>
+            <file>BookingFaultTest.php</file>
+            <file>BookingCallerTransactionTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -8,10 +8,12 @@ use App\Enums\ReservationStatus;
 use App\Exceptions\InquiryConflict;
 use App\Exceptions\ReservationFailure;
 use App\Models\ProviderAvailabilitySetting;
+use App\Models\ProviderProfile;
 use App\Models\Service;
 use App\Models\ServiceInquiry;
 use App\Models\ServiceReservation;
 use App\Models\User;
+use App\Support\BookingClock;
 use App\Support\ReservationInput;
 use Illuminate\Database\DetectsConcurrencyErrors;
 use Illuminate\Support\Facades\DB;
@@ -57,11 +59,11 @@ class ReservationWorkflow
     {
         return $this->safely(function () use ($actor, $inquiryId, $input) {
             return app(ReservationTransactions::class)->run(function () use ($actor, $inquiryId, $input) {
-                $inquiry = ServiceInquiry::findOrFail($inquiryId);
+                $inquiry = ReservationTransactions::current(ServiceInquiry::query())->findOrFail($inquiryId);
                 Gate::forUser($actor)->authorize('propose', [ServiceReservation::class, $inquiry]);
                 $data = ReservationInput::proposal($input);
                 $key = strtolower($data['idempotency_key']);
-                $existing = ServiceReservation::where('client_user_id', $actor->id)->where('service_inquiry_id', $inquiryId)->where('idempotency_key', $key)->first();
+                $existing = ReservationTransactions::current(ServiceReservation::where('client_user_id', $actor->id))->where('service_inquiry_id', $inquiryId)->where('idempotency_key', $key)->first();
                 if ($existing) {
                     if ($existing->local_date !== $data['date'] || $existing->localTime() !== $data['time'] || $existing->availability_revision !== (int) $data['availability_revision'] || $existing->quote_id !== (isset($data['quote_id']) ? strtolower($data['quote_id']) : null)) {
                         throw new ReservationFailure('Este identificador ya se usó para otra propuesta. Abre un formulario nuevo.');
@@ -70,7 +72,8 @@ class ReservationWorkflow
                     return ['reservation' => $existing, 'created' => false];
                 }
                 $this->lockInquiry($inquiryId);
-                $inquiry = $inquiry->fresh();
+                $inquiry = ReservationTransactions::current(ServiceInquiry::query())->findOrFail($inquiry->id);
+                $this->lockParents($inquiry);
                 Gate::forUser($actor)->authorize('propose', [ServiceReservation::class, $inquiry]);
                 if ($inquiry->reservations()->active()->exists()) {
                     throw new ReservationFailure('Esta solicitud ya tiene una propuesta o reserva activa. Consulta su estado.');
@@ -100,7 +103,7 @@ class ReservationWorkflow
                 $reservation->version = 1;
                 $reservation->last_actor_user_id = $actor->id;
                 $reservation->last_reason = 'proposal';
-                $reservation->created_at = $reservation->updated_at = now('UTC')->format('Y-m-d H:i:s');
+                $reservation->created_at = $reservation->updated_at = $this->commandTime()->format('Y-m-d H:i:s');
                 $reservation->save();
 
                 return ['reservation' => $reservation->fresh(), 'created' => true];
@@ -113,7 +116,7 @@ class ReservationWorkflow
         return $this->safely(function () use ($actor, $reservationId, $action, $input) {
             return app(ReservationTransactions::class)->run(function () use ($actor, $reservationId, $action, $input) {
                 abort_unless(in_array($action, ['confirm', 'commit', 'reject', 'cancel', 'complete'], true), 404);
-                $reservation = ServiceReservation::findOrFail($reservationId);
+                $reservation = ReservationTransactions::current(ServiceReservation::query())->findOrFail($reservationId);
                 Gate::forUser($actor)->authorize($action, $reservation);
                 $data = ReservationInput::decision($input);
                 if ($reservation->quote_id) {
@@ -123,12 +126,17 @@ class ReservationWorkflow
                     throw new ReservationFailure('Esta reserva no tiene una retención comercial que confirmar.');
                 }
                 $this->lockInquiry($reservation->service_inquiry_id);
-                $reservation = $reservation->fresh();
+                $reservation = ReservationTransactions::current(ServiceReservation::query())->findOrFail($reservation->id);
                 Gate::forUser($actor)->authorize($action, $reservation);
+                if (ReservationTransactions::writingMysql()) {
+                    $inquiry = ReservationTransactions::current(ServiceInquiry::query())->findOrFail($reservation->service_inquiry_id);
+                    $this->lockParents($inquiry);
+                    $reservation->setRelation('inquiry', $inquiry);
+                }
                 if ($reservation->version !== (int) $data['version']) {
                     throw new ReservationFailure;
                 }
-                $now = now('UTC')->format('Y-m-d H:i:s');
+                $now = $this->commandTime()->format('Y-m-d H:i:s');
                 $target = match ($action) {
                     'confirm' => ReservationStatus::Confirmed, 'reject' => ReservationStatus::Rejected,
                     'cancel' => ReservationStatus::Cancelled, 'complete' => ReservationStatus::Completed,
@@ -157,7 +165,7 @@ class ReservationWorkflow
                 }
                 $this->transition($reservation, $target, $actor, $action);
 
-                return $reservation->fresh();
+                return ReservationTransactions::current(ServiceReservation::query())->findOrFail($reservation->id);
             });
         });
     }
@@ -170,7 +178,8 @@ class ReservationWorkflow
                 throw new \LogicException('El cierre conjunto requiere la transacción de InquiryWorkflow.');
             }
             $this->lockInquiry($inquiry->id);
-            $inquiry = $inquiry->fresh();
+            $inquiry = ReservationTransactions::current(ServiceInquiry::query())->findOrFail($inquiry->id);
+            $this->lockParents($inquiry);
             Gate::forUser($actor)->authorize('complete', $inquiry);
             $blocker = $this->inquiryCompletionBlocker($inquiry);
             if ($blocker !== null) {
@@ -182,7 +191,7 @@ class ReservationWorkflow
     // Orienta la vista; el cierre vuelve a consultar esta misma regla bajo bloqueo de escritura.
     public function inquiryCompletionBlocker(ServiceInquiry $inquiry): ?string
     {
-        $now = now('UTC')->format('Y-m-d H:i:s');
+        $now = $this->commandTime()->format('Y-m-d H:i:s');
         $active = $inquiry->reservations()->active()->first();
         if ($active?->effectiveStatus() === ReservationStatus::Held) {
             return 'Primero el cliente debe confirmar la retención y el prestador marcar la reserva como realizada después de su horario.';
@@ -195,11 +204,11 @@ class ReservationWorkflow
                 ? 'El servicio todavía está programado. Espera a que termine el horario y marca la reserva como realizada.'
                 : 'El horario ya terminó. Marca la reserva como realizada antes de finalizar la solicitud.';
         }
-        $performed = $inquiry->reservations()->where('status', ReservationStatus::Completed->value)
+        $performed = ReservationTransactions::current($inquiry->reservations()->getQuery())->where('status', ReservationStatus::Completed->value)
             ->where('last_reason', 'complete')->where('ends_at_utc', '<=', $now)
-            ->whereHas('events', fn ($events) => $events->where('from_status', 'requested')->where('to_status', 'confirmed')
+            ->whereHas('events', fn ($events) => ReservationTransactions::current($events)->where('from_status', 'requested')->where('to_status', 'confirmed')
                 ->where('reason', 'confirm')->whereColumn('reservation_events.version', '<', 'service_reservations.version'))
-            ->whereHas('events', fn ($events) => $events->where('from_status', 'confirmed')->where('to_status', 'completed')->where('reason', 'complete')
+            ->whereHas('events', fn ($events) => ReservationTransactions::current($events)->where('from_status', 'confirmed')->where('to_status', 'completed')->where('reason', 'complete')
                 ->whereColumn('reservation_events.version', 'service_reservations.version')
                 ->whereColumn('reservation_events.occurred_at_utc', '>=', 'service_reservations.ends_at_utc'))->exists();
 
@@ -209,14 +218,14 @@ class ReservationWorkflow
     public function refreshExpirations(): void
     {
         // GET stays read-only unless a real expiration needs durable reconciliation.
-        if (DB::table('reservation_holds')->where('state', 'held')->whereRaw('expires_at_us <= max(?, (SELECT high_water_us FROM reservation_hold_clock WHERE id=1))', [\App\Support\BookingClock::micros()])->exists()) {
+        if (DB::table('reservation_holds')->where('state', 'held')->whereRaw('expires_at_us <= '.BookingClock::observedSql())->exists()) {
             $this->safely(fn () => app(ReservationTransactions::class)->run(fn () => null));
         }
     }
 
     public function quoteOptions(ServiceInquiry $inquiry): array
     {
-        if (! DB::table('service_price_versions')->where('service_id', $inquiry->service_id)->exists()) {
+        if (! ReservationTransactions::current(DB::table('service_price_versions')->where('service_id', $inquiry->service_id))->exists()) {
             return [];
         }
         $quotes = DB::table('service_quotes as q')->join('quote_acceptances as a', 'a.quote_id', '=', 'q.id')
@@ -224,6 +233,14 @@ class ReservationWorkflow
             ->where('q.client_user_id', $inquiry->client_user_id)->where('a.client_user_id', $inquiry->client_user_id)
             ->where('q.provider_profile_id', $inquiry->service->provider_profile_id)->orderByDesc('a.accepted_at_utc')
             ->get(['q.id', 'q.total_cents', 'q.currency', 'q.duration_minutes', 'q.price_version', 'a.accepted_at_utc']);
+        if (DB::connection()->getDriverName() === 'mysql') {
+            // The InnoDB checks guarantee these exact integers; PDO returns VARCHAR/DECIMAL as strings.
+            foreach ($quotes as $quote) {
+                $quote->total_cents = (int) $quote->total_cents;
+                $quote->duration_minutes = (int) $quote->duration_minutes;
+                $quote->price_version = (int) $quote->price_version;
+            }
+        }
 
         return ['commercial' => ['requires_accepted_quote' => true, 'hold_seconds' => 900, 'accepted_quotes' => $quotes->all(),
             'quotes_web_url' => route('inquiries.show', $inquiry).'#cotizaciones']];
@@ -231,7 +248,7 @@ class ReservationWorkflow
 
     private function proposalQuote(ServiceInquiry $inquiry, array $input): ?string
     {
-        $priced = DB::table('service_price_versions')->where('service_id', $inquiry->service_id)->exists();
+        $priced = ReservationTransactions::current(DB::table('service_price_versions')->where('service_id', $inquiry->service_id))->exists();
         if (! $priced) {
             if (! empty($input['quote_id'])) {
                 throw ValidationException::withMessages(['quote_id' => 'Este servicio no utiliza cotización comercial.']);
@@ -243,7 +260,7 @@ class ReservationWorkflow
             throw ValidationException::withMessages(['quote_id' => 'Selecciona una cotización aceptada para esta solicitud.']);
         }
         $id = strtolower($input['quote_id']);
-        $valid = DB::table('service_quotes as q')->join('quote_acceptances as a', 'a.quote_id', '=', 'q.id')
+        $valid = ReservationTransactions::current(DB::table('service_quotes as q')->join('quote_acceptances as a', 'a.quote_id', '=', 'q.id'))
             ->where('q.id', $id)->where('q.service_inquiry_id', $inquiry->id)->where('q.service_id', $inquiry->service_id)
             ->where('q.provider_profile_id', $inquiry->service->provider_profile_id)->where('q.client_user_id', $inquiry->client_user_id)
             ->where('a.client_user_id', $inquiry->client_user_id)->exists();
@@ -260,23 +277,26 @@ class ReservationWorkflow
             throw ValidationException::withMessages(['idempotency_key' => 'La operación comercial requiere una clave de envío.']);
         }
         $key = strtolower($input['idempotency_key']);
-        $receipt = DB::table('reservation_action_receipts')->where('actor_user_id', $actor->id)->where('idempotency_key', $key)->first();
+        $receipt = ReservationTransactions::current(DB::table('reservation_action_receipts')->where('actor_user_id', $actor->id)->where('idempotency_key', $key))->first();
         if ($receipt) {
-            if ($receipt->service_reservation_id !== $reservation->id || $receipt->action !== $action || $receipt->expected_version !== (int) $input['version']) {
+            if ($receipt->service_reservation_id !== $reservation->id || $receipt->action !== $action || (int) $receipt->expected_version !== (int) $input['version']) {
                 throw new ReservationFailure('La clave ya pertenece a otra operación o contenido.');
             }
 
-            return $reservation->fresh();
+            return ReservationTransactions::current(ServiceReservation::query())->findOrFail($reservation->id);
         }
         $this->lockInquiry($reservation->service_inquiry_id);
-        $reservation = $reservation->fresh();
+        $reservation = ReservationTransactions::current(ServiceReservation::query())->findOrFail($reservation->id);
         Gate::forUser($actor)->authorize($action, $reservation);
         if ($reservation->version !== (int) $input['version']) {
             throw new ReservationFailure;
         }
-        $hold = $reservation->hold;
+        $inquiry = ReservationTransactions::current(ServiceInquiry::query())->findOrFail($reservation->service_inquiry_id);
+        $this->lockParents($inquiry);
+        $reservation->setRelation('inquiry', $inquiry);
+        $hold = ReservationTransactions::current($reservation->hold()->getQuery())->first();
         $state = $reservation->status;
-        $now = now('UTC')->format('Y-m-d H:i:s');
+        $now = $this->commandTime()->format('Y-m-d H:i:s');
         if ($hold && in_array($hold->state, ['expired', 'released'], true)) {
             throw new ReservationFailure('La retención terminó. Prepara otra propuesta; no se reactiva ni renueva.');
         }
@@ -299,7 +319,8 @@ class ReservationWorkflow
                 'accepted_at_us' => $accepted, 'expires_at_us' => $accepted + \App\Support\BookingClock::HOLD_MICROSECONDS,
                 'state' => 'held', 'version' => 1, 'last_actor_user_id' => $actor->id, 'closed_at_us' => null]);
         } elseif ($action === 'commit') {
-            if ($state !== ReservationStatus::Requested || ! $hold || $hold->state !== 'held' || $hold->expires_at_us <= \App\Support\BookingClock::micros() || $reservation->starts_at_utc <= $now) {
+            if ($state !== ReservationStatus::Requested || ! $hold || $hold->state !== 'held'
+                || (! ReservationTransactions::writingMysql() && $hold->expires_at_us <= BookingClock::micros()) || $reservation->starts_at_utc <= $now) {
                 throw new ReservationFailure('La retención venció o el servicio ya comenzó. No se confirmó la reserva.');
             }
             // Provider acceptance freezes the slot. Later schedule/price edits do not displace it.
@@ -313,6 +334,18 @@ class ReservationWorkflow
             if (\App\Http\Controllers\LocalIntegratedCheckoutController::permitsSyntheticRequest(request())
                 && ! app(\App\Payments\LocalCheckoutAttemptStore::class)->permitsCommit($reservation)) {
                 throw new ReservationFailure('Primero elige y registra un método de pago de prueba antes de confirmar tu reserva.', 409);
+            }
+            if (ReservationTransactions::writingMysql()) {
+                $sampled = BookingClock::micros();
+                if ($hold->expires_at_us <= $sampled) {
+                    DB::table('reservation_holds')->where('service_reservation_id', $reservation->id)->where('state', 'held')->update([
+                        'state' => 'expired', 'version' => $hold->version + 1, 'last_actor_user_id' => null,
+                        'closed_at_us' => $hold->expires_at_us,
+                    ]);
+                }
+                if ($hold->expires_at_us <= $sampled || $reservation->starts_at_utc <= BookingClock::date($sampled)->format('Y-m-d H:i:s')) {
+                    throw new ReservationFailure('La retención venció o el servicio ya comenzó. No se confirmó la reserva.');
+                }
             }
             $this->transition($reservation, ReservationStatus::Confirmed, $actor, 'confirm');
         } else {
@@ -330,7 +363,7 @@ class ReservationWorkflow
             };
             $this->transition($reservation, $target, $actor, $action);
         }
-        $result = $reservation->fresh();
+        $result = ReservationTransactions::current(ServiceReservation::query())->findOrFail($reservation->id);
         DB::table('reservation_action_receipts')->insert(['actor_user_id' => $actor->id, 'idempotency_key' => $key,
             'service_reservation_id' => $result->id, 'action' => $action, 'expected_version' => (int) $input['version'],
             'result_version' => $result->version, 'recorded_at_us' => \App\Support\BookingClock::micros()]);
@@ -340,6 +373,13 @@ class ReservationWorkflow
 
     private function lockInquiry(int $id): void
     {
+        if (ReservationTransactions::writingMysql()) {
+            if (ServiceInquiry::whereKey($id)->where('status', InquiryStatus::Accepted->value)->lockForUpdate()->first(['id']) === null) {
+                throw new ReservationFailure('La solicitud ya no está aceptada. Consulta su estado actual.');
+            }
+
+            return;
+        }
         // SQLite ignora FOR UPDATE: esta escritura condicional obtiene su bloqueo real, compartido con decisiones y mensajes.
         $changed = ServiceInquiry::whereKey($id)->where('status', InquiryStatus::Accepted->value)->update(['status' => DB::raw('status')]);
         if ($changed !== 1) {
@@ -349,12 +389,13 @@ class ReservationWorkflow
 
     private function setting(ServiceInquiry $inquiry): ProviderAvailabilitySetting
     {
+        $this->lockParents($inquiry);
         if (! Service::publiclyVisible()->whereKey($inquiry->service_id)->exists()
             || ! $inquiry->client->hasPermission(Permission::ManageOwnInquiries)
             || ! $inquiry->service->providerProfile->user->hasPermission(Permission::ManageReceivedInquiries)) {
             throw new ReservationFailure('El servicio o sus participantes ya no permiten nuevas reservas.');
         }
-        $setting = $inquiry->service->providerProfile->availabilitySetting()->first();
+        $setting = ReservationTransactions::current($inquiry->service->providerProfile->availabilitySetting()->getQuery())->first();
         if (! $setting) {
             throw new ReservationFailure('El prestador no ha publicado horarios. No es posible proponer ni confirmar una reserva.');
         }
@@ -364,7 +405,7 @@ class ReservationWorkflow
 
     private function available(ServiceInquiry $inquiry, ProviderAvailabilitySetting $setting, string $date, array $slot): void
     {
-        $now = now('UTC');
+        $now = $this->commandTime();
         $today = $now->copy()->setTimezone($setting->timezone)->startOfDay();
         if ($slot['starts_at_utc'] <= $now->format('Y-m-d H:i:s')) {
             throw new ReservationFailure('El horario propuesto ya pasó o está en curso. Elige un horario futuro.');
@@ -373,22 +414,39 @@ class ReservationWorkflow
             throw ValidationException::withMessages(['date' => 'La fecha supera el horizonte de reservas permitido.']);
         }
         $profile = $inquiry->service->providerProfile;
-        if ($profile->blockedDates()->where('blocked_date', $date)->exists()
-            || ! $profile->weeklyIntervals()->where('day_of_week', $slot['weekday'])->where('start_minute', '<=', $slot['local_start_minute'])
-                ->where('end_minute', '>=', $slot['local_start_minute'] + 60)->exists()) {
+        if (ReservationTransactions::current($profile->blockedDates()->where('blocked_date', $date)->getQuery())->exists()
+            || ! ReservationTransactions::current($profile->weeklyIntervals()->where('day_of_week', $slot['weekday'])->where('start_minute', '<=', $slot['local_start_minute'])
+                ->where('end_minute', '>=', $slot['local_start_minute'] + 60)->getQuery())->exists()) {
             throw new ReservationFailure('El horario no está dentro de la disponibilidad vigente o la fecha está bloqueada.');
         }
-        if (DB::table('reservation_occupancy')->where('provider_profile_id', $profile->id)
-            ->where('starts_at_utc', '<', $slot['ends_at_utc'])->where('ends_at_utc', '>', $slot['starts_at_utc'])->exists()) {
+        $occupancy = ReservationTransactions::writingMysql()
+            ? ReservationTransactions::activeRows(occupancy: true)->where('current_booking.provider_profile_id', $profile->id)
+            : DB::table('reservation_occupancy')->where('provider_profile_id', $profile->id);
+        if ($occupancy->where('starts_at_utc', '<', $slot['ends_at_utc'])->where('ends_at_utc', '>', $slot['starts_at_utc'])->exists()) {
             throw new ReservationFailure('El horario ya no está disponible. Propón otro horario.');
         }
+    }
+
+    private function lockParents(ServiceInquiry $inquiry): void
+    {
+        if (ReservationTransactions::writingMysql()) {
+            $service = Service::whereKey($inquiry->service_id)->sharedLock()->firstOrFail();
+            $profile = ProviderProfile::whereKey($service->provider_profile_id)->lockForUpdate()->firstOrFail();
+            $service->setRelation('providerProfile', $profile);
+            $inquiry->setRelation('service', $service);
+        }
+    }
+
+    private function commandTime(): \Carbon\CarbonInterface
+    {
+        return ReservationTransactions::writingMysql() ? BookingClock::date(BookingClock::micros()) : now('UTC');
     }
 
     private function transition(ServiceReservation $reservation, ReservationStatus $target, User $actor, string $reason): void
     {
         $changed = ServiceReservation::whereKey($reservation->id)->where('status', $reservation->status->value)->where('version', $reservation->version)->update([
             'status' => $target->value, 'version' => $reservation->version + 1, 'last_actor_user_id' => $actor->id,
-            'last_reason' => $reason, 'updated_at' => now('UTC')->format('Y-m-d H:i:s')]);
+            'last_reason' => $reason, 'updated_at' => $this->commandTime()->format('Y-m-d H:i:s')]);
         if ($changed !== 1) {
             throw new ReservationFailure;
         }
@@ -401,7 +459,14 @@ class ReservationWorkflow
         } catch (\PDOException $exception) {
             // No conservar SQL ni bindings en una excepción previa; los triggers también terminan aquí.
             $code = $exception->errorInfo[1] ?? null;
-            $conflict = is_int($code) && in_array($code & 255, [5, 6, 19], true);
+            $conflict = DB::connection()->getDriverName() === 'mysql'
+                ? in_array($code, [1062, 1205, 1213], true)
+                    || ($code === 1644 && in_array($exception->errorInfo[2] ?? null, [
+                        'reservation_transition', 'reservation_hold_transition', 'reservation_overlap',
+                        'reservation_inquiry_closed', 'reservation_one_active_inquiry', 'reservation_active_inquiry',
+                        'reservation_accepted_quote_required', 'reservation_hold_identity',
+                    ], true))
+                : (is_int($code) && in_array($code & 255, [5, 6, 19], true));
             throw new ReservationFailure($conflict ? 'Hay un conflicto con el estado o el horario. Consulta Mis reservas antes de reintentar.' : 'No se pudo consultar o guardar la reserva. Inténtalo de nuevo más tarde.', $conflict ? 409 : 503, $exception);
         }
     }

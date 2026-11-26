@@ -44,7 +44,8 @@ class ServiceInquiryPolicy
     public function accept(Authenticatable $actor, ServiceInquiry $inquiry): bool
     {
         return $actor instanceof User && $actor->hasPermission(Permission::ManageReceivedInquiries)
-            && $inquiry->service()->whereHas('providerProfile', fn ($profiles) => $profiles->where('user_id', $actor->id))->exists();
+            && PricingMySqlConnection::lockPricingRead($inquiry->service()->getQuery())->whereHas('providerProfile',
+                fn ($profiles) => PricingMySqlConnection::lockPricingRead($profiles)->where('user_id', $actor->id))->exists();
     }
 
     public function reject(Authenticatable $actor, ServiceInquiry $inquiry): bool
