@@ -121,6 +121,12 @@ final class ClientDashboardSummary
     private function bookingTime(): int
     {
         $watermark = DB::table('reservation_hold_clock')->where('id', 1)->value('high_water_us');
+        // InnoDB stores the watermark in DECIMAL(49,30); PDO returns its exact decimal string.
+        if (DB::connection()->getDriverName() === 'mysql' && is_string($watermark)
+            && preg_match('/^(0|[1-9][0-9]{0,18})\.0+$/D', $watermark, $parts)
+            && (string) (int) $parts[1] === $parts[1]) {
+            $watermark = (int) $parts[1];
+        }
         $now = BookingClock::micros();
         if (! is_int($watermark) || $watermark < 0 || $now < $watermark) {
             throw new ClientDashboardFailure;

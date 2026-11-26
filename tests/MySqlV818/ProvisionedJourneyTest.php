@@ -225,6 +225,9 @@ final class ProvisionedJourneyTest extends TestCase
         $commit = $this->action();
         $this->patchJson($reservationUrl.'/commit', $commit, $headers)->assertOk();
         $this->patchJson($reservationUrl.'/commit', $commit, $headers)->assertOk();
+        $this->get('/api/v1/me/dashboard', $headers + ['Accept' => 'application/json'])->assertOk()
+            ->assertJsonPath('data.counts.confirmed', 1)
+            ->assertJsonPath('data.upcoming_reservations.0.id', $idReservation);
         $this->getJson($url.'/journey', $headers)->assertOk();
         $this->getJson('/api/v1/notifications/unread-count', $headers)->assertOk();
         $this->getJson('/api/v1/notifications', $headers)->assertOk();
