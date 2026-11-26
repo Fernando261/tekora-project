@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Permission;
 use App\Payments\CheckoutContext;
 use App\Payments\IntegratedCheckout;
 use App\Payments\WebMoney;
@@ -17,10 +18,13 @@ final class IntegratedCheckoutController extends Controller
         $projection = $context->forReservation($actor, $reservation);
         abort_unless($projection['amount'], 503);
         $attempt = $checkout->latest($item);
+        $canReceiveCash = ($attempt['status'] ?? null) === 'awaiting_cash' && IntegratedCheckout::enabled()
+            && $item->providerProfile->user->hasPermission(Permission::ManageReceivedInquiries)
+            && $checkout->cashWindow($item, BookingClock::observedMicros());
 
         return $this->page('checkout.local-integrated', [
             'context' => $projection, 'reservation' => $reservation, 'attempt' => $attempt,
-            'canReceiveCash' => IntegratedCheckout::enabled() && $checkout->cashWindow($item, BookingClock::observedMicros()),
+            'canReceiveCash' => $canReceiveCash,
             'formattedAmount' => WebMoney::format($projection['amount']->totalCents),
         ]);
     }

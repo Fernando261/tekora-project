@@ -339,7 +339,8 @@ final class ProvisionedJourneyTest extends TestCase
             }
             auth()->forgetGuards();
             $this->actingAs($client, 'web')->get(route('checkout.integrated.show', $idReservation))->assertOk()
-                ->assertSee('Procesamiento simulado')->assertSee('name="instrument"', false)
+                ->assertSee('Procesamiento simulado')->assertSee('PERSONA DE PRUEBA')->assertSee('name="instrument"', false)
+                ->assertDontSee('ENTORNO LOCAL')
                 ->assertDontSee('name="cvv"', false)->assertDontSee('name="card_number"', false);
             if ($method === 'card') {
                 $this->captureCheckout('selection', $idReservation);

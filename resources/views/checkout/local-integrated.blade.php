@@ -74,7 +74,7 @@
                   </div>
                   <div class="co-card-number" data-b32-card-number>•••• &nbsp;•••• &nbsp;•••• &nbsp;4242</div>
                   <div class="co-card-bottom">
-                    <div><small>TITULAR FICTICIO</small><strong>{{ mb_strtoupper($context['client']['name']) }}</strong></div>
+                    <div><small>TITULAR FICTICIO</small><strong>{{ $officialCheckout ? 'PERSONA DE PRUEBA' : mb_strtoupper($context['client']['name']) }}</strong></div>
                     <div><small>VENCE</small><strong>12/30</strong></div>
                     <span class="co-card-network">TARJETA<small>SOLO PRUEBAS</small></span>
                   </div>
@@ -83,7 +83,7 @@
                     <svg viewBox="0 0 120 62" fill="none" aria-hidden="true"><rect x="3" y="3" width="114" height="56" rx="9"/><path d="M18 3c0 9-6 15-15 15m114 0c-9 0-15-6-15-15M3 44c9 0 15 6 15 15m84 0c0-9 6-15 15-15"/><circle cx="60" cy="31" r="17"/><path d="M66 23h-8a5 5 0 0 0 0 10h4a5 5 0 0 1 0 10h-8m6-24v28"/></svg>
                     <strong>EFECTIVO</strong>
                     <small>Recepción por el prestador</small>
-                    <span>ENTORNO LOCAL</span>
+                    <span>{{ $officialCheckout ? 'RESULTADO DE PRUEBA' : 'ENTORNO LOCAL' }}</span>
                   </div>
                 </div>
                 <div class="co-card-face co-card-back">
@@ -136,7 +136,7 @@
                     <span aria-hidden="true">▱</span>
                     @if($officialCheckout)
                       <select name="instrument" id="b32-number" data-b32-number>
-                        <option value="{{ \App\Payments\SimulatedCheckoutProcessor::INSTRUMENT }}" data-b32-last-four="4242">•••• 4242 · Instrumento ficticio</option>
+                        <option value="{{ \App\Payments\SimulatedCheckoutProcessor::INSTRUMENT }}" data-b32-last-four="4242">•••• 4242 · Ficticia</option>
                       </select>
                     @else
                     <select name="card_number" id="b32-number" data-b32-number>
