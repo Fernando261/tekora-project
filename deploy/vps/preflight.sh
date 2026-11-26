@@ -3,6 +3,7 @@ set -euo pipefail
 
 here=$(cd -- "$(dirname -- "$0")" && pwd -P)
 source "$here/mysql-common.sh"
+source "$here/preflight-memory.sh"
 [[ $# -eq 1 ]] || fail 'Uso: preflight.sh /srv/tekora'
 root=$1
 [[ -d "$root" && $(uname -m) == x86_64 ]] || fail 'Falta el directorio de releases o la arquitectura x86_64.'
@@ -12,7 +13,8 @@ for command in php composer node npm mysql mysqldump nginx curl python3 git floc
     command -v "$command" >/dev/null || fail "Falta $command."
 done
 [[ $(getconf _NPROCESSORS_ONLN) -ge 2 ]] || fail 'Se requieren 2 vCPU.'
-awk '/MemTotal:/ {ram=$2} /SwapTotal:/ {swap=$2} END {exit !(ram>=800*1024 && swap>=1024*1024)}' /proc/meminfo ||
+page_bytes=$(getconf PAGESIZE) || fail 'No se pudo determinar el tamaño de página del sistema.'
+vps_memory_sufficient "$page_bytes" /proc/meminfo ||
     fail 'Memoria o swap insuficientes para este procedimiento.'
 df -Pk "$root" | awk 'NR==2 {exit !($4 >= 2*1024*1024)}' || fail 'Se requieren 2 GiB libres antes de preparar el release.'
 php -r 'exit(PHP_VERSION_ID >= 80300 && PHP_VERSION_ID < 80400 && extension_loaded("pdo_mysql") && extension_loaded("mbstring") && extension_loaded("fileinfo") && extension_loaded("curl") && extension_loaded("dom") ? 0 : 1);' ||

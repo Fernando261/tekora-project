@@ -53,6 +53,7 @@ jobs:
         run: |
           set -euo pipefail
           for script in deploy/vps/*.sh tools/mysql-v818/*.sh; do bash -n "$script"; done
+          bash tools/mysql-v818/test-preflight-memory.sh | tee "$TEKORA_V818_ARTIFACTS/preflight-memory.log"
           docker build -t tekora-v818-lab-php:8.3.37 tools/mysql-v818 2>&1 | tee "$TEKORA_V818_ARTIFACTS/image.log"
           bash tools/mysql-v818/run.sh "$TEKORA_V818_ARTIFACTS/lab"
 
