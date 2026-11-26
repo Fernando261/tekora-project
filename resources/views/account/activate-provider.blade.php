@@ -7,7 +7,7 @@
     @can(\App\Enums\Permission::ManageProviderProfile->value)
       <a class="account-button" href="{{ route('account.provider') }}">Ya está activado: gestionar mi perfil</a>
     @else
-      <form method="POST" action="{{ route('identity.roles.store') }}">@csrf<input type="hidden" name="role" value="provider"><button class="account-button" type="submit">Activar Prestador y completar mi perfil</button></form>
+      <form method="POST" action="{{ route('identity.roles.store') }}">@csrf<input type="hidden" name="role" value="provider">@if(\App\Support\TrustSchema::available()) <x-professional-license-fields required /> @endif <button class="account-button" type="submit">Activar Prestador y completar mi perfil</button></form>
     @endcan
   </section>
 </x-account-layout>

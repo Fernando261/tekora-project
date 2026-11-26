@@ -14,6 +14,7 @@
       <button class="account-button" type="submit">Entrar a mi cuenta</button>
     </form>
     <p class="access-footer">¿No tienes cuenta? <a href="{{ route('registro.create') }}" data-auth-switch>Crear una cuenta única <x-tekora-arrow /></a></p>
+    <p class="access-footer"><a href="{{ route('legal.show', 'privacidad') }}">Aviso de privacidad</a> · <a href="{{ route('legal.show', 'terminos') }}">Términos y condiciones</a></p>
     <p class="access-footer"><a href="{{ route('catalog.index') }}">Explorar servicios sin iniciar sesión</a></p>
   </x-tekora-auth-card>
 </x-access-layout>

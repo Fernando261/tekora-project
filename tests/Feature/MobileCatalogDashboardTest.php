@@ -90,10 +90,11 @@ final class MobileCatalogDashboardTest extends TestCase
         $path = '/api/v1/providers/'.$service->provider_profile_id.'/services';
         foreach (['page=0' => 'page', 'page=10001' => 'page', 'per_page=51' => 'per_page', 'page[]=1' => 'page',
             'page=1.5' => 'page', 'per_page=' => 'per_page', 'status=draft' => 'request', 'provider_id=2' => 'request',
-            'q=técnico' => 'request'] as $query => $field) {
+            'municipality=inexistente' => 'municipality'] as $query => $field) {
             $this->get($path.'?'.$query)->assertUnprocessable()->assertJsonPath('error.code', 'validation_failed')
                 ->assertJsonStructure(['error' => ['code', 'message', 'fields' => [$field]]]);
         }
+        $this->get($path.'?q=computadoras')->assertOk()->assertJsonCount(1, 'data');
         $this->get('/api/v1/categories?is_active=0')->assertUnprocessable()->assertJsonStructure(['error' => ['fields' => ['request']]]);
         foreach ([$path, '/api/v1/categories'] as $endpoint) {
             $this->json('GET', $endpoint, ['per_page' => 1])->assertUnprocessable()

@@ -7,6 +7,7 @@
     <div class="mp-search-field"><label for="q">¿Qué servicio buscas?</label><div class="mp-input-wrap"><x-tekora-icon name="search" /><input id="q" type="search" name="q" value="{{ $filters['q'] ?? '' }}" maxlength="120" placeholder="Una idea, una solución, un talento…"></div></div>
     <div><label for="category">Categoría</label><select id="category" name="category"><option value="">Todas las categorías</option>@foreach($categories as $category)<option value="{{ $category->slug }}" @selected(($filters['category'] ?? '') === $category->slug)>{{ $category->name }}</option>@endforeach</select></div>
     <div><label for="modality">Modalidad</label><select id="modality" name="modality"><option value="">Todas las modalidades</option>@foreach(\App\Enums\ServiceModality::cases() as $modality)<option value="{{ $modality->value }}" @selected(($filters['modality'] ?? '') === $modality->value)>{{ $modality->label() }}</option>@endforeach</select></div>
+    <x-trust-filters :filters="$filters" />
     <button class="account-button" type="submit">Buscar <x-tekora-icon name="arrow" /></button><a class="mp-reset" href="{{ route('catalog.index') }}">Limpiar filtros</a>
   </form>
   <div class="mp-results-heading"><div><span class="mp-kicker">EXPLORA LAS POSIBILIDADES</span><h2>Talento, en acción.</h2></div><p class="catalog-result-count" role="status">{{ $services->total() }} {{ $services->total() === 1 ? 'servicio disponible' : 'servicios disponibles' }}</p></div>

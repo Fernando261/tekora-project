@@ -2,7 +2,7 @@ name: Mobile API integration
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, codex/v810-integrated-simulated-checkout]
     paths:
       - '.github/workflows/mobile-api-integration.yml'
       - 'app/**'
@@ -60,5 +60,14 @@ jobs:
 
       - name: Run clean-install, mobile journey and compatibility tests
         run: |
-          php vendor/bin/phpunit --do-not-cache-result \
-            --filter 'Mobile(CleanInstallation|IntegrationJourney|ApiAuth|ApiCatalog|CatalogDashboard|IdentityProfile|OperationsContract|OperationsConcurrency|ContactPrivacy|Notifications|NotificationConcurrency|Reviews|QuotesApi|QuoteConcurrency|CheckoutHandoffContract|ConfirmationReadiness|SyntheticCheckoutApi)Test|ReservationHold(ApiAndGuards|Concurrency)Test|ReviewConcurrencyTest|ContractingJourneyTest|LocalIntegratedCheckoutHttpTest'
+          php vendor/bin/phpunit --do-not-cache-result --log-junit "$RUNNER_TEMP/tekora-api.xml" \
+            --filter 'Mobile(CleanInstallation|IntegrationJourney|ApiAuth|ApiCatalog|CatalogDashboard|IdentityProfile|OperationsContract|OperationsConcurrency|ContactPrivacy|Notifications|NotificationConcurrency|Reviews|QuotesApi|QuoteConcurrency|CheckoutHandoffContract|ConfirmationReadiness|SyntheticCheckoutApi)Test|ReservationHold(ApiAndGuards|Concurrency)Test|ReviewConcurrencyTest|ContractingJourneyTest|LocalIntegratedCheckoutHttpTest|ProfessionalTrustTest|PublicCatalogTest'
+
+
+      - name: Preserve PHPUnit results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: tekora-api-php-${{ matrix.php }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/tekora-api.xml
+          if-no-files-found: ignore

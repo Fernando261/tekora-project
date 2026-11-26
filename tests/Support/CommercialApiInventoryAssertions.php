@@ -99,7 +99,12 @@ trait CommercialApiInventoryAssertions
 
     protected function mobileClientExtensions(): array
     {
-        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory() + $this->m31ApiInventory() + $this->v810ApiInventory();
+        return $this->m28ApiInventory() + $this->m29ApiInventory() + $this->m30ApiInventory() + $this->m31ApiInventory() + $this->v810ApiInventory() + [
+            'api.v1.municipalities.index' => [
+                'uri' => 'api/v1/municipalities', 'methods' => ['GET', 'HEAD'], 'action' => CatalogController::class.'@municipalities',
+                'middleware' => ['api', 'throttle:mobile-catalog'], 'wheres' => [],
+            ],
+        ];
     }
 
     /** The B3.2 sandbox routes are private, synthetic and fixture-gated at runtime. */

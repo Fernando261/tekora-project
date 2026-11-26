@@ -212,16 +212,39 @@ if "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --up
     printf '%s\n' 'FAIL: se aceptó actualizar con la cuenta de aplicación habilitada.' >&2
     exit 1
 fi
+checkout_base=af04234cc8cd57d82103322de07c777c50be4f10
+[[ $(git rev-parse "$checkout_base^{tree}") == 559091158fb1ff8db106fe1b5c355165289be5b4 ]]
+checkout_project="$private/checkout-project"
+mkdir "$checkout_project"
+git archive "$checkout_base" | tar -x -C "$checkout_project"
+cmp "$checkout_project/composer.lock" "$project/composer.lock"
+cp -al "$project/vendor" "$checkout_project/vendor"
+admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT LOCK"
+TEKORA_V818_PROJECT="$checkout_project" "$checkout_project/deploy/vps/provision.sh" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
+admin source < "$project/deploy/vps/mysql-checkout-grants.sql"
+admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT UNLOCK"
+TEKORA_V818_PROJECT="$checkout_project" php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_official_checkout --log-junit /evidence/mysql-v810-before-upgrade.xml
+"$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
+watermark_before=$(admin source tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1')
+legacy_before=$(admin source tekora -e 'SELECT id,status,quote_id,version FROM service_reservations ORDER BY id')
+checkout_before=$(admin source tekora -e 'SELECT id,reservation_id,status,reference,received_at FROM integrated_checkout_attempts ORDER BY id')
+[[ -n "$checkout_before" ]]
+if "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade; then
+    printf '%s\n' 'FAIL: se aceptó actualizar V8.1.10 con la cuenta de aplicación habilitada.' >&2
+    exit 1
+fi
 admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT LOCK"
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
 administrative_window_closed source
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --upgrade
 administrative_window_closed source
-[[ $(admin source tekora -e 'SELECT COUNT(*) FROM migrations') == 40 ]]
+[[ $(admin source tekora -e 'SELECT COUNT(*) FROM migrations') == 41 ]]
 [[ $(admin source tekora -e 'SELECT high_water_us FROM reservation_hold_clock WHERE id=1') == "$watermark_before" ]]
-[[ $(admin source tekora -e 'SELECT id,status,quote_id,version FROM service_reservations') == "$legacy_before" ]]
-[[ $(admin source tekora -e 'SELECT COUNT(*) FROM service_reservations WHERE checkout_required=1') == 0 ]]
-[[ $(admin source tekora -e 'SELECT COUNT(*) FROM integrated_checkout_attempts') == 0 ]]
+[[ $(admin source tekora -e 'SELECT id,status,quote_id,version FROM service_reservations ORDER BY id') == "$legacy_before" ]]
+[[ $(admin source tekora -e 'SELECT id,reservation_id,status,reference,received_at FROM integrated_checkout_attempts ORDER BY id') == "$checkout_before" ]]
+[[ $(admin source tekora -e 'SELECT COUNT(*) FROM municipalities') == 9 ]]
+admin source < "$project/deploy/vps/mysql-trust-grants.sql"
+printf '%s\n' 'V8.1.11 conserva reservas, resultados V8.1.10 y reloj.'
 digest=$(admin source tekora -e 'SELECT schema_sha256 FROM tekora_provisioning')
 admin source < "$project/deploy/vps/mysql-checkout-grants.sql"
 admin source -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT UNLOCK"
@@ -243,7 +266,7 @@ admin source tekora -e 'ALTER TABLE tekora_provisioning MODIFY state VARCHAR(16)
 "$provision" "$private/source-admin.cnf" "$private/source-migrator.json" --verify
 
 
-php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter 'test_runtime|test_ordinary|test_identity|test_official_checkout' --log-junit /evidence/mysql-provisioned.xml
+php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter 'test_runtime|test_ordinary|test_identity|test_official_checkout|test_trust' --log-junit /evidence/mysql-provisioned.xml
 fixture_clock source
 php vendor/bin/phpunit -c tests/MySqlV818/phpunit.xml --filter test_integrated_checkout_at_exact_expiry --log-junit /evidence/mysql-checkout-expiry.xml
 restore_clock source
@@ -304,8 +327,24 @@ fi
 [[ $(admin clean tekora -e 'SELECT state FROM tekora_provisioning') == upgrading ]]
 [[ $(admin clean -e "SELECT COUNT(*) FROM information_schema.triggers WHERE TRIGGER_SCHEMA='tekora' AND TRIGGER_NAME='integrated_checkout_commit'") == 0 ]]
 administrative_window_closed clean
-docker logs "$lab-clean" > "$evidence/mysql-clean.log" 2>&1
+docker logs "$lab-clean" > "$evidence/mysql-clean-install.log" 2>&1
 docker rm -f "$lab-clean" >/dev/null
 docker volume rm "$lab-clean-socket" >/dev/null
 docker run --rm --network none --mount "type=bind,src=$private,dst=/lab" "$image" sh -c 'rm -rf /lab/clean-data'
 printf '%s\n' 'Instalación limpia y actualización coinciden; migración interrumpida rechazada.'
+
+# Reuse the now-empty comparison slot to test the sealed 39-to-41 path directly.
+start clean 81504
+accounts clean
+TEKORA_V818_INSTANCE=clean TEKORA_V818_PROJECT="$legacy" "$legacy/deploy/vps/provision.sh" "$private/clean-admin.cnf" "$private/clean-migrator.json"
+[[ $(admin clean tekora -e 'SELECT COUNT(*) FROM migrations') == 39 ]]
+admin clean -e "ALTER USER 'tekora_app'@'localhost' ACCOUNT LOCK"
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --upgrade
+administrative_window_closed clean
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --upgrade
+administrative_window_closed clean
+TEKORA_V818_INSTANCE=clean "$provision" "$private/clean-admin.cnf" "$private/clean-migrator.json" --verify
+[[ $(admin clean tekora -e 'SELECT batch, COUNT(*) FROM migrations GROUP BY batch ORDER BY batch') == $'1\t39\n2\t1\n3\t1' ]]
+[[ $(admin clean tekora -e 'SELECT schema_sha256 FROM tekora_provisioning') == "$digest" ]]
+docker logs "$lab-clean" > "$evidence/mysql-direct-upgrade.log" 2>&1
+printf '%s\n' 'Actualización directa 39→41: dos lotes, idempotencia y sello coincidente con instalación nueva.'

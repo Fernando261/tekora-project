@@ -35,6 +35,10 @@
       <label for="password_confirmation">Confirmar contraseña</label>
       <input id="password_confirmation" name="password_confirmation" type="password" minlength="6" required autocomplete="new-password" @error('password_confirmation') aria-invalid="true" aria-describedby="password_confirmation-error" @enderror>
       @error('password_confirmation')<span id="password_confirmation-error" class="tk-field-error">{{ $message }}</span>@enderror
+      @if(\App\Support\TrustSchema::available())
+        <x-professional-license-fields signup />
+        <x-terms-acceptance />
+      @endif
       <button class="account-button" type="submit">Crear mi cuenta única</button>
     </form>
     <p class="access-footer">¿Ya tienes cuenta? <a href="{{ route('login') }}" data-auth-switch>Iniciar sesión</a></p>

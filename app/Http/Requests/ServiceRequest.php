@@ -40,7 +40,12 @@ class ServiceRequest extends FormRequest
             ? ['price_mxn' => ['prohibited'], 'creation_key' => ['prohibited']]
             : ['price_mxn' => ['nullable', 'string'], 'creation_key' => ['required_with:price_mxn', 'nullable', 'uuid']];
 
-        return self::detailRules() + ['status' => ['required', Rule::enum(ServiceStatus::class)]] + self::protectedFields() + $pricing;
+        $location = \App\Support\TrustSchema::available() ? ['municipality' => [
+            'exclude_if:modality,remote', 'required_if:modality,onsite,both', 'nullable',
+            Rule::in(array_keys(\App\Support\Municipalities::NAMES)),
+        ]] : [];
+
+        return self::detailRules() + $location + ['status' => ['required', Rule::enum(ServiceStatus::class)]] + self::protectedFields() + $pricing;
     }
 
     public function messages(): array

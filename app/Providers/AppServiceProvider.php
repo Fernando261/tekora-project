@@ -33,6 +33,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('database.default') === 'sqlite') {
+            $this->loadMigrationsFrom(database_path('extensions'));
+        }
         foreach (['mobile-private' => 120, 'mobile-inquiry-writes' => 5, 'mobile-message-writes' => 10,
             'mobile-read-writes' => 30, 'mobile-reservation-writes' => 10, 'mobile-quote-writes' => 10, 'mobile-profile-writes' => 10,
             'mobile-review-writes' => 10] as $name => $limit) {

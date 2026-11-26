@@ -50,6 +50,9 @@ mysql_local < "$here/mysql-runtime-grants.sql"
 if [[ $(mysql_local -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='tekora' AND table_name='integrated_checkout_attempts'") == 1 ]]; then
     mysql_local < "$here/mysql-checkout-grants.sql"
 fi
+if [[ $(mysql_local -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='tekora' AND table_name='service_locations'") == 1 ]]; then
+    mysql_local < "$here/mysql-trust-grants.sql"
+fi
 mysql_local --database=tekora < "$here/mysql-check-foreign-keys.sql"
 tar --extract --gzip --no-same-owner --no-same-permissions --file="$backup/files.tar.gz" --directory="$storage"
 printf '%s\n' 'Restauración verificada en el destino indicado.'

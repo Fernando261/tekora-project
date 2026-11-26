@@ -52,6 +52,7 @@ class InquiryCsrfTest extends TestCase
         $service = $this->service($provider);
         $this->get(route('inquiries.create', $service))->assertRedirect('/login');
         $this->withSession(['_token' => 'before-login'])->post('/registro', [
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION,
             '_token' => 'before-login', 'name' => 'Cliente de prueba', 'age' => 30, 'gender' => 'Prefiero no decirlo',
             'email' => 'inquiry-client@example.test', 'password' => 'test-password', 'password_confirmation' => 'test-password', 'intent' => 'client',
         ])->assertRedirect('/login');
@@ -64,8 +65,10 @@ class InquiryCsrfTest extends TestCase
         $this->post(route('inquiries.store', $service), ['_token' => $token, 'message' => 'Necesito resolver un problema con mi equipo.'])->assertStatus(303);
         $inquiry = ServiceInquiry::firstOrFail();
         $this->post('/logout', ['_token' => $token])->assertRedirect('/login');
-        $this->post('/login', ['_token' => session()->token(), 'email' => $provider->email, 'password' => 'test-password'])->assertRedirect('/cuenta/prestador');
+        $this->post('/login', ['_token' => session()->token(), 'email' => $provider->email, 'password' => 'test-password'])->assertRedirect(route('trust.onboarding'));
         $token = session()->token();
+        $this->post(route('trust.onboarding.store'), ['license_disposition' => 'none'])->assertStatus(419);
+        $this->post(route('trust.onboarding.store'), ['_token' => $token, 'license_disposition' => 'none'])->assertRedirect('/cuenta/prestador');
         $this->get('/cuenta/solicitudes/recibidas')->assertOk()->assertSee('Necesito resolver un problema con mi equipo.');
         $this->patch(route('inquiries.accept', $inquiry), ['_token' => $token])->assertStatus(303);
         $this->patch(route('inquiries.complete', $inquiry), ['_token' => 'wrong'])->assertStatus(419);

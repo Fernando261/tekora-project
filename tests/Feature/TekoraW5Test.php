@@ -108,8 +108,8 @@ class TekoraW5Test extends TestCase
         $xpath = $this->document($html);
         $this->assertSame('provider', $xpath->query('//main//input[@name="role"]/@value')->item(0)->nodeValue);
         $this->post('/cuenta/roles', ['role' => 'provider'])->assertStatus(419);
-        $this->post('/cuenta/roles', ['role' => 'provider', '_token' => 'w5-csrf'])->assertRedirect(route('account.provider'));
-        $this->post('/cuenta/roles', ['role' => 'provider', '_token' => 'w5-csrf'])->assertStatus(303);
+        $this->post('/cuenta/roles', ['role' => 'provider', '_token' => 'w5-csrf', 'license_disposition' => 'none'])->assertRedirect(route('account.provider'));
+        $this->post('/cuenta/roles', ['role' => 'provider', '_token' => 'w5-csrf', 'license_disposition' => 'none'])->assertStatus(303);
         $this->assertSame(['client', 'provider'], $user->roles()->orderBy('slug')->pluck('slug')->all());
         $this->assertDatabaseCount('users', 1);
         $this->assertDatabaseCount('profesionistas', 0);
@@ -280,7 +280,8 @@ class TekoraW5Test extends TestCase
         foreach (['/forgot-password', '/reset-password/synthetic-w5-token'] as $uri) {
             $response = $this->get($uri)->assertOk()->assertDontSee('MindBloom')->assertDontSee('private-password')->assertDontSee('<script>W5-XSS', false);
             $x = $this->document($response->getContent());
-            $this->assertSame(1, $x->query('//form[@method="POST"]//input[@name="_token"]')->length);
+            $action = $uri === '/forgot-password' ? route('password.email') : route('password.update');
+            $this->assertSame(1, $x->query('//form[@method="POST" and @action="'.$action.'"]//input[@name="_token"]')->length);
             $this->assertSame(0, $x->query('//script[not(@src)]')->length);
         }
         $this->withSession(['_old_input' => ['email' => ['bad']]])->get('/forgot-password')->assertOk();

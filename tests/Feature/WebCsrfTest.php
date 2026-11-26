@@ -77,6 +77,7 @@ class WebCsrfTest extends TestCase
     public function test_registration_login_and_activation_work_with_real_csrf_and_a_rotated_session_token(): void
     {
         $this->withSession(['_token' => 'before-login-token'])->post('/registro', [
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION,
             '_token' => 'before-login-token', 'name' => 'Cuenta central', 'age' => 30, 'gender' => 'Prefiero no decirlo',
             'email' => 'central@example.test', 'password' => 'test-password', 'password_confirmation' => 'test-password',
             'intent' => 'client',
@@ -86,7 +87,7 @@ class WebCsrfTest extends TestCase
         $newToken = session()->token();
         $this->assertNotSame('before-login-token', $newToken);
         $this->post('/cuenta/roles', ['_token' => 'before-login-token', 'role' => 'provider'])->assertStatus(419);
-        $this->post('/cuenta/roles', ['_token' => $newToken, 'role' => 'provider'])->assertRedirect('/cuenta/prestador');
+        $this->post('/cuenta/roles', ['_token' => $newToken, 'role' => 'provider', 'license_disposition' => 'none'])->assertRedirect('/cuenta/prestador');
         $this->post('/perfil-profesional', ['_token' => $newToken, 'display_name' => 'Perfil central'])
             ->assertRedirect('/cuenta/prestador');
         $this->assertDatabaseCount('users', 1);

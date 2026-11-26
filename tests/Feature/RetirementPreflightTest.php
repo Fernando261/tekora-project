@@ -39,6 +39,12 @@ class RetirementPreflightTest extends TestCase
 
     private string $syntheticStorageRoot;
 
+    protected function migrationFixtureOptions(): array
+    {
+        // This rehearsal compares the reviewed historical schema and exact ledger.
+        return ['--path' => ['database/migrations']];
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

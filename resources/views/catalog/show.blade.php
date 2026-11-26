@@ -5,10 +5,12 @@
       <span class="mp-kicker" data-market-enter>UNA PROPUESTA. NUEVAS POSIBILIDADES.</span>
       <x-marketplace-tags :service="$service" />
       <h1 data-market-enter>{{ $service->title }}</h1>
+  <x-service-location :service="$service" />
+  <x-professional-credential :profile="$service->providerProfile" />
+
       <x-published-price :cents="$service->published_price_cents" />
       <div class="mp-detail-rule" aria-hidden="true"><span></span></div>
       <h2>Sobre este servicio</h2><p class="catalog-bio">{{ $service->description }}</p>
-      <p class="account-note">Publicación sin verificación profesional.</p>
     </article>
     <aside class="account-card mp-provider-aside" aria-label="Prestador y solicitud">
       <span class="mp-kicker">LA PERSONA DETRÁS</span><x-marketplace-avatar :name="$service->providerProfile->display_name" />

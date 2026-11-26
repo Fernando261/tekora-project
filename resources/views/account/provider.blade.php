@@ -1,7 +1,10 @@
 <x-account-layout :operations="true" title="Mi perfil profesional">
   <x-ops-heading variant="studio"><span class="account-eyebrow">Experiencia de prestador</span><h1>Mi perfil profesional</h1><p>Presenta tu experiencia como técnico o freelancer usando tu misma cuenta.</p></x-ops-heading>
-  <p class="account-alert">Activación sin verificación profesional. Tu presentación pública depende de los servicios que publiques en Tekora. La agenda y los registros anteriores permanecen separados; no se han migrado.</p>
+  <p class="account-alert">Tu presentación pública depende de los servicios que publiques en Tekora. La agenda y los registros anteriores permanecen separados; no se han migrado.</p>
   <div class="tk-ops-tools">
+  @if(\App\Support\TrustSchema::available())
+    <section class="account-card"><h2>Certificación profesional</h2><p>Gestiona tu declaración de cédula y su visibilidad. También puedes enviar un certificado privado para solicitar la insignia.</p><a class="account-button secondary" href="{{ route('trust.edit') }}">Gestionar certificación</a></section>
+  @endif
   <section class="account-card"><h2>Mis horarios de atención</h2><p>Publica horarios orientativos y fechas sin atención para tus servicios de Tekora.</p><a class="account-button secondary" href="{{ route('availability.edit') }}">Gestionar disponibilidad</a></section>
   <section class="account-card"><h2>Solicitudes de tus servicios</h2><p>Revisa las necesidades de tus clientes y consulta su seguimiento.</p><a class="account-button" href="{{ route('inquiries.received') }}">Solicitudes recibidas</a></section>
   <section class="account-card"><h2>Los servicios que ofreces</h2><p>Al publicar un servicio en el catálogo Tekora, tu nombre público, titular y biografía aparecen en tu ficha pública de prestador.</p><a class="account-button secondary" href="{{ route('provider-services.index') }}">Mis servicios</a> @can('create', \App\Models\Service::class)<a class="account-button" href="{{ route('provider-services.create') }}">Crear servicio</a>@endcan</section>

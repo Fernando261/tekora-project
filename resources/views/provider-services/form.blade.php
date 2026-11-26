@@ -17,6 +17,16 @@
       <label for="description">Descripción</label><textarea id="description" name="description" rows="7" maxlength="5000" required @error('description') aria-invalid="true" @enderror>{{ is_string($description) ? $description : '' }}</textarea>
       <label for="service_category_id">Categoría</label><select id="service_category_id" name="service_category_id" required><option value="">Selecciona una categoría</option>@foreach($categories as $category)<option value="{{ $category->id }}" @selected(old('service_category_id', $service->service_category_id) == $category->id)>{{ $category->name }}</option>@endforeach</select>
       <label for="modality">Modalidad</label><select id="modality" name="modality" required><option value="">Selecciona una modalidad</option>@foreach(\App\Enums\ServiceModality::cases() as $modality)<option value="{{ $modality->value }}" @selected(old('modality', $service->modality?->value) === $modality->value)>{{ $modality->label() }}</option>@endforeach</select>
+      @if(\App\Support\TrustSchema::available())
+        <label for="municipality">Municipio (servicios presenciales o mixtos)</label>
+        <select id="municipality" name="municipality">
+          <option value="">Seleccionar municipio o cobertura remota</option>
+          @foreach(\App\Support\Municipalities::NAMES as $slug => $name)
+            <option value="{{ $slug }}" @selected(old('municipality', $service->location?->municipality_slug) === $slug)>{{ $name }}</option>
+          @endforeach
+        </select>
+        @error('municipality')<p role="alert">{{ $message }}</p>@enderror
+      @endif
       <label for="status">Estado</label><select id="status" name="status" required>@foreach(\App\Enums\ServiceStatus::cases() as $status)<option value="{{ $status->value }}" @selected(old('status', $service->status?->value ?? 'draft') === $status->value)>{{ $status->label() }}</option>@endforeach</select>
       @if(!$service->exists)
         <h3>Precio del servicio</h3><p class="account-help">MXN por 60 minutos. Opcional: si lo dejas vacío se mostrará «Precio no publicado».</p>

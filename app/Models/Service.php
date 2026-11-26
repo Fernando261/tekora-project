@@ -6,10 +6,14 @@ use App\Database\PricingMySqlConnection;
 use App\Enums\RoleName;
 use App\Enums\ServiceModality;
 use App\Enums\ServiceStatus;
+use App\Support\Municipalities;
+use App\Support\TrustSchema;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\DB;
 
 class Service extends Model
 {
@@ -23,6 +27,41 @@ class Service extends Model
     public function providerProfile(): BelongsTo
     {
         return $this->belongsTo(ProviderProfile::class);
+    }
+
+    public function location(): HasOne
+    {
+        return $this->hasOne(ServiceLocation::class);
+    }
+
+    public function scopeWithMarketplaceDetails(Builder $query): void
+    {
+        $trust = TrustSchema::available();
+        $query->with(['category:id,name,slug', 'providerProfile' => fn ($provider) => $provider
+            ->select(['id', 'user_id', 'display_name', 'headline', 'bio'])->withPublicCredential($trust)]);
+        if ($trust) {
+            $query->with('location');
+        }
+    }
+
+    public function publicLocation(): array
+    {
+        $slug = $this->relationLoaded('location') ? $this->location?->municipality_slug : null;
+
+        return [
+            'municipality' => $slug !== null && isset(Municipalities::NAMES[$slug])
+                ? ['slug' => $slug, 'name' => Municipalities::NAMES[$slug]] : null,
+            'remote' => $this->modality !== ServiceModality::Onsite,
+        ];
+    }
+
+    public function syncMunicipality(?string $slug): void
+    {
+        if ($slug !== null) {
+            DB::table('service_locations')->updateOrInsert(['service_id' => $this->id], ['municipality_slug' => $slug]);
+        } elseif (TrustSchema::available()) {
+            $this->location()->delete();
+        }
     }
 
     public function category(): BelongsTo

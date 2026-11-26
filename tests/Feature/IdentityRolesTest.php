@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Enums\Permission;
 use App\Enums\RoleName;
-use Tests\Support\Retired\Profesionista;
 use App\Models\ProviderProfile;
 use App\Models\Role;
 use App\Models\User;
@@ -12,6 +11,7 @@ use App\Services\RoleMemberships;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 class IdentityRolesTest extends TestCase
@@ -44,6 +44,7 @@ class IdentityRolesTest extends TestCase
     public function test_new_registration_gets_only_client_even_when_privileged_fields_are_submitted(): void
     {
         $this->post('/registro', [
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION,
             'name' => 'Cliente', 'age' => 30, 'gender' => 'Prefiero no decirlo',
             'email' => 'client@example.test', 'password' => 'test-password',
             'role' => 'admin', 'roles' => ['admin', 'provider'], 'is_admin' => true,
@@ -63,7 +64,7 @@ class IdentityRolesTest extends TestCase
         $this->actingAs($user, 'web');
 
         foreach (['client', 'provider', 'provider', 'client'] as $role) {
-            $this->postJson('/cuenta/roles', ['role' => $role])->assertOk();
+            $this->postJson('/cuenta/roles', ['role' => $role, 'license_disposition' => 'none'])->assertOk();
         }
 
         $this->getJson('/cuenta/identidad')->assertOk()->assertJson([

@@ -2,7 +2,7 @@ name: MySQL 8.4 foundation
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, codex/v810-integrated-simulated-checkout]
 
 permissions:
   contents: read

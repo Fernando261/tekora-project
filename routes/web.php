@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 require __DIR__.'/reservations.php';
 require __DIR__.'/reviews.php';
 require __DIR__.'/identities.php';
+require __DIR__.'/trust.php';
 require __DIR__.'/catalog.php';
 require __DIR__.'/inquiries.php';
 require __DIR__.'/conversations.php';

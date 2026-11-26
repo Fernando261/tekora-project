@@ -19,6 +19,7 @@
   @if($identity)
     <x-identity-assets />
   @endif
+  <link rel="stylesheet" href="{{ asset('css/tekora/trust.css') }}">
 </head>
 <body class="{{ $ambient ? 'tekora-ambient-page tekora-interior' : '' }} tk-account-shell {{ $dashboard ? 'tk-dashboard-page' : 'tk-account-page' }} {{ $operations ? 'tk-ops' : '' }} {{ $identity ? 'tk-identity' : '' }}">
   @if($ambient)<x-tekora-ambient />@endif
@@ -46,7 +47,8 @@
       <x-flash-messages />
       {{ $slot }}
     </main>
-    <footer class="tk-shell-footer"><span>tekora<span aria-hidden="true">.</span></span><p>Conecta con lo que viene.</p></footer>
+    <x-cookie-banner />
+  <footer class="tk-shell-footer"><span>tekora<span aria-hidden="true">.</span></span><p>Conecta con lo que viene.</p><x-legal-links /></footer>
     </div>
   </div>
   @stack('scripts')

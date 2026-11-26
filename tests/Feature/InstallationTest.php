@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use Tests\Support\Retired\Emotion;
-use Tests\Support\Retired\Profesionista;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Tests\Support\Retired\Emotion;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 class InstallationTest extends TestCase
@@ -26,7 +26,11 @@ class InstallationTest extends TestCase
     public function test_all_migrations_run_on_an_empty_memory_database_and_can_be_checked_again(): void
     {
         $this->assertSame(':memory:', DB::connection()->getDatabaseName());
-        $migrationCount = count(glob(database_path('migrations/*.php')));
+        $this->assertCount(39, glob(database_path('migrations/*.php')));
+        $migrationCount = 40;
+        foreach (['professional_credentials', 'municipalities', 'terms_acceptances'] as $table) {
+            $this->assertTrue(Schema::hasTable($table));
+        }
         $this->assertDatabaseCount('migrations', $migrationCount);
         $this->assertTrue(Schema::hasColumns('profesionistas', [
             'google_access_token', 'google_refresh_token', 'google_calendar_id', 'google_token_expires_at',

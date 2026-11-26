@@ -10,6 +10,6 @@ final class ProviderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return ['id' => $this->id, 'display_name' => $this->display_name,
-            'headline' => $this->headline, 'bio' => $this->bio];
+            'headline' => $this->headline, 'bio' => $this->bio, 'professional_credential' => $this->resource->publicCredential()];
     }
 }

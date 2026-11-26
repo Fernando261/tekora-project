@@ -44,13 +44,14 @@ class ServiceCsrfTest extends TestCase
     public function test_one_account_can_register_activate_provider_publish_and_be_discovered_by_a_guest(): void
     {
         $this->withSession(['_token' => 'registration-token'])->post('/registro', [
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION,
             '_token' => 'registration-token', 'name' => 'Una sola cuenta', 'age' => 30, 'gender' => 'Prefiero no decirlo',
             'email' => 'new-provider@example.test', 'password' => 'test-password', 'password_confirmation' => 'test-password', 'intent' => 'client',
         ])->assertRedirect('/login');
         $this->post('/login', ['_token' => 'registration-token', 'email' => 'new-provider@example.test', 'password' => 'test-password'])
             ->assertRedirect('/cuenta');
         $token = session()->token();
-        $this->post('/cuenta/roles', ['_token' => $token, 'role' => 'provider'])->assertRedirect('/cuenta/prestador');
+        $this->post('/cuenta/roles', ['_token' => $token, 'role' => 'provider', 'license_disposition' => 'none'])->assertRedirect('/cuenta/prestador');
         $this->post('/perfil-profesional', ['_token' => $token, 'display_name' => 'Mi presentación pública', 'headline' => 'Soporte técnico'])
             ->assertRedirect('/cuenta/prestador');
         $this->get('/cuenta/servicios/crear')->assertOk();

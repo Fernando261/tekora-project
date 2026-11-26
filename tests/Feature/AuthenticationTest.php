@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use Tests\Support\Retired\Profesionista;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
@@ -25,6 +25,7 @@ class AuthenticationTest extends TestCase
     public function test_a_user_can_register_without_authenticating_the_professional_guard(): void
     {
         $this->post('/registro', [
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION,
             'name' => 'Cliente de prueba', 'age' => 25, 'gender' => 'Prefiero no decirlo',
             'email' => 'client@example.test', 'password' => 'test-password',
         ])->assertRedirect('/login')->assertSessionHas('success');

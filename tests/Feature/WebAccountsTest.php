@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleName;
-use Tests\Support\Retired\Profesionista;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Tests\Support\Retired\Profesionista;
 use Tests\TestCase;
 
 class WebAccountsTest extends TestCase
@@ -23,7 +23,8 @@ class WebAccountsTest extends TestCase
     {
         return ['name' => 'Cuenta de prueba', 'age' => 28, 'gender' => 'Prefiero no decirlo',
             'email' => $intent.'@example.test', 'password' => 'test-password',
-            'password_confirmation' => 'test-password', 'intent' => $intent];
+            'password_confirmation' => 'test-password', 'intent' => $intent,
+            'accept_terms' => '1', 'terms_version' => \App\Support\LegalPolicies::VERSION, 'license_disposition' => 'none'];
     }
 
     public function test_all_three_registration_choices_use_one_central_identity(): void
@@ -60,7 +61,7 @@ class WebAccountsTest extends TestCase
         $this->post('/login', ['email' => $data['email'], 'password' => $data['password']])->assertRedirect('/cuenta');
         $this->get('/cuenta')->assertOk()->assertSee('Convertirme en prestador');
         $this->get('/cuenta/activar-prestador')->assertOk()->assertSee('Tu acceso de cliente se conserva');
-        $this->post('/cuenta/roles', ['role' => 'provider'])->assertStatus(303)->assertRedirect('/cuenta/prestador')
+        $this->post('/cuenta/roles', ['role' => 'provider', 'license_disposition' => 'none'])->assertStatus(303)->assertRedirect('/cuenta/prestador')
             ->assertSessionHas('success');
         $this->get('/cuenta/prestador')->assertOk()->assertSee('Completar mi presentación');
         $this->post('/perfil-profesional', ['display_name' => 'Nombre público', 'headline' => 'Soporte técnico', 'bio' => 'Mi experiencia.'])
@@ -91,8 +92,8 @@ class WebAccountsTest extends TestCase
     {
         $user = $this->account(RoleName::Client);
         $this->actingAs($user, 'web');
-        $this->post('/cuenta/roles', ['role' => 'provider'])->assertRedirect('/cuenta/prestador');
-        $this->post('/cuenta/roles', ['role' => 'provider'])->assertRedirect('/cuenta/prestador');
+        $this->post('/cuenta/roles', ['role' => 'provider', 'license_disposition' => 'none'])->assertRedirect('/cuenta/prestador');
+        $this->post('/cuenta/roles', ['role' => 'provider', 'license_disposition' => 'none'])->assertRedirect('/cuenta/prestador');
         $this->get('/cuenta/cliente')->assertOk();
         $this->assertDatabaseCount('role_user', 2);
         $this->assertFalse($user->hasRole(RoleName::Admin));
@@ -145,8 +146,11 @@ class WebAccountsTest extends TestCase
             ];
             foreach ($links as $link) {
                 $html = 'href="'.route($link['route']).'"';
-                if (in_array($link['role'], $roles, true)) $response->assertSee($html, false);
-                else $response->assertDontSee($html, false);
+                if (in_array($link['role'], $roles, true)) {
+                    $response->assertSee($html, false);
+                } else {
+                    $response->assertDontSee($html, false);
+                }
             }
         }
     }

@@ -1,0 +1,13 @@
+@api = https://tekora.example.test/api/v1
+
+### Catálogo público
+GET {{api}}/municipalities
+Accept: application/json
+
+### Combinar búsqueda, municipio, categoría y verificación
+GET {{api}}/services?municipality=zapopan&verified=1&category=soporte-tecnico&q=equipo&page=1&per_page=12
+Accept: application/json
+
+### Prestadores con oferta publicada en Tonalá
+GET {{api}}/providers?municipality=tonala&verified=1
+Accept: application/json

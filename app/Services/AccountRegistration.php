@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\RoleName;
 use App\Models\User;
+use App\Support\LegalPolicies;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,11 @@ final class AccountRegistration
                 $this->memberships->enroll($user, RoleName::Client);
                 if ($provider) {
                     $this->memberships->enroll($user, RoleName::Provider);
+                    app(ProfessionalCredentials::class)->enroll($user, $input);
+                }
+
+                if (($input['terms_version'] ?? null) === LegalPolicies::VERSION && isset($input['accept_terms'])) {
+                    LegalPolicies::accept($user);
                 }
 
                 return $user;
