@@ -11,6 +11,7 @@
             <file>PricingFaultTest.php</file>
             <file>BookingHoldTest.php</file>
             <file>BookingFaultTest.php</file>
+            <file>BookingCallerTransactionTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -37,8 +37,9 @@ final class MysqlReservationTransactions
         try {
             $connection->beginReservationWork($pdo, $parent, $savepoint);
         } catch (Throwable $error) {
-            $this->retire($connection, $pdo, $parent);
-            throw new ReservationStorageUncertain($error);
+            $failure = new ReservationStorageUncertain($error);
+            $this->retire($connection, $pdo, $parent, $failure);
+            throw $failure;
         }
         $finishing = false;
         try {
@@ -91,19 +92,24 @@ final class MysqlReservationTransactions
                 } elseif (! $finishing || $parent > 0) {
                     throw new LogicException('No se acreditó el rollback ni el savepoint.');
                 }
-                $connection->finishReservationWork($parent, $parent > 0 && ! $pdo->inTransaction());
+                $connection->finishReservationWork($parent);
             } catch (Throwable $secondary) {
                 $cleanup = $secondary;
             }
             if ($finishing || $cleanup !== null) {
-                $this->retire($connection, $pdo, $parent);
-                throw new ReservationStorageUncertain($error, $cleanup);
+                $failure = new ReservationStorageUncertain($error, $cleanup);
+                $this->retire($connection, $pdo, $parent, $failure);
+                throw $failure;
             }
             if ($deadlock || $diagnostic === ['HY000', 1205]) {
                 $message = $deadlock && $parent > 0
                     ? 'InnoDB revirtió la transacción del llamador. Finaliza esa unidad antes de reintentar.'
                     : 'Hay un conflicto de escritura. Consulta el estado y reintenta con la misma clave.';
-                throw new ReservationFailure($message, 409, $error);
+                $failure = new ReservationFailure($message, 409, $error);
+                if ($deadlock && $parent > 0) {
+                    $connection->requireCallerRollback($parent, $pdo, $failure);
+                }
+                throw $failure;
             }
             throw $error;
         }
@@ -135,12 +141,15 @@ final class MysqlReservationTransactions
         }
     }
 
-    private function retire(PricingMySqlConnection $connection, PDO $pdo, int $parent): void
+    private function retire(PricingMySqlConnection $connection, PDO $pdo, int $parent, ReservationStorageUncertain $failure): void
     {
-        $connection->finishReservationWork($parent, $parent > 0);
-        if ($parent === 0) {
-            self::$quarantine[] = $pdo;
-            $connection->retirePricing();
+        if ($parent > 0) {
+            $connection->requireCallerRollback($parent, $pdo, $failure);
+
+            return;
         }
+        $connection->finishReservationWork(0);
+        self::$quarantine[] = $pdo;
+        $connection->retirePricing();
     }
 }

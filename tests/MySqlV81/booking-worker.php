@@ -88,7 +88,7 @@ try {
 } catch (ValidationException $error) {
     $result = ['validation' => array_keys($error->errors())];
 }
-$pdo = DB::connection()->getPdo();
+$pdo = DB::connection()->getRawPdo();
 $result += ['calls' => $calls, 'physical' => $pdo->inTransaction(), 'level' => DB::transactionLevel()];
 if ($parent) {
     if (($result['native'] ?? null) === 1213) {
